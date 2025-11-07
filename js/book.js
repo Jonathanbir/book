@@ -402,6 +402,13 @@ $(function () {
         $("#flipbook .girl-l-hand").addClass("girl-l-hand-finish");
         $("#flipbook .girl-r-hand").addClass("girl-r-hand-finish");
 
+        const girlDrinkgMilkSound = document.getElementById("girl-drink-milk");
+
+        girlDrinkgMilkSound.currentTime = 0;
+        girlDrinkgMilkSound.play().catch(() => {
+          console.log("播放被瀏覽器阻止，請點擊頁面後再播放。");
+        });
+
         setTimeout(() => {
           $(".girl-l-hand").addClass("girl-l-hand-finish-milk");
         }, 1000);
@@ -429,6 +436,8 @@ $(function () {
         }, 2500);
       });
     } else {
+      $(".milk-hand").removeClass("milk-hand-animation");
+      $(".milk-inner").removeClass("milk-inner-full");
       $("#flipbook .click-girl").css("display", "block");
       $("#flipbook .girl-l-hand").removeClass("girl-l-hand-finish");
       $("#flipbook .girl-r-hand").removeClass("girl-r-hand-finish");
