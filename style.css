@@ -1,0 +1,2230 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+}
+
+.book-section {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 1200px;
+  height: 600px;
+  margin: auto;
+  margin-top: 10vh;
+  left: -20%;
+  transition: all 1s ease-in-out;
+  cursor: pointer;
+}
+
+canvas {
+  position: relative;
+  z-index: 9;
+}
+
+#rotate-notice {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100vh;
+  color: #aaa;
+  font-size: 40px;
+  font-weight: 900;
+  text-align: center;
+  padding-top: 45vh;
+  background-image: url(./images/book/mb-bg.png);
+  z-index: 99999;
+}
+
+.mb-hint {
+  position: fixed;
+  bottom: 500px;
+  z-index: 9999999;
+  width: 80%;
+  height: 650px;
+  background-image: url(./images/dialog/mb-hint.png);
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+.mb-icon {
+  position: fixed;
+  bottom: 0;
+  z-index: 999999;
+  width: 100%;
+  height: 640px;
+  background-image: url(./images/object/mb-icon.png);
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+#rotate-notice p {
+  text-align: center;
+}
+
+audio {
+  display: none;
+}
+
+#flipbook {
+  width: 1200px;
+  height: 600px;
+  overflow: hidden;
+}
+
+#flipbook .page {
+  width: 460px;
+  height: 600px;
+  line-height: 600px;
+  text-align: center;
+  font-size: 24px;
+  background: white;
+  border: 1px solid #ccc;
+}
+
+#flipbook .page img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 讓圖片不會被拉伸變形，可改為 contain 看需求 */
+  display: block;
+}
+
+#flipbook .page p {
+  width: 100%;
+  height: 600px;
+  display: flex;
+}
+
+/* 點擊區域：右下角 */
+.click-corner {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  bottom: 0;
+  cursor: pointer;
+  z-index: 99;
+}
+
+#next-corner {
+  right: 0;
+}
+
+#prev-corner {
+  left: 0;
+}
+
+/* 可以取消這個 debug 色塊顯示透明按鈕位置 */
+.click-corner:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.controls {
+  position: relative;
+  z-index: 9999;
+  text-align: center;
+  margin: 20px auto;
+}
+
+.controls button {
+  background: #fff;
+  border: none;
+  border-radius: 20px;
+  color: brown;
+  padding: 10px 20px;
+  font-size: 16px;
+  margin: 0 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+.knock {
+  position: absolute;
+  left: 28%;
+  bottom: 18%;
+  width: 105px;
+  height: 270px;
+  background-image: url("./images/dialog/knok.png");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  animation: dialogKnockShow 2s ease-in-out infinite;
+  transition: all 1s ease-in-out;
+}
+
+@keyframes dialogKnockShow {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.talk {
+  display: none;
+  position: absolute;
+  left: -80%;
+  bottom: 60%;
+  width: 100px;
+  height: 100px;
+  background-image: url("./images/talk.png");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  transition: all 1s ease-in-out;
+}
+
+.cow:hover .talk {
+  display: block;
+}
+
+.page12 {
+  position: relative;
+}
+
+.book {
+  width: 100%;
+  height: 600px;
+  background-size: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.dialog {
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  position: absolute;
+  animation: dialogShow 2s ease-in-out infinite;
+  transition: all 1s ease-in-out;
+}
+
+@keyframes dialogShow {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.page1 {
+  position: relative;
+  border-left: 1px solid #ccc;
+}
+
+.book-title {
+  position: absolute;
+  top: 4%;
+  right: 4%;
+  z-index: 100;
+  width: 500px;
+  height: 150px;
+  background-image: url(./images/object/book-title1.png);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  margin: auto;
+}
+
+.page1 .magnifier {
+  width: 150px;
+  height: 300px;
+  background-image: url(./images/object/magnifier.png);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  position: absolute;
+  bottom: 8%;
+  right: 50%;
+  z-index: 9;
+  animation: magnifierMove 2s ease-in-out infinite;
+  transition: all 1s ease-in-out;
+}
+
+@keyframes magnifierMove {
+  0% {
+    transform: rotate(10deg);
+  }
+  50% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(10deg);
+  }
+}
+
+.page1 .cow {
+  position: absolute;
+  bottom: 12%;
+  right: 40%;
+  z-index: 10;
+  width: 100px;
+  height: 100px;
+  background-image: url("./images/object/cow.png");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.page2 {
+  position: relative;
+  border-right: 1px solid #ccc;
+}
+
+.page5 {
+  position: relative;
+}
+
+.page5 .cup {
+  position: absolute;
+  bottom: 22%;
+  right: 40%;
+  z-index: 10;
+  width: 50px;
+  height: 80px;
+  background-image: url("./images/object/cup.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.cup-animation {
+  animation: cupMove 2.5s ease-in-out;
+  animation-delay: 1.5s;
+  animation-fill-mode: forwards;
+  transition: all 1s ease-in-out;
+}
+
+@keyframes cupMove {
+  0% {
+    transform: translate(0%, 0%) rotate(0deg);
+  }
+  100% {
+    transform: translate(0%, -102%) rotate(140deg);
+  }
+}
+
+.hand {
+  position: absolute;
+  z-index: 10;
+  width: 100px;
+  height: 50px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.dialog5 {
+  width: 150px;
+  height: 120px;
+  background-image: url(./images/dialog/dialog5.png);
+  bottom: 75%;
+  left: 33%;
+  opacity: 0;
+}
+
+.dialog5-animation {
+  animation: dialog5Show 2s ease-in-out infinite;
+  animation-delay: 3s;
+  transition: all 1s ease-in-out;
+}
+
+@keyframes dialog5Show {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.page5 .left-hand {
+  bottom: 34%;
+  right: 48%;
+  z-index: 11;
+  transform: translate(0%, 0%) rotate(-135deg);
+  background-image: url("./images/object/left-hand.png");
+}
+
+.left-hand-animation {
+  animation: leftHandMove 3s ease-in-out;
+  animation-delay: 0.5s;
+  animation-fill-mode: forwards;
+  transition: all 1s ease-in-out;
+}
+
+@keyframes leftHandMove {
+  0% {
+    transform: translate(0%, 0%) rotate(-135deg);
+  }
+  50% {
+    transform: translate(37%, 0%) rotate(37deg);
+  }
+  100% {
+    transform: translate(27%, 0%) rotate(-57deg);
+  }
+}
+
+.right-hand {
+  bottom: 35%;
+  right: 25%;
+  background-image: url("./images/object/right-hand.png");
+}
+
+.right-hand-animation {
+  animation: rightHandMove 3s ease-in-out;
+  animation-delay: 0.5s;
+  animation-fill-mode: forwards;
+  transition: all 1s ease-in-out;
+}
+
+@keyframes rightHandMove {
+  0% {
+    transform: translate(0%, 0%) rotate(0deg);
+  }
+  50% {
+    transform: translate(0%, 30%) rotate(-20deg);
+  }
+  100% {
+    transform: translate(0%, 0%) rotate(30deg);
+  }
+}
+
+.page6 {
+  position: relative;
+}
+
+.dialog6 {
+  background-image: url(./images/dialog/dialog6.png);
+  bottom: 28%;
+  left: 21%;
+}
+
+.page6 .hand {
+  width: 85px;
+  height: 40px;
+}
+
+.page6 .left-hand {
+  bottom: 15%;
+  right: 67%;
+  transform: rotate(-135deg);
+  background-image: url("./images/object/left-hand.png");
+  animation: handWaveMove 2s ease-in-out infinite;
+  transition: all 1s ease-in-out;
+}
+
+@keyframes handWaveMove {
+  0% {
+    transform: translate(-5%, 5%) rotate(-135deg);
+  }
+  50% {
+    transform: translate(2%, 10%) rotate(-115deg);
+  }
+  100% {
+    transform: translate(-5%, 5%) rotate(-135deg);
+  }
+}
+
+.page7 {
+  position: relative;
+}
+
+.page8 {
+  position: relative;
+}
+
+.door-common {
+  position: absolute;
+  left: 17%;
+  bottom: 20%;
+  z-index: 3;
+  width: 60px;
+  height: 120px;
+  background-size: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.door {
+  background-image: url(./images/object/door.png);
+  cursor: grab;
+  transition: all 1s ease-in-out;
+  z-index: 4;
+}
+
+.door-bg {
+  background-image: url(./images/object/door-bg.png);
+}
+
+.door-opening {
+  transform: translateX(-50%) rotateY(60deg);
+}
+
+.peoples {
+  position: absolute;
+  left: 9%;
+  bottom: 20%;
+  z-index: 3;
+  width: 150px;
+  height: 100px;
+  background-size: contain;
+  background-image: url(./images/object/boo8-people.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: all 1s ease-in-out;
+}
+
+.peoples-open {
+  left: 11%;
+  opacity: 1;
+}
+
+.tree1 {
+  position: absolute;
+  left: 0;
+  bottom: -100%;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  background-size: 100%;
+  background-image: url(./images/object/book7-tree1.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: all 2s ease-in-out;
+  opacity: 0;
+}
+
+.tree2 {
+  position: absolute;
+  right: 0;
+  bottom: -100%;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  background-size: 100%;
+  background-image: url(./images/object/book7-tree2.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: all 2s ease-in-out;
+  opacity: 0;
+}
+
+.tree-fade-in {
+  bottom: 0%;
+  opacity: 1;
+}
+
+.cloud1 {
+  position: absolute;
+  left: 0;
+  top: -100%;
+  width: 100%;
+  height: 100%;
+  background-size: 100%;
+  background-image: url(./images/object/book7-cloud.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: all 2s ease-in-out;
+}
+
+.cloud2 {
+  position: absolute;
+  left: 0;
+  top: -100%;
+  width: 100%;
+  height: 100%;
+  background-size: 100%;
+  background-image: url(./images/object/book8-cloud.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: all 2s ease-in-out;
+}
+
+.cloud-fade-in {
+  top: 0%;
+  opacity: 1;
+}
+
+.dialog8 {
+  position: absolute;
+  top: 5%;
+  right: 60%;
+  width: 90px;
+  height: 90px;
+  background-image: url(./images/dialog/dialog8.png);
+  background-size: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+}
+
+.dialog8-animation {
+  animation: dialogShow 2s ease-in-out infinite;
+  animation-delay: 1.5s;
+  transition: all 1s ease-in-out;
+}
+
+.cow01 {
+  position: absolute;
+  left: 10%;
+  bottom: 25%;
+  width: 100px;
+  height: 100px;
+  background-size: 100%;
+  background-image: url(./images/object/cow.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: all 2s ease-in-out;
+  animation: cowMove01 10s ease-in-out infinite;
+  transition: all 10s ease-in-out;
+}
+
+@keyframes cowMove01 {
+  0% {
+    transform: translateX(10px) rotate(-5deg);
+  }
+  25% {
+    transform: translateX(5px) rotate(5deg);
+  }
+  50% {
+    transform: translateX(0px) rotate(5deg);
+  }
+  75% {
+    transform: translateX(5px) rotate(5deg);
+  }
+  100% {
+    transform: translateX(10px) rotate(-5deg);
+  }
+}
+
+.cow02 {
+  position: absolute;
+  left: 62%;
+  bottom: 45%;
+  width: 80px;
+  height: 70px;
+  background-size: 100%;
+  background-image: url(./images/object/cow02.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: all 2s ease-in-out;
+  animation: cowMove02 10s ease-in-out infinite;
+}
+
+@keyframes cowMove02 {
+  0% {
+    transform: translateX(-10px) rotate(-5deg);
+  }
+  25% {
+    transform: translateX(-5px) rotate(5deg);
+  }
+  50% {
+    transform: translateX(0px) rotate(5deg);
+  }
+  75% {
+    transform: translateX(-5px) rotate(5deg);
+  }
+  100% {
+    transform: translateX(-10px) rotate(-5deg);
+  }
+}
+
+.cow03 {
+  position: absolute;
+  left: 80%;
+  bottom: 45%;
+  width: 80px;
+  height: 70px;
+  background-size: 100%;
+  background-image: url(./images/object/cow03.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: all 2s ease-in-out;
+  animation: cowMove03 10s ease-in-out infinite;
+}
+
+@keyframes cowMove03 {
+  0% {
+    transform: translateX(10px) rotate(-5deg);
+  }
+  25% {
+    transform: translateX(5px) rotate(5deg);
+  }
+  50% {
+    transform: translateX(0px) rotate(5deg);
+  }
+  75% {
+    transform: translateX(5px) rotate(5deg);
+  }
+  100% {
+    transform: translateX(10px) rotate(-5deg);
+  }
+}
+
+.cow04 {
+  position: absolute;
+  left: 50%;
+  bottom: 23%;
+  width: 200px;
+  height: 200px;
+  background-size: 100%;
+  background-image: url(./images/object/cow04.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: all 2s ease-in-out;
+  animation: cowMove01 10s ease-in-out infinite;
+  transition: all 10s ease-in-out;
+}
+
+.cow05 {
+  position: absolute;
+  right: 36%;
+  bottom: 14%;
+  z-index: 99;
+  width: 250px;
+  height: 250px;
+  background-size: 100%;
+  background-image: url(./images/object/cow04.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: all 2s ease-in-out;
+  animation: cowMove02 10s ease-in-out infinite;
+  transition: all 10s ease-in-out;
+}
+
+.list-board {
+  position: absolute;
+  right: 33.5%;
+  bottom: 14%;
+  z-index: 100;
+  width: 180px;
+  height: 224px;
+  background-size: 100%;
+  background-image: url(./images/object/list-board.png);
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.list {
+  position: absolute;
+  right: 37%;
+  bottom: 23%;
+  z-index: 101;
+  width: 100px;
+  height: 130px;
+  background-size: 100%;
+  background-image: url(./images/object/list.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  animation: listShow 2s ease-in-out infinite;
+  transition: all 2s ease-in-out;
+  opacity: 0;
+}
+
+@keyframes listShow {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.foot {
+  position: absolute;
+  z-index: 3;
+  width: 80px;
+  height: 80px;
+  background-size: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: all 1s ease-in-out;
+  opacity: 0;
+}
+
+.foot1 {
+  left: 42%;
+  bottom: 7%;
+  background-image: url(./images/object/foot1.png);
+}
+
+.foot1-animation {
+  animation: footShow 2s ease-in-out;
+  animation-fill-mode: forwards;
+  animation-delay: 1s;
+}
+
+.foot2 {
+  left: 23%;
+  bottom: 14%;
+  background-image: url(./images/object/foot2.png);
+}
+
+.foot2-animation {
+  animation: footShow 2s ease-in-out;
+  animation-fill-mode: forwards;
+  animation-delay: 2s;
+}
+
+.foot3 {
+  left: 32%;
+  bottom: 35%;
+  background-image: url(./images/object/foot3.png);
+}
+
+.foot3-animation {
+  animation: footShow 2s ease-in-out;
+  animation-fill-mode: forwards;
+  animation-delay: 3s;
+}
+
+.foot4 {
+  left: 50%;
+  bottom: 42%;
+  background-image: url(./images/object/foot4.png);
+}
+
+.foot4-animation {
+  animation: footShow 2s ease-in-out;
+  animation-fill-mode: forwards;
+  animation-delay: 4s;
+}
+
+.foot5 {
+  left: 63%;
+  bottom: 62%;
+  background-image: url(./images/object/foot5.png);
+}
+
+.foot5-animation {
+  animation: footShow 2s ease-in-out;
+  animation-fill-mode: forwards;
+  animation-delay: 5s;
+}
+
+@keyframes footShow {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.dialog10 {
+  position: absolute;
+  top: 31%;
+  right: 37%;
+  width: 140px;
+  height: 30px;
+  background-image: url(./images/dialog/dialog10.png);
+  background-size: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+}
+
+.dialog10-animation {
+  animation: dialogShow 2s ease-in-out infinite;
+  animation-delay: 7s;
+  transition: all 1s ease-in-out;
+}
+
+.cloud {
+  position: absolute;
+  z-index: 99;
+  width: 350px;
+  height: 310px;
+  background-image: url(./images/object/cloud.png);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  animation: cloudMove 10s ease-in-out infinite;
+  transition: all 10s ease-in-out;
+}
+
+@keyframes cloudMove {
+  0% {
+    transform: translateX(10px);
+  }
+  50% {
+    transform: translateX(-10px);
+  }
+  100% {
+    transform: translateX(10px);
+  }
+}
+
+.cloud01 {
+  top: 4%;
+  left: 30%;
+}
+
+.cloud02 {
+  top: 10%;
+  right: -200px;
+}
+
+.rainbow {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -26%;
+  margin: auto;
+  z-index: 100;
+  width: 100%;
+  height: 600px;
+  background-size: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url(./images/object/rainbow.png);
+}
+
+.cloud-group {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  z-index: 99;
+  width: 100%;
+  height: 600px;
+  background-size: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url(./images/object/cloud-group.png);
+  animation: cloudGroupMove 15s ease-in-out infinite;
+  transition: all 15s ease-in-out;
+}
+
+@keyframes cloudGroupMove {
+  0% {
+    transform: translateX(20px);
+  }
+  50% {
+    transform: translateX(-20px);
+  }
+  100% {
+    transform: translateX(20px);
+  }
+}
+
+.cloud-01 {
+  position: absolute;
+  left: 0%;
+  top: 0%;
+  width: 318px;
+  height: 133px;
+  background-size: 100%;
+  background-image: url(./images/object/cloud01.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: all 2s ease-in-out;
+  display: none;
+  animation: cloudGroupMove 10s ease-in-out infinite;
+}
+
+.cloud-02 {
+  position: absolute;
+  right: 0%;
+  top: 0%;
+  width: 400px;
+  height: 67px;
+  background-size: 100%;
+  background-image: url(./images/object/cloud02.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: all 2s ease-in-out;
+  display: none;
+  animation: cloudGroupMove 10s ease-in-out infinite;
+}
+
+.cloud-animation {
+  display: block;
+}
+
+.electric-fan {
+  position: absolute;
+  right: 50%;
+  top: 0%;
+  width: 200px;
+  height: 80px;
+  background-size: 100%;
+  background-image: url(./images/object/electric-fan.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: all 2s ease-in-out;
+  /* animation: cloudGroupMove 10s ease-in-out infinite; */
+}
+
+.girls-head {
+  position: absolute;
+  right: 33%;
+  bottom: -1%;
+  z-index: 3;
+  width: 365px;
+  height: 265px;
+  background-size: 100%;
+  background-image: url(./images/object/girls-head.png);
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.electfan {
+  position: absolute;
+  right: 35%;
+  top: 0%;
+  z-index: 99;
+  width: 350px;
+  height: 145px;
+  background-size: 100%;
+  background-image: url(./images/object/electric-fan.png);
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.electfan-move {
+  background-image: url(./images/object/electfan-move.png);
+  transition: all 2s ease-in-out;
+  animation: electFanMove 10s ease-in-out infinite;
+}
+
+@keyframes electFanMove {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(10deg);
+  }
+  50% {
+    transform: rotate(0deg);
+  }
+  75% {
+    transform: rotate(-10deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.bubble-bg {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  z-index: 103;
+  width: 100%;
+  height: 100%;
+  background-size: 100%;
+  background-image: url(./images/object/bubble.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: all 6s ease-in-out;
+}
+
+.bubble-move {
+  opacity: 1;
+}
+
+.coin {
+  position: absolute;
+  z-index: 99;
+  width: 150px;
+  height: 150px;
+  background-size: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transform: scale(0.1);
+}
+
+.coin01 {
+  right: 10%;
+  bottom: 10%;
+  background-image: url(./images/object/coin.png);
+}
+
+.coin02 {
+  right: 10%;
+  bottom: 10%;
+  background-image: url(./images/object/coin02.png);
+}
+
+.coin03 {
+  right: 10%;
+  bottom: 10%;
+  background-image: url(./images/object/coin03.png);
+}
+
+.coin01-final {
+  right: 55%;
+  bottom: 10%;
+}
+
+.coin02-final {
+  right: 43%;
+  bottom: 10%;
+}
+
+.coin03-final {
+  right: 30%;
+  bottom: 10%;
+}
+
+.coin-animation {
+  opacity: 1;
+  transform: scale(1) rotate(360deg);
+  transition: all 1s ease-in-out;
+  animation: coinsFloat 2s ease-in-out infinite;
+  animation-delay: 1s;
+  transition: all 1s ease-in-out;
+}
+
+@keyframes coinsFloat {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.crown {
+  opacity: 0;
+  position: absolute;
+  right: 44%;
+  top: 10%;
+  z-index: 99;
+  width: 150px;
+  height: 150px;
+  background-size: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url(./images/object/crown.png);
+  transform: translateY(-100%);
+  transition: all 1s ease-in-out;
+}
+
+.crown-animation {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 1s ease-in-out;
+  animation: crownFloat 2s ease-in-out infinite;
+  animation-delay: 1s;
+  transition: all 1s ease-in-out;
+}
+
+@keyframes crownFloat {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.milk-hand {
+  position: absolute;
+  bottom: 25%;
+  left: 11%;
+  z-index: 2;
+  width: 260px;
+  height: 150px;
+  transform: rotate(0deg);
+  background-size: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url("./images/object/milk-hand.png");
+  transition: all 3s ease-in-out;
+}
+
+.milk-hand-animation {
+  bottom: 19%;
+  transform: rotate(20deg);
+  transition: all 3s ease-in-out;
+}
+
+.milk-cup {
+  position: absolute;
+  bottom: 42px;
+  right: 252px;
+  z-index: 4;
+  width: 63px;
+  height: 94px;
+  transform: rotate(0deg);
+  background-size: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url("./images/object/milk-cup.png");
+}
+
+.milk-inner {
+  position: absolute;
+  bottom: 50px;
+  right: 259px;
+  z-index: 3;
+  width: 55px;
+  height: 0;
+  /* height: 60px; */
+  transform: rotate(0deg);
+  background-size: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url("./images/object/milk-inner.png");
+  transition: all 5s ease-in-out;
+}
+
+.milk-inner-full {
+  height: 60px;
+}
+
+.milk-drop {
+  position: absolute;
+  bottom: 35px;
+  right: 254px;
+  z-index: 2;
+  width: 50px;
+  height: 150px;
+  transform: rotate(7deg);
+  background-size: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url("./images/object/milk-drop.png");
+  opacity: 0;
+  transition: all 2s ease-in-out;
+}
+
+.milk-drop-show {
+  opacity: 1;
+}
+
+.milk-bottle-click {
+  position: absolute;
+  right: 86%;
+  bottom: 14%;
+  z-index: 5;
+  width: 68px;
+  height: 40px;
+}
+
+.milk-bottle {
+  position: absolute;
+  right: 86%;
+  bottom: 14%;
+  z-index: 2;
+  width: 68px;
+  height: 40px;
+  overflow: hidden;
+}
+
+.bottle {
+  position: absolute;
+  z-index: 2;
+  width: 68px;
+  height: 40px;
+  background-size: 100%;
+  background-image: url(./images/object/milk-bottle.png);
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.milk {
+  position: absolute;
+  right: 5%;
+  bottom: 20%;
+  z-index: 0;
+  width: 42px;
+  height: 28px;
+  border-radius: 0 10px 0 0;
+  background-color: #fff;
+  background-size: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  transform: rotate(-15deg);
+  transition: all 3s ease-in-out;
+}
+
+.milk-empty {
+  bottom: -45%;
+}
+
+.girls-hand {
+  position: absolute;
+  right: 76%;
+  bottom: 11%;
+  z-index: 3;
+  width: 90px;
+  height: 70px;
+  background-size: 100%;
+  background-image: url(./images/object/girls-hand.png);
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.cows-face {
+  position: absolute;
+  left: 0;
+  bottom: 27px;
+  z-index: 2;
+  width: 15px;
+  height: 125px;
+  background-size: 100%;
+  background-image: url(./images/object/cows-face.png);
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.cows-tongue {
+  position: absolute;
+  left: -2px;
+  bottom: 13%;
+  z-index: 1;
+  width: 25px;
+  height: 25px;
+  background-size: 100%;
+  background-image: url(./images/object/cows-tongue.png);
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.cows-tongue-animation {
+  transition: all 1s ease-in-out;
+  animation: tongueMove 1s ease-in-out infinite;
+}
+
+.click-milk {
+  position: absolute;
+  left: 18%;
+  bottom: 10%;
+  width: 105px;
+  height: 270px;
+  background-image: url(./images/dialog/click-milk.png);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  animation: dialogKnockShow 2s ease-in-out infinite;
+  transition: all 1s ease-in-out;
+}
+
+@keyframes tongueMove {
+  0% {
+    transform: rotate(20deg);
+  }
+  50% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(20deg);
+  }
+}
+
+.girls-left {
+  position: absolute;
+  right: 0;
+  bottom: -17px;
+  z-index: 2;
+  width: 82px;
+  height: 300px;
+  background-size: 100%;
+  background-image: url(./images/object/girls-left.png);
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.stethoscope {
+  position: absolute;
+  right: -20px;
+  bottom: 55px;
+  z-index: 3;
+  width: 90px;
+  height: 100px;
+  background-size: 100%;
+  background-image: url(./images/object/stethoscope.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  transform: rotate(-26deg);
+  transition: all 1s ease-in-out;
+}
+
+.stethoscope-move {
+  transform: rotate(3deg);
+  right: 2px;
+  bottom: 75px;
+}
+
+.hearing-heart {
+  position: absolute;
+  right: 9%;
+  bottom: 18%;
+  width: 105px;
+  height: 270px;
+  background-image: url("./images/dialog/hearing-heart.png");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  animation: cowMove 2s ease-in-out infinite;
+  transition: all 1s ease-in-out;
+  animation: dialogKnockShow 2s ease-in-out infinite;
+  transition: all 1s ease-in-out;
+}
+
+.bubble-toggle {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.5);
+  font-family: sans-serif;
+  font-size: 13px;
+  color: #333;
+}
+
+.bubbles {
+  position: absolute;
+  z-index: 99;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.bubble-container {
+  position: absolute;
+  bottom: 0;
+  will-change: transform;
+  animation: bubblerise, 4s, infinite, ease-in;
+  opacity: 0;
+}
+
+.bubble {
+  width: 6px;
+  height: 6px;
+  margin: 0 auto;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.25);
+  will-change: transform;
+  border-radius: 10px;
+  animation: bubblewobble, 0.4s, infinite, linear;
+}
+
+@keyframes bubblerise {
+  0% {
+    bottom: 0;
+    opacity: 0;
+  }
+  5% {
+    bottom: 0;
+    opacity: 1;
+  }
+  99% {
+    opacity: 1;
+  }
+  100% {
+    bottom: 100%;
+    opacity: 0;
+  }
+}
+
+@keyframes bubblewobble {
+  0% {
+    margin-left: 0;
+  }
+  50% {
+    margin-left: 2px;
+  }
+}
+
+.girl-click-region {
+  position: absolute;
+  bottom: 0;
+  right: 10%;
+  width: 450px;
+  height: 490px;
+  z-index: 99;
+  cursor: pointer;
+}
+
+.little-girl {
+  position: absolute;
+  right: 34px;
+  bottom: -4px;
+  z-index: 2;
+  width: 500px;
+  height: 499px;
+  background-size: 100%;
+  background-image: url(./images/object/little-girl.png);
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.flower {
+  position: absolute;
+  z-index: 1;
+  width: 85px;
+  height: 67px;
+  background-size: 100%;
+  background-image: url(./images/object/flower.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: all 1.5s ease-in-out;
+}
+
+.flower01 {
+  right: 34%;
+  top: 29%;
+  transform: rotate(-180deg);
+}
+
+.flower01-finish {
+  right: 14%;
+  top: 29%;
+  width: 60px;
+  height: 50px;
+  transform: rotate(0deg);
+}
+
+.flower02 {
+  right: 40%;
+  top: 57%;
+  transform: rotate(180deg);
+}
+
+.flower02-finish {
+  right: 23%;
+  top: 57%;
+  width: 67px;
+  height: 50px;
+  transform: rotate(-21deg);
+}
+
+.flower03 {
+  right: 38%;
+  top: 79%;
+  transform: rotate(180deg);
+}
+
+.flower03-finish {
+  right: 18%;
+  top: 69%;
+  width: 90px;
+  height: 80px;
+  transform: rotate(0deg);
+}
+
+.flower04 {
+  left: 38%;
+  top: 40%;
+  transform: rotate(-180deg);
+}
+
+.flower04-finish {
+  left: 8%;
+  top: 52%;
+  width: 140px;
+  height: 120px;
+  transform: rotate(29deg);
+}
+
+.flower05 {
+  left: 40%;
+  top: 37%;
+  transform: rotate(-180deg);
+}
+
+.flower05-finish {
+  left: 10%;
+  top: 37%;
+  width: 75px;
+  height: 65px;
+  transform: rotate(0deg);
+}
+
+.flower06 {
+  left: 36%;
+  top: 37%;
+  transform: rotate(0deg);
+}
+
+.flower06-finish {
+  left: 26%;
+  top: 17%;
+  width: 120px;
+  height: 90px;
+  transform: rotate(-127deg);
+}
+
+.girl-l-hand {
+  position: absolute;
+  right: 55%;
+  bottom: 90px;
+  z-index: 3;
+  width: 138px;
+  height: 185px;
+  background-size: 100%;
+  background-image: url(./images/object/girl-l-hand.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: all 1.5s ease-in-out;
+}
+
+.girl-l-hand-finish {
+  right: 53%;
+  bottom: 150px;
+  transform: rotate(25deg);
+}
+
+.girl-l-hand-finish-milk {
+  background-image: url(./images/object/girl-l-hand-finish.png);
+}
+
+.girl-r-hand {
+  position: absolute;
+  right: 33%;
+  bottom: 45px;
+  z-index: 3;
+  width: 190px;
+  height: 161px;
+  background-size: 100%;
+  background-image: url(./images/object/girl-r-hand.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: all 1.5s ease-in-out;
+}
+
+.girl-r-hand-finish {
+  transform: rotate(39deg);
+  right: 34%;
+  bottom: 108px;
+}
+
+.click-girl {
+  position: absolute;
+  z-index: 9;
+  left: 2%;
+  top: 19%;
+  width: 180px;
+  height: 200px;
+  background-image: url(./images/dialog/click-girl.png);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  animation: dialogKnockShow 2s ease-in-out infinite;
+  transition: all 1s ease-in-out;
+}
+
+.cow-right {
+  position: absolute;
+  right: -100%;
+  top: 140px;
+  z-index: 2;
+  width: 372px;
+  height: 348px;
+  background-size: 100%;
+  background-image: url(./images/object/cow-right.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: all 3s ease-in-out;
+}
+
+.cow-right-move {
+  right: 0%;
+}
+
+.father-hand {
+  position: absolute;
+  left: 12%;
+  bottom: 70px;
+  z-index: 3;
+  width: 320px;
+  height: 190px;
+  background-size: 100%;
+  background-image: url(./images/object/father-hand.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: all 1.5s ease-in-out;
+}
+
+.father-hand-finish {
+  transform: scale(0.8) rotate(-25deg);
+  left: 12%;
+  bottom: 130px;
+}
+
+.father-hand-empty {
+  background-image: url(./images/object/father-hand-finish.png);
+}
+
+.daughter-hand {
+  position: absolute;
+  right: 22%;
+  bottom: 107px;
+  z-index: 2;
+  width: 100px;
+  height: 130px;
+  background-size: 100%;
+  background-image: url(./images/object/daughter-hand.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: all 1.5s ease-in-out;
+}
+
+.daughter-hand-finish {
+  transform: rotate(-75deg);
+  right: 17%;
+  bottom: 160px;
+}
+
+.daughter-hand-empty {
+  background-image: url(./images/object/daughter-hand-finish.png);
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.mom-hand {
+  position: absolute;
+  right: 40%;
+  bottom: 80px;
+  z-index: 99;
+  width: 240px;
+  height: 140px;
+  background-size: 100%;
+  background-image: url(./images/object/mom-hand.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: all 1.5s ease-in-out;
+}
+
+.mom-hand-empty {
+  background-image: url(./images/object/mom-hand-finish.png);
+}
+
+.mom-hand-finish {
+  bottom: 120px;
+  transform: scale(0.9) rotate(45deg);
+}
+
+.mow {
+  display: none;
+  position: absolute;
+  right: 50%;
+  top: 300px;
+  z-index: 99;
+  width: 53px;
+  height: 35px;
+  background-size: 100%;
+  background-image: url(./images/dialog/mow.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: all 1.5s ease-in-out;
+  animation: listShow 1.5s ease-in-out infinite;
+}
+
+/* 書的底圖 */
+.book-cover {
+  background-image: url(./images/book/book-cover.png);
+}
+
+.book-foot {
+  background-image: url(./images/book/book-foot.png);
+}
+
+.book01 {
+  background-image: url(./images/book/book2.jpg);
+  overflow: hidden;
+}
+
+.book02 {
+  background-image: url(./images/book/book1.jpg);
+  overflow: hidden;
+}
+
+.book03 {
+  background-image: url(./images/book/book3.jpg);
+}
+
+.book04 {
+  background-image: url(./images/book/book4.jpg);
+}
+
+.book05 {
+  background-image: url(./images/book/book5.jpg);
+}
+
+.book06 {
+  background-image: url(./images/book/book6.jpg);
+}
+
+.book07 {
+  background-image: url(./images/book/book7.jpg);
+}
+
+.book08 {
+  background-image: url(./images/book/book8.jpg);
+}
+
+.book9 {
+  background-image: url(./images/book/book9.jpg);
+}
+
+.book10 {
+  background-image: url(./images/book/book10.jpg);
+}
+
+.book11 {
+  background-image: url(./images/book/book11.jpg);
+}
+
+.book12 {
+  background-image: url(./images/book/book12.jpg);
+}
+
+.book13 {
+  background-image: url(./images/book/book13.jpg);
+}
+
+.book14 {
+  background-image: url(./images/book/book14.jpg);
+}
+.book15 {
+  position: relative;
+  background-image: url(./images/book/book15.jpg);
+}
+.book16 {
+  background-image: url(./images/book/book16.jpg);
+}
+.book17 {
+  position: relative;
+  background-image: url(./images/book/book17.jpg);
+}
+.book18 {
+  background-image: url(./images/book/book18.jpg);
+}
+.book19 {
+  background-image: url(./images/book/book19.jpg);
+}
+.book20 {
+  background-image: url(./images/book/book20.jpg);
+}
+.book21 {
+  background-image: url(./images/book/book21.jpg);
+}
+.book22 {
+  position: relative;
+  background-image: url(./images/book/book22.jpg);
+}
+.book23 {
+  position: relative;
+  background-image: url(./images/book/book23.jpg);
+}
+.book24 {
+  position: relative;
+  background-image: url(./images/book/book24.jpg);
+}
+.book25 {
+  position: relative;
+  background-image: url(./images/book/book25.jpg);
+}
+.book26 {
+  position: relative;
+  background-image: url(./images/book/book26.jpg);
+}
+.book27 {
+  position: relative;
+  background-image: url(./images/book/book27.jpg);
+}
+.book28 {
+  position: relative;
+  background-image: url(./images/book/book28.jpg);
+}
+
+@media screen and (max-height: 500px) {
+  body {
+    margin: 0;
+  }
+
+  .book-section {
+    height: 100vh;
+    margin-top: 0;
+  }
+
+  .book {
+    width: 502px;
+    height: 464px !important;
+  }
+
+  .controls {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100px;
+    height: 40px;
+    position: fixed;
+    top: 40%;
+    bottom: initial;
+    left: 0;
+    margin: initial;
+  }
+
+  #prev-page,
+  #next-page,
+  #mute-toggle {
+    margin: 20px auto;
+  }
+
+  #flipbook {
+    height: 100vh;
+  }
+
+  #flipbook .page {
+    height: 100vh;
+  }
+
+  #flipbook .page p {
+    height: 100vh;
+  }
+
+  .book {
+    height: 100% !important;
+  }
+
+  #prev-page {
+    margin: 20% auto;
+  }
+
+  #next-page {
+    margin: 20% auto;
+  }
+
+  #mute-toggle {
+    margin: 20% auto;
+  }
+
+  .door {
+    transform: scale(3) rotateY(0deg);
+  }
+
+  .door.open {
+    transform: translateX(66%) scale(3) rotateY(91deg);
+  }
+
+  .knock {
+    right: 5%;
+    bottom: 40%;
+    width: 75px;
+    height: 250px;
+  }
+  .house {
+    left: 11%;
+    bottom: 2%;
+  }
+
+  .cloud {
+    width: 25%;
+    height: 35%;
+  }
+
+  .page1 .magnifier {
+    width: 27%;
+    height: 47%;
+    bottom: 15%;
+    right: 49%;
+  }
+
+  .page1 .cow {
+    bottom: 9%;
+    right: 193px;
+  }
+
+  .hand {
+    width: 80px;
+    height: 40px;
+  }
+
+  .page6 .hand {
+    width: 65px;
+    height: 30px;
+  }
+
+  .page5 .cup {
+    width: 40px;
+    height: 70px;
+  }
+
+  .dialog5 {
+    width: 120px;
+    height: 120px;
+    bottom: 69%;
+  }
+
+  .door-common {
+    width: 15px;
+  }
+
+  .knock {
+    right: 8%;
+    bottom: 30%;
+    height: 120px;
+  }
+
+  .peoples {
+    bottom: 24%;
+    height: 80px;
+  }
+
+  .dialog10 {
+    position: absolute;
+    top: 30%;
+    right: 38%;
+    width: 100px;
+  }
+
+  .rainbow {
+    top: -40%;
+    width: 1004px !important;
+    height: 600px !important;
+  }
+
+  .girls-head {
+    right: 30%;
+    bottom: -7%;
+  }
+
+  .cloud-01 {
+    width: 200px;
+  }
+
+  .cloud-02 {
+    width: 200px;
+    height: 30px;
+  }
+
+  .cow01 {
+    position: absolute;
+    left: 0%;
+    bottom: 25%;
+    width: 80px;
+    height: 80px;
+  }
+
+  .cow04 {
+    position: absolute;
+    left: 45%;
+    bottom: 15%;
+    width: 150px;
+    height: 150px;
+  }
+
+  .cow05 {
+    width: 180px;
+    height: 180px;
+    right: 40%;
+    bottom: 15%;
+  }
+
+  .list {
+    position: absolute;
+    right: 36%;
+    bottom: 20%;
+    width: 90px;
+    height: 120px;
+  }
+
+  .list-board {
+    position: absolute;
+    right: 336px;
+    bottom: 10%;
+    z-index: 100;
+    width: 150px;
+    height: 200px;
+  }
+
+  .click-milk {
+    left: 25%;
+  }
+
+  .girls-hand {
+    right: 76%;
+    bottom: 8%;
+    width: 70px;
+    height: 70px;
+  }
+
+  .milk-bottle {
+    position: absolute;
+    right: 84%;
+    bottom: 12%;
+    width: 58px;
+  }
+
+  .milk {
+    right: -11%;
+    bottom: 18%;
+  }
+
+  .cows-face {
+    width: 13px;
+    bottom: 18px;
+    height: 78px;
+  }
+
+  .cows-tongue {
+    bottom: 10%;
+  }
+
+  .milk-bottle-click {
+    right: 82%;
+  }
+
+  .milk-empty {
+    bottom: -40%;
+  }
+
+  .girls-left {
+    bottom: -57px;
+    width: 66px;
+  }
+
+  .stethoscope {
+    position: absolute;
+    right: -15px;
+    bottom: 26px;
+    width: 70px;
+    height: 100px;
+  }
+
+  .stethoscope-move {
+    position: absolute;
+    right: 1px;
+    bottom: 41px;
+  }
+
+  .crown {
+    right: 43%;
+    top: 1%;
+  }
+
+  .coin01-final,
+  .coin02-final,
+  .coin03-final {
+    width: 100px;
+    bottom: 0%;
+  }
+
+  .milk-hand {
+    left: 13%;
+    width: 200px;
+  }
+
+  .milk-cup {
+    bottom: 4px;
+    right: 208px;
+  }
+
+  .milk-drop {
+    right: 215px;
+    bottom: 15px;
+  }
+
+  .milk-inner {
+    bottom: 15px;
+    right: 214px;
+    width: 55px;
+  }
+
+  .milk-inner-full {
+    height: 50px;
+  }
+
+  .father-hand {
+    bottom: 47px;
+    left: 19%;
+    width: 220px;
+    transform: scale(1);
+  }
+
+  .father-hand-finish {
+    left: 20%;
+    bottom: 65px;
+    transform: scale(1) rotate(-35deg);
+  }
+
+  .daughter-hand {
+    width: 80px;
+    right: 23%;
+    bottom: 64px;
+  }
+
+  .daughter-hand-finish {
+    right: 18%;
+    bottom: 100px;
+  }
+
+  .mom-hand {
+    right: 40%;
+    bottom: 36px;
+    width: 200px;
+  }
+
+  .mom-hand-finish {
+    bottom: 60px;
+  }
+
+  .cow-right {
+    top: 100px;
+    width: 300px;
+    height: 300px;
+  }
+
+  .mow {
+    top: 240px;
+  }
+
+  .little-girl {
+    position: absolute;
+    right: 25px;
+    bottom: -36px;
+    width: 400px;
+    height: 450px;
+  }
+
+  .girl-l-hand {
+    width: 100px;
+    height: 155px;
+  }
+
+  .girl-r-hand {
+    width: 150px;
+  }
+
+  .girl-l-hand-finish {
+    bottom: 120px;
+  }
+
+  .girl-r-hand-finish {
+    right: 37%;
+    bottom: 60px;
+  }
+}

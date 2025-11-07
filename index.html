@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Turn.js 電子書 Demo</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- jQuery UI -->
+    <link
+      rel="stylesheet"
+      href="https://code.jquery.com/ui/1.13.2/themes/smoothness/jquery-ui.css"
+    />
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+    <!-- Turn.js（使用本地或 CDN） -->
+    <!-- 若你有放在本地資料夾 -->
+    <script src="./js/turn.js"></script>
+    <!-- CSS -->
+    <style></style>
+  </head>
+  <body>
+    <!-- 書本容器 -->
+    <div class="book-section">
+      <div id="rotate-notice" style="display: block">
+        <!-- <p>請將裝置旋轉為橫向以觀看最佳效果</p> -->
+        <div class="mb-hint"></div>
+        <div class="mb-icon"></div>
+      </div>
+      <audio id="audio-background" controls style="display: none">
+        <source src="./mp3/background.mp3" type="audio/mpeg" />
+      </audio>
+      <div id="flipbook">
+        <div class="page" id="cover">
+          <div class="book book-cover"></div>
+        </div>
+        <div class="page page2">
+          <div class="book book02"></div>
+        </div>
+        <div class="page page1">
+          <audio id="audio-1" controls>
+            <source src="./mp3/01.mp3" type="audio/mpeg" />
+          </audio>
+          <div class="book book01"></div>
+          <div class="magnifier"></div>
+          <div class="cow"></div>
+          <div class="cloud cloud02"></div>
+        </div>
+        <div class="page">
+          <div class="book book03"></div>
+          <audio id="audio-2" controls>
+            <source src="./mp3/02.mp3" type="audio/mpeg" />
+          </audio>
+        </div>
+        <div class="page">
+          <div class="book book04"></div>
+        </div>
+        <div class="page page5">
+          <div class="book book05"></div>
+          <div class="dialog dialog5"></div>
+          <div class="hand left-hand"></div>
+          <div class="hand right-hand"></div>
+          <div class="cup"></div>
+          <audio id="audio-3" controls>
+            <source src="./mp3/03.mp3" type="audio/mpeg" />
+          </audio>
+        </div>
+        <div class="page page6">
+          <div class="book book06"></div>
+          <div class="dialog dialog6"></div>
+          <div class="hand left-hand"></div>
+          <audio id="audio-4" controls>
+            <source src="./mp3/04.mp3" type="audio/mpeg" />
+          </audio>
+        </div>
+        <div class="page page7">
+          <div class="book book07"></div>
+          <div class="tree1"></div>
+          <div class="cloud1"></div>
+          <audio id="audio-5" controls>
+            <source src="./mp3/05.mp3" type="audio/mpeg" />
+          </audio>
+        </div>
+        <div class="page page8">
+          <div class="book book08"></div>
+          <div class="knock"></div>
+          <audio id="knock" controls>
+            <source src="./mp3/knock.mp3" type="audio/mpeg" />
+          </audio>
+          <div class="door-bg door-common"></div>
+          <div class="door door-common" onclick="handleDoorClick()"></div>
+          <div class="peoples"></div>
+          <div class="cloud2"></div>
+          <div class="tree2"></div>
+          <div class="dialog8"></div>
+        </div>
+        <div class="page">
+          <div class="book book9"></div>
+          <div class="step"></div>
+          <div class="foot foot1"></div>
+          <div class="foot foot2"></div>
+          <div class="foot foot3"></div>
+          <div class="foot foot4"></div>
+          <div class="foot foot5"></div>
+        </div>
+        <div class="page">
+          <div class="book book10"></div>
+          <div class="dialog10"></div>
+          <audio id="audio-6" controls>
+            <source src="./mp3/06.mp3" type="audio/mpeg" />
+          </audio>
+        </div>
+        <div class="page page11">
+          <div class="book book11"></div>
+          <div class="cow01"></div>
+          <div class="cow02"></div>
+          <div class="cow03"></div>
+          <div class="cow04"></div>
+          <div class="cloud-01"></div>
+          <div class="girls-head"></div>
+        </div>
+        <div class="page page12">
+          <div class="book book12"></div>
+          <div class="cloud-02"></div>
+          <audio id="audio-7" controls>
+            <source src="./mp3/07.mp3" type="audio/mpeg" />
+          </audio>
+        </div>
+        <div class="page">
+          <div class="book book13"></div>
+        </div>
+        <div class="page">
+          <div class="book book14"></div>
+          <div class="coin01 coin"></div>
+          <audio id="coin-drops" controls>
+            <source src="./mp3/coin-drops.mp3" type="audio/mpeg" />
+          </audio>
+          <audio id="audio-11" controls>
+            <source src="./mp3/09.mp3" type="audio/mpeg" />
+          </audio>
+        </div>
+        <div class="page">
+          <div class="book book15"></div>
+        </div>
+        <div class="page">
+          <div class="book book16"></div>
+          <div class="milk-bottle-click"></div>
+          <div class="milk-bottle">
+            <div class="bottle"></div>
+            <div class="milk"></div>
+          </div>
+          <div class="girls-hand"></div>
+          <div class="cows-face"></div>
+          <div class="cows-tongue"></div>
+          <div class="click-milk"></div>
+          <audio id="coin-drops" controls>
+            <source src="./mp3/coin-drops.mp3" type="audio/mpeg" />
+          </audio>
+          <div class="coin coin02"></div>
+          <audio id="audio-8" controls>
+            <source src="./mp3/08.mp3" type="audio/mpeg" />
+          </audio>
+          <audio id="sucking" controls>
+            <source src="./mp3/sucking.mp3" type="audio/mpeg" />
+          </audio>
+        </div>
+        <div class="page">
+          <audio id="audio-9" controls>
+            <source src="./mp3/09.mp3" type="audio/mpeg" />
+          </audio>
+          <div class="book book17"></div>
+          <div class="girls-left"></div>
+          <div class="stethoscope"></div>
+          <div class="hearing-heart"></div>
+          <audio id="hearts-beat" controls>
+            <source src="./mp3/heartbeat.mp3" type="audio/mpeg" />
+          </audio>
+        </div>
+        <div class="page">
+          <div class="book book18"></div>
+          <audio id="coin-drops" controls>
+            <source src="./mp3/coin-drops.mp3" type="audio/mpeg" />
+          </audio>
+          <div class="coin coin03"></div>
+        </div>
+        <div class="page">
+          <div class="book book19"></div>
+          <audio id="audio-10" controls>
+            <source src="./mp3/10.mp3" type="audio/mpeg" />
+          </audio>
+        </div>
+        <div class="page">
+          <audio id="coin-drops" controls>
+            <source src="./mp3/coin-drops.mp3" type="audio/mpeg" />
+          </audio>
+          <audio id="crown-drops" controls>
+            <source src="./mp3/flash.mp3" type="audio/mpeg" />
+          </audio>
+          <div class="book book20"></div>
+        </div>
+        <div class="page">
+          <div class="bubbles"></div>
+          <div class="book book21"></div>
+          <audio id="audio-12" controls>
+            <source src="./mp3/12.mp3" type="audio/mpeg" />
+          </audio>
+        </div>
+        <div class="page">
+          <audio id="audio-11" controls>
+            <source src="./mp3/11.mp3" type="audio/mpeg" />
+          </audio>
+          <div class="bubbles"></div>
+          <div class="book book22"></div>
+        </div>
+        <div class="page">
+          <div class="book book23"></div>
+        </div>
+        <div class="page">
+          <audio id="audio-12" controls>
+            <source src="./mp3/12.mp3" type="audio/mpeg" />
+          </audio>
+          <div class="book book24"></div>
+        </div>
+        <div class="page">
+          <audio id="milk-drop" controls>
+            <source src="./mp3/pouring.mp3" type="audio/mpeg" />
+          </audio>
+          <div class="milk-hand"></div>
+          <div class="milk-inner"></div>
+          <div class="milk-cup"></div>
+          <div class="milk-drop"></div>
+          <div class="book book25"></div>
+        </div>
+        <div class="page">
+          <audio id="audio-13" controls>
+            <source src="./mp3/13.mp3" type="audio/mpeg" />
+          </audio>
+          <audio id="drinking-milk" controls>
+            <source src="./mp3/drinking-liquid.mp3" type="audio/mpeg" />
+          </audio>
+          <div class="girl-click-region"></div>
+          <div class="click-girl"></div>
+          <div class="little-girl"></div>
+          <div class="flower flower01"></div>
+          <div class="flower flower02"></div>
+          <div class="flower flower03"></div>
+          <div class="flower flower04"></div>
+          <div class="flower flower05"></div>
+          <div class="flower flower06"></div>
+          <div class="girl-l-hand"></div>
+          <div class="girl-r-hand"></div>
+          <audio id="flower-show" controls>
+            <source src="./mp3/victory.mp3" type="audio/mpeg" />
+          </audio>
+          <div class="book book26"></div>
+        </div>
+        <div class="page">
+          <div class="father-hand"></div>
+          <div class="daughter-hand"></div>
+          <audio id="drinking-milk" controls>
+            <source src="./mp3/drinking-liquid.mp3" type="audio/mpeg" />
+          </audio>
+          <audio id="audio-14" controls>
+            <source src="./mp3/14.mp3" type="audio/mpeg" />
+          </audio>
+          <div class="book book27"></div>
+        </div>
+        <div class="page">
+          <div class="cow-right"></div>
+          <audio id="cow-mooing" controls>
+            <source src="./mp3/cow-mooing.mp3" type="audio/mpeg" />
+          </audio>
+          <div class="mow"></div>
+          <div class="book book28"></div>
+        </div>
+        <div class="page">
+          <div class="book book-foot"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 翻頁按鈕 -->
+    <div class="controls">
+      <button id="prev-page">上一頁</button>
+      <button id="next-page">下一頁</button>
+      <button id="mute-toggle"><i class="fas fa-volume-mute"></i> 關閉</button>
+    </div>
+    <script>
+      const audio4 = document.getElementById("audio-4");
+
+      function handleDoorClick() {
+        $(".door").addClass("door-opening");
+        $(".peoples").addClass("peoples-open");
+        $(".tree1").addClass("tree-fade-in");
+        $(".tree2").addClass("tree-fade-in");
+        $(".cloud1").addClass("cloud-fade-in");
+        $(".cloud2").addClass("cloud-fade-in");
+        $(".dialog8").addClass("dialog8-animation");
+        audio4.currentTime = 0;
+        audio4.play().catch(() => {
+          console.log("播放被瀏覽器阻止，請點擊頁面後再播放。");
+        });
+      }
+    </script>
+    <script>
+      function checkOrientation() {
+        const isPortrait = window.innerHeight > window.innerWidth;
+        document.getElementById("rotate-notice").style.display = isPortrait
+          ? "block"
+          : "none";
+      }
+
+      // 初始檢查
+      checkOrientation();
+
+      // 當裝置旋轉時重新檢查
+      window.addEventListener("resize", checkOrientation);
+
+      // 當裝置旋轉時重新載入
+      let previous = window.orientation;
+
+      window.addEventListener("orientationchange", function () {
+        const current = window.orientation;
+
+        // 0 或 180 = 直向
+        // 90 或 -90 = 橫向
+        if (
+          (previous === 0 || previous === 180) &&
+          (current === 90 || current === -90)
+        ) {
+          location.reload();
+        }
+
+        previous = current;
+      });
+    </script>
+  </body>
+  <script src="./js/book.js"></script>
+</html>
