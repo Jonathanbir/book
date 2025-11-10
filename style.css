@@ -1052,6 +1052,18 @@ audio {
   transform: scale(0.1);
 }
 
+.coin-all {
+  position: absolute;
+  z-index: 99;
+  width: 150px;
+  height: 150px;
+  background-size: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transform: scale(0.1);
+}
+
 .coin01 {
   right: 10%;
   bottom: 10%;
@@ -1073,19 +1085,31 @@ audio {
 .coin01-final {
   right: 55%;
   bottom: 10%;
+  background-image: url(./images/object/coin.png);
 }
 
 .coin02-final {
   right: 43%;
   bottom: 10%;
+  background-image: url(./images/object/coin02.png);
 }
 
 .coin03-final {
   right: 30%;
   bottom: 10%;
+  background-image: url(./images/object/coin03.png);
 }
 
 .coin-animation {
+  opacity: 1;
+  transform: scale(1) rotate(360deg);
+  transition: all 1s ease-in-out;
+  animation: coinsFloat 2s ease-in-out infinite;
+  animation-delay: 1s;
+  transition: all 1s ease-in-out;
+}
+
+.coin-all-animation {
   opacity: 1;
   transform: scale(1) rotate(360deg);
   transition: all 1s ease-in-out;
