@@ -1490,6 +1490,11 @@ audio {
   cursor: pointer;
 }
 
+.girl-click-region.disabled {
+  pointer-events: none;
+  opacity: 0.5; /* optional: 顯示不能點 */
+}
+
 .little-girl {
   position: absolute;
   right: 34px;
@@ -1644,6 +1649,7 @@ audio {
 }
 
 .click-girl {
+  display: none;
   position: absolute;
   z-index: 9;
   left: 2%;

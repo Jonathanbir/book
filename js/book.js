@@ -68,62 +68,62 @@ $(function () {
     $("#flipbook").turn("next");
   });
 
-  // 上一頁按鈕
-  $("#prev-page").on("click", function () {
-    $flipbook.turn("previous");
-  });
-
-  // 下一頁按鈕
-  $("#next-page").on("click", function () {
-    $flipbook.turn("next");
-  });
-
-  // let isBtnDisabled;
   // // 上一頁按鈕
   // $("#prev-page").on("click", function () {
-  //   if (isBtnDisabled) return; // 防止連按
-  //   isBtnDisabled = true;
-  //   $("#prev-page, #next-page").prop("disabled", true);
-  //   $("#prev-page, #next-page").css("color", "#aaa");
-  //   $("#prev-page, #next-page").css("background", "#ccc");
-  //   $("#prev-page, #next-page").css("boxShadow", " initial");
-
   //   $flipbook.turn("previous");
-
-  //   setTimeout(() => {
-  //     isBtnDisabled = false;
-  //     $("#prev-page, #next-page").prop("disabled", false);
-  //     $("#prev-page, #next-page").css("color", "brown");
-  //     $("#prev-page, #next-page").css("background", "#fff");
-  //     $("#prev-page, #next-page").css(
-  //       "boxShadow",
-  //       "0 0 10px rgba(0, 0, 0, 0.2)"
-  //     );
-  //   }, 1500);
   // });
 
   // // 下一頁按鈕
   // $("#next-page").on("click", function () {
-  //   if (isBtnDisabled) return; // 防止連按
-  //   isBtnDisabled = true;
-  //   $("#prev-page, #next-page").prop("disabled", true);
-  //   $("#prev-page, #next-page").css("color", "#aaa");
-  //   $("#prev-page, #next-page").css("background", "#ccc");
-  //   $("#prev-page, #next-page").css("boxShadow", " initial");
-
   //   $flipbook.turn("next");
-
-  //   setTimeout(() => {
-  //     isBtnDisabled = false;
-  //     $("#prev-page, #next-page").css("color", "brown");
-  //     $("#prev-page, #next-page").css("background", "#fff");
-  //     $("#prev-page, #next-page").css(
-  //       "boxShadow",
-  //       "0 0 10px rgba(0, 0, 0, 0.2)"
-  //     );
-  //     $("#prev-page, #next-page").prop("disabled", false);
-  //   }, 1500);
   // });
+
+  let isBtnDisabled;
+  // 上一頁按鈕
+  $("#prev-page").on("click", function () {
+    if (isBtnDisabled) return; // 防止連按
+    isBtnDisabled = true;
+    $("#prev-page, #next-page").prop("disabled", true);
+    $("#prev-page, #next-page").css("color", "#aaa");
+    $("#prev-page, #next-page").css("background", "#ccc");
+    $("#prev-page, #next-page").css("boxShadow", " initial");
+
+    $flipbook.turn("previous");
+
+    setTimeout(() => {
+      isBtnDisabled = false;
+      $("#prev-page, #next-page").prop("disabled", false);
+      $("#prev-page, #next-page").css("color", "brown");
+      $("#prev-page, #next-page").css("background", "#fff");
+      $("#prev-page, #next-page").css(
+        "boxShadow",
+        "0 0 10px rgba(0, 0, 0, 0.2)"
+      );
+    }, 1500);
+  });
+
+  // 下一頁按鈕
+  $("#next-page").on("click", function () {
+    if (isBtnDisabled) return; // 防止連按
+    isBtnDisabled = true;
+    $("#prev-page, #next-page").prop("disabled", true);
+    $("#prev-page, #next-page").css("color", "#aaa");
+    $("#prev-page, #next-page").css("background", "#ccc");
+    $("#prev-page, #next-page").css("boxShadow", " initial");
+
+    $flipbook.turn("next");
+
+    setTimeout(() => {
+      isBtnDisabled = false;
+      $("#prev-page, #next-page").css("color", "brown");
+      $("#prev-page, #next-page").css("background", "#fff");
+      $("#prev-page, #next-page").css(
+        "boxShadow",
+        "0 0 10px rgba(0, 0, 0, 0.2)"
+      );
+      $("#prev-page, #next-page").prop("disabled", false);
+    }, 1500);
+  });
 
   // 鍵盤方向鍵控制翻頁
   $(document).on("keydown", function (e) {
@@ -161,6 +161,18 @@ $(function () {
     });
   }
 
+  // 統一音效播放函式（避免重複 code）
+  function playAudio(id, delay = 0) {
+    const audio = document.getElementById(id);
+    if (!audio) return;
+    setTimeout(() => {
+      audio.currentTime = 0;
+      audio.play().catch(() => {
+        console.log("播放被瀏覽器阻止，請點擊頁面後再播放。");
+      });
+    }, delay);
+  }
+
   // 當頁面翻轉完成後觸發
   $("#flipbook").bind("turning", function (event, page, view) {
     console.log("page:", page);
@@ -192,14 +204,9 @@ $(function () {
     }
 
     if (page === 8 || page === 9) {
-      const dorSound = document.getElementById("knock");
-
       const door = document.querySelector(".door");
       door.addEventListener("click", () => {
-        dorSound.currentTime = 0;
-        dorSound.play().catch(() => {
-          console.log("播放被瀏覽器阻止，請點擊頁面後再播放。");
-        });
+        playAudio("knock", 0);
       });
     }
 
@@ -260,18 +267,6 @@ $(function () {
       $("#flipbook .list").remove();
     }
 
-    // 統一音效播放函式（避免重複 code）
-    function playAudio(id, delay = 0) {
-      const audio = document.getElementById(id);
-      if (!audio) return;
-      setTimeout(() => {
-        audio.currentTime = 0;
-        audio.play().catch(() => {
-          console.log("播放被瀏覽器阻止，請點擊頁面後再播放。");
-        });
-      }, delay);
-    }
-
     // 確保元素只 append 一次
     let fanAndBubbleCreated = false;
     let milkClickBound = false;
@@ -287,9 +282,7 @@ $(function () {
       setTimeout(() => $(".electfan").addClass("electfan-move"), 500);
       setTimeout(() => $(".bubble-bg").addClass("bubble-move"), 1200);
 
-      playAudio("coin-drops", 3000);
-
-      setTimeout(() => $(".coin01").addClass("coin-animation"), 3000);
+      setTimeout(() => $(".coin01").addClass("coin-animation"), 15000);
     } else {
       $(".electfan").removeClass("electfan-move");
       $(".bubble-bg").removeClass("bubble-move");
@@ -362,18 +355,15 @@ $(function () {
       <div class="crown"></div>
     `);
 
-      playAudio("coin-drops", 1000);
-      playAudio("crown-drops", 2000);
-
       setTimeout(() => {
         $(".coin01-final, .coin02-final, .coin03-final").addClass(
           "coin-all-animation"
         );
-      }, 1000);
+      }, 1500);
 
       setTimeout(() => {
         $(".crown").addClass("crown-animation");
-      }, 2000);
+      }, 2500);
     } else {
       $(".coin01-final, .coin02-final, .coin03-final").removeClass(
         "coin-all-animation"
@@ -382,23 +372,13 @@ $(function () {
       $("#flipbook .crown").remove();
     }
 
-    // 統一音效播放控制
-    function playSound(id) {
-      const el = document.getElementById(id);
-      if (!el || isMuted) return;
-
-      el.pause();
-      el.currentTime = 0;
-      el.play().catch(() => {});
-    }
-
     // 重置該頁面的所有動畫與音效
     function resetMilkPage() {
+      $(".girl-click-region").addClass("disabled");
       $(".milk-hand").removeClass("milk-hand-animation");
       $(".milk-inner").removeClass("milk-inner-full");
       $(".milk-drop").removeClass("milk-drop-show");
-
-      $(".click-girl").show();
+      $(".click-girl").hide();
       $(".girl-l-hand, .girl-r-hand").removeClass(
         "girl-l-hand-finish girl-r-hand-finish girl-l-hand-finish-milk"
       );
@@ -420,7 +400,6 @@ $(function () {
 
       setTimeout(() => {
         $(".milk-drop").addClass("milk-drop-show");
-        playSound("milk-drop");
       }, 1700);
 
       setTimeout(() => {
@@ -443,26 +422,32 @@ $(function () {
         $(".girl-l-hand").addClass("girl-l-hand-finish");
         $(".girl-r-hand").addClass("girl-r-hand-finish");
 
-        playSound("girl-drink-milk");
+        playAudio("girl-drink-milk", 0);
 
         setTimeout(() => {
           $(".girl-l-hand").addClass("girl-l-hand-finish-milk");
-          playSound("drinking-milk");
+          playAudio("drinking-milk", 0);
         }, 1000);
 
         setTimeout(() => {
           for (let i = 1; i <= 6; i++) {
             $(`.flower0${i}`).addClass(`flower0${i}-finish`);
           }
-          playSound("flower-show");
+          playAudio("flower-show", 0);
         }, 2300);
       });
 
     // 翻到該頁才開始動作
     $("#flipbook").bind("turned", function (event, page) {
       if (page === 26 || page === 27) {
-        resetMilkPage(); // ✅ 每次重進頁面重置一次
+        resetMilkPage(); // 每次重進頁面重置一次
         $(".girl-click-region").removeClass("played");
+
+        setTimeout(() => {
+          $(".girl-click-region").removeClass("disabled");
+          $(".click-girl").show();
+        }, 9000);
+
         startMilkAnimation();
       } else {
         resetMilkPage();
@@ -489,7 +474,6 @@ $(function () {
 
       $(".father-hand").addClass("father-hand-finish");
       $(".daughter-hand").addClass("daughter-hand-finish");
-      playSound("drinking-milk");
 
       setTimeout(() => {
         $(".mom-hand").addClass("mom-hand-finish");
@@ -502,7 +486,6 @@ $(function () {
       }, 2000);
 
       setTimeout(() => {
-        playSound("cow-mooing");
         $(".cow-right").addClass("cow-right-move");
       }, 3000);
 
@@ -686,15 +669,6 @@ $(function () {
             }
           }
         }, 1000);
-
-        // 播放背景音樂
-        const bgAudio = document.getElementById("audio-background");
-        if (bgAudio) {
-          bgAudio.currentTime = 0;
-          bgAudio.play().catch(() => {
-            console.log("背景音樂播放被阻擋");
-          });
-        }
       }, 100); // 延遲播放
     });
 
