@@ -132,9 +132,23 @@ audio {
   border: none;
   border-radius: 20px;
   color: brown;
-  padding: 10px 20px;
+  padding: 10px 10px;
   font-size: 16px;
-  margin: 0 10px;
+  margin: 10px 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+.controls .disabled-btn {
+  color: #aaa;
+  background-color: #ccc;
+  box-shadow: initial;
+  cursor: not-allowed;
+}
+
+.controls .undisabled-btn {
+  color: brown;
+  background-color: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   cursor: pointer;
 }
@@ -1251,6 +1265,10 @@ audio {
   height: 40px;
 }
 
+.milk-bottle-click.disabled {
+  pointer-events: none;
+}
+
 .milk-bottle {
   position: absolute;
   right: 86%;
@@ -1337,6 +1355,7 @@ audio {
 }
 
 .click-milk {
+  display: none;
   position: absolute;
   left: 18%;
   bottom: 10%;
@@ -1391,6 +1410,10 @@ audio {
   transition: all 1s ease-in-out;
 }
 
+.stethoscope.disabled {
+  pointer-events: none;
+}
+
 .stethoscope-move {
   transform: rotate(3deg);
   right: 2px;
@@ -1398,6 +1421,7 @@ audio {
 }
 
 .hearing-heart {
+  display: none;
   position: absolute;
   right: 9%;
   bottom: 18%;
@@ -1492,7 +1516,6 @@ audio {
 
 .girl-click-region.disabled {
   pointer-events: none;
-  opacity: 0.5; /* optional: 顯示不能點 */
 }
 
 .little-girl {
@@ -1918,9 +1941,9 @@ audio {
     margin: initial;
   }
 
-  #prev-page,
-  #next-page,
-  #mute-toggle {
+  .prev-page,
+  .next-page,
+  .mute-toggle {
     margin: 20px auto;
   }
 
@@ -1940,15 +1963,15 @@ audio {
     height: 100% !important;
   }
 
-  #prev-page {
+  .prev-page {
     margin: 20% auto;
   }
 
-  #next-page {
+  .next-page {
     margin: 20% auto;
   }
 
-  #mute-toggle {
+  .mute-toggle {
     margin: 20% auto;
   }
 

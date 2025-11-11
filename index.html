@@ -146,7 +146,7 @@
         </div>
         <div class="page">
           <div class="book book16"></div>
-          <div class="milk-bottle-click"></div>
+          <div class="milk-bottle-click disabled"></div>
           <div class="milk-bottle">
             <div class="bottle"></div>
             <div class="milk"></div>
@@ -155,15 +155,12 @@
           <div class="cows-face"></div>
           <div class="cows-tongue"></div>
           <div class="click-milk"></div>
-          <audio id="coin-drops" controls>
-            <source src="./mp3/coin-drops.mp3" type="audio/mpeg" />
+          <audio id="sucking-coin" controls>
+            <source src="./mp3/sucking-coin.mp3" type="audio/mpeg" />
           </audio>
           <div class="coin coin02"></div>
           <audio id="audio-8" controls>
             <source src="./mp3/08.mp3" type="audio/mpeg" />
-          </audio>
-          <audio id="sucking" controls>
-            <source src="./mp3/sucking.mp3" type="audio/mpeg" />
           </audio>
         </div>
         <div class="page">
@@ -172,16 +169,13 @@
           </audio>
           <div class="book book17"></div>
           <div class="girls-left"></div>
-          <div class="stethoscope"></div>
+          <div class="stethoscope disabled"></div>
           <div class="hearing-heart"></div>
-          <audio id="hearts-beat" controls>
-            <source src="./mp3/heartbeat.mp3" type="audio/mpeg" />
-          </audio>
         </div>
         <div class="page">
           <div class="book book18"></div>
-          <audio id="coin-drops" controls>
-            <source src="./mp3/coin-drops.mp3" type="audio/mpeg" />
+          <audio id="hearts-coin" controls>
+            <source src="./mp3/hear-coin.mp3" type="audio/mpeg" />
           </audio>
           <div class="coin coin03"></div>
         </div>
@@ -283,9 +277,11 @@
 
     <!-- 翻頁按鈕 -->
     <div class="controls">
-      <button id="prev-page">上一頁</button>
-      <button id="next-page">下一頁</button>
-      <button id="mute-toggle"><i class="fas fa-volume-mute"></i> 關閉</button>
+      <button class="prev-page">上一頁</button>
+      <button class="next-page">下一頁</button>
+      <button class="mute-toggle">
+        <i class="fas fa-volume-mute"></i> 關閉
+      </button>
     </div>
     <script>
       const audio4 = document.getElementById("audio-4");

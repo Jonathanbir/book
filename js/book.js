@@ -68,61 +68,49 @@ $(function () {
     $("#flipbook").turn("next");
   });
 
-  // // 上一頁按鈕
-  // $("#prev-page").on("click", function () {
-  //   $flipbook.turn("previous");
-  // });
-
-  // // 下一頁按鈕
-  // $("#next-page").on("click", function () {
-  //   $flipbook.turn("next");
-  // });
-
   let isBtnDisabled;
-  // 上一頁按鈕
-  $("#prev-page").on("click", function () {
-    if (isBtnDisabled) return; // 防止連按
+
+  function btnDisabled() {
     isBtnDisabled = true;
-    $("#prev-page, #next-page").prop("disabled", true);
-    $("#prev-page, #next-page").css("color", "#aaa");
-    $("#prev-page, #next-page").css("background", "#ccc");
-    $("#prev-page, #next-page").css("boxShadow", " initial");
+    $(".next-page").addClass("disabled-btn");
+    $(".next-page").prop("disabled", true);
+  }
+
+  function btnUnDisabled() {
+    isBtnDisabled = false;
+    $(".next-page").removeClass("disabled-btn");
+    $(".next-page").prop("disabled", false);
+  }
+
+  // 上一頁按鈕
+  $(".prev-page").on("click", function () {
+    // if (isBtnDisabled) return; // 防止連按
+    // isBtnDisabled = true;
+    // $(".prev-page, .next-page").addClass("disabled-btn");
 
     $flipbook.turn("previous");
 
-    setTimeout(() => {
-      isBtnDisabled = false;
-      $("#prev-page, #next-page").prop("disabled", false);
-      $("#prev-page, #next-page").css("color", "brown");
-      $("#prev-page, #next-page").css("background", "#fff");
-      $("#prev-page, #next-page").css(
-        "boxShadow",
-        "0 0 10px rgba(0, 0, 0, 0.2)"
-      );
-    }, 1500);
+    $(".next-page").removeClass("disabled-btn");
+    $(".next-page").prop("disabled", false);
+
+    // setTimeout(() => {
+    //   isBtnDisabled = false;
+    //   $(".prev-page, .next-page").removeClass("disabled-btn");
+    // }, 1500);
   });
 
   // 下一頁按鈕
-  $("#next-page").on("click", function () {
-    if (isBtnDisabled) return; // 防止連按
-    isBtnDisabled = true;
-    $("#prev-page, #next-page").prop("disabled", true);
-    $("#prev-page, #next-page").css("color", "#aaa");
-    $("#prev-page, #next-page").css("background", "#ccc");
-    $("#prev-page, #next-page").css("boxShadow", " initial");
+  $(".next-page").on("click", function () {
+    // if (isBtnDisabled) return; // 防止連按
+    // isBtnDisabled = true;
+    // $(".prev-page, .next-page").addClass("disabled-btn");
 
     $flipbook.turn("next");
 
-    setTimeout(() => {
-      isBtnDisabled = false;
-      $("#prev-page, #next-page").css("color", "brown");
-      $("#prev-page, #next-page").css("background", "#fff");
-      $("#prev-page, #next-page").css(
-        "boxShadow",
-        "0 0 10px rgba(0, 0, 0, 0.2)"
-      );
-      $("#prev-page, #next-page").prop("disabled", false);
-    }, 1500);
+    // setTimeout(() => {
+    //   isBtnDisabled = false;
+    //   $(".prev-page, .next-page").removeClass("disabled-btn");
+    // }, 1500);
   });
 
   // 鍵盤方向鍵控制翻頁
@@ -137,7 +125,7 @@ $(function () {
   //靜音按鈕
   let isMuted = false;
 
-  $("#mute-toggle").on("click", function () {
+  $(".mute-toggle").on("click", function () {
     isMuted = !isMuted;
 
     // 控制所有 audio 是否靜音
@@ -296,23 +284,35 @@ $(function () {
       if (!milkClickBound) {
         milkClickBound = true;
 
+        // setTimeout(() => {
+        btnDisabled();
+        // }, 1510);
+
+        setTimeout(() => {
+          $(".click-milk").show();
+          $(".milk-bottle-click").removeClass("disabled");
+        }, 13000);
+
         $("#flipbook .milk-bottle-click").on("click", function () {
           $(".cows-tongue").addClass("cows-tongue-animation");
           $(".milk").addClass("milk-empty");
           $(".click-milk").hide();
 
-          playAudio("sucking", 0);
-          playAudio("coin-drops", 2000);
+          playAudio("sucking-coin", 0);
 
-          setTimeout(() => $(".coin02").addClass("coin-animation"), 2000);
+          setTimeout(() => {
+            $(".coin02").addClass("coin-animation");
+          }, 10000);
+          setTimeout(() => {
+            btnUnDisabled();
+          }, 12000);
         });
       }
     } else {
+      $(".milk-bottle-click").addClass("disabled");
       $(".cows-tongue").removeClass("cows-tongue-animation");
       $(".milk").removeClass("milk-empty");
       $(".coin02").removeClass("coin-animation");
-
-      setTimeout(() => $(".click-milk").show(), 300);
     }
 
     // 全域：避免重複 append coin 與 crown
@@ -324,26 +324,33 @@ $(function () {
       if (!stethoscopeBound) {
         stethoscopeBound = true;
 
+        // setTimeout(() => {
+        btnDisabled();
+        // }, 1510);
+
+        setTimeout(() => {
+          $("#flipbook .hearing-heart").show();
+          $(".stethoscope").removeClass("disabled");
+        }, 15000);
+
         $("#flipbook .stethoscope").on("click", function () {
           $(this).addClass("stethoscope-move");
           $("#flipbook .hearing-heart").hide();
 
-          playAudio("hearts-beat", 1000);
-          playAudio("coin-drops", 6000);
+          playAudio("hearts-coin", 1000);
 
           setTimeout(() => {
             $(".coin03").addClass("coin-animation");
-          }, 6000);
+          }, 13000);
+          setTimeout(() => {
+            btnUnDisabled();
+          }, 14000);
         });
       }
     } else {
+      $(".stethoscope").addClass("disabled");
       $("#flipbook .stethoscope").removeClass("stethoscope-move");
       $(".coin03").removeClass("coin-animation");
-
-      // 避免白屏閃爍，延後顯示
-      setTimeout(() => {
-        $("#flipbook .hearing-heart").show();
-      }, 300);
     }
 
     // 第 20–21 頁：獲得皇冠 + 投硬幣動畫
@@ -359,7 +366,7 @@ $(function () {
         $(".coin01-final, .coin02-final, .coin03-final").addClass(
           "coin-all-animation"
         );
-      }, 1500);
+      }, 1200);
 
       setTimeout(() => {
         $(".crown").addClass("crown-animation");
@@ -435,11 +442,19 @@ $(function () {
           }
           playAudio("flower-show", 0);
         }, 2300);
+
+        setTimeout(() => {
+          btnUnDisabled();
+        }, 7000);
       });
 
     // 翻到該頁才開始動作
     $("#flipbook").bind("turned", function (event, page) {
       if (page === 26 || page === 27) {
+        // setTimeout(() => {
+        btnDisabled();
+        // }, 1510);
+
         resetMilkPage(); // 每次重進頁面重置一次
         $(".girl-click-region").removeClass("played");
 
