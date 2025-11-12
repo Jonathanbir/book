@@ -74,12 +74,22 @@ $(function () {
     isBtnDisabled = true;
     $(".next-page").addClass("disabled-btn");
     $(".next-page").prop("disabled", true);
+    $(".next-page")
+      .on("mouseenter", function () {
+        $(".next-page-hint").addClass("next-page-hint-show");
+      })
+      .on("mouseleave", function () {
+        $(".next-page-hint").removeClass("next-page-hint-show");
+      });
   }
 
   function btnUnDisabled() {
     isBtnDisabled = false;
     $(".next-page").removeClass("disabled-btn");
     $(".next-page").prop("disabled", false);
+    $(".next-page").on("mouseenter", function () {
+      $(".next-page-hint").removeClass("next-page-hint-show");
+    });
   }
 
   function btnPreviousDisabled() {
@@ -552,6 +562,32 @@ $(function () {
         $(".mom-hand").removeClass("mom-hand-finish mom-hand-empty");
         $(".mom-hand").remove();
       }
+
+      if (page === 30) {
+        let count = 3;
+        $(".prev-page").prop("disabled", true);
+        $(".prev-page").addClass("disabled-btn");
+        const prevBtn = $(".prev-page")[0];
+
+        // 每秒更新一次按鈕文字
+        prevBtn.innerText = count + "秒";
+
+        const timer = setInterval(() => {
+          count--;
+          if (count > 0) {
+            prevBtn.innerText = count + "秒";
+          } else {
+            clearInterval(timer);
+            prevBtn.innerText = "上一頁";
+          }
+        }, 1000);
+        setTimeout(() => {
+          $(".prev-page").removeClass("disabled-btn");
+          $(".prev-page").prop("disabled", false);
+        }, 3000);
+
+        $(".next-page").addClass("disabled-btn");
+      }
     });
 
     $("#flipbook").bind("turned", function (event, page) {
@@ -568,7 +604,8 @@ $(function () {
       page !== 18 &&
       page !== 19 &&
       page !== 26 &&
-      page !== 27
+      page !== 27 &&
+      page !== 30
     ) {
       allBtnDisabled();
     }
