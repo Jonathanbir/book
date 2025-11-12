@@ -1531,6 +1531,25 @@ audio {
   background-repeat: no-repeat;
 }
 
+.milk-stains {
+  position: absolute;
+  right: 48%;
+  top: 45%;
+  z-index: 4;
+  width: 50px;
+  height: 20px;
+  background-size: 100%;
+  background-image: url(./images/object/milk-stains.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: all 1.5s ease-in-out;
+}
+
+.milk-stains-show {
+  opacity: 1;
+}
+
 .flower {
   position: absolute;
   z-index: 1;
@@ -1686,6 +1705,49 @@ audio {
   cursor: pointer;
   animation: dialogKnockShow 2s ease-in-out infinite;
   transition: all 1s ease-in-out;
+}
+
+.dad-milk-ink {
+  position: absolute;
+  right: 47.5%;
+  top: 42%;
+  z-index: 4;
+  width: 48px;
+  height: 20px;
+  background-size: 100%;
+  background-image: url(./images/object/dad-milk-ink.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: all 1.5s ease-in-out;
+}
+
+.dad-milk-ink-show {
+  opacity: 1;
+}
+
+.girls-milk-ink {
+  position: absolute;
+  right: 23%;
+  top: 54%;
+  z-index: 4;
+  width: 30px;
+  height: 15px;
+  background-size: 100%;
+  background-image: url(./images/object/girls-milk-ink.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: all 1.5s ease-in-out;
+}
+
+.mom-milk-ink {
+  right: -1%;
+  top: 51.5%;
+}
+
+.girls-milk-ink-show {
+  opacity: 1;
 }
 
 .cow-right {

@@ -285,7 +285,7 @@ $(function () {
         milkClickBound = true;
 
         // setTimeout(() => {
-        btnDisabled();
+        // btnDisabled();
         // }, 1510);
 
         setTimeout(() => {
@@ -325,7 +325,7 @@ $(function () {
         stethoscopeBound = true;
 
         // setTimeout(() => {
-        btnDisabled();
+        // btnDisabled();
         // }, 1510);
 
         setTimeout(() => {
@@ -381,14 +381,15 @@ $(function () {
 
     // 重置該頁面的所有動畫與音效
     function resetMilkPage() {
+      $(".click-girl").hide();
       $(".girl-click-region").addClass("disabled");
       $(".milk-hand").removeClass("milk-hand-animation");
       $(".milk-inner").removeClass("milk-inner-full");
       $(".milk-drop").removeClass("milk-drop-show");
-      $(".click-girl").hide();
       $(".girl-l-hand, .girl-r-hand").removeClass(
         "girl-l-hand-finish girl-r-hand-finish girl-l-hand-finish-milk"
       );
+      $(".milk-stains").removeClass("milk-stains-show");
 
       for (let i = 1; i <= 6; i++) {
         $(`.flower0${i}`).removeClass(`flower0${i}-finish`);
@@ -437,6 +438,10 @@ $(function () {
         }, 1000);
 
         setTimeout(() => {
+          $(".milk-stains").addClass("milk-stains-show");
+        }, 1200);
+
+        setTimeout(() => {
           for (let i = 1; i <= 6; i++) {
             $(`.flower0${i}`).addClass(`flower0${i}-finish`);
           }
@@ -452,7 +457,7 @@ $(function () {
     $("#flipbook").bind("turned", function (event, page) {
       if (page === 26 || page === 27) {
         // setTimeout(() => {
-        btnDisabled();
+        // btnDisabled();
         // }, 1510);
 
         resetMilkPage(); // 每次重進頁面重置一次
@@ -474,31 +479,27 @@ $(function () {
       $(".father-hand, .daughter-hand").removeClass(
         "father-hand-finish daughter-hand-finish father-hand-empty daughter-hand-empty"
       );
-
+      $(".dad-milk-ink ").removeClass("dad-milk-ink-show ");
+      $(".girls-milk-ink ").removeClass("girls-milk-ink-show ");
       $(".cow-right").removeClass("cow-right-move");
       $(".mow").hide();
-
-      if ($(".mom-hand").length) $(".mom-hand").remove();
     }
 
     // Animation flow — page 28/29
     function startFamilyAnimation() {
-      if (!$(".mom-hand").length) {
-        $("#flipbook").append('<div class="mom-hand"></div>');
-      }
-
       $(".father-hand").addClass("father-hand-finish");
       $(".daughter-hand").addClass("daughter-hand-finish");
-
-      setTimeout(() => {
-        $(".mom-hand").addClass("mom-hand-finish");
-      }, 200);
 
       setTimeout(() => {
         $(".daughter-hand").addClass("daughter-hand-empty");
         $(".father-hand").addClass("father-hand-empty");
         $(".mom-hand").addClass("mom-hand-empty");
-      }, 2000);
+      }, 2550);
+
+      setTimeout(() => {
+        $(".dad-milk-ink ").addClass("dad-milk-ink-show ");
+        $(".girls-milk-ink ").addClass("girls-milk-ink-show ");
+      }, 3000);
 
       setTimeout(() => {
         $(".cow-right").addClass("cow-right-move");
@@ -510,9 +511,24 @@ $(function () {
     }
 
     // Turn.js event
+    $("#flipbook").bind("turning", function (event, page) {
+      if (page === 28 || page === 29) {
+        if (!$(".mom-hand").length) {
+          setTimeout(() => {
+            $("#flipbook").append('<div class="mom-hand"></div>');
+          }, 500);
+          setTimeout(() => {
+            $(".mom-hand").addClass("mom-hand-finish");
+          }, 550);
+        }
+      } else {
+        $(".mom-hand").removeClass("mom-hand-finish mom-hand-empty");
+        $(".mom-hand").remove();
+      }
+    });
+
     $("#flipbook").bind("turned", function (event, page) {
       if (page === 28 || page === 29) {
-        resetFamilyPage();
         startFamilyAnimation();
       } else {
         resetFamilyPage();
