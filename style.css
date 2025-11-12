@@ -1975,6 +1975,11 @@ audio {
   background-image: url(./images/book/book28.jpg);
 }
 
+.prev-page,
+.next-page {
+  width: 68px;
+}
+
 @media screen and (max-height: 500px) {
   body {
     margin: 0;

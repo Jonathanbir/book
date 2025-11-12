@@ -82,35 +82,67 @@ $(function () {
     $(".next-page").prop("disabled", false);
   }
 
+  function btnPreviousDisabled() {
+    let count = 3;
+    const prevBtn = $(".prev-page")[0];
+
+    // 每秒更新一次按鈕文字
+    prevBtn.innerText = count + "秒";
+
+    const timer = setInterval(() => {
+      count--;
+      if (count > 0) {
+        prevBtn.innerText = count + "秒";
+      } else {
+        clearInterval(timer);
+        prevBtn.innerText = "上一頁";
+      }
+    }, 1000);
+
+    $(".prev-page").prop("disabled", true);
+    $(".prev-page").addClass("disabled-btn");
+    setTimeout(() => {
+      $(".prev-page").removeClass("disabled-btn");
+      $(".prev-page").prop("disabled", false);
+    }, 3000);
+  }
+
+  function allBtnDisabled() {
+    let count = 3;
+    const prevBtn = $(".prev-page")[0];
+    const nextBtn = $(".next-page")[0];
+
+    // 每秒更新一次按鈕文字
+    prevBtn.innerText = count + "秒";
+    nextBtn.innerText = count + "秒";
+
+    const timer = setInterval(() => {
+      count--;
+      if (count > 0) {
+        prevBtn.innerText = count + "秒";
+        nextBtn.innerText = count + "秒";
+      } else {
+        clearInterval(timer);
+        prevBtn.innerText = "上一頁";
+        nextBtn.innerText = "下一頁";
+      }
+    }, 1000);
+    $(".prev-page, .next-page").prop("disabled", true);
+    $(".prev-page, .next-page").addClass("disabled-btn");
+    setTimeout(() => {
+      $(".prev-page, .next-page").removeClass("disabled-btn");
+      $(".prev-page, .next-page").prop("disabled", false);
+    }, 3000);
+  }
+
   // 上一頁按鈕
   $(".prev-page").on("click", function () {
-    // if (isBtnDisabled) return; // 防止連按
-    // isBtnDisabled = true;
-    // $(".prev-page, .next-page").addClass("disabled-btn");
-
     $flipbook.turn("previous");
-
-    $(".next-page").removeClass("disabled-btn");
-    $(".next-page").prop("disabled", false);
-
-    // setTimeout(() => {
-    //   isBtnDisabled = false;
-    //   $(".prev-page, .next-page").removeClass("disabled-btn");
-    // }, 1500);
   });
 
   // 下一頁按鈕
   $(".next-page").on("click", function () {
-    // if (isBtnDisabled) return; // 防止連按
-    // isBtnDisabled = true;
-    // $(".prev-page, .next-page").addClass("disabled-btn");
-
     $flipbook.turn("next");
-
-    // setTimeout(() => {
-    //   isBtnDisabled = false;
-    //   $(".prev-page, .next-page").removeClass("disabled-btn");
-    // }, 1500);
   });
 
   // 鍵盤方向鍵控制翻頁
@@ -283,10 +315,8 @@ $(function () {
       // 避免多次 click＝動作卡、音效重複
       if (!milkClickBound) {
         milkClickBound = true;
-
-        // setTimeout(() => {
-        // btnDisabled();
-        // }, 1510);
+        btnPreviousDisabled();
+        btnDisabled();
 
         setTimeout(() => {
           $(".click-milk").show();
@@ -323,10 +353,8 @@ $(function () {
       // 只綁一次 click，不會因翻頁重複綁定
       if (!stethoscopeBound) {
         stethoscopeBound = true;
-
-        // setTimeout(() => {
-        // btnDisabled();
-        // }, 1510);
+        btnPreviousDisabled();
+        btnDisabled();
 
         setTimeout(() => {
           $("#flipbook .hearing-heart").show();
@@ -412,7 +440,7 @@ $(function () {
 
       setTimeout(() => {
         $(".milk-inner").addClass("milk-inner-full");
-      }, 2000);
+      }, 3000);
 
       setTimeout(() => {
         $(".milk-drop").removeClass("milk-drop-show");
@@ -456,9 +484,8 @@ $(function () {
     // 翻到該頁才開始動作
     $("#flipbook").bind("turned", function (event, page) {
       if (page === 26 || page === 27) {
-        // setTimeout(() => {
-        // btnDisabled();
-        // }, 1510);
+        btnPreviousDisabled();
+        btnDisabled();
 
         resetMilkPage(); // 每次重進頁面重置一次
         $(".girl-click-region").removeClass("played");
@@ -534,6 +561,17 @@ $(function () {
         resetFamilyPage();
       }
     });
+
+    if (
+      page !== 16 &&
+      page !== 17 &&
+      page !== 18 &&
+      page !== 19 &&
+      page !== 26 &&
+      page !== 27
+    ) {
+      allBtnDisabled();
+    }
 
     var $bubbles = $(".bubbles");
 
