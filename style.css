@@ -1976,8 +1976,9 @@ audio {
 }
 
 .prev-page,
-.next-page {
-  width: 68px;
+.next-page,
+.mute-toggle {
+  width: 80px;
 }
 
 .next-page-hint {

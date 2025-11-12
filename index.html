@@ -71,7 +71,7 @@
           <div class="book book06"></div>
           <div class="dialog dialog6"></div>
           <div class="hand left-hand"></div>
-          <audio id="audio-4" controls>
+          <audio id="audio-4-click" controls>
             <source src="./mp3/04.mp3" type="audio/mpeg" />
           </audio>
         </div>
@@ -90,7 +90,7 @@
             <source src="./mp3/knock.mp3" type="audio/mpeg" />
           </audio>
           <div class="door-bg door-common"></div>
-          <div class="door door-common" onclick="handleDoorClick()"></div>
+          <div class="door door-common"></div>
           <div class="peoples"></div>
           <div class="cloud2"></div>
           <div class="tree2"></div>
@@ -278,7 +278,6 @@
         </div>
       </div>
     </div>
-
     <!-- 翻頁按鈕 -->
     <div class="controls">
       <button class="prev-page disabled-btn">上一頁</button>
@@ -288,23 +287,6 @@
       </button>
       <div class="next-page-hint">請完成任務</div>
     </div>
-    <script>
-      const audio4 = document.getElementById("audio-4");
-
-      function handleDoorClick() {
-        $(".door").addClass("door-opening");
-        $(".peoples").addClass("peoples-open");
-        $(".tree1").addClass("tree-fade-in");
-        $(".tree2").addClass("tree-fade-in");
-        $(".cloud1").addClass("cloud-fade-in");
-        $(".cloud2").addClass("cloud-fade-in");
-        $(".dialog8").addClass("dialog8-animation");
-        audio4.currentTime = 0;
-        audio4.play().catch(() => {
-          console.log("播放被瀏覽器阻止，請點擊頁面後再播放。");
-        });
-      }
-    </script>
     <script>
       function checkOrientation() {
         const isPortrait = window.innerHeight > window.innerWidth;

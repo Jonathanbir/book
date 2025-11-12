@@ -195,6 +195,10 @@ $(function () {
   function playAudio(id, delay = 0) {
     const audio = document.getElementById(id);
     if (!audio) return;
+
+    // 用 muted 屬性控制輸出，不中斷播放
+    audio.muted = isMuted;
+
     setTimeout(() => {
       audio.currentTime = 0;
       audio.play().catch(() => {
@@ -206,6 +210,32 @@ $(function () {
   // 當頁面翻轉完成後觸發
   $("#flipbook").bind("turning", function (event, page, view) {
     console.log("page:", page);
+
+    if (page === 1) {
+      let count = 3;
+      $(".next-page").prop("disabled", true);
+      $(".next-page").addClass("disabled-btn");
+      const prevBtn = $(".next-page")[0];
+
+      // 每秒更新一次按鈕文字
+      prevBtn.innerText = count + "秒";
+
+      const timer = setInterval(() => {
+        count--;
+        if (count > 0) {
+          prevBtn.innerText = count + "秒";
+        } else {
+          clearInterval(timer);
+          prevBtn.innerText = "下一頁";
+        }
+      }, 1000);
+      setTimeout(() => {
+        $(".next-page").removeClass("disabled-btn");
+        $(".next-page").prop("disabled", false);
+      }, 3000);
+
+      $(".prev-page").addClass("disabled-btn");
+    }
 
     if (page === 2 || page === 3) {
       setTimeout(() => {
@@ -237,6 +267,14 @@ $(function () {
       const door = document.querySelector(".door");
       door.addEventListener("click", () => {
         playAudio("knock", 0);
+        $(".door").addClass("door-opening");
+        $(".peoples").addClass("peoples-open");
+        $(".tree1").addClass("tree-fade-in");
+        $(".tree2").addClass("tree-fade-in");
+        $(".cloud1").addClass("cloud-fade-in");
+        $(".cloud2").addClass("cloud-fade-in");
+        $(".dialog8").addClass("dialog8-animation");
+        playAudio("audio-4-click", 0);
       });
     }
 
@@ -599,6 +637,7 @@ $(function () {
     });
 
     if (
+      page !== 1 &&
       page !== 16 &&
       page !== 17 &&
       page !== 18 &&
@@ -697,8 +736,8 @@ $(function () {
 
     bubbles();
 
-    let latestPage = 0;
-    let playTimeout = null;
+    let playTimeout;
+    let latestPage = 1;
 
     // 頁面對應的音檔 ID 對照表
     const pageAudioMap = {
@@ -708,8 +747,6 @@ $(function () {
       5: "audio-2",
       6: "audio-3",
       7: "audio-3",
-      8: "audio",
-      9: "audio",
       10: "audio-5",
       11: "audio-5",
       12: "audio-6",
@@ -732,11 +769,11 @@ $(function () {
       29: "audio-14",
     };
 
-    // 全部暫停
+    // 停止所有音樂
     function allAudioPause() {
-      document.querySelectorAll("audio").forEach((audio) => {
-        audio.pause();
-        audio.currentTime = 0;
+      $("audio").each(function () {
+        this.pause();
+        this.currentTime = 0;
       });
     }
 
@@ -757,25 +794,24 @@ $(function () {
       if (playTimeout) clearTimeout(playTimeout);
 
       playTimeout = setTimeout(() => {
-        // 確保是最後停留頁
-        if (page !== latestPage) return;
+        if (page !== latestPage) return; // 防止快速切頁
 
         allAudioPause();
 
         setTimeout(() => {
-          // 播放對應音檔
           const audioId = pageAudioMap[page];
           if (audioId) {
             const audio = document.getElementById(audioId);
             if (audio) {
               audio.currentTime = 0;
+              audio.muted = isMuted; // 🔸 關鍵：重新套用靜音狀態
               audio.play().catch(() => {
                 console.log("自動播放被阻擋，請點擊頁面再播放");
               });
             }
           }
         }, 1000);
-      }, 100); // 延遲播放
+      }, 100);
     });
 
     $("#flipbook").on("mouseup", function (e) {
