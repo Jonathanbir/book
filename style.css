@@ -1660,6 +1660,10 @@ audio {
   transition: all 1.5s ease-in-out;
 }
 
+.girl-l-hand-empty {
+  opacity: 0;
+}
+
 .girl-l-hand-finish {
   right: 53%;
   bottom: 150px;
@@ -1667,7 +1671,20 @@ audio {
 }
 
 .girl-l-hand-finish-milk {
+  position: absolute;
+  z-index: 3;
+  width: 138px;
+  height: 185px;
+  background-size: 100%;
+  opacity: 0;
   background-image: url(./images/object/girl-l-hand-finish.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: all 1.5s ease-in-out;
+}
+
+.girl-l-hand-finished-milk {
+  opacity: 1;
 }
 
 .girl-r-hand {
@@ -1783,13 +1800,36 @@ audio {
 }
 
 .father-hand-finish {
+  left: 12%;
+  bottom: 130px;
   transform: scale(0.8) rotate(-25deg);
+}
+
+.father-hand-remove {
+  opacity: 0;
+}
+
+.father-hand-empty {
+  position: absolute;
+  transform: scale(0.8) rotate(-25deg);
+  z-index: 3;
+  width: 320px;
+  height: 190px;
+  background-size: 100%;
+  background-image: url(./images/object/father-hand-finish.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: all 1.5s ease-in-out;
+}
+
+.father-hand-empty-move {
   left: 12%;
   bottom: 130px;
 }
 
-.father-hand-empty {
-  background-image: url(./images/object/father-hand-finish.png);
+.father-hand-empty-finish {
+  opacity: 1;
 }
 
 .daughter-hand {
@@ -1806,16 +1846,37 @@ audio {
   transition: all 1.5s ease-in-out;
 }
 
+.daughter-hand-remove {
+  opacity: 0;
+}
+
 .daughter-hand-finish {
+  right: 17%;
+  bottom: 160px;
   transform: rotate(-75deg);
+}
+
+.daughter-hand-empty {
+  position: absolute;
+  transform: rotate(-75deg);
+  z-index: 2;
+  width: 100px;
+  height: 130px;
+  background-size: 100%;
+  background-image: url(./images/object/daughter-hand-finish.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: all 1.5s ease-in-out;
+}
+
+.daughter-hand-empty-move {
   right: 17%;
   bottom: 160px;
 }
 
-.daughter-hand-empty {
-  background-image: url(./images/object/daughter-hand-finish.png);
-  background-position: center;
-  background-repeat: no-repeat;
+.daughter-hand-empty-finish {
+  opacity: 1;
 }
 
 .mom-hand {
@@ -1832,13 +1893,36 @@ audio {
   transition: all 1.5s ease-in-out;
 }
 
-.mom-hand-empty {
-  background-image: url(./images/object/mom-hand-finish.png);
+.mom-hand-remove {
+  opacity: 0;
 }
 
 .mom-hand-finish {
   bottom: 120px;
   transform: scale(0.9) rotate(45deg);
+}
+
+.mom-hand-empty {
+  position: absolute;
+  z-index: 99;
+  width: 240px;
+  height: 140px;
+  background-size: 100%;
+  transform: scale(0.9) rotate(45deg);
+  background-image: url(./images/object/mom-hand-finish.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: all 1.5s ease-in-out;
+}
+
+.mom-hand-empty-move {
+  right: 40%;
+  bottom: 120px;
+}
+
+.mom-hand-empty-finish {
+  opacity: 1;
 }
 
 .mow {
@@ -2298,6 +2382,11 @@ audio {
     height: 50px;
   }
 
+  .milk-stains {
+    right: 45%;
+    z-index: 3;
+  }
+
   .father-hand {
     bottom: 47px;
     left: 19%;
@@ -2306,6 +2395,13 @@ audio {
   }
 
   .father-hand-finish {
+    left: 20%;
+    bottom: 65px;
+    transform: scale(1) rotate(-35deg);
+  }
+
+  .father-hand-empty-finish {
+    width: 220px;
     left: 20%;
     bottom: 65px;
     transform: scale(1) rotate(-35deg);
@@ -2322,14 +2418,22 @@ audio {
     bottom: 100px;
   }
 
+  .daughter-hand-empty-finish {
+    width: 80px;
+    right: 18%;
+    bottom: 100px;
+  }
+
   .mom-hand {
     right: 40%;
-    bottom: 36px;
+    bottom: 60px;
     width: 200px;
   }
 
-  .mom-hand-finish {
+  .mom-hand-empty-finish {
+    right: 40%;
     bottom: 60px;
+    width: 200px;
   }
 
   .cow-right {
@@ -2350,7 +2454,8 @@ audio {
     height: 450px;
   }
 
-  .girl-l-hand {
+  .girl-l-hand,
+  .girl-l-hand-finish-milk {
     width: 100px;
     height: 155px;
   }
@@ -2366,5 +2471,11 @@ audio {
   .girl-r-hand-finish {
     right: 37%;
     bottom: 60px;
+  }
+
+  .father-hand-empty,
+  .daughter-hand-empty,
+  .mom-hand-empty {
+    transition: none;
   }
 }

@@ -462,9 +462,10 @@ $(function () {
       $(".milk-hand").removeClass("milk-hand-animation");
       $(".milk-inner").removeClass("milk-inner-full");
       $(".milk-drop").removeClass("milk-drop-show");
-      $(".girl-l-hand, .girl-r-hand").removeClass(
-        "girl-l-hand-finish girl-r-hand-finish girl-l-hand-finish-milk"
-      );
+      $(".girl-l-hand").removeClass("girl-l-hand-empty");
+      $(".girl-l-hand").removeClass("girl-l-hand-finish");
+      $(".girl-r-hand").removeClass("girl-r-hand-finish");
+      $(".girl-l-hand-finish-milk").removeClass("girl-l-hand-finished-milk");
       $(".milk-stains").removeClass("milk-stains-show");
 
       for (let i = 1; i <= 6; i++) {
@@ -509,7 +510,8 @@ $(function () {
         playAudio("girl-drink-milk", 0);
 
         setTimeout(() => {
-          $(".girl-l-hand").addClass("girl-l-hand-finish-milk");
+          $(".girl-l-hand").addClass("girl-l-hand-empty");
+          $(".girl-l-hand-finish-milk").addClass("girl-l-hand-finished-milk");
           playAudio("drinking-milk", 0);
         }, 1000);
 
@@ -528,6 +530,78 @@ $(function () {
           btnUnDisabled();
         }, 7000);
       });
+
+    // Animation flow — page 28/29
+    function startFamilyAnimation() {
+      $(".father-hand").addClass("father-hand-finish");
+      $(".daughter-hand").addClass("daughter-hand-finish");
+      $(".mom-hand").addClass("mom-hand-finish");
+
+      setTimeout(() => {
+        $(".father-hand-empty").addClass("father-hand-empty-move");
+        $(".daughter-hand-empty").addClass("daughter-hand-empty-move");
+        $(".mom-hand-empty").addClass("mom-hand-empty-move");
+      }, 2000);
+
+      setTimeout(() => {
+        $(".father-hand").addClass("father-hand-remove");
+        $(".daughter-hand").addClass("daughter-hand-remove");
+        $(".mom-hand").addClass("mom-hand-remove");
+        $(".father-hand-empty").addClass("father-hand-empty-finish");
+        $(".daughter-hand-empty").addClass("daughter-hand-empty-finish");
+        $(".mom-hand-empty").addClass("mom-hand-empty-finish");
+      }, 2550);
+
+      setTimeout(() => {
+        $(".dad-milk-ink ").addClass("dad-milk-ink-show ");
+        $(".girls-milk-ink ").addClass("girls-milk-ink-show ");
+      }, 3000);
+
+      setTimeout(() => {
+        $(".cow-right").addClass("cow-right-move");
+      }, 3000);
+
+      setTimeout(() => {
+        $(".mow").show();
+      }, 3800);
+    }
+
+    // Reset function
+    // 重置家人手部與牛相關動畫狀態
+    function resetFamilyPage() {
+      const removeClasses = [
+        // 手部完成、移除
+        "father-hand-finish",
+        "daughter-hand-finish",
+        "father-hand-remove",
+        "daughter-hand-remove",
+        "mom-hand-finish",
+        "mom-hand-remove",
+
+        // 空手動畫
+        "father-hand-empty-finish",
+        "father-hand-empty-move",
+        "daughter-hand-empty-finish",
+        "daughter-hand-empty-move",
+        "mom-hand-empty-move",
+        "mom-hand-empty-finish",
+
+        // 墨水效果
+        "dad-milk-ink-show",
+        "girls-milk-ink-show",
+
+        // 牛移動動畫
+        "cow-right-move",
+      ];
+
+      // 批次移除所有指定 class
+      $(
+        ".father-hand, .daughter-hand, .mom-hand, .father-hand-empty, .daughter-hand-empty, .mom-hand-empty, .dad-milk-ink, .girls-milk-ink, .cow-right"
+      ).removeClass(removeClasses.join(" "));
+
+      // 隱藏叫聲
+      $(".mow").hide();
+    }
 
     // 翻到該頁才開始動作
     $("#flipbook").bind("turned", function (event, page) {
@@ -549,48 +623,13 @@ $(function () {
       }
     });
 
-    // Reset function
-    function resetFamilyPage() {
-      $(".father-hand, .daughter-hand").removeClass(
-        "father-hand-finish daughter-hand-finish father-hand-empty daughter-hand-empty"
-      );
-      $(".dad-milk-ink ").removeClass("dad-milk-ink-show ");
-      $(".girls-milk-ink ").removeClass("girls-milk-ink-show ");
-      $(".cow-right").removeClass("cow-right-move");
-      $(".mow").hide();
-    }
-
-    // Animation flow — page 28/29
-    function startFamilyAnimation() {
-      $(".father-hand").addClass("father-hand-finish");
-      $(".daughter-hand").addClass("daughter-hand-finish");
-
-      setTimeout(() => {
-        $(".daughter-hand").addClass("daughter-hand-empty");
-        $(".father-hand").addClass("father-hand-empty");
-        $(".mom-hand").addClass("mom-hand-empty");
-      }, 2550);
-
-      setTimeout(() => {
-        $(".dad-milk-ink ").addClass("dad-milk-ink-show ");
-        $(".girls-milk-ink ").addClass("girls-milk-ink-show ");
-      }, 3000);
-
-      setTimeout(() => {
-        $(".cow-right").addClass("cow-right-move");
-      }, 3000);
-
-      setTimeout(() => {
-        $(".mow").show();
-      }, 3800);
-    }
-
     // Turn.js event
     $("#flipbook").bind("turning", function (event, page) {
       if (page === 28 || page === 29) {
         if (!$(".mom-hand").length) {
           setTimeout(() => {
             $("#flipbook").append('<div class="mom-hand"></div>');
+            $("#flipbook").append('<div class="mom-hand-empty"></div>');
           }, 500);
           setTimeout(() => {
             $(".mom-hand").addClass("mom-hand-finish");
@@ -599,6 +638,7 @@ $(function () {
       } else {
         $(".mom-hand").removeClass("mom-hand-finish mom-hand-empty");
         $(".mom-hand").remove();
+        $(".mom-hand-empty").remove();
       }
 
       if (page === 30) {
