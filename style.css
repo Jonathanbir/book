@@ -2155,7 +2155,7 @@ audio {
   }
 
   #right-down-corner {
-    bottom: -5%;
+    top: 363px;
     right: 8%;
   }
 
@@ -2164,7 +2164,7 @@ audio {
   }
 
   #left-down-corner {
-    bottom: -5%;
+    top: 363px;
     left: 8%;
   }
 
