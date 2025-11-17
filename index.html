@@ -280,6 +280,11 @@
           <div class="book book-foot"></div>
         </div>
       </div>
+      <!-- 左右角落區域 -->
+      <div id="left-up-corner"></div>
+      <div id="left-down-corner"></div>
+      <div id="right-up-corner" onclick="nextPage()"></div>
+      <div id="right-down-corner" onclick="nextPage()"></div>
     </div>
     <!-- 翻頁按鈕 -->
     <div class="controls">
@@ -290,6 +295,15 @@
       </button>
       <div class="next-page-hint">請完成任務</div>
     </div>
+    <script>
+      let canFlipOnce = false;
+      function nextPage() {
+        if (!canFlipOnce) {
+          $("#flipbook").turn("next");
+          canFlipOnce = true;
+        }
+      }
+    </script>
     <script>
       function checkOrientation() {
         const isPortrait = window.innerHeight > window.innerWidth;

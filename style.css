@@ -153,6 +153,38 @@ audio {
   cursor: pointer;
 }
 
+#left-up-corner,
+#left-down-corner,
+#right-up-corner,
+#right-down-corner {
+  position: absolute;
+  bottom: 0;
+  width: 100px;
+  height: 100px;
+  z-index: 100;
+  cursor: pointer;
+}
+
+#left-up-corner {
+  top: 0;
+  left: 0;
+}
+
+#right-up-corner {
+  top: 0;
+  right: 0;
+}
+
+#left-down-corner {
+  bottom: 0;
+  left: 0;
+}
+
+#right-down-corner {
+  bottom: 0;
+  right: 0;
+}
+
 .knock {
   position: absolute;
   left: 28%;

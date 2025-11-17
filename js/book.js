@@ -74,7 +74,7 @@ $(function () {
     isBtnDisabled = true;
     $(".next-page").addClass("disabled-btn");
     $(".next-page").prop("disabled", true);
-    $(".next-page")
+    $(".next-page, #right-up-corner, #right-down-corner")
       .on("mouseenter", function () {
         $(".next-page-hint").addClass("next-page-hint-show");
       })
@@ -87,9 +87,12 @@ $(function () {
     isBtnDisabled = false;
     $(".next-page").removeClass("disabled-btn");
     $(".next-page").prop("disabled", false);
-    $(".next-page").on("mouseenter", function () {
-      $(".next-page-hint").removeClass("next-page-hint-show");
-    });
+    $(".next-page, #right-up-corner, #right-down-corner").on(
+      "mouseenter",
+      function () {
+        $(".next-page-hint").removeClass("next-page-hint-show");
+      }
+    );
   }
 
   function btnPreviousDisabled() {
@@ -207,11 +210,49 @@ $(function () {
     }, delay);
   }
 
+  // 監聽 mouseup，更新目前頁碼狀態
+  let currentPage = 1;
+
   // 當頁面翻轉完成後觸發
   $("#flipbook").bind("turning", function (event, page, view) {
     console.log("page:", page);
+    let canFlipPrev = false; // 初始禁止往前翻頁
+    let canFlipNext = false; // 初始禁止往後翻頁
+
+    function isCanNotFlipPrev() {
+      $("#left-up-corner, #left-down-corner")
+        .off("click") // 移除舊的
+        .on("click", function () {
+          if (!canFlipPrev) {
+            return;
+          }
+          $("#flipbook").turn("previous");
+        });
+    }
+
+    function isCanNotFlipNext() {
+      $("#right-up-corner, #right-down-corner")
+        .off("click")
+        .on("click", function () {
+          if (!canFlipNext) {
+            return;
+          }
+          $("#flipbook").turn("next");
+        });
+    }
+
+    function isCanFlip() {
+      isCanNotFlipPrev();
+      isCanNotFlipNext();
+    }
+
+    currentPage = page;
 
     if (page === 1) {
+      isCanFlip();
+      setTimeout(() => {
+        canFlipNext = true;
+      }, 3000);
       let count = 3;
       $(".next-page").prop("disabled", true);
       $(".next-page").addClass("disabled-btn");
@@ -360,6 +401,10 @@ $(function () {
     }
 
     if (page === 16 || page === 17) {
+      isCanFlip();
+      setTimeout(() => {
+        canFlipPrev = true;
+      }, 3000);
       // 避免多次 click＝動作卡、音效重複
       if (!milkClickBound) {
         milkClickBound = true;
@@ -383,6 +428,7 @@ $(function () {
           }, 10000);
           setTimeout(() => {
             btnUnDisabled();
+            canFlipNext = true;
           }, 12000);
         });
       }
@@ -398,6 +444,10 @@ $(function () {
 
     // 第 18–19 頁：聽心跳 + 投錢
     if (page === 18 || page === 19) {
+      isCanFlip();
+      setTimeout(() => {
+        canFlipPrev = true;
+      }, 3000);
       // 只綁一次 click，不會因翻頁重複綁定
       if (!stethoscopeBound) {
         stethoscopeBound = true;
@@ -420,6 +470,7 @@ $(function () {
           }, 13000);
           setTimeout(() => {
             btnUnDisabled();
+            canFlipNext = true;
           }, 14000);
         });
       }
@@ -528,6 +579,7 @@ $(function () {
 
         setTimeout(() => {
           btnUnDisabled();
+          canFlipNext = true;
         }, 7000);
       });
 
@@ -606,6 +658,10 @@ $(function () {
     // 翻到該頁才開始動作
     $("#flipbook").bind("turned", function (event, page) {
       if (page === 26 || page === 27) {
+        isCanFlip();
+        setTimeout(() => {
+          canFlipPrev = true;
+        }, 3000);
         btnPreviousDisabled();
         btnDisabled();
 
@@ -687,6 +743,12 @@ $(function () {
       page !== 30
     ) {
       allBtnDisabled();
+      isCanFlip();
+      // 延遲三秒後才能翻頁
+      setTimeout(() => {
+        canFlipPrev = true;
+        canFlipNext = true;
+      }, 3000);
     }
 
     var $bubbles = $(".bubbles");
@@ -855,6 +917,8 @@ $(function () {
     });
 
     $("#flipbook").on("mouseup", function (e) {
+      const page = $("#flipbook").turn("page");
+      console.log("目前頁面是：" + page);
       const offset = $(this).offset();
       const x = e.pageX - offset.left;
       const y = e.pageY - offset.top;
