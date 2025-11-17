@@ -2150,6 +2150,24 @@ audio {
     margin: 20px auto;
   }
 
+  #right-up-corner {
+    right: 8%;
+  }
+
+  #right-down-corner {
+    bottom: -5%;
+    right: 8%;
+  }
+
+  #left-up-corner {
+    left: 8%;
+  }
+
+  #left-down-corner {
+    bottom: -5%;
+    left: 8%;
+  }
+
   #flipbook {
     height: 100vh;
   }
