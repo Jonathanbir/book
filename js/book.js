@@ -4,11 +4,7 @@ $(function () {
 
   const bookHeight = window.innerHeight;
   const bookWidth = bookHeight * (1200 / 600); // 保持原始比例 1200:600
-  const width = screen.width;
-  const height = screen.height;
 
-  console.log("瀏覽器視窗寬度:", width);
-  console.log("瀏覽器視窗高度:", height);
   console.log("新的寬高:", bookWidth, bookHeight);
   $(window).on("resize", function () {
     const newHeight = window.innerHeight;
@@ -26,8 +22,8 @@ $(function () {
   } else {
     // 初始化 turn.js
     $flipbook.turn({
-      width: 1004,
-      height: 464,
+      width: bookWidth,
+      height: "100vh",
       autoCenter: true,
     });
   }
@@ -241,7 +237,7 @@ $(function () {
         });
     }
 
-    function isCanFlip() {
+    function isCanNotFlip() {
       isCanNotFlipPrev();
       isCanNotFlipNext();
     }
@@ -249,7 +245,7 @@ $(function () {
     currentPage = page;
 
     if (page === 1) {
-      isCanFlip();
+      isCanNotFlip();
       setTimeout(() => {
         canFlipNext = true;
       }, 3000);
@@ -401,7 +397,7 @@ $(function () {
     }
 
     if (page === 16 || page === 17) {
-      isCanFlip();
+      isCanNotFlip();
       setTimeout(() => {
         canFlipPrev = true;
       }, 3000);
@@ -444,7 +440,7 @@ $(function () {
 
     // 第 18–19 頁：聽心跳 + 投錢
     if (page === 18 || page === 19) {
-      isCanFlip();
+      isCanNotFlip();
       setTimeout(() => {
         canFlipPrev = true;
       }, 3000);
@@ -658,7 +654,7 @@ $(function () {
     // 翻到該頁才開始動作
     $("#flipbook").bind("turned", function (event, page) {
       if (page === 26 || page === 27) {
-        isCanFlip();
+        isCanNotFlip();
         setTimeout(() => {
           canFlipPrev = true;
         }, 3000);
@@ -743,7 +739,7 @@ $(function () {
       page !== 30
     ) {
       allBtnDisabled();
-      isCanFlip();
+      isCanNotFlip();
       // 延遲三秒後才能翻頁
       setTimeout(() => {
         canFlipPrev = true;

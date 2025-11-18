@@ -2116,23 +2116,42 @@ audio {
   opacity: 1;
 }
 
+.mobile {
+  display: none;
+}
+
 @media screen and (max-height: 500px) {
+  .mobile {
+    display: block;
+  }
+
+  .page-btn-mobile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .page-btn-mobile p {
+    font-weight: 500;
+  }
+
   body {
     margin: 0;
   }
 
   .book-section {
+    width: 100vw;
     height: 100vh;
     margin-top: 0;
   }
 
   .book {
-    width: 502px;
+    width: 100%;
     height: 464px !important;
   }
 
   .controls {
-    display: flex;
+    display: none;
     flex-direction: column;
     justify-content: center;
     width: 100px;
@@ -2144,28 +2163,20 @@ audio {
     margin: initial;
   }
 
+  #left-down-corner {
+    background-color: rgba(169, 169, 169, 0.2);
+    border-radius: 0 50% 0 0;
+  }
+
+  #right-down-corner {
+    background-color: rgba(169, 169, 169, 0.2);
+    border-radius: 50% 0 0 0;
+  }
+
   .prev-page,
   .next-page,
   .mute-toggle {
     margin: 20px auto;
-  }
-
-  #right-up-corner {
-    right: 8%;
-  }
-
-  #right-down-corner {
-    top: 363px;
-    right: 8%;
-  }
-
-  #left-up-corner {
-    left: 8%;
-  }
-
-  #left-down-corner {
-    top: 363px;
-    left: 8%;
   }
 
   #flipbook {
