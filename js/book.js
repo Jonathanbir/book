@@ -13,6 +13,27 @@ $(function () {
     $("#flipbook").turn("size", newWidth, newHeight);
   });
 
+  function isSafari() {
+    const ua = navigator.userAgent;
+
+    return /^((?!chrome|crios|android).)*safari/i.test(ua);
+  }
+
+  if (isSafari()) {
+    console.log("這是 Safari");
+  }
+
+  function isChrome() {
+    const ua = navigator.userAgent;
+
+    // Android Chrome 或 iOS Chrome (CriOS)
+    return ua.includes("Chrome") || ua.includes("CriOS");
+  }
+
+  if (isChrome()) {
+    console.log("這是 Chrome");
+  }
+
   if (!window.matchMedia("(max-height: 500px)").matches) {
     $flipbook.turn({
       width: 1200,
@@ -20,12 +41,23 @@ $(function () {
       autoCenter: true,
     });
   } else {
-    // 初始化 turn.js
-    $flipbook.turn({
-      width: bookWidth,
-      height: "100vh",
-      autoCenter: true,
-    });
+    if (isSafari()) {
+      // 初始化 safri turn.js
+      $flipbook.turn({
+        width: bookWidth,
+        height: "100vh",
+        autoCenter: true,
+      });
+    }
+
+    if (isChrome()) {
+      // 初始化 chorme turn.js
+      $flipbook.turn({
+        width: bookWidth,
+        height: "100vh",
+        autoCenter: true,
+      });
+    }
   }
 
   // 禁止滑鼠拖曳翻頁（但保留角落點擊）
