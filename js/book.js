@@ -77,6 +77,11 @@ $(function () {
       .on("mouseleave", function () {
         $(".next-page-hint").removeClass("next-page-hint-show");
       });
+
+    if (window.matchMedia("(max-height: 500px)").matches) {
+      $("#right-down-corner").css("color", "##969696");
+      $("#right-down-corner").prop("disabled", true);
+    }
   }
 
   function btnUnDisabled() {
@@ -93,7 +98,9 @@ $(function () {
 
   function btnPreviousDisabled() {
     let count = 3;
+    let countMobile = 3;
     const prevBtn = $(".prev-page")[0];
+    const prevMobileBtn = $("#left-down-corner")[0];
 
     // 每秒更新一次按鈕文字
     prevBtn.innerText = count + "秒";
@@ -108,6 +115,23 @@ $(function () {
       }
     }, 1000);
 
+    if (window.matchMedia("(max-height: 500px)").matches) {
+      // 每秒更新一次按鈕文字
+      prevMobileBtn.innerText = countMobile + "秒";
+      $("#left-down-corner").css("color", "##969696");
+
+      const timerMobile = setInterval(() => {
+        countMobile--;
+        if (countMobile > 0) {
+          prevMobileBtn.innerText = countMobile + "秒";
+        } else {
+          clearInterval(timerMobile);
+          prevMobileBtn.innerText = "上一頁";
+          $("#left-down-corner").css("color", "#000");
+        }
+      }, 1000);
+    }
+
     $(".prev-page").prop("disabled", true);
     $(".prev-page").addClass("disabled-btn");
     setTimeout(() => {
@@ -118,8 +142,12 @@ $(function () {
 
   function allBtnDisabled() {
     let count = 3;
+    let countMobile = 3;
     const prevBtn = $(".prev-page")[0];
     const nextBtn = $(".next-page")[0];
+
+    const prevMobileBtn = $("#left-down-corner")[0];
+    const nextMobileBtn = $("#right-down-corner")[0];
 
     // 每秒更新一次按鈕文字
     prevBtn.innerText = count + "秒";
@@ -136,6 +164,27 @@ $(function () {
         nextBtn.innerText = "下一頁";
       }
     }, 1000);
+
+    if (window.matchMedia("(max-height: 500px)").matches) {
+      // 每秒更新一次按鈕文字
+      prevMobileBtn.innerText = countMobile + "秒";
+      nextMobileBtn.innerText = countMobile + "秒";
+      $("#left-down-corner,#right-down-corner").css("color", "##969696");
+
+      const timerMobile = setInterval(() => {
+        countMobile--;
+        if (countMobile > 0) {
+          prevMobileBtn.innerText = countMobile + "秒";
+          nextMobileBtn.innerText = countMobile + "秒";
+        } else {
+          clearInterval(timerMobile);
+          prevMobileBtn.innerText = "上一頁";
+          nextMobileBtn.innerText = "下一頁";
+          $("#left-down-corner,#right-down-corner").css("color", "#000");
+        }
+      }, 1000);
+    }
+
     $(".prev-page, .next-page").prop("disabled", true);
     $(".prev-page, .next-page").addClass("disabled-btn");
     setTimeout(() => {
@@ -166,7 +215,7 @@ $(function () {
   //靜音按鈕
   let isMuted = false;
 
-  $(".mute-toggle").on("click", function () {
+  $(".mute-toggle,.mute-mobile-toggle").on("click", function () {
     isMuted = !isMuted;
 
     // 控制所有 audio 是否靜音
@@ -174,13 +223,23 @@ $(function () {
 
     // 切換 icon + 文字
     if (isMuted) {
-      $(this).css("color", "#fff");
-      $(this).css("background", "#ccc");
-      $(this).html('<i class="fas fa-volume-up"></i> 開啟');
+      if (!window.matchMedia("(max-height: 500px)").matches) {
+        $(".mute-toggle").css("color", "#fff");
+        $(".mute-toggle").css("background", "#ccc");
+        $(".mute-toggle").html('<i class="fas fa-volume-up"></i> 開啟');
+      } else {
+        $(".mute-mobile-toggle").css("background", "#fff");
+        $(".mute-mobile-toggle").html('<i class="fas fa-volume-mute"></i>');
+      }
     } else {
-      $(this).css("color", "brown");
-      $(this).css("background", "#fff");
-      $(this).html('<i class="fas fa-volume-mute"></i> 關閉');
+      if (!window.matchMedia("(max-height: 500px)").matches) {
+        $(".mute-toggle").css("color", "brown");
+        $(".mute-toggle").css("background", "#fff");
+        $(".mute-toggle").html('<i class="fas fa-volume-mute"></i> 關閉');
+      } else {
+        $(".mute-mobile-toggle").css("background", "rgba(169, 169, 169, 0.2)");
+        $(".mute-mobile-toggle").html('<i class="fas fa-volume-up"></i>');
+      }
     }
   });
 
@@ -216,7 +275,18 @@ $(function () {
     let canFlipNext = false; // 初始禁止往後翻頁
 
     function isCanNotFlipPrev() {
-      $("#left-up-corner, #left-down-corner")
+      if (!window.matchMedia("(max-height: 500px)").matches) {
+        $("#left-up-corner")
+          .off("click") // 移除舊的
+          .on("click", function () {
+            if (!canFlipPrev) {
+              return;
+            }
+            $("#flipbook").turn("previous");
+          });
+      }
+
+      $("#left-down-corner")
         .off("click") // 移除舊的
         .on("click", function () {
           if (!canFlipPrev) {
@@ -227,7 +297,18 @@ $(function () {
     }
 
     function isCanNotFlipNext() {
-      $("#right-up-corner, #right-down-corner")
+      if (!window.matchMedia("(max-height: 500px)").matches) {
+        $("#right-up-corner")
+          .off("click")
+          .on("click", function () {
+            if (!canFlipNext) {
+              return;
+            }
+            $("#flipbook").turn("next");
+          });
+      }
+
+      $("#right-down-corner")
         .off("click")
         .on("click", function () {
           if (!canFlipNext) {
@@ -425,6 +506,8 @@ $(function () {
           setTimeout(() => {
             btnUnDisabled();
             canFlipNext = true;
+            $("#right-down-corner").css("color", "#000");
+            $("#right-down-corner").prop("disabled", false);
           }, 12000);
         });
       }
@@ -467,6 +550,8 @@ $(function () {
           setTimeout(() => {
             btnUnDisabled();
             canFlipNext = true;
+            $("#right-down-corner").css("color", "#000");
+            $("#right-down-corner").prop("disabled", false);
           }, 14000);
         });
       }
@@ -576,6 +661,8 @@ $(function () {
         setTimeout(() => {
           btnUnDisabled();
           canFlipNext = true;
+          $("#right-down-corner").css("color", "#000");
+          $("#right-down-corner").prop("disabled", false);
         }, 7000);
       });
 
