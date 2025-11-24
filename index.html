@@ -26,7 +26,20 @@
   </head>
   <body>
     <!-- 書本容器 -->
+    <div class="swipe-cotainer"></div>
+    <div class="swipe-pointer"></div>
+    <div class="arrow"></div>
     <div class="book-section">
+      <!-- 向下滑提示（手機顯示） -->
+      <div id="swipe-hint" class="swipe-hint mobile" aria-hidden="true">
+        <div class="swipe-hint-inner">
+          <div class="swipe-text">
+            關閉後請向下滑至最底<br />進入全螢幕模式瀏覽
+          </div>
+          <div class="close-btn">關閉</div>
+          <button class="swipe-close" aria-label="關閉提示">x</button>
+        </div>
+      </div>
       <div id="rotate-notice" style="display: block">
         <!-- <p>請將裝置旋轉為橫向以觀看最佳效果</p> -->
         <div class="mb-hint"></div>
@@ -310,38 +323,6 @@
           canFlipOnce = true;
         }
       }
-    </script>
-    <script>
-      function checkOrientation() {
-        const isPortrait = window.innerHeight > window.innerWidth;
-        document.getElementById("rotate-notice").style.display = isPortrait
-          ? "block"
-          : "none";
-      }
-
-      // 初始檢查
-      checkOrientation();
-
-      // 當裝置旋轉時重新檢查
-      window.addEventListener("resize", checkOrientation);
-
-      // 當裝置旋轉時重新載入
-      let previous = window.orientation;
-
-      window.addEventListener("orientationchange", function () {
-        const current = window.orientation;
-
-        // 0 或 180 = 直向
-        // 90 或 -90 = 橫向
-        if (
-          (previous === 0 || previous === 180) &&
-          (current === 90 || current === -90)
-        ) {
-          location.reload();
-        }
-
-        previous = current;
-      });
     </script>
     <script src="./js/book.js"></script>
   </body>

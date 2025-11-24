@@ -1,5 +1,4 @@
 $(function () {
-  const cow = document.querySelector(".cow");
   const $flipbook = $("#flipbook");
 
   const bookHeight = window.innerHeight;
@@ -7,11 +6,26 @@ $(function () {
 
   console.log("新的寬高:", bookWidth, bookHeight);
   $(window).on("resize", function () {
-    const newHeight = window.innerHeight;
     const newWidth = window.innerWidth;
-    console.log("新的寬高:", newWidth, newHeight);
+    const newHeight = window.innerHeight;
     $("#flipbook").turn("size", newWidth, newHeight);
   });
+
+  const screenWidth = screen.width;
+  const screenHeight = screen.height;
+  console.log("手機新的寬高:", bookWidth, bookHeight);
+  console.log("瀏覽器的寬高:", screenWidth, screenHeight);
+
+  const vh = window.visualViewport.height;
+  function updateHeight() {
+    document.documentElement.style.setProperty("--vh", `${vh}px`);
+  }
+
+  // 頁面初次載入
+  updateHeight();
+
+  // 當手機旋轉或尺寸改變
+  window.addEventListener("resize", updateHeight);
 
   function isSafari() {
     const ua = navigator.userAgent;
@@ -23,15 +37,26 @@ $(function () {
     console.log("這是 Safari");
   }
 
-  function isChrome() {
+  function isIOSChrome() {
     const ua = navigator.userAgent;
 
     // Android Chrome 或 iOS Chrome (CriOS)
-    return ua.includes("Chrome") || ua.includes("CriOS");
+    return ua.includes("CriOS");
   }
 
-  if (isChrome()) {
-    console.log("這是 Chrome");
+  function isAndroidChrome() {
+    const ua = navigator.userAgent;
+
+    // Android Chrome 或 iOS Chrome (CriOS)
+    return ua.includes("Chrome");
+  }
+
+  if (isIOSChrome()) {
+    console.log("這是 ios Chrome");
+  }
+
+  if (isAndroidChrome()) {
+    console.log("這是 android Chrome");
   }
 
   if (!window.matchMedia("(max-height: 500px)").matches) {
@@ -44,20 +69,250 @@ $(function () {
     if (isSafari()) {
       // 初始化 safri turn.js
       $flipbook.turn({
-        width: bookWidth,
-        height: "100vh",
+        width: "100vw",
+        height: "80vh",
         autoCenter: true,
       });
+      $("#left-down-corner,#right-down-corner").css("bottom", "18vh");
+      $("#flipbook").css("marginTop", "1vh");
     }
 
-    if (isChrome()) {
+    if (isIOSChrome()) {
       // 初始化 chorme turn.js
       $flipbook.turn({
-        width: bookWidth,
+        width: "100vw",
+        height: "90vh",
+        autoCenter: true,
+      });
+      $("#left-down-corner,#right-down-corner").css("bottom", "8vh");
+      $("#flipbook").css("marginTop", "1vh");
+    }
+
+    if (isAndroidChrome()) {
+      // 初始化 chorme turn.js
+      $flipbook.turn({
+        width: "100vw",
         height: "100vh",
         autoCenter: true,
       });
+      $(".scroll-box").css("display", "block");
+      // $("#left-down-corner,#right-down-corner").css("bottom", "0");
+      // $("#flipbook").css("marginTop", "1vh");
+
+      // call on load & on orientation change
+      window.addEventListener("load", maybeShowSwipeHint);
+      window.addEventListener("orientationchange", () =>
+        setTimeout(maybeShowSwipeHint, 300)
+      );
+
+      // 顯示提示（只在第一次進站顯示）
+      function showFullscreenHint() {
+        // window.alert("請向下滑一下即可全螢幕觀看");
+        if (localStorage.getItem("fullscreenHintShown")) return;
+
+        const hint = document.getElementById("swipe-fullscreen-hint");
+        hint.classList.add("show");
+
+        // 記錄下次不要再顯示
+        localStorage.setItem("fullscreenHintShown", "true");
+      }
+
+      // 隱藏提示
+      function hideFullscreenHint() {
+        const hint = document.getElementById("swipe-fullscreen-hint");
+        hint.classList.remove("show");
+      }
+
+      // 檢查使用者是否滑動（手動觸發全螢幕）
+      let touchStartY = 0;
+
+      window.addEventListener("touchstart", (e) => {
+        touchStartY = e.touches[0].clientY;
+      });
+
+      window.addEventListener("touchmove", (e) => {
+        const deltaY = e.touches[0].clientY - touchStartY;
+
+        if (deltaY > 20) {
+          hideFullscreenHint();
+
+          // 觸發微小滾動 → Android/Safari 會隱藏網址列
+          window.scrollTo(0, 1);
+        }
+      });
+
+      window.addEventListener("load", () => {
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+        }, 0);
+        setTimeout(showFullscreenHint, 600);
+      });
     }
+  }
+
+  //翻轉手機提示
+  function checkOrientation() {
+    const isPortrait = window.innerHeight > window.innerWidth;
+    document.getElementById("rotate-notice").style.display = isPortrait
+      ? "block"
+      : "none";
+  }
+
+  // 初始檢查
+  checkOrientation();
+
+  // 當裝置旋轉時重新檢查
+  window.addEventListener("resize", checkOrientation);
+
+  // 當裝置旋轉時重新載入
+  let previous = window.orientation;
+
+  window.addEventListener("orientationchange", function () {
+    const current = window.orientation;
+
+    // 0 或 180 = 直向
+    // 90 或 -90 = 橫向
+    if (
+      (previous === 0 || previous === 180) &&
+      (current === 90 || current === -90)
+    ) {
+      location.reload();
+    }
+
+    previous = current;
+  });
+
+  // ---------- Swipe hint 功能 ----------
+  const swipeHint = document.getElementById("swipe-hint");
+  const swipeClose = swipeHint && swipeHint.querySelector(".swipe-close");
+
+  function showSwipeHint() {
+    if (!swipeHint) return;
+    $(".swipe-cotainer").show();
+    swipeHint.classList.add("show");
+    swipeHint.setAttribute("aria-hidden", "false");
+  }
+
+  function hideSwipeHint() {
+    if (!swipeHint) return;
+
+    swipeHint.classList.remove("show");
+    swipeHint.setAttribute("aria-hidden", "true");
+    $(".swipe-pointer").show();
+    $(".arrow").show();
+  }
+
+  // 綁一次性使用者互動：若使用者觸碰畫面視為已知，消失
+  function bindSwipeHintDismiss() {
+    const userDismiss = () => {
+      hideSwipeHint();
+      window.removeEventListener("touchstart", userDismiss);
+      window.removeEventListener("mousedown", userDismiss);
+    };
+    window.addEventListener("touchstart", userDismiss, { passive: true });
+    window.addEventListener("mousedown", userDismiss);
+  }
+
+  // 阻止點擊穿透整個提示層
+  swipeHint.addEventListener("click", (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+  });
+
+  if (swipeClose) swipeClose.addEventListener("click", hideSwipeHint);
+
+  // 判斷是否要顯示（只在手機或小螢幕顯示）
+  function maybeShowSwipeHint() {
+    const isMobileLike = /Mobi|Android|iPhone|iPad|Mobile/i.test(
+      navigator.userAgent
+    );
+    if (!isMobileLike) return;
+    // 若橫向或寬高比例小於某值，也可判斷
+    // 這裡示範：若寬>高度（橫向）或高度小於 500 則顯示
+    const w = window.innerWidth,
+      h = window.innerHeight;
+    if (w > h || h < 600) {
+      showSwipeHint(); // 顯示 5 秒
+      bindSwipeHintDismiss();
+    }
+  }
+
+  // ---------- custom alert（覆寫 window.alert） ----------
+  const customAlertEl = document.getElementById("custom-alert");
+  const customAlertMsg = document.getElementById("custom-alert-message");
+  const customAlertOk = document.getElementById("custom-alert-ok");
+
+  function showCustomAlert(message, options = {}) {
+    if (!customAlertEl) {
+      // fallback
+      window.origAlert(message);
+      return;
+    }
+    customAlertMsg.textContent = message ?? "";
+    customAlertEl.classList.add("show");
+    customAlertEl.setAttribute("aria-hidden", "false");
+
+    // focus button for accessibility
+    customAlertOk.focus();
+
+    // return a Promise to allow awaiting if needed
+    return new Promise((resolve) => {
+      function closeHandler() {
+        customAlertEl.classList.remove("show");
+        customAlertEl.setAttribute("aria-hidden", "true");
+        customAlertOk.removeEventListener("click", closeHandler);
+        document.removeEventListener("keydown", keyHandler);
+        resolve();
+      }
+      function keyHandler(e) {
+        if (e.key === "Enter" || e.key === "Escape") closeHandler();
+      }
+      customAlertOk.addEventListener("click", closeHandler);
+      document.addEventListener("keydown", keyHandler);
+    });
+  }
+
+  // 保留原生 alert 作 fallback
+  window.origAlert = window.alert;
+  // 覆寫
+  window.alert = function (msg) {
+    // 如果你想保留同步行為可以用 xhr alert fallback，這裡用非同步替代
+    showCustomAlert(String(msg));
+  };
+
+  let startMoveY = 0;
+
+  window.addEventListener("touchstart", function (e) {
+    startMoveY = e.touches[0].clientY;
+  });
+
+  window.addEventListener("touchmove", function (e) {
+    const currentY = e.touches[0].clientY;
+
+    // 手指往上滑 = currentY < startMoveY
+    if (startMoveY - currentY > 50) {
+      onSwipeUp();
+    }
+  });
+
+  function onSwipeUp() {
+    $(".swipe-pointer").hide();
+    $(".arrow").hide();
+  }
+
+  window.addEventListener("touchmove", () => {
+    const scrollTop = window.scrollY;
+    const viewportHeight = window.innerHeight;
+    const pageHeight = document.documentElement.scrollHeight;
+
+    if (scrollTop + viewportHeight + 5 >= pageHeight) {
+      onReachBottom();
+    }
+  });
+
+  function onReachBottom() {
+    // 你要執行的動作
+    $(".swipe-cotainer").hide();
   }
 
   // 禁止滑鼠拖曳翻頁（但保留角落點擊）
@@ -1064,7 +1319,6 @@ $(function () {
 
       // 假設右下角 50x50 px
       if (x > width - 50 && y > height - 50) {
-        console.log("右下角 click");
         clearFlipbookElements();
         const nextPage = currentPage + 1;
         $flipbook.turn("page", nextPage);
@@ -1074,7 +1328,6 @@ $(function () {
         }, 1000);
       } // 右上角 (top-right)
       else if (x > width - 50 && y < 50) {
-        console.log("右上角 click");
         clearFlipbookElements();
         const nextPage = currentPage + 1;
         $flipbook.turn("page", nextPage);
@@ -1084,7 +1337,6 @@ $(function () {
         }, 1000);
       } // 左下角 (bottom-left)
       else if (x < 50 && y > height - 50) {
-        console.log("左下角 click");
         clearFlipbookElements();
         const previousPage = currentPage - 1;
         $flipbook.turn("page", previousPage);
@@ -1094,8 +1346,6 @@ $(function () {
         }, 1000);
       } // 左上角 (top-left)
       else if (x < 50 && y < 50) {
-        console.log("click~~~");
-        console.log("左上角 click");
         clearFlipbookElements();
         const previousPage = currentPage - 1;
         $flipbook.turn("page", previousPage);
