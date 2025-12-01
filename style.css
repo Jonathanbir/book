@@ -308,33 +308,76 @@ audio {
   position: relative;
 }
 
-.page5 .cup {
+.page5 .eyes {
   position: absolute;
-  bottom: 22%;
-  right: 40%;
+  top: 42%;
+  right: 33%;
   z-index: 10;
-  width: 50px;
-  height: 80px;
-  background-image: url("./images/object/cup.png");
+  width: 110px;
+  height: 40px;
+  background-image: url("./images/object/white-eyes.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
 
-.cup-animation {
-  animation: cupMove 2.5s ease-in-out;
+.page5 .eyes-ball {
+  position: absolute;
+  z-index: 10;
+  width: 16px;
+  height: 16px;
+  background-image: url("./images/object/eyes-ball.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.eyes-ball-animation {
+  animation: eyesBallBig 2.5s ease-in-out;
   animation-delay: 1.5s;
   animation-fill-mode: forwards;
   transition: all 1s ease-in-out;
 }
 
-@keyframes cupMove {
+@keyframes eyesBallBig {
   0% {
-    transform: translate(0%, 0%) rotate(0deg);
+    transform: scale(1);
   }
   100% {
-    transform: translate(0%, -102%) rotate(140deg);
+    transform: scale(1.5);
   }
+}
+
+.page5 .eyes-ball-left {
+  top: 45%;
+  right: 45%;
+}
+
+.page5 .eyes-ball-right {
+  top: 43%;
+  right: 37%;
+}
+
+.page5 .eyes-hair {
+  position: absolute;
+  z-index: 10;
+  width: 30px;
+  height: 30px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.page5 .eyes-hair-left {
+  background-image: url("./images/object/eyes-hair-left.png");
+  top: 254px;
+  right: 274px;
+}
+
+.page5 .eyes-hair-right {
+  background-image: url("./images/object/eyes-hair-right.png");
+  top: 240px;
+  right: 213px;
 }
 
 .hand {
@@ -349,10 +392,11 @@ audio {
 
 .dialog5 {
   width: 150px;
-  height: 120px;
+  height: 150px;
   background-image: url(./images/dialog/dialog5.png);
-  bottom: 75%;
+  bottom: 73%;
   left: 33%;
+  transform: rotate(-25deg);
   opacity: 0;
 }
 
@@ -365,9 +409,15 @@ audio {
 @keyframes dialog5Show {
   0% {
     opacity: 0;
+    transform: rotate(25deg);
+  }
+  50% {
+    opacity: 1;
+    transform: rotate(-25deg);
   }
   100% {
-    opacity: 1;
+    opacity: 0;
+    transform: rotate(25deg);
   }
 }
 
@@ -395,6 +445,36 @@ audio {
   }
   100% {
     transform: translate(27%, 0%) rotate(-57deg);
+  }
+}
+
+.moms-hand {
+  position: absolute;
+  bottom: 20%;
+  right: 41%;
+  z-index: 11;
+  width: 140px;
+  height: 165px;
+  transform: translate(0%, 0%) rotate(-8deg);
+  background-image: url(./images/object/moms-hand.png);
+  background-size: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  animation: momsHandMove 3s ease-in-out infinite;
+  animation-delay: 0.5s;
+  animation-fill-mode: forwards;
+  transition: all 1s ease-in-out;
+}
+
+@keyframes momsHandMove {
+  0% {
+    transform: translate(0%, 0%) rotate(-8deg);
+  }
+  50% {
+    transform: translate(0%, 0%) rotate(0deg);
+  }
+  100% {
+    transform: translate(0%, 0%) rotate(-8deg);
   }
 }
 
@@ -468,10 +548,10 @@ audio {
 }
 
 .door-common {
-  position: absolute;
-  left: 17%;
+  position: fixed;
+  right: 38%;
   bottom: 20%;
-  z-index: 3;
+  z-index: 1000;
   width: 60px;
   height: 120px;
   background-size: 100%;
@@ -483,7 +563,7 @@ audio {
   background-image: url(./images/object/door.png);
   cursor: grab;
   transition: all 1s ease-in-out;
-  z-index: 4;
+  z-index: 1001;
 }
 
 .door-bg {
@@ -495,10 +575,10 @@ audio {
 }
 
 .peoples {
-  position: absolute;
-  left: 9%;
+  position: fixed;
+  right: 36%;
   bottom: 20%;
-  z-index: 3;
+  z-index: 1000;
   width: 150px;
   height: 100px;
   background-size: contain;
@@ -510,37 +590,22 @@ audio {
 }
 
 .peoples-open {
-  left: 11%;
+  right: 33%;
   opacity: 1;
 }
 
-.tree1 {
+.tree {
   position: absolute;
   left: 0;
-  bottom: -100%;
-  z-index: 2;
+  bottom: 0;
+  z-index: 999;
   width: 100%;
   height: 100%;
   background-size: 100%;
-  background-image: url(./images/object/book7-tree1.png);
+  background-image: url(./images/object/forest.png);
   background-position: center;
   background-repeat: no-repeat;
-  transition: all 2s ease-in-out;
-  opacity: 0;
-}
-
-.tree2 {
-  position: absolute;
-  right: 0;
-  bottom: -100%;
-  z-index: 2;
-  width: 100%;
-  height: 100%;
-  background-size: 100%;
-  background-image: url(./images/object/book7-tree2.png);
-  background-position: center;
-  background-repeat: no-repeat;
-  transition: all 2s ease-in-out;
+  transition: all 3s ease-in-out;
   opacity: 0;
 }
 
@@ -549,10 +614,54 @@ audio {
   opacity: 1;
 }
 
-.cloud1 {
+.fog5 {
   position: absolute;
   left: 0;
-  top: -100%;
+  bottom: 0;
+  z-index: 999;
+  width: 100%;
+  height: 100%;
+  background-size: 100%;
+  background-image: url(./images/object/fog5.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: all 3s ease-in-out;
+  opacity: 0;
+}
+
+.fog5-fade-in {
+  bottom: 0%;
+  opacity: 1;
+}
+
+.start5 {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 999;
+  width: 100%;
+  height: 100%;
+  background-size: 100%;
+  background-image: url(./images/object/start5.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: all 3s ease-in-out;
+  opacity: 0;
+}
+
+@keyframes startShow {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.cloud1 {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   background-size: 100%;
@@ -560,24 +669,24 @@ audio {
   background-position: center;
   background-repeat: no-repeat;
   opacity: 0;
-  transition: all 2s ease-in-out;
+  transition: all 5s ease-in-out;
 }
 
 .cloud2 {
   position: absolute;
+  top: 0;
   left: 0;
-  top: -100%;
   width: 100%;
   height: 100%;
   background-size: 100%;
   background-image: url(./images/object/book8-cloud.png);
   background-position: center;
   background-repeat: no-repeat;
-  transition: all 2s ease-in-out;
+  opacity: 0;
+  transition: all 5s ease-in-out;
 }
 
 .cloud-fade-in {
-  top: 0%;
   opacity: 1;
 }
 
@@ -739,6 +848,20 @@ audio {
   background-image: url(./images/object/list-board.png);
   background-position: center;
   background-repeat: no-repeat;
+  transition: all 2s ease-in-out;
+  animation: listRotate 2s ease-in-out infinite;
+}
+
+@keyframes listRotate {
+  0% {
+    transform: rotate(-10deg);
+  }
+  50% {
+    transform: rotate(10deg);
+  }
+  100% {
+    transform: rotate(-10deg);
+  }
 }
 
 .list {
@@ -760,9 +883,14 @@ audio {
 @keyframes listShow {
   0% {
     opacity: 0;
+    transform: rotate(-15deg);
+  }
+  50% {
+    transform: rotate(15deg);
   }
   100% {
     opacity: 1;
+    transform: rotate(-15deg);
   }
 }
 
@@ -847,6 +975,79 @@ audio {
   }
 }
 
+.mom-daughter {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 99;
+  width: 350px;
+  height: 260px;
+  margin: auto;
+  background-image: url(./images/object/mom-daughter.png);
+  background-size: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.eyes9 {
+  position: absolute;
+  top: 22%;
+  left: 35%;
+  z-index: 10;
+  width: 60px;
+  height: 50px;
+  background-image: url(./images/object/eyes9.png);
+  background-size: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.eyes9-hair-animation {
+  background-image: url("./images/object/eyes-hair.png");
+  background-size: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  animation: eyesChange 1s ease-in-out infinite;
+}
+
+@keyframes eyesChange {
+  0% {
+    background-image: url("./images/object/eyes9.png");
+  }
+  100% {
+    background-image: url("./images/object/eyes-hair.png");
+  }
+}
+
+.eyes10 {
+  position: absolute;
+  top: 28%;
+  left: 21%;
+  z-index: 10;
+  width: 50px;
+  height: 50px;
+  background-image: url("./images/object/eyes10.png");
+  background-size: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.mom-daughter-animation {
+  animation: momDaughterMove 1s ease-in-out infinite;
+}
+
+@keyframes momDaughterMove {
+  0% {
+    transform: translateX(10px);
+  }
+  50% {
+    transform: translateX(0px);
+  }
+  100% {
+    transform: translateX(10px);
+  }
+}
 .dialog10 {
   position: absolute;
   top: 31%;
@@ -913,6 +1114,28 @@ audio {
   background-position: center;
   background-repeat: no-repeat;
   background-image: url(./images/object/rainbow.png);
+}
+
+.start12 {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 999;
+  width: 100%;
+  height: 100%;
+  background-size: 100%;
+  background-image: url(./images/object/start12.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: all 3s ease-in-out;
+  opacity: 0;
+}
+
+.start-fade-in {
+  bottom: 0%;
+  opacity: 1;
+  animation: startShow 2s ease-in-out infinite;
+  transition: all 1s ease-in-out;
 }
 
 .cloud-group {
@@ -1065,6 +1288,132 @@ audio {
   opacity: 1;
 }
 
+.check {
+  position: absolute;
+  right: 31%;
+  top: 29%;
+  margin: auto;
+  z-index: 103;
+  width: 30px;
+  height: 30px;
+  background-size: 100%;
+  background-image: url(./images/object/check.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  animation: startShow 2s ease-in-out infinite;
+  transition: all 2s ease-in-out;
+}
+
+.check-box {
+  position: fixed;
+  right: 5%;
+  top: 15%;
+  z-index: 104;
+  width: 170px;
+  height: 232px;
+  transform: rotate(-19deg);
+  border-radius: 0 24px 24px;
+}
+
+.popup-board-bg {
+  display: none;
+  position: absolute;
+  z-index: 105;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.popup-board {
+  display: none;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  z-index: 106;
+  width: 600px;
+  height: 600px;
+  background-size: 100%;
+  background-image: url(./images/object/popup-board.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: all 2s ease-in-out;
+}
+
+.popup-close-btn {
+  position: absolute;
+  right: 1%;
+  top: 1%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 10px;
+  height: 10px;
+  padding: 5px;
+  color: #000;
+  background-color: #ccc;
+  border-radius: 100%;
+}
+
+.check02 {
+  right: 28%;
+  top: 34%;
+}
+
+.cow-heart {
+  position: absolute;
+  right: -0%;
+  bottom: 12%;
+  z-index: 0;
+  width: 150px;
+  height: 136px;
+  background-size: 100%;
+  background-image: url(./images/object/cow-heart.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: all 2s ease-in-out;
+}
+
+.girl {
+  position: absolute;
+  left: 6%;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  z-index: 106;
+  width: 250px;
+  height: 280px;
+  background-size: 100%;
+  background-image: url(./images/object/girl.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: all 2s ease-in-out;
+}
+
+.nurse-hand {
+  position: absolute;
+  left: 30%;
+  right: 0;
+  bottom: -7%;
+  margin: auto;
+  z-index: 106;
+  width: 150px;
+  height: 280px;
+  background-size: 100%;
+  background-image: url(./images/object/nurse-hand.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: all 2s ease-in-out;
+}
+
+.check03 {
+  right: 26%;
+  top: 39%;
+}
+
 .coin {
   position: absolute;
   z-index: 99;
@@ -1174,7 +1523,6 @@ audio {
 .crown-animation {
   opacity: 1;
   transform: translateY(0);
-  transition: all 1s ease-in-out;
   animation: crownFloat 2s ease-in-out infinite;
   animation-delay: 1s;
   transition: all 1s ease-in-out;
@@ -1190,6 +1538,200 @@ audio {
   100% {
     transform: translateY(0px);
   }
+}
+
+.dream01 {
+  position: absolute;
+  left: 38%;
+  top: 24%;
+  margin: auto;
+  z-index: 106;
+  width: 40px;
+  height: 40px;
+  background-size: 100%;
+  background-image: url(./images/object/dream01.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: all 1s ease-in-out;
+}
+
+.dream02 {
+  position: absolute;
+  left: 28%;
+  top: 22%;
+  margin: auto;
+  z-index: 106;
+  width: 50px;
+  height: 50px;
+  background-size: 100%;
+  background-image: url(./images/object/dream02.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: all 1s ease-in-out;
+}
+
+.dream03 {
+  position: absolute;
+  left: 12%;
+  top: 15%;
+  margin: auto;
+  z-index: 106;
+  width: 100px;
+  height: 120px;
+  background-size: 100%;
+  background-image: url(./images/object/dream03.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: all 1s ease-in-out;
+}
+
+.dream04 {
+  position: absolute;
+  right: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  z-index: 106;
+  width: 100%;
+  height: 600px;
+  background-size: 100%;
+  background-image: url(./images/object/dream04.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: all 1s ease-in-out;
+}
+
+.start22 {
+  position: absolute;
+  right: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  z-index: 106;
+  width: 100%;
+  height: 600px;
+  background-size: 100%;
+  background-image: url(./images/object/start22.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: all 1s ease-in-out;
+}
+
+.dream-animation {
+  opacity: 1;
+}
+
+.dialog22 {
+  position: absolute;
+  top: 35%;
+  right: 72%;
+  z-index: 999;
+  width: 90px;
+  height: 90px;
+}
+
+.dialog22-animation {
+  animation: dialogShow 2s ease-in-out infinite;
+}
+
+.sleeping-girl {
+  position: absolute;
+  right: 1%;
+  bottom: 7%;
+  margin: auto;
+  z-index: 106;
+  width: 450px;
+  height: 550px;
+  background-size: 100%;
+  background-image: url(./images/object/sleeping-girl.png);
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.cow-alarm {
+  position: absolute;
+  right: 2%;
+  top: 8%;
+  margin: auto;
+  z-index: 106;
+  width: 150px;
+  height: 150px;
+  background-size: 100%;
+  background-image: url(./images/object/cow-alarm.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: all 1s ease-in-out;
+}
+
+.cow-alarm-animation {
+  animation: crownAlarm 15s ease-in-out forwards;
+  animation-delay: 2s;
+  transition: all 1s ease-in-out;
+}
+
+@keyframes crownAlarm {
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+  25% {
+    transform: scale(1.05) rotate(-30deg);
+  }
+  50% {
+    transform: scale(1) rotate(0deg);
+  }
+  75% {
+    transform: scale(1.05) rotate(30deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+.sleep-girl-hand {
+  position: absolute;
+  left: 38%;
+  bottom: 50%;
+  z-index: 3;
+  width: 50px;
+  height: 50px;
+  background-size: 100%;
+  background-image: url(./images/object/sleep-girl-hand.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  animation: sleepGirlHand 2s ease-in-out infinite;
+  transition: all 1s ease-in-out;
+}
+
+@keyframes sleepGirlHand {
+  0% {
+    transform: rotate(20deg);
+  }
+  50% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(20deg);
+  }
+}
+
+.sleep-girl-arm {
+  position: absolute;
+  left: 32%;
+  bottom: 34%;
+  z-index: 4;
+  width: 120px;
+  height: 180px;
+  background-size: 100%;
+  background-image: url(./images/object/sleep-girl-arm.png);
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .milk-hand {
@@ -1265,19 +1807,6 @@ audio {
 
 .milk-drop-show {
   opacity: 1;
-}
-
-.milk-bottle-click {
-  position: absolute;
-  right: 86%;
-  bottom: 14%;
-  z-index: 5;
-  width: 68px;
-  height: 40px;
-}
-
-.milk-bottle-click.disabled {
-  pointer-events: none;
 }
 
 .milk-bottle {
@@ -1443,10 +1972,30 @@ audio {
   background-position: center;
   background-repeat: no-repeat;
   cursor: pointer;
-  animation: cowMove 2s ease-in-out infinite;
-  transition: all 1s ease-in-out;
   animation: dialogKnockShow 2s ease-in-out infinite;
   transition: all 1s ease-in-out;
+}
+
+.heart-beat-animation {
+  animation-name: heartBeat;
+  /* 修改這裡：單次心跳只需要 1 秒 (這樣才像心跳) */
+  animation-duration: 1s;
+  /* 新增這裡：重複播放 6 次 (1秒 x 6次 = 總共執行 6 秒) */
+  animation-iteration-count: 6;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+}
+
+@keyframes heartBeat {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 .bubble-toggle {
@@ -2028,6 +2577,7 @@ audio {
 .book17 {
   position: relative;
   background-image: url(./images/book/book17.jpg);
+  background-size: cover;
 }
 .book18 {
   background-image: url(./images/book/book18.jpg);
@@ -2632,10 +3182,6 @@ audio {
 
   .cows-tongue {
     bottom: 10%;
-  }
-
-  .milk-bottle-click {
-    right: 82%;
   }
 
   .milk-empty {

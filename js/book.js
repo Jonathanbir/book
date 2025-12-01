@@ -657,33 +657,53 @@ $(function () {
     }
 
     if (page === 6 || page === 7) {
-      $(".cup").addClass("cup-animation");
-      $(".left-hand").addClass("left-hand-animation");
-      $(".right-hand").addClass("right-hand-animation");
+      $(".eyes-ball").addClass("eyes-ball-animation");
       $(".dialog5").addClass("dialog5-animation");
     } else {
-      $(".cup").removeClass("cup-animation");
-      $(".left-hand").removeClass("left-hand-animation");
-      $(".right-hand").removeClass("right-hand-animation");
+      $(".eyes-ball").removeClass("eyes-ball-animation");
       $(".dialog5").removeClass("dialog5-animation");
     }
 
     if (page === 8 || page === 9) {
       const door = document.querySelector(".door");
-      door.addEventListener("click", () => {
+      $("#flipbook").append('<div class="tree"></div>');
+      $("#flipbook").append('<div class="fog5"></div>');
+      $("#flipbook").append('<div class="start5"></div>');
+      $("#flipbook").append('<div class="door-bg door-common"></div>');
+      $("#flipbook").append('<div class="door door-common"></div>');
+      $("#flipbook").append('<div class="peoples"></div>');
+      $("#flipbook .door").on("click", () => {
         playAudio("knock", 0);
         $(".door").addClass("door-opening");
         $(".peoples").addClass("peoples-open");
-        $(".tree1").addClass("tree-fade-in");
-        $(".tree2").addClass("tree-fade-in");
-        $(".cloud1").addClass("cloud-fade-in");
-        $(".cloud2").addClass("cloud-fade-in");
-        $(".dialog8").addClass("dialog8-animation");
+        $(".tree").addClass("tree-fade-in");
+        setTimeout(() => {
+          $(".cloud1").addClass("cloud-fade-in");
+          $(".cloud2").addClass("cloud-fade-in");
+        }, 3000);
+        setTimeout(() => {
+          $(".fog5").addClass("fog5-fade-in");
+        }, 5000);
+        setTimeout(() => {
+          $(".start5").addClass("start-fade-in");
+          $(".dialog8").addClass("dialog8-animation");
+        }, 7000);
         playAudio("audio-4-click", 0);
       });
+    } else {
+      $("#flipbook .tree").remove();
+      $("#flipbook .door-common").remove();
+      $("#flipbook .peoples").remove();
+      $("#flipbook .fog5").remove();
+      $("#flipbook .start5").remove();
     }
 
     if (page === 10 || page === 11) {
+      $("#flipbook").append('<div class="mom-daughter"></div>');
+      setTimeout(() => {
+        $(".eyes9").addClass("eyes9-hair-animation");
+        $(".mom-daughter").addClass("mom-daughter-animation");
+      }, 8000);
       $(".foot1").addClass("foot1-animation");
       $(".foot2").addClass("foot2-animation");
       $(".foot3").addClass("foot3-animation");
@@ -699,6 +719,9 @@ $(function () {
       $(".foot4").removeClass("foot4-animation");
       $(".foot5").removeClass("foot5-animation");
       $(".dialog10").removeClass("dialog10-animation");
+      $(".eyes9").removeClass("eyes9-hair-animation");
+      $(".mom-daughter").removeClass("mom-daughter-animation");
+      $("#flipbook .mom-daughter").remove();
     }
 
     if (page === 7 || page === 10) {
@@ -718,6 +741,8 @@ $(function () {
         $(".cloud-02").addClass("cloud-animation");
       }, 50);
       $("#flipbook").append('<div class="rainbow"></div>');
+      $("#flipbook").append('<div class="start12"></div>');
+      $("#flipbook").append('<div class="fog5"></div>');
       if (window.matchMedia("(max-height: 500px)").matches) {
         $(".rainbow").css("width", bookWidth);
         $(".rainbow").css("height", bookHeight);
@@ -727,6 +752,16 @@ $(function () {
       $("#flipbook").append('<div class="cow05"></div>');
       $("#flipbook").append('<div class="list-board"></div>');
       $("#flipbook").append('<div class="list"></div>');
+
+      setTimeout(() => {
+        $(".fog5").addClass("fog5-fade-in");
+      }, 1000);
+      setTimeout(() => {
+        $(".start12").addClass("start-fade-in");
+      }, 2000);
+    } else {
+      $("#flipbook .start12").remove();
+      $("#flipbook .fog5").remove();
     }
 
     if (page === 11 || page === 14) {
@@ -749,19 +784,44 @@ $(function () {
       if (!fanAndBubbleCreated) {
         fanAndBubbleCreated = true;
         $("#flipbook").append(`<div class="electfan"></div>
-                           <div class="bubble-bg"></div>`);
+                           <div class="bubble-bg"></div>
+                           <div class="check-box"></div>
+                           </div>`);
+
+        $(".book-section").append(`
+                           <div class="popup-board-bg">
+                              <div class="popup-close-btn">x</div>
+                            </div>
+                           <div class="popup-board"></div>`);
       }
 
       setTimeout(() => $(".electfan").addClass("electfan-move"), 500);
       setTimeout(() => $(".bubble-bg").addClass("bubble-move"), 1200);
-
       setTimeout(() => $(".coin01").addClass("coin-animation"), 15000);
+
+      $(".check-box").on("click", function () {
+        $(".popup-board-bg").css("display", "block");
+        $(".popup-board").css("display", "block");
+      });
+
+      $(".popup-board").on("click", function () {
+        $(".popup-board-bg").css("display", "none");
+        $(".popup-board").css("display", "none");
+      });
+
+      $(".popup-board-bg").on("click", function () {
+        $(".popup-board-bg").css("display", "none");
+        $(".popup-board").css("display", "none");
+      });
     } else {
       $(".electfan").removeClass("electfan-move");
       $(".bubble-bg").removeClass("bubble-move");
       $(".coin01").removeClass("coin-animation");
       $("#flipbook .electfan").remove();
       $("#flipbook .bubble-bg").remove();
+      $("#flipbook .check-box").remove();
+      $(".book-section .popup-board-bg").remove();
+      $(".book-section .popup-board").remove();
     }
 
     if (page === 16 || page === 17) {
@@ -775,12 +835,33 @@ $(function () {
         btnPreviousDisabled();
         btnDisabled();
 
+        $("#flipbook").append(`<div class="check-box"></div>`);
+        $(".book-section").append(`
+                           <div class="popup-board-bg">
+                              <div class="popup-close-btn">x</div>
+                            </div>
+                           <div class="popup-board"></div>`);
+
+        $(".check-box").on("click", function () {
+          $(".popup-board-bg").css("display", "block");
+          $(".popup-board").css("display", "block");
+        });
+
+        $(".popup-board").on("click", function () {
+          $(".popup-board-bg").css("display", "none");
+          $(".popup-board").css("display", "none");
+        });
+
+        $(".popup-board-bg").on("click", function () {
+          $(".popup-board-bg").css("display", "none");
+          $(".popup-board").css("display", "none");
+        });
+
         setTimeout(() => {
           $(".click-milk").show();
-          $(".milk-bottle-click").removeClass("disabled");
         }, 13000);
 
-        $("#flipbook .milk-bottle-click").on("click", function () {
+        $("#flipbook .click-milk").on("click", function () {
           $(".cows-tongue").addClass("cows-tongue-animation");
           $(".milk").addClass("milk-empty");
           $(".click-milk").hide();
@@ -799,7 +880,6 @@ $(function () {
         });
       }
     } else {
-      $(".milk-bottle-click").addClass("disabled");
       $(".cows-tongue").removeClass("cows-tongue-animation");
       $(".milk").removeClass("milk-empty");
       $(".coin02").removeClass("coin-animation");
@@ -819,14 +899,40 @@ $(function () {
         stethoscopeBound = true;
         btnPreviousDisabled();
         btnDisabled();
+        setTimeout(() => {
+          $("#flipbook").append(`<div class="girl"></div>`);
+          $("#flipbook").append(`<div class="nurse-hand"></div>`);
+        }, 200);
+        $("#flipbook").append(`<div class="check-box"></div>`);
+        $(".book-section").append(`
+                           <div class="popup-board-bg">
+                              <div class="popup-close-btn">x</div>
+                            </div>
+                           <div class="popup-board"></div>`);
+
+        $(".check-box").on("click", function () {
+          $(".popup-board-bg").css("display", "block");
+          $(".popup-board").css("display", "block");
+        });
+
+        $(".popup-board").on("click", function () {
+          $(".popup-board-bg").css("display", "none");
+          $(".popup-board").css("display", "none");
+        });
+
+        $(".popup-board-bg").on("click", function () {
+          $(".popup-board-bg").css("display", "none");
+          $(".popup-board").css("display", "none");
+        });
 
         setTimeout(() => {
           $("#flipbook .hearing-heart").show();
           $(".stethoscope").removeClass("disabled");
         }, 15000);
 
-        $("#flipbook .stethoscope").on("click", function () {
-          $(this).addClass("stethoscope-move");
+        $("#flipbook .hearing-heart").on("click", function () {
+          $(".stethoscope").addClass("stethoscope-move");
+          $(".cow-heart").addClass("heart-beat-animation");
           $("#flipbook .hearing-heart").hide();
 
           playAudio("hearts-coin", 1000);
@@ -845,7 +951,10 @@ $(function () {
     } else {
       $(".stethoscope").addClass("disabled");
       $("#flipbook .stethoscope").removeClass("stethoscope-move");
+      $(".cow-heart").removeClass("heart-beat-animation");
       $(".coin03").removeClass("coin-animation");
+      $("#flipbook .girl").remove();
+      $("#flipbook .nurse-hand").remove();
     }
 
     // 第 20–21 頁：獲得皇冠 + 投硬幣動畫
@@ -874,10 +983,53 @@ $(function () {
       $("#flipbook .crown").remove();
     }
 
+    // 第 22–23 頁：小女孩夢境 + 浮出夢境
+    if (page === 22 || page === 23) {
+      $("#flipbook").append(`<div class="dream04"></div>`);
+      $("#flipbook").append(`<div class="dialog8 dialog22"></div>`);
+      $("#flipbook").append(`<div class="start22"></div>`);
+      setTimeout(() => {
+        $(".dream01").addClass("dream-animation");
+      }, 1000);
+      setTimeout(() => {
+        $(".dream02").addClass("dream-animation");
+      }, 2000);
+      setTimeout(() => {
+        $(".dream03").addClass("dream-animation");
+      }, 3000);
+      setTimeout(() => {
+        $(".dream04").addClass("dream-animation");
+      }, 4000);
+      setTimeout(() => {
+        $(".start22").addClass("dialog22-animation");
+      }, 5000);
+      setTimeout(() => {
+        $(".dialog8").addClass("dialog22-animation");
+      }, 6000);
+    } else {
+      $(".dream04").remove();
+      $(".dialog22").remove();
+      $(".start22").remove();
+      $(".dream01").removeClass("dream-animation");
+      $(".dream02").removeClass("dream-animation");
+      $(".dream03").removeClass("dream-animation");
+      $(".dream04").removeClass("dream-animation");
+      $(".dialog8").removeClass("dialog22-animation");
+      $(".start22").removeClass("dialog22-animation");
+    }
+
+    if (page === 24 || page === 25) {
+      setTimeout(() => {
+        $(".cow-alarm").addClass("cow-alarm-animation");
+      }, 2000);
+    } else {
+      $(".cow-alarm").removeClass("cow-alarm-animation");
+    }
+
     // 重置該頁面的所有動畫與音效
     function resetMilkPage() {
       $(".click-girl").hide();
-      $(".girl-click-region").addClass("disabled");
+      // $(".girl-click-region").addClass("disabled");
       $(".milk-hand").removeClass("milk-hand-animation");
       $(".milk-inner").removeClass("milk-inner-full");
       $(".milk-drop").removeClass("milk-drop-show");
@@ -891,7 +1043,7 @@ $(function () {
         $(`.flower0${i}`).removeClass(`flower0${i}-finish`);
       }
 
-      $(".girl-click-region").removeClass("played"); // ✅ 允許重複進入頁面動畫
+      // $(".girl-click-region").removeClass("played"); // ✅ 允許重複進入頁面動畫
 
       $("audio").each(function () {
         this.pause();
@@ -916,7 +1068,7 @@ $(function () {
     }
 
     // 小女孩喝奶動畫流程（只綁一次，不堆疊）
-    $(".girl-click-region")
+    $(".click-girl")
       .off("click")
       .on("click", function () {
         if ($(this).hasClass("played")) return;
@@ -1036,10 +1188,10 @@ $(function () {
         btnDisabled();
 
         resetMilkPage(); // 每次重進頁面重置一次
-        $(".girl-click-region").removeClass("played");
+        // $(".girl-click-region").removeClass("played");
 
         setTimeout(() => {
-          $(".girl-click-region").removeClass("disabled");
+          // $(".girl-click-region").removeClass("disabled");
           $(".click-girl").show();
         }, 9000);
 
@@ -1120,93 +1272,6 @@ $(function () {
         canFlipNext = true;
       }, 3000);
     }
-
-    var $bubbles = $(".bubbles");
-
-    function bubbles() {
-      // Settings
-      var min_bubble_count = 20, // Minimum number of bubbles
-        max_bubble_count = 60, // Maximum number of bubbles
-        min_bubble_size = 3, // Smallest possible bubble diameter (px)
-        max_bubble_size = 12; // Maximum bubble blur amount (px)
-
-      // Calculate a random number of bubbles based on our min/max
-      var bubbleCount =
-        min_bubble_count + Math.floor(Math.random() * (max_bubble_count + 1));
-
-      // Create the bubbles
-      for (var i = 0; i < bubbleCount; i++) {
-        $bubbles.append(
-          '<div class="bubble-container"><div class="bubble"></div></div>'
-        );
-      }
-
-      // Now randomise the various bubble elements
-      $bubbles.find(".bubble-container").each(function () {
-        // Randomise the bubble positions (0 - 100%)
-        var pos_rand = Math.floor(Math.random() * 101);
-
-        // Randomise their size
-        var size_rand =
-          min_bubble_size + Math.floor(Math.random() * (max_bubble_size + 1));
-
-        // Randomise the time they start rising (0-15s)
-        var delay_rand = Math.floor(Math.random() * 16);
-
-        // Randomise their speed (3-8s)
-        var speed_rand = 3 + Math.floor(Math.random() * 9);
-
-        // Random blur
-        var blur_rand = Math.floor(Math.random() * 3);
-
-        // Cache the this selector
-        var $this = $(this);
-
-        // Apply the new styles
-        $this.css({
-          left: pos_rand + "%",
-
-          "-webkit-animation-duration": speed_rand + "s",
-          "-moz-animation-duration": speed_rand + "s",
-          "-ms-animation-duration": speed_rand + "s",
-          "animation-duration": speed_rand + "s",
-
-          "-webkit-animation-delay": delay_rand + "s",
-          "-moz-animation-delay": delay_rand + "s",
-          "-ms-animation-delay": delay_rand + "s",
-          "animation-delay": delay_rand + "s",
-
-          "-webkit-filter": "blur(" + blur_rand + "px)",
-          "-moz-filter": "blur(" + blur_rand + "px)",
-          "-ms-filter": "blur(" + blur_rand + "px)",
-          filter: "blur(" + blur_rand + "px)",
-        });
-
-        $this.children(".bubble").css({
-          width: size_rand + "px",
-          height: size_rand + "px",
-        });
-      });
-    }
-
-    // In case users value their laptop battery life
-    // Allow them to turn the bubbles off
-    $(".bubble-toggle").click(function () {
-      if ($bubbles.is(":empty")) {
-        bubbles();
-        $bubbles.show();
-        $(this).text("Bubbles Off");
-      } else {
-        $bubbles.fadeOut(function () {
-          $(this).empty();
-        });
-        $(this).text("Bubbles On");
-      }
-
-      return false;
-    });
-
-    bubbles();
 
     let playTimeout;
     let latestPage = 1;
@@ -1308,7 +1373,7 @@ $(function () {
           ".electfan",
           ".electfan-move",
           ".bubble-bg",
-          "mom-hand",
+          ".mom-hand",
         ];
 
         // 用 forEach 逐一移除
