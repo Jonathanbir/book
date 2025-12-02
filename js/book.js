@@ -651,7 +651,7 @@ $(function () {
       $("#flipbook .cloud01").remove();
     }
 
-    if (page === 6 || page === 7) {
+    if (page === 4 || page === 5) {
       $(".eyes-ball").addClass("eyes-ball-animation");
       $(".eyes-left").addClass("eyes-big-animation");
       $(".eyes-right").addClass("eyes-big-animation");
@@ -661,7 +661,7 @@ $(function () {
       $(".dialog5").removeClass("dialog5-animation");
     }
 
-    if (page === 8 || page === 9) {
+    if (page === 6 || page === 7) {
       const door = document.querySelector(".door");
       $("#flipbook").append('<div class="tree"></div>');
       $("#flipbook").append('<div class="fog5"></div>');
@@ -693,9 +693,16 @@ $(function () {
       $("#flipbook .peoples").remove();
       $("#flipbook .fog5").remove();
       $("#flipbook .start5").remove();
+      $(".door").removeClass("door-opening");
+      $(".peoples").removeClass("peoples-open");
+      $(".tree1").removeClass("tree-fade-in");
+      $(".tree2").removeClass("tree-fade-in");
+      $(".cloud1").removeClass("cloud-fade-in");
+      $(".cloud2").removeClass("cloud-fade-in");
+      $(".dialog8").removeClass("dialog8-animation");
     }
 
-    if (page === 10 || page === 11) {
+    if (page === 8 || page === 9) {
       $("#flipbook").append('<div class="mom-daughter"></div>');
       setTimeout(() => {
         $(".eyes9").addClass("eyes9-hair-animation");
@@ -709,7 +716,7 @@ $(function () {
       $(".dialog10").addClass("dialog10-animation");
     }
 
-    if (page === 9 || page === 12) {
+    if (page === 7 || page === 10) {
       $(".foot1").removeClass("foot1-animation");
       $(".foot2").removeClass("foot2-animation");
       $(".foot3").removeClass("foot3-animation");
@@ -721,17 +728,7 @@ $(function () {
       $("#flipbook .mom-daughter").remove();
     }
 
-    if (page === 7 || page === 10) {
-      $(".door").removeClass("door-opening");
-      $(".peoples").removeClass("peoples-open");
-      $(".tree1").removeClass("tree-fade-in");
-      $(".tree2").removeClass("tree-fade-in");
-      $(".cloud1").removeClass("cloud-fade-in");
-      $(".cloud2").removeClass("cloud-fade-in");
-      $(".dialog8").removeClass("dialog8-animation");
-    }
-
-    if (page === 12 || page === 13) {
+    if (page === 10 || page === 11) {
       $(".list").addClass("list-animation");
       setTimeout(() => {
         $(".cloud-01").addClass("cloud-animation");
@@ -761,7 +758,7 @@ $(function () {
       $("#flipbook .fog5").remove();
     }
 
-    if (page === 11 || page === 14) {
+    if (page === 9 || page === 12) {
       $(".list").removeClass("list-animation");
       $(".cloud-01").removeClass("cloud-animation");
       $(".cloud-02").removeClass("cloud-animation");
@@ -776,7 +773,7 @@ $(function () {
     let fanAndBubbleCreated = false;
     let milkClickBound = false;
 
-    if (page === 14 || page === 15) {
+    if (page === 12 || page === 13) {
       // 只建立一次，避免 DOM 爆掉
       if (!fanAndBubbleCreated) {
         fanAndBubbleCreated = true;
@@ -821,7 +818,7 @@ $(function () {
       $(".book-section .popup-board").remove();
     }
 
-    if (page === 16 || page === 17) {
+    if (page === 14 || page === 15) {
       isCanNotFlip();
       setTimeout(() => {
         canFlipPrev = true;
@@ -886,7 +883,7 @@ $(function () {
     let stethoscopeBound = false;
 
     // 第 18–19 頁：聽心跳 + 投錢
-    if (page === 18 || page === 19) {
+    if (page === 16 || page === 17) {
       isCanNotFlip();
       setTimeout(() => {
         canFlipPrev = true;
@@ -955,7 +952,7 @@ $(function () {
     }
 
     // 第 20–21 頁：獲得皇冠 + 投硬幣動畫
-    if (page === 20 || page === 21) {
+    if (page === 18 || page === 19) {
       $("#flipbook").append(`
       <div class="coin-all  coin01-final"></div>
       <div class="coin-all coin02-final"></div>
@@ -981,7 +978,7 @@ $(function () {
     }
 
     // 第 22–23 頁：小女孩夢境 + 浮出夢境
-    if (page === 22 || page === 23) {
+    if (page === 20 || page === 21) {
       $("#flipbook").append(`<div class="dream04"></div>`);
       $("#flipbook").append(`<div class="dialog8 dialog22"></div>`);
       $("#flipbook").append(`<div class="start22"></div>`);
@@ -1015,7 +1012,7 @@ $(function () {
       $(".start22").removeClass("dialog22-animation");
     }
 
-    if (page === 24 || page === 25) {
+    if (page === 22 || page === 23) {
       setTimeout(() => {
         $(".cow-alarm").addClass("cow-alarm-animation");
       }, 2000);
@@ -1176,7 +1173,7 @@ $(function () {
 
     // 翻到該頁才開始動作
     $("#flipbook").bind("turned", function (event, page) {
-      if (page === 26 || page === 27) {
+      if (page === 24 || page === 25) {
         isCanNotFlip();
         setTimeout(() => {
           canFlipPrev = true;
@@ -1200,7 +1197,7 @@ $(function () {
 
     // Turn.js event
     $("#flipbook").bind("turning", function (event, page) {
-      if (page === 28 || page === 29) {
+      if (page === 26 || page === 27) {
         if (!$(".mom-hand").length) {
           setTimeout(() => {
             $("#flipbook").append('<div class="mom-hand"></div>');
@@ -1216,7 +1213,7 @@ $(function () {
         $(".mom-hand-empty").remove();
       }
 
-      if (page === 30) {
+      if (page === 28) {
         let count = 3;
         $(".prev-page").prop("disabled", true);
         $(".prev-page").addClass("disabled-btn");
@@ -1244,7 +1241,7 @@ $(function () {
     });
 
     $("#flipbook").bind("turned", function (event, page) {
-      if (page === 28 || page === 29) {
+      if (page === 26 || page === 27) {
         startFamilyAnimation();
       } else {
         resetFamilyPage();
@@ -1275,32 +1272,32 @@ $(function () {
 
     // 頁面對應的音檔 ID 對照表
     const pageAudioMap = {
-      2: "audio-1",
-      3: "audio-1",
-      4: "audio-2",
-      5: "audio-2",
-      6: "audio-3",
-      7: "audio-3",
-      10: "audio-5",
-      11: "audio-5",
-      12: "audio-6",
-      13: "audio-6",
-      14: "audio-7",
-      15: "audio-7",
-      16: "audio-8",
-      17: "audio-8",
-      18: "audio-9",
-      19: "audio-9",
-      20: "audio-10",
-      21: "audio-10",
-      22: "audio-11",
-      23: "audio-11",
-      24: "audio-12",
-      25: "audio-12",
-      26: "audio-13",
-      27: "audio-13",
-      28: "audio-14",
-      29: "audio-14",
+      2: "audio-2",
+      3: "audio-2",
+      4: "audio-3",
+      5: "audio-3",
+      6: "audio-4",
+      7: "audio-4",
+      8: "audio-5",
+      9: "audio-5",
+      10: "audio-6",
+      11: "audio-6",
+      12: "audio-7",
+      13: "audio-7",
+      14: "audio-8",
+      15: "audio-8",
+      16: "audio-9",
+      17: "audio-9",
+      18: "audio-10",
+      19: "audio-10",
+      20: "audio-11",
+      21: "audio-11",
+      22: "audio-12",
+      23: "audio-12",
+      24: "audio-13",
+      25: "audio-13",
+      26: "audio-14",
+      27: "audio-14",
     };
 
     // 停止所有音樂
