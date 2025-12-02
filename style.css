@@ -247,6 +247,81 @@ audio {
   border-left: 1px solid #ccc;
 }
 
+.cloud-0 {
+  position: absolute;
+  top: 0;
+  right: -20%;
+  z-index: 1;
+  width: 1000px;
+  height: 500px;
+  background-image: url(./images/book/book00/雲.png);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  animation: cloudMove 10s ease-in-out infinite;
+  transition: all 10s ease-in-out;
+}
+
+@keyframes cloudMove {
+  0% {
+    transform: translateX(10px);
+  }
+  50% {
+    transform: translateX(-10px);
+  }
+  100% {
+    transform: translateX(10px);
+  }
+}
+
+.bubble-0 {
+  position: absolute;
+  top: 0;
+  right: -20%;
+  z-index: 4;
+  width: 1500px;
+  height: 500px;
+  background-image: url(./images/book/book00/牛奶泡泡.png);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  animation: bubbleMove 10s ease-in-out infinite;
+  transition: all 10s ease-in-out;
+}
+
+@keyframes bubbleMove {
+  0% {
+    transform: translateX(5px);
+  }
+  50% {
+    transform: translateX(-5px);
+  }
+  100% {
+    transform: translateX(5px);
+  }
+}
+
+.star-0 {
+  position: absolute;
+  bottom: 0%;
+  right: 3%;
+  z-index: 10;
+  width: 1200px;
+  height: 463px;
+  background-image: url(./images/book/book00/亮晶晶.png);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  animation: starShow 1s ease-in-out infinite;
+  transition: all 0.5s ease-in-out;
+}
+
+@keyframes starShow {
+  0% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 .book-title {
   position: absolute;
   top: 4%;
@@ -254,22 +329,72 @@ audio {
   z-index: 100;
   width: 500px;
   height: 150px;
-  background-image: url(./images/object/book-title1.png);
+  background-image: url(./images/book/book00/故事標題.png);
   background-size: 100%;
   background-repeat: no-repeat;
   margin: auto;
 }
 
-.page1 .magnifier {
+.grass-0 {
+  position: absolute;
+  bottom: 0;
+  z-index: 3;
+  width: 100%;
+  height: 137px;
+  background-image: url("./images/book/book00/前草地.png");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.grass-back-0 {
+  position: absolute;
+  bottom: 9%;
+  z-index: 2;
+  width: 100%;
+  height: 200px;
+  background-image: url(./images/book/book00/後草地.png);
+  background-size: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.fence {
+  position: absolute;
+  bottom: -1%;
+  right: -1%;
+  z-index: 20;
+  width: 1100px;
+  height: 85px;
+  background-image: url("./images/book/book00/柵欄.png");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.girl-0 {
+  position: absolute;
+  bottom: -3%;
+  right: 14%;
+  z-index: 5;
+  width: 450px;
+  height: 500px;
+  background-image: url("./images/book/book00/鈴鈴.png");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.left-hand-magnifier {
+  position: absolute;
+  bottom: 10%;
+  right: 49%;
+  z-index: 6;
   width: 150px;
   height: 300px;
-  background-image: url(./images/object/magnifier.png);
+  background-image: url(./images/book/book00/放大鏡手.png);
   background-size: 100%;
   background-repeat: no-repeat;
-  position: absolute;
-  bottom: 8%;
-  right: 50%;
-  z-index: 9;
   animation: magnifierMove 2s ease-in-out infinite;
   transition: all 1s ease-in-out;
 }
@@ -286,14 +411,52 @@ audio {
   }
 }
 
-.page1 .cow {
+.right-hand-milk-box {
+  position: absolute;
+  bottom: -1%;
+  right: 14%;
+  z-index: 6;
+  width: 150px;
+  height: 300px;
+  background-image: url(./images/book/book00/鈴鈴右手牛奶盒.png);
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+.cow-0-1 {
+  position: absolute;
+  bottom: 9%;
+  left: 21%;
+  z-index: 10;
+  width: 115px;
+  height: 110px;
+  background-image: url(./images/book/book00/牛1.png);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.cow-0-2 {
   position: absolute;
   bottom: 12%;
-  right: 40%;
+  right: 39%;
   z-index: 10;
   width: 100px;
   height: 100px;
-  background-image: url("./images/object/cow.png");
+  background-image: url("./images/book/book00/牛2.png");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.cow-0-3 {
+  position: absolute;
+  bottom: 11%;
+  right: 9%;
+  z-index: 10;
+  width: 150px;
+  height: 110px;
+  background-image: url(./images/book/book00/牛3.png);
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
@@ -380,6 +543,52 @@ audio {
   right: 213px;
 }
 
+.page5 .eyes-left {
+  position: absolute;
+  top: 260px;
+  right: 256px;
+  z-index: 10;
+  width: 35px;
+  height: 35px;
+  background-image: url("./images/book/book03/left-eye.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.page5 .eyes-right {
+  position: absolute;
+  top: 250px;
+  right: 208px;
+  z-index: 10;
+  width: 35px;
+  height: 35px;
+  background-image: url("./images/book/book03/right-eye.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: all 1s ease-in-out;
+}
+
+.eyes-big-animation {
+  animation: eyesBig 2.5s ease-in-out infinite;
+  animation-delay: 1.5s;
+  /* animation-fill-mode: forwards; */
+  transition: all 1s ease-in-out;
+}
+
+@keyframes eyesBig {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
 .hand {
   position: absolute;
   z-index: 10;
@@ -390,10 +599,24 @@ audio {
   background-repeat: no-repeat;
 }
 
+.text-4 {
+  position: absolute;
+  top: 10%;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 80%;
+  height: 300px;
+  background-image: url(./images/book/book04/文案.png);
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
 .dialog5 {
-  width: 150px;
+  width: 70px;
   height: 150px;
-  background-image: url(./images/dialog/dialog5.png);
+  background-image: url(./images/book/book03/question-mark.png);
+  background-size: 100%;
   bottom: 73%;
   left: 33%;
   transform: rotate(-25deg);
@@ -421,42 +644,66 @@ audio {
   }
 }
 
-.page5 .left-hand {
-  bottom: 34%;
-  right: 48%;
-  z-index: 11;
-  transform: translate(0%, 0%) rotate(-135deg);
-  background-image: url("./images/object/left-hand.png");
+.daughter-4 {
+  position: absolute;
+  bottom: 0%;
+  left: 18%;
+  z-index: 3;
+  width: 200px;
+  height: 200px;
+  background-image: url("./images/book/book04/小女孩.png");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
-.left-hand-animation {
-  animation: leftHandMove 3s ease-in-out;
-  animation-delay: 0.5s;
-  animation-fill-mode: forwards;
+.daughter-hand-4 {
+  position: absolute;
+  bottom: 8%;
+  left: 24%;
+  z-index: 4;
+  width: 50px;
+  height: 135px;
+  background-image: url("./images/book/book04/小女孩手.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  animation: handWaveMove 2s ease-in-out infinite;
   transition: all 1s ease-in-out;
 }
 
-@keyframes leftHandMove {
+@keyframes handWaveMove {
   0% {
-    transform: translate(0%, 0%) rotate(-135deg);
+    transform: translate(-5%, 5%);
   }
   50% {
-    transform: translate(37%, 0%) rotate(37deg);
+    transform: translate(2%, 5%) rotate(5deg);
   }
   100% {
-    transform: translate(27%, 0%) rotate(-57deg);
+    transform: translate(-5%, 5%);
   }
 }
 
-.moms-hand {
+.moms-head-4 {
   position: absolute;
-  bottom: 20%;
-  right: 41%;
-  z-index: 11;
-  width: 140px;
-  height: 165px;
-  transform: translate(0%, 0%) rotate(-8deg);
-  background-image: url(./images/object/moms-hand.png);
+  bottom: 16%;
+  right: 24%;
+  z-index: 4;
+  width: 220px;
+  height: 220px;
+  background-image: url("./images/book/book04/母親頭.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+.moms-hand-4 {
+  position: absolute;
+  bottom: 153px;
+  right: 48%;
+  z-index: 2;
+  width: 90px;
+  height: 100px;
+  transform: translate(0%, 0%) rotate(-3deg);
+  background-image: url(./images/book/book04/母親手.png);
   background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
@@ -468,13 +715,13 @@ audio {
 
 @keyframes momsHandMove {
   0% {
-    transform: translate(0%, 0%) rotate(-8deg);
+    transform: translate(0%, 0%) rotate(-3deg);
   }
   50% {
     transform: translate(0%, 0%) rotate(0deg);
   }
   100% {
-    transform: translate(0%, 0%) rotate(-8deg);
+    transform: translate(0%, 0%) rotate(-3deg);
   }
 }
 
@@ -507,36 +754,10 @@ audio {
   position: relative;
 }
 
-.dialog6 {
-  background-image: url(./images/dialog/dialog6.png);
+.dialog-4 {
+  background-image: url(./images/book/book04/出發!.png);
   bottom: 28%;
   left: 21%;
-}
-
-.page6 .hand {
-  width: 85px;
-  height: 40px;
-}
-
-.page6 .left-hand {
-  bottom: 15%;
-  right: 67%;
-  transform: rotate(-135deg);
-  background-image: url("./images/object/left-hand.png");
-  animation: handWaveMove 2s ease-in-out infinite;
-  transition: all 1s ease-in-out;
-}
-
-@keyframes handWaveMove {
-  0% {
-    transform: translate(-5%, 5%) rotate(-135deg);
-  }
-  50% {
-    transform: translate(2%, 10%) rotate(-115deg);
-  }
-  100% {
-    transform: translate(-5%, 5%) rotate(-135deg);
-  }
 }
 
 .page7 {
@@ -1065,30 +1286,6 @@ audio {
   animation: dialogShow 2s ease-in-out infinite;
   animation-delay: 7s;
   transition: all 1s ease-in-out;
-}
-
-.cloud {
-  position: absolute;
-  z-index: 99;
-  width: 350px;
-  height: 310px;
-  background-image: url(./images/object/cloud.png);
-  background-size: 100%;
-  background-repeat: no-repeat;
-  animation: cloudMove 10s ease-in-out infinite;
-  transition: all 10s ease-in-out;
-}
-
-@keyframes cloudMove {
-  0% {
-    transform: translateX(10px);
-  }
-  50% {
-    transform: translateX(-10px);
-  }
-  100% {
-    transform: translateX(10px);
-  }
 }
 
 .cloud01 {
@@ -2503,7 +2700,7 @@ audio {
 
 /* 書的底圖 */
 .book-cover {
-  background-image: url(./images/book/book-cover.png);
+  background-image: url(./images/book/book00/book00.png);
 }
 
 .book-foot {
@@ -2521,19 +2718,19 @@ audio {
 }
 
 .book03 {
-  background-image: url(./images/book/book3.jpg);
+  background-image: url(./images/book/book01/book01.png);
 }
 
 .book04 {
-  background-image: url(./images/book/book4.jpg);
+  background-image: url(./images/book/book02/book02.png);
 }
 
 .book05 {
-  background-image: url(./images/book/book5.jpg);
+  background-image: url(./images/book/book03/book03.png);
 }
 
 .book06 {
-  background-image: url(./images/book/book6.jpg);
+  background-image: url(./images/book/book04/book04.png);
 }
 
 .book07 {
@@ -3012,6 +3209,102 @@ audio {
     margin: 20% auto;
   }
 
+  .book-title {
+    right: 0;
+    left: 0;
+    margin: auto;
+    width: 95%;
+    height: 150px;
+  }
+
+  .star-0 {
+    bottom: -7%;
+    right: -3%;
+  }
+
+  .grass {
+    bottom: -3%;
+    z-index: 3;
+    height: 100px;
+  }
+
+  .fence {
+    right: 0;
+    width: 100%;
+    height: 50px;
+  }
+
+  .girl-0 {
+    bottom: -18%;
+    right: 20%;
+    width: 60%;
+  }
+
+  .cow-0-1 {
+    bottom: 4%;
+    left: 17%;
+    width: 20%;
+  }
+
+  .cow-0-2 {
+    bottom: 9%;
+    right: 40%;
+    width: 17%;
+    height: 100px;
+  }
+
+  .cow-0-3 {
+    bottom: 6%;
+    right: 12%;
+    width: 21%;
+  }
+
+  .left-hand-magnifier {
+    bottom: -6%;
+    right: 49%;
+    width: 25%;
+  }
+
+  .right-hand-milk-box {
+    bottom: -19%;
+    right: 16%;
+    width: 23%;
+  }
+
+  .page5 .eyes-left {
+    top: 42%;
+    right: 42%;
+  }
+
+  .page5 .eyes-right {
+    top: 40%;
+    right: 34%;
+  }
+
+  .daughter-4 {
+    bottom: -4%;
+    left: 17%;
+    width: 31%;
+  }
+
+  .daughter-hand-4 {
+    bottom: 2%;
+    left: 23%;
+    width: 8%;
+  }
+
+  .moms-head-4 {
+    bottom: 3%;
+    right: 26%;
+    width: 35%;
+  }
+
+  .moms-hand-4 {
+    width: 13%;
+    bottom: 21%;
+    right: 49%;
+  }
+
   .door {
     transform: scale(3) rotateY(0deg);
   }
@@ -3036,14 +3329,14 @@ audio {
     height: 35%;
   }
 
-  .page1 .magnifier {
+  .magnifier {
     width: 27%;
     height: 47%;
     bottom: 15%;
     right: 49%;
   }
 
-  .page1 .cow {
+  .cow {
     bottom: 9%;
     right: 193px;
   }
@@ -3064,8 +3357,7 @@ audio {
   }
 
   .dialog5 {
-    width: 120px;
-    height: 120px;
+    width: 10%;
     bottom: 69%;
   }
 

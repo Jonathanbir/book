@@ -66,14 +66,65 @@ $(function () {
       autoCenter: true,
     });
   } else {
+    // call on load & on orientation change
+    window.addEventListener("load", maybeShowSwipeHint);
+    window.addEventListener("orientationchange", () =>
+      setTimeout(maybeShowSwipeHint, 300)
+    );
+
+    // 顯示提示（只在第一次進站顯示）
+    function showFullscreenHint() {
+      // window.alert("請向下滑一下即可全螢幕觀看");
+      if (localStorage.getItem("fullscreenHintShown")) return;
+
+      const hint = document.getElementById("swipe-fullscreen-hint");
+      hint.classList.add("show");
+
+      // 記錄下次不要再顯示
+      localStorage.setItem("fullscreenHintShown", "true");
+    }
+
+    // 隱藏提示
+    function hideFullscreenHint() {
+      const hint = document.getElementById("swipe-fullscreen-hint");
+      hint.classList.remove("show");
+    }
+
+    // 檢查使用者是否滑動（手動觸發全螢幕）
+    let touchStartY = 0;
+
+    window.addEventListener("touchstart", (e) => {
+      touchStartY = e.touches[0].clientY;
+    });
+
+    window.addEventListener("touchmove", (e) => {
+      const deltaY = e.touches[0].clientY - touchStartY;
+
+      if (deltaY > 20) {
+        hideFullscreenHint();
+
+        // 觸發微小滾動 → Android/Safari 會隱藏網址列
+        window.scrollTo(0, 1);
+      }
+    });
+
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+      }, 0);
+      setTimeout(showFullscreenHint, 600);
+    });
+
     if (isSafari()) {
       // 初始化 safri turn.js
       $flipbook.turn({
         width: "100vw",
-        height: "80vh",
+        height: "100vh",
+        // height: "80vh",
         autoCenter: true,
       });
-      $("#left-down-corner,#right-down-corner").css("bottom", "18vh");
+      // $("#left-down-corner,#right-down-corner").css("bottom", "18vh");
+      $("#left-down-corner,#right-down-corner").css("bottom", "0vh");
       $("#flipbook").css("marginTop", "1vh");
     }
 
@@ -81,10 +132,10 @@ $(function () {
       // 初始化 chorme turn.js
       $flipbook.turn({
         width: "100vw",
-        height: "90vh",
+        height: "100vh",
         autoCenter: true,
       });
-      $("#left-down-corner,#right-down-corner").css("bottom", "8vh");
+      $("#left-down-corner,#right-down-corner").css("bottom", "0vh");
       $("#flipbook").css("marginTop", "1vh");
     }
 
@@ -95,58 +146,8 @@ $(function () {
         height: "100vh",
         autoCenter: true,
       });
-      $(".scroll-box").css("display", "block");
       // $("#left-down-corner,#right-down-corner").css("bottom", "0");
       // $("#flipbook").css("marginTop", "1vh");
-
-      // call on load & on orientation change
-      window.addEventListener("load", maybeShowSwipeHint);
-      window.addEventListener("orientationchange", () =>
-        setTimeout(maybeShowSwipeHint, 300)
-      );
-
-      // 顯示提示（只在第一次進站顯示）
-      function showFullscreenHint() {
-        // window.alert("請向下滑一下即可全螢幕觀看");
-        if (localStorage.getItem("fullscreenHintShown")) return;
-
-        const hint = document.getElementById("swipe-fullscreen-hint");
-        hint.classList.add("show");
-
-        // 記錄下次不要再顯示
-        localStorage.setItem("fullscreenHintShown", "true");
-      }
-
-      // 隱藏提示
-      function hideFullscreenHint() {
-        const hint = document.getElementById("swipe-fullscreen-hint");
-        hint.classList.remove("show");
-      }
-
-      // 檢查使用者是否滑動（手動觸發全螢幕）
-      let touchStartY = 0;
-
-      window.addEventListener("touchstart", (e) => {
-        touchStartY = e.touches[0].clientY;
-      });
-
-      window.addEventListener("touchmove", (e) => {
-        const deltaY = e.touches[0].clientY - touchStartY;
-
-        if (deltaY > 20) {
-          hideFullscreenHint();
-
-          // 觸發微小滾動 → Android/Safari 會隱藏網址列
-          window.scrollTo(0, 1);
-        }
-      });
-
-      window.addEventListener("load", () => {
-        setTimeout(() => {
-          window.scrollTo(0, 0);
-        }, 0);
-        setTimeout(showFullscreenHint, 600);
-      });
     }
   }
 
@@ -472,8 +473,8 @@ $(function () {
       }, 1000);
     }
 
-    $(".prev-page, .next-page").prop("disabled", true);
-    $(".prev-page, .next-page").addClass("disabled-btn");
+    // $(".prev-page, .next-page").prop("disabled", true);
+    // $(".prev-page, .next-page").addClass("disabled-btn");
     setTimeout(() => {
       $(".prev-page, .next-page").removeClass("disabled-btn");
       $(".prev-page, .next-page").prop("disabled", false);
@@ -643,13 +644,7 @@ $(function () {
     }
 
     if (page === 2 || page === 3) {
-      setTimeout(() => {
-        $("#flipbook").append('<div class="book-title"></div>');
-        $("#flipbook").append('<div class="cloud cloud01"></div>');
-      }, 200);
     } else {
-      $("#flipbook .book-title").remove();
-      $("#flipbook .cloud01").remove();
     }
 
     if (page === 1 || page === 4) {
@@ -658,6 +653,8 @@ $(function () {
 
     if (page === 6 || page === 7) {
       $(".eyes-ball").addClass("eyes-ball-animation");
+      $(".eyes-left").addClass("eyes-big-animation");
+      $(".eyes-right").addClass("eyes-big-animation");
       $(".dialog5").addClass("dialog5-animation");
     } else {
       $(".eyes-ball").removeClass("eyes-ball-animation");
