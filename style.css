@@ -865,7 +865,7 @@ audio {
   opacity: 1;
 }
 
-.bubble5 {
+.bubble8 {
   position: absolute;
   left: 0;
   bottom: 0;
@@ -873,7 +873,7 @@ audio {
   width: 100%;
   height: 100%;
   background-size: cover;
-  background-image: url(./images/book/book0506/牛奶泡泡.png);
+  background-image: url(./images/book/book10/牛奶泡泡.png);
   background-position: center;
   background-repeat: no-repeat;
   transition: all 3s ease-in-out;
@@ -1020,7 +1020,7 @@ audio {
   width: 100px;
   height: 100px;
   background-size: 100%;
-  background-image: url(./images/object/cow.png);
+  background-image: url(./images/book/book09/cow01.png);
   background-position: center;
   background-repeat: no-repeat;
   transition: all 2s ease-in-out;
@@ -1053,7 +1053,7 @@ audio {
   width: 80px;
   height: 70px;
   background-size: 100%;
-  background-image: url(./images/object/cow02.png);
+  background-image: url(./images/book/book09/cow02.png);
   background-position: center;
   background-repeat: no-repeat;
   transition: all 2s ease-in-out;
@@ -1085,7 +1085,7 @@ audio {
   width: 80px;
   height: 70px;
   background-size: 100%;
-  background-image: url(./images/object/cow03.png);
+  background-image: url(./images/book/book09/cow03.png);
   background-position: center;
   background-repeat: no-repeat;
   transition: all 2s ease-in-out;
@@ -1113,11 +1113,11 @@ audio {
 .cow04 {
   position: absolute;
   left: 50%;
-  bottom: 23%;
-  width: 200px;
-  height: 200px;
+  bottom: 21%;
+  width: 150px;
+  height: 150px;
   background-size: 100%;
-  background-image: url(./images/object/cow04.png);
+  background-image: url(./images/book/book09/cow04.png);
   background-position: center;
   background-repeat: no-repeat;
   transition: all 2s ease-in-out;
@@ -1133,7 +1133,7 @@ audio {
   width: 250px;
   height: 250px;
   background-size: 100%;
-  background-image: url(./images/object/cow04.png);
+  background-image: url(./images/book/book09/cow05.png);
   background-position: center;
   background-repeat: no-repeat;
   transition: all 2s ease-in-out;
@@ -1149,7 +1149,7 @@ audio {
   width: 180px;
   height: 224px;
   background-size: 100%;
-  background-image: url(./images/object/list-board.png);
+  background-image: url(./images/book/book10/手.png);
   background-position: center;
   background-repeat: no-repeat;
   transition: all 2s ease-in-out;
@@ -1170,13 +1170,13 @@ audio {
 
 .list {
   position: absolute;
-  right: 37%;
-  bottom: 23%;
+  right: 36%;
+  bottom: 20%;
   z-index: 101;
-  width: 100px;
-  height: 130px;
+  width: 119px;
+  height: 148px;
   background-size: 100%;
-  background-image: url(./images/object/list.png);
+  background-image: url(./images/book/book10/清單內容.png);
   background-position: center;
   background-repeat: no-repeat;
   animation: listShow 2s ease-in-out infinite;
@@ -1423,10 +1423,10 @@ audio {
   background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
-  background-image: url(./images/object/rainbow.png);
+  background-image: url(./images/book/book10/彩虹.png);
 }
 
-.star12 {
+.star8 {
   position: absolute;
   left: 0;
   bottom: 0;
@@ -1434,7 +1434,7 @@ audio {
   width: 100%;
   height: 100%;
   background-size: 100%;
-  background-image: url(./images/object/star12.png);
+  background-image: url(./images/book/book10/亮晶晶.png);
   background-position: center;
   background-repeat: no-repeat;
   transition: all 3s ease-in-out;
@@ -1454,31 +1454,46 @@ audio {
   background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
-  background-image: url(./images/object/cloud-group.png);
+  background-image: url(./images/book/book10/cloud-group.png);
   animation: cloudGroupMove 15s ease-in-out infinite;
   transition: all 15s ease-in-out;
-}
-
-@keyframes cloudGroupMove {
-  0% {
-    transform: translateX(20px);
-  }
-  50% {
-    transform: translateX(-20px);
-  }
-  100% {
-    transform: translateX(20px);
-  }
 }
 
 .cloud-01 {
   position: absolute;
   left: 0%;
   top: 0%;
-  width: 318px;
+  width: 230px;
   height: 133px;
   background-size: 100%;
-  background-image: url(./images/object/cloud01.png);
+  background-image: url(./images/book/book09/cloud01.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: all 2s ease-in-out;
+  display: none;
+  animation: cloud01Move 10s ease-in-out infinite;
+}
+
+@keyframes cloud01Move {
+  0% {
+    transform: translateX(0px);
+  }
+  50% {
+    transform: translateX(-10px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+
+.cloud-02 {
+  position: absolute;
+  right: 0%;
+  top: 0%;
+  width: 120px;
+  height: 100px;
+  background-size: 100%;
+  background-image: url(./images/book/book10/cloud02.png);
   background-position: center;
   background-repeat: no-repeat;
   transition: all 2s ease-in-out;
@@ -1486,19 +1501,16 @@ audio {
   animation: cloudGroupMove 10s ease-in-out infinite;
 }
 
-.cloud-02 {
-  position: absolute;
-  right: 0%;
-  top: 0%;
-  width: 400px;
-  height: 67px;
-  background-size: 100%;
-  background-image: url(./images/object/cloud02.png);
-  background-position: center;
-  background-repeat: no-repeat;
-  transition: all 2s ease-in-out;
-  display: none;
-  animation: cloudGroupMove 10s ease-in-out infinite;
+@keyframes cloudGroupMove {
+  0% {
+    transform: translateX(10px);
+  }
+  50% {
+    transform: translateX(20px);
+  }
+  100% {
+    transform: translateX(10px);
+  }
 }
 
 .cloud-animation {
@@ -1521,13 +1533,13 @@ audio {
 
 .girls-head {
   position: absolute;
-  right: 33%;
+  left: 8%;
   bottom: -1%;
-  z-index: 3;
-  width: 365px;
-  height: 265px;
+  z-index: 99;
+  width: 538px;
+  height: 254px;
   background-size: 100%;
-  background-image: url(./images/object/girls-head.png);
+  background-image: url(./images/book/book09/媽媽鈴鈴.png);
   background-position: center;
   background-repeat: no-repeat;
 }
@@ -2847,12 +2859,12 @@ audio {
   background-image: url(./images/book/book08/book08.png);
 }
 
-.book11 {
-  background-image: url(./images/book/book11.jpg);
+.book09 {
+  background-image: url(./images/book/book09/book09.png);
 }
 
-.book12 {
-  background-image: url(./images/book/book12.jpg);
+.book10 {
+  background-image: url(./images/book/book10/book10.png);
 }
 
 .book13 {

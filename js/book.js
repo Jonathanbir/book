@@ -760,9 +760,10 @@ $(function () {
         $(".cloud-01").addClass("cloud-animation");
         $(".cloud-02").addClass("cloud-animation");
       }, 50);
+      $("#flipbook").append('  <div class="girls-head"></div>');
       $("#flipbook").append('<div class="rainbow"></div>');
-      $("#flipbook").append('<div class="star12"></div>');
-      $("#flipbook").append('<div class="bubble5"></div>');
+      $("#flipbook").append('<div class="star8"></div>');
+      $("#flipbook").append('<div class="bubble8"></div>');
       if (window.matchMedia("(max-height: 500px)").matches) {
         $(".rainbow").css("width", bookWidth);
         $(".rainbow").css("height", bookHeight);
@@ -774,14 +775,11 @@ $(function () {
       $("#flipbook").append('<div class="list"></div>');
 
       setTimeout(() => {
-        $(".bubble5").addClass("bubble5-fade-in");
+        $(".bubble8").addClass("bubble-fade-in");
       }, 1000);
       setTimeout(() => {
-        $(".star12").addClass("star-fade-in");
+        $(".star8").addClass("star-fade-in");
       }, 2000);
-    } else {
-      $("#flipbook .star12").remove();
-      // $("#flipbook .bubble5").remove();
     }
 
     if (page === 9 || page === 12) {
@@ -790,9 +788,12 @@ $(function () {
       $(".cloud-02").removeClass("cloud-animation");
       $("#flipbook .rainbow").remove();
       $("#flipbook .cloud-group").remove();
+      $("#flipbook .girls-head").remove();
       $("#flipbook .cow05").remove();
       $("#flipbook .list-board").remove();
       $("#flipbook .list").remove();
+      $("#flipbook .bubble8").remove();
+      $("#flipbook .star8").remove();
     }
 
     // 確保元素只 append 一次
