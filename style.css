@@ -865,7 +865,7 @@ audio {
   opacity: 1;
 }
 
-.fog5 {
+.bubble5 {
   position: absolute;
   left: 0;
   bottom: 0;
@@ -880,11 +880,7 @@ audio {
   opacity: 0;
 }
 
-.fog5-fade-in {
-  opacity: 1;
-}
-
-.start5 {
+.star5 {
   position: absolute;
   left: 0;
   bottom: -5%;
@@ -899,7 +895,7 @@ audio {
   opacity: 0;
 }
 
-@keyframes startShow {
+@keyframes starShow {
   0% {
     opacity: 0;
   }
@@ -1216,8 +1212,8 @@ audio {
 
 .foot1 {
   left: 42%;
-  bottom: 7%;
-  background-image: url(./images/object/foot1.png);
+  bottom: 3%;
+  background-image: url(./images/book/book07/foot1.png);
 }
 
 .foot1-animation {
@@ -1228,8 +1224,8 @@ audio {
 
 .foot2 {
   left: 23%;
-  bottom: 14%;
-  background-image: url(./images/object/foot2.png);
+  bottom: 10%;
+  background-image: url(./images/book/book07/foot2.png);
 }
 
 .foot2-animation {
@@ -1241,7 +1237,7 @@ audio {
 .foot3 {
   left: 32%;
   bottom: 35%;
-  background-image: url(./images/object/foot3.png);
+  background-image: url(./images/book/book07/foot3.png);
 }
 
 .foot3-animation {
@@ -1253,7 +1249,7 @@ audio {
 .foot4 {
   left: 50%;
   bottom: 42%;
-  background-image: url(./images/object/foot4.png);
+  background-image: url(./images/book/book07/foot4.png);
 }
 
 .foot4-animation {
@@ -1265,7 +1261,7 @@ audio {
 .foot5 {
   left: 63%;
   bottom: 62%;
-  background-image: url(./images/object/foot5.png);
+  background-image: url(./images/book/book07/foot5.png);
 }
 
 .foot5-animation {
@@ -1285,57 +1281,14 @@ audio {
 
 .mom-daughter {
   position: absolute;
-  left: 0;
+  left: -5%;
   right: 0;
   bottom: 0;
   z-index: 99;
-  width: 350px;
-  height: 260px;
+  width: 550px;
+  height: 334px;
   margin: auto;
-  background-image: url(./images/object/mom-daughter.png);
-  background-size: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-.eyes9 {
-  position: absolute;
-  top: 22%;
-  left: 35%;
-  z-index: 10;
-  width: 60px;
-  height: 50px;
-  background-image: url(./images/object/eyes9.png);
-  background-size: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-.eyes9-hair-animation {
-  background-image: url("./images/object/eyes-hair.png");
-  background-size: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
-  animation: eyesChange 1s ease-in-out infinite;
-}
-
-@keyframes eyesChange {
-  0% {
-    background-image: url("./images/object/eyes9.png");
-  }
-  100% {
-    background-image: url("./images/object/eyes-hair.png");
-  }
-}
-
-.eyes10 {
-  position: absolute;
-  top: 28%;
-  left: 21%;
-  z-index: 10;
-  width: 50px;
-  height: 50px;
-  background-image: url("./images/object/eyes10.png");
+  background-image: url(./images/book/book07/鈴鈴媽媽.png);
   background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
@@ -1356,6 +1309,79 @@ audio {
     transform: translateX(10px);
   }
 }
+
+.eyes-7 {
+  position: absolute;
+  top: 22%;
+  left: 35%;
+  z-index: 10;
+  width: 60px;
+  height: 50px;
+  background-image: url(./images/book/book07/eyes.png);
+  background-size: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.eyes-ball-7 {
+  position: absolute;
+  top: 130px;
+  left: 198px;
+  z-index: 10;
+  width: 58px;
+  height: 50px;
+  background-image: url(./images/book/book07/eyes-ball.png);
+  background-size: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.eyes-ball-animation {
+  animation: eyesChange 2s ease-in-out infinite;
+}
+
+@keyframes eyesChange {
+  0% {
+    transform: translate(9px, -2px);
+  }
+  50% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(9px, -2px);
+  }
+}
+
+.bubble7 {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 1000;
+  width: 100%;
+  height: 100%;
+  background-size: 100%;
+  background-image: url(./images/book/book07/牛奶泡泡.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: all 3s ease-in-out;
+  opacity: 0;
+}
+
+.star7 {
+  position: absolute;
+  left: 0;
+  bottom: 0%;
+  z-index: 999;
+  width: 100%;
+  height: 100%;
+  background-size: 100%;
+  background-image: url(./images/book/book08/亮晶晶.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: all 3s ease-in-out;
+  opacity: 0;
+}
+
 .dialog10 {
   position: absolute;
   top: 31%;
@@ -1400,7 +1426,7 @@ audio {
   background-image: url(./images/object/rainbow.png);
 }
 
-.start12 {
+.star12 {
   position: absolute;
   left: 0;
   bottom: 0;
@@ -1408,17 +1434,11 @@ audio {
   width: 100%;
   height: 100%;
   background-size: 100%;
-  background-image: url(./images/object/start12.png);
+  background-image: url(./images/object/star12.png);
   background-position: center;
   background-repeat: no-repeat;
   transition: all 3s ease-in-out;
   opacity: 0;
-}
-
-.start-fade-in {
-  opacity: 1;
-  animation: startShow 2s ease-in-out infinite;
-  transition: all 1s ease-in-out;
 }
 
 .cloud-group {
@@ -1584,7 +1604,7 @@ audio {
   background-position: center;
   background-repeat: no-repeat;
   opacity: 0;
-  animation: startShow 2s ease-in-out infinite;
+  animation: starShow 2s ease-in-out infinite;
   transition: all 2s ease-in-out;
 }
 
@@ -1889,7 +1909,7 @@ audio {
   transition: all 1s ease-in-out;
 }
 
-.start22 {
+.star22 {
   position: absolute;
   right: 0;
   left: 0;
@@ -1900,7 +1920,7 @@ audio {
   width: 100%;
   height: 600px;
   background-size: 100%;
-  background-image: url(./images/object/start22.png);
+  background-image: url(./images/object/star22.png);
   background-position: center;
   background-repeat: no-repeat;
   opacity: 0;
@@ -2794,47 +2814,37 @@ audio {
 }
 
 .book01 {
-  background-image: url(./images/book/book2.jpg);
-  overflow: hidden;
-}
-
-.book02 {
-  background-image: url(./images/book/book1.jpg);
-  overflow: hidden;
-}
-
-.book03 {
   background-image: url(./images/book/book01/book01.png);
 }
 
-.book04 {
+.book02 {
   background-image: url(./images/book/book02/book02.png);
 }
 
-.book05 {
+.book03 {
   background-image: url(./images/book/book03/book03.png);
 }
 
-.book06 {
+.book04 {
   background-image: url(./images/book/book04/book04.png);
 }
 
-.book07 {
+.book05 {
   background-image: url(./images/book/book0506/天空1.png);
   background-size: cover;
 }
 
-.book08 {
+.book06 {
   background-image: url(./images/book/book0506/天空2.png);
   background-size: cover;
 }
 
-.book9 {
-  background-image: url(./images/book/book9.jpg);
+.book07 {
+  background-image: url(./images/book/book07/book07.png);
 }
 
-.book10 {
-  background-image: url(./images/book/book10.jpg);
+.book08 {
+  background-image: url(./images/book/book08/book08.png);
 }
 
 .book11 {
@@ -2979,6 +2989,16 @@ audio {
   100% {
     transform: rotate(0deg);
   }
+}
+
+.bubble-fade-in {
+  opacity: 1;
+}
+
+.star-fade-in {
+  opacity: 1;
+  animation: starShow 2s ease-in-out infinite;
+  transition: all 1s ease-in-out;
 }
 
 @media screen and (max-height: 500px) {

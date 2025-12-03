@@ -667,8 +667,8 @@ $(function () {
       $("#flipbook").append('<div class="tree2"></div>');
       $("#flipbook").append('<div class="tree3"></div>');
       $("#flipbook").append('<div class="cloud2"></div>');
-      $("#flipbook").append('<div class="fog5"></div>');
-      $("#flipbook").append('<div class="start5"></div>');
+      $("#flipbook").append('<div class="bubble5"></div>');
+      $("#flipbook").append('<div class="star5"></div>');
       $("#flipbook").append('<div class="door-bg door-common"></div>');
       $("#flipbook").append('<div class="door door-common"></div>');
       $("#flipbook").append('<div class="peoples"></div>');
@@ -688,10 +688,10 @@ $(function () {
           $(".tree3").addClass("tree-fade-in");
         }, 5000);
         setTimeout(() => {
-          $(".fog5").addClass("fog5-fade-in");
+          $(".bubble5").addClass("bubble-fade-in");
         }, 7000);
         setTimeout(() => {
-          $(".start5").addClass("start-fade-in");
+          $(".star5").addClass("star-fade-in");
           $(".dialog8").addClass("dialog8-animation");
         }, 9000);
         playAudio("audio-4-click", 0);
@@ -703,8 +703,8 @@ $(function () {
       $("#flipbook .cloud2").remove();
       $("#flipbook .door-common").remove();
       $("#flipbook .peoples").remove();
-      $("#flipbook .fog5").remove();
-      $("#flipbook .start5").remove();
+      $("#flipbook .bubble5").remove();
+      $("#flipbook .star5").remove();
       $(".door").removeClass("door-opening");
       $(".peoples").removeClass("peoples-open");
       $(".tree1").removeClass("tree-fade-in");
@@ -718,8 +718,10 @@ $(function () {
 
     if (page === 8 || page === 9) {
       $("#flipbook").append('<div class="mom-daughter"></div>');
+      $("#flipbook").append('<div class="bubble7"></div>');
+      $("#flipbook").append('<div class="star7"></div>');
       setTimeout(() => {
-        $(".eyes9").addClass("eyes9-hair-animation");
+        $(".eyes-ball-7").addClass("eyes-ball-animation");
         $(".mom-daughter").addClass("mom-daughter-animation");
       }, 8000);
       $(".foot1").addClass("foot1-animation");
@@ -728,6 +730,12 @@ $(function () {
       $(".foot4").addClass("foot4-animation");
       $(".foot5").addClass("foot5-animation");
       $(".dialog10").addClass("dialog10-animation");
+      setTimeout(() => {
+        $(".bubble7").addClass("bubble-fade-in");
+      }, 9000);
+      setTimeout(() => {
+        $(".star7").addClass("star-fade-in");
+      }, 10000);
     }
 
     if (page === 7 || page === 10) {
@@ -737,9 +745,13 @@ $(function () {
       $(".foot4").removeClass("foot4-animation");
       $(".foot5").removeClass("foot5-animation");
       $(".dialog10").removeClass("dialog10-animation");
-      $(".eyes9").removeClass("eyes9-hair-animation");
+      $(".eyes-ball-7").removeClass("eyes-ball-animation");
       $(".mom-daughter").removeClass("mom-daughter-animation");
+      $(".bubble7").removeClass("bubble-fade-in");
+      $(".star7").removeClass("star-fade-in");
       $("#flipbook .mom-daughter").remove();
+      $("#flipbook .bubble7").remove();
+      $("#flipbook .star7").remove();
     }
 
     if (page === 10 || page === 11) {
@@ -749,8 +761,8 @@ $(function () {
         $(".cloud-02").addClass("cloud-animation");
       }, 50);
       $("#flipbook").append('<div class="rainbow"></div>');
-      $("#flipbook").append('<div class="start12"></div>');
-      $("#flipbook").append('<div class="fog5"></div>');
+      $("#flipbook").append('<div class="star12"></div>');
+      $("#flipbook").append('<div class="bubble5"></div>');
       if (window.matchMedia("(max-height: 500px)").matches) {
         $(".rainbow").css("width", bookWidth);
         $(".rainbow").css("height", bookHeight);
@@ -762,14 +774,14 @@ $(function () {
       $("#flipbook").append('<div class="list"></div>');
 
       setTimeout(() => {
-        $(".fog5").addClass("fog5-fade-in");
+        $(".bubble5").addClass("bubble5-fade-in");
       }, 1000);
       setTimeout(() => {
-        $(".start12").addClass("start-fade-in");
+        $(".star12").addClass("star-fade-in");
       }, 2000);
     } else {
-      $("#flipbook .start12").remove();
-      // $("#flipbook .fog5").remove();
+      $("#flipbook .star12").remove();
+      // $("#flipbook .bubble5").remove();
     }
 
     if (page === 9 || page === 12) {
@@ -995,7 +1007,7 @@ $(function () {
     if (page === 20 || page === 21) {
       $("#flipbook").append(`<div class="dream04"></div>`);
       $("#flipbook").append(`<div class="dialog8 dialog22"></div>`);
-      $("#flipbook").append(`<div class="start22"></div>`);
+      $("#flipbook").append(`<div class="star22"></div>`);
       setTimeout(() => {
         $(".dream01").addClass("dream-animation");
       }, 1000);
@@ -1009,7 +1021,7 @@ $(function () {
         $(".dream04").addClass("dream-animation");
       }, 4000);
       setTimeout(() => {
-        $(".start22").addClass("dialog22-animation");
+        $(".star22").addClass("dialog22-animation");
       }, 5000);
       setTimeout(() => {
         $(".dialog8").addClass("dialog22-animation");
@@ -1017,13 +1029,13 @@ $(function () {
     } else {
       $(".dream04").remove();
       $(".dialog22").remove();
-      $(".start22").remove();
+      $(".star22").remove();
       $(".dream01").removeClass("dream-animation");
       $(".dream02").removeClass("dream-animation");
       $(".dream03").removeClass("dream-animation");
       $(".dream04").removeClass("dream-animation");
       $(".dialog8").removeClass("dialog22-animation");
-      $(".start22").removeClass("dialog22-animation");
+      $(".star22").removeClass("dialog22-animation");
     }
 
     if (page === 22 || page === 23) {
