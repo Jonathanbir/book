@@ -663,32 +663,44 @@ $(function () {
 
     if (page === 6 || page === 7) {
       const door = document.querySelector(".door");
-      $("#flipbook").append('<div class="tree"></div>');
+      $("#flipbook").append('<div class="tree1"></div>');
+      $("#flipbook").append('<div class="tree2"></div>');
+      $("#flipbook").append('<div class="tree3"></div>');
+      $("#flipbook").append('<div class="cloud2"></div>');
       $("#flipbook").append('<div class="fog5"></div>');
       $("#flipbook").append('<div class="start5"></div>');
       $("#flipbook").append('<div class="door-bg door-common"></div>');
       $("#flipbook").append('<div class="door door-common"></div>');
       $("#flipbook").append('<div class="peoples"></div>');
       $("#flipbook .door").on("click", () => {
+        $(".knock").css("display", "none");
         playAudio("knock", 0);
         $(".door").addClass("door-opening");
         $(".peoples").addClass("peoples-open");
-        $(".tree").addClass("tree-fade-in");
+        $(".tree1").addClass("tree-fade-in");
         setTimeout(() => {
           $(".cloud1").addClass("cloud-fade-in");
           $(".cloud2").addClass("cloud-fade-in");
+          $(".cloud3").addClass("cloud-fade-in");
+          $(".tree2").addClass("tree-fade-in");
         }, 3000);
         setTimeout(() => {
-          $(".fog5").addClass("fog5-fade-in");
+          $(".tree3").addClass("tree-fade-in");
         }, 5000);
+        setTimeout(() => {
+          $(".fog5").addClass("fog5-fade-in");
+        }, 7000);
         setTimeout(() => {
           $(".start5").addClass("start-fade-in");
           $(".dialog8").addClass("dialog8-animation");
-        }, 7000);
+        }, 9000);
         playAudio("audio-4-click", 0);
       });
     } else {
-      $("#flipbook .tree").remove();
+      $("#flipbook .tree1").remove();
+      $("#flipbook .tree2").remove();
+      $("#flipbook .tree3").remove();
+      $("#flipbook .cloud2").remove();
       $("#flipbook .door-common").remove();
       $("#flipbook .peoples").remove();
       $("#flipbook .fog5").remove();
@@ -697,8 +709,10 @@ $(function () {
       $(".peoples").removeClass("peoples-open");
       $(".tree1").removeClass("tree-fade-in");
       $(".tree2").removeClass("tree-fade-in");
+      $(".tree3").removeClass("tree-fade-in");
       $(".cloud1").removeClass("cloud-fade-in");
       $(".cloud2").removeClass("cloud-fade-in");
+      $(".cloud3").removeClass("cloud-fade-in");
       $(".dialog8").removeClass("dialog8-animation");
     }
 
@@ -755,7 +769,7 @@ $(function () {
       }, 2000);
     } else {
       $("#flipbook .start12").remove();
-      $("#flipbook .fog5").remove();
+      // $("#flipbook .fog5").remove();
     }
 
     if (page === 9 || page === 12) {

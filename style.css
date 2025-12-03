@@ -167,7 +167,7 @@ audio {
 
 .knock {
   position: absolute;
-  left: 28%;
+  left: 33%;
   bottom: 18%;
   width: 105px;
   height: 270px;
@@ -771,25 +771,25 @@ audio {
 
 .door-common {
   position: fixed;
-  right: 38%;
-  bottom: 20%;
+  right: 34%;
+  bottom: 17%;
   z-index: 1000;
-  width: 60px;
-  height: 120px;
+  width: 130px;
+  height: 220px;
   background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
 }
 
 .door {
-  background-image: url(./images/object/door.png);
+  background-image: url(./images/book/book0506/門.png);
   cursor: grab;
   transition: all 1s ease-in-out;
   z-index: 1001;
 }
 
 .door-bg {
-  background-image: url(./images/object/door-bg.png);
+  background-image: url(./images/book/book0506/門內.png);
 }
 
 .door-opening {
@@ -799,12 +799,12 @@ audio {
 .peoples {
   position: fixed;
   right: 36%;
-  bottom: 20%;
+  bottom: 14%;
   z-index: 1000;
-  width: 150px;
-  height: 100px;
+  width: 200px;
+  height: 200px;
   background-size: contain;
-  background-image: url(./images/object/boo8-people.png);
+  background-image: url(./images/book/book0506/媽媽鈴鈴.png);
   background-position: center;
   background-repeat: no-repeat;
   opacity: 0;
@@ -812,19 +812,49 @@ audio {
 }
 
 .peoples-open {
-  right: 33%;
+  right: 31%;
   opacity: 1;
 }
 
-.tree {
+.tree1 {
   position: absolute;
-  left: 0;
-  bottom: 0;
+  right: 0;
+  bottom: -5%;
   z-index: 999;
   width: 100%;
   height: 100%;
   background-size: 100%;
-  background-image: url(./images/object/forest.png);
+  background-image: url(./images/book/book0506/forest-1.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: all 3s ease-in-out;
+  opacity: 0;
+}
+
+.tree2 {
+  position: absolute;
+  left: 0;
+  bottom: -5%;
+  z-index: 999;
+  width: 100%;
+  height: 100%;
+  background-size: 100%;
+  background-image: url(./images/book/book0506/forest-2.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: all 3s ease-in-out;
+  opacity: 0;
+}
+
+.tree3 {
+  position: absolute;
+  left: 0;
+  bottom: -5%;
+  z-index: 999;
+  width: 100%;
+  height: 100%;
+  background-size: 100%;
+  background-image: url(./images/book/book0506/forest-3.png);
   background-position: center;
   background-repeat: no-repeat;
   transition: all 3s ease-in-out;
@@ -832,7 +862,6 @@ audio {
 }
 
 .tree-fade-in {
-  bottom: 0%;
   opacity: 1;
 }
 
@@ -840,11 +869,11 @@ audio {
   position: absolute;
   left: 0;
   bottom: 0;
-  z-index: 999;
+  z-index: 1000;
   width: 100%;
   height: 100%;
-  background-size: 100%;
-  background-image: url(./images/object/fog5.png);
+  background-size: cover;
+  background-image: url(./images/book/book0506/牛奶泡泡.png);
   background-position: center;
   background-repeat: no-repeat;
   transition: all 3s ease-in-out;
@@ -852,19 +881,18 @@ audio {
 }
 
 .fog5-fade-in {
-  bottom: 0%;
   opacity: 1;
 }
 
 .start5 {
   position: absolute;
   left: 0;
-  bottom: 0;
+  bottom: -5%;
   z-index: 999;
   width: 100%;
   height: 100%;
   background-size: 100%;
-  background-image: url(./images/object/start5.png);
+  background-image: url(./images/book/book0506/亮晶晶.png);
   background-position: center;
   background-repeat: no-repeat;
   transition: all 3s ease-in-out;
@@ -887,25 +915,82 @@ audio {
   width: 100%;
   height: 100%;
   background-size: 100%;
-  background-image: url(./images/object/book7-cloud.png);
+  background-image: url(./images/book/book0506/clouc-5-1.png);
   background-position: center;
   background-repeat: no-repeat;
   opacity: 0;
   transition: all 5s ease-in-out;
+  animation: cloud1 5s ease-in-out infinite;
+  transition: all 5s ease-in-out;
+}
+
+@keyframes cloud1 {
+  0% {
+    transform: translateX(-10px);
+  }
+  50% {
+    transform: translateX(0px);
+  }
+  100% {
+    transform: translateX(-10px);
+  }
 }
 
 .cloud2 {
+  position: absolute;
+  top: 0;
+  left: 34%;
+  z-index: 900;
+  width: 400px;
+  height: 130px;
+  background-size: 100%;
+  background-image: url(./images/book/book0506/cloud-5-2.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: all 5s ease-in-out;
+  animation: cloud2 5s ease-in-out infinite;
+  transition: all 5s ease-in-out;
+}
+
+@keyframes cloud2 {
+  0% {
+    transform: translateX(-20px);
+  }
+  50% {
+    transform: translateX(0px);
+  }
+  100% {
+    transform: translateX(-20px);
+  }
+}
+
+.cloud3 {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background-size: 100%;
-  background-image: url(./images/object/book8-cloud.png);
+  background-image: url(./images/book/book0506/cloud-5-3.png);
   background-position: center;
   background-repeat: no-repeat;
   opacity: 0;
   transition: all 5s ease-in-out;
+  animation: cloud3 5s ease-in-out infinite;
+  transition: all 5s ease-in-out;
+}
+
+@keyframes cloud3 {
+  0% {
+    transform: translateX(10px);
+  }
+  50% {
+    transform: translateX(0px);
+  }
+  100% {
+    transform: translateX(10px);
+  }
 }
 
 .cloud-fade-in {
@@ -916,9 +1001,10 @@ audio {
   position: absolute;
   top: 5%;
   right: 60%;
+  z-index: 999;
   width: 90px;
   height: 90px;
-  background-image: url(./images/dialog/dialog8.png);
+  background-image: url(./images/book/book0506/哇!.png);
   background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
@@ -1330,7 +1416,6 @@ audio {
 }
 
 .start-fade-in {
-  bottom: 0%;
   opacity: 1;
   animation: startShow 2s ease-in-out infinite;
   transition: all 1s ease-in-out;
@@ -2735,11 +2820,13 @@ audio {
 }
 
 .book07 {
-  background-image: url(./images/book/book7.jpg);
+  background-image: url(./images/book/book0506/天空.png);
+  background-size: cover;
 }
 
 .book08 {
-  background-image: url(./images/book/book8.jpg);
+  background-image: url(./images/book/book0506/天空.png);
+  background-size: cover;
 }
 
 .book9 {
