@@ -762,7 +762,7 @@ $(function () {
       }, 50);
       $("#flipbook").append('  <div class="girls-head"></div>');
       $("#flipbook").append('<div class="rainbow"></div>');
-      $("#flipbook").append('<div class="star8"></div>');
+      $("#flipbook").append('<div class="star11"></div>');
       $("#flipbook").append('<div class="bubble11"></div>');
       if (window.matchMedia("(max-height: 500px)").matches) {
         $(".rainbow").css("width", bookWidth);
@@ -778,7 +778,7 @@ $(function () {
         $(".bubble11").addClass("bubble-fade-in");
       }, 1000);
       setTimeout(() => {
-        $(".star8").addClass("star-fade-in");
+        $(".star11").addClass("star-fade-in");
       }, 2000);
     }
 
@@ -793,7 +793,7 @@ $(function () {
       $("#flipbook .list-board").remove();
       $("#flipbook .list").remove();
       $("#flipbook .bubble11").remove();
-      $("#flipbook .star8").remove();
+      $("#flipbook .star11").remove();
     }
 
     // 確保元素只 append 一次
@@ -806,6 +806,7 @@ $(function () {
         fanAndBubbleCreated = true;
         $("#flipbook").append(`<div class="electfan"></div>
                            <div class="bubble-bg"></div>
+                           <div class="bubble12"></div>
                            <div class="check-box"></div>
                            </div>`);
 
@@ -816,9 +817,14 @@ $(function () {
                            <div class="popup-board"></div>`);
       }
 
-      setTimeout(() => $(".electfan").addClass("electfan-move"), 500);
-      setTimeout(() => $(".bubble-bg").addClass("bubble-move"), 1200);
-      setTimeout(() => $(".coin01").addClass("coin-animation"), 15000);
+      setTimeout(() => $(".magic-wand").addClass("magic-wand-animation"), 500);
+      setTimeout(() => $(".electfan").addClass("electfan-move"), 1000);
+      setTimeout(() => $(".bubble-bg").addClass("bubble-move"), 2000);
+      setTimeout(() => $(".bubble12").addClass("bubble-fade-in"), 3000);
+      setTimeout(() => {
+        $(".coin01").addClass("coin-animation");
+        $(".coin-light").addClass("bubble-fade-in");
+      }, 15000);
 
       $(".check-box").on("click", function () {
         $(".popup-board-bg").css("display", "block");
@@ -837,9 +843,12 @@ $(function () {
     } else {
       $(".electfan").removeClass("electfan-move");
       $(".bubble-bg").removeClass("bubble-move");
+      $(".magic-wand").removeClass("magic-wand-animation");
       $(".coin01").removeClass("coin-animation");
+      $(".coin-light").removeClass("bubble-fade-in");
       $("#flipbook .electfan").remove();
       $("#flipbook .bubble-bg").remove();
+      $("#flipbook .bubble12").remove();
       $("#flipbook .check-box").remove();
       $(".book-section .popup-board-bg").remove();
       $(".book-section .popup-board").remove();

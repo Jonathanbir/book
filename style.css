@@ -1400,7 +1400,7 @@ audio {
   background-image: url(./images/book/book11/彩虹.png);
 }
 
-.star8 {
+.star11 {
   position: absolute;
   left: 0;
   bottom: 0;
@@ -1465,8 +1465,8 @@ audio {
 }
 
 /* book12  小女孩魔法棒 電風閃轉出泡泡*/
-.book13 {
-  background-image: url(./images/book/book13.jpg);
+.book12 {
+  background-image: url(./images/book/book12/book12.png);
 }
 
 .electric-fan {
@@ -1504,7 +1504,7 @@ audio {
   width: 350px;
   height: 145px;
   background-size: 100%;
-  background-image: url(./images/object/electric-fan.png);
+  background-image: url(./images/book/book12/風扇.png);
   background-position: center;
   background-repeat: no-repeat;
 }
@@ -1533,6 +1533,39 @@ audio {
   }
 }
 
+.magic-wand {
+  position: absolute;
+  right: 17%;
+  bottom: 30%;
+  margin: auto;
+  z-index: 106;
+  width: 56px;
+  height: 112px;
+  background-size: 100%;
+  background-image: url(./images/book/book12/魔法棒.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: all 2s ease-in-out;
+}
+
+.magic-wand-animation {
+  animation: magicWandMove 3s ease-in-out;
+  animation-fill-mode: forwards;
+  transition: all 1s ease-in-out;
+}
+
+@keyframes magicWandMove {
+  0% {
+    transform: translate(0%, 0%) rotate(0deg);
+  }
+  50% {
+    transform: translate(-18%, -2%) rotate(-10deg);
+  }
+  100% {
+    transform: translate(0%, 0%) rotate(0deg);
+  }
+}
+
 .bubble-bg {
   position: absolute;
   left: 0;
@@ -1544,7 +1577,7 @@ audio {
   width: 100%;
   height: 100%;
   background-size: 100%;
-  background-image: url(./images/object/bubble.png);
+  background-image: url(./images/book/book13/水珠.png);
   background-position: center;
   background-repeat: no-repeat;
   opacity: 0;
@@ -1564,7 +1597,7 @@ audio {
   width: 30px;
   height: 30px;
   background-size: 100%;
-  background-image: url(./images/object/check.png);
+  background-image: url(./images/book/book13/綠\ 勾.png);
   background-position: center;
   background-repeat: no-repeat;
   opacity: 0;
@@ -1581,6 +1614,21 @@ audio {
   height: 232px;
   transform: rotate(-19deg);
   border-radius: 0 24px 24px;
+}
+
+.bubble12 {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 1000;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-image: url(./images/book/book13/牛奶泡泡.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: all 3s ease-in-out;
+  opacity: 0;
 }
 
 .popup-board-bg {
@@ -1631,8 +1679,24 @@ audio {
 }
 
 /* book13 小女孩魔法棒 電風閃轉出泡泡*/
-.book14 {
-  background-image: url(./images/book/book14.jpg);
+.book13 {
+  background-image: url(./images/book/book13/book13.png);
+}
+
+.coin-light {
+  position: absolute;
+  right: 0%;
+  bottom: -3%;
+  margin: auto;
+  z-index: 1;
+  width: 450px;
+  height: 320px;
+  background-size: 100%;
+  background-image: url(./images/book/book13/發光.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: all 2s ease-in-out;
 }
 
 /* book14 小女孩餵牛奶*/
@@ -1921,7 +1985,7 @@ audio {
 .coin01 {
   right: 10%;
   bottom: 10%;
-  background-image: url(./images/object/coin.png);
+  background-image: url(./images/book/book13/獎牌.png);
 }
 
 .coin02 {
