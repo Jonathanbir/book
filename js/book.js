@@ -655,10 +655,10 @@ $(function () {
       $(".eyes-ball").addClass("eyes-ball-animation");
       $(".eyes-left").addClass("eyes-big-animation");
       $(".eyes-right").addClass("eyes-big-animation");
-      $(".dialog5").addClass("dialog5-animation");
+      $(".question").addClass("question-animation");
     } else {
       $(".eyes-ball").removeClass("eyes-ball-animation");
-      $(".dialog5").removeClass("dialog5-animation");
+      $(".question").removeClass("question-animation");
     }
 
     if (page === 6 || page === 7) {
@@ -667,7 +667,7 @@ $(function () {
       $("#flipbook").append('<div class="tree2"></div>');
       $("#flipbook").append('<div class="tree3"></div>');
       $("#flipbook").append('<div class="cloud2"></div>');
-      $("#flipbook").append('<div class="bubble5"></div>');
+      $("#flipbook").append('<div class="bubble67"></div>');
       $("#flipbook").append('<div class="star5"></div>');
       $("#flipbook").append('<div class="door-bg door-common"></div>');
       $("#flipbook").append('<div class="door door-common"></div>');
@@ -688,11 +688,11 @@ $(function () {
           $(".tree3").addClass("tree-fade-in");
         }, 5000);
         setTimeout(() => {
-          $(".bubble5").addClass("bubble-fade-in");
+          $(".bubble67").addClass("bubble-fade-in");
         }, 7000);
         setTimeout(() => {
           $(".star5").addClass("star-fade-in");
-          $(".dialog8").addClass("dialog8-animation");
+          $(".wow").addClass("wow-animation");
         }, 9000);
         playAudio("audio-4-click", 0);
       });
@@ -703,7 +703,7 @@ $(function () {
       $("#flipbook .cloud2").remove();
       $("#flipbook .door-common").remove();
       $("#flipbook .peoples").remove();
-      $("#flipbook .bubble5").remove();
+      $("#flipbook .bubble67").remove();
       $("#flipbook .star5").remove();
       $(".door").removeClass("door-opening");
       $(".peoples").removeClass("peoples-open");
@@ -713,7 +713,7 @@ $(function () {
       $(".cloud1").removeClass("cloud-fade-in");
       $(".cloud2").removeClass("cloud-fade-in");
       $(".cloud3").removeClass("cloud-fade-in");
-      $(".dialog8").removeClass("dialog8-animation");
+      $(".wow").removeClass("wow-animation");
     }
 
     if (page === 8 || page === 9) {
@@ -721,7 +721,7 @@ $(function () {
       $("#flipbook").append('<div class="bubble7"></div>');
       $("#flipbook").append('<div class="star7"></div>');
       setTimeout(() => {
-        $(".eyes-ball-7").addClass("eyes-ball-animation");
+        $(".eyes-ball-8").addClass("eyes-ball-animation");
         $(".mom-daughter").addClass("mom-daughter-animation");
       }, 8000);
       $(".foot1").addClass("foot1-animation");
@@ -729,7 +729,7 @@ $(function () {
       $(".foot3").addClass("foot3-animation");
       $(".foot4").addClass("foot4-animation");
       $(".foot5").addClass("foot5-animation");
-      $(".dialog10").addClass("dialog10-animation");
+      $(".mowmow").addClass("mowmow-animation");
       setTimeout(() => {
         $(".bubble7").addClass("bubble-fade-in");
       }, 9000);
@@ -744,8 +744,8 @@ $(function () {
       $(".foot3").removeClass("foot3-animation");
       $(".foot4").removeClass("foot4-animation");
       $(".foot5").removeClass("foot5-animation");
-      $(".dialog10").removeClass("dialog10-animation");
-      $(".eyes-ball-7").removeClass("eyes-ball-animation");
+      $(".mowmow").removeClass("mowmow-animation");
+      $(".eyes-ball-8").removeClass("eyes-ball-animation");
       $(".mom-daughter").removeClass("mom-daughter-animation");
       $(".bubble7").removeClass("bubble-fade-in");
       $(".star7").removeClass("star-fade-in");
@@ -763,7 +763,7 @@ $(function () {
       $("#flipbook").append('  <div class="girls-head"></div>');
       $("#flipbook").append('<div class="rainbow"></div>');
       $("#flipbook").append('<div class="star8"></div>');
-      $("#flipbook").append('<div class="bubble8"></div>');
+      $("#flipbook").append('<div class="bubble11"></div>');
       if (window.matchMedia("(max-height: 500px)").matches) {
         $(".rainbow").css("width", bookWidth);
         $(".rainbow").css("height", bookHeight);
@@ -775,7 +775,7 @@ $(function () {
       $("#flipbook").append('<div class="list"></div>');
 
       setTimeout(() => {
-        $(".bubble8").addClass("bubble-fade-in");
+        $(".bubble11").addClass("bubble-fade-in");
       }, 1000);
       setTimeout(() => {
         $(".star8").addClass("star-fade-in");
@@ -792,7 +792,7 @@ $(function () {
       $("#flipbook .cow05").remove();
       $("#flipbook .list-board").remove();
       $("#flipbook .list").remove();
-      $("#flipbook .bubble8").remove();
+      $("#flipbook .bubble11").remove();
       $("#flipbook .star8").remove();
     }
 
@@ -1007,7 +1007,7 @@ $(function () {
     // 第 22–23 頁：小女孩夢境 + 浮出夢境
     if (page === 20 || page === 21) {
       $("#flipbook").append(`<div class="dream04"></div>`);
-      $("#flipbook").append(`<div class="dialog8 dialog22"></div>`);
+      $("#flipbook").append(`<div class="wow dialog22"></div>`);
       $("#flipbook").append(`<div class="star22"></div>`);
       setTimeout(() => {
         $(".dream01").addClass("dream-animation");
@@ -1025,7 +1025,7 @@ $(function () {
         $(".star22").addClass("dialog22-animation");
       }, 5000);
       setTimeout(() => {
-        $(".dialog8").addClass("dialog22-animation");
+        $(".wow").addClass("dialog22-animation");
       }, 6000);
     } else {
       $(".dream04").remove();
@@ -1035,7 +1035,7 @@ $(function () {
       $(".dream02").removeClass("dream-animation");
       $(".dream03").removeClass("dream-animation");
       $(".dream04").removeClass("dream-animation");
-      $(".dialog8").removeClass("dialog22-animation");
+      $(".wow").removeClass("dialog22-animation");
       $(".star22").removeClass("dialog22-animation");
     }
 
