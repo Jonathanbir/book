@@ -823,7 +823,8 @@ $(function () {
       setTimeout(() => $(".bubble12").addClass("bubble-fade-in"), 3000);
       setTimeout(() => {
         $(".coin01").addClass("coin-animation");
-        $(".coin-light").addClass("bubble-fade-in");
+        $(".coin-light").addClass("coin-light-show");
+        $(".check01").addClass("check-show");
       }, 15000);
 
       $(".check-box").on("click", function () {
@@ -845,7 +846,8 @@ $(function () {
       $(".bubble-bg").removeClass("bubble-move");
       $(".magic-wand").removeClass("magic-wand-animation");
       $(".coin01").removeClass("coin-animation");
-      $(".coin-light").removeClass("bubble-fade-in");
+      $(".coin-light").removeClass("coin-light-show");
+      $(".check01").removeClass("check-show");
       $("#flipbook .electfan").remove();
       $("#flipbook .bubble-bg").remove();
       $("#flipbook .bubble12").remove();
@@ -865,7 +867,13 @@ $(function () {
         btnPreviousDisabled();
         btnDisabled();
 
-        $("#flipbook").append(`<div class="check-box"></div>`);
+        $("#flipbook").append(`<div class="small-cow"></div>
+          <div class="board-list02"></div>
+          <div class="board"></div>
+          <div class="check check02"></div>
+          <div class="check-box"></div>
+          <div class="click-milk"></div>
+          <div class="bubble14">`);
         $(".book-section").append(`
                            <div class="popup-board-bg">
                               <div class="popup-close-btn">x</div>
@@ -888,10 +896,21 @@ $(function () {
         });
 
         setTimeout(() => {
+          $(".board-list02").addClass("bubble-fade-in");
+        }, 1000);
+
+        setTimeout(() => {
+          $(".bubble14").addClass("bubble-fade-in");
+        }, 1000);
+
+        setTimeout(() => {
           $(".click-milk").show();
         }, 13000);
 
         $("#flipbook .click-milk").on("click", function () {
+          setTimeout(() => {
+            $(".success-hint").addClass("bubble-fade-in");
+          }, 5000);
           $(".cows-tongue").addClass("cows-tongue-animation");
           $(".milk").addClass("milk-empty");
           $(".click-milk").hide();
@@ -899,7 +918,9 @@ $(function () {
           playAudio("sucking-coin", 0);
 
           setTimeout(() => {
+            $(".check02").addClass("check-show");
             $(".coin02").addClass("coin-animation");
+            $(".coin-light02").addClass("coin-light-show");
           }, 10000);
           setTimeout(() => {
             btnUnDisabled();
@@ -910,9 +931,16 @@ $(function () {
         });
       }
     } else {
+      $("#flipbook .board").remove();
+      $("#flipbook .board-list02").remove();
+      $("#flipbook .small-cow").remove();
+      $("#flipbook .bubble14").remove();
+      $(".success-hint").removeClass("bubble-fade-in");
       $(".cows-tongue").removeClass("cows-tongue-animation");
       $(".milk").removeClass("milk-empty");
       $(".coin02").removeClass("coin-animation");
+      $(".coin-light02").removeClass("coin-light-show");
+      $(".check02").removeClass("check-show");
     }
 
     // 全域：避免重複 append coin 與 crown
