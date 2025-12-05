@@ -822,6 +822,9 @@ $(function () {
       setTimeout(() => $(".bubble-bg").addClass("bubble-move"), 2000);
       setTimeout(() => $(".bubble12").addClass("bubble-fade-in"), 3000);
       setTimeout(() => {
+        $(".coin-hint01").addClass("bubble-fade-in");
+      }, 12000);
+      setTimeout(() => {
         $(".coin01").addClass("coin-animation");
         $(".coin-light").addClass("coin-light-show");
         $(".check01").addClass("check-show");
@@ -847,6 +850,7 @@ $(function () {
       $(".magic-wand").removeClass("magic-wand-animation");
       $(".coin01").removeClass("coin-animation");
       $(".coin-light").removeClass("coin-light-show");
+      $(".coin-hint01").removeClass("bubble-fade-in");
       $(".check01").removeClass("check-show");
       $("#flipbook .electfan").remove();
       $("#flipbook .bubble-bg").remove();
@@ -869,7 +873,7 @@ $(function () {
 
         $("#flipbook").append(`<div class="small-cow"></div>
           <div class="board-list02"></div>
-          <div class="board"></div>
+          <div class="board14"></div>
           <div class="check check02"></div>
           <div class="check-box"></div>
           <div class="click-milk"></div>
@@ -909,14 +913,16 @@ $(function () {
 
         $("#flipbook .click-milk").on("click", function () {
           setTimeout(() => {
-            $(".success-hint").addClass("bubble-fade-in");
+            $(".success-hint02").addClass("bubble-fade-in");
           }, 5000);
           $(".cows-tongue").addClass("cows-tongue-animation");
           $(".milk").addClass("milk-empty");
           $(".click-milk").hide();
 
           playAudio("sucking-coin", 0);
-
+          setTimeout(() => {
+            $(".coin-hint02").addClass("bubble-fade-in");
+          }, 7000);
           setTimeout(() => {
             $(".check02").addClass("check-show");
             $(".coin02").addClass("coin-animation");
@@ -931,16 +937,18 @@ $(function () {
         });
       }
     } else {
-      $("#flipbook .board").remove();
+      $("#flipbook .board14").remove();
       $("#flipbook .board-list02").remove();
       $("#flipbook .small-cow").remove();
       $("#flipbook .bubble14").remove();
-      $(".success-hint").removeClass("bubble-fade-in");
+      $("#flipbook .check02").remove();
+      $(".success-hint02").removeClass("bubble-fade-in");
       $(".cows-tongue").removeClass("cows-tongue-animation");
       $(".milk").removeClass("milk-empty");
       $(".coin02").removeClass("coin-animation");
       $(".coin-light02").removeClass("coin-light-show");
       $(".check02").removeClass("check-show");
+      $(".coin-hint02").removeClass("bubble-fade-in");
     }
 
     // 全域：避免重複 append coin 與 crown
@@ -957,16 +965,34 @@ $(function () {
         stethoscopeBound = true;
         btnPreviousDisabled();
         btnDisabled();
-        setTimeout(() => {
-          $("#flipbook").append(`<div class="girl"></div>`);
-          $("#flipbook").append(`<div class="nurse-hand"></div>`);
-        }, 200);
+        $("#flipbook").append(`
+            <div class="story-text16"></div>
+            <div class="girl"></div>
+            <div class="mom-cow"></div>
+            <div class="stethoscope disabled"></div>
+            <div class="cow-eyes"></div>
+            <div class="cow-heart"></div>
+            <div class="dondon"></div>
+            <div class="nurse-head"></div>
+            <div class="nurse-body"></div>
+            <div class="nurse-hand"></div>
+            <div class="click-hearing-heart"></div>
+            <div class="board-list03"></div>   
+            <div class="check check03"></div>
+            <div class="board16"></div>
+            <div class="bubble16"></div>
+            `);
         $("#flipbook").append(`<div class="check-box"></div>`);
         $(".book-section").append(`
                            <div class="popup-board-bg">
                               <div class="popup-close-btn">x</div>
                             </div>
                            <div class="popup-board"></div>`);
+
+        setTimeout(() => {
+          $(".bubble16").addClass("bubble-fade-in");
+          $(".board-list03").addClass("bubble-fade-in");
+        }, 1000);
 
         $(".check-box").on("click", function () {
           $(".popup-board-bg").css("display", "block");
@@ -984,19 +1010,27 @@ $(function () {
         });
 
         setTimeout(() => {
-          $("#flipbook .hearing-heart").show();
-          $(".stethoscope").removeClass("disabled");
+          $(".click-hearing-heart").show();
         }, 15000);
 
-        $("#flipbook .hearing-heart").on("click", function () {
+        $("#flipbook .click-hearing-heart").on("click", function () {
+          $(".dondon").addClass("bubble-fade-in");
           $(".stethoscope").addClass("stethoscope-move");
           $(".cow-heart").addClass("heart-beat-animation");
-          $("#flipbook .hearing-heart").hide();
+          $(".click-hearing-heart").hide();
 
           playAudio("hearts-coin", 1000);
 
           setTimeout(() => {
+            $(".success-hint03").addClass("bubble-fade-in");
+          }, 5000);
+          setTimeout(() => {
+            $(".coin-hint03").addClass("bubble-fade-in");
+          }, 10000);
+          setTimeout(() => {
+            $(".check03").addClass("check-show");
             $(".coin03").addClass("coin-animation");
+            $(".coin-light03").addClass("coin-light-show");
           }, 13000);
           setTimeout(() => {
             btnUnDisabled();
@@ -1011,8 +1045,26 @@ $(function () {
       $("#flipbook .stethoscope").removeClass("stethoscope-move");
       $(".cow-heart").removeClass("heart-beat-animation");
       $(".coin03").removeClass("coin-animation");
+      $(".check03").removeClass("check-show");
+      $(".coin-hint03").removeClass("bubble-fade-in");
+      $(".success-hint03").removeClass("bubble-fade-in");
+      $(".dondon").removeClass("bubble-fade-in");
+      $("#flipbook .story-text16").remove();
       $("#flipbook .girl").remove();
+      $("#flipbook .mom-cow").remove();
+      $("#flipbook .stethoscope").remove();
+      $("#flipbook .cow-eyes").remove();
+      $("#flipbook .cow-heart").remove();
+      $("#flipbook .dondon").remove();
+      $("#flipbook .nurse-head").remove();
+      $("#flipbook .nurse-body").remove();
       $("#flipbook .nurse-hand").remove();
+      $("#flipbook .click-hearing-heart").remove();
+      $("#flipbook .check03").remove();
+      $("#flipbook .board-list03").remove();
+      $("#flipbook .board16").remove();
+      $("#flipbook .bubble16").remove();
+      $("#flipbook .dondon").remove();
     }
 
     // 第 20–21 頁：獲得皇冠 + 投硬幣動畫
