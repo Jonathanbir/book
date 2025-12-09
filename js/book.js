@@ -936,7 +936,10 @@ $(function () {
           }, 12000);
         });
       }
-    } else {
+    }
+
+    if (page === 13 || page === 16) {
+      $("#flipbook .click-milk").remove();
       $("#flipbook .board14").remove();
       $("#flipbook .board-list02").remove();
       $("#flipbook .small-cow").remove();
@@ -1040,11 +1043,14 @@ $(function () {
           }, 14000);
         });
       }
-    } else {
+    }
+
+    if (page === 15 || page === 18) {
       $(".stethoscope").addClass("disabled");
       $("#flipbook .stethoscope").removeClass("stethoscope-move");
       $(".cow-heart").removeClass("heart-beat-animation");
       $(".coin03").removeClass("coin-animation");
+      $(".coin-light03").removeClass("coin-light-show");
       $(".check03").removeClass("check-show");
       $(".coin-hint03").removeClass("bubble-fade-in");
       $(".success-hint03").removeClass("bubble-fade-in");
@@ -1073,24 +1079,40 @@ $(function () {
       <div class="coin-all  coin01-final"></div>
       <div class="coin-all coin02-final"></div>
       <div class="coin-all coin03-final"></div>
+      <div class="coin-all-light"></div>
+      <div class="coin-all-shine"></div>
       <div class="crown"></div>
+      <div class="bubble18"></div>
     `);
 
       setTimeout(() => {
         $(".coin01-final, .coin02-final, .coin03-final").addClass(
           "coin-all-animation"
         );
+        $(".coin-all-light").addClass("bubble-fade-in");
       }, 1200);
 
       setTimeout(() => {
+        $(".coin-all-shine").addClass("bubble-fade-in");
+      }, 1500);
+
+      setTimeout(() => {
+        $(".bubble18").addClass("bubble-fade-in");
         $(".crown").addClass("crown-animation");
       }, 2500);
-    } else {
+    }
+
+    if (page === 17 || page === 20) {
       $(".coin01-final, .coin02-final, .coin03-final").removeClass(
         "coin-all-animation"
       );
       $(".crown").removeClass("crown-animation");
+      $(".coin-all-light").removeClass("bubble-fade-in");
+      $(".coin-all-shine").removeClass("bubble-fade-in");
+      $(".bubble18").removeClass("bubble-fade-in");
       $("#flipbook .crown").remove();
+      $("#flipbook .coin-all-light").remove();
+      $("#flipbook .coin-all-shine").remove();
     }
 
     // 第 22–23 頁：小女孩夢境 + 浮出夢境

@@ -1861,18 +1861,6 @@ audio {
   animation: lightShine 2s ease-in-out infinite;
 }
 
-@keyframes lightShine {
-  0% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.5;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
 .success-hint02 {
   position: absolute;
   top: 5%;
@@ -2316,11 +2304,11 @@ audio {
 
 /* book1920 小女孩皇冠金幣*/
 .book19 {
-  background-image: url(./images/book/book19.jpg);
+  background-image: url(./images/book/book1819/book18.png);
 }
 
 .book20 {
-  background-image: url(./images/book/book20.jpg);
+  background-image: url(./images/book/book1819/book19.png);
 }
 
 .check03 {
@@ -2343,13 +2331,47 @@ audio {
 .coin-all {
   position: absolute;
   z-index: 99;
-  width: 150px;
-  height: 150px;
+  width: 100px;
+  height: 120px;
   background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
   opacity: 0;
   transform: scale(0.1);
+}
+
+.coin-all-light {
+  position: absolute;
+  right: 31%;
+  bottom: 5%;
+  z-index: 99;
+  width: 430px;
+  height: 83px;
+  background-image: url(./images/book/book1819/金幣光環.png);
+  background-size: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  animation: coinsFloat 2s ease-in-out infinite;
+  animation-delay: 1s;
+  transition: all 1s ease-in-out;
+}
+
+.coin-all-shine {
+  position: absolute;
+  right: 31%;
+  bottom: 5%;
+  z-index: 99;
+  width: 485px;
+  height: 135px;
+  background-image: url(./images/book/book1819/亮晶晶.png);
+  background-size: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  animation: lightShine 2s ease-in-out infinite;
+  animation-delay: 3s;
+  transition: all 1s ease-in-out;
 }
 
 .coin01 {
@@ -2371,21 +2393,21 @@ audio {
 }
 
 .coin01-final {
-  right: 55%;
-  bottom: 10%;
-  background-image: url(./images/object/coin.png);
+  right: 56%;
+  bottom: 5%;
+  background-image: url(./images/book/book1819/金幣01.png);
 }
 
 .coin02-final {
-  right: 43%;
-  bottom: 10%;
-  background-image: url(./images/object/coin02.png);
+  right: 44.5%;
+  bottom: 5%;
+  background-image: url(./images/book/book1819/金幣02.png);
 }
 
 .coin03-final {
-  right: 30%;
-  bottom: 10%;
-  background-image: url(./images/object/coin03.png);
+  right: 32%;
+  bottom: 5%;
+  background-image: url(./images/book/book1819/金幣03.png);
 }
 
 .coin-animation {
@@ -2429,7 +2451,7 @@ audio {
   background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
-  background-image: url(./images/object/crown.png);
+  background-image: url(./images/book/book1819/好牛皇冠.png);
   transform: translateY(-100%);
   transition: all 1s ease-in-out;
 }
@@ -2452,6 +2474,21 @@ audio {
   100% {
     transform: translateY(0px);
   }
+}
+
+.bubble18 {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 99;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-image: url(./images/book/book1819/牛奶泡泡.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: all 3s ease-in-out;
+  opacity: 0;
 }
 
 /* book2122 小女孩夢境浮現*/
@@ -3298,6 +3335,18 @@ audio {
 
 .coin-light-show {
   display: block;
+}
+
+@keyframes lightShine {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 @media screen and (max-height: 500px) {
