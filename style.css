@@ -2493,12 +2493,12 @@ audio {
 
 /* book2122 小女孩夢境浮現*/
 .book21 {
-  background-image: url(./images/book/book21.jpg);
+  background-image: url(./images/book/book2021/book20.png);
 }
 
 .book22 {
   position: relative;
-  background-image: url(./images/book/book22.jpg);
+  background-image: url(./images/book/book2021/book21.png);
 }
 
 .dream01 {
@@ -2510,7 +2510,7 @@ audio {
   width: 40px;
   height: 40px;
   background-size: 100%;
-  background-image: url(./images/object/dream01.png);
+  background-image: url(./images/book/book2021/夢泡01.png);
   background-position: center;
   background-repeat: no-repeat;
   opacity: 0;
@@ -2526,7 +2526,7 @@ audio {
   width: 50px;
   height: 50px;
   background-size: 100%;
-  background-image: url(./images/object/dream02.png);
+  background-image: url(./images/book/book2021/夢泡02.png);
   background-position: center;
   background-repeat: no-repeat;
   opacity: 0;
@@ -2542,7 +2542,7 @@ audio {
   width: 100px;
   height: 120px;
   background-size: 100%;
-  background-image: url(./images/object/dream03.png);
+  background-image: url(./images/book/book2021/夢泡03.png);
   background-position: center;
   background-repeat: no-repeat;
   opacity: 0;
@@ -2560,36 +2560,49 @@ audio {
   width: 100%;
   height: 600px;
   background-size: 100%;
-  background-image: url(./images/object/dream04.png);
+  background-image: url(./images/book/book2021/夢泡04.png);
   background-position: center;
   background-repeat: no-repeat;
   opacity: 0;
   transition: all 1s ease-in-out;
 }
 
-.star22 {
+.star20 {
   position: absolute;
-  right: 0;
-  left: 0;
-  top: 0;
-  bottom: 0;
+  left: 20%;
+  top: 20%;
   margin: auto;
   z-index: 106;
-  width: 100%;
-  height: 600px;
+  width: 317;
+  height: 313;
   background-size: 100%;
-  background-image: url(./images/object/star22.png);
+  background-image: url(./images/book/book2021/亮晶晶.png);
   background-position: center;
   background-repeat: no-repeat;
   opacity: 0;
   transition: all 1s ease-in-out;
+}
+
+.dream-girl {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  margin: auto;
+  z-index: 106;
+  width: 843px;
+  height: 545px;
+  background-size: 100%;
+  background-image: url(./images/book/book2021/鈴鈴.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
 }
 
 .dream-animation {
   opacity: 1;
 }
 
-.dialog22 {
+.dialog20 {
   position: absolute;
   top: 35%;
   right: 72%;
@@ -2598,22 +2611,37 @@ audio {
   height: 90px;
 }
 
-.dialog22-animation {
+.dialog20-animation {
   animation: dialogShow 2s ease-in-out infinite;
 }
 
 .sleeping-girl {
   position: absolute;
-  right: 1%;
-  bottom: 7%;
+  right: 6%;
+  bottom: 11%;
   margin: auto;
   z-index: 106;
-  width: 450px;
-  height: 550px;
+  width: 300px;
+  height: 400px;
   background-size: 100%;
-  background-image: url(./images/object/sleeping-girl.png);
+  background-image: url(./images/book/book2021/床.png);
   background-position: center;
   background-repeat: no-repeat;
+}
+
+.bubble20 {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 99;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-image: url(./images/book/book2021/牛奶泡泡20.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: all 3s ease-in-out;
+  opacity: 0;
 }
 
 /* book2324 媽媽叫醒小女孩*/

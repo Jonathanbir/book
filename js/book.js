@@ -1110,6 +1110,7 @@ $(function () {
       $(".coin-all-light").removeClass("bubble-fade-in");
       $(".coin-all-shine").removeClass("bubble-fade-in");
       $(".bubble18").removeClass("bubble-fade-in");
+      $("#flipbook .bubble18").remove();
       $("#flipbook .crown").remove();
       $("#flipbook .coin-all-light").remove();
       $("#flipbook .coin-all-shine").remove();
@@ -1118,8 +1119,10 @@ $(function () {
     // 第 22–23 頁：小女孩夢境 + 浮出夢境
     if (page === 20 || page === 21) {
       $("#flipbook").append(`<div class="dream04"></div>`);
-      $("#flipbook").append(`<div class="wow dialog22"></div>`);
-      $("#flipbook").append(`<div class="star22"></div>`);
+      $("#flipbook").append(`<div class="dream-girl"></div>`);
+      $("#flipbook").append(`<div class="wow dialog20"></div>`);
+      $("#flipbook").append(`<div class="bubble20"></div>`);
+      $("#flipbook").append(`<div class="star20"></div>`);
       setTimeout(() => {
         $(".dream01").addClass("dream-animation");
       }, 1000);
@@ -1133,21 +1136,29 @@ $(function () {
         $(".dream04").addClass("dream-animation");
       }, 4000);
       setTimeout(() => {
-        $(".star22").addClass("dialog22-animation");
+        $(".star20").addClass("dialog20-animation");
+        $(".dream-girl").addClass("dream-animation");
       }, 5000);
       setTimeout(() => {
-        $(".wow").addClass("dialog22-animation");
+        $(".wow").addClass("dialog20-animation");
       }, 6000);
+      setTimeout(() => {
+        $(".bubble20").addClass("bubble-fade-in");
+      }, 8000);
     } else {
       $(".dream04").remove();
-      $(".dialog22").remove();
-      $(".star22").remove();
+      $(".dream-girl").remove();
+      $(".dialog20").remove();
+      $(".star20").remove();
+      $(".bubble20").remove();
       $(".dream01").removeClass("dream-animation");
       $(".dream02").removeClass("dream-animation");
       $(".dream03").removeClass("dream-animation");
       $(".dream04").removeClass("dream-animation");
-      $(".wow").removeClass("dialog22-animation");
-      $(".star22").removeClass("dialog22-animation");
+      $(".wow").removeClass("dialog20-animation");
+      $(".star20").removeClass("dialog20-animation");
+      $(".bubble20").removeClass("bubble-fade-in");
+      $(".dream-girl").removeClass("dream-animation");
     }
 
     if (page === 22 || page === 23) {
