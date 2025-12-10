@@ -3083,7 +3083,7 @@ audio {
 /* book27 一家人喝牛奶 */
 .book27 {
   position: relative;
-  background-image: url(./images/book/book27.jpg);
+  background-image: url(./images/book/book2627/book26.png);
 }
 
 .dad-milk-ink {
@@ -3121,139 +3121,211 @@ audio {
 }
 
 .mom-milk-ink {
-  right: -1%;
+  right: 0%;
   top: 51.5%;
+}
+
+.father-hand-region {
+  position: absolute;
+  left: 12%;
+  top: 65%;
+  z-index: 3;
+  transition: all 1.5s ease-in-out;
 }
 
 .father-hand {
   position: absolute;
-  left: 12%;
-  bottom: 70px;
-  z-index: 3;
-  width: 320px;
-  height: 190px;
+  width: 300px;
+  height: 147px;
   background-size: 100%;
-  background-image: url(./images/object/father-hand.png);
+  background-image: url(./images/book/book2627/爸爸手.png);
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.father-hand-cup {
+  position: absolute;
+  left: 241px;
+  bottom: -61px;
+  z-index: 0;
+  width: 66px;
+  height: 96px;
+  background-size: 100%;
+  background-image: url(./images/book/book2627/空杯.png);
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.father-hand-milk {
+  position: absolute;
+  left: 245px;
+  bottom: -55px;
+  width: 61px;
+  height: 81px;
+  background-size: 100%;
+  background-image: url(./images/book/book2627/牛奶.png);
   background-position: center;
   background-repeat: no-repeat;
   transition: all 1.5s ease-in-out;
 }
 
 .father-hand-finish {
+  transform: scale(0.9) rotate(-27deg);
   left: 12%;
-  bottom: 130px;
-  transform: scale(0.8) rotate(-25deg);
+  top: 65%;
 }
 
-.father-hand-remove {
+.father-hand-milk-empty {
   opacity: 0;
 }
 
-.father-hand-empty {
+.milk-box {
   position: absolute;
-  transform: scale(0.8) rotate(-25deg);
+  left: 205px;
+  bottom: 19px;
   z-index: 3;
-  width: 320px;
-  height: 190px;
+  width: 110px;
+  height: 224px;
   background-size: 100%;
-  background-image: url(./images/object/father-hand-finish.png);
+  background-image: url(./images/book/book2627/林鳳營.png);
   background-position: center;
   background-repeat: no-repeat;
-  opacity: 0;
+}
+
+.daughter-hand-region {
+  position: absolute;
+  left: 61%;
+  top: 65%;
+  z-index: 3;
   transition: all 1.5s ease-in-out;
-}
-
-.father-hand-empty-move {
-  left: 12%;
-  bottom: 130px;
-}
-
-.father-hand-empty-finish {
-  opacity: 1;
 }
 
 .daughter-hand {
   position: absolute;
-  right: 22%;
-  bottom: 107px;
   z-index: 2;
-  width: 100px;
-  height: 130px;
+  width: 57px;
+  height: 82px;
   background-size: 100%;
-  background-image: url(./images/object/daughter-hand.png);
+  background-image: url(./images/book/book2627/鈴鈴手.png);
   background-position: center;
   background-repeat: no-repeat;
   transition: all 1.5s ease-in-out;
 }
 
-.daughter-hand-remove {
+.daughter-hand-cup {
+  position: absolute;
+  left: 24px;
+  bottom: -74px;
+  z-index: 0;
+  width: 66px;
+  height: 96px;
+  background-size: 100%;
+  background-image: url(./images/book/book2627/空杯.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  transform: rotate(-8deg);
+}
+
+.daughter-hand-finish .daughter-hand-cup {
+  transform: rotate(45deg);
+  left: 21px;
+  bottom: -93px;
+}
+
+.daughter-hand-milk {
+  position: absolute;
+  left: 29px;
+  bottom: -69px;
+  width: 60px;
+  height: 81px;
+  background-size: 100%;
+  background-image: url(./images/book/book2627/牛奶.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: all 1.5s ease-in-out;
+  transform: rotate(-8deg);
+}
+
+.daughter-hand-finish .daughter-hand-milk {
+  transform: rotate(45deg);
+  left: 21px;
+  bottom: -90px;
+}
+
+.daughter-hand-milk-empty {
   opacity: 0;
 }
 
 .daughter-hand-finish {
-  right: 17%;
-  bottom: 160px;
-  transform: rotate(-75deg);
+  transform: rotate(-45deg);
 }
 
-.daughter-hand-empty {
+.cheers {
   position: absolute;
-  transform: rotate(-75deg);
-  z-index: 2;
-  width: 100px;
-  height: 130px;
+  left: 66%;
+  bottom: 385px;
+  z-index: 3;
+  width: 115px;
+  height: 60px;
   background-size: 100%;
-  background-image: url(./images/object/daughter-hand-finish.png);
+  background-image: url(./images/book/book2627/乾杯.png);
   background-position: center;
   background-repeat: no-repeat;
-  opacity: 0;
+  animation: dialogShow 2s ease-in-out infinite;
+  transition: all 1s ease-in-out;
+}
+
+.mom-hand-region {
+  position: absolute;
+  right: 60%;
+  bottom: 204px;
+  z-index: 99;
   transition: all 1.5s ease-in-out;
-}
-
-.daughter-hand-empty-move {
-  right: 17%;
-  bottom: 160px;
-}
-
-.daughter-hand-empty-finish {
-  opacity: 1;
 }
 
 .mom-hand {
   position: absolute;
-  right: 40%;
-  bottom: 80px;
-  z-index: 99;
   width: 240px;
   height: 140px;
   background-size: 100%;
-  background-image: url(./images/object/mom-hand.png);
+  background-image: url(./images/book/book2627/媽媽手.png);
   background-position: center;
   background-repeat: no-repeat;
   transition: all 1.5s ease-in-out;
 }
 
-.mom-hand-remove {
-  opacity: 0;
+.mom-hand-cup {
+  position: absolute;
+  left: -17px;
+  bottom: -80px;
+  z-index: 0;
+  width: 66px;
+  height: 96px;
+  background-size: 100%;
+  background-image: url(./images/book/book2627/空杯.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  transform: rotate(-26deg);
+}
+
+.mom-hand-milk {
+  position: absolute;
+  left: -11px;
+  bottom: -75px;
+  width: 60px;
+  height: 81px;
+  background-size: 100%;
+  background-image: url(./images/book/book2627/牛奶.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: all 1.5s ease-in-out;
+  transform: rotate(-26deg);
 }
 
 .mom-hand-finish {
-  bottom: 120px;
+  right: 53%;
+  bottom: 280px;
   transform: scale(0.9) rotate(45deg);
-}
-
-.mom-hand-empty {
-  position: absolute;
-  z-index: 99;
-  width: 240px;
-  height: 140px;
-  background-size: 100%;
-  transform: scale(0.9) rotate(45deg);
-  background-image: url(./images/object/mom-hand-finish.png);
-  background-position: center;
-  background-repeat: no-repeat;
-  opacity: 0;
-  transition: all 1.5s ease-in-out;
 }
 
 .mom-hand-empty-move {
@@ -3261,8 +3333,8 @@ audio {
   bottom: 120px;
 }
 
-.mom-hand-empty-finish {
-  opacity: 1;
+.mom-hand-milk-empty {
+  opacity: 0;
 }
 
 .girls-milk-ink-show {
@@ -3272,7 +3344,7 @@ audio {
 /* book28 一家人喝牛奶 */
 .book28 {
   position: relative;
-  background-image: url(./images/book/book28.jpg);
+  background-image: url(./images/book/book2627/book27.png);
 }
 
 .cow-right {
@@ -3283,7 +3355,7 @@ audio {
   width: 372px;
   height: 348px;
   background-size: 100%;
-  background-image: url(./images/object/cow-right.png);
+  background-image: url(./images/book/book2627/愛心牛牛.png);
   background-position: center;
   background-repeat: no-repeat;
   transition: all 3s ease-in-out;
@@ -3291,6 +3363,26 @@ audio {
 
 .cow-right-move {
   right: 0%;
+}
+
+.sweet-taste {
+  position: absolute;
+  right: 30%;
+  top: 60px;
+  z-index: 3;
+  width: 300px;
+  height: 70px;
+  background-size: 100%;
+  background-image: url(./images/book/book2627/好幸福的味道.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+}
+
+.sweet-taste-animation {
+  animation: dialogShow 2s ease-in-out infinite;
+  /* animation-delay: 4s; */
+  transition: all 1s ease-in-out;
 }
 
 .mow {

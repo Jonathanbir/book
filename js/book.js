@@ -1251,23 +1251,14 @@ $(function () {
 
     // Animation flow — page 28/29
     function startFamilyAnimation() {
-      $(".father-hand").addClass("father-hand-finish");
-      $(".daughter-hand").addClass("daughter-hand-finish");
-      $(".mom-hand").addClass("mom-hand-finish");
+      $(".father-hand-region").addClass("father-hand-finish");
+      $(".daughter-hand-region").addClass("daughter-hand-finish");
+      $(".mom-hand-region").addClass("mom-hand-finish");
 
       setTimeout(() => {
-        $(".father-hand-empty").addClass("father-hand-empty-move");
-        $(".daughter-hand-empty").addClass("daughter-hand-empty-move");
-        $(".mom-hand-empty").addClass("mom-hand-empty-move");
-      }, 2000);
-
-      setTimeout(() => {
-        $(".father-hand").addClass("father-hand-remove");
-        $(".daughter-hand").addClass("daughter-hand-remove");
-        $(".mom-hand").addClass("mom-hand-remove");
-        $(".father-hand-empty").addClass("father-hand-empty-finish");
-        $(".daughter-hand-empty").addClass("daughter-hand-empty-finish");
-        $(".mom-hand-empty").addClass("mom-hand-empty-finish");
+        $(".father-hand-milk").addClass("father-hand-milk-empty");
+        $(".daughter-hand-milk").addClass("daughter-hand-milk-empty");
+        $(".mom-hand-milk").addClass("mom-hand-milk-empty");
       }, 2550);
 
       setTimeout(() => {
@@ -1280,6 +1271,7 @@ $(function () {
       }, 3000);
 
       setTimeout(() => {
+        $(".sweet-taste").addClass("sweet-taste-animation");
         $(".mow").show();
       }, 3800);
     }
@@ -1291,18 +1283,12 @@ $(function () {
         // 手部完成、移除
         "father-hand-finish",
         "daughter-hand-finish",
-        "father-hand-remove",
-        "daughter-hand-remove",
         "mom-hand-finish",
-        "mom-hand-remove",
 
         // 空手動畫
-        "father-hand-empty-finish",
-        "father-hand-empty-move",
-        "daughter-hand-empty-finish",
-        "daughter-hand-empty-move",
-        "mom-hand-empty-move",
-        "mom-hand-empty-finish",
+        "father-hand-milk-empty",
+        "daughter-hand-milk-empty",
+        "mom-hand-milk-empty",
 
         // 墨水效果
         "dad-milk-ink-show",
@@ -1314,7 +1300,7 @@ $(function () {
 
       // 批次移除所有指定 class
       $(
-        ".father-hand, .daughter-hand, .mom-hand, .father-hand-empty, .daughter-hand-empty, .mom-hand-empty, .dad-milk-ink, .girls-milk-ink, .cow-right"
+        ".father-hand, .daughter-hand, .mom-hand, .dad-milk-ink, .girls-milk-ink, .cow-right"
       ).removeClass(removeClasses.join(" "));
 
       // 隱藏叫聲
@@ -1350,17 +1336,14 @@ $(function () {
       if (page === 26 || page === 27) {
         if (!$(".mom-hand").length) {
           setTimeout(() => {
-            $("#flipbook").append('<div class="mom-hand"></div>');
-            $("#flipbook").append('<div class="mom-hand-empty"></div>');
+            $("#flipbook").append(
+              '<div class="mom-hand-region"><div class="mom-hand-milk"></div><div class="mom-hand-cup"></div><div class="mom-hand"></div></div>'
+            );
           }, 500);
-          setTimeout(() => {
-            $(".mom-hand").addClass("mom-hand-finish");
-          }, 550);
         }
       } else {
-        $(".mom-hand").removeClass("mom-hand-finish mom-hand-empty");
-        $(".mom-hand").remove();
-        $(".mom-hand-empty").remove();
+        $(".mom-hand").removeClass("mom-hand-finish");
+        $(".mom-hand-region").remove();
       }
 
       if (page === 28) {
@@ -1395,6 +1378,11 @@ $(function () {
         startFamilyAnimation();
       } else {
         resetFamilyPage();
+        $(".father-hand-region").removeClass("father-hand-finish");
+        $(".daughter-hand-region").removeClass("daughter-hand-finish");
+        $(".father-hand-milk").removeClass("father-hand-milk-empty");
+        $(".daughter-hand-milk").removeClass("daughter-hand-milk-empty");
+        $(".sweet-taste").removeClass("sweet-taste-animation");
       }
     });
 
