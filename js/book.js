@@ -1177,7 +1177,8 @@ $(function () {
       $(".milk-inner").removeClass("milk-inner-full");
       $(".milk-drop").removeClass("milk-drop-show");
       $(".girl-l-hand").removeClass("girl-l-hand-empty");
-      $(".girl-l-hand").removeClass("girl-l-hand-finish");
+      $(".girl-l-hand-region").removeClass("girl-l-hand-finish");
+      $(".girl-l-hand-milk").removeClass("girl-l-hand-empty");
       $(".girl-r-hand").removeClass("girl-r-hand-finish");
       $(".girl-l-hand-finish-milk").removeClass("girl-l-hand-finished-milk");
       $(".milk-stains").removeClass("milk-stains-show");
@@ -1218,13 +1219,13 @@ $(function () {
         $(this).addClass("played");
 
         $(".click-girl").hide();
-        $(".girl-l-hand").addClass("girl-l-hand-finish");
+        $(".girl-l-hand-region").addClass("girl-l-hand-finish");
         $(".girl-r-hand").addClass("girl-r-hand-finish");
 
         playAudio("girl-drink-milk", 0);
 
         setTimeout(() => {
-          $(".girl-l-hand").addClass("girl-l-hand-empty");
+          $(".girl-l-hand-milk").addClass("girl-l-hand-empty");
           $(".girl-l-hand-finish-milk").addClass("girl-l-hand-finished-milk");
           playAudio("drinking-milk", 0);
         }, 1000);

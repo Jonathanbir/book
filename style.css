@@ -2303,11 +2303,11 @@ audio {
 }
 
 /* book1920 小女孩皇冠金幣*/
-.book19 {
+.book18 {
   background-image: url(./images/book/book1819/book18.png);
 }
 
-.book20 {
+.book19 {
   background-image: url(./images/book/book1819/book19.png);
 }
 
@@ -2491,12 +2491,12 @@ audio {
   opacity: 0;
 }
 
-/* book2122 小女孩夢境浮現*/
-.book21 {
+/* book2021 小女孩夢境浮現*/
+.book20 {
   background-image: url(./images/book/book2021/book20.png);
 }
 
-.book22 {
+.book21 {
   position: relative;
   background-image: url(./images/book/book2021/book21.png);
 }
@@ -2644,15 +2644,15 @@ audio {
   opacity: 0;
 }
 
-/* book2324 媽媽叫醒小女孩*/
-.book23 {
+/* book2223 媽媽叫醒小女孩*/
+.book22 {
   position: relative;
-  background-image: url(./images/book/book23.jpg);
+  background-image: url(./images/book/book2223/book22.png);
 }
 
-.book24 {
+.book23 {
   position: relative;
-  background-image: url(./images/book/book24.jpg);
+  background-image: url(./images/book/book2223/book23.png);
 }
 
 .cow-alarm {
@@ -2661,10 +2661,10 @@ audio {
   top: 8%;
   margin: auto;
   z-index: 106;
-  width: 150px;
-  height: 150px;
+  width: 120px;
+  height: 130px;
   background-size: 100%;
-  background-image: url(./images/object/cow-alarm.png);
+  background-image: url(./images/book/book2223/牛掛鐘.png);
   background-position: center;
   background-repeat: no-repeat;
   transition: all 1s ease-in-out;
@@ -2702,7 +2702,7 @@ audio {
   width: 50px;
   height: 50px;
   background-size: 100%;
-  background-image: url(./images/object/sleep-girl-hand.png);
+  background-image: url(./images/book/book2223/拳頭.png);
   background-position: center;
   background-repeat: no-repeat;
   animation: sleepGirlHand 2s ease-in-out infinite;
@@ -2723,21 +2723,21 @@ audio {
 
 .sleep-girl-arm {
   position: absolute;
-  left: 32%;
-  bottom: 34%;
+  left: 33%;
+  bottom: 36%;
   z-index: 4;
-  width: 120px;
-  height: 180px;
+  width: 94px;
+  height: 113px;
   background-size: 100%;
-  background-image: url(./images/object/sleep-girl-arm.png);
+  background-image: url(./images/book/book2223/手臂.png);
   background-position: center;
   background-repeat: no-repeat;
 }
 
-/* book25 媽媽倒牛奶*/
-.book25 {
+/* book24 媽媽倒牛奶*/
+.book24 {
   position: relative;
-  background-image: url(./images/book/book25.jpg);
+  background-image: url(./images/book/book24/book24.png);
 }
 
 .milk-hand {
@@ -2751,7 +2751,7 @@ audio {
   background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
-  background-image: url("./images/object/milk-hand.png");
+  background-image: url("./images/book/book24/手拿牛奶.png");
   transition: all 3s ease-in-out;
 }
 
@@ -2763,36 +2763,35 @@ audio {
 
 .milk-cup {
   position: absolute;
-  bottom: 42px;
-  right: 252px;
+  bottom: 7px;
+  right: 221px;
   z-index: 4;
-  width: 63px;
-  height: 94px;
+  width: 110px;
+  height: 150px;
   transform: rotate(0deg);
   background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
-  background-image: url("./images/object/milk-cup.png");
+  background-image: url("./images/book/book24/牛奶杯.png");
 }
 
 .milk-inner {
   position: absolute;
-  bottom: 50px;
-  right: 259px;
+  bottom: 41px;
+  right: 240px;
   z-index: 3;
-  width: 55px;
+  width: 69px;
   height: 0;
-  /* height: 60px; */
   transform: rotate(0deg);
   background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
-  background-image: url("./images/object/milk-inner.png");
+  background-image: url("./images/book/book24/牛奶.png");
   transition: all 5s ease-in-out;
 }
 
 .milk-inner-full {
-  height: 60px;
+  height: 100px;
 }
 
 .milk-drop {
@@ -2806,7 +2805,7 @@ audio {
   background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
-  background-image: url("./images/object/milk-drop.png");
+  background-image: url("./images/book/book24/牛奶柱.png");
   opacity: 0;
   transition: all 2s ease-in-out;
 }
@@ -2815,10 +2814,10 @@ audio {
   opacity: 1;
 }
 
-/* book26 小女孩喝牛奶*/
-.book26 {
+/* book25 小女孩喝牛奶*/
+.book25 {
   position: relative;
-  background-image: url(./images/book/book26.jpg);
+  background-image: url(./images/book/book25/book25.png);
 }
 
 .girl-click-region {
@@ -2840,23 +2839,23 @@ audio {
   right: 34px;
   bottom: -4px;
   z-index: 2;
-  width: 500px;
-  height: 499px;
+  width: 449px;
+  height: 489px;
   background-size: 100%;
-  background-image: url(./images/object/little-girl.png);
+  background-image: url(./images/book/book25/鈴鈴.png);
   background-position: center;
   background-repeat: no-repeat;
 }
 
 .milk-stains {
   position: absolute;
-  right: 48%;
+  right: 44%;
   top: 45%;
   z-index: 4;
   width: 50px;
   height: 20px;
   background-size: 100%;
-  background-image: url(./images/object/milk-stains.png);
+  background-image: url(./images//book/book25/牛奶鬍.png);
   background-position: center;
   background-repeat: no-repeat;
   opacity: 0;
@@ -2871,15 +2870,15 @@ audio {
   position: absolute;
   z-index: 1;
   width: 85px;
-  height: 67px;
+  height: 85px;
   background-size: 100%;
-  background-image: url(./images/object/flower.png);
   background-position: center;
   background-repeat: no-repeat;
   transition: all 1.5s ease-in-out;
 }
 
 .flower01 {
+  background-image: url(./images/book/book25/花1.png);
   right: 34%;
   top: 29%;
   transform: rotate(-180deg);
@@ -2894,6 +2893,7 @@ audio {
 }
 
 .flower02 {
+  background-image: url(./images/book/book25/花2.png);
   right: 40%;
   top: 57%;
   transform: rotate(180deg);
@@ -2908,6 +2908,7 @@ audio {
 }
 
 .flower03 {
+  background-image: url(./images/book/book25/花3.png);
   right: 38%;
   top: 79%;
   transform: rotate(180deg);
@@ -2922,6 +2923,7 @@ audio {
 }
 
 .flower04 {
+  background-image: url(./images/book/book25/花4.png);
   left: 38%;
   top: 40%;
   transform: rotate(-180deg);
@@ -2931,11 +2933,12 @@ audio {
   left: 8%;
   top: 52%;
   width: 140px;
-  height: 120px;
+  height: 140px;
   transform: rotate(29deg);
 }
 
 .flower05 {
+  background-image: url(./images/book/book25/花5.png);
   left: 40%;
   top: 37%;
   transform: rotate(-180deg);
@@ -2950,6 +2953,7 @@ audio {
 }
 
 .flower06 {
+  background-image: url(./images/book/book25/花6.png);
   left: 36%;
   top: 37%;
   transform: rotate(0deg);
@@ -2959,22 +2963,29 @@ audio {
   left: 26%;
   top: 17%;
   width: 120px;
-  height: 90px;
+  height: 120px;
   transform: rotate(-127deg);
+}
+
+.girl-l-hand-region {
+  position: relative;
+  left: 23%;
+  top: 60%;
+  z-index: 3;
+  width: 120px;
+  height: 150px;
+  transition: all 1.5s ease-in-out;
 }
 
 .girl-l-hand {
   position: absolute;
-  right: 55%;
-  bottom: 90px;
   z-index: 3;
-  width: 138px;
-  height: 185px;
+  width: 101px;
+  height: 141px;
   background-size: 100%;
-  background-image: url(./images/object/girl-l-hand.png);
+  background-image: url(./images/book/book25/左手臂.png);
   background-position: center;
   background-repeat: no-repeat;
-  transition: all 1.5s ease-in-out;
 }
 
 .girl-l-hand-empty {
@@ -2982,9 +2993,37 @@ audio {
 }
 
 .girl-l-hand-finish {
-  right: 53%;
-  bottom: 150px;
+  left: 28%;
+  top: 50%;
   transform: rotate(25deg);
+}
+
+.girl-l-hand-milk {
+  position: absolute;
+  right: -8%;
+  bottom: 35%;
+  z-index: 2;
+  width: 76px;
+  height: 100px;
+  background-size: 100%;
+  background-image: url(./images/book/book25/牛奶.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: all 1s ease-in-out;
+}
+
+.girl-l-hand-cup {
+  position: absolute;
+  right: -15%;
+  bottom: 34%;
+  z-index: 2;
+  width: 85px;
+  height: 129px;
+  background-size: 100%;
+  background-image: url(./images/book/book25/牛奶杯.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: all 1s ease-in-out;
 }
 
 .girl-l-hand-finish-milk {
@@ -2994,7 +3033,7 @@ audio {
   height: 185px;
   background-size: 100%;
   opacity: 0;
-  background-image: url(./images/object/girl-l-hand-finish.png);
+  background-image: url(./images/book/book25/girl-l-hand-finish.png);
   background-position: center;
   background-repeat: no-repeat;
   transition: all 1.5s ease-in-out;
@@ -3006,22 +3045,22 @@ audio {
 
 .girl-r-hand {
   position: absolute;
-  right: 33%;
-  bottom: 45px;
+  right: 28.5%;
+  bottom: 56px;
   z-index: 3;
-  width: 190px;
-  height: 161px;
+  width: 193px;
+  height: 156px;
   background-size: 100%;
-  background-image: url(./images/object/girl-r-hand.png);
+  background-image: url(./images/book/book25/右手臂.png);
   background-position: center;
   background-repeat: no-repeat;
   transition: all 1.5s ease-in-out;
 }
 
 .girl-r-hand-finish {
-  transform: rotate(39deg);
-  right: 34%;
-  bottom: 108px;
+  transform: rotate(28deg);
+  right: 30%;
+  bottom: 103px;
 }
 
 .click-girl {
@@ -3032,7 +3071,7 @@ audio {
   top: 19%;
   width: 180px;
   height: 200px;
-  background-image: url(./images/dialog/click-girl.png);
+  background-image: url(./images/book/book25/點這裡.png);
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
