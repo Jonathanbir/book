@@ -2558,7 +2558,7 @@ audio {
 .dream-girl {
   position: absolute;
   left: 0;
-  bottom: 0;
+  bottom: -100%;
   margin: auto;
   z-index: 106;
   width: 843px;
@@ -2568,9 +2568,11 @@ audio {
   background-position: center;
   background-repeat: no-repeat;
   opacity: 0;
+  transition: all 1s ease-in-out;
 }
 
 .dream-animation {
+  bottom: 0;
   opacity: 1;
 }
 
@@ -2817,6 +2819,22 @@ audio {
   background-image: url(./images/book/book25/鈴鈴.png);
   background-position: center;
   background-repeat: no-repeat;
+}
+
+.story-25 {
+  position: absolute;
+  right: 0;
+  left: 5%;
+  bottom: 1%;
+  margin: auto;
+  z-index: 3;
+  width: 300px;
+  height: 25px;
+  background-size: 100%;
+  background-image: url(./images/book/book25/故事25.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: all 1s ease-in-out;
 }
 
 .milk-stains {

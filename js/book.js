@@ -1453,7 +1453,7 @@ $(function () {
       // 書本定位
       if (page === 1) {
         document.querySelector(".book-section").style.left = "-20%";
-      } else if (page === 30) {
+      } else if (page === 28) {
         document.querySelector(".book-section").style.left = "17%";
       } else {
         document.querySelector(".book-section").style.left = "0px";
