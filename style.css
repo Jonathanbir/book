@@ -142,7 +142,7 @@ audio {
   bottom: 0;
   width: 100px;
   height: 100px;
-  z-index: 100;
+  z-index: 999;
   cursor: pointer;
 }
 
@@ -1529,7 +1529,7 @@ audio {
   width: 30px;
   height: 30px;
   background-size: 100%;
-  background-image: url(./images/book/book13/綠\ 勾.png);
+  background-image: url(./images/book/book13/綠勾.png);
   background-position: center;
   background-repeat: no-repeat;
   opacity: 0;
@@ -3890,6 +3890,7 @@ audio {
   }
 
   .book {
+    /* background-size: contain; */
     height: 100% !important;
   }
 
@@ -3983,26 +3984,29 @@ audio {
     width: 31%;
   }
 
-  .daughter-hand-4 {
-    bottom: 2%;
-    left: 23%;
+  .daughter-5 {
+    width: 32%;
+    height: 160px;
+  }
+
+  .daughter-hand-5 {
+    bottom: 16%;
+    left: 24%;
     width: 8%;
+    height: 70px;
   }
 
-  .moms-head-4 {
-    bottom: 3%;
-    right: 26%;
+  .moms-head-5 {
+    bottom: 30%;
+    right: 25%;
     width: 35%;
+    height: 100px;
   }
 
-  .moms-hand-4 {
-    width: 13%;
-    bottom: 21%;
-    right: 49%;
-  }
-
-  .door {
-    transform: scale(3) rotateY(0deg);
+  .moms-hand-5 {
+    bottom: -8%;
+    right: 31.5%;
+    width: 29%;
   }
 
   .door.open {
@@ -4053,12 +4057,36 @@ audio {
   }
 
   .question {
-    width: 10%;
-    bottom: 69%;
+    width: 20%;
+    height: 100px;
+    bottom: 75%;
+  }
+
+  /* book0607 點門出現森林 */
+  .tree1 {
+    width: 69%;
+    height: 385px;
+    right: 1%;
+  }
+
+  .tree2 {
+    left: 0%;
+    bottom: -13%;
+    width: 40%;
+    height: 473px;
+  }
+
+  .tree3 {
+    left: 0;
+    bottom: -5%;
+    width: 100%;
+    height: 473px;
   }
 
   .door-common {
-    width: 15px;
+    width: 10%;
+    right: 33%;
+    bottom: 11%;
   }
 
   .knock {
@@ -4068,8 +4096,26 @@ audio {
   }
 
   .peoples {
-    bottom: 24%;
-    height: 80px;
+    bottom: 14%;
+    right: 34%;
+    height: 150px;
+    width: 10%;
+    background-size: 100%;
+  }
+
+  .cloud1 {
+    width: 50%;
+    height: 70px;
+  }
+
+  .cloud2 {
+    width: 20%;
+    height: 72px;
+  }
+
+  .cloud3 {
+    width: 40%;
+    height: 40px;
   }
 
   .mowmow {
@@ -4079,6 +4125,30 @@ audio {
     width: 100px;
   }
 
+  /* book0809 牛角印 */
+  .mom-daughter {
+    width: 48%;
+    height: 250px;
+  }
+
+  .bubble7 {
+    width: 87%;
+    height: 86%;
+  }
+
+  .eyes-8 {
+    top: 18%;
+    width: 10%;
+  }
+
+  .eyes-ball-8 {
+    top: 18%;
+    left: 33%;
+    width: 9.5%;
+  }
+
+  /* book0910 彩虹 */
+
   .rainbow {
     top: -40%;
     width: 1004px !important;
@@ -4086,17 +4156,19 @@ audio {
   }
 
   .girls-head {
-    right: 30%;
+    width: 40%;
+    left: 10%;
     bottom: -7%;
   }
 
   .cloud-01 {
-    width: 200px;
+    width: 30%;
+    height: 80px;
   }
 
   .cloud-02 {
-    width: 200px;
-    height: 30px;
+    width: 30%;
+    height: 80px;
   }
 
   .cow01 {
@@ -4110,8 +4182,8 @@ audio {
   .cow04 {
     position: absolute;
     left: 45%;
-    bottom: 15%;
-    width: 150px;
+    bottom: 21%;
+    width: 20%;
     height: 150px;
   }
 
@@ -4124,9 +4196,9 @@ audio {
 
   .list {
     position: absolute;
-    right: 36%;
-    bottom: 20%;
-    width: 90px;
+    right: 35.5%;
+    bottom: 19%;
+    width: 12%;
     height: 120px;
   }
 
@@ -4139,15 +4211,48 @@ audio {
     height: 200px;
   }
 
-  .click-milk {
-    left: 25%;
-  }
-
   .girls-hand {
     right: 76%;
     bottom: 8%;
     width: 70px;
     height: 70px;
+  }
+
+  /* book12~13 電風扇 */
+  .electfan {
+    top: -1%;
+    width: 30%;
+    height: 125px;
+  }
+
+  .coin {
+    width: 25%;
+  }
+
+  .coin-light {
+    width: 80%;
+    height: 200px;
+  }
+
+  /* book1415 餵牛奶 */
+
+  .click-milk {
+    right: 27%;
+    bottom: 10%;
+  }
+
+  .board14 {
+    top: 4%;
+    width: 20%;
+  }
+
+  .board-list02 {
+    top: 9%;
+    width: 15%;
+  }
+
+  .small-cow {
+    left: 29%;
   }
 
   .milk-bottle {
