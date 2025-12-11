@@ -3660,6 +3660,36 @@ audio {
     display: block;
   }
 
+  .pop-up-box {
+    position: fixed;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.9);
+  }
+
+  .pop-up-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+  }
+
+  .pop-up-text h1 {
+    margin: 0;
+  }
+
+  #left-up-corner,
+  #left-down-corner,
+  #right-down-corner {
+    /* bottom: 15vh; */
+  }
+
   .page-btn-mobile {
     display: flex;
     justify-content: center;
@@ -3824,11 +3854,12 @@ audio {
 
   .close-btn {
     position: absolute;
-    bottom: 15%;
+    right: 2%;
+    top: 5%;
     background-color: #fff;
     color: #000;
-    padding: 15px 30px;
-    border-radius: 10px;
+    padding: 15px 20px;
+    border-radius: 100%;
   }
 
   .controls {

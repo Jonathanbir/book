@@ -16,6 +16,13 @@ $(function () {
   console.log("手機新的寬高:", bookWidth, bookHeight);
   console.log("瀏覽器的寬高:", screenWidth, screenHeight);
 
+  const innerWidth = window.innerWidth;
+  const innerHeight = window.innerHeight; // 目前可視高度（含工具列收起）
+  const barHeight = innerHeight - screenHeight;
+  const visualWidth = visualViewport.width;
+  const visualHeight = visualViewport.height;
+  const widthGap = (visualWidth - visualHeight * 2) / 2;
+
   const vh = window.visualViewport.height;
   function updateHeight() {
     document.documentElement.style.setProperty("--vh", `${vh}px`);
@@ -66,88 +73,138 @@ $(function () {
       autoCenter: true,
     });
   } else {
-    // call on load & on orientation change
-    window.addEventListener("load", maybeShowSwipeHint);
-    window.addEventListener("orientationchange", () =>
-      setTimeout(maybeShowSwipeHint, 300)
-    );
-
-    // 顯示提示（只在第一次進站顯示）
-    function showFullscreenHint() {
-      // window.alert("請向下滑一下即可全螢幕觀看");
-      if (localStorage.getItem("fullscreenHintShown")) return;
-
-      const hint = document.getElementById("swipe-fullscreen-hint");
-      hint.classList.add("show");
-
-      // 記錄下次不要再顯示
-      localStorage.setItem("fullscreenHintShown", "true");
-    }
-
-    // 隱藏提示
-    function hideFullscreenHint() {
-      const hint = document.getElementById("swipe-fullscreen-hint");
-      hint.classList.remove("show");
-    }
-
-    // 檢查使用者是否滑動（手動觸發全螢幕）
-    let touchStartY = 0;
-
-    window.addEventListener("touchstart", (e) => {
-      touchStartY = e.touches[0].clientY;
+    $(".pop-up-box").on("click", function () {
+      $(".pop-up-box").css("display", "none");
     });
 
-    window.addEventListener("touchmove", (e) => {
-      const deltaY = e.touches[0].clientY - touchStartY;
-
-      if (deltaY > 20) {
-        hideFullscreenHint();
-
-        // 觸發微小滾動 → Android/Safari 會隱藏網址列
-        window.scrollTo(0, 1);
-      }
-    });
-
-    window.addEventListener("load", () => {
-      setTimeout(() => {
-        window.scrollTo(0, 0);
-      }, 0);
-      setTimeout(showFullscreenHint, 600);
-    });
+    // window.alert(
+    //   "visualViewport.height: " +
+    //     visualViewport.height +
+    //     "\nwidthGap " +
+    //     widthGap / 2 +
+    //     "\ninnerWidth " +
+    //     innerWidth +
+    //     "\nscreenHeight " +
+    //     screenHeight +
+    //     "\n推算工具列高度" +
+    //     barHeight +
+    //     "\nisIOSChrome(): " +
+    //     isIOSChrome() +
+    //     "\nisAndroidChrome(): " +
+    //     isAndroidChrome() +
+    //     "\nisSafari(): " +
+    //     isSafari()
+    // );
 
     if (isSafari()) {
+      console.log("safari~~~");
       // 初始化 safri turn.js
       $flipbook.turn({
-        width: "100vw",
-        height: "100vh",
-        // height: "80vh",
+        width: visualHeight * 2,
+        height: visualHeight,
         autoCenter: true,
       });
+      $("#left-down-corner").css({
+        top: visualHeight + barHeight + "px",
+        left: widthGap + "px",
+      });
+
+      $("#right-down-corner").css({
+        top: visualHeight + barHeight + "px",
+        right: widthGap + "px",
+      });
       // $("#left-down-corner,#right-down-corner").css("bottom", "18vh");
-      $("#left-down-corner,#right-down-corner").css("bottom", "0vh");
-      $("#flipbook").css("marginTop", "1vh");
+      // $("#flipbook").css("marginTop", "1vh");
     }
 
     if (isIOSChrome()) {
+      console.log("ios Chrome~~~");
       // 初始化 chorme turn.js
       $flipbook.turn({
-        width: "100vw",
-        height: "100vh",
+        width: visualHeight * 2,
+        height: visualHeight,
         autoCenter: true,
       });
-      $("#left-down-corner,#right-down-corner").css("bottom", "0vh");
-      $("#flipbook").css("marginTop", "1vh");
+      $("#left-down-corner").css({
+        bottom: "5vh",
+        left: widthGap + "px",
+      });
+      $("#right-down-corner").css({
+        bottom: "5vh",
+        right: widthGap + "px",
+      });
+      // $("#left-down-corner,#right-down-corner").css("bottom", "8vh");
+      // $("#flipbook").css("marginTop", "1vh");
     }
 
     if (isAndroidChrome()) {
+      console.log("android Chrome~~~");
       // 初始化 chorme turn.js
       $flipbook.turn({
-        width: "100vw",
-        height: "100vh",
+        width: screenHeight * 2,
+        height: screenHeight,
         autoCenter: true,
       });
-      // $("#left-down-corner,#right-down-corner").css("bottom", "0");
-      // $("#flipbook").css("marginTop", "1vh");
+      $(".book").css("height", screenHeight + "px");
+      $("#left-down-corner").css({
+        top: screenHeight + barHeight - 100 + "px",
+        left: (visualWidth - screenHeight * 2) / 2 + "px",
+      });
+      $("#right-down-corner").css({
+        top: screenHeight + barHeight - 100 + "px",
+        right: (visualWidth - screenHeight * 2) / 2 + "px",
+      });
+      console.log("推算工具列高度≈ ", barHeight);
+      console.log("工具列高度≈ ", screenHeight);
+
+      $(".scroll-box").css("display", "block");
+      // $("#left-down-corner,#right-down-corner").css("bottom", "0vh");
+      $("#flipbook").css("marginTop", barHeight);
+
+      // call on load & on orientation change
+
+      // 顯示提示（只在第一次進站顯示）
+      function showFullscreenHint() {
+        // window.alert("請向下滑一下即可全螢幕觀看");
+        if (localStorage.getItem("fullscreenHintShown")) return;
+
+        const hint = document.getElementById("swipe-fullscreen-hint");
+        hint.classList.add("show");
+
+        // 記錄下次不要再顯示
+        localStorage.setItem("fullscreenHintShown", "true");
+      }
+
+      // 隱藏提示
+      function hideFullscreenHint() {
+        const hint = document.getElementById("swipe-fullscreen-hint");
+        hint.classList.remove("show");
+      }
+
+      // 檢查使用者是否滑動（手動觸發全螢幕）
+      let touchStartY = 0;
+
+      window.addEventListener("touchstart", (e) => {
+        touchStartY = e.touches[0].clientY;
+      });
+
+      window.addEventListener("touchmove", (e) => {
+        const deltaY = e.touches[0].clientY - touchStartY;
+
+        if (deltaY > 20) {
+          hideFullscreenHint();
+
+          // 觸發微小滾動 → Android/Safari 會隱藏網址列
+          window.scrollTo(0, 1);
+        }
+      });
+
+      window.addEventListener("load", () => {
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+        }, 0);
+        setTimeout(showFullscreenHint, 600);
+      });
     }
   }
 
@@ -1570,34 +1627,41 @@ $(function () {
     // });
   });
 
-  // let touchStartX = 0;
-  // let touchEndX = 0;
+  let canFlip = true;
 
-  // const flipbook = document.getElementById('flipbook');
+  let touchStartX = 0;
+  let touchEndX = 0;
 
-  // flipbook.addEventListener('touchstart', function (e) {
-  //   touchStartX = e.changedTouches[0].screenX;
-  // });
+  const flipbook = document.getElementById("flipbook");
 
-  // flipbook.addEventListener('touchend', function (e) {
-  //   touchEndX = e.changedTouches[0].screenX;
-  //   handleSwipe();
-  // });
+  flipbook.addEventListener("touchstart", function (e) {
+    touchStartX = e.changedTouches[0].screenX;
+  });
 
-  // function handleSwipe() {
-  //   const swipeDistance = touchEndX - touchStartX;
+  flipbook.addEventListener("touchend", function (e) {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+  });
 
-  //   if (Math.abs(swipeDistance) < 30) {
-  //     // 忽略太短的滑動
-  //     return;
-  //   }
+  function handleSwipe() {
+    const swipeDistance = touchEndX - touchStartX;
 
-  //   if (swipeDistance < 0) {
-  //     // 向左滑（下一頁）
-  //     $('#flipbook').turn('next');
-  //   } else {
-  //     // 向右滑（上一頁）
-  //     $('#flipbook').turn('previous');
-  //   }
-  // }
+    if (Math.abs(swipeDistance) < 30) return;
+
+    // ❌ 冷卻期間禁止翻頁
+    if (!canFlip) return;
+
+    canFlip = false; // 鎖住翻頁
+
+    if (swipeDistance < 0) {
+      $("#flipbook").turn("next");
+    } else {
+      $("#flipbook").turn("previous");
+    }
+
+    // ✅ 3 秒後解除鎖定
+    setTimeout(() => {
+      canFlip = true;
+    }, 3000);
+  }
 });
