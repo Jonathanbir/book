@@ -1137,7 +1137,7 @@ $(function () {
       }, 4000);
       setTimeout(() => {
         $(".star20").addClass("dialog20-animation");
-        $(".dream-girl").addClass("dream-animation");
+        $(".dream-girl").addClass("dream-girl-animation");
       }, 5000);
       setTimeout(() => {
         $(".wow").addClass("dialog20-animation");
@@ -1158,7 +1158,7 @@ $(function () {
       $(".wow").removeClass("dialog20-animation");
       $(".star20").removeClass("dialog20-animation");
       $(".bubble20").removeClass("bubble-fade-in");
-      $(".dream-girl").removeClass("dream-animation");
+      $(".dream-girl").removeClass("dream-girl-animation");
     }
 
     if (page === 22 || page === 23) {

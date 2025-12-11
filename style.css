@@ -24,7 +24,7 @@ body {
   z-index: 9999999;
   width: 80%;
   height: 650px;
-  background-image: url(./images/dialog/mb-hint.png);
+  background-image: url(./images/common/mb-hint.png);
   background-size: 100%;
   background-repeat: no-repeat;
 }
@@ -171,7 +171,7 @@ audio {
   bottom: 18%;
   width: 105px;
   height: 270px;
-  background-image: url("./images/dialog/knok.png");
+  background-image: url("./images/book/book0607/點這裡.png");
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
@@ -465,7 +465,7 @@ audio {
   z-index: 10;
   width: 35px;
   height: 35px;
-  background-image: url("./images/book/book04/left-eye.png");
+  background-image: url("./images/book/book04/左眼.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -478,7 +478,7 @@ audio {
   z-index: 10;
   width: 35px;
   height: 35px;
-  background-image: url("./images/book/book04/right-eye.png");
+  background-image: url("./images/book/book04/右眼.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -505,9 +505,9 @@ audio {
 }
 
 .question {
-  width: 70px;
+  width: 150px;
   height: 150px;
-  background-image: url(./images/book/book04/question-mark.png);
+  background-image: url(./images/book/book04/問號.png);
   background-size: 100%;
   bottom: 73%;
   left: 33%;
@@ -1441,20 +1441,6 @@ audio {
   background-image: url(./images/book/book12/book12.png);
 }
 
-.electric-fan {
-  position: absolute;
-  right: 50%;
-  top: 0%;
-  width: 200px;
-  height: 80px;
-  background-size: 100%;
-  background-image: url(./images/object/electric-fan.png);
-  background-position: center;
-  background-repeat: no-repeat;
-  transition: all 2s ease-in-out;
-  /* animation: cloudGroupMove 10s ease-in-out infinite; */
-}
-
 .girls-head {
   position: absolute;
   left: 8%;
@@ -1474,7 +1460,7 @@ audio {
   top: 0%;
   z-index: 99;
   width: 350px;
-  height: 145px;
+  height: 155px;
   background-size: 100%;
   background-image: url(./images/book/book12/風扇.png);
   background-position: center;
@@ -1482,7 +1468,7 @@ audio {
 }
 
 .electfan-move {
-  background-image: url(./images/object/electfan-move.png);
+  background-image: url(./images/book/book12/轉的風扇.png);
   transition: all 2s ease-in-out;
   animation: electFanMove 10s ease-in-out infinite;
 }
@@ -1731,7 +1717,7 @@ audio {
   width: 68px;
   height: 40px;
   background-size: 100%;
-  background-image: url(./images/object/milk-bottle.png);
+  background-image: url(./images/book/book1415/奶瓶.png);
   background-position: center;
   background-repeat: no-repeat;
 }
@@ -1807,7 +1793,7 @@ audio {
   z-index: 999;
   width: 105px;
   height: 270px;
-  background-image: url(./images/dialog/click-milk.png);
+  background-image: url(./images/book/book1415/點這裡.png);
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
@@ -2087,7 +2073,7 @@ audio {
   z-index: 999;
   width: 105px;
   height: 270px;
-  background-image: url(./images/dialog/click-milk.png);
+  background-image: url(./images/book/book1617/點這裡.png);
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
@@ -2361,7 +2347,7 @@ audio {
 .coin03 {
   right: 10%;
   bottom: 10%;
-  background-image: url(./images/object/coin03.png);
+  background-image: url(./images/book/book1617/獎牌.png);
 }
 
 .coin01-final {
@@ -2571,8 +2557,12 @@ audio {
   transition: all 1s ease-in-out;
 }
 
-.dream-animation {
+.dream-girl-animation {
   bottom: 0;
+  opacity: 1;
+}
+
+.dream-animation {
   opacity: 1;
 }
 
@@ -3216,12 +3206,6 @@ audio {
   transform: rotate(-8deg);
 }
 
-.daughter-hand-finish .daughter-hand-cup {
-  transform: rotate(45deg);
-  left: 21px;
-  bottom: -93px;
-}
-
 .daughter-hand-milk {
   position: absolute;
   left: 29px;
@@ -3236,10 +3220,11 @@ audio {
   transform: rotate(-8deg);
 }
 
-.daughter-hand-finish .daughter-hand-milk {
+.daughter-hand-milk-region {
+  position: relative;
   transform: rotate(45deg);
-  left: 21px;
-  bottom: -90px;
+  left: 30px;
+  bottom: 10px;
 }
 
 .daughter-hand-milk-empty {
@@ -3379,12 +3364,12 @@ audio {
   display: none;
   position: absolute;
   right: 50%;
-  top: 300px;
+  top: 280px;
   z-index: 99;
-  width: 53px;
-  height: 35px;
+  width: 60px;
+  height: 60px;
   background-size: 100%;
-  background-image: url(./images/dialog/mow.png);
+  background-image: url(./images/book/book2627/哞.png);
   background-position: center;
   background-repeat: no-repeat;
   transition: all 1.5s ease-in-out;
@@ -3550,7 +3535,7 @@ audio {
   font-weight: 900;
   text-align: center;
   padding-top: 45vh;
-  background-image: url(./images/book/mb-bg.png);
+  background-image: url(./images/common/mb-bg.png);
   z-index: 99999;
 }
 
