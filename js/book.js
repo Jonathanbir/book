@@ -1172,7 +1172,6 @@ $(function () {
     // 重置該頁面的所有動畫與音效
     function resetMilkPage() {
       $(".click-girl").hide();
-      // $(".girl-click-region").addClass("disabled");
       $(".milk-hand").removeClass("milk-hand-animation");
       $(".milk-inner").removeClass("milk-inner-full");
       $(".milk-drop").removeClass("milk-drop-show");
@@ -1182,6 +1181,9 @@ $(function () {
       $(".girl-r-hand").removeClass("girl-r-hand-finish");
       $(".girl-l-hand-finish-milk").removeClass("girl-l-hand-finished-milk");
       $(".milk-stains").removeClass("milk-stains-show");
+      $(".milk-drop").removeClass("milk-drop-show");
+      $(".milk-smell").removeClass("milk-drop-show");
+      $(".milk-spot").removeClass("milk-drop-show");
 
       for (let i = 1; i <= 6; i++) {
         $(`.flower0${i}`).removeClass(`flower0${i}-finish`);
@@ -1207,17 +1209,23 @@ $(function () {
       }, 3000);
 
       setTimeout(() => {
+        $(".milk-flower").addClass("milk-drop-show");
         $(".milk-drop").removeClass("milk-drop-show");
       }, 5000);
+
+      setTimeout(() => {
+        $(".milk-spot").addClass("milk-drop-show");
+      }, 6000);
+
+      setTimeout(() => {
+        $(".milk-smell").addClass("milk-drop-show");
+      }, 7000);
     }
 
     // 小女孩喝奶動畫流程（只綁一次，不堆疊）
     $(".click-girl")
       .off("click")
       .on("click", function () {
-        if ($(this).hasClass("played")) return;
-        $(this).addClass("played");
-
         $(".click-girl").hide();
         $(".girl-l-hand-region").addClass("girl-l-hand-finish");
         $(".girl-r-hand").addClass("girl-r-hand-finish");
@@ -1318,10 +1326,8 @@ $(function () {
         btnDisabled();
 
         resetMilkPage(); // 每次重進頁面重置一次
-        // $(".girl-click-region").removeClass("played");
 
         setTimeout(() => {
-          // $(".girl-click-region").removeClass("disabled");
           $(".click-girl").show();
         }, 9000);
 

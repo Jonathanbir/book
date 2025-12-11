@@ -1,6 +1,7 @@
 body {
   font-family: Arial, sans-serif;
   background-color: #f4f4f4;
+  overflow: hidden;
 }
 
 .book-section {
@@ -1584,10 +1585,10 @@ audio {
   bottom: 0;
   margin: auto;
   z-index: 106;
-  width: 600px;
+  width: 500px;
   height: 600px;
   background-size: 100%;
-  background-image: url(./images/object/popup-board.png);
+  background-image: url(./images/book/book1415/板子.png);
   background-position: center;
   background-repeat: no-repeat;
   transition: all 2s ease-in-out;
@@ -2681,11 +2682,11 @@ audio {
 
 .milk-hand {
   position: absolute;
-  bottom: 25%;
+  bottom: 18%;
   left: 11%;
   z-index: 2;
-  width: 260px;
-  height: 150px;
+  width: 240px;
+  height: 140px;
   transform: rotate(0deg);
   background-size: 100%;
   background-position: center;
@@ -2695,9 +2696,9 @@ audio {
 }
 
 .milk-hand-animation {
-  bottom: 19%;
+  bottom: 21%;
+  left: 13.5%;
   transform: rotate(20deg);
-  transition: all 3s ease-in-out;
 }
 
 .milk-cup {
@@ -2733,6 +2734,19 @@ audio {
   height: 100px;
 }
 
+.mom-right-hand {
+  position: absolute;
+  bottom: 78px;
+  right: 217px;
+  z-index: 4;
+  width: 51px;
+  height: 74px;
+  background-size: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url("./images/book/book24/媽媽右手掌.png");
+}
+
 .milk-drop {
   position: absolute;
   bottom: 35px;
@@ -2749,6 +2763,55 @@ audio {
   transition: all 2s ease-in-out;
 }
 
+.milk-flower {
+  position: absolute;
+  bottom: 29%;
+  right: 36%;
+  z-index: 5;
+  width: 72px;
+  height: 136px;
+  background-size: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url("./images/book/book24/花花.png");
+  opacity: 0;
+  animation: flowereMove 5s ease-in-out infinite;
+  transition: all 2s ease-in-out;
+}
+
+.milk-smell {
+  position: absolute;
+  bottom: 20%;
+  right: 21%;
+  z-index: 5;
+  width: 169px;
+  height: 214px;
+  background-size: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url("./images/book/book24/香氣.png");
+  opacity: 0;
+  animation: lightShine 2s ease-in-out infinite;
+  transition: all 2s ease-in-out;
+}
+
+.milk-spot {
+  position: absolute;
+  bottom: 31%;
+  right: 44%;
+  z-index: 5;
+  width: 50px;
+  height: 132px;
+  background-size: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url("./images/book/book24/點點.png");
+  opacity: 0;
+  animation: flowereMove 5s ease-in-out infinite;
+  animation-delay: 1s;
+  transition: all 2s ease-in-out;
+}
+
 .milk-drop-show {
   opacity: 1;
 }
@@ -2757,20 +2820,6 @@ audio {
 .book25 {
   position: relative;
   background-image: url(./images/book/book25/book25.png);
-}
-
-.girl-click-region {
-  position: absolute;
-  bottom: 0;
-  right: 10%;
-  width: 450px;
-  height: 490px;
-  z-index: 99;
-  cursor: pointer;
-}
-
-.girl-click-region.disabled {
-  pointer-events: none;
 }
 
 .little-girl {
@@ -3021,7 +3070,7 @@ audio {
 .click-girl {
   display: none;
   position: absolute;
-  z-index: 9;
+  z-index: 999;
   left: 2%;
   top: 19%;
   width: 180px;
@@ -3594,6 +3643,18 @@ audio {
   }
 }
 
+@keyframes flowereMove {
+  0% {
+    transform: translateY(5px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+  100% {
+    transform: translateY(5px);
+  }
+}
+
 @media screen and (max-height: 500px) {
   .mobile {
     display: block;
@@ -3768,45 +3829,6 @@ audio {
     color: #000;
     padding: 15px 30px;
     border-radius: 10px;
-  }
-
-  .swipe-cotainer {
-    /* display: none;
-    position: fixed; */
-    z-index: 999999;
-    width: 100%;
-    height: 100vh;
-    /* background-color: #aaa; */
-    opacity: 0.5;
-  }
-
-  .swipe-pointer {
-    display: none;
-    position: fixed;
-    right: 35%;
-    bottom: 35%;
-    z-index: 99999999;
-    width: 100px;
-    height: 100px;
-    margin: auto;
-    background-size: 100%;
-    background-image: url(./images/pointer.png);
-    background-position: center;
-    background-repeat: no-repeat;
-    animation: pointerMove 1.5s ease-in-out infinite;
-    transition: all 1s ease-in-out;
-  }
-
-  @keyframes pointerMove {
-    0% {
-      transform: translateY(0px);
-    }
-    50% {
-      transform: translateY(-100px);
-    }
-    100% {
-      transform: translateY(0px);
-    }
   }
 
   .controls {
