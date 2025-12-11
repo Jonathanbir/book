@@ -323,17 +323,17 @@ audio {
   width: 100%;
   height: 137px;
   background-image: url("./images/book/book01/前草地.png");
-  background-size: contain;
+  background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
 }
 
 .grass-back-0 {
   position: absolute;
-  bottom: 9%;
+  bottom: -6%;
   z-index: 2;
   width: 100%;
-  height: 200px;
+  height: 310px;
   background-image: url(./images/book/book01/後草地.png);
   background-size: 100%;
   background-position: center;
@@ -390,18 +390,6 @@ audio {
   100% {
     transform: rotate(10deg);
   }
-}
-
-.right-hand-milk-box {
-  position: absolute;
-  bottom: -1%;
-  right: 14%;
-  z-index: 6;
-  width: 150px;
-  height: 300px;
-  background-image: url(./images/book/book01/鈴鈴右手牛奶盒.png);
-  background-size: 100%;
-  background-repeat: no-repeat;
 }
 
 .cow-0-1 {
@@ -551,19 +539,6 @@ audio {
   background-repeat: no-repeat;
 }
 
-.text-5 {
-  position: absolute;
-  top: 10%;
-  left: 0;
-  right: 0;
-  margin: auto;
-  width: 80%;
-  height: 300px;
-  background-image: url(./images/book/book05/文案.png);
-  background-size: 100%;
-  background-repeat: no-repeat;
-}
-
 .daughter-5 {
   position: absolute;
   bottom: 0%;
@@ -617,11 +592,11 @@ audio {
 
 .moms-hand-5 {
   position: absolute;
-  bottom: 153px;
-  right: 48%;
+  bottom: -3px;
+  right: 29.5%;
   z-index: 2;
-  width: 90px;
-  height: 100px;
+  width: 200px;
+  height: 261px;
   transform: translate(0%, 0%) rotate(-3deg);
   background-image: url(./images/book/book05/母親手.png);
   background-size: 100%;
@@ -709,10 +684,10 @@ audio {
   right: 0;
   bottom: -5%;
   z-index: 999;
-  width: 100%;
-  height: 100%;
+  width: 836px;
+  height: 459px;
   background-size: 100%;
-  background-image: url(./images/book/book0607/forest-1.png);
+  background-image: url(./images/book/book0607/森林1.png);
   background-position: center;
   background-repeat: no-repeat;
   transition: all 3s ease-in-out;
@@ -724,10 +699,10 @@ audio {
   left: 0;
   bottom: -5%;
   z-index: 999;
-  width: 100%;
-  height: 100%;
+  width: 475px;
+  height: 494px;
   background-size: 100%;
-  background-image: url(./images/book/book0607/forest-2.png);
+  background-image: url(./images/book/book0607/森林2.png);
   background-position: center;
   background-repeat: no-repeat;
   transition: all 3s ease-in-out;
@@ -740,9 +715,9 @@ audio {
   bottom: -5%;
   z-index: 999;
   width: 100%;
-  height: 100%;
+  height: 573px;
   background-size: 100%;
-  background-image: url(./images/book/book0607/forest-3.png);
+  background-image: url(./images/book/book0607/森林3.png);
   background-position: center;
   background-repeat: no-repeat;
   transition: all 3s ease-in-out;
@@ -781,10 +756,10 @@ audio {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: 380px;
+  height: 115px;
   background-size: 100%;
-  background-image: url(./images/book/book0607/clouc-5-1.png);
+  background-image: url(./images/book/book0607/雲1.png);
   background-position: center;
   background-repeat: no-repeat;
   opacity: 0;
@@ -810,10 +785,10 @@ audio {
   top: 0;
   left: 34%;
   z-index: 900;
-  width: 400px;
-  height: 130px;
+  width: 280px;
+  height: 100px;
   background-size: 100%;
-  background-image: url(./images/book/book0607/cloud-5-2.png);
+  background-image: url(./images/book/book0607/雲2.png);
   background-position: center;
   background-repeat: no-repeat;
   opacity: 0;
@@ -837,11 +812,11 @@ audio {
 .cloud3 {
   position: absolute;
   top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  right: 0;
+  width: 300px;
+  height: 70px;
   background-size: 100%;
-  background-image: url(./images/book/book0607/cloud-5-3.png);
+  background-image: url(./images/book/book0607/雲3.png);
   background-position: center;
   background-repeat: no-repeat;
   opacity: 0;
@@ -3831,33 +3806,6 @@ audio {
     }
     100% {
       transform: translateY(0px);
-    }
-  }
-
-  .arrow {
-    display: none;
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0%;
-    z-index: 999999;
-    width: 120px;
-    height: 400px;
-    margin: auto;
-    background-size: 100%;
-    background-image: url(./images/arrow.png);
-    background-position: center;
-    background-repeat: no-repeat;
-    animation: arrowShow 1s ease-in-out infinite;
-    transition: all 1s ease-in-out;
-  }
-
-  @keyframes arrowShow {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
     }
   }
 
