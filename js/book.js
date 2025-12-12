@@ -86,6 +86,8 @@ $(function () {
     //     innerWidth +
     //     "\nscreenHeight " +
     //     screenHeight +
+    //     "\ninnerHeight " +
+    //     innerHeight +
     //     "\n推算工具列高度" +
     //     barHeight +
     //     "\nisIOSChrome(): " +
@@ -105,12 +107,12 @@ $(function () {
         autoCenter: true,
       });
       $("#left-down-corner").css({
-        top: visualHeight + barHeight + "px",
+        top: visualHeight - 100 + "px",
         left: widthGap + "px",
       });
 
       $("#right-down-corner").css({
-        top: visualHeight + barHeight + "px",
+        top: visualHeight - 100 + "px",
         right: widthGap + "px",
       });
       // $("#left-down-corner,#right-down-corner").css("bottom", "18vh");
@@ -126,11 +128,11 @@ $(function () {
         autoCenter: true,
       });
       $("#left-down-corner").css({
-        bottom: "5vh",
+        top: visualHeight - 100,
         left: widthGap + "px",
       });
       $("#right-down-corner").css({
-        bottom: "5vh",
+        top: visualHeight - 100,
         right: widthGap + "px",
       });
       // $("#left-down-corner,#right-down-corner").css("bottom", "8vh");
@@ -710,11 +712,10 @@ $(function () {
 
     if (page === 4 || page === 5) {
       $(".eyes-ball").addClass("eyes-ball-animation");
-      $(".eyes-left").addClass("eyes-big-animation");
-      $(".eyes-right").addClass("eyes-big-animation");
+      $(".eyes-4").addClass("eyes-big-animation");
       $(".question").addClass("question-animation");
     } else {
-      $(".eyes-ball").removeClass("eyes-ball-animation");
+      $(".eyes-4").removeClass("eyes-big-animation");
       $(".question").removeClass("question-animation");
     }
 
@@ -774,7 +775,9 @@ $(function () {
     }
 
     if (page === 8 || page === 9) {
-      $("#flipbook").append('<div class="mom-daughter"></div>');
+      $("#flipbook").append(
+        '<img class="mom-daughter" src="./images/book/book08/鈴鈴媽媽.png"/>'
+      );
       $("#flipbook").append('<div class="bubble7"></div>');
       $("#flipbook").append('<div class="star7"></div>');
       setTimeout(() => {
@@ -817,19 +820,22 @@ $(function () {
         $(".cloud-01").addClass("cloud-animation");
         $(".cloud-02").addClass("cloud-animation");
       }, 50);
-      $("#flipbook").append('  <div class="girls-head"></div>');
-      $("#flipbook").append('<div class="rainbow"></div>');
+      $("#flipbook").append(
+        '<img class="girls-head" src="./images/book/book10/媽媽鈴鈴.png"/>'
+      );
+      $("#flipbook").append(
+        '<img class="rainbow"  src="./images/book/book11/彩虹.png"/></div>'
+      );
       $("#flipbook").append('<div class="star11"></div>');
       $("#flipbook").append('<div class="bubble11"></div>');
-      if (window.matchMedia("(max-height: 500px)").matches) {
-        $(".rainbow").css("width", bookWidth);
-        $(".rainbow").css("height", bookHeight);
-      }
-
       $("#flipbook").append('<div class="cloud-group"></div>');
       $("#flipbook").append('<div class="cow05"></div>');
-      $("#flipbook").append('<div class="list-board"></div>');
-      $("#flipbook").append('<div class="list"></div>');
+      $("#flipbook").append(
+        '<img src="./images/book/book11/手.png" class="list-board"/>'
+      );
+      $("#flipbook").append(
+        '<img src="./images/book/book11/清單內容.png" class="list"/>'
+      );
 
       setTimeout(() => {
         $(".bubble11").addClass("bubble-fade-in");
@@ -1027,15 +1033,12 @@ $(function () {
         btnDisabled();
         $("#flipbook").append(`
             <div class="story-text16"></div>
-            <div class="girl"></div>
             <div class="mom-cow"></div>
             <div class="stethoscope disabled"></div>
             <div class="cow-eyes"></div>
             <div class="cow-heart"></div>
             <div class="dondon"></div>
-            <div class="nurse-head"></div>
-            <div class="nurse-body"></div>
-            <div class="nurse-hand"></div>
+            <div class="nurse-girl"></div>
             <div class="click-hearing-heart"></div>
             <div class="board-list03"></div>   
             <div class="check check03"></div>
@@ -1113,15 +1116,12 @@ $(function () {
       $(".success-hint03").removeClass("bubble-fade-in");
       $(".dondon").removeClass("bubble-fade-in");
       $("#flipbook .story-text16").remove();
-      $("#flipbook .girl").remove();
       $("#flipbook .mom-cow").remove();
       $("#flipbook .stethoscope").remove();
       $("#flipbook .cow-eyes").remove();
       $("#flipbook .cow-heart").remove();
       $("#flipbook .dondon").remove();
-      $("#flipbook .nurse-head").remove();
-      $("#flipbook .nurse-body").remove();
-      $("#flipbook .nurse-hand").remove();
+      $("#flipbook .nurse-girl").remove();
       $("#flipbook .click-hearing-heart").remove();
       $("#flipbook .check03").remove();
       $("#flipbook .board-list03").remove();
@@ -1136,7 +1136,6 @@ $(function () {
       <div class="coin-all  coin01-final"></div>
       <div class="coin-all coin02-final"></div>
       <div class="coin-all coin03-final"></div>
-      <div class="coin-all-light"></div>
       <div class="coin-all-shine"></div>
       <div class="crown"></div>
       <div class="bubble18"></div>
@@ -1146,7 +1145,6 @@ $(function () {
         $(".coin01-final, .coin02-final, .coin03-final").addClass(
           "coin-all-animation"
         );
-        $(".coin-all-light").addClass("bubble-fade-in");
       }, 1200);
 
       setTimeout(() => {
@@ -1164,12 +1162,10 @@ $(function () {
         "coin-all-animation"
       );
       $(".crown").removeClass("crown-animation");
-      $(".coin-all-light").removeClass("bubble-fade-in");
       $(".coin-all-shine").removeClass("bubble-fade-in");
       $(".bubble18").removeClass("bubble-fade-in");
       $("#flipbook .bubble18").remove();
       $("#flipbook .crown").remove();
-      $("#flipbook .coin-all-light").remove();
       $("#flipbook .coin-all-shine").remove();
     }
 
@@ -1468,6 +1464,80 @@ $(function () {
       }, 3000);
     }
 
+    if (window.matchMedia("(max-height: 500px)").matches) {
+      if (page === 4 || page === 5) {
+        if (isSafari() || isIOSChrome()) {
+          $(".moms-hand-5").css({
+            bottom: (visualHeight * 153) / 609 + "px",
+          });
+        }
+        if (isAndroidChrome()) {
+          $(".moms-hand-5").css({
+            bottom: (screenHeight * 153) / 609 + "px",
+          });
+        }
+      }
+
+      if (page === 6 || page === 7) {
+        $("#flipbook").append('<div class="clouds"></div>');
+        setTimeout(() => {
+          $(".clouds").addClass("cloud-fade-in");
+        }, 3000);
+
+        if (isSafari() || isIOSChrome()) {
+          $(".knock").css({
+            right: (visualHeight * 200) / 609 + "px",
+            bottom: (visualHeight * 150) / 609 + "px",
+          });
+        }
+        if (isAndroidChrome()) {
+          $(".knock").css({
+            right: (screenHeight * 200) / 609 + "px",
+            bottom: (screenHeight * 150) / 609 + "px",
+          });
+        }
+      } else {
+        $("#flipbook .clouds").remove();
+        $(".clouds").removeClass("cloud-fade-in");
+      }
+
+      if (page === 16 || page === 17) {
+        $(".click-hearing-heart").css({
+          right: (visualHeight * 180) / 609 + "px",
+          bottom: (visualHeight * 70) / 609 + "px",
+        });
+      }
+      if (isAndroidChrome()) {
+        $(".click-hearing-heart").css({
+          right: (screenHeight * 180) / 609 + "px",
+          bottom: (screenHeight * 70) / 609 + "px",
+        });
+      }
+
+      if (page === 18 || page === 19) {
+        if (isSafari() || isIOSChrome()) {
+          $(".crown").css({
+            width: (visualHeight * 150) / 609 + "px",
+            height: (visualHeight * 150) / 609 + "px",
+          });
+          $(".coin-all").css({
+            width: (visualHeight * 130) / 609 + "px",
+            height: (visualHeight * 130) / 609 + "px",
+          });
+        }
+        if (isAndroidChrome()) {
+          $(".crown").css({
+            width: (screenHeight * 150) / 609 + "px",
+            height: (screenHeight * 150) / 609 + "px",
+          });
+          $(".coin-all").css({
+            width: (screenHeight * 130) / 609 + "px",
+            height: (screenHeight * 130) / 609 + "px",
+          });
+        }
+      }
+    }
+
     let playTimeout;
     let latestPage = 1;
 
@@ -1649,7 +1719,7 @@ $(function () {
     if (Math.abs(swipeDistance) < 30) return;
 
     // ❌ 冷卻期間禁止翻頁
-    if (!canFlip) return;
+    // if (!canFlip) return;
 
     canFlip = false; // 鎖住翻頁
 
@@ -1660,8 +1730,8 @@ $(function () {
     }
 
     // ✅ 3 秒後解除鎖定
-    setTimeout(() => {
-      canFlip = true;
-    }, 3000);
+    // setTimeout(() => {
+    //   canFlip = true;
+    // }, 3000);
   }
 });
