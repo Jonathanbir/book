@@ -1235,8 +1235,8 @@ $(function () {
       $(".girl-l-hand-finish-milk").removeClass("girl-l-hand-finished-milk");
       $(".milk-stains").removeClass("milk-stains-show");
       $(".milk-drop").removeClass("milk-drop-show");
-      $(".milk-smell").removeClass("milk-drop-show");
-      $(".milk-spot").removeClass("milk-drop-show");
+      $(".milk-flower").removeClass("milk-drop-show");
+      $(".milk-smell").removeClass("milk-smell-animation");
 
       for (let i = 1; i <= 6; i++) {
         $(`.flower0${i}`).removeClass(`flower0${i}-finish`);
@@ -1267,12 +1267,8 @@ $(function () {
       }, 5000);
 
       setTimeout(() => {
-        $(".milk-spot").addClass("milk-drop-show");
+        $(".milk-smell").addClass("milk-smell-animation");
       }, 6000);
-
-      setTimeout(() => {
-        $(".milk-smell").addClass("milk-drop-show");
-      }, 7000);
     }
 
     // 小女孩喝奶動畫流程（只綁一次，不堆疊）

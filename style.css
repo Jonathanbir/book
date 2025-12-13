@@ -2636,12 +2636,13 @@ audio {
 
 .milk-hand {
   position: absolute;
-  bottom: 18%;
-  left: 11%;
+  bottom: 13%;
+  left: -6%;
+  transform: rotate(-5deg);
   z-index: 2;
-  width: 240px;
-  height: 140px;
-  transform: rotate(0deg);
+  width: 100%;
+  height: 100%;
+  margin: auto;
   background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
@@ -2650,19 +2651,21 @@ audio {
 }
 
 .milk-hand-animation {
-  bottom: 21%;
-  left: 13.5%;
-  transform: rotate(20deg);
+  bottom: 0;
+  left: 0;
+  transform: rotate(0deg);
 }
 
 .milk-cup {
   position: absolute;
-  bottom: 7px;
-  right: 221px;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
   z-index: 4;
-  width: 110px;
-  height: 150px;
-  transform: rotate(0deg);
+  width: 100%;
+  height: 100%;
+  margin: auto;
   background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
@@ -2671,12 +2674,14 @@ audio {
 
 .milk-inner {
   position: absolute;
-  bottom: 41px;
-  right: 240px;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
   z-index: 3;
-  width: 69px;
-  height: 0;
-  transform: rotate(0deg);
+  width: 100%;
+  opacity: 0;
+  margin: auto;
   background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
@@ -2685,16 +2690,19 @@ audio {
 }
 
 .milk-inner-full {
-  height: 100px;
+  opacity: 1;
 }
 
 .mom-right-hand {
   position: absolute;
-  bottom: 78px;
-  right: 217px;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
   z-index: 4;
-  width: 51px;
-  height: 74px;
+  width: 100%;
+  height: 100%;
+  margin: auto;
   background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
@@ -2703,12 +2711,14 @@ audio {
 
 .milk-drop {
   position: absolute;
-  bottom: 35px;
-  right: 254px;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
   z-index: 2;
-  width: 50px;
-  height: 150px;
-  transform: rotate(7deg);
+  width: 100%;
+  height: 100%;
+  margin: auto;
   background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
@@ -2719,11 +2729,14 @@ audio {
 
 .milk-flower {
   position: absolute;
-  bottom: 29%;
-  right: 36%;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
   z-index: 5;
-  width: 72px;
-  height: 136px;
+  width: 100%;
+  height: 100%;
+  margin: auto;
   background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
@@ -2735,34 +2748,23 @@ audio {
 
 .milk-smell {
   position: absolute;
-  bottom: 20%;
-  right: 21%;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
   z-index: 5;
-  width: 169px;
-  height: 214px;
+  width: 100%;
+  height: 100%;
+  margin: auto;
   background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
   background-image: url("./images/book/book24/香氣.png");
   opacity: 0;
-  animation: lightShine 2s ease-in-out infinite;
-  transition: all 2s ease-in-out;
 }
 
-.milk-spot {
-  position: absolute;
-  bottom: 31%;
-  right: 44%;
-  z-index: 5;
-  width: 50px;
-  height: 132px;
-  background-size: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-image: url("./images/book/book24/點點.png");
-  opacity: 0;
-  animation: flowereMove 5s ease-in-out infinite;
-  animation-delay: 1s;
+.milk-smell-animation {
+  animation: lightShine 2s ease-in-out infinite;
   transition: all 2s ease-in-out;
 }
 
@@ -4269,31 +4271,6 @@ audio {
   .crown {
     right: 43%;
     top: 10%;
-  }
-
-  .milk-hand {
-    left: 13%;
-    width: 200px;
-  }
-
-  .milk-cup {
-    bottom: 4px;
-    right: 208px;
-  }
-
-  .milk-drop {
-    right: 215px;
-    bottom: 15px;
-  }
-
-  .milk-inner {
-    bottom: 15px;
-    right: 214px;
-    width: 55px;
-  }
-
-  .milk-inner-full {
-    height: 50px;
   }
 
   .milk-stains {
