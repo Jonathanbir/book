@@ -1275,6 +1275,30 @@ $(function () {
     $(".click-girl")
       .off("click")
       .on("click", function () {
+        setTimeout(() => {
+          if (isAndroidChrome()) {
+            $(".girl-l-hand-finish").css({
+              top: (screenHeight * 314.276) / 609 + "px",
+              left: (screenHeight * 117.075) / 609 + "px",
+            });
+            $(".girl-r-hand-finish").css({
+              bottom: (screenHeight * 104.95) / 609 + "px",
+              right: (screenHeight * 212.32) / 609 + "px",
+            });
+          }
+
+          if (isSafari() || isIOSChrome()) {
+            $(".girl-l-hand-finish").css({
+              top: (visualHeight * 305) / 609 + "px",
+              left: (visualHeight * 125.14) / 609 + "px",
+            });
+            $(".girl-r-hand-finish").css({
+              bottom: (visualHeight * 114.1226) / 609 + "px",
+              right: (visualHeight * 212.13) / 609 + "px",
+            });
+          }
+        }, 100);
+
         $(".click-girl").hide();
         $(".girl-l-hand-region").addClass("girl-l-hand-finish");
         $(".girl-r-hand").addClass("girl-r-hand-finish");
@@ -1308,6 +1332,39 @@ $(function () {
 
     // Animation flow — page 28/29
     function startFamilyAnimation() {
+      if (window.matchMedia("(max-height: 500px)").matches) {
+        setTimeout(() => {
+          if (isAndroidChrome()) {
+            $(".father-hand-finish").css({
+              top: (screenHeight * 359.2) / 609 + "px", //243
+              left: (screenHeight * 53.214) / 609 + "px", //36
+            });
+            $(".daughter-hand-finish").css({
+              top: (screenHeight * 403.536) / 609 + "px", //273
+              left: (screenHeight * 375.45) / 609 + "px", //254
+            });
+            $(".mom-hand-finish").css({
+              transform:
+                `translate(` +
+                (screenHeight * 84.255) / 609 +
+                `px,` +
+                (screenHeight * -75.386) / 609 +
+                `px) rotate(33deg)`,
+            }); //transform: translate(57px, -51px) rotate(33deg);
+          }
+
+          if (isSafari() || isIOSChrome()) {
+            $(".father-hand-finish").css({
+              top: (visualHeight * 305) / 609 + "px",
+              left: (visualHeight * 125.14) / 609 + "px",
+            });
+            $(".daughter-hand-finish").css({
+              bottom: (visualHeight * 114.1226) / 609 + "px",
+              right: (visualHeight * 212.13) / 609 + "px",
+            });
+          }
+        }, 550);
+      }
       $(".father-hand-region").addClass("father-hand-finish");
       $(".daughter-hand-region").addClass("daughter-hand-finish");
       $(".mom-hand-region").addClass("mom-hand-finish");
@@ -1392,7 +1449,7 @@ $(function () {
         if (!$(".mom-hand").length) {
           setTimeout(() => {
             $("#flipbook").append(
-              '<div class="mom-hand-region"><div class="mom-hand-milk"></div><div class="mom-hand-cup"></div><div class="mom-hand"></div></div>'
+              ' <div class="mom-hand-region"><div class="mom-hand-milk-region"><img class="mom-hand-milk" src="./images/book/book2627/牛奶.png"/><img class="mom-hand-cup" src="./images/book/book2627/空杯.png"/></div><img class="mom-hand" src="./images/book/book2627/媽媽手.png"/></div>'
             );
           }, 500);
         }
@@ -1529,6 +1586,168 @@ $(function () {
           $(".coin-all").css({
             width: (screenHeight * 130) / 609 + "px",
             height: (screenHeight * 130) / 609 + "px",
+          });
+        }
+      }
+      // console.log("visualHeight:", visualHeight);
+      // console.log("screenHeight:", screenHeight);
+
+      if (page === 24 || page === 25) {
+        if (isSafari() || isIOSChrome()) {
+          $(".girl-l-hand-region").css({
+            top: (visualHeight * 373.1) / 609 + "px",
+            left: (visualHeight * 120.14) / 609 + "px",
+          });
+          $(".girl-r-hand").css({
+            bottom: (visualHeight * 72.177) / 609 + "px",
+            right: (visualHeight * 210.576) / 609 + "px",
+          });
+        }
+        if (isAndroidChrome()) {
+          $(".girl-l-hand-region").css({
+            top: (screenHeight * 363.6) / 609 + "px",
+            left: (screenHeight * 117.075) / 609 + "px",
+          });
+
+          if (screenHeight <= 360) {
+            $(".girl-l-hand-cup").css({
+              bottom: (screenHeight * 144.638) / 609 + "px",
+              right: (screenHeight * 42.62) / 609 + "px",
+            });
+            $(".girl-l-hand-milk").css({
+              bottom: (screenHeight * 147.18) / 609 + "px",
+              right: (screenHeight * 50.75) / 609 + "px",
+            });
+          } else {
+            $(".girl-l-hand-cup").css({
+              bottom: "54%",
+            });
+            $(".girl-l-hand-milk").css({
+              bottom: "55%",
+            });
+          }
+
+          $(".girl-l-hand").css({
+            width: (screenHeight * 109.96) / 609 + "px",
+          });
+          $(".girl-r-hand").css({
+            width: (screenHeight * 192.16) / 609 + "px",
+            bottom: (screenHeight * 58.8) / 609 + "px",
+            right: (screenHeight * 209.5) / 609 + "px",
+          });
+        }
+      }
+
+      if (page === 26 || page === 27) {
+        if (isSafari() || isIOSChrome()) {
+          $(".girl-l-hand-region").css({
+            top: (visualHeight * 373.1) / 609 + "px",
+            left: (visualHeight * 120.14) / 609 + "px",
+          });
+          $(".girl-r-hand").css({
+            bottom: (visualHeight * 72.177) / 609 + "px",
+            right: (visualHeight * 210.576) / 609 + "px",
+          });
+        }
+        if (isAndroidChrome()) {
+          $(".cheers").css({
+            bottom: (screenHeight * 383.73) / 609 + "px", //259.6px
+          });
+          $(".milk-box").css({
+            width: (screenHeight * 106.427) / 609 + "px", //72px
+            top: (screenHeight * 307.456) / 609 + "px", //208px
+            left: (screenHeight * 211.3765) / 609 + "px", //143px
+          });
+
+          $(".father-hand-region").css({
+            width: (screenHeight * 325.197) / 609 + "px", //220px
+            top: (screenHeight * 395.85) / 609 + "px", //267.8px
+            left: (screenHeight * 78.34) / 609 + "px", //53px
+          });
+
+          $(".father-hand").css({
+            width: (screenHeight * 295.63) / 609 + "px", //200px
+          });
+
+          $(".father-hand-cup").css({
+            width: (screenHeight * 72.43) / 609 + "px", //49px
+            bottom: (screenHeight * -88.69) / 609 + "px", //-60px
+            left: (screenHeight * 232.07) / 609 + "px", //157px
+          });
+
+          $(".father-hand-milk").css({
+            width: (screenHeight * 73.9) / 609 + "px", //50px
+            bottom: (screenHeight * -79.82) / 609 + "px", //-54px
+            left: (screenHeight * 2378) / 609 + "px", //161px
+          });
+
+          $(".daughter-hand-region").css({
+            top: (screenHeight * 395.85) / 609 + "px", //267.8px
+            left: (screenHeight * 371.475) / 609 + "px", //251.31px
+          });
+
+          $(".daughter-hand").css({
+            width: (screenHeight * 59.126) / 609 + "px", //40px
+          });
+
+          $(".daughter-hand-cup").css({
+            width: (screenHeight * 59.126) / 609 + "px", //40px
+          });
+
+          $(".daughter-hand-milk").css({
+            width: (screenHeight * 59.126) / 609 + "px", //40px
+            bottom: (screenHeight * -107.9) / 609 + "px", //-73
+            left: (screenHeight * 38.432) / 609 + "px", //26px
+          });
+
+          setTimeout(() => {
+            $(".mom-hand-region").css({
+              bottom: (screenHeight * 224.68) / 609 + "px", //152px
+              right: (screenHeight * 739.078) / 609 + "px", //500px
+            });
+
+            $(".mom-hand").css({
+              width: (screenHeight * 229.114) / 609 + "px", //155px
+            });
+
+            $(".mom-hand-cup").css({
+              width: (screenHeight * 59.126) / 609 + "px", //40px
+              bottom: (screenHeight * -82.255) / 609 + "px", //-57px
+              left: (screenHeight * 8.869) / 609 + "px", //-6px
+            });
+
+            $(".mom-hand-milk").css({
+              width: (screenHeight * 59.126) / 609 + "px", //40px
+              bottom: (screenHeight * -82.255) / 609 + "px", //-57px
+              left: (screenHeight * 8.869) / 609 + "px", //-6px
+            });
+          }, 550);
+
+          if (screenHeight <= 360) {
+            $(".girl-l-hand-cup").css({
+              bottom: (screenHeight * 144.638) / 609 + "px",
+              right: (screenHeight * 42.62) / 609 + "px",
+            });
+            $(".girl-l-hand-milk").css({
+              bottom: (screenHeight * 147.18) / 609 + "px",
+              right: (screenHeight * 50.75) / 609 + "px",
+            });
+          } else {
+            $(".girl-l-hand-cup").css({
+              bottom: "54%",
+            });
+            $(".girl-l-hand-milk").css({
+              bottom: "55%",
+            });
+          }
+
+          $(".girl-l-hand").css({
+            width: (screenHeight * 109.96) / 609 + "px",
+          });
+          $(".girl-r-hand").css({
+            width: (screenHeight * 192.16) / 609 + "px",
+            bottom: (screenHeight * 58.8) / 609 + "px",
+            right: (screenHeight * 209.5) / 609 + "px",
           });
         }
       }

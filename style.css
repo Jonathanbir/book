@@ -66,8 +66,8 @@ audio {
 }
 
 #flipbook .page img {
-  width: 100%;
-  height: 100%;
+  /* width: 100%;
+  height: 100%; */
   object-fit: cover; /* 讓圖片不會被拉伸變形，可改為 contain 看需求 */
   display: block;
 }
@@ -2636,8 +2636,8 @@ audio {
 
 .milk-hand {
   position: absolute;
-  bottom: 13%;
-  left: -6%;
+  bottom: 6%;
+  left: 0%;
   transform: rotate(-5deg);
   z-index: 2;
   width: 100%;
@@ -2647,7 +2647,7 @@ audio {
   background-position: center;
   background-repeat: no-repeat;
   background-image: url("./images/book/book24/手拿牛奶.png");
-  transition: all 3s ease-in-out;
+  transition: all 1.5s ease-in-out;
 }
 
 .milk-hand-animation {
@@ -2780,11 +2780,14 @@ audio {
 
 .little-girl {
   position: absolute;
-  right: 34px;
-  bottom: -4px;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
   z-index: 2;
-  width: 449px;
-  height: 489px;
+  width: 100%;
+  height: 100%;
+  margin: auto;
   background-size: 100%;
   background-image: url(./images/book/book25/鈴鈴.png);
   background-position: center;
@@ -2809,11 +2812,14 @@ audio {
 
 .milk-stains {
   position: absolute;
-  right: 44%;
-  top: 45%;
-  z-index: 4;
-  width: 50px;
-  height: 20px;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 5;
+  width: 100%;
+  height: 100%;
+  margin: auto;
   background-size: 100%;
   background-image: url(./images//book/book25/牛奶鬍.png);
   background-position: center;
@@ -2830,15 +2836,10 @@ audio {
   position: absolute;
   z-index: 1;
   width: 85px;
-  height: 85px;
-  background-size: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
   transition: all 1.5s ease-in-out;
 }
 
 .flower01 {
-  background-image: url(./images/book/book25/花1.png);
   right: 34%;
   top: 29%;
   transform: rotate(-180deg);
@@ -2853,7 +2854,6 @@ audio {
 }
 
 .flower02 {
-  background-image: url(./images/book/book25/花2.png);
   right: 40%;
   top: 57%;
   transform: rotate(180deg);
@@ -2863,12 +2863,10 @@ audio {
   right: 23%;
   top: 57%;
   width: 67px;
-  height: 50px;
   transform: rotate(-21deg);
 }
 
 .flower03 {
-  background-image: url(./images/book/book25/花3.png);
   right: 38%;
   top: 79%;
   transform: rotate(180deg);
@@ -2878,12 +2876,10 @@ audio {
   right: 18%;
   top: 69%;
   width: 90px;
-  height: 80px;
   transform: rotate(0deg);
 }
 
 .flower04 {
-  background-image: url(./images/book/book25/花4.png);
   left: 38%;
   top: 40%;
   transform: rotate(-180deg);
@@ -2893,12 +2889,10 @@ audio {
   left: 8%;
   top: 52%;
   width: 140px;
-  height: 140px;
   transform: rotate(29deg);
 }
 
 .flower05 {
-  background-image: url(./images/book/book25/花5.png);
   left: 40%;
   top: 37%;
   transform: rotate(-180deg);
@@ -2908,12 +2902,10 @@ audio {
   left: 10%;
   top: 37%;
   width: 75px;
-  height: 65px;
   transform: rotate(0deg);
 }
 
 .flower06 {
-  background-image: url(./images/book/book25/花6.png);
   left: 36%;
   top: 37%;
   transform: rotate(0deg);
@@ -2923,7 +2915,6 @@ audio {
   left: 26%;
   top: 17%;
   width: 120px;
-  height: 120px;
   transform: rotate(-127deg);
 }
 
@@ -2941,11 +2932,6 @@ audio {
   position: absolute;
   z-index: 3;
   width: 101px;
-  height: 141px;
-  background-size: 100%;
-  background-image: url(./images/book/book25/左手臂.png);
-  background-position: center;
-  background-repeat: no-repeat;
 }
 
 .girl-l-hand-empty {
@@ -2953,7 +2939,7 @@ audio {
 }
 
 .girl-l-hand-finish {
-  left: 28%;
+  left: 23%;
   top: 50%;
   transform: rotate(25deg);
 }
@@ -2964,11 +2950,6 @@ audio {
   bottom: 35%;
   z-index: 2;
   width: 76px;
-  height: 100px;
-  background-size: 100%;
-  background-image: url(./images/book/book25/牛奶.png);
-  background-position: center;
-  background-repeat: no-repeat;
   transition: all 1s ease-in-out;
 }
 
@@ -2978,25 +2959,7 @@ audio {
   bottom: 34%;
   z-index: 2;
   width: 85px;
-  height: 129px;
-  background-size: 100%;
-  background-image: url(./images/book/book25/牛奶杯.png);
-  background-position: center;
-  background-repeat: no-repeat;
   transition: all 1s ease-in-out;
-}
-
-.girl-l-hand-finish-milk {
-  position: absolute;
-  z-index: 3;
-  width: 138px;
-  height: 185px;
-  background-size: 100%;
-  opacity: 0;
-  background-image: url(./images/book/book25/girl-l-hand-finish.png);
-  background-position: center;
-  background-repeat: no-repeat;
-  transition: all 1.5s ease-in-out;
 }
 
 .girl-l-hand-finished-milk {
@@ -3005,22 +2968,17 @@ audio {
 
 .girl-r-hand {
   position: absolute;
-  right: 28.5%;
+  right: 33.5%;
   bottom: 56px;
   z-index: 3;
   width: 193px;
-  height: 156px;
-  background-size: 100%;
-  background-image: url(./images/book/book25/右手臂.png);
-  background-position: center;
-  background-repeat: no-repeat;
   transition: all 1.5s ease-in-out;
 }
 
 .girl-r-hand-finish {
   transform: rotate(28deg);
-  right: 30%;
-  bottom: 103px;
+  right: 35%;
+  bottom: 100px;
 }
 
 .click-girl {
@@ -3096,11 +3054,6 @@ audio {
 .father-hand {
   position: absolute;
   width: 300px;
-  height: 147px;
-  background-size: 100%;
-  background-image: url(./images/book/book2627/爸爸手.png);
-  background-position: center;
-  background-repeat: no-repeat;
 }
 
 .father-hand-cup {
@@ -3109,11 +3062,6 @@ audio {
   bottom: -61px;
   z-index: 0;
   width: 66px;
-  height: 96px;
-  background-size: 100%;
-  background-image: url(./images/book/book2627/空杯.png);
-  background-position: center;
-  background-repeat: no-repeat;
 }
 
 .father-hand-milk {
@@ -3121,11 +3069,6 @@ audio {
   left: 245px;
   bottom: -55px;
   width: 61px;
-  height: 81px;
-  background-size: 100%;
-  background-image: url(./images/book/book2627/牛奶.png);
-  background-position: center;
-  background-repeat: no-repeat;
   transition: all 1.5s ease-in-out;
 }
 
@@ -3164,11 +3107,6 @@ audio {
   position: absolute;
   z-index: 2;
   width: 57px;
-  height: 82px;
-  background-size: 100%;
-  background-image: url(./images/book/book2627/鈴鈴手.png);
-  background-position: center;
-  background-repeat: no-repeat;
   transition: all 1.5s ease-in-out;
 }
 
@@ -3178,12 +3116,7 @@ audio {
   bottom: -74px;
   z-index: 0;
   width: 66px;
-  height: 96px;
-  background-size: 100%;
-  background-image: url(./images/book/book2627/空杯.png);
-  background-position: center;
-  background-repeat: no-repeat;
-  transform: rotate(-8deg);
+  transform: rotate(12deg);
 }
 
 .daughter-hand-milk {
@@ -3191,13 +3124,8 @@ audio {
   left: 29px;
   bottom: -69px;
   width: 60px;
-  height: 81px;
-  background-size: 100%;
-  background-image: url(./images/book/book2627/牛奶.png);
-  background-position: center;
-  background-repeat: no-repeat;
   transition: all 1.5s ease-in-out;
-  transform: rotate(-8deg);
+  transform: rotate(12deg);
 }
 
 .daughter-hand-milk-region {
@@ -3212,7 +3140,9 @@ audio {
 }
 
 .daughter-hand-finish {
-  transform: rotate(-45deg);
+  left: 62%;
+  top: 67%;
+  transform: rotate(-65deg);
 }
 
 .cheers {
@@ -3240,12 +3170,7 @@ audio {
 
 .mom-hand {
   position: absolute;
-  width: 240px;
-  height: 140px;
-  background-size: 100%;
-  background-image: url(./images/book/book2627/媽媽手.png);
-  background-position: center;
-  background-repeat: no-repeat;
+  width: 200px;
   transition: all 1.5s ease-in-out;
 }
 
@@ -3255,11 +3180,6 @@ audio {
   bottom: -80px;
   z-index: 0;
   width: 66px;
-  height: 96px;
-  background-size: 100%;
-  background-image: url(./images/book/book2627/空杯.png);
-  background-position: center;
-  background-repeat: no-repeat;
   transform: rotate(-26deg);
 }
 
@@ -3268,11 +3188,6 @@ audio {
   left: -11px;
   bottom: -75px;
   width: 60px;
-  height: 81px;
-  background-size: 100%;
-  background-image: url(./images/book/book2627/牛奶.png);
-  background-position: center;
-  background-repeat: no-repeat;
   transition: all 1.5s ease-in-out;
   transform: rotate(-26deg);
 }
@@ -3280,7 +3195,6 @@ audio {
 .mom-hand-finish {
   right: 53%;
   bottom: 280px;
-  transform: scale(0.9) rotate(45deg);
 }
 
 .mom-hand-empty-move {
@@ -4273,21 +4187,7 @@ audio {
     top: 10%;
   }
 
-  .milk-stains {
-    right: 45%;
-    z-index: 3;
-  }
-
-  .father-hand {
-    bottom: 47px;
-    left: 19%;
-    width: 220px;
-    transform: scale(1);
-  }
-
   .father-hand-finish {
-    left: 20%;
-    bottom: 65px;
     transform: scale(1) rotate(-35deg);
   }
 
@@ -4298,28 +4198,17 @@ audio {
     transform: scale(1) rotate(-35deg);
   }
 
-  .daughter-hand {
-    width: 80px;
-    right: 23%;
-    bottom: 64px;
-  }
-
-  .daughter-hand-finish {
-    right: 18%;
-    bottom: 100px;
-  }
-
   .daughter-hand-empty-finish {
     width: 80px;
     right: 18%;
     bottom: 100px;
   }
 
-  .mom-hand {
+  /* .mom-hand {
     right: 40%;
     bottom: 60px;
     width: 200px;
-  }
+  } */
 
   .mom-hand-empty-finish {
     right: 40%;
@@ -4337,37 +4226,105 @@ audio {
     top: 240px;
   }
 
-  .little-girl {
-    position: absolute;
-    right: 25px;
-    bottom: -36px;
-    width: 400px;
-    height: 450px;
+  .click-girl {
+    left: 10%;
+    top: 10%;
+    width: 20%;
   }
 
   .girl-l-hand,
   .girl-l-hand-finish-milk {
-    width: 100px;
-    height: 155px;
+    width: 75px;
   }
 
   .girl-r-hand {
-    width: 150px;
+    width: 136px;
+    right: 34%;
+    bottom: 36px;
+  }
+
+  .girl-l-hand-region {
+    top: 59%;
+    left: 19%;
   }
 
   .girl-l-hand-finish {
-    bottom: 120px;
+    top: 51%;
+    left: 19%;
   }
 
   .girl-r-hand-finish {
-    right: 37%;
-    bottom: 60px;
+    right: 35%;
+    bottom: 72px;
+  }
+
+  .girl-l-hand-cup {
+    right: 17%;
+    bottom: 51%;
+    width: 60px;
+  }
+
+  .girl-l-hand-milk {
+    right: 21%;
+    bottom: 52%;
+    width: 55px;
+  }
+
+  .flower01-finish {
+    right: 18%;
+    top: 29%;
+    width: 50px;
+  }
+
+  .flower02-finish {
+    right: 24%;
+    top: 60%;
+    width: 50px;
+    transform: rotate(-4deg);
+  }
+
+  .flower03-finish {
+    right: 22%;
+    top: 74%;
+    width: 60px;
+  }
+
+  .flower04-finish {
+    left: 12%;
+    top: 58%;
+    width: 80px;
+  }
+
+  .flower05-finish {
+    top: 42%;
+    width: 50px;
+  }
+
+  .flower06-finish {
+    left: 27%;
+    top: 16%;
+    width: 80px;
   }
 
   .father-hand-empty,
   .daughter-hand-empty,
   .mom-hand-empty {
     transition: none;
+  }
+
+  .mom-hand-region {
+    right: initial;
+    bottom: initial;
+  }
+
+  .mom-hand {
+    width: initial;
+  }
+
+  .mom-hand-milk {
+    width: initial;
+    left: initial;
+    bottom: initial;
   }
 }
 
