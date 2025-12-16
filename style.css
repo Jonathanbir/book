@@ -3211,11 +3211,13 @@ audio {
   background-image: url(./images/book/book2627/愛心牛牛.png);
   background-position: center;
   background-repeat: no-repeat;
+  opacity: 0;
   transition: all 3s ease-in-out;
 }
 
 .cow-right-move {
   right: 0%;
+  opacity: 1;
 }
 
 .sweet-taste {
@@ -4300,10 +4302,11 @@ audio {
     transform: rotate(-72deg);
   }
 
-  .mom-hand-region {
-    right: initial;
-    bottom: initial;
-    transform: initial;
+  .mom-hand-region-mb {
+    position: absolute;
+    z-index: 99;
+    transition: all 1.5s ease-in-out;
+    opacity: 0;
   }
 
   .mom-hand {

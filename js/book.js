@@ -1343,7 +1343,7 @@ $(function () {
               top: (screenHeight * 403.536) / 609 + "px", //273
               left: (screenHeight * 375.45) / 609 + "px", //254
             });
-            $(".mom-hand-finish").css({
+            $(".mom-hand-finish-mb").css({
               transform:
                 `translate(` +
                 (screenHeight * 84.255) / 609 +
@@ -1363,7 +1363,7 @@ $(function () {
               left: (visualHeight * 377.1348) / 609 + "px", //280
             });
 
-            $(".mom-hand-finish").css({
+            $(".mom-hand-finish-mb").css({
               transform:
                 `translate(` +
                 (visualHeight * 32.33) / 609 +
@@ -1376,7 +1376,11 @@ $(function () {
       }
       $(".father-hand-region").addClass("father-hand-finish");
       $(".daughter-hand-region").addClass("daughter-hand-finish");
-      $(".mom-hand-region").addClass("mom-hand-finish");
+      if (window.matchMedia("(max-height: 500px)").matches) {
+        $(".mom-hand-region-mb").addClass("mom-hand-finish-mb");
+      } else {
+        $(".mom-hand-region").addClass("mom-hand-finish");
+      }
 
       setTimeout(() => {
         $(".father-hand-milk").addClass("father-hand-milk-empty");
@@ -1406,6 +1410,7 @@ $(function () {
         "father-hand-finish",
         "daughter-hand-finish",
         "mom-hand-finish",
+        "mom-hand-finish-mb",
 
         // 空手動畫
         "father-hand-milk-empty",
@@ -1453,16 +1458,29 @@ $(function () {
     // Turn.js event
     $("#flipbook").bind("turning", function (event, page) {
       if (page === 26 || page === 27) {
-        if (!$(".mom-hand").length) {
+        if (window.matchMedia("(max-height: 500px)").matches) {
           setTimeout(() => {
             $("#flipbook").append(
-              ' <div class="mom-hand-region"><div class="mom-hand-milk-region"><img class="mom-hand-milk" src="./images/book/book2627/牛奶.png"/><img class="mom-hand-cup" src="./images/book/book2627/空杯.png"/></div><img class="mom-hand" src="./images/book/book2627/媽媽手.png"/></div>'
+              ' <div class="mom-hand-region-mb"><div class="mom-hand-milk-region"><img class="mom-hand-milk" src="./images/book/book2627/牛奶.png"/><img class="mom-hand-cup" src="./images/book/book2627/空杯.png"/></div><img class="mom-hand" src="./images/book/book2627/媽媽手.png"/></div>'
             );
           }, 500);
+        } else {
+          if (!$(".mom-hand").length) {
+            setTimeout(() => {
+              $("#flipbook").append(
+                ' <div class="mom-hand-region"><div class="mom-hand-milk-region"><img class="mom-hand-milk" src="./images/book/book2627/牛奶.png"/><img class="mom-hand-cup" src="./images/book/book2627/空杯.png"/></div><img class="mom-hand" src="./images/book/book2627/媽媽手.png"/></div>'
+              );
+            }, 500);
+          }
         }
       } else {
-        $(".mom-hand").removeClass("mom-hand-finish");
-        $(".mom-hand-region").remove();
+        if (window.matchMedia("(max-height: 500px)").matches) {
+          $(".mom-hand-region-mb").remove();
+          $(".mom-hand").removeClass("mom-hand-finish-mb");
+        } else {
+          $(".mom-hand-region").remove();
+          $(".mom-hand").removeClass("mom-hand-finish");
+        }
       }
 
       if (page === 28) {
@@ -1648,7 +1666,7 @@ $(function () {
       if (page === 26 || page === 27) {
         if (isSafari() || isIOSChrome()) {
           $(".cheers").css({
-            bottom: (visualHeight * 349.68) / 609 + "px", //259.6px
+            bottom: (visualHeight * 385) / 609 + "px", //259.6px
           });
           $(".milk-box").css({
             width: (visualHeight * 96.984) / 609 + "px", //72px
@@ -1698,9 +1716,10 @@ $(function () {
           });
 
           setTimeout(() => {
-            $(".mom-hand-region").css({
+            $(".mom-hand-region-mb").css({
               bottom: (visualHeight * 204.744) / 609 + "px", //152px
               right: (visualHeight * 673.5) / 609 + "px", //500px
+              opacity: "1",
             });
 
             $(".mom-hand").css({
@@ -1776,9 +1795,10 @@ $(function () {
           });
 
           setTimeout(() => {
-            $(".mom-hand-region").css({
+            $(".mom-hand-region-mb").css({
               bottom: (screenHeight * 224.68) / 609 + "px", //152px
               right: (screenHeight * 739.078) / 609 + "px", //500px
+              opacity: "1",
             });
 
             $(".mom-hand").css({
