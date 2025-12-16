@@ -4312,6 +4312,10 @@ audio {
     transition: none;
   }
 
+  .daughter-hand-finish {
+    transform: rotate(-72deg);
+  }
+
   .mom-hand-region {
     right: initial;
     bottom: initial;
