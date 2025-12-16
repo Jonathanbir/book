@@ -3004,43 +3004,26 @@ audio {
   background-image: url(./images/book/book2627/book26.png);
 }
 
-.dad-milk-ink {
+.all-milk-stains {
   position: absolute;
-  right: 47.5%;
-  top: 42%;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
   z-index: 4;
-  width: 48px;
-  height: 20px;
+  width: 100%;
+  height: 100%;
+  margin: auto;
   background-size: 100%;
-  background-image: url(./images/object/dad-milk-ink.png);
+  background-image: url(./images/book/book2627/牛奶鬍.png);
   background-position: center;
   background-repeat: no-repeat;
   opacity: 0;
   transition: all 1.5s ease-in-out;
 }
 
-.dad-milk-ink-show {
+.all-milk-stains-show {
   opacity: 1;
-}
-
-.girls-milk-ink {
-  position: absolute;
-  right: 23%;
-  top: 54%;
-  z-index: 4;
-  width: 30px;
-  height: 15px;
-  background-size: 100%;
-  background-image: url(./images/object/girls-milk-ink.png);
-  background-position: center;
-  background-repeat: no-repeat;
-  opacity: 0;
-  transition: all 1.5s ease-in-out;
-}
-
-.mom-milk-ink {
-  right: 0%;
-  top: 51.5%;
 }
 
 .father-hand-region {
@@ -3195,6 +3178,7 @@ audio {
 .mom-hand-finish {
   right: 53%;
   bottom: 280px;
+  transform: scale(0.9) rotate(45deg);
 }
 
 .mom-hand-empty-move {
@@ -4319,6 +4303,7 @@ audio {
   .mom-hand-region {
     right: initial;
     bottom: initial;
+    transform: initial;
   }
 
   .mom-hand {

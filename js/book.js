@@ -1385,8 +1385,7 @@ $(function () {
       }, 2550);
 
       setTimeout(() => {
-        $(".dad-milk-ink ").addClass("dad-milk-ink-show ");
-        $(".girls-milk-ink ").addClass("girls-milk-ink-show ");
+        $(".all-milk-stains ").addClass("all-milk-stains-show ");
       }, 3000);
 
       setTimeout(() => {
@@ -1414,8 +1413,7 @@ $(function () {
         "mom-hand-milk-empty",
 
         // 墨水效果
-        "dad-milk-ink-show",
-        "girls-milk-ink-show",
+        "all-milk-stains-show",
 
         // 牛移動動畫
         "cow-right-move",
@@ -1423,7 +1421,7 @@ $(function () {
 
       // 批次移除所有指定 class
       $(
-        ".father-hand, .daughter-hand, .mom-hand, .dad-milk-ink, .girls-milk-ink, .cow-right"
+        ".father-hand, .daughter-hand, .mom-hand, .all-milk-stains, .girls-milk-ink, .cow-right"
       ).removeClass(removeClasses.join(" "));
 
       // 隱藏叫聲
@@ -1773,6 +1771,10 @@ $(function () {
             left: (screenHeight * 38.432) / 609 + "px", //26px
           });
 
+          $(".all-milk-stains ").css({
+            height: screenHeight + "px",
+          });
+
           setTimeout(() => {
             $(".mom-hand-region").css({
               bottom: (screenHeight * 224.68) / 609 + "px", //152px
@@ -1847,7 +1849,10 @@ $(function () {
       // 書本定位
       if (page === 1) {
         document.querySelector(".book-section").style.left = "-20%";
-      } else if (page === 28) {
+      } else if (
+        page === 28 &&
+        !window.matchMedia("(max-height: 500px)").matches
+      ) {
         document.querySelector(".book-section").style.left = "17%";
       } else {
         document.querySelector(".book-section").style.left = "0px";
