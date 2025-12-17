@@ -721,36 +721,21 @@ $(function () {
 
     if (page === 6 || page === 7) {
       $("#flipbook").append(
-        '<img class="knock" src="./images/book/book0607/點這裡.png" />'
+        `<img class="knock" src="./images/book/book0607/點這裡.png"/>
+        <img class="tree1" src="./images/book/book0607/森林1.png"/>
+        <img class="tree2" src="./images/book/book0607/森林2.png"/>           
+        <img class="tree3" src="./images/book/book0607/森林3.png"/>         
+        <img class="cloud2" src="./images/book/book0607/雲2.png"/>           
+        <img class="bubble67" src="./images/book/book0607/牛奶泡泡.png"/>           
+        <img class="star5" src="./images/book/book0607/亮晶晶.png"/>         
+        <img class="door-bg door-common" src="./images/book/book0607/門內.png"/>           
+        <img class="door door-common" src="./images/book/book0607/門.png"/>            
+        <img class="peoples" src="./images/book/book0607/媽媽鈴鈴.png"/>
+        `
       );
+
       const door = document.querySelector(".door");
-      $("#flipbook").append(
-        '<img class="tree1" src="./images/book/book0607/森林1.png" />'
-      );
-      $("#flipbook").append(
-        '<img class="tree2" src="./images/book/book0607/森林2.png" />'
-      );
-      $("#flipbook").append(
-        '<img class="tree3" src="./images/book/book0607/森林3.png" />'
-      );
-      $("#flipbook").append(
-        '<img class="cloud2" src="./images/book/book0607/雲2.png" />'
-      );
-      $("#flipbook").append(
-        '<img class="bubble67" src="./images/book/book0607/牛奶泡泡.png" />'
-      );
-      $("#flipbook").append(
-        '<img class="star5" src="./images/book/book0607/亮晶晶.png" />'
-      );
-      $("#flipbook").append(
-        '<img class="door-bg door-common" src="./images/book/book0607/門內.png"/>'
-      );
-      $("#flipbook").append(
-        '<img class="door door-common" src="./images/book/book0607/門.png"/>'
-      );
-      $("#flipbook").append(
-        '<img class="peoples" src="./images/book/book0607/媽媽鈴鈴.png" />'
-      );
+
       $("#flipbook .knock").on("click", () => {
         $(".knock").css("display", "none");
         playAudio("knock", 0);
@@ -798,10 +783,11 @@ $(function () {
 
     if (page === 8 || page === 9) {
       $("#flipbook").append(
-        '<img class="mom-daughter" src="./images/book/book08/鈴鈴媽媽.png"/>'
+        `<img class="mom-daughter" src="./images/book/book08/鈴鈴媽媽.png"/>
+        <img class="bubble7" src="./images/book/book08/牛奶泡泡.png"/>
+        <img class="star7" src="./images/book/book09/亮晶晶.png"/>
+        `
       );
-      $("#flipbook").append('<div class="bubble7"></div>');
-      $("#flipbook").append('<div class="star7"></div>');
       setTimeout(() => {
         $(".eyes-ball-8").addClass("eyes-ball-animation");
         $(".mom-daughter").addClass("mom-daughter-animation");
@@ -843,20 +829,15 @@ $(function () {
         $(".cloud-02").addClass("cloud-animation");
       }, 50);
       $("#flipbook").append(
-        '<img class="girls-head" src="./images/book/book10/媽媽鈴鈴.png"/>'
-      );
-      $("#flipbook").append(
-        '<img class="rainbow"  src="./images/book/book11/彩虹.png"/></div>'
-      );
-      $("#flipbook").append('<div class="star11"></div>');
-      $("#flipbook").append('<div class="bubble11"></div>');
-      $("#flipbook").append('<div class="cloud-group"></div>');
-      $("#flipbook").append('<div class="cow05"></div>');
-      $("#flipbook").append(
-        '<img src="./images/book/book11/手.png" class="list-board"/>'
-      );
-      $("#flipbook").append(
-        '<img src="./images/book/book11/清單內容.png" class="list"/>'
+        `<img class="girls-head" src="./images/book/book10/媽媽鈴鈴.png"/>        
+        <img class="rainbow"  src="./images/book/book11/彩虹.png"/>
+        <img class="star11" src="./images/book/book11/亮晶晶.png">
+        <img class="bubble11" src="./images/book/book11/牛奶泡泡.png">
+        <img class="cloud-group" src="./images/book/book11/雲01.png">
+        <img class="cow05" src="./images/book/book10/牛05.png"/>
+        <img src="./images/book/book11/手.png" class="list-board"/>
+        <img src="./images/book/book11/清單內容.png" class="list"/>
+        `
       );
 
       setTimeout(() => {
@@ -964,7 +945,16 @@ $(function () {
           <img class="check check02" src="./images/book/book13/綠勾.png"/>
           <div class="check-box"></div>
           <img class="click-milk" src="./images/book/book1415/點這裡.png"/>
-          <img class="bubble14" src="./images/book/book1415/牛奶泡泡.png"/>`);
+          <img class="bubble14" src="./images/book/book1415/牛奶泡泡.png"/>          
+           `);
+
+        setTimeout(() => {
+          $("#flipbook").append(
+            `<img class="cloud14-2" src="./images/book/book1415/雲2.png"/>      
+             <img class="text14" src="./images/book/book1415/故事14.png"/>`
+          );
+        }, 300);
+
         $(".book-section").append(`
                            <div class="popup-board-bg">
                               <div class="popup-close-btn">x</div>
@@ -1042,6 +1032,8 @@ $(function () {
     }
 
     if (page === 13 || page === 16) {
+      $("#flipbook .cloud14-2").remove();
+      $("#flipbook .text14").remove();
       $("#flipbook .click-milk").remove();
       $("#flipbook .board14").remove();
       $("#flipbook .board-list02").remove();
@@ -1072,18 +1064,18 @@ $(function () {
         btnPreviousDisabled();
         btnDisabled();
         $("#flipbook").append(`
-            <div class="story-text16"></div>
-            <div class="mom-cow"></div>
-            <div class="stethoscope disabled"></div>
-            <div class="cow-eyes"></div>
-            <div class="cow-heart"></div>
-            <div class="dondon"></div>
-            <div class="nurse-girl"></div>
-            <div class="click-hearing-heart"></div>
-            <div class="board-list03"></div>   
+            <img class="story-text16" src="./images/book/book1617/故事文.png"/>
+            <img class="mom-cow" src="./images/book/book1617/媽媽牛.png"/>
+            <img class="stethoscope disabled" src="./images/book/book1617/手.png"/>
+            <img class="cow-eyes" src="./images/book/book1617/牛眼睜開.png"/>
+            <img class="cow-heart" src="./images/book/book1617/牛愛心.png"/>
+            <img class="dondon" src="./images/book/book1617/咚咚.png">
+            <img class="nurse-girl" src="./images/book/book1617/鈴鈴護士.png"/>
+            <img class="click-hearing-heart" src="./images/book/book1617/點這裡.png"/>
+            <img class="board-list03" src="./images/book/book1617/任務清單.png"/>
             <img class="check check03" src="./images/book/book13/綠勾.png" />
-            <div class="board16"></div>
-            <div class="bubble16"></div>
+            <img class="board16" src="./images/book/book1415/板子.png">
+            <img class="bubble16" src="./images/book/book1617/牛奶泡泡.png"/>
             `);
         $("#flipbook").append(`<div class="check-box"></div>`);
         $(".book-section").append(`
@@ -1212,22 +1204,13 @@ $(function () {
     // 第 22–23 頁：小女孩夢境 + 浮出夢境
     if (page === 20 || page === 21) {
       $("#flipbook").append(
-        `<img class="dream04" src="./images/book/book2021/夢泡04.png" />`
-      );
-      $("#flipbook").append(
-        `<img class="dream-girl" src="./images/book/book2021/鈴鈴.png" />`
-      );
-      $("#flipbook").append(
-        `<img class="dialog20" src="./images/book/book2021/哇!.png"></div>`
-      );
-      $("#flipbook").append(
-        `<img class="dialog21" src="./images/book/book2021/嗯.png"></div>`
-      );
-      $("#flipbook").append(
-        `<img class="bubble20" src="./images/book/book2021/牛奶泡泡20.png" />`
-      );
-      $("#flipbook").append(
-        `<img class="star20" src="./images/book/book2021/亮晶晶.png" />`
+        `<img class="dream04" src="./images/book/book2021/夢泡04.png"/>
+        <img class="dream-girl" src="./images/book/book2021/鈴鈴.png"/>
+        <img class="dialog20" src="./images/book/book2021/哇!.png"/>
+        <img class="dialog21" src="./images/book/book2021/嗯.png"/>
+        <img class="bubble20" src="./images/book/book2021/牛奶泡泡20.png"/>
+        <img class="star20" src="./images/book/book2021/亮晶晶.png"/>
+        `
       );
       setTimeout(() => {
         $(".dream01").addClass("dream-animation");
@@ -1647,7 +1630,9 @@ $(function () {
       }
 
       if (page === 6 || page === 7) {
-        $("#flipbook").append('<div class="clouds"></div>');
+        $("#flipbook").append(
+          '<img class="clouds" src="./images/book/book0607/雲.png"/>'
+        );
         setTimeout(() => {
           $(".clouds").addClass("cloud-fade-in");
         }, 3000);

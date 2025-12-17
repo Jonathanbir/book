@@ -65,10 +65,6 @@ audio {
   border: 1px solid #ccc;
 }
 
-#flipbook .page img {
-  object-fit: contain; /* 讓圖片不會被拉伸變形，可改為 contain 看需求 */
-}
-
 #flipbook .page p {
   width: 100%;
   height: 600px;
@@ -216,7 +212,6 @@ audio {
 .dialog {
   position: absolute;
   width: 90px;
-  height: 90px;
   background-size: 100%;
   background-repeat: no-repeat;
   position: absolute;
@@ -252,10 +247,6 @@ audio {
   right: -20%;
   z-index: 1;
   width: 1200px;
-  height: 609px;
-  background-image: url(./images/book/book01/雲.png);
-  background-size: 100%;
-  background-repeat: no-repeat;
   animation: cloudMove 10s ease-in-out infinite;
   transition: all 10s ease-in-out;
 }
@@ -266,10 +257,6 @@ audio {
   right: -20%;
   z-index: 4;
   width: 1500px;
-  height: 500px;
-  background-image: url(./images/book/book01/牛奶泡泡.png);
-  background-size: 100%;
-  background-repeat: no-repeat;
   animation: bubbleMove 10s ease-in-out infinite;
   transition: all 10s ease-in-out;
 }
@@ -280,10 +267,6 @@ audio {
   right: 3%;
   z-index: 10;
   width: 1200px;
-  height: 463px;
-  background-image: url(./images/book/book01/亮晶晶.png);
-  background-size: 100%;
-  background-repeat: no-repeat;
   animation: starShow 1s ease-in-out infinite;
   transition: all 0.5s ease-in-out;
 }
@@ -307,9 +290,6 @@ audio {
   margin: auto;
   width: 100%;
   height: 100%;
-  background-image: url(./images/book/book01/故事標題.png);
-  background-size: 100%;
-  background-repeat: no-repeat;
   margin: auto;
 }
 
@@ -323,10 +303,6 @@ audio {
   margin: auto;
   width: 100%;
   height: 100%;
-  background-image: url("./images/book/book01/前草地.png");
-  background-size: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
 }
 
 .grass-back-0 {
@@ -339,10 +315,6 @@ audio {
   margin: auto;
   width: 100%;
   height: 100%;
-  background-image: url(./images/book/book01/後草地.png);
-  background-size: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
 }
 
 .fence {
@@ -368,10 +340,6 @@ audio {
   margin: auto;
   width: 100%;
   height: 100%;
-  background-image: url("./images/book/book01/鈴鈴.png");
-  background-size: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
 }
 
 .left-hand-magnifier {
@@ -384,9 +352,6 @@ audio {
   margin: auto;
   width: 100%;
   height: 100%;
-  background-image: url(./images/book/book01/放大鏡手.png);
-  background-size: 100%;
-  background-repeat: no-repeat;
   animation: magnifierMove 2s ease-in-out infinite;
   transition: all 1s ease-in-out;
 }
@@ -409,11 +374,6 @@ audio {
   left: 21%;
   z-index: 10;
   width: 115px;
-  height: 110px;
-  background-image: url(./images/book/book01/牛1.png);
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
 }
 
 .cow-0-2 {
@@ -423,10 +383,6 @@ audio {
   z-index: 10;
   width: 100px;
   height: 100px;
-  background-image: url("./images/book/book01/牛2.png");
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
 }
 
 .cow-0-3 {
@@ -435,11 +391,6 @@ audio {
   right: 9%;
   z-index: 10;
   width: 150px;
-  height: 110px;
-  background-image: url(./images/book/book01/牛3.png);
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
 }
 
 /* book02 */
@@ -962,10 +913,6 @@ audio {
   z-index: 1000;
   width: 100%;
   height: 100%;
-  background-size: 100%;
-  background-image: url(./images/book/book08/牛奶泡泡.png);
-  background-position: center;
-  background-repeat: no-repeat;
   transition: all 3s ease-in-out;
   opacity: 0;
 }
@@ -982,10 +929,6 @@ audio {
   z-index: 999;
   width: 100%;
   height: 100%;
-  background-size: 100%;
-  background-image: url(./images/book/book09/亮晶晶.png);
-  background-position: center;
-  background-repeat: no-repeat;
   transition: all 3s ease-in-out;
   opacity: 0;
 }
@@ -1090,15 +1033,9 @@ audio {
 .cow05 {
   position: absolute;
   right: 36%;
-  bottom: 14%;
+  bottom: 22%;
   z-index: 99;
   width: 250px;
-  height: 250px;
-  background-size: 100%;
-  background-image: url(./images/book/book10/牛05.png);
-  background-position: center;
-  background-repeat: no-repeat;
-  transition: all 2s ease-in-out;
   animation: cowMove02 10s ease-in-out infinite;
   transition: all 10s ease-in-out;
 }
@@ -1108,11 +1045,6 @@ audio {
   left: 0%;
   top: 0%;
   width: 230px;
-  height: 133px;
-  background-size: 100%;
-  background-image: url(./images/book/book10/雲.png);
-  background-position: center;
-  background-repeat: no-repeat;
   transition: all 2s ease-in-out;
   display: none;
   animation: cloud01Move 10s ease-in-out infinite;
@@ -1189,10 +1121,6 @@ audio {
   z-index: 1000;
   width: 100%;
   height: 100%;
-  background-size: cover;
-  background-image: url(./images/book/book11/牛奶泡泡.png);
-  background-position: center;
-  background-repeat: no-repeat;
   transition: all 3s ease-in-out;
   opacity: 0;
 }
@@ -1229,10 +1157,6 @@ audio {
   z-index: 999;
   width: 100%;
   height: 100%;
-  background-size: 100%;
-  background-image: url(./images/book/book11/亮晶晶.png);
-  background-position: center;
-  background-repeat: no-repeat;
   transition: all 3s ease-in-out;
   opacity: 0;
 }
@@ -1246,11 +1170,6 @@ audio {
   margin: auto;
   z-index: 99;
   width: 100%;
-  height: 600px;
-  background-size: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-image: url(./images/book/book11/雲01.png);
   animation: cloudGroupMove 15s ease-in-out infinite;
   transition: all 15s ease-in-out;
 }
@@ -1677,6 +1596,49 @@ audio {
   opacity: 0;
 }
 
+.cloud14-1 {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 99;
+  width: 323px;
+  transition: all 3s ease-in-out;
+  animation: cloud1 10s ease-in-out infinite;
+  transition: all 10s ease-in-out;
+}
+
+.cloud14-2 {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 99;
+  width: 1200px;
+  margin: auto;
+  transition: all 3s ease-in-out;
+  animation: cloudMove 10s ease-in-out infinite;
+  transition: all 10s ease-in-out;
+}
+
+.cloud14-3 {
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 99;
+  width: 344px;
+  transition: all 3s ease-in-out;
+  animation: cloud3 10s ease-in-out infinite;
+  transition: all 10s ease-in-out;
+}
+
+.text14 {
+  position: absolute;
+  left: 3%;
+  top: 3%;
+  z-index: 99;
+  width: 20%;
+}
+
 /* book16 小女孩聽牛心跳*/
 .book16 {
   position: relative;
@@ -1752,12 +1714,6 @@ audio {
   bottom: 0;
   z-index: 99;
   width: 100%;
-  height: 609px;
-  margin: auto;
-  background-size: 100%;
-  background-image: url(./images/book/book1617/媽媽牛.png);
-  background-position: center;
-  background-repeat: no-repeat;
 }
 
 .cow-eyes {
@@ -1768,12 +1724,7 @@ audio {
   bottom: 0;
   z-index: 99;
   width: 100%;
-  height: 609px;
   margin: auto;
-  background-size: 100%;
-  background-image: url(./images/book/book1617/牛眼睜開.png);
-  background-position: center;
-  background-repeat: no-repeat;
   /* transition: all 2s ease-in-out; */
 }
 
@@ -1785,12 +1736,7 @@ audio {
   bottom: 0;
   z-index: 99;
   width: 100%;
-  height: 609px;
   margin: auto;
-  background-size: 100%;
-  background-image: url(./images/book/book1617/牛愛心.png);
-  background-position: center;
-  background-repeat: no-repeat;
   transition: all 2s ease-in-out;
 }
 
@@ -1802,12 +1748,7 @@ audio {
   bottom: 0;
   z-index: 99;
   width: 100%;
-  height: 609px;
   margin: auto;
-  background-size: 100%;
-  background-image: url(./images/book/book1617/咚咚.png);
-  background-position: center;
-  background-repeat: no-repeat;
   opacity: 0;
   transition: all 2s ease-in-out;
 }
@@ -1820,12 +1761,7 @@ audio {
   bottom: 0;
   z-index: 100;
   width: 100%;
-  height: 609px;
   margin: auto;
-  background-size: 100%;
-  background-image: url(./images/book/book1617/手.png);
-  background-position: center;
-  background-repeat: no-repeat;
   transform: rotate(-2deg);
   transition: all 1s ease-in-out;
 }
@@ -1843,15 +1779,10 @@ audio {
 .click-hearing-heart {
   display: none;
   position: absolute;
-  right: 29%;
-  bottom: 16%;
+  right: 24%;
+  bottom: 33%;
   z-index: 999;
   width: 105px;
-  height: 270px;
-  background-image: url(./images/book/book1617/點這裡.png);
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
   cursor: pointer;
   pointer-events: auto;
   animation: dialogKnockShow 2s ease-in-out infinite;
@@ -1886,11 +1817,6 @@ audio {
   right: 3.5%;
   z-index: 100;
   width: 236px;
-  height: 255px;
-  background-size: 100%;
-  background-image: url(./images/book/book1415/板子.png);
-  background-position: center;
-  background-repeat: no-repeat;
 }
 
 .board-list03 {
@@ -1899,11 +1825,6 @@ audio {
   right: 6.5%;
   z-index: 102;
   width: 168px;
-  height: 190px;
-  background-size: 100%;
-  background-image: url(./images/book/book1617/任務清單.png);
-  background-position: center;
-  background-repeat: no-repeat;
   opacity: 0;
   transition: all 2s ease-in-out;
 }
@@ -1915,10 +1836,6 @@ audio {
   z-index: 99;
   width: 100%;
   height: 100%;
-  background-size: cover;
-  background-image: url(./images/book/book1617/牛奶泡泡.png);
-  background-position: center;
-  background-repeat: no-repeat;
   transition: all 3s ease-in-out;
   opacity: 0;
 }
@@ -1935,11 +1852,6 @@ audio {
   margin: auto;
   z-index: 101;
   width: 339px;
-  height: 85px;
-  background-size: 100%;
-  background-image: url(./images/book/book1617/故事文.png);
-  background-position: center;
-  background-repeat: no-repeat;
 }
 
 .nurse-girl {
@@ -1951,11 +1863,6 @@ audio {
   margin: auto;
   z-index: 101;
   width: 100%;
-  height: 609px;
-  background-size: 100%;
-  background-image: url(./images/book/book1617/鈴鈴護士.png);
-  background-position: center;
-  background-repeat: no-repeat;
 }
 
 .coin-light03 {
@@ -2245,7 +2152,7 @@ audio {
   top: 0;
   bottom: 0;
   margin: auto;
-  z-index: 99;
+  z-index: 999;
   width: 100%;
   opacity: 0;
 }
@@ -3010,10 +2917,6 @@ audio {
   right: -20%;
   z-index: 4;
   width: 1500px;
-  height: 500px;
-  background-image: url(./images/book/book28/牛奶泡泡.png);
-  background-size: 100%;
-  background-repeat: no-repeat;
   animation: bubbleMove 10s ease-in-out infinite;
   transition: all 10s ease-in-out;
 }
@@ -3024,10 +2927,6 @@ audio {
   right: 3%;
   z-index: 10;
   width: 1200px;
-  height: 463px;
-  background-image: url(./images/book/book28/亮晶晶.png);
-  background-size: 100%;
-  background-repeat: no-repeat;
   animation: starShow 1s ease-in-out infinite;
   transition: all 0.5s ease-in-out;
 }
@@ -3038,11 +2937,6 @@ audio {
   bottom: 0;
   z-index: 3;
   width: 100%;
-  height: 310px;
-  background-image: url("./images/book/book28/前草地.png");
-  background-size: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
 }
 
 .fence-28 {
@@ -3051,11 +2945,6 @@ audio {
   right: -1%;
   z-index: 20;
   width: 100%;
-  height: 85px;
-  background-image: url("./images/book/book28/柵欄.png");
-  background-size: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
 }
 
 .story-28 {
@@ -3064,10 +2953,6 @@ audio {
   left: 10%;
   z-index: 10;
   width: 355px;
-  height: 165px;
-  background-image: url(./images/book/book28/故事28.png);
-  background-size: 100%;
-  background-repeat: no-repeat;
 }
 
 .cow-28-1 {
@@ -3076,11 +2961,6 @@ audio {
   left: 32%;
   z-index: 10;
   width: 138px;
-  height: 94px;
-  background-image: url(./images/book/book28/牛1.png);
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
 }
 
 .cow-28-2 {
@@ -3089,11 +2969,6 @@ audio {
   right: 10%;
   z-index: 10;
   width: 109px;
-  height: 77px;
-  background-image: url("./images/book/book28/牛2.png");
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
 }
 
 /* 共用物件 */
@@ -3695,10 +3570,6 @@ audio {
     width: 100%;
     height: 100%;
     margin: auto;
-    background-size: 100%;
-    background-image: url(./images/book/book0607/雲.png);
-    background-position: center;
-    background-repeat: no-repeat;
     opacity: 0;
     transition: all 5s ease-in-out;
     animation: clouds-animation 5s ease-in-out infinite;
@@ -3778,10 +3649,9 @@ audio {
   }
 
   .cow05 {
-    width: 180px;
-    height: 180px;
+    width: 150px;
     right: 40%;
-    bottom: 15%;
+    bottom: 25%;
   }
 
   .list-board {
@@ -3827,6 +3697,8 @@ audio {
 
   .coin {
     width: 25%;
+    right: 7%;
+    bottom: 13%;
   }
 
   .coin-light,
@@ -3875,10 +3747,16 @@ audio {
     bottom: 21%;
   }
 
-  .cows-face {
-    width: 13px;
-    bottom: 18px;
-    height: 78px;
+  .cloud14-1 {
+    width: 50%;
+  }
+
+  .cloud14-2 {
+    width: 100%;
+  }
+
+  .cloud14-3 {
+    width: 50%;
   }
 
   @keyframes drink {
@@ -3888,11 +3766,6 @@ audio {
     to {
       height: 0%;
     }
-  }
-
-  .girls-left {
-    bottom: -57px;
-    width: 66px;
   }
 
   /* book1617 牛聽心跳*/
@@ -4071,6 +3944,21 @@ audio {
     width: initial;
     left: initial;
     bottom: initial;
+  }
+
+  /* 書底 */
+  .story-28 {
+    width: 60%;
+  }
+
+  .bubble-28 {
+    width: 600px;
+    height: 100%;
+  }
+
+  .cloud-28 {
+    background-size: 80%;
+    background-position-x: 240%;
   }
 }
 
