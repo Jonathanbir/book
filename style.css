@@ -229,9 +229,6 @@ audio {
 }
 
 /* book01 書的底圖 */
-.book01 {
-  background-image: url(./images/book/book01/book01.png);
-}
 
 .page5,
 .page6,
@@ -394,19 +391,10 @@ audio {
 }
 
 /* book02 */
-.book02 {
-  background-image: url(./images/book/book02/book02.png);
-}
 
 /* book03 */
-.book03 {
-  background-image: url(./images/book/book03/book03.png);
-}
 
 /* book04 小女孩沒牛奶 */
-.book04 {
-  background-image: url(./images/book/book04/book04.png);
-}
 
 .eyes-4 {
   position: absolute;
@@ -476,7 +464,6 @@ audio {
 /* book05 小女孩與媽媽搖手 */
 .book05 {
   position: relative;
-  background-image: url(./images/book/book05/book05.png);
 }
 
 .hand {
@@ -560,11 +547,6 @@ audio {
 }
 
 /* book0607 點們展開森林*/
-.book06 {
-  background-image: url(./images/book/book0607/天空1.png);
-  background-size: cover;
-}
-
 .door-common {
   position: absolute;
   right: 31%;
@@ -760,15 +742,8 @@ audio {
 }
 
 /* book07 */
-.book07 {
-  background-image: url(./images/book/book0607/天空2.png);
-  background-size: cover;
-}
 
 /* book08 鈴鈴觀察腳步聲*/
-.book08 {
-  background-image: url(./images/book/book08/book08.png);
-}
 
 .foot {
   position: absolute;
@@ -918,9 +893,6 @@ audio {
 }
 
 /* book09 牛發出哞叫聲*/
-.book09 {
-  background-image: url(./images/book/book09/book09.png);
-}
 
 .star7 {
   position: absolute;
@@ -934,10 +906,6 @@ audio {
 }
 
 /* book10 農場任務清單*/
-.book10 {
-  background-image: url(./images/book/book10/book10.png);
-}
-
 .cow01 {
   position: absolute;
   left: 10%;
@@ -1063,10 +1031,6 @@ audio {
 }
 
 /* book11 農場任務清單*/
-.book11 {
-  background-image: url(./images/book/book11/book11.png);
-}
-
 .list-board {
   position: absolute;
   right: 33.5%;
@@ -1201,10 +1165,6 @@ audio {
 }
 
 /* book12  小女孩魔法棒 電風閃轉出泡泡*/
-.book12 {
-  background-image: url(./images/book/book12/book12.png);
-}
-
 .girls-head {
   position: absolute;
   left: 8%;
@@ -1375,10 +1335,6 @@ audio {
 }
 
 /* book13 小女孩魔法棒 電風閃轉出泡泡*/
-.book13 {
-  background-image: url(./images/book/book13/book13.png);
-}
-
 .coin-light {
   display: none;
   position: absolute;
@@ -1409,11 +1365,6 @@ audio {
 }
 
 /* book14 小女孩餵牛奶*/
-.book14 {
-  position: relative;
-  background-image: url(./images/book/book1415/book14.png);
-}
-
 .small-cow {
   position: absolute;
   left: 0;
@@ -1426,10 +1377,6 @@ audio {
 }
 
 /* book15 小女孩餵牛奶*/
-.book15 {
-  background-image: url(./images/book/book1415/book15.png);
-}
-
 .milk-bottle {
   position: absolute;
   right: 86%;
@@ -1642,8 +1589,6 @@ audio {
 /* book16 小女孩聽牛心跳*/
 .book16 {
   position: relative;
-  background-image: url(./images/book/book1617/book16.png);
-  background-size: cover;
 }
 
 .cloud-16-0 {
@@ -1841,10 +1786,6 @@ audio {
 }
 
 /* book17 小女孩聽牛心跳*/
-.book17 {
-  background-image: url(./images/book/book1617/book17.png);
-}
-
 .story-text16 {
   position: absolute;
   top: 6%;
@@ -1909,14 +1850,6 @@ audio {
 }
 
 /* book1920 小女孩皇冠金幣*/
-.book18 {
-  background-image: url(./images/book/book1819/book18.png);
-}
-
-.book19 {
-  background-image: url(./images/book/book1819/book19.png);
-}
-
 .check03 {
   right: 14%;
   top: 38%;
@@ -2049,13 +1982,8 @@ audio {
 }
 
 /* book2021 小女孩夢境浮現*/
-.book20 {
-  background-image: url(./images/book/book2021/book20.png);
-}
-
 .book21 {
   position: relative;
-  background-image: url(./images/book/book2021/book21.png);
 }
 
 .dream01 {
@@ -2175,12 +2103,10 @@ audio {
 /* book2223 媽媽叫醒小女孩*/
 .book22 {
   position: relative;
-  background-image: url(./images/book/book2223/book22.png);
 }
 
 .book23 {
   position: relative;
-  background-image: url(./images/book/book2223/book23.png);
 }
 
 .cow-alarm {
@@ -2261,7 +2187,6 @@ audio {
 /* book24 媽媽倒牛奶*/
 .book24 {
   position: relative;
-  background-image: url(./images/book/book24/book24.png);
 }
 
 .milk-hand {
@@ -2405,7 +2330,6 @@ audio {
 /* book25 小女孩喝牛奶*/
 .book25 {
   position: relative;
-  background-image: url(./images/book/book25/book25.png);
 }
 
 .little-girl {
@@ -2632,7 +2556,6 @@ audio {
 /* book27 一家人喝牛奶 */
 .book26 {
   position: relative;
-  background-image: url(./images/book/book2627/book26.png);
 }
 
 .all-milk-stains {
@@ -2828,7 +2751,6 @@ audio {
 /* book27 一家人喝牛奶 */
 .book27 {
   position: relative;
-  background-image: url(./images/book/book2627/book27.png);
 }
 
 .cow-right {
@@ -2892,10 +2814,6 @@ audio {
 }
 
 /* book28 書底*/
-.book28 {
-  background-image: url(./images/book/book28/book28.png);
-}
-
 .cloud-28 {
   position: absolute;
   top: 0;
@@ -3163,7 +3081,6 @@ audio {
 
   .book {
     width: 100%;
-    height: 464px !important;
   }
 
   #swipe-fullscreen-hint {
