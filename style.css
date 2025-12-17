@@ -36,7 +36,7 @@ body {
   z-index: 999999;
   width: 100%;
   height: 640px;
-  background-image: url(./images/object/mb-icon.png);
+  background-image: url(./images/common/mb-icon.png);
   background-size: 100%;
   background-repeat: no-repeat;
 }
@@ -66,10 +66,7 @@ audio {
 }
 
 #flipbook .page img {
-  /* width: 100%;
-  height: 100%; */
-  object-fit: cover; /* 讓圖片不會被拉伸變形，可改為 contain 看需求 */
-  display: block;
+  object-fit: contain; /* 讓圖片不會被拉伸變形，可改為 contain 看需求 */
 }
 
 #flipbook .page p {
@@ -168,14 +165,10 @@ audio {
 
 .knock {
   position: absolute;
-  right: 50%;
-  bottom: 18%;
+  right: 21%;
+  bottom: 34%;
+  z-index: 9999;
   width: 105px;
-  height: 270px;
-  background-image: url("./images/book/book0607/點這裡.png");
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
   cursor: pointer;
   animation: dialogKnockShow 2s ease-in-out infinite;
   transition: all 1s ease-in-out;
@@ -474,10 +467,6 @@ audio {
   margin: auto;
   width: 100%;
   height: 100%;
-  background-image: url("./images/book/book04/眼睛.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
 }
 
 .eyes-big-animation {
@@ -509,8 +498,6 @@ audio {
   margin: auto;
   width: 100%;
   height: 100%;
-  background-image: url(./images/book/book04/問號.png);
-  background-size: 100%;
   opacity: 0;
 }
 
@@ -557,23 +544,16 @@ audio {
   left: 18%;
   z-index: 3;
   width: 200px;
-  height: 200px;
-  background-image: url("./images/book/book05/小女孩.png");
-  background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
 }
 
 .daughter-hand-5 {
   position: absolute;
-  bottom: 8%;
-  left: 24%;
+  bottom: 16%;
+  left: 25%;
   z-index: 4;
   width: 50px;
-  height: 135px;
-  background-image: url("./images/book/book05/小女孩手.png");
-  background-size: 100%;
-  background-repeat: no-repeat;
   animation: handWaveMove 2s ease-in-out infinite;
   transition: all 1s ease-in-out;
 }
@@ -592,14 +572,10 @@ audio {
 
 .moms-head-5 {
   position: absolute;
-  bottom: 16%;
-  right: 24%;
+  bottom: 34%;
+  right: 31%;
   z-index: 4;
-  width: 220px;
-  height: 220px;
-  background-image: url("./images/book/book05/母親頭.png");
-  background-size: 100%;
-  background-repeat: no-repeat;
+  width: 180px;
 }
 
 .moms-hand-5 {
@@ -608,12 +584,7 @@ audio {
   right: 49.5%;
   z-index: 2;
   width: 78px;
-  height: 97px;
   transform: translate(0%, 0%) rotate(-3deg);
-  background-image: url(./images/book/book05/母親手.png);
-  background-size: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
   animation: momsHandMove 3s ease-in-out infinite;
   animation-delay: 0.5s;
   animation-fill-mode: forwards;
@@ -622,18 +593,17 @@ audio {
 
 @keyframes momsHandMove {
   0% {
-    transform: translate(0%, 0%) rotate(-3deg);
+    transform: translate(0%, 0%) rotate(-5deg);
   }
   50% {
     transform: translate(0%, 0%) rotate(0deg);
   }
   100% {
-    transform: translate(0%, 0%) rotate(-3deg);
+    transform: translate(0%, 0%) rotate(-5deg);
   }
 }
 
 .gogo {
-  background-image: url(./images/book/book05/出發!.png);
   bottom: 28%;
   left: 21%;
 }
@@ -645,26 +615,17 @@ audio {
 }
 
 .door-common {
-  position: fixed;
-  right: 34%;
-  bottom: 17%;
+  position: absolute;
+  right: 31%;
+  bottom: 21%;
   z-index: 1000;
   width: 130px;
-  height: 220px;
-  background-size: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
 }
 
 .door {
-  background-image: url(./images/book/book0607/門.png);
   cursor: grab;
   transition: all 1s ease-in-out;
   z-index: 1001;
-}
-
-.door-bg {
-  background-image: url(./images/book/book0607/門內.png);
 }
 
 .door-opening {
@@ -672,16 +633,11 @@ audio {
 }
 
 .peoples {
-  position: fixed;
-  right: 36%;
-  bottom: 14%;
+  position: absolute;
+  bottom: 17%;
+  right: 35%;
   z-index: 1000;
-  width: 200px;
-  height: 200px;
-  background-size: contain;
-  background-image: url(./images/book/book0607/媽媽鈴鈴.png);
-  background-position: center;
-  background-repeat: no-repeat;
+  width: 130px;
   opacity: 0;
   transition: all 1s ease-in-out;
 }
@@ -701,10 +657,6 @@ audio {
   width: 100%;
   height: 100%;
   margin: auto;
-  background-size: 100%;
-  background-image: url(./images/book/book0607/森林1.png);
-  background-position: center;
-  background-repeat: no-repeat;
   transition: all 3s ease-in-out;
   opacity: 0;
 }
@@ -717,12 +669,7 @@ audio {
   bottom: 0;
   z-index: 999;
   width: 100%;
-  height: 100%;
   margin: auto;
-  background-size: 100%;
-  background-image: url(./images/book/book0607/森林2.png);
-  background-position: center;
-  background-repeat: no-repeat;
   transition: all 3s ease-in-out;
   opacity: 0;
 }
@@ -737,10 +684,6 @@ audio {
   width: 100%;
   height: 100%;
   margin: auto;
-  background-size: 100%;
-  background-image: url(./images/book/book0607/森林3.png);
-  background-position: center;
-  background-repeat: no-repeat;
   transition: all 3s ease-in-out;
   opacity: 0;
 }
@@ -756,10 +699,6 @@ audio {
   z-index: 999;
   width: 100%;
   height: 100%;
-  background-size: 100%;
-  background-image: url(./images/book/book0607/亮晶晶.png);
-  background-position: center;
-  background-repeat: no-repeat;
   transition: all 3s ease-in-out;
   opacity: 0;
 }
@@ -778,11 +717,6 @@ audio {
   top: 0;
   left: 0;
   width: 380px;
-  height: 115px;
-  background-size: 100%;
-  background-image: url(./images/book/book0607/雲1.png);
-  background-position: center;
-  background-repeat: no-repeat;
   opacity: 0;
   transition: all 5s ease-in-out;
   animation: cloud1 5s ease-in-out infinite;
@@ -807,11 +741,6 @@ audio {
   left: 34%;
   z-index: 900;
   width: 280px;
-  height: 100px;
-  background-size: 100%;
-  background-image: url(./images/book/book0607/雲2.png);
-  background-position: center;
-  background-repeat: no-repeat;
   opacity: 0;
   transition: all 5s ease-in-out;
   animation: cloud2 5s ease-in-out infinite;
@@ -835,11 +764,6 @@ audio {
   top: 0;
   right: 0;
   width: 300px;
-  height: 70px;
-  background-size: 100%;
-  background-image: url(./images/book/book0607/雲3.png);
-  background-position: center;
-  background-repeat: no-repeat;
   opacity: 0;
   transition: all 5s ease-in-out;
   animation: cloud3 5s ease-in-out infinite;
@@ -864,11 +788,6 @@ audio {
   right: 60%;
   z-index: 999;
   width: 90px;
-  height: 90px;
-  background-image: url(./images/book/book0607/哇!.png);
-  background-size: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
   opacity: 0;
 }
 
@@ -885,10 +804,6 @@ audio {
   z-index: 1000;
   width: 100%;
   height: 100%;
-  background-size: cover;
-  background-image: url(./images/book/book0607/牛奶泡泡.png);
-  background-position: center;
-  background-repeat: no-repeat;
   transition: all 3s ease-in-out;
   opacity: 0;
 }
@@ -908,7 +823,6 @@ audio {
   position: absolute;
   z-index: 3;
   width: 80px;
-  height: 80px;
   background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
@@ -919,7 +833,6 @@ audio {
 .foot1 {
   left: 42%;
   bottom: 3%;
-  background-image: url(./images/book/book08/foot1.png);
 }
 
 .foot1-animation {
@@ -931,7 +844,6 @@ audio {
 .foot2 {
   left: 23%;
   bottom: 10%;
-  background-image: url(./images/book/book08/foot2.png);
 }
 
 .foot2-animation {
@@ -943,7 +855,6 @@ audio {
 .foot3 {
   left: 32%;
   bottom: 35%;
-  background-image: url(./images/book/book08/foot3.png);
 }
 
 .foot3-animation {
@@ -955,7 +866,6 @@ audio {
 .foot4 {
   left: 50%;
   bottom: 42%;
-  background-image: url(./images/book/book08/foot4.png);
 }
 
 .foot4-animation {
@@ -967,7 +877,6 @@ audio {
 .foot5 {
   left: 63%;
   bottom: 62%;
-  background-image: url(./images/book/book08/foot5.png);
 }
 
 .foot5-animation {
@@ -1020,11 +929,6 @@ audio {
   left: 35%;
   z-index: 10;
   width: 60px;
-  height: 50px;
-  background-image: url(./images/book/book08/eyes.png);
-  background-size: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
 }
 
 .eyes-ball-8 {
@@ -1033,11 +937,6 @@ audio {
   left: 198px;
   z-index: 10;
   width: 58px;
-  height: 50px;
-  background-image: url(./images/book/book08/eyes-ball.png);
-  background-size: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
 }
 
 .eyes-ball-animation {
@@ -1101,11 +1000,6 @@ audio {
   left: 10%;
   bottom: 25%;
   width: 100px;
-  height: 100px;
-  background-size: 100%;
-  background-image: url(./images/book/book10/cow01.png);
-  background-position: center;
-  background-repeat: no-repeat;
   transition: all 2s ease-in-out;
   animation: cowMove01 10s ease-in-out infinite;
   transition: all 10s ease-in-out;
@@ -1134,11 +1028,6 @@ audio {
   left: 62%;
   bottom: 45%;
   width: 80px;
-  height: 70px;
-  background-size: 100%;
-  background-image: url(./images/book/book10/cow02.png);
-  background-position: center;
-  background-repeat: no-repeat;
   transition: all 2s ease-in-out;
   animation: cowMove02 10s ease-in-out infinite;
 }
@@ -1166,11 +1055,6 @@ audio {
   left: 80%;
   bottom: 45%;
   width: 80px;
-  height: 70px;
-  background-size: 100%;
-  background-image: url(./images/book/book10/cow03.png);
-  background-position: center;
-  background-repeat: no-repeat;
   transition: all 2s ease-in-out;
   animation: cowMove03 10s ease-in-out infinite;
 }
@@ -1196,13 +1080,8 @@ audio {
 .cow04 {
   position: absolute;
   left: 50%;
-  bottom: 21%;
+  bottom: 25%;
   width: 150px;
-  height: 150px;
-  background-size: 100%;
-  background-image: url(./images/book/book10/cow04.png);
-  background-position: center;
-  background-repeat: no-repeat;
   transition: all 2s ease-in-out;
   animation: cowMove01 10s ease-in-out infinite;
   transition: all 10s ease-in-out;
@@ -1216,7 +1095,7 @@ audio {
   width: 250px;
   height: 250px;
   background-size: 100%;
-  background-image: url(./images/book/book10/cow05.png);
+  background-image: url(./images/book/book10/牛05.png);
   background-position: center;
   background-repeat: no-repeat;
   transition: all 2s ease-in-out;
@@ -1231,7 +1110,7 @@ audio {
   width: 230px;
   height: 133px;
   background-size: 100%;
-  background-image: url(./images/book/book10/cloud01.png);
+  background-image: url(./images/book/book10/雲.png);
   background-position: center;
   background-repeat: no-repeat;
   transition: all 2s ease-in-out;
@@ -1325,11 +1204,6 @@ audio {
   right: 0;
   margin: auto;
   width: 140px;
-  height: 30px;
-  background-image: url(./images/book/book09/mowmow.png);
-  background-size: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
   opacity: 0;
 }
 
@@ -1376,7 +1250,7 @@ audio {
   background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
-  background-image: url(./images/book/book11/cloud-group.png);
+  background-image: url(./images/book/book11/雲01.png);
   animation: cloudGroupMove 15s ease-in-out infinite;
   transition: all 15s ease-in-out;
 }
@@ -1386,11 +1260,6 @@ audio {
   right: 0%;
   top: 0%;
   width: 120px;
-  height: 100px;
-  background-size: 100%;
-  background-image: url(./images/book/book11/cloud02.png);
-  background-position: center;
-  background-repeat: no-repeat;
   transition: all 2s ease-in-out;
   display: none;
   animation: cloudGroupMove 10s ease-in-out infinite;
@@ -1431,15 +1300,10 @@ audio {
   top: 0%;
   z-index: 99;
   width: 350px;
-  height: 155px;
-  background-size: 100%;
-  background-image: url(./images/book/book12/風扇.png);
-  background-position: center;
-  background-repeat: no-repeat;
 }
 
 .electfan-move {
-  background-image: url(./images/book/book12/轉的風扇.png);
+  /* background-image: url(./images/book/book12/轉的風扇.png); */
   transition: all 2s ease-in-out;
   animation: electFanMove 10s ease-in-out infinite;
 }
@@ -1469,11 +1333,6 @@ audio {
   margin: auto;
   z-index: 106;
   width: 56px;
-  height: 112px;
-  background-size: 100%;
-  background-image: url(./images/book/book12/魔法棒.png);
-  background-position: center;
-  background-repeat: no-repeat;
   transition: all 2s ease-in-out;
 }
 
@@ -1505,10 +1364,6 @@ audio {
   z-index: 103;
   width: 100%;
   height: 100%;
-  background-size: 100%;
-  background-image: url(./images/book/book13/水珠.png);
-  background-position: center;
-  background-repeat: no-repeat;
   opacity: 0;
   transition: all 6s ease-in-out;
 }
@@ -1522,18 +1377,13 @@ audio {
   margin: auto;
   z-index: 103;
   width: 30px;
-  height: 30px;
-  background-size: 100%;
-  background-image: url(./images/book/book13/綠勾.png);
-  background-position: center;
-  background-repeat: no-repeat;
   opacity: 0;
   transition: all 2s ease-in-out;
 }
 
 .check01 {
-  right: 31%;
-  top: 29%;
+  right: 32%;
+  top: 27%;
 }
 
 .check-box {
@@ -1551,13 +1401,9 @@ audio {
   position: absolute;
   left: 0;
   bottom: 0;
-  z-index: 1000;
+  z-index: 99;
   width: 100%;
   height: 100%;
-  background-size: cover;
-  background-image: url(./images/book/book13/牛奶泡泡.png);
-  background-position: center;
-  background-repeat: no-repeat;
   transition: all 3s ease-in-out;
   opacity: 0;
 }
@@ -1606,7 +1452,7 @@ audio {
 
 .check02 {
   right: 15%;
-  top: 34%;
+  top: 33%;
 }
 
 /* book13 小女孩魔法棒 電風閃轉出泡泡*/
@@ -1622,11 +1468,6 @@ audio {
   margin: auto;
   z-index: 1;
   width: 450px;
-  height: 320px;
-  background-size: 100%;
-  background-image: url(./images/book/book13/發光.png);
-  background-position: center;
-  background-repeat: no-repeat;
   transition: all 2s ease-in-out;
   animation: lightShine 1s ease-in-out infinite;
 }
@@ -1660,14 +1501,9 @@ audio {
   right: 0;
   top: 0;
   bottom: 0;
-  z-index: 999;
+  z-index: 99;
   margin: auto;
   width: 100%;
-  height: 609px;
-  background-size: 100%;
-  background-image: url(./images/book/book1415/小牛.png);
-  background-position: center;
-  background-repeat: no-repeat;
 }
 
 /* book15 小女孩餵牛奶*/
@@ -1678,9 +1514,9 @@ audio {
 .milk-bottle {
   position: absolute;
   right: 86%;
-  bottom: 14%;
+  bottom: 16%;
   z-index: 2;
-  width: 68px;
+  width: 134px;
   height: 40px;
   overflow: hidden;
 }
@@ -1689,44 +1525,44 @@ audio {
   position: absolute;
   z-index: 2;
   width: 68px;
-  height: 40px;
-  background-size: 100%;
-  background-image: url(./images/book/book1415/奶瓶.png);
-  background-position: center;
-  background-repeat: no-repeat;
 }
 
 .milk {
   position: absolute;
-  right: 5%;
-  bottom: 20%;
+  right: 0%;
+  bottom: 8%;
   z-index: 0;
   width: 42px;
   height: 28px;
-  border-radius: 0 10px 0 0;
+  border-radius: 0 10px 19px 0;
   background-color: #fff;
   background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
   transform: rotate(-15deg);
+  transform-origin: bottom;
   transition: all 3s ease-in-out;
 }
 
 .milk-empty {
-  bottom: -45%;
+  animation: drink 3s linear forwards;
+}
+
+@keyframes drink {
+  from {
+    height: 28px;
+  }
+  to {
+    height: 0%;
+  }
 }
 
 .girls-hand {
   position: absolute;
   right: 77.5%;
-  bottom: 12%;
+  bottom: 13%;
   z-index: 3;
   width: 90px;
-  height: 70px;
-  background-size: 100%;
-  background-image: url(./images/book/book1415/手.png);
-  background-position: center;
-  background-repeat: no-repeat;
 }
 
 .cows-tongue {
@@ -1738,11 +1574,6 @@ audio {
   z-index: 999;
   margin: auto;
   width: 100%;
-  height: 609px;
-  background-size: 100%;
-  background-image: url(./images/book/book1415/舌頭.png);
-  background-position: center;
-  background-repeat: no-repeat;
 }
 
 .cows-tongue-animation {
@@ -1769,11 +1600,6 @@ audio {
   bottom: 16%;
   z-index: 999;
   width: 105px;
-  height: 270px;
-  background-image: url(./images/book/book1415/點這裡.png);
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
   cursor: pointer;
   animation: dialogKnockShow 2s ease-in-out infinite;
   transition: all 1s ease-in-out;
@@ -1787,11 +1613,6 @@ audio {
   margin: auto;
   z-index: 1;
   width: 450px;
-  height: 320px;
-  background-size: 100%;
-  background-image: url(./images/book/book1415/發光.png);
-  background-position: center;
-  background-repeat: no-repeat;
   transition: all 2s ease-in-out;
   animation: lightShine 2s ease-in-out infinite;
 }
@@ -1833,11 +1654,6 @@ audio {
   right: 3.5%;
   z-index: 100;
   width: 236px;
-  height: 255px;
-  background-size: 100%;
-  background-image: url(./images/book/book1415/板子.png);
-  background-position: center;
-  background-repeat: no-repeat;
 }
 
 .board-list02 {
@@ -1846,11 +1662,6 @@ audio {
   right: 6.5%;
   z-index: 102;
   width: 168px;
-  height: 190px;
-  background-size: 100%;
-  background-image: url(./images/book/book1415/任務清單.png);
-  background-position: center;
-  background-repeat: no-repeat;
   opacity: 0;
   transition: all 2s ease-in-out;
 }
@@ -1862,10 +1673,6 @@ audio {
   z-index: 99;
   width: 100%;
   height: 100%;
-  background-size: cover;
-  background-image: url(./images/book/book1415/牛奶泡泡.png);
-  background-position: center;
-  background-repeat: no-repeat;
   transition: all 3s ease-in-out;
   opacity: 0;
 }
@@ -1989,12 +1796,14 @@ audio {
 
 .dondon {
   position: absolute;
-  right: 57%;
-  bottom: 29%;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 99;
+  width: 100%;
+  height: 609px;
   margin: auto;
-  z-index: 105;
-  width: 200px;
-  height: 100px;
   background-size: 100%;
   background-image: url(./images/book/book1617/咚咚.png);
   background-position: center;
@@ -2157,11 +1966,6 @@ audio {
   margin: auto;
   z-index: 1;
   width: 450px;
-  height: 320px;
-  background-size: 100%;
-  background-image: url(./images/book/book1415/發光.png);
-  background-position: center;
-  background-repeat: no-repeat;
   transition: all 2s ease-in-out;
   animation: lightShine 2s ease-in-out infinite;
 }
@@ -2208,14 +2012,15 @@ audio {
 
 .check03 {
   right: 14%;
-  top: 40%;
+  top: 38%;
 }
 
 .coin {
   position: absolute;
+  right: 12%;
+  bottom: 12%;
   z-index: 99;
   width: 150px;
-  height: 150px;
   background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
@@ -2243,45 +2048,25 @@ audio {
   bottom: 5%;
   z-index: 99;
   width: 485px;
-  height: 135px;
-  background-image: url(./images/book/book1819/亮晶晶.png);
-  background-size: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
   opacity: 0;
   animation: lightShine 2s ease-in-out infinite;
   animation-delay: 3s;
   transition: all 1s ease-in-out;
 }
 
-.coin01 {
-  background-image: url(./images/book/book13/獎牌.png);
-}
-
-.coin02 {
-  background-image: url(./images/book/book1617/獎牌.png);
-}
-
-.coin03 {
-  background-image: url(./images/book/book1617/獎牌.png);
-}
-
 .coin01-final {
   right: 56%;
   bottom: 5%;
-  background-image: url(./images/book/book1819/金幣01.png);
 }
 
 .coin02-final {
   right: 44.5%;
   bottom: 5%;
-  background-image: url(./images/book/book1819/金幣02.png);
 }
 
 .coin03-final {
   right: 32%;
   bottom: 5%;
-  background-image: url(./images/book/book1819/金幣03.png);
 }
 
 .coin-animation {
@@ -2321,11 +2106,6 @@ audio {
   top: 10%;
   z-index: 99;
   width: 150px;
-  height: 150px;
-  background-size: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-image: url(./images/book/book1819/好牛皇冠.png);
   transform: translateY(-100%);
   transition: all 1s ease-in-out;
 }
@@ -2357,10 +2137,6 @@ audio {
   z-index: 99;
   width: 100%;
   height: 100%;
-  background-size: cover;
-  background-image: url(./images/book/book1819/牛奶泡泡.png);
-  background-position: center;
-  background-repeat: no-repeat;
   transition: all 3s ease-in-out;
   opacity: 0;
 }
@@ -2383,12 +2159,7 @@ audio {
   bottom: 0;
   z-index: 106;
   width: 100%;
-  height: 609px;
   margin: auto;
-  background-size: 100%;
-  background-image: url(./images/book/book2021/夢泡01.png);
-  background-position: center;
-  background-repeat: no-repeat;
   opacity: 0;
   transition: all 1s ease-in-out;
 }
@@ -2401,12 +2172,7 @@ audio {
   bottom: 0;
   z-index: 106;
   width: 100%;
-  height: 609px;
   margin: auto;
-  background-size: 100%;
-  background-image: url(./images/book/book2021/夢泡02.png);
-  background-position: center;
-  background-repeat: no-repeat;
   opacity: 0;
   transition: all 1s ease-in-out;
 }
@@ -2419,12 +2185,7 @@ audio {
   bottom: 0;
   z-index: 106;
   width: 100%;
-  height: 609px;
   margin: auto;
-  background-size: 100%;
-  background-image: url(./images/book/book2021/夢泡03.png);
-  background-position: center;
-  background-repeat: no-repeat;
   opacity: 0;
   transition: all 1s ease-in-out;
 }
@@ -2438,27 +2199,19 @@ audio {
   margin: auto;
   z-index: 106;
   width: 100%;
-  height: 600px;
-  background-size: 100%;
-  background-image: url(./images/book/book2021/夢泡04.png);
-  background-position: center;
-  background-repeat: no-repeat;
   opacity: 0;
   transition: all 1s ease-in-out;
 }
 
 .star20 {
   position: absolute;
-  left: 20%;
-  top: 20%;
+  right: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
   margin: auto;
   z-index: 106;
-  width: 317;
-  height: 313;
-  background-size: 100%;
-  background-image: url(./images/book/book2021/亮晶晶.png);
-  background-position: center;
-  background-repeat: no-repeat;
+  width: 100%;
   opacity: 0;
   transition: all 1s ease-in-out;
 }
@@ -2471,10 +2224,6 @@ audio {
   z-index: 106;
   width: 100%;
   height: 100%;
-  background-size: 100%;
-  background-image: url(./images/book/book2021/鈴鈴.png);
-  background-position: center;
-  background-repeat: no-repeat;
   opacity: 0;
   transition: all 1s ease-in-out;
 }
@@ -2488,31 +2237,21 @@ audio {
   opacity: 1;
 }
 
-.dialog20 {
+.dialog20,
+.dialog21 {
   position: absolute;
-  top: 35%;
-  right: 72%;
-  z-index: 999;
-  width: 90px;
-  height: 90px;
+  right: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  z-index: 99;
+  width: 100%;
+  opacity: 0;
 }
 
 .dialog20-animation {
   animation: dialogShow 2s ease-in-out infinite;
-}
-
-.sleeping-girl {
-  position: absolute;
-  right: 6%;
-  bottom: 11%;
-  margin: auto;
-  z-index: 106;
-  width: 300px;
-  height: 400px;
-  background-size: 100%;
-  background-image: url(./images/book/book2021/床.png);
-  background-position: center;
-  background-repeat: no-repeat;
 }
 
 .bubble20 {
@@ -2522,10 +2261,6 @@ audio {
   z-index: 110;
   width: 100%;
   height: 100%;
-  background-size: cover;
-  background-image: url(./images/book/book2021/牛奶泡泡20.png);
-  background-position: center;
-  background-repeat: no-repeat;
   transition: all 3s ease-in-out;
   opacity: 0;
 }
@@ -2551,10 +2286,6 @@ audio {
   width: 100%;
   height: 100%;
   margin: auto;
-  background-size: 100%;
-  background-image: url(./images/book/book2223/牛掛鐘.png);
-  background-position: center;
-  background-repeat: no-repeat;
   transition: all 1s ease-in-out;
 }
 
@@ -2592,10 +2323,6 @@ audio {
   width: 100%;
   height: 100%;
   margin: auto;
-  background-size: 100%;
-  background-image: url(./images/book/book2223/拳頭.png);
-  background-position: center;
-  background-repeat: no-repeat;
   animation: sleepGirlHand 2s ease-in-out infinite;
   transition: all 1s ease-in-out;
 }
@@ -2622,10 +2349,6 @@ audio {
   width: 100%;
   height: 100%;
   margin: auto;
-  background-size: 100%;
-  background-image: url(./images/book/book2223/手臂.png);
-  background-position: center;
-  background-repeat: no-repeat;
 }
 
 /* book24 媽媽倒牛奶*/
@@ -2930,6 +2653,7 @@ audio {
 
 .girl-l-hand {
   position: absolute;
+  right: 15%;
   z-index: 3;
   width: 101px;
 }
@@ -3459,10 +3183,6 @@ audio {
   transition: all 1s ease-in-out;
 }
 
-.coin-light-show {
-  display: block;
-}
-
 @keyframes lightShine {
   0% {
     opacity: 1;
@@ -3749,7 +3469,7 @@ audio {
     right: 0;
     width: 40px;
     height: 40px;
-    z-index: 100;
+    z-index: 1000;
     border: none;
     border-radius: 100%;
     color: #000;
@@ -3870,9 +3590,9 @@ audio {
 
   .moms-head-5 {
     bottom: initial;
-    top: 48%;
-    right: 25%;
-    width: 35%;
+    top: 45.5%;
+    right: 31%;
+    width: 29%;
     height: 100px;
   }
 
@@ -3882,6 +3602,12 @@ audio {
     height: 17%;
   }
 
+  .gogo {
+    bottom: 24%;
+    left: 15%;
+  }
+
+  /* book0607 */
   .door.open {
     transform: translateX(66%) scale(3) rotateY(91deg);
   }
@@ -3892,6 +3618,7 @@ audio {
     width: 75px;
     height: 250px;
   }
+
   .house {
     left: 11%;
     bottom: 2%;
@@ -3933,7 +3660,7 @@ audio {
   .door-common {
     width: 10%;
     right: 33%;
-    bottom: 11%;
+    bottom: 21%;
   }
 
   .knock {
@@ -3943,11 +3670,14 @@ audio {
   }
 
   .peoples {
-    bottom: 14%;
-    right: 34%;
-    height: 150px;
+    bottom: 16%;
+    right: 38%;
     width: 10%;
     background-size: 100%;
+  }
+
+  .peoples-open {
+    right: 33%;
   }
 
   .cloud1,
@@ -3996,7 +3726,6 @@ audio {
   /* book0809 牛角印 */
   .mom-daughter {
     width: 48%;
-    height: 250px;
   }
 
   .bubble7 {
@@ -4005,12 +3734,12 @@ audio {
   }
 
   .eyes-8 {
-    top: 18%;
+    top: 21%;
     width: 10%;
   }
 
   .eyes-ball-8 {
-    top: 18%;
+    top: 21%;
     left: 33%;
     width: 9.5%;
   }
@@ -4029,6 +3758,7 @@ audio {
   .cloud-02 {
     width: 30%;
     height: 80px;
+    right: -5%;
   }
 
   .cow01 {
@@ -4064,10 +3794,9 @@ audio {
   }
 
   .girls-hand {
-    right: 76%;
+    right: 77%;
     bottom: 8%;
-    width: 70px;
-    height: 70px;
+    width: 65px;
   }
 
   /* book12~13 電風扇 */
@@ -4088,7 +3817,7 @@ audio {
 
   .check02 {
     right: 16%;
-    top: 33%;
+    top: 32%;
   }
 
   .check03 {
@@ -4100,40 +3829,50 @@ audio {
     width: 25%;
   }
 
-  .coin-light {
-    width: 80%;
-    height: 200px;
+  .coin-light,
+  .coin-light02,
+  .coin-light03 {
+    display: none;
+    bottom: 0%;
+    width: 250px;
   }
 
   /* book1415 餵牛奶 */
-
   .click-milk {
     right: 27%;
-    bottom: 10%;
+    bottom: 23%;
+    width: 10%;
   }
 
   .board14,
   .board16 {
-    top: 4%;
+    top: 11%;
     width: 20%;
   }
 
   .board-list02,
   .board-list03 {
-    top: 9%;
+    top: 13%;
     width: 15%;
   }
 
   .milk-bottle {
     position: absolute;
-    right: 84%;
-    bottom: 12%;
-    width: 58px;
+    right: 81%;
+    bottom: 15%;
+    width: 134px;
+    height: 32px;
+  }
+
+  .bottle {
+    width: 50px;
   }
 
   .milk {
-    right: -11%;
-    bottom: 18%;
+    width: 35px;
+    height: 20px;
+    right: 13%;
+    bottom: 21%;
   }
 
   .cows-face {
@@ -4142,8 +3881,13 @@ audio {
     height: 78px;
   }
 
-  .milk-empty {
-    bottom: -40%;
+  @keyframes drink {
+    from {
+      height: 20px;
+    }
+    to {
+      height: 0%;
+    }
   }
 
   .girls-left {
@@ -4302,6 +4046,16 @@ audio {
     transform: rotate(-72deg);
   }
 
+  .father-hand-region {
+    display: none;
+  }
+
+  .father-hand-region-mb {
+    position: absolute;
+    z-index: 3;
+    transition: all 1.5s ease-in-out;
+  }
+
   .mom-hand-region-mb {
     position: absolute;
     z-index: 99;
@@ -4322,4 +4076,8 @@ audio {
 
 .cloud-fade-in {
   opacity: 1;
+}
+
+.coin-light-show {
+  display: block;
 }

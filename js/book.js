@@ -720,17 +720,38 @@ $(function () {
     }
 
     if (page === 6 || page === 7) {
+      $("#flipbook").append(
+        '<img class="knock" src="./images/book/book0607/點這裡.png" />'
+      );
       const door = document.querySelector(".door");
-      $("#flipbook").append('<div class="tree1"></div>');
-      $("#flipbook").append('<div class="tree2"></div>');
-      $("#flipbook").append('<div class="tree3"></div>');
-      $("#flipbook").append('<div class="cloud2"></div>');
-      $("#flipbook").append('<div class="bubble67"></div>');
-      $("#flipbook").append('<div class="star5"></div>');
-      $("#flipbook").append('<div class="door-bg door-common"></div>');
-      $("#flipbook").append('<div class="door door-common"></div>');
-      $("#flipbook").append('<div class="peoples"></div>');
-      $("#flipbook .door").on("click", () => {
+      $("#flipbook").append(
+        '<img class="tree1" src="./images/book/book0607/森林1.png" />'
+      );
+      $("#flipbook").append(
+        '<img class="tree2" src="./images/book/book0607/森林2.png" />'
+      );
+      $("#flipbook").append(
+        '<img class="tree3" src="./images/book/book0607/森林3.png" />'
+      );
+      $("#flipbook").append(
+        '<img class="cloud2" src="./images/book/book0607/雲2.png" />'
+      );
+      $("#flipbook").append(
+        '<img class="bubble67" src="./images/book/book0607/牛奶泡泡.png" />'
+      );
+      $("#flipbook").append(
+        '<img class="star5" src="./images/book/book0607/亮晶晶.png" />'
+      );
+      $("#flipbook").append(
+        '<img class="door-bg door-common" src="./images/book/book0607/門內.png"/>'
+      );
+      $("#flipbook").append(
+        '<img class="door door-common" src="./images/book/book0607/門.png"/>'
+      );
+      $("#flipbook").append(
+        '<img class="peoples" src="./images/book/book0607/媽媽鈴鈴.png" />'
+      );
+      $("#flipbook .knock").on("click", () => {
         $(".knock").css("display", "none");
         playAudio("knock", 0);
         $(".door").addClass("door-opening");
@@ -755,6 +776,7 @@ $(function () {
         playAudio("audio-4-click", 0);
       });
     } else {
+      $("#flipbook .knock").remove();
       $("#flipbook .tree1").remove();
       $("#flipbook .tree2").remove();
       $("#flipbook .tree3").remove();
@@ -867,9 +889,10 @@ $(function () {
       // 只建立一次，避免 DOM 爆掉
       if (!fanAndBubbleCreated) {
         fanAndBubbleCreated = true;
-        $("#flipbook").append(`<div class="electfan"></div>
-                           <div class="bubble-bg"></div>
-                           <div class="bubble12"></div>
+        $("#flipbook")
+          .append(`<img class="electfan" src="./images/book/book12/風扇.png"/>
+                           <img class="bubble-bg" src="./images/book/book13/水珠.png"/>
+                           <img class="bubble12" src="./images/book/book13/牛奶泡泡.png"/>
                            <div class="check-box"></div>
                            </div>`);
 
@@ -934,13 +957,14 @@ $(function () {
         btnPreviousDisabled();
         btnDisabled();
 
-        $("#flipbook").append(`<div class="small-cow"></div>
-          <div class="board-list02"></div>
-          <div class="board14"></div>
-          <div class="check check02"></div>
+        $("#flipbook")
+          .append(`<img class="small-cow" src="./images/book/book1415/小牛.png"/>
+          <img class="board-list02" src="./images/book/book1415/任務清單.png">
+          <img class="board14" src="./images/book/book1415/板子.png"/>
+          <img class="check check02" src="./images/book/book13/綠勾.png"/>
           <div class="check-box"></div>
-          <div class="click-milk"></div>
-          <div class="bubble14">`);
+          <img class="click-milk" src="./images/book/book1415/點這裡.png"/>
+          <img class="bubble14" src="./images/book/book1415/牛奶泡泡.png"/>`);
         $(".book-section").append(`
                            <div class="popup-board-bg">
                               <div class="popup-close-btn">x</div>
@@ -961,6 +985,22 @@ $(function () {
           $(".popup-board-bg").css("display", "none");
           $(".popup-board").css("display", "none");
         });
+
+        if (window.matchMedia("(max-height: 500px)").matches) {
+          if (isAndroidChrome()) {
+            $(".girls-hand").css({
+              right: (screenHeight * 473.9) / 609 + "px", //320.6
+              bottom: (screenHeight * 75.68) / 609 + "px", //51.2
+            });
+          }
+
+          if (isSafari() || isIOSChrome()) {
+            $(".girls-hand").css({
+              right: (visualHeight * 473.1857) / 609 + "px", //351.312
+              bottom: (visualHeight * 81.124) / 609 + "px", //60.2311
+            });
+          }
+        }
 
         setTimeout(() => {
           $(".board-list02").addClass("bubble-fade-in");
@@ -1041,7 +1081,7 @@ $(function () {
             <div class="nurse-girl"></div>
             <div class="click-hearing-heart"></div>
             <div class="board-list03"></div>   
-            <div class="check check03"></div>
+            <img class="check check03" src="./images/book/book13/綠勾.png" />
             <div class="board16"></div>
             <div class="bubble16"></div>
             `);
@@ -1133,12 +1173,12 @@ $(function () {
     // 第 20–21 頁：獲得皇冠 + 投硬幣動畫
     if (page === 18 || page === 19) {
       $("#flipbook").append(`
-      <div class="coin-all  coin01-final"></div>
-      <div class="coin-all coin02-final"></div>
-      <div class="coin-all coin03-final"></div>
-      <div class="coin-all-shine"></div>
-      <div class="crown"></div>
-      <div class="bubble18"></div>
+      <img class="coin-all  coin01-final" src="./images/book/book1819/金幣01.png" />
+      <img class="coin-all coin02-final" src="./images/book/book1819/金幣02.png" />
+      <img class="coin-all coin03-final" src="./images/book/book1819/金幣03.png" />
+      <img class="coin-all-shine" src="./images/book/book1819/亮晶晶.png" />
+      <img class="crown" src="./images/book/book1819/好牛皇冠.png" />
+      <img class="bubble18" src="./images/book/book1819/牛奶泡泡.png" />
     `);
 
       setTimeout(() => {
@@ -1171,11 +1211,24 @@ $(function () {
 
     // 第 22–23 頁：小女孩夢境 + 浮出夢境
     if (page === 20 || page === 21) {
-      $("#flipbook").append(`<div class="dream04"></div>`);
-      $("#flipbook").append(`<div class="dream-girl"></div>`);
-      $("#flipbook").append(`<div class="wow dialog20"></div>`);
-      $("#flipbook").append(`<div class="bubble20"></div>`);
-      $("#flipbook").append(`<div class="star20"></div>`);
+      $("#flipbook").append(
+        `<img class="dream04" src="./images/book/book2021/夢泡04.png" />`
+      );
+      $("#flipbook").append(
+        `<img class="dream-girl" src="./images/book/book2021/鈴鈴.png" />`
+      );
+      $("#flipbook").append(
+        `<img class="dialog20" src="./images/book/book2021/哇!.png"></div>`
+      );
+      $("#flipbook").append(
+        `<img class="dialog21" src="./images/book/book2021/嗯.png"></div>`
+      );
+      $("#flipbook").append(
+        `<img class="bubble20" src="./images/book/book2021/牛奶泡泡20.png" />`
+      );
+      $("#flipbook").append(
+        `<img class="star20" src="./images/book/book2021/亮晶晶.png" />`
+      );
       setTimeout(() => {
         $(".dream01").addClass("dream-animation");
       }, 1000);
@@ -1193,7 +1246,8 @@ $(function () {
         $(".dream-girl").addClass("dream-girl-animation");
       }, 5000);
       setTimeout(() => {
-        $(".wow").addClass("dialog20-animation");
+        $(".dialog20").addClass("dialog20-animation");
+        $(".dialog21").addClass("dialog20-animation");
       }, 6000);
       setTimeout(() => {
         $(".bubble20").addClass("bubble-fade-in");
@@ -1204,11 +1258,14 @@ $(function () {
       $(".dialog20").remove();
       $(".star20").remove();
       $(".bubble20").remove();
+      $(".dialog20").remove();
+      $(".dialog21").remove();
       $(".dream01").removeClass("dream-animation");
       $(".dream02").removeClass("dream-animation");
       $(".dream03").removeClass("dream-animation");
       $(".dream04").removeClass("dream-animation");
-      $(".wow").removeClass("dialog20-animation");
+      $(".dialog20").removeClass("dialog20-animation");
+      $(".dialog21").removeClass("dialog20-animation");
       $(".star20").removeClass("dialog20-animation");
       $(".bubble20").removeClass("bubble-fade-in");
       $(".dream-girl").removeClass("dream-girl-animation");
@@ -1275,29 +1332,31 @@ $(function () {
     $(".click-girl")
       .off("click")
       .on("click", function () {
-        setTimeout(() => {
-          if (isAndroidChrome()) {
-            $(".girl-l-hand-finish").css({
-              top: (screenHeight * 314.276) / 609 + "px",
-              left: (screenHeight * 117.075) / 609 + "px",
-            });
-            $(".girl-r-hand-finish").css({
-              bottom: (screenHeight * 104.95) / 609 + "px",
-              right: (screenHeight * 212.32) / 609 + "px",
-            });
-          }
+        if (window.matchMedia("(max-height: 500px)").matches) {
+          setTimeout(() => {
+            if (isAndroidChrome()) {
+              $(".girl-l-hand-finish").css({
+                top: (screenHeight * 314.276) / 609 + "px",
+                left: (screenHeight * 117.075) / 609 + "px",
+              });
+              $(".girl-r-hand-finish").css({
+                bottom: (screenHeight * 104.95) / 609 + "px",
+                right: (screenHeight * 212.32) / 609 + "px",
+              });
+            }
 
-          if (isSafari() || isIOSChrome()) {
-            $(".girl-l-hand-finish").css({
-              top: (visualHeight * 305) / 609 + "px",
-              left: (visualHeight * 125.14) / 609 + "px",
-            });
-            $(".girl-r-hand-finish").css({
-              bottom: (visualHeight * 114.1226) / 609 + "px",
-              right: (visualHeight * 212.13) / 609 + "px",
-            });
-          }
-        }, 100);
+            if (isSafari() || isIOSChrome()) {
+              $(".girl-l-hand-finish").css({
+                top: (visualHeight * 305) / 609 + "px",
+                left: (visualHeight * 125.14) / 609 + "px",
+              });
+              $(".girl-r-hand-finish").css({
+                bottom: (visualHeight * 114.1226) / 609 + "px",
+                right: (visualHeight * 212.13) / 609 + "px",
+              });
+            }
+          }, 100);
+        }
 
         $(".click-girl").hide();
         $(".girl-l-hand-region").addClass("girl-l-hand-finish");
@@ -1335,9 +1394,13 @@ $(function () {
       if (window.matchMedia("(max-height: 500px)").matches) {
         setTimeout(() => {
           if (isAndroidChrome()) {
-            $(".father-hand-finish").css({
-              top: (screenHeight * 359.2) / 609 + "px", //243
-              left: (screenHeight * 53.214) / 609 + "px", //36
+            $(".father-hand-finish-mb").css({
+              transform:
+                `translate(` +
+                (screenHeight * -23.65) / 609 +
+                `px,` +
+                (screenHeight * -44.34) / 609 +
+                `px) rotate(-39deg)`, //transform: translate(-16px, -30px) rotate(-39deg);
             });
             $(".daughter-hand-finish").css({
               top: (screenHeight * 403.536) / 609 + "px", //273
@@ -1354,10 +1417,15 @@ $(function () {
           }
 
           if (isSafari() || isIOSChrome()) {
-            $(".father-hand-finish").css({
-              top: (visualHeight * 327.32) / 609 + "px", //243
-              left: (visualHeight * 48.49) / 609 + "px", //36
+            $(".father-hand-finish-mb").css({
+              transform:
+                `translate(` +
+                (visualHeight * 2.694) / 609 +
+                `px,` +
+                (visualHeight * -18.858) / 609 +
+                `px) rotate(-39deg)`, //transform: translate(2px, -14px) rotate(-39deg);
             });
+
             $(".daughter-hand-finish").css({
               top: (visualHeight * 404.073) / 609 + "px", //300
               left: (visualHeight * 377.1348) / 609 + "px", //280
@@ -1374,11 +1442,12 @@ $(function () {
           }
         }, 550);
       }
-      $(".father-hand-region").addClass("father-hand-finish");
       $(".daughter-hand-region").addClass("daughter-hand-finish");
       if (window.matchMedia("(max-height: 500px)").matches) {
+        $(".father-hand-region-mb").addClass("father-hand-finish-mb");
         $(".mom-hand-region-mb").addClass("mom-hand-finish-mb");
       } else {
+        $(".father-hand-region").addClass("father-hand-finish");
         $(".mom-hand-region").addClass("mom-hand-finish");
       }
 
@@ -1411,6 +1480,7 @@ $(function () {
         "daughter-hand-finish",
         "mom-hand-finish",
         "mom-hand-finish-mb",
+        "father-hand-finish-mb",
 
         // 空手動畫
         "father-hand-milk-empty",
@@ -1476,7 +1546,7 @@ $(function () {
       } else {
         if (window.matchMedia("(max-height: 500px)").matches) {
           $(".mom-hand-region-mb").remove();
-          $(".mom-hand").removeClass("mom-hand-finish-mb");
+          $(".mom-hand-region-mb").removeClass("mom-hand-finish-mb");
         } else {
           $(".mom-hand-region").remove();
           $(".mom-hand").removeClass("mom-hand-finish");
@@ -1515,6 +1585,26 @@ $(function () {
         startFamilyAnimation();
       } else {
         resetFamilyPage();
+
+        if (window.matchMedia("(max-height: 500px)").matches) {
+          if (isSafari() || isIOSChrome()) {
+            $(".father-hand-region-mb").css({
+              width: (visualHeight * 296.34) / 609 + "px", //220px
+              top: (visualHeight * 360.727) / 609 + "px", //267.8px
+              left: (visualHeight * 85.39) / 609 + "px", //53px
+              transform: "translate(0,0) rotate(0deg)",
+            });
+          }
+          if (isAndroidChrome()) {
+            $(".father-hand-region-mb").css({
+              width: (screenHeight * 325.197) / 609 + "px", //220px
+              top: (screenHeight * 395.85) / 609 + "px", //267.8px
+              left: (screenHeight * 78.34) / 609 + "px", //53px
+              transform: "translate(0,0) rotate(0deg)",
+            });
+          }
+        }
+
         $(".father-hand-region").removeClass("father-hand-finish");
         $(".daughter-hand-region").removeClass("daughter-hand-finish");
         $(".father-hand-milk").removeClass("father-hand-milk-empty");
@@ -1564,19 +1654,38 @@ $(function () {
 
         if (isSafari() || isIOSChrome()) {
           $(".knock").css({
-            right: (visualHeight * 200) / 609 + "px",
-            bottom: (visualHeight * 150) / 609 + "px",
+            right: (visualHeight * 296.34) / 609 + "px", //220
+            bottom: (visualHeight * 188.58) / 609 + "px", //140
           });
         }
         if (isAndroidChrome()) {
           $(".knock").css({
-            right: (screenHeight * 200) / 609 + "px",
-            bottom: (screenHeight * 150) / 609 + "px",
+            right: (screenHeight * 280.85) / 609 + "px", //190
+            bottom: (screenHeight * 184.77) / 609 + "px", //125
           });
+
+          if (screenHeight <= 360) {
+            $(".door-common").css({
+              bottom: "8%",
+            });
+            $(".wow").css({
+              width: "15%",
+              right: "65%",
+              bottom: "8%",
+            });
+          }
         }
       } else {
         $("#flipbook .clouds").remove();
         $(".clouds").removeClass("cloud-fade-in");
+      }
+
+      if (page === 8 || page === 9) {
+        if (screenHeight <= 360) {
+          $(".foot").css({
+            width: "15%",
+          });
+        }
       }
 
       if (page === 16 || page === 17) {
@@ -1623,6 +1732,9 @@ $(function () {
             top: (visualHeight * 373.1) / 609 + "px",
             left: (visualHeight * 120.14) / 609 + "px",
           });
+          $(".girl-l-hand").css({
+            right: (visualHeight * 59.264) / 609 + "px", //44
+          });
           $(".girl-r-hand").css({
             bottom: (visualHeight * 72.177) / 609 + "px",
             right: (visualHeight * 210.576) / 609 + "px",
@@ -1632,6 +1744,10 @@ $(function () {
           $(".girl-l-hand-region").css({
             top: (screenHeight * 363.6) / 609 + "px",
             left: (screenHeight * 117.075) / 609 + "px",
+          });
+
+          $(".girl-l-hand").css({
+            right: (screenHeight * 67.404) / 609 + "px", //45.6
           });
 
           if (screenHeight <= 360) {
@@ -1674,25 +1790,26 @@ $(function () {
             left: (visualHeight * 192.621) / 609 + "px", //143px
           });
 
-          $(".father-hand-region").css({
+          $(".father-hand-region-mb").css({
             width: (visualHeight * 296.34) / 609 + "px", //220px
             top: (visualHeight * 360.727) / 609 + "px", //267.8px
-            left: (visualHeight * 71.39) / 609 + "px", //53px
+            left: (visualHeight * 85.39) / 609 + "px", //53px
           });
 
           $(".father-hand").css({
             width: (visualHeight * 269.4) / 609 + "px", //200px
+            left: (visualHeight * 2.97) / 609 + "px", //2.2px
           });
 
           $(".father-hand-cup").css({
             width: (visualHeight * 66.003) / 609 + "px", //49px
-            bottom: (visualHeight * -80.82) / 609 + "px", //-60px
+            bottom: (visualHeight * -67.478) / 609 + "px", //-50px
             left: (visualHeight * 211.479) / 609 + "px", //157px
           });
 
           $(".father-hand-milk").css({
             width: (visualHeight * 67.35) / 609 + "px", //50px
-            bottom: (visualHeight * -72.738) / 609 + "px", //-54px
+            bottom: (visualHeight * -67.478) / 609 + "px", //-50px
             left: (visualHeight * 216.867) / 609 + "px", //161px
           });
 
@@ -1749,7 +1866,7 @@ $(function () {
             left: (screenHeight * 211.3765) / 609 + "px", //143px
           });
 
-          $(".father-hand-region").css({
+          $(".father-hand-region-mb").css({
             width: (screenHeight * 325.197) / 609 + "px", //220px
             top: (screenHeight * 395.85) / 609 + "px", //267.8px
             left: (screenHeight * 78.34) / 609 + "px", //53px
@@ -1757,18 +1874,19 @@ $(function () {
 
           $(".father-hand").css({
             width: (screenHeight * 295.63) / 609 + "px", //200px
+            left: (screenHeight * 3.25) / 609 + "px", //2.2px
           });
 
           $(".father-hand-cup").css({
             width: (screenHeight * 72.43) / 609 + "px", //49px
-            bottom: (screenHeight * -88.69) / 609 + "px", //-60px
+            bottom: (screenHeight * -73.91) / 609 + "px", //-50px
             left: (screenHeight * 232.07) / 609 + "px", //157px
           });
 
           $(".father-hand-milk").css({
             width: (screenHeight * 73.9) / 609 + "px", //50px
-            bottom: (screenHeight * -79.82) / 609 + "px", //-54px
-            left: (screenHeight * 2378) / 609 + "px", //161px
+            bottom: (screenHeight * -73.91) / 609 + "px", //-50px
+            left: (screenHeight * 237.8) / 609 + "px", //161px
           });
 
           $(".daughter-hand-region").css({
