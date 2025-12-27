@@ -165,6 +165,7 @@ audio {
   bottom: 34%;
   z-index: 9999;
   width: 105px;
+  opacity: 0;
   cursor: pointer;
   animation: dialogKnockShow 2s ease-in-out infinite;
   transition: all 1s ease-in-out;
@@ -215,7 +216,8 @@ audio {
   background-size: 100%;
   background-repeat: no-repeat;
   position: absolute;
-  animation: dialogShow 2s ease-in-out infinite;
+  animation-delay: 2s;
+  /* animation: dialogShow 2s ease-in-out infinite; */
   transition: all 1s ease-in-out;
 }
 
@@ -391,10 +393,22 @@ audio {
 }
 
 /* book02 */
+.book02 {
+  opacity: 0;
+  transition: all 1s ease-in-out;
+}
 
 /* book03 */
+.book03 {
+  opacity: 0;
+  transition: all 1s ease-in-out;
+}
 
 /* book04 小女孩沒牛奶 */
+.book04 {
+  opacity: 0;
+  transition: all 1s ease-in-out;
+}
 
 .eyes-4 {
   position: absolute;
@@ -406,6 +420,8 @@ audio {
   margin: auto;
   width: 100%;
   height: 100%;
+  opacity: 0;
+  transition: all 1s ease-in-out;
 }
 
 .eyes-big-animation {
@@ -464,6 +480,8 @@ audio {
 /* book05 小女孩與媽媽搖手 */
 .book05 {
   position: relative;
+  opacity: 0;
+  transition: all 1s ease-in-out;
 }
 
 .hand {
@@ -474,6 +492,8 @@ audio {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  opacity: 0;
+  transition: all 1s ease-in-out;
 }
 
 .daughter-5 {
@@ -484,6 +504,8 @@ audio {
   width: 200px;
   background-position: center;
   background-repeat: no-repeat;
+  opacity: 0;
+  transition: all 1s ease-in-out;
 }
 
 .daughter-hand-5 {
@@ -493,6 +515,7 @@ audio {
   z-index: 4;
   width: 50px;
   animation: handWaveMove 2s ease-in-out infinite;
+  opacity: 0;
   transition: all 1s ease-in-out;
 }
 
@@ -527,6 +550,8 @@ audio {
   animation-delay: 0.5s;
   animation-fill-mode: forwards;
   transition: all 1s ease-in-out;
+  opacity: 0;
+  transition: all 1s ease-in-out;
 }
 
 @keyframes momsHandMove {
@@ -542,8 +567,10 @@ audio {
 }
 
 .gogo {
-  bottom: 28%;
+  bottom: 30%;
   left: 21%;
+  opacity: 0;
+  transition: all 1s ease-in-out;
 }
 
 /* book0607 點們展開森林*/
@@ -553,12 +580,16 @@ audio {
   bottom: 21%;
   z-index: 1000;
   width: 130px;
+  opacity: 0;
+  transition: all 1s ease-in-out;
 }
 
 .door {
   cursor: grab;
   transition: all 1s ease-in-out;
   z-index: 1001;
+  opacity: 0;
+  transition: all 1s ease-in-out;
 }
 
 .door-opening {
@@ -744,6 +775,10 @@ audio {
 /* book07 */
 
 /* book08 鈴鈴觀察腳步聲*/
+.book08 {
+  opacity: 0;
+  transition: all 1s ease-in-out;
+}
 
 .foot {
   position: absolute;
@@ -831,6 +866,8 @@ audio {
   background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
+  opacity: 0;
+  transition: all 1s ease-in-out;
 }
 
 .mom-daughter-animation {
@@ -855,6 +892,8 @@ audio {
   left: 35%;
   z-index: 10;
   width: 60px;
+  opacity: 0;
+  transition: all 1s ease-in-out;
 }
 
 .eyes-ball-8 {
@@ -863,6 +902,8 @@ audio {
   left: 198px;
   z-index: 10;
   width: 58px;
+  opacity: 0;
+  transition: all 1s ease-in-out;
 }
 
 .eyes-ball-animation {
@@ -893,6 +934,10 @@ audio {
 }
 
 /* book09 牛發出哞叫聲*/
+.book09 {
+  opacity: 0;
+  transition: all 1s ease-in-out;
+}
 
 .star7 {
   position: absolute;
@@ -906,6 +951,11 @@ audio {
 }
 
 /* book10 農場任務清單*/
+.book10 {
+  opacity: 0;
+  transition: all 1s ease-in-out;
+}
+
 .cow01 {
   position: absolute;
   left: 10%;
@@ -913,7 +963,8 @@ audio {
   width: 100px;
   transition: all 2s ease-in-out;
   animation: cowMove01 10s ease-in-out infinite;
-  transition: all 10s ease-in-out;
+  opacity: 0;
+  transition: all 2s ease-in-out;
 }
 
 @keyframes cowMove01 {
@@ -940,7 +991,8 @@ audio {
   bottom: 45%;
   width: 80px;
   transition: all 2s ease-in-out;
-  animation: cowMove02 10s ease-in-out infinite;
+  opacity: 0;
+  animation: cowMove02 2s ease-in-out infinite;
 }
 
 @keyframes cowMove02 {
@@ -967,7 +1019,8 @@ audio {
   bottom: 45%;
   width: 80px;
   transition: all 2s ease-in-out;
-  animation: cowMove03 10s ease-in-out infinite;
+  opacity: 0;
+  animation: cowMove03 2s ease-in-out infinite;
 }
 
 @keyframes cowMove03 {
@@ -995,7 +1048,8 @@ audio {
   width: 150px;
   transition: all 2s ease-in-out;
   animation: cowMove01 10s ease-in-out infinite;
-  transition: all 10s ease-in-out;
+  opacity: 0;
+  transition: all 2s ease-in-out;
 }
 
 .cow05 {
@@ -1005,7 +1059,8 @@ audio {
   z-index: 99;
   width: 250px;
   animation: cowMove02 10s ease-in-out infinite;
-  transition: all 10s ease-in-out;
+  opacity: 0;
+  transition: all 2s ease-in-out;
 }
 
 .cloud-01 {
@@ -1015,7 +1070,8 @@ audio {
   width: 230px;
   transition: all 2s ease-in-out;
   display: none;
-  animation: cloud01Move 10s ease-in-out infinite;
+  opacity: 0;
+  animation: cloud01Move 5s ease-in-out 1s infinite;
 }
 
 @keyframes cloud01Move {
@@ -1031,14 +1087,20 @@ audio {
 }
 
 /* book11 農場任務清單*/
+.book11 {
+  opacity: 0;
+  transition: all 1s ease-in-out;
+}
+
 .list-board {
   position: absolute;
   right: 33.5%;
   bottom: 14%;
   z-index: 100;
   width: 180px;
+  opacity: 0;
   transition: all 2s ease-in-out;
-  animation: listRotate 2s ease-in-out infinite;
+  animation: listRotate 2s ease-in-out 1s infinite;
 }
 
 @keyframes listRotate {
@@ -1059,7 +1121,7 @@ audio {
   bottom: 20%;
   z-index: 101;
   width: 119px;
-  animation: listShow 2s ease-in-out infinite;
+  animation: listShow 2s ease-in-out 1s infinite;
   transition: all 2s ease-in-out;
   opacity: 0;
 }
@@ -1112,6 +1174,8 @@ audio {
   margin: auto;
   z-index: 100;
   width: 100%;
+  opacity: 0;
+  transition: all 1s ease-in-out;
 }
 
 .star11 {
@@ -1134,7 +1198,8 @@ audio {
   margin: auto;
   z-index: 99;
   width: 100%;
-  animation: cloudGroupMove 15s ease-in-out infinite;
+  animation: cloudGroupMove 5s ease-in-out 1s infinite;
+  opacity: 0;
   transition: all 15s ease-in-out;
 }
 
@@ -1145,7 +1210,8 @@ audio {
   width: 120px;
   transition: all 2s ease-in-out;
   display: none;
-  animation: cloudGroupMove 10s ease-in-out infinite;
+  opacity: 0;
+  animation: cloudGroupMove 5s ease-in-out 1s infinite;
 }
 
 @keyframes cloudGroupMove {
@@ -1165,12 +1231,19 @@ audio {
 }
 
 /* book12  小女孩魔法棒 電風閃轉出泡泡*/
+.book12 {
+  opacity: 0;
+  transition: all 1s ease-in-out;
+}
+
 .girls-head {
   position: absolute;
   left: 8%;
   bottom: -1%;
   z-index: 99;
   width: 538px;
+  opacity: 0;
+  transition: all 1s ease-in-out;
 }
 
 .electfan {
@@ -1179,6 +1252,8 @@ audio {
   top: 0%;
   z-index: 99;
   width: 350px;
+  opacity: 0;
+  transition: all 1s ease-in-out;
 }
 
 .electfan-move {
@@ -1212,6 +1287,7 @@ audio {
   margin: auto;
   z-index: 106;
   width: 56px;
+  opacity: 0;
   transition: all 2s ease-in-out;
 }
 
@@ -1335,6 +1411,11 @@ audio {
 }
 
 /* book13 小女孩魔法棒 電風閃轉出泡泡*/
+.book13 {
+  opacity: 0;
+  transition: all 1s ease-in-out;
+}
+
 .coin-light {
   display: none;
   position: absolute;
@@ -1365,6 +1446,11 @@ audio {
 }
 
 /* book14 小女孩餵牛奶*/
+.book14 {
+  opacity: 0;
+  transition: all 1s ease-in-out;
+}
+
 .small-cow {
   position: absolute;
   left: 0;
@@ -1374,9 +1460,16 @@ audio {
   z-index: 99;
   margin: auto;
   width: 100%;
+  opacity: 0;
+  transition: all 1s ease-in-out;
 }
 
 /* book15 小女孩餵牛奶*/
+.book15 {
+  opacity: 0;
+  transition: all 1s ease-in-out;
+}
+
 .milk-bottle {
   position: absolute;
   right: 86%;
@@ -1385,12 +1478,16 @@ audio {
   width: 134px;
   height: 40px;
   overflow: hidden;
+  opacity: 0;
+  transition: all 1s ease-in-out;
 }
 
 .bottle {
   position: absolute;
   z-index: 2;
   width: 68px;
+  opacity: 0;
+  transition: all 1s ease-in-out;
 }
 
 .milk {
@@ -1407,7 +1504,8 @@ audio {
   background-repeat: no-repeat;
   transform: rotate(-15deg);
   transform-origin: bottom;
-  transition: all 3s ease-in-out;
+  opacity: 0;
+  transition: all 1s ease-in-out;
 }
 
 .milk-empty {
@@ -1429,6 +1527,8 @@ audio {
   bottom: 13%;
   z-index: 3;
   width: 90px;
+  opacity: 0;
+  transition: all 1s ease-in-out;
 }
 
 .cows-tongue {
@@ -1440,6 +1540,8 @@ audio {
   z-index: 999;
   margin: auto;
   width: 100%;
+  opacity: 0;
+  transition: all 1s ease-in-out;
 }
 
 .cows-tongue-animation {
@@ -1520,6 +1622,8 @@ audio {
   right: 3.5%;
   z-index: 100;
   width: 236px;
+  opacity: 0;
+  transition: all 1s ease-in-out;
 }
 
 .board-list02 {
@@ -1551,7 +1655,8 @@ audio {
   width: 323px;
   transition: all 3s ease-in-out;
   animation: cloud1 10s ease-in-out infinite;
-  transition: all 10s ease-in-out;
+  opacity: 0;
+  transition: all 1s ease-in-out;
 }
 
 .cloud14-2 {
@@ -1564,7 +1669,8 @@ audio {
   margin: auto;
   transition: all 3s ease-in-out;
   animation: cloudMove 10s ease-in-out infinite;
-  transition: all 10s ease-in-out;
+  opacity: 0;
+  transition: all 1s ease-in-out;
 }
 
 .cloud14-3 {
@@ -1575,7 +1681,8 @@ audio {
   width: 344px;
   transition: all 3s ease-in-out;
   animation: cloud3 10s ease-in-out infinite;
-  transition: all 10s ease-in-out;
+  opacity: 0;
+  transition: all 1s ease-in-out;
 }
 
 .text14 {
@@ -1584,11 +1691,15 @@ audio {
   top: 3%;
   z-index: 99;
   width: 20%;
+  opacity: 0;
+  transition: all 1s ease-in-out;
 }
 
 /* book16 小女孩聽牛心跳*/
 .book16 {
   position: relative;
+  opacity: 0;
+  transition: all 1s ease-in-out;
 }
 
 .cloud-16-0 {
@@ -1602,7 +1713,8 @@ audio {
   background-size: 100%;
   background-repeat: no-repeat;
   animation: cloud01Move 10s ease-in-out infinite;
-  transition: all 10s ease-in-out;
+  opacity: 0;
+  transition: all 1s ease-in-out;
 }
 
 .cloud-16-3 {
@@ -1616,7 +1728,8 @@ audio {
   background-size: 100%;
   background-repeat: no-repeat;
   animation: cloud3 10s ease-in-out infinite;
-  transition: all 10s ease-in-out;
+  opacity: 0;
+  transition: all 1s ease-in-out;
 }
 
 .moutain-left {
@@ -1633,6 +1746,8 @@ audio {
   background-image: url(./images/book/book1617/山左.png);
   background-position: center;
   background-repeat: no-repeat;
+  opacity: 0;
+  transition: all 1s ease-in-out;
 }
 
 .moutain-right {
@@ -1649,6 +1764,8 @@ audio {
   background-image: url(./images/book/book1617/山右.png);
   background-position: center;
   background-repeat: no-repeat;
+  opacity: 0;
+  transition: all 1s ease-in-out;
 }
 
 .mom-cow {
@@ -1659,6 +1776,8 @@ audio {
   bottom: 0;
   z-index: 99;
   width: 100%;
+  opacity: 0;
+  transition: all 1s ease-in-out;
 }
 
 .cow-eyes {
@@ -1670,7 +1789,8 @@ audio {
   z-index: 99;
   width: 100%;
   margin: auto;
-  /* transition: all 2s ease-in-out; */
+  opacity: 0;
+  transition: all 1s ease-in-out;
 }
 
 .cow-heart {
@@ -1682,6 +1802,7 @@ audio {
   z-index: 99;
   width: 100%;
   margin: auto;
+  opacity: 0;
   transition: all 2s ease-in-out;
 }
 
@@ -1708,6 +1829,7 @@ audio {
   width: 100%;
   margin: auto;
   transform: rotate(-2deg);
+  opacity: 0;
   transition: all 1s ease-in-out;
 }
 
@@ -1762,6 +1884,8 @@ audio {
   right: 3.5%;
   z-index: 100;
   width: 236px;
+  opacity: 0;
+  transition: all 1s ease-in-out;
 }
 
 .board-list03 {
@@ -1786,6 +1910,11 @@ audio {
 }
 
 /* book17 小女孩聽牛心跳*/
+.book17 {
+  opacity: 0;
+  transition: all 1s ease-in-out;
+}
+
 .story-text16 {
   position: absolute;
   top: 6%;
@@ -1793,6 +1922,8 @@ audio {
   margin: auto;
   z-index: 101;
   width: 339px;
+  transition: all 3s ease-in-out;
+  opacity: 0;
 }
 
 .nurse-girl {
@@ -1804,6 +1935,8 @@ audio {
   margin: auto;
   z-index: 101;
   width: 100%;
+  transition: all 3s ease-in-out;
+  opacity: 0;
 }
 
 .coin-light03 {
@@ -1849,7 +1982,13 @@ audio {
   transition: all 2s ease-in-out;
 }
 
-/* book1920 小女孩皇冠金幣*/
+/* book1819 小女孩皇冠金幣*/
+.book18,
+.book19 {
+  opacity: 0;
+  transition: all 1s ease-in-out;
+}
+
 .check03 {
   right: 14%;
   top: 38%;
@@ -1982,8 +2121,10 @@ audio {
 }
 
 /* book2021 小女孩夢境浮現*/
+.book20,
 .book21 {
-  position: relative;
+  opacity: 0;
+  transition: all 1s ease-in-out;
 }
 
 .dream01 {
@@ -2102,11 +2243,13 @@ audio {
 
 /* book2223 媽媽叫醒小女孩*/
 .book22 {
-  position: relative;
+  opacity: 0;
+  transition: all 1s ease-in-out;
 }
 
 .book23 {
-  position: relative;
+  opacity: 0;
+  transition: all 1s ease-in-out;
 }
 
 .cow-alarm {
@@ -2119,6 +2262,7 @@ audio {
   width: 100%;
   height: 100%;
   margin: auto;
+  opacity: 0;
   transition: all 1s ease-in-out;
 }
 
@@ -2157,6 +2301,7 @@ audio {
   height: 100%;
   margin: auto;
   animation: sleepGirlHand 2s ease-in-out infinite;
+  opacity: 0;
   transition: all 1s ease-in-out;
 }
 
@@ -2182,11 +2327,14 @@ audio {
   width: 100%;
   height: 100%;
   margin: auto;
+  opacity: 0;
+  transition: all 1s ease-in-out;
 }
 
 /* book24 媽媽倒牛奶*/
 .book24 {
-  position: relative;
+  opacity: 0;
+  transition: all 1s ease-in-out;
 }
 
 .milk-hand {
@@ -2202,6 +2350,7 @@ audio {
   background-position: center;
   background-repeat: no-repeat;
   background-image: url("./images/book/book24/手拿牛奶.png");
+  opacity: 0;
   transition: all 1.5s ease-in-out;
 }
 
@@ -2225,6 +2374,8 @@ audio {
   background-position: center;
   background-repeat: no-repeat;
   background-image: url("./images/book/book24/牛奶杯.png");
+  opacity: 0;
+  transition: all 1s ease-in-out;
 }
 
 .milk-inner {
@@ -2244,10 +2395,6 @@ audio {
   transition: all 5s ease-in-out;
 }
 
-.milk-inner-full {
-  opacity: 1;
-}
-
 .mom-right-hand {
   position: absolute;
   top: 0;
@@ -2262,6 +2409,8 @@ audio {
   background-position: center;
   background-repeat: no-repeat;
   background-image: url("./images/book/book24/媽媽右手掌.png");
+  opacity: 0;
+  transition: all 1s ease-in-out;
 }
 
 .milk-drop {
@@ -2329,7 +2478,8 @@ audio {
 
 /* book25 小女孩喝牛奶*/
 .book25 {
-  position: relative;
+  opacity: 0;
+  transition: all 1s ease-in-out;
 }
 
 .little-girl {
@@ -2342,6 +2492,8 @@ audio {
   width: 100%;
   height: 100%;
   margin: auto;
+  opacity: 0;
+  transition: all 1s ease-in-out;
 }
 
 .milk-stains {
@@ -2366,6 +2518,7 @@ audio {
   position: absolute;
   z-index: 1;
   width: 85px;
+  opacity: 0;
   transition: all 1.5s ease-in-out;
 }
 
@@ -2463,6 +2616,8 @@ audio {
   right: 15%;
   z-index: 3;
   width: 101px;
+  opacity: 0;
+  transition: all 1s ease-in-out;
 }
 
 .girl-l-hand-empty {
@@ -2481,6 +2636,7 @@ audio {
   bottom: 35%;
   z-index: 2;
   width: 76px;
+  opacity: 0;
   transition: all 1s ease-in-out;
 }
 
@@ -2490,11 +2646,8 @@ audio {
   bottom: 34%;
   z-index: 2;
   width: 85px;
+  opacity: 0;
   transition: all 1s ease-in-out;
-}
-
-.girl-l-hand-finished-milk {
-  opacity: 1;
 }
 
 .girl-r-hand {
@@ -2503,6 +2656,7 @@ audio {
   bottom: 56px;
   z-index: 3;
   width: 193px;
+  opacity: 0;
   transition: all 1.5s ease-in-out;
 }
 
@@ -2532,6 +2686,8 @@ audio {
 /* book27 一家人喝牛奶 */
 .book26 {
   position: relative;
+  opacity: 0;
+  transition: all 1s ease-in-out;
 }
 
 .all-milk-stains {
@@ -2567,6 +2723,8 @@ audio {
 .father-hand {
   position: absolute;
   width: 300px;
+  opacity: 0;
+  transition: all 1.5s ease-in-out;
 }
 
 .father-hand-cup {
@@ -2575,9 +2733,12 @@ audio {
   bottom: -61px;
   z-index: 0;
   width: 66px;
+  opacity: 0;
+  transition: all 1.5s ease-in-out;
 }
 
 .father-hand-milk {
+  display: none;
   position: absolute;
   left: 245px;
   bottom: -55px;
@@ -2591,10 +2752,6 @@ audio {
   top: 65%;
 }
 
-.father-hand-milk-empty {
-  opacity: 0;
-}
-
 .milk-box {
   position: absolute;
   left: 205px;
@@ -2606,6 +2763,8 @@ audio {
   background-image: url(./images/book/book2627/林鳳營.png);
   background-position: center;
   background-repeat: no-repeat;
+  opacity: 0;
+  transition: all 1.5s ease-in-out;
 }
 
 .daughter-hand-region {
@@ -2620,6 +2779,7 @@ audio {
   position: absolute;
   z-index: 2;
   width: 57px;
+  opacity: 0;
   transition: all 1.5s ease-in-out;
 }
 
@@ -2630,15 +2790,18 @@ audio {
   z-index: 0;
   width: 66px;
   transform: rotate(12deg);
+  opacity: 0;
+  transition: all 1.5s ease-in-out;
 }
 
 .daughter-hand-milk {
+  display: none;
   position: absolute;
   left: 29px;
   bottom: -69px;
   width: 60px;
-  transition: all 1.5s ease-in-out;
   transform: rotate(12deg);
+  transition: all 1.5s ease-in-out;
 }
 
 .daughter-hand-milk-region {
@@ -2646,10 +2809,6 @@ audio {
   transform: rotate(45deg);
   left: 30px;
   bottom: 10px;
-}
-
-.daughter-hand-milk-empty {
-  opacity: 0;
 }
 
 .daughter-hand-finish {
@@ -2669,6 +2828,10 @@ audio {
   background-image: url(./images/book/book2627/乾杯.png);
   background-position: center;
   background-repeat: no-repeat;
+  opacity: 0;
+}
+
+.cheers-show-animation {
   animation: dialogShow 2s ease-in-out infinite;
   transition: all 1s ease-in-out;
 }
@@ -2684,6 +2847,7 @@ audio {
 .mom-hand {
   position: absolute;
   width: 200px;
+  opacity: 0;
   transition: all 1.5s ease-in-out;
 }
 
@@ -2694,6 +2858,8 @@ audio {
   z-index: 0;
   width: 66px;
   transform: rotate(-26deg);
+  opacity: 0;
+  transition: all 1.5s ease-in-out;
 }
 
 .mom-hand-milk {
@@ -2703,6 +2869,8 @@ audio {
   width: 60px;
   transition: all 1.5s ease-in-out;
   transform: rotate(-26deg);
+  opacity: 0;
+  transition: all 1.5s ease-in-out;
 }
 
 .mom-hand-finish {
@@ -2716,10 +2884,6 @@ audio {
   bottom: 120px;
 }
 
-.mom-hand-milk-empty {
-  opacity: 0;
-}
-
 .girls-milk-ink-show {
   opacity: 1;
 }
@@ -2727,6 +2891,8 @@ audio {
 /* book27 一家人喝牛奶 */
 .book27 {
   position: relative;
+  opacity: 0;
+  transition: all 1s ease-in-out;
 }
 
 .cow-right {
@@ -3713,8 +3879,7 @@ audio {
     width: 20%;
   }
 
-  .girl-l-hand,
-  .girl-l-hand-finish-milk {
+  .girl-l-hand {
     width: 75px;
   }
 
@@ -3811,7 +3976,7 @@ audio {
     position: absolute;
     z-index: 99;
     transition: all 1.5s ease-in-out;
-    opacity: 0;
+    /* opacity: 0; */
   }
 
   .mom-hand {

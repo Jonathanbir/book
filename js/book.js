@@ -703,7 +703,13 @@ $(function () {
     }
 
     if (page === 2 || page === 3) {
+      setTimeout(() => {
+        $(".book02").css("opacity", "1");
+        $(".book03").css("opacity", "1");
+      }, 1000);
     } else {
+      $(".book02").css("opacity", "0");
+      $(".book03").css("opacity", "0");
     }
 
     if (page === 1 || page === 4) {
@@ -711,12 +717,31 @@ $(function () {
     }
 
     if (page === 4 || page === 5) {
+      setTimeout(() => {
+        $(".book04").css("opacity", "1");
+        $(".eyes-4").css("opacity", "1");
+        $(".book05").css("opacity", "1");
+        $(".daughter-5").css("opacity", "1");
+        $(".moms-head-5").css("opacity", "1");
+        $(".daughter-hand-5").css("opacity", "1");
+        $(".moms-hand-5").css("opacity", "1");
+        $(".gogo").css("opacity", "1");
+      }, 1000);
+
       $(".eyes-ball").addClass("eyes-ball-animation");
       $(".eyes-4").addClass("eyes-big-animation");
       $(".question").addClass("question-animation");
     } else {
       $(".eyes-4").removeClass("eyes-big-animation");
       $(".question").removeClass("question-animation");
+      $(".book04").css("opacity", "0");
+      $(".eyes-4").css("opacity", "0");
+      $(".book05").css("opacity", "0");
+      $(".daughter-5").css("opacity", "0");
+      $(".moms-head-5").css("opacity", "0");
+      $(".daughter-hand-5").css("opacity", "0");
+      $(".moms-hand-5").css("opacity", "0");
+      $(".gogo").css("opacity", "0");
     }
 
     if (page === 6 || page === 7) {
@@ -733,6 +758,15 @@ $(function () {
         <img class="peoples" src="./images/book/book0607/媽媽鈴鈴.png"/>
         `
       );
+
+      setTimeout(() => {
+        $(".knock").css("opacity", "1");
+        $(".door").css("opacity", "1");
+      }, 1000);
+
+      setTimeout(() => {
+        $(".door-bg").css("opacity", "1");
+      }, 2000);
 
       const door = document.querySelector(".door");
 
@@ -788,6 +822,18 @@ $(function () {
         <img class="star7" src="./images/book/book09/亮晶晶.png"/>
         `
       );
+
+      setTimeout(() => {
+        $(".book08").css("opacity", "1");
+        $(".book09").css("opacity", "1");
+        $(".eyes-8").css("opacity", "1");
+        $(".eyes-ball-8").css("opacity", "1");
+      }, 1000);
+
+      setTimeout(() => {
+        $(".mom-daughter").css("opacity", "1");
+      }, 1000);
+
       setTimeout(() => {
         $(".eyes-ball-8").addClass("eyes-ball-animation");
         $(".mom-daughter").addClass("mom-daughter-animation");
@@ -820,6 +866,10 @@ $(function () {
       $("#flipbook .mom-daughter").remove();
       $("#flipbook .bubble7").remove();
       $("#flipbook .star7").remove();
+      $(".book08").css("opacity", "0");
+      $(".book09").css("opacity", "0");
+      $(".eyes-8").css("opacity", "0");
+      $(".eyes-ball-8").css("opacity", "0");
     }
 
     if (page === 10 || page === 11) {
@@ -839,6 +889,22 @@ $(function () {
         <img src="./images/book/book11/清單內容.png" class="list"/>
         `
       );
+
+      setTimeout(() => {
+        $(".book10").css("opacity", "1");
+        $(".book11").css("opacity", "1");
+        $(".cow01").css("opacity", "1");
+        $(".cow02").css("opacity", "1");
+        $(".cow03").css("opacity", "1");
+        $(".cow04").css("opacity", "1");
+        $(".cow05").css("opacity", "1");
+        $(".cloud-group").css("opacity", "1");
+        $(".cloud-01").css("opacity", "1");
+        $(".cloud-02").css("opacity", "1");
+        $(".list-board").css("opacity", "1");
+        $(".rainbow").css("opacity", "1");
+        $(".girls-head").css("opacity", "1");
+      }, 1000);
 
       setTimeout(() => {
         $(".bubble11").addClass("bubble-fade-in");
@@ -867,6 +933,13 @@ $(function () {
     let milkClickBound = false;
 
     if (page === 12 || page === 13) {
+      setTimeout(() => {
+        $(".book12").css("opacity", "1");
+        $(".book13").css("opacity", "1");
+        $(".electfan").css("opacity", "1");
+        $(".magic-wand").css("opacity", "1");
+      }, 1000);
+
       // 只建立一次，避免 DOM 爆掉
       if (!fanAndBubbleCreated) {
         fanAndBubbleCreated = true;
@@ -912,6 +985,10 @@ $(function () {
         $(".popup-board").css("display", "none");
       });
     } else {
+      $(".book12").css("opacity", "0");
+      $(".book13").css("opacity", "0");
+      $(".electfan").css("opacity", "0");
+      $(".magic-wand").css("opacity", "0");
       $(".electfan").removeClass("electfan-move");
       $(".bubble-bg").removeClass("bubble-move");
       $(".magic-wand").removeClass("magic-wand-animation");
@@ -928,6 +1005,22 @@ $(function () {
     }
 
     if (page === 14 || page === 15) {
+      setTimeout(() => {
+        $(".book14").css("opacity", "1");
+        $(".book15").css("opacity", "1");
+        $(".milk-bottle").css("opacity", "1");
+        $(".bottle").css("opacity", "1");
+        $(".milk").css("opacity", "1");
+        $(".girls-hand ").css("opacity", "1");
+        $(".cows-tongue").css("opacity", "1");
+        $(".board14").css("opacity", "1");
+        $(".cloud14-1").css("opacity", "1");
+        $(".cloud14-2").css("opacity", "1");
+        $(".cloud14-3").css("opacity", "1");
+        $(".text14").css("opacity", "1");
+        $(".small-cow ").css("opacity", "1");
+      }, 1000);
+
       isCanNotFlip();
       setTimeout(() => {
         canFlipPrev = true;
@@ -1032,6 +1125,19 @@ $(function () {
     }
 
     if (page === 13 || page === 16) {
+      $(".book14").css("opacity", "0");
+      $(".book15").css("opacity", "0");
+      $(".milk-bottle").css("opacity", "0");
+      $(".bottle").css("opacity", "0");
+      $(".milk").css("opacity", "0");
+      $(".girls-hand ").css("opacity", "0");
+      $(".cows-tongue").css("opacity", "0");
+      $(".board14").css("opacity", "0");
+      $(".cloud14-1").css("opacity", "0");
+      $(".cloud14-2").css("opacity", "0");
+      $(".cloud14-3").css("opacity", "0");
+      $(".text14").css("opacity", "0");
+      $(".small-cow ").css("opacity", "0");
       $("#flipbook .cloud14-2").remove();
       $("#flipbook .text14").remove();
       $("#flipbook .click-milk").remove();
@@ -1083,6 +1189,23 @@ $(function () {
                               <div class="popup-close-btn">x</div>
                             </div>
                            <div class="popup-board"></div>`);
+
+        setTimeout(() => {
+          $(".book16").css("opacity", "1");
+          $(".book17").css("opacity", "1");
+          $(".cloud-16-0").css("opacity", "1");
+          $(".cloud-16-3").css("opacity", "1");
+          $(".cloud14-3").css("opacity", "1");
+          $(".moutain-left").css("opacity", "1");
+          $(".moutain-right").css("opacity", "1");
+          $(".mom-cow").css("opacity", "1");
+          $(".cow-eyes").css("opacity", "1");
+          $(".cow-heart").css("opacity", "1");
+          $(".stethoscope").css("opacity", "1");
+          $(".board16").css("opacity", "1");
+          $(".story-text16").css("opacity", "1");
+          $(".nurse-girl").css("opacity", "1");
+        }, 1000);
 
         setTimeout(() => {
           $(".bubble16").addClass("bubble-fade-in");
@@ -1138,6 +1261,20 @@ $(function () {
     }
 
     if (page === 15 || page === 18) {
+      $(".book16").css("opacity", "0");
+      $(".book17").css("opacity", "0");
+      $(".cloud-16-0").css("opacity", "0");
+      $(".cloud-16-3").css("opacity", "0");
+      $(".cloud14-3").css("opacity", "0");
+      $(".moutain-left").css("opacity", "0");
+      $(".moutain-right").css("opacity", "0");
+      $(".mom-cow").css("opacity", "0");
+      $(".cow-eyes").css("opacity", "0");
+      $(".cow-heart").css("opacity", "0");
+      $(".stethoscope").css("opacity", "0");
+      $(".board16").css("opacity", "0");
+      $(".story-text16").css("opacity", "0");
+      $(".nurse-girl").css("opacity", "0");
       $(".stethoscope").addClass("disabled");
       $("#flipbook .stethoscope").removeClass("stethoscope-move");
       $(".cow-heart").removeClass("heart-beat-animation");
@@ -1174,6 +1311,11 @@ $(function () {
     `);
 
       setTimeout(() => {
+        $(".book18").css("opacity", "1");
+        $(".book19").css("opacity", "1");
+      }, 1000);
+
+      setTimeout(() => {
         $(".coin01-final, .coin02-final, .coin03-final").addClass(
           "coin-all-animation"
         );
@@ -1190,6 +1332,8 @@ $(function () {
     }
 
     if (page === 17 || page === 20) {
+      $(".book18").css("opacity", "0");
+      $(".book19").css("opacity", "0");
       $(".coin01-final, .coin02-final, .coin03-final").removeClass(
         "coin-all-animation"
       );
@@ -1212,30 +1356,38 @@ $(function () {
         <img class="star20" src="./images/book/book2021/亮晶晶.png"/>
         `
       );
+
+      setTimeout(() => {
+        $(".book20").css("opacity", "1");
+        $(".book21").css("opacity", "1");
+      }, 1000);
+
       setTimeout(() => {
         $(".dream01").addClass("dream-animation");
-      }, 1000);
-      setTimeout(() => {
-        $(".dream02").addClass("dream-animation");
       }, 2000);
       setTimeout(() => {
-        $(".dream03").addClass("dream-animation");
+        $(".dream02").addClass("dream-animation");
       }, 3000);
       setTimeout(() => {
-        $(".dream04").addClass("dream-animation");
+        $(".dream03").addClass("dream-animation");
       }, 4000);
+      setTimeout(() => {
+        $(".dream04").addClass("dream-animation");
+      }, 5000);
       setTimeout(() => {
         $(".star20").addClass("dialog20-animation");
         $(".dream-girl").addClass("dream-girl-animation");
-      }, 5000);
+      }, 6000);
       setTimeout(() => {
         $(".dialog20").addClass("dialog20-animation");
         $(".dialog21").addClass("dialog20-animation");
-      }, 6000);
+      }, 7000);
       setTimeout(() => {
         $(".bubble20").addClass("bubble-fade-in");
-      }, 8000);
+      }, 9000);
     } else {
+      $(".book20").css("opacity", "0");
+      $(".book21").css("opacity", "0");
       $(".dream04").remove();
       $(".dream-girl").remove();
       $(".dialog20").remove();
@@ -1256,23 +1408,44 @@ $(function () {
 
     if (page === 22 || page === 23) {
       setTimeout(() => {
+        $(".book22").css("opacity", "1");
+        $(".book23").css("opacity", "1");
+        $(".cow-alarm ").css("opacity", "1");
+        $(".sleep-girl-hand").css("opacity", "1");
+        $(".sleep-girl-arm").css("opacity", "1");
+      }, 1000);
+      setTimeout(() => {
         $(".cow-alarm").addClass("cow-alarm-animation");
       }, 2000);
     } else {
+      $(".book22").css("opacity", "0");
+      $(".book23").css("opacity", "0");
+      $(".cow-alarm ").css("opacity", "0");
+      $(".sleep-girl-hand ").css("opacity", "0");
+      $(".sleep-girl-arm").css("opacity", "0");
       $(".cow-alarm").removeClass("cow-alarm-animation");
     }
 
     // 重置該頁面的所有動畫與音效
     function resetMilkPage() {
+      $(".book24").css("opacity", "0");
+      $(".book25").css("opacity", "0");
+      $(".milk-hand").css("opacity", "0");
+      $(".milk-cup").css("opacity", "0");
+      $(".mom-right-hand").css("opacity", "0");
+      $(".little-girl").css("opacity", "0");
+      $(".girl-l-hand").css("opacity", "0");
+      $(".girl-l-hand-milk").css("opacity", "0");
+      $(".girl-l-hand-cup").css("opacity", "0");
+      $(".girl-r-hand").css("opacity", "0");
+      $(".flower").css("opacity", "0");
+      $(".milk-inner").css("opacity", "0");
       $(".click-girl").hide();
       $(".milk-hand").removeClass("milk-hand-animation");
-      $(".milk-inner").removeClass("milk-inner-full");
       $(".milk-drop").removeClass("milk-drop-show");
       $(".girl-l-hand").removeClass("girl-l-hand-empty");
       $(".girl-l-hand-region").removeClass("girl-l-hand-finish");
-      $(".girl-l-hand-milk").removeClass("girl-l-hand-empty");
       $(".girl-r-hand").removeClass("girl-r-hand-finish");
-      $(".girl-l-hand-finish-milk").removeClass("girl-l-hand-finished-milk");
       $(".milk-stains").removeClass("milk-stains-show");
       $(".milk-drop").removeClass("milk-drop-show");
       $(".milk-flower").removeClass("milk-drop-show");
@@ -1291,6 +1464,23 @@ $(function () {
 
     // 牛奶倒動畫流程
     function startMilkAnimation() {
+      setTimeout(() => {
+        $(".book24").css("opacity", "1");
+        $(".book25").css("opacity", "1");
+        $(".milk-hand").css("opacity", "1");
+        $(".milk-cup").css("opacity", "1");
+        $(".mom-right-hand").css("opacity", "1");
+        $(".little-girl").css("opacity", "1");
+        $(".girl-l-hand").css("opacity", "1");
+        $(".girl-l-hand-milk").css("opacity", "1");
+        $(".girl-l-hand-cup").css("opacity", "1");
+        $(".girl-r-hand").css("opacity", "1");
+      }, 1000);
+
+      setTimeout(() => {
+        $(".flower").css("opacity", "1");
+      }, 3000);
+
       $(".milk-hand").addClass("milk-hand-animation");
 
       setTimeout(() => {
@@ -1298,7 +1488,7 @@ $(function () {
       }, 1700);
 
       setTimeout(() => {
-        $(".milk-inner").addClass("milk-inner-full");
+        $(".milk-inner").css("opacity", "1");
       }, 3000);
 
       setTimeout(() => {
@@ -1348,8 +1538,7 @@ $(function () {
         playAudio("girl-drink-milk", 0);
 
         setTimeout(() => {
-          $(".girl-l-hand-milk").addClass("girl-l-hand-empty");
-          $(".girl-l-hand-finish-milk").addClass("girl-l-hand-finished-milk");
+          $(".girl-l-hand-milk").css("opacity", "0");
           playAudio("drinking-milk", 0);
         }, 1000);
 
@@ -1374,9 +1563,27 @@ $(function () {
 
     // Animation flow — page 28/29
     function startFamilyAnimation() {
+      setTimeout(() => {
+        $(".book26").css("opacity", "1");
+        $(".book27").css("opacity", "1");
+        $(".cheers").addClass("cheers-show-animation");
+        $(".milk-box").css("opacity", "1");
+        $(".father-hand").css("opacity", "1");
+        $(".father-hand-milk").css("display", "block");
+        $(".father-hand-cup").css("opacity", "1");
+        $(".daughter-hand").css("opacity", "1");
+        $(".daughter-hand-milk").css("display", "block");
+        $(".daughter-hand-cup").css("opacity", "1");
+      }, 1500);
+
       if (window.matchMedia("(max-height: 500px)").matches) {
-        setTimeout(() => {
-          if (isAndroidChrome()) {
+        if (isAndroidChrome()) {
+          $(".daughter-hand-finish").css({
+            top: (screenHeight * 403.536) / 609 + "px", //273
+            left: (screenHeight * 375.45) / 609 + "px", //254
+          });
+
+          setTimeout(() => {
             $(".father-hand-finish-mb").css({
               transform:
                 `translate(` +
@@ -1384,10 +1591,6 @@ $(function () {
                 `px,` +
                 (screenHeight * -44.34) / 609 +
                 `px) rotate(-39deg)`, //transform: translate(-16px, -30px) rotate(-39deg);
-            });
-            $(".daughter-hand-finish").css({
-              top: (screenHeight * 403.536) / 609 + "px", //273
-              left: (screenHeight * 375.45) / 609 + "px", //254
             });
             $(".mom-hand-finish-mb").css({
               transform:
@@ -1397,9 +1600,16 @@ $(function () {
                 (screenHeight * -75.386) / 609 +
                 `px) rotate(33deg)`,
             }); //transform: translate(57px, -51px) rotate(33deg);
-          }
+          }, 3000);
+        }
 
-          if (isSafari() || isIOSChrome()) {
+        if (isSafari() || isIOSChrome()) {
+          $(".daughter-hand-finish").css({
+            top: (visualHeight * 404.073) / 609 + "px", //300
+            left: (visualHeight * 377.1348) / 609 + "px", //280
+          });
+
+          setTimeout(() => {
             $(".father-hand-finish-mb").css({
               transform:
                 `translate(` +
@@ -1408,12 +1618,6 @@ $(function () {
                 (visualHeight * -18.858) / 609 +
                 `px) rotate(-39deg)`, //transform: translate(2px, -14px) rotate(-39deg);
             });
-
-            $(".daughter-hand-finish").css({
-              top: (visualHeight * 404.073) / 609 + "px", //300
-              left: (visualHeight * 377.1348) / 609 + "px", //280
-            });
-
             $(".mom-hand-finish-mb").css({
               transform:
                 `translate(` +
@@ -1422,41 +1626,58 @@ $(function () {
                 (visualHeight * -86.21) / 609 +
                 `px) rotate(33deg)`,
             }); //transform: translate(24px, -64px) rotate(33deg);
-          }
-        }, 550);
+          }, 3000);
+        }
       }
-      $(".daughter-hand-region").addClass("daughter-hand-finish");
+      setTimeout(() => {
+        $(".daughter-hand-region").addClass("daughter-hand-finish");
+      }, 3000);
       if (window.matchMedia("(max-height: 500px)").matches) {
-        $(".father-hand-region-mb").addClass("father-hand-finish-mb");
-        $(".mom-hand-region-mb").addClass("mom-hand-finish-mb");
+        setTimeout(() => {
+          $(".father-hand-region-mb").addClass("father-hand-finish-mb");
+          $(".mom-hand-region-mb").addClass("mom-hand-finish-mb");
+        }, 3000);
       } else {
-        $(".father-hand-region").addClass("father-hand-finish");
-        $(".mom-hand-region").addClass("mom-hand-finish");
+        setTimeout(() => {
+          $(".father-hand-region").addClass("father-hand-finish");
+          $(".mom-hand-region").addClass("mom-hand-finish");
+        }, 3000);
       }
 
       setTimeout(() => {
-        $(".father-hand-milk").addClass("father-hand-milk-empty");
-        $(".daughter-hand-milk").addClass("daughter-hand-milk-empty");
-        $(".mom-hand-milk").addClass("mom-hand-milk-empty");
-      }, 2550);
+        $(".father-hand-milk").css("opacity", "0");
+        $(".daughter-hand-milk").css("opacity", "0");
+        $(".mom-hand-milk").css("opacity", "0");
+      }, 4000);
 
       setTimeout(() => {
         $(".all-milk-stains ").addClass("all-milk-stains-show ");
-      }, 3000);
+      }, 4000);
 
       setTimeout(() => {
         $(".cow-right").addClass("cow-right-move");
-      }, 3000);
+      }, 4000);
 
       setTimeout(() => {
         $(".sweet-taste").addClass("sweet-taste-animation");
         $(".mow").show();
-      }, 3800);
+      }, 4500);
     }
 
     // Reset function
     // 重置家人手部與牛相關動畫狀態
     function resetFamilyPage() {
+      $(".book26").css("opacity", "0");
+      $(".book27").css("opacity", "0");
+      $(".milk-box").css("opacity", "0");
+      $(".father-hand").css("opacity", "0");
+      $(".father-hand-milk").css("display", "none");
+      $(".father-hand-cup").css("opacity", "0");
+      $(".daughter-hand").css("opacity", "0");
+      $(".daughter-hand-milk").css("display", "none");
+      $(".daughter-hand-cup").css("opacity", "0");
+      $(".mom-hand-milk").css("opacity", "0");
+      $(".cheers").removeClass("cheers-show-animation");
       const removeClasses = [
         // 手部完成、移除
         "father-hand-finish",
@@ -1516,16 +1737,22 @@ $(function () {
             $("#flipbook").append(
               ' <div class="mom-hand-region-mb"><div class="mom-hand-milk-region"><img class="mom-hand-milk" src="./images/book/book2627/牛奶.png"/><img class="mom-hand-cup" src="./images/book/book2627/空杯.png"/></div><img class="mom-hand" src="./images/book/book2627/媽媽手.png"/></div>'
             );
-          }, 500);
+          }, 1500);
         } else {
           if (!$(".mom-hand").length) {
             setTimeout(() => {
               $("#flipbook").append(
                 ' <div class="mom-hand-region"><div class="mom-hand-milk-region"><img class="mom-hand-milk" src="./images/book/book2627/牛奶.png"/><img class="mom-hand-cup" src="./images/book/book2627/空杯.png"/></div><img class="mom-hand" src="./images/book/book2627/媽媽手.png"/></div>'
               );
-            }, 500);
+            }, 1500);
           }
         }
+
+        setTimeout(() => {
+          $(".mom-hand").css("opacity", "1");
+          $(".mom-hand-milk").css("opacity", "1");
+          $(".mom-hand-cup").css("opacity", "1");
+        }, 2000);
       } else {
         if (window.matchMedia("(max-height: 500px)").matches) {
           $(".mom-hand-region-mb").remove();
@@ -1590,7 +1817,9 @@ $(function () {
 
         $(".father-hand-region").removeClass("father-hand-finish");
         $(".daughter-hand-region").removeClass("daughter-hand-finish");
-        $(".father-hand-milk").removeClass("father-hand-milk-empty");
+        $(".father-hand-milk").css("opacity", "1");
+        $(".daughter-hand-milk").css("opacity", "1");
+        $(".mom-hand-milk").css("opacity", "1");
         $(".daughter-hand-milk").removeClass("daughter-hand-milk-empty");
         $(".sweet-taste").removeClass("sweet-taste-animation");
       }
@@ -1839,7 +2068,7 @@ $(function () {
               bottom: (visualHeight * -76.78) / 609 + "px", //-57px
               left: (visualHeight * 8.082) / 609 + "px", //-6px
             });
-          }, 550);
+          }, 1800);
         }
         if (isAndroidChrome()) {
           $(".cheers").css({
@@ -1919,7 +2148,7 @@ $(function () {
               bottom: (screenHeight * -82.255) / 609 + "px", //-57px
               left: (screenHeight * 8.869) / 609 + "px", //-6px
             });
-          }, 550);
+          }, 1800);
         }
       }
     }
