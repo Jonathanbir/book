@@ -747,6 +747,7 @@ $(function () {
     if (page === 6 || page === 7) {
       $("#flipbook").append(
         `<img class="knock" src="./images/book/book0607/點這裡.png"/>
+        <img class="grass0607" src="./images/book/book0607/草地.png"/>
         <img class="tree1" src="./images/book/book0607/森林1.png"/>
         <img class="tree2" src="./images/book/book0607/森林2.png"/>           
         <img class="tree3" src="./images/book/book0607/森林3.png"/>         
@@ -775,7 +776,10 @@ $(function () {
         playAudio("knock", 0);
         $(".door").addClass("door-opening");
         $(".peoples").addClass("peoples-open");
-        $(".tree1").addClass("tree-fade-in");
+        $(".grass0607").addClass("tree-fade-in");
+        setTimeout(() => {
+          $(".tree1").addClass("tree-fade-in");
+        }, 1500);
         setTimeout(() => {
           $(".cloud1").addClass("cloud-fade-in");
           $(".cloud2").addClass("cloud-fade-in");
@@ -796,6 +800,7 @@ $(function () {
       });
     } else {
       $("#flipbook .knock").remove();
+      $("#flipbook .grass0607").remove();
       $("#flipbook .tree1").remove();
       $("#flipbook .tree2").remove();
       $("#flipbook .tree3").remove();
@@ -806,6 +811,7 @@ $(function () {
       $("#flipbook .star5").remove();
       $(".door").removeClass("door-opening");
       $(".peoples").removeClass("peoples-open");
+      $(".grass0607").removeClass("tree-fade-in");
       $(".tree1").removeClass("tree-fade-in");
       $(".tree2").removeClass("tree-fade-in");
       $(".tree3").removeClass("tree-fade-in");
@@ -933,18 +939,11 @@ $(function () {
     let milkClickBound = false;
 
     if (page === 12 || page === 13) {
-      setTimeout(() => {
-        $(".book12").css("opacity", "1");
-        $(".book13").css("opacity", "1");
-        $(".electfan").css("opacity", "1");
-        $(".magic-wand").css("opacity", "1");
-      }, 1000);
-
       // 只建立一次，避免 DOM 爆掉
       if (!fanAndBubbleCreated) {
         fanAndBubbleCreated = true;
         $("#flipbook")
-          .append(`<img class="electfan" src="./images/book/book12/風扇.png"/>
+          .append(`<img class="electfan" src="./images/book/book12/風扇1.png"/>
                            <img class="bubble-bg" src="./images/book/book13/水珠.png"/>
                            <img class="bubble12" src="./images/book/book13/牛奶泡泡.png"/>
                            <div class="check-box"></div>
@@ -957,8 +956,29 @@ $(function () {
                            <div class="popup-board"></div>`);
       }
 
+      const fanImages = [
+        "./images/book/book12/風扇1.png",
+        "./images/book/book12/風扇2.png",
+        "./images/book/book12/風扇3.png",
+      ];
+
+      let fanIndex = 0;
+      const fanImg = document.querySelector(".electfan");
+
+      setTimeout(() => {
+        $(".book12").css("opacity", "1");
+        $(".book13").css("opacity", "1");
+        $(".electfan").css("opacity", "1");
+        $(".magic-wand").css("opacity", "1");
+      }, 1000);
+
       setTimeout(() => $(".magic-wand").addClass("magic-wand-animation"), 500);
-      setTimeout(() => $(".electfan").addClass("electfan-move"), 1000);
+      setTimeout(() => {
+        setInterval(() => {
+          fanIndex = (fanIndex + 1) % fanImages.length;
+          fanImg.src = fanImages[fanIndex];
+        }, 100);
+      }, 4000);
       setTimeout(() => $(".bubble-bg").addClass("bubble-move"), 2000);
       setTimeout(() => $(".bubble12").addClass("bubble-fade-in"), 3000);
       setTimeout(() => {
@@ -1232,6 +1252,19 @@ $(function () {
         }, 15000);
 
         $("#flipbook .click-hearing-heart").on("click", function () {
+          const cowEyesImages = [
+            "./images/book/book1617/牛眼睜開.png",
+            "./images/book/book1617/牛眼關閉.png",
+          ];
+
+          let cowEyesIndex = 0;
+          const cowEyesImg = document.querySelector(".cow-eyes");
+
+          setInterval(() => {
+            cowEyesIndex = (cowEyesIndex + 1) % cowEyesImages.length;
+            cowEyesImg.src = cowEyesImages[cowEyesIndex];
+          }, 500);
+
           $(".dondon").addClass("bubble-fade-in");
           $(".stethoscope").addClass("stethoscope-move");
           $(".cow-heart").addClass("heart-beat-animation");
@@ -1349,6 +1382,8 @@ $(function () {
     if (page === 20 || page === 21) {
       $("#flipbook").append(
         `<img class="dream04" src="./images/book/book2021/夢泡04.png"/>
+        <img class="dream-light" src="./images/book/book2021/夢泡光.png"/>
+        <img class="story20" src="./images/book/book2021/故事20.png"/>
         <img class="dream-girl" src="./images/book/book2021/鈴鈴.png"/>
         <img class="dialog20" src="./images/book/book2021/哇!.png"/>
         <img class="dialog21" src="./images/book/book2021/嗯.png"/>
@@ -1375,6 +1410,8 @@ $(function () {
         $(".dream04").addClass("dream-animation");
       }, 5000);
       setTimeout(() => {
+        $(".dream-light").addClass("sweet-taste-animation");
+        $(".story20").addClass("dream-animation");
         $(".star20").addClass("dialog20-animation");
         $(".dream-girl").addClass("dream-girl-animation");
       }, 6000);
@@ -1389,6 +1426,8 @@ $(function () {
       $(".book20").css("opacity", "0");
       $(".book21").css("opacity", "0");
       $(".dream04").remove();
+      $(".dream-light").remove();
+      $(".story20").remove();
       $(".dream-girl").remove();
       $(".dialog20").remove();
       $(".star20").remove();
