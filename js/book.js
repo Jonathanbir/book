@@ -481,7 +481,7 @@ $(function () {
           prevMobileBtn.innerText = countMobile + "秒";
         } else {
           clearInterval(timerMobile);
-          $(".prev-page img").attr("src", "./images/common/上一頁.png");
+          prevMobileBtn.innerText = "上一頁";
           $("#left-down-corner").css("color", "#000");
         }
       }, 1000);
@@ -774,6 +774,7 @@ $(function () {
 
     if (!doorClickBound) {
       doorClickBound = true;
+      // 第 6–7 頁：點擊門跑出森林
       if (page === 6 || page === 7) {
         $("#flipbook").append(
           `<img class="knock" src="./images/book/book0607/點這裡.png"/>
@@ -842,7 +843,9 @@ $(function () {
           }, 12000);
           playAudio("audio-4-click", 0);
         });
-      } else {
+      }
+
+      if (page === 5 || page === 8) {
         $("#flipbook .knock").remove();
         $("#flipbook .grass0607").remove();
         $("#flipbook .tree1").remove();
@@ -1082,6 +1085,7 @@ $(function () {
       $(".book-section .popup-board").remove();
     }
 
+    // 第 14–15 頁：餵牛奶
     if (page === 14 || page === 15) {
       setTimeout(() => {
         $(".book14").css("opacity", "1");
@@ -1236,7 +1240,7 @@ $(function () {
     // 全域：避免重複 append coin 與 crown
     let stethoscopeBound = false;
 
-    // 第 18–19 頁：聽心跳 + 投錢
+    // 第 16–17 頁：聽牛心跳
     if (page === 16 || page === 17) {
       isCanNotFlip();
       setTimeout(() => {
@@ -1436,7 +1440,7 @@ $(function () {
       $("#flipbook .coin-all-shine").remove();
     }
 
-    // 第 22–23 頁：小女孩夢境 + 浮出夢境
+    // 第 20–21 頁：小女孩夢境 + 浮出夢境
     if (page === 20 || page === 21) {
       $("#flipbook").append(
         `<img class="dream04" src="./images/book/book2021/夢泡04.png"/>
@@ -1806,6 +1810,7 @@ $(function () {
 
     // 翻到該頁才開始動作
     $("#flipbook").bind("turned", function (event, page) {
+      // 第 24–25 頁：點擊小女孩喝牛奶
       if (page === 24 || page === 25) {
         isCanNotFlip();
         setTimeout(() => {
@@ -1899,6 +1904,7 @@ $(function () {
     });
 
     $("#flipbook").bind("turned", function (event, page) {
+      // 第 26–27 頁：家人一起喝牛奶
       if (page === 26 || page === 27) {
         startFamilyAnimation();
       } else {
@@ -1967,13 +1973,11 @@ $(function () {
         }
       }
 
+      // 第 6–7 頁：點擊門跑出森林
       if (page === 6 || page === 7) {
         $("#flipbook").append(
           '<img class="clouds" src="./images/book/book0607/雲.png"/>'
         );
-        setTimeout(() => {
-          $(".clouds").addClass("cloud-fade-in");
-        }, 3000);
 
         if (isSafari() || isIOSChrome()) {
           $(".knock").css({
@@ -2046,8 +2050,8 @@ $(function () {
           });
         }
       }
-      console.log("visualHeight:", visualHeight);
-      console.log("screenHeight:", screenHeight);
+      // console.log("visualHeight:", visualHeight);
+      // console.log("screenHeight:", screenHeight);
 
       if (page === 24 || page === 25) {
         if (isSafari() || isIOSChrome()) {
@@ -2425,12 +2429,134 @@ $(function () {
   });
 
   let canFlip = true;
+  let canSwipePrev = false;
+  let canSwipeNext = false;
 
   let touchStartX = 0;
   let touchEndX = 0;
 
+  let currentMobilePage = 1;
+
   const flipbook = document.getElementById("flipbook");
 
+  /* ======================
+   頁面規則控制
+====================== */
+  function applyPageRule(page) {
+    console.log("套用規則 page:", page);
+
+    // 預設：全部開放
+    canSwipePrev = true;
+    canSwipeNext = true;
+
+    // 第一頁：不能往回
+    if (page === 1) {
+      canSwipePrev = false;
+    }
+
+    // 第 6–7 頁：點擊門跑出森林
+    if (page === 6 || page === 7) {
+      canSwipePrev = false;
+      canSwipeNext = false;
+
+      // 3 秒後允許往回
+      setTimeout(() => {
+        canSwipePrev = true;
+        console.log("6/7 頁 → 允許往回");
+      }, 3000);
+
+      // 點 knock 才能準備往前
+      $("#flipbook .knock").one("click", function () {
+        console.log("knock clicked");
+
+        setTimeout(() => {
+          canSwipeNext = true;
+          console.log("6/7 頁 → 允許往前");
+        }, 12000);
+      });
+    }
+
+    // 第 14–15 頁：餵牛奶
+    if (page === 14 || page === 15) {
+      canSwipePrev = false;
+      canSwipeNext = false;
+
+      // 3 秒後允許往回
+      setTimeout(() => {
+        canSwipePrev = true;
+      }, 3000);
+
+      // 點 knock 才能準備往前
+      $("#flipbook .click-milk").one("click", function () {
+        console.log("click-milk clicked");
+
+        setTimeout(() => {
+          canSwipeNext = true;
+        }, 12000);
+      });
+    }
+
+    // 第 16–17 頁：聽牛心跳
+    if (page === 16 || page === 17) {
+      canSwipePrev = false;
+      canSwipeNext = false;
+
+      // 3 秒後允許往回
+      setTimeout(() => {
+        canSwipePrev = true;
+      }, 3000);
+
+      // 點 knock 才能準備往前
+      $("#flipbook .click-hearing-heart").one("click", function () {
+        console.log("click-hearing-heart clicked");
+
+        setTimeout(() => {
+          canSwipeNext = true;
+        }, 14000);
+      });
+    }
+
+    // 第 24–25 頁：點擊小女孩喝牛奶
+    if (page === 24 || page === 25) {
+      canSwipePrev = false;
+      canSwipeNext = false;
+
+      // 3 秒後允許往回
+      setTimeout(() => {
+        canSwipePrev = true;
+      }, 3000);
+
+      // 點 knock 才能準備往前
+      $(".click-girl").one("click", function () {
+        console.log("click-girl clicked");
+
+        setTimeout(() => {
+          canSwipeNext = true;
+        }, 7000);
+      });
+    }
+  }
+
+  /* ======================
+   turned 事件
+====================== */
+  $("#flipbook").on("turned", function (e, page) {
+    currentMobilePage = page;
+    applyPageRule(page);
+  });
+
+  /* ======================
+   🔥 初始化補救（一開始page是undefined關鍵）
+====================== */
+  $(document).ready(function () {
+    const initPage = $("#flipbook").turn("page") || 1;
+    currentMobilePage = initPage;
+    applyPageRule(initPage);
+  });
+
+  /* ======================
+   touch events
+====================== */
   flipbook.addEventListener("touchstart", function (e) {
     touchStartX = e.changedTouches[0].screenX;
   });
@@ -2440,25 +2566,36 @@ $(function () {
     handleSwipe();
   });
 
+  /* ======================
+   swipe事件
+====================== */
   function handleSwipe() {
     const swipeDistance = touchEndX - touchStartX;
-
     if (Math.abs(swipeDistance) < 30) return;
+    if (!canFlip) return;
 
-    // ❌ 冷卻期間禁止翻頁
-    // if (!canFlip) return;
-
-    canFlip = false; // 鎖住翻頁
-
-    if (swipeDistance < 0) {
-      $("#flipbook").turn("next");
-    } else {
+    // 👉 向右滑：previous
+    if (swipeDistance > 0) {
+      if (!canSwipePrev) return;
+      lockFlip();
       $("#flipbook").turn("previous");
     }
 
-    // ✅ 3 秒後解除鎖定
-    // setTimeout(() => {
-    //   canFlip = true;
-    // }, 3000);
+    // 👉 向左滑：next
+    if (swipeDistance < 0) {
+      if (!canSwipeNext) return;
+      lockFlip();
+      $("#flipbook").turn("next");
+    }
+  }
+
+  /* ======================
+   冷卻鎖
+====================== */
+  function lockFlip() {
+    canFlip = false;
+    setTimeout(() => {
+      canFlip = true;
+    }, 3000);
   }
 });
