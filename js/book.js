@@ -413,9 +413,12 @@ $(function () {
 
   let isBtnDisabled;
 
+  //有任務下一頁 鎖定按鈕
   function btnDisabled() {
+    console.log("btnDisabled!");
     isBtnDisabled = true;
-    $(".next-page").addClass("disabled-btn");
+    $(".next-page img").attr("src", "./images/common/下一頁深藍.png");
+    $(".next-page img").css("cursor", "not-allowed");
     $(".next-page").prop("disabled", true);
     $(".next-page, #right-up-corner, #right-down-corner")
       .on("mouseenter", function () {
@@ -431,9 +434,12 @@ $(function () {
     }
   }
 
+  //有任務下一頁 不鎖定按鈕
   function btnUnDisabled() {
+    console.log("btnUnDisabled!");
     isBtnDisabled = false;
-    $(".next-page").removeClass("disabled-btn");
+    $(".next-page img").attr("src", "./images/common/下一頁.png");
+    $(".next-page img").css("cursor", "pointer");
     $(".next-page").prop("disabled", false);
     $(".next-page, #right-up-corner, #right-down-corner").on(
       "mouseenter",
@@ -443,22 +449,24 @@ $(function () {
     );
   }
 
+  //上一頁按鈕 倒數三秒
   function btnPreviousDisabled() {
+    console.log("btnPreviousDisabled!");
     let count = 3;
     let countMobile = 3;
     const prevBtn = $(".prev-page")[0];
     const prevMobileBtn = $("#left-down-corner")[0];
 
-    // 每秒更新一次按鈕文字
-    prevBtn.innerText = count + "秒";
-
     const timer = setInterval(() => {
       count--;
+
       if (count > 0) {
-        prevBtn.innerText = count + "秒";
+        $(".prev-page img").attr("src", `./images/common/${count}秒.png`);
+        $(".prev-page img").css("cursor", "not-allowed");
       } else {
         clearInterval(timer);
-        prevBtn.innerText = "上一頁";
+        $(".prev-page img").attr("src", "./images/common/上一頁.png");
+        $(".prev-page img").css("cursor", "pointer");
       }
     }, 1000);
 
@@ -473,45 +481,59 @@ $(function () {
           prevMobileBtn.innerText = countMobile + "秒";
         } else {
           clearInterval(timerMobile);
-          prevMobileBtn.innerText = "上一頁";
+          $(".prev-page img").attr("src", "./images/common/上一頁.png");
           $("#left-down-corner").css("color", "#000");
         }
       }, 1000);
     }
 
     $(".prev-page").prop("disabled", true);
-    $(".prev-page").addClass("disabled-btn");
+    $(".prev-page img").attr("src", "./images/common/上一頁深藍.png");
     setTimeout(() => {
-      $(".prev-page").removeClass("disabled-btn");
+      $(".prev-page img").attr("src", "./images/common/上一頁.png");
       $(".prev-page").prop("disabled", false);
     }, 3000);
   }
 
+  //上下一頁 倒數3秒
   function allBtnDisabled() {
+    console.log("allBtnDisabled!");
     let count = 3;
     let countMobile = 3;
-    const prevBtn = $(".prev-page")[0];
-    const nextBtn = $(".next-page")[0];
+
+    //一開始先顯示 3 秒
+    $(".prev-page img").attr("src", "./images/common/3秒.png");
+    $(".next-page img").attr("src", "./images/common/3秒.png");
+    $(".prev-page").css("cursor", "not-allowed");
+    $(".next-page").css("cursor", "not-allowed");
+    $(".prev-page").prop("disabled", true);
+    $(".next-page").prop("disabled", true);
 
     const prevMobileBtn = $("#left-down-corner")[0];
     const nextMobileBtn = $("#right-down-corner")[0];
 
-    // 每秒更新一次按鈕文字
-    prevBtn.innerText = count + "秒";
-    nextBtn.innerText = count + "秒";
-
     const timer = setInterval(() => {
       count--;
+
       if (count > 0) {
-        prevBtn.innerText = count + "秒";
-        nextBtn.innerText = count + "秒";
+        $(".prev-page img").attr("src", `./images/common/${count}秒.png`);
+        $(".next-page img").attr("src", `./images/common/${count}秒.png`);
+        $(".prev-page").css("cursor", "not-allowed");
+        $(".next-page").css("cursor", "not-allowed");
+        $(".prev-page").prop("disabled", true);
+        $(".next-page").prop("disabled", true);
       } else {
         clearInterval(timer);
-        prevBtn.innerText = "上一頁";
-        nextBtn.innerText = "下一頁";
+        $(".prev-page img").attr("src", "./images/common/上一頁.png");
+        $(".next-page img").attr("src", "./images/common/下一頁.png");
+        $(".prev-page").css("cursor", "pointer");
+        $(".next-page").css("cursor", "pointer");
+        $(".prev-page").prop("disabled", false);
+        $(".next-page").prop("disabled", false);
       }
     }, 1000);
 
+    //手機版 控制按鈕
     if (window.matchMedia("(max-height: 500px)").matches) {
       // 每秒更新一次按鈕文字
       prevMobileBtn.innerText = countMobile + "秒";
@@ -533,10 +555,11 @@ $(function () {
     }
 
     // $(".prev-page, .next-page").prop("disabled", true);
-    // $(".prev-page, .next-page").addClass("disabled-btn");
+    // $(".prev-page, .next-page img").attr("src","./images/common/下一頁深藍.png");
     setTimeout(() => {
-      $(".prev-page, .next-page").removeClass("disabled-btn");
-      $(".prev-page, .next-page").prop("disabled", false);
+      $(".prev-page img").attr("src", "./images/common/上一頁.png");
+      $(".next-page img").attr("src", "./images/common/下一頁.png");
+      $(".prev-page img, .next-page img").prop("disabled", false);
     }, 3000);
   }
 
@@ -571,18 +594,14 @@ $(function () {
     // 切換 icon + 文字
     if (isMuted) {
       if (!window.matchMedia("(max-height: 500px)").matches) {
-        $(".mute-toggle").css("color", "#fff");
-        $(".mute-toggle").css("background", "#ccc");
-        $(".mute-toggle").html('<i class="fas fa-volume-up"></i> 開啟');
+        $(".mute-toggle img").attr("src", "./images/common/靜音按鈕開啟.png");
       } else {
         $(".mute-mobile-toggle").css("background", "#fff");
         $(".mute-mobile-toggle").html('<i class="fas fa-volume-mute"></i>');
       }
     } else {
       if (!window.matchMedia("(max-height: 500px)").matches) {
-        $(".mute-toggle").css("color", "brown");
-        $(".mute-toggle").css("background", "#fff");
-        $(".mute-toggle").html('<i class="fas fa-volume-mute"></i> 關閉');
+        $(".mute-toggle img").attr("src", "./images/common/靜音按鈕關閉.png");
       } else {
         $(".mute-mobile-toggle").css("background", "rgba(169, 169, 169, 0.2)");
         $(".mute-mobile-toggle").html('<i class="fas fa-volume-up"></i>');
@@ -678,28 +697,35 @@ $(function () {
         canFlipNext = true;
       }, 3000);
       let count = 3;
+      $(".next-page img").attr("src", "./images/common/下一頁深藍.png");
+      $(".next-page img").css("cursor", "not-allowed");
       $(".next-page").prop("disabled", true);
-      $(".next-page").addClass("disabled-btn");
       const prevBtn = $(".next-page")[0];
 
-      // 每秒更新一次按鈕文字
-      prevBtn.innerText = count + "秒";
+      $(".prev-page img").attr("src", "./images/common/上一頁深藍.png");
+      $(".prev-page img").css("cursor", "not-allowed");
+      $(".next-page img").attr("src", "./images/common/3秒.png");
+      $(".prev-page").prop("disabled", true);
 
       const timer = setInterval(() => {
         count--;
+
         if (count > 0) {
-          prevBtn.innerText = count + "秒";
+          $(".next-page img").attr("src", `./images/common/${count}秒.png`);
+          $(".next-page").css("cursor", "not-allowed");
+          $(".next-page").prop("disabled", true);
         } else {
           clearInterval(timer);
-          prevBtn.innerText = "下一頁";
+          $(".next-page img").attr("src", "./images/common/下一頁.png");
+          $(".next-page").css("cursor", "pointer");
+          $(".next-page").prop("disabled", false);
         }
       }, 1000);
+
       setTimeout(() => {
-        $(".next-page").removeClass("disabled-btn");
+        $(".next-page img").attr("src", "./images/common/下一頁.png");
         $(".next-page").prop("disabled", false);
       }, 3000);
-
-      $(".prev-page").addClass("disabled-btn");
     }
 
     if (page === 2 || page === 3) {
@@ -744,9 +770,13 @@ $(function () {
       $(".gogo").css("opacity", "0");
     }
 
-    if (page === 6 || page === 7) {
-      $("#flipbook").append(
-        `<img class="knock" src="./images/book/book0607/點這裡.png"/>
+    let doorClickBound = false;
+
+    if (!doorClickBound) {
+      doorClickBound = true;
+      if (page === 6 || page === 7) {
+        $("#flipbook").append(
+          `<img class="knock" src="./images/book/book0607/點這裡.png"/>
         <img class="grass0607" src="./images/book/book0607/草地.png"/>
         <img class="tree1" src="./images/book/book0607/森林1.png"/>
         <img class="tree2" src="./images/book/book0607/森林2.png"/>           
@@ -758,67 +788,82 @@ $(function () {
         <img class="door door-common" src="./images/book/book0607/門.png"/>            
         <img class="peoples" src="./images/book/book0607/媽媽鈴鈴.png"/>
         `
-      );
+        );
 
-      setTimeout(() => {
-        $(".knock").css("opacity", "1");
-        $(".door").css("opacity", "1");
-      }, 1000);
-
-      setTimeout(() => {
-        $(".door-bg").css("opacity", "1");
-      }, 2000);
-
-      const door = document.querySelector(".door");
-
-      $("#flipbook .knock").on("click", () => {
-        $(".knock").css("display", "none");
-        playAudio("knock", 0);
-        $(".door").addClass("door-opening");
-        $(".peoples").addClass("peoples-open");
-        $(".grass0607").addClass("tree-fade-in");
         setTimeout(() => {
-          $(".tree1").addClass("tree-fade-in");
-        }, 1500);
+          $(".knock").css("opacity", "1");
+          $(".door").css("opacity", "1");
+        }, 1000);
+
+        isCanNotFlip();
         setTimeout(() => {
-          $(".cloud1").addClass("cloud-fade-in");
-          $(".cloud2").addClass("cloud-fade-in");
-          $(".cloud3").addClass("cloud-fade-in");
-          $(".tree2").addClass("tree-fade-in");
+          canFlipPrev = true;
         }, 3000);
+
         setTimeout(() => {
-          $(".tree3").addClass("tree-fade-in");
-        }, 5000);
-        setTimeout(() => {
-          $(".bubble67").addClass("bubble-fade-in");
-        }, 7000);
-        setTimeout(() => {
-          $(".star5").addClass("star-fade-in");
-          $(".wow").addClass("wow-animation");
-        }, 9000);
-        playAudio("audio-4-click", 0);
-      });
-    } else {
-      $("#flipbook .knock").remove();
-      $("#flipbook .grass0607").remove();
-      $("#flipbook .tree1").remove();
-      $("#flipbook .tree2").remove();
-      $("#flipbook .tree3").remove();
-      $("#flipbook .cloud2").remove();
-      $("#flipbook .door-common").remove();
-      $("#flipbook .peoples").remove();
-      $("#flipbook .bubble67").remove();
-      $("#flipbook .star5").remove();
-      $(".door").removeClass("door-opening");
-      $(".peoples").removeClass("peoples-open");
-      $(".grass0607").removeClass("tree-fade-in");
-      $(".tree1").removeClass("tree-fade-in");
-      $(".tree2").removeClass("tree-fade-in");
-      $(".tree3").removeClass("tree-fade-in");
-      $(".cloud1").removeClass("cloud-fade-in");
-      $(".cloud2").removeClass("cloud-fade-in");
-      $(".cloud3").removeClass("cloud-fade-in");
-      $(".wow").removeClass("wow-animation");
+          $(".door-bg").css("opacity", "1");
+        }, 2000);
+
+        const door = document.querySelector(".door");
+
+        btnPreviousDisabled();
+        btnDisabled();
+
+        $("#flipbook .knock").on("click", () => {
+          $(".knock").css("display", "none");
+          playAudio("knock", 0);
+          $(".door").addClass("door-opening");
+          $(".peoples").addClass("peoples-open");
+          $(".grass0607").addClass("tree-fade-in");
+          setTimeout(() => {
+            $(".tree1").addClass("tree-fade-in");
+          }, 1500);
+          setTimeout(() => {
+            $(".cloud1").addClass("cloud-fade-in");
+            $(".cloud2").addClass("cloud-fade-in");
+            $(".cloud3").addClass("cloud-fade-in");
+            $(".tree2").addClass("tree-fade-in");
+          }, 3000);
+          setTimeout(() => {
+            $(".tree3").addClass("tree-fade-in");
+          }, 5000);
+          setTimeout(() => {
+            $(".bubble67").addClass("bubble-fade-in");
+          }, 7000);
+          setTimeout(() => {
+            $(".star5").addClass("star-fade-in");
+            $(".wow").addClass("wow-animation");
+          }, 9000);
+          setTimeout(() => {
+            btnUnDisabled();
+            canFlipNext = true;
+            $("#right-down-corner").css("color", "#000");
+            $("#right-down-corner").prop("disabled", false);
+          }, 12000);
+          playAudio("audio-4-click", 0);
+        });
+      } else {
+        $("#flipbook .knock").remove();
+        $("#flipbook .grass0607").remove();
+        $("#flipbook .tree1").remove();
+        $("#flipbook .tree2").remove();
+        $("#flipbook .tree3").remove();
+        $("#flipbook .cloud2").remove();
+        $("#flipbook .door-common").remove();
+        $("#flipbook .peoples").remove();
+        $("#flipbook .bubble67").remove();
+        $("#flipbook .star5").remove();
+        $(".door").removeClass("door-opening");
+        $(".peoples").removeClass("peoples-open");
+        $(".grass0607").removeClass("tree-fade-in");
+        $(".tree1").removeClass("tree-fade-in");
+        $(".tree2").removeClass("tree-fade-in");
+        $(".tree3").removeClass("tree-fade-in");
+        $(".cloud1").removeClass("cloud-fade-in");
+        $(".cloud2").removeClass("cloud-fade-in");
+        $(".cloud3").removeClass("cloud-fade-in");
+        $(".wow").removeClass("wow-animation");
+      }
     }
 
     if (page === 8 || page === 9) {
@@ -921,6 +966,19 @@ $(function () {
     }
 
     if (page === 9 || page === 12) {
+      $(".book10").css("opacity", "0");
+      $(".book11").css("opacity", "0");
+      $(".cow01").css("opacity", "0");
+      $(".cow02").css("opacity", "0");
+      $(".cow03").css("opacity", "0");
+      $(".cow04").css("opacity", "0");
+      $(".cow05").css("opacity", "0");
+      $(".cloud-group").css("opacity", "0");
+      $(".cloud-01").css("opacity", "0");
+      $(".cloud-02").css("opacity", "0");
+      $(".list-board").css("opacity", "0");
+      $(".rainbow").css("opacity", "0");
+      $(".girls-head").css("opacity", "0");
       $(".list").removeClass("list-animation");
       $(".cloud-01").removeClass("cloud-animation");
       $(".cloud-02").removeClass("cloud-animation");
@@ -1803,29 +1861,40 @@ $(function () {
       }
 
       if (page === 28) {
+        isCanNotFlip();
+        setTimeout(() => {
+          canFlipPrev = true;
+        }, 3000);
         let count = 3;
-        $(".prev-page").prop("disabled", true);
-        $(".prev-page").addClass("disabled-btn");
-        const prevBtn = $(".prev-page")[0];
+        $(".next-page img").attr("src", "./images/common/下一頁深藍.png");
+        $(".next-page img").css("cursor", "not-allowed");
+        $(".next-page").prop("disabled", true);
+        const prevBtn = $(".next-page")[0];
 
-        // 每秒更新一次按鈕文字
-        prevBtn.innerText = count + "秒";
+        $(".prev-page img").attr("src", "./images/common/上一頁深藍.png");
+        $(".prev-page img").css("cursor", "not-allowed");
+        $(".prev-page img").attr("src", "./images/common/3秒.png");
+        $(".prev-page").prop("disabled", true);
 
         const timer = setInterval(() => {
           count--;
+
           if (count > 0) {
-            prevBtn.innerText = count + "秒";
+            $(".prev-page img").attr("src", `./images/common/${count}秒.png`);
+            $(".prev-page").css("cursor", "not-allowed");
+            $(".prev-page").prop("disabled", true);
           } else {
             clearInterval(timer);
-            prevBtn.innerText = "上一頁";
+            $(".prev-page img").attr("src", "./images/common/上一頁.png");
+            $(".prev-page").css("cursor", "pointer");
+            $(".prev-page").prop("disabled", false);
           }
         }, 1000);
+
         setTimeout(() => {
-          $(".prev-page").removeClass("disabled-btn");
+          $(".prev-page img").attr("src", "./images/common/上一頁.png");
           $(".prev-page").prop("disabled", false);
         }, 3000);
-
-        $(".next-page").addClass("disabled-btn");
       }
     });
 
@@ -1866,13 +1935,14 @@ $(function () {
 
     if (
       page !== 1 &&
+      page !== 6 &&
+      page !== 7 &&
+      page !== 14 &&
+      page !== 15 &&
       page !== 16 &&
       page !== 17 &&
-      page !== 18 &&
-      page !== 19 &&
-      page !== 26 &&
-      page !== 27 &&
-      page !== 30
+      page !== 24 &&
+      page !== 28
     ) {
       allBtnDisabled();
       isCanNotFlip();

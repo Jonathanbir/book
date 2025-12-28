@@ -95,30 +95,25 @@ audio {
 }
 
 .controls {
+  display: flex;
+  justify-content: center;
   position: relative;
   z-index: 9999;
   text-align: center;
   margin: 20px auto;
 }
 
-.controls button {
-  border: none;
-  border-radius: 20px;
-  background-color: #039aff;
-  color: #ffea00;
-  padding: 10px 10px;
-  font-size: 16px;
-  margin: 10px 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+.page-btn {
+  margin: 0 40px;
   cursor: pointer;
 }
 
-.controls .disabled-btn {
+/* .controls .disabled-btn {
   color: #aaa;
   background-color: #ccc;
   box-shadow: initial;
   cursor: not-allowed;
-}
+} */
 
 .controls .undisabled-btn {
   color: brown;
@@ -208,6 +203,11 @@ audio {
   background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
+}
+
+button {
+  background-color: initial;
+  border: none;
 }
 
 .dialog {
@@ -975,10 +975,9 @@ audio {
   left: 10%;
   bottom: 25%;
   width: 100px;
-  transition: all 2s ease-in-out;
-  animation: cowMove01 10s ease-in-out infinite;
   opacity: 0;
-  transition: all 2s ease-in-out;
+  animation: cowMove01 10s ease-in-out infinite;
+  transition: all 1s ease-in-out;
 }
 
 @keyframes cowMove01 {
@@ -1004,9 +1003,9 @@ audio {
   left: 62%;
   bottom: 45%;
   width: 80px;
-  transition: all 2s ease-in-out;
   opacity: 0;
   animation: cowMove02 2s ease-in-out infinite;
+  transition: all 1s ease-in-out;
 }
 
 @keyframes cowMove02 {
@@ -1032,9 +1031,9 @@ audio {
   left: 80%;
   bottom: 45%;
   width: 80px;
-  transition: all 2s ease-in-out;
   opacity: 0;
   animation: cowMove03 2s ease-in-out infinite;
+  transition: all 1s ease-in-out;
 }
 
 @keyframes cowMove03 {
@@ -1060,10 +1059,9 @@ audio {
   left: 50%;
   bottom: 25%;
   width: 150px;
-  transition: all 2s ease-in-out;
-  animation: cowMove01 10s ease-in-out infinite;
   opacity: 0;
-  transition: all 2s ease-in-out;
+  animation: cowMove01 10s ease-in-out infinite;
+  transition: all 1s ease-in-out;
 }
 
 .cow05 {
@@ -1072,9 +1070,9 @@ audio {
   bottom: 22%;
   z-index: 99;
   width: 250px;
-  animation: cowMove02 10s ease-in-out infinite;
   opacity: 0;
-  transition: all 2s ease-in-out;
+  animation: cowMove02 10s ease-in-out infinite;
+  transition: all 1s ease-in-out;
 }
 
 .cloud-01 {
@@ -1113,7 +1111,7 @@ audio {
   z-index: 100;
   width: 180px;
   opacity: 0;
-  transition: all 2s ease-in-out;
+  transition: all 1s ease-in-out;
   animation: listRotate 2s ease-in-out 1s infinite;
 }
 
@@ -1136,7 +1134,7 @@ audio {
   z-index: 101;
   width: 119px;
   animation: listShow 2s ease-in-out 1s infinite;
-  transition: all 2s ease-in-out;
+  transition: all 1s ease-in-out;
   opacity: 0;
 }
 
@@ -1214,7 +1212,7 @@ audio {
   width: 100%;
   animation: cloudGroupMove 5s ease-in-out 1s infinite;
   opacity: 0;
-  transition: all 15s ease-in-out;
+  transition: all 5s ease-in-out;
 }
 
 .cloud-02 {
@@ -1912,7 +1910,7 @@ audio {
   margin: auto;
   z-index: 101;
   width: 339px;
-  transition: all 3s ease-in-out;
+  transition: all 1s ease-in-out;
   opacity: 0;
 }
 
@@ -1925,7 +1923,7 @@ audio {
   margin: auto;
   z-index: 101;
   width: 100%;
-  transition: all 3s ease-in-out;
+  transition: all 1s ease-in-out;
   opacity: 0;
 }
 
@@ -2673,7 +2671,7 @@ audio {
   z-index: 3;
   width: 193px;
   opacity: 0;
-  transition: all 1.5s ease-in-out;
+  transition: all 1s ease-in-out;
 }
 
 .girl-r-hand-finish {
@@ -3062,6 +3060,10 @@ audio {
   display: none;
 }
 
+.desktop {
+  display: flex;
+}
+
 #rotate-notice {
   display: none;
   position: fixed;
@@ -3170,6 +3172,10 @@ audio {
 @media screen and (max-height: 500px) {
   .mobile {
     display: block;
+  }
+
+  .desktop {
+    display: none;
   }
 
   .pop-up-box {
