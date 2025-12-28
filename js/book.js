@@ -415,7 +415,6 @@ $(function () {
 
   //有任務下一頁 鎖定按鈕
   function btnDisabled() {
-    console.log("btnDisabled!");
     isBtnDisabled = true;
     $(".next-page img").attr("src", "./images/common/下一頁深藍.png");
     $(".next-page img").css("cursor", "not-allowed");
@@ -436,7 +435,6 @@ $(function () {
 
   //有任務下一頁 不鎖定按鈕
   function btnUnDisabled() {
-    console.log("btnUnDisabled!");
     isBtnDisabled = false;
     $(".next-page img").attr("src", "./images/common/下一頁.png");
     $(".next-page img").css("cursor", "pointer");
@@ -496,8 +494,7 @@ $(function () {
   }
 
   //上下一頁 倒數3秒
-  function allBtnDisabled() {
-    console.log("allBtnDisabled!");
+  function allBtnDisabled(page) {
     let count = 3;
     let countMobile = 3;
 
@@ -533,25 +530,27 @@ $(function () {
       }
     }, 1000);
 
-    //手機版 控制按鈕
-    if (window.matchMedia("(max-height: 500px)").matches) {
-      // 每秒更新一次按鈕文字
-      prevMobileBtn.innerText = countMobile + "秒";
-      nextMobileBtn.innerText = countMobile + "秒";
-      $("#left-down-corner,#right-down-corner").css("color", "##969696");
+    if (page !== 6) {
+      //手機版 控制按鈕
+      if (window.matchMedia("(max-height: 500px)").matches) {
+        // 每秒更新一次按鈕文字
+        prevMobileBtn.innerText = countMobile + "秒";
+        nextMobileBtn.innerText = countMobile + "秒";
+        $("#left-down-corner,#right-down-corner").css("color", "##969696");
 
-      const timerMobile = setInterval(() => {
-        countMobile--;
-        if (countMobile > 0) {
-          prevMobileBtn.innerText = countMobile + "秒";
-          nextMobileBtn.innerText = countMobile + "秒";
-        } else {
-          clearInterval(timerMobile);
-          prevMobileBtn.innerText = "上一頁";
-          nextMobileBtn.innerText = "下一頁";
-          $("#left-down-corner,#right-down-corner").css("color", "#000");
-        }
-      }, 1000);
+        const timerMobile = setInterval(() => {
+          countMobile--;
+          if (countMobile > 0) {
+            prevMobileBtn.innerText = countMobile + "秒";
+            nextMobileBtn.innerText = countMobile + "秒";
+          } else {
+            clearInterval(timerMobile);
+            prevMobileBtn.innerText = "上一頁";
+            nextMobileBtn.innerText = "下一頁";
+            $("#left-down-corner,#right-down-corner").css("color", "#000");
+          }
+        }, 1000);
+      }
     }
 
     // $(".prev-page, .next-page").prop("disabled", true);
@@ -772,10 +771,21 @@ $(function () {
 
     let doorClickBound = false;
 
-    if (!doorClickBound) {
-      doorClickBound = true;
-      // 第 6–7 頁：點擊門跑出森林
-      if (page === 6 || page === 7) {
+    // 第 6–7 頁：點擊門跑出森林
+    if (page === 6 || page === 7) {
+      setTimeout(() => {
+        $(".knock").css("opacity", "1");
+        $(".door").css("opacity", "1");
+      }, 1000);
+
+      isCanNotFlip();
+      setTimeout(() => {
+        canFlipPrev = true;
+      }, 3000);
+
+      if (!doorClickBound) {
+        doorClickBound = true;
+
         $("#flipbook").append(
           `<img class="knock" src="./images/book/book0607/點這裡.png"/>
         <img class="grass0607" src="./images/book/book0607/草地.png"/>
@@ -790,16 +800,6 @@ $(function () {
         <img class="peoples" src="./images/book/book0607/媽媽鈴鈴.png"/>
         `
         );
-
-        setTimeout(() => {
-          $(".knock").css("opacity", "1");
-          $(".door").css("opacity", "1");
-        }, 1000);
-
-        isCanNotFlip();
-        setTimeout(() => {
-          canFlipPrev = true;
-        }, 3000);
 
         setTimeout(() => {
           $(".door-bg").css("opacity", "1");
@@ -844,29 +844,29 @@ $(function () {
           playAudio("audio-4-click", 0);
         });
       }
+    }
 
-      if (page === 5 || page === 8) {
-        $("#flipbook .knock").remove();
-        $("#flipbook .grass0607").remove();
-        $("#flipbook .tree1").remove();
-        $("#flipbook .tree2").remove();
-        $("#flipbook .tree3").remove();
-        $("#flipbook .cloud2").remove();
-        $("#flipbook .door-common").remove();
-        $("#flipbook .peoples").remove();
-        $("#flipbook .bubble67").remove();
-        $("#flipbook .star5").remove();
-        $(".door").removeClass("door-opening");
-        $(".peoples").removeClass("peoples-open");
-        $(".grass0607").removeClass("tree-fade-in");
-        $(".tree1").removeClass("tree-fade-in");
-        $(".tree2").removeClass("tree-fade-in");
-        $(".tree3").removeClass("tree-fade-in");
-        $(".cloud1").removeClass("cloud-fade-in");
-        $(".cloud2").removeClass("cloud-fade-in");
-        $(".cloud3").removeClass("cloud-fade-in");
-        $(".wow").removeClass("wow-animation");
-      }
+    if (page === 5 || page === 8) {
+      $("#flipbook .knock").remove();
+      $("#flipbook .grass0607").remove();
+      $("#flipbook .tree1").remove();
+      $("#flipbook .tree2").remove();
+      $("#flipbook .tree3").remove();
+      $("#flipbook .cloud2").remove();
+      $("#flipbook .door-common").remove();
+      $("#flipbook .peoples").remove();
+      $("#flipbook .bubble67").remove();
+      $("#flipbook .star5").remove();
+      $(".door").removeClass("door-opening");
+      $(".peoples").removeClass("peoples-open");
+      $(".grass0607").removeClass("tree-fade-in");
+      $(".tree1").removeClass("tree-fade-in");
+      $(".tree2").removeClass("tree-fade-in");
+      $(".tree3").removeClass("tree-fade-in");
+      $(".cloud1").removeClass("cloud-fade-in");
+      $(".cloud2").removeClass("cloud-fade-in");
+      $(".cloud3").removeClass("cloud-fade-in");
+      $(".wow").removeClass("wow-animation");
     }
 
     if (page === 8 || page === 9) {
@@ -1950,7 +1950,7 @@ $(function () {
       page !== 24 &&
       page !== 28
     ) {
-      allBtnDisabled();
+      allBtnDisabled(page);
       isCanNotFlip();
       // 延遲三秒後才能翻頁
       setTimeout(() => {
@@ -2443,8 +2443,6 @@ $(function () {
    頁面規則控制
 ====================== */
   function applyPageRule(page) {
-    console.log("套用規則 page:", page);
-
     // 預設：全部開放
     canSwipePrev = true;
     canSwipeNext = true;
@@ -2462,16 +2460,12 @@ $(function () {
       // 3 秒後允許往回
       setTimeout(() => {
         canSwipePrev = true;
-        console.log("6/7 頁 → 允許往回");
       }, 3000);
 
       // 點 knock 才能準備往前
       $("#flipbook .knock").one("click", function () {
-        console.log("knock clicked");
-
         setTimeout(() => {
           canSwipeNext = true;
-          console.log("6/7 頁 → 允許往前");
         }, 12000);
       });
     }
@@ -2488,8 +2482,6 @@ $(function () {
 
       // 點 knock 才能準備往前
       $("#flipbook .click-milk").one("click", function () {
-        console.log("click-milk clicked");
-
         setTimeout(() => {
           canSwipeNext = true;
         }, 12000);
@@ -2508,8 +2500,6 @@ $(function () {
 
       // 點 knock 才能準備往前
       $("#flipbook .click-hearing-heart").one("click", function () {
-        console.log("click-hearing-heart clicked");
-
         setTimeout(() => {
           canSwipeNext = true;
         }, 14000);
@@ -2528,8 +2518,6 @@ $(function () {
 
       // 點 knock 才能準備往前
       $(".click-girl").one("click", function () {
-        console.log("click-girl clicked");
-
         setTimeout(() => {
           canSwipeNext = true;
         }, 7000);

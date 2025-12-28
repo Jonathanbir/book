@@ -131,6 +131,7 @@ audio {
   width: 100px;
   height: 100px;
   z-index: 999;
+  pointer-events: auto;
   cursor: pointer;
 }
 
@@ -162,6 +163,7 @@ audio {
   width: 105px;
   opacity: 0;
   cursor: pointer;
+  pointer-events: auto;
   animation: dialogKnockShow 2s ease-in-out infinite;
   transition: all 1s ease-in-out;
 }
@@ -574,6 +576,18 @@ button {
 }
 
 /* book0607 點們展開森林*/
+.grass0607,
+.tree1,
+.tree2,
+.tree3,
+.cloud2,
+.bubble67,
+.star5,
+.door-bg,
+.peoples {
+  pointer-events: none;
+}
+
 .door-common {
   position: absolute;
   right: 31%;
@@ -3619,11 +3633,6 @@ button {
 
   .peoples-open {
     right: 33%;
-  }
-
-  .cloud1,
-  .cloud2 {
-    display: none;
   }
 
   .clouds {
