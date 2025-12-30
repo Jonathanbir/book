@@ -66,6 +66,35 @@ $(function () {
     console.log("這是 android Chrome");
   }
 
+  function isIPad() {
+    return (
+      navigator.maxTouchPoints > 1 && /iPad|Macintosh/.test(navigator.userAgent)
+    );
+  }
+
+  // window.alert(
+  //   "visualHeight: " +
+  //     visualHeight +
+  //     "\nwidthGap " +
+  //     widthGap / 2 +
+  //     "\ninnerWidth " +
+  //     innerWidth +
+  //     "\nscreenHeight " +
+  //     screenHeight +
+  //     "\ninnerHeight " +
+  //     innerHeight +
+  //     "\n推算工具列高度" +
+  //     barHeight +
+  //     "\nisIOSChrome(): " +
+  //     isIOSChrome() +
+  //     "\nisAndroidChrome(): " +
+  //     isAndroidChrome() +
+  //     "\nisSafari(): " +
+  //     isSafari() +
+  //     "\nisIPad(): " +
+  //     isIPad()
+  // );
+
   if (!window.matchMedia("(max-height: 500px)").matches) {
     $flipbook.turn({
       width: 1200,
@@ -76,27 +105,6 @@ $(function () {
     $(".pop-up-box").on("click", function () {
       $(".pop-up-box").css("display", "none");
     });
-
-    // window.alert(
-    //   "visualViewport.height: " +
-    //     visualViewport.height +
-    //     "\nwidthGap " +
-    //     widthGap / 2 +
-    //     "\ninnerWidth " +
-    //     innerWidth +
-    //     "\nscreenHeight " +
-    //     screenHeight +
-    //     "\ninnerHeight " +
-    //     innerHeight +
-    //     "\n推算工具列高度" +
-    //     barHeight +
-    //     "\nisIOSChrome(): " +
-    //     isIOSChrome() +
-    //     "\nisAndroidChrome(): " +
-    //     isAndroidChrome() +
-    //     "\nisSafari(): " +
-    //     isSafari()
-    // );
 
     if (isSafari()) {
       console.log("safari~~~");
@@ -1044,8 +1052,8 @@ $(function () {
           <div class="popup-board popup-board01">
           <p>
           牛⽜大部分是來自溫帶品種的荷蘭⽜，</br>
-          台灣夏季高溫潮溼，容易讓牛牛產生「熱緊迫」（就像人類夏天也會中暑一樣喔），</br>
-          牛牛胃口一不好，就會營養不足，容易生病，</br>
+          台灣夏季高溫潮溼，容易讓牛牛產生「熱緊迫」（就像人類夏天也會中暑一樣喔），
+          牛牛胃口一不好，</br>就會營養不足，容易生病，</br>
           這就是為什麼牧場裡需要安裝風扇與灑水系統幫牛牛降溫。</br>
           </p>
           </div>
@@ -1203,11 +1211,10 @@ $(function () {
           </div>          
           <div class="popup-board popup-board02">
           <p>
-            牛牛不只是吃牧草喔！牠們的餐點像人類一樣，</br>
+            牛牛不只是吃牧草喔！</br>牠們的餐點像人類一樣，</br>
             有主食、也有配餐，</br>
-            會依據牛牛的年紀與身體狀況加入除了牧草以外的其他食物，</br>
-            像是小牛喝奶粉，少女牛補充蛋白質幫助發育…讓牛牛補充足夠的營養，</br>
-            吃得健康。
+            會依據牛牛的年紀與身體狀況加入除了牧草以外的其他食物，
+            像是小牛喝奶粉，</br>少女牛補充蛋白質幫助發育…讓牛牛補充足夠的營養，吃得健康。
           </p>
           </div>
         `);
@@ -1352,11 +1359,11 @@ $(function () {
           </div>             
           <div class="popup-board popup-board03">
           <p>
-           牛牛是草食性動物，不會輕易表現出身體不適，</br>
+           牛牛是草食性動物，</br>不會輕易表現出身體不適，</br>
            所以必須透過獸醫師的專業檢查與經驗判斷才能瞭解。</br>
-           除了聽診、量體溫、看糞便、觸診之外，獸醫師也需要檢查牛舍、</br>
+           除了聽診、量體溫、看糞便、觸診之外，獸醫師也需要檢查牛舍、
            看飼料、觀察牛隻活動，幫助牧場提前預防問題。</br>
-          除了把關牛牛的健康，也要打造讓牛牛「吃得好、住得好」的牧場環境，</br>
+          除了把關牛牛的健康，也要打造讓牛牛「吃得好、住得好」的牧場環境，
           才能「預防勝於治療」，減少牛牛生病的機率。
           </p>
           </div>
@@ -1920,7 +1927,7 @@ $(function () {
 
         setTimeout(() => {
           $(".click-girl").show();
-        }, 9000);
+        }, 1000);
 
         startMilkAnimation();
       } else {
@@ -2427,15 +2434,25 @@ $(function () {
       latestPage = page;
 
       // 書本定位
-      if (page === 1) {
-        document.querySelector(".book-section").style.left = "-20%";
-      } else if (
-        page === 28 &&
-        !window.matchMedia("(max-height: 500px)").matches
-      ) {
-        document.querySelector(".book-section").style.left = "17%";
-      } else {
-        document.querySelector(".book-section").style.left = "0px";
+      if (!isIPad()) {
+        if (page === 1) {
+          if (!window.matchMedia("(max-height: 500px)").matches) {
+            $(".book-section").css({
+              left: "-300px",
+            });
+          }
+        } else if (
+          page === 28 &&
+          !window.matchMedia("(max-height: 500px)").matches
+        ) {
+          $(".book-section").css({
+            left: "17%",
+          });
+        } else {
+          $(".book-section").css({
+            left: "0px",
+          });
+        }
       }
 
       // 若已有計時器，清除
@@ -2562,9 +2579,67 @@ $(function () {
     canSwipePrev = true;
     canSwipeNext = true;
 
+    if (isIPad() && isSafari()) {
+      $(".book-section").addClass("book-section-ipad-safari");
+      $(".controls").addClass("controls-ipad-safari");
+    }
+    if (isIPad() && isIOSChrome()) {
+      $(".book-section").addClass("book-section-ipad-chorme");
+      $(".controls").addClass("controls-ipad-chorme");
+    }
+
     // 第一頁：不能往回
     if (page === 1) {
       canSwipePrev = false;
+      if (isIPad() && isSafari()) {
+        $(".book-section").css({
+          left: (visualHeight * -240) / 609 + "px", //-342.72
+          marginTop: (visualHeight * 20) / 609 + "px",
+        });
+      }
+      if (isIPad() && isIOSChrome()) {
+        $(".book-section").css({
+          left: (visualHeight * -330) / 609 + "px", //-342.72
+          marginTop: (visualHeight * -30) / 609 + "px",
+        });
+      }
+
+      if (window.matchMedia("(max-height: 500px)").matches) {
+        if (isSafari() || isIOSChrome()) {
+          $(".book-section").css({
+            left: (visualHeight * -312.48) / 609 + "px", //-232
+          });
+        }
+        if (isAndroidChrome()) {
+          $(".book-section").css({
+            left: (screenHeight * 153) / 609 + "px",
+          });
+        }
+      }
+    } else {
+      if (isIPad() && isSafari()) {
+        if (page === 28) {
+          $(".book-section").css({
+            left: (visualHeight * 180) / 609 + "px", //-342.72
+          });
+        } else {
+          $(".book-section").css({
+            left: (visualHeight * -40) / 609 + "px",
+          });
+        }
+      }
+
+      if (isIPad() && isIOSChrome()) {
+        if (page === 28) {
+          $(".book-section").css({
+            left: (visualHeight * 120) / 609 + "px", //164.46
+          });
+        } else {
+          $(".book-section").css({
+            left: (visualHeight * -120) / 609 + "px", //-342.72
+          });
+        }
+      }
     }
 
     // 第 6–7 頁：點擊門跑出森林
