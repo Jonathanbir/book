@@ -106,11 +106,16 @@ $(function () {
         height: visualHeight,
         autoCenter: true,
       });
+      $("#left-up-corner").css({
+        left: widthGap + "px",
+      });
       $("#left-down-corner").css({
         top: visualHeight - 100 + "px",
         left: widthGap + "px",
       });
-
+      $("#right-up-corner").css({
+        right: widthGap + "px",
+      });
       $("#right-down-corner").css({
         top: visualHeight - 100 + "px",
         right: widthGap + "px",
@@ -127,9 +132,15 @@ $(function () {
         height: visualHeight,
         autoCenter: true,
       });
+      $("#left-up-corner").css({
+        left: widthGap + "px",
+      });
       $("#left-down-corner").css({
         top: visualHeight - 100,
         left: widthGap + "px",
+      });
+      $("#right-up-corner").css({
+        right: widthGap + "px",
       });
       $("#right-down-corner").css({
         top: visualHeight - 100,
@@ -691,6 +702,7 @@ $(function () {
     currentPage = page;
 
     if (page === 1) {
+      $("#left-down-corner").hide();
       isCanNotFlip();
       setTimeout(() => {
         canFlipNext = true;
@@ -728,12 +740,15 @@ $(function () {
     }
 
     if (page === 2 || page === 3) {
+      $("#left-down-corner").show();
       setTimeout(() => {
         $(".book02").css("opacity", "1");
+        $(".text-02").css("opacity", "1");
         $(".book03").css("opacity", "1");
       }, 1000);
     } else {
       $(".book02").css("opacity", "0");
+      $(".text-02").css("opacity", "0");
       $(".book03").css("opacity", "0");
     }
 
@@ -1000,21 +1015,41 @@ $(function () {
     let milkClickBound = false;
 
     if (page === 12 || page === 13) {
+      isCanNotFlip();
+      setTimeout(() => {
+        canFlipPrev = true;
+      }, 3000);
+
       // 只建立一次，避免 DOM 爆掉
       if (!fanAndBubbleCreated) {
         fanAndBubbleCreated = true;
+        btnPreviousDisabled();
+        btnDisabled();
+
         $("#flipbook")
           .append(`<img class="electfan" src="./images/book/book12/風扇1.png"/>
-                           <img class="bubble-bg" src="./images/book/book13/水珠.png"/>
-                           <img class="bubble12" src="./images/book/book13/牛奶泡泡.png"/>
-                           <div class="check-box"></div>
-                           </div>`);
+                    <img class="electfan-wind" src="./images/book/book12/電風扇氣旋.png"/>
+                    <img class="electfan-wind" src="./images/book/book12/風的線條.png"/>
+                   <img class="finish-mission01" src="./images/common/請完成任務1.png"/>
+                   <img class="click-magic-wand" src="./images/book/book0607/點這裡.png"/>
+                   <img class="bubble-bg" src="./images/book/book13/水珠.png"/>
+                   <img class="bubble12" src="./images/book/book13/牛奶泡泡.png"/>
+                   <div class="check-box"></div>
+                   `);
 
         $(".book-section").append(`
-                           <div class="popup-board-bg">
-                              <div class="popup-close-btn">x</div>
-                            </div>
-                           <div class="popup-board"></div>`);
+          <div class="popup-board-bg">
+            <div class="popup-close-btn">x</div>
+          </div>
+          <div class="popup-board popup-board01">
+          <p>
+          牛⽜大部分是來自溫帶品種的荷蘭⽜，</br>
+          台灣夏季高溫潮溼，容易讓牛牛產生「熱緊迫」（就像人類夏天也會中暑一樣喔），</br>
+          牛牛胃口一不好，就會營養不足，容易生病，</br>
+          這就是為什麼牧場裡需要安裝風扇與灑水系統幫牛牛降溫。</br>
+          </p>
+          </div>
+        `);
       }
 
       const fanImages = [
@@ -1031,45 +1066,71 @@ $(function () {
         $(".book13").css("opacity", "1");
         $(".electfan").css("opacity", "1");
         $(".magic-wand").css("opacity", "1");
+        $(".click-magic-wand").css("opacity", "1");
+        $(".finish-mission01").css("opacity", "1");
       }, 1000);
 
-      setTimeout(() => $(".magic-wand").addClass("magic-wand-animation"), 500);
-      setTimeout(() => {
-        setInterval(() => {
-          fanIndex = (fanIndex + 1) % fanImages.length;
-          fanImg.src = fanImages[fanIndex];
-        }, 100);
-      }, 4000);
-      setTimeout(() => $(".bubble-bg").addClass("bubble-move"), 2000);
-      setTimeout(() => $(".bubble12").addClass("bubble-fade-in"), 3000);
-      setTimeout(() => {
-        $(".coin-hint01").addClass("bubble-fade-in");
-      }, 12000);
-      setTimeout(() => {
-        $(".coin01").addClass("coin-animation");
-        $(".coin-light").addClass("coin-light-show");
-        $(".check01").addClass("check-show");
-      }, 15000);
+      $("#flipbook .click-magic-wand").on("click", () => {
+        $(".click-magic-wand").hide();
+        $(".finish-mission01").hide();
+        setTimeout(
+          () => $(".magic-wand").addClass("magic-wand-animation"),
+          500
+        );
+        setTimeout(() => {
+          $(".electfan-wind").css("opacity", "1");
+          $(".electfan-wind-line").css("opacity", "1");
+          setInterval(() => {
+            fanIndex = (fanIndex + 1) % fanImages.length;
+            fanImg.src = fanImages[fanIndex];
+          }, 100);
+        }, 4000);
+        setTimeout(() => $(".bubble-bg").addClass("bubble-move"), 2000);
+        setTimeout(() => $(".bubble12").addClass("bubble-fade-in"), 3000);
+        setTimeout(() => {
+          $(".coin-hint01").addClass("bubble-fade-in");
+        }, 12000);
+        setTimeout(() => {
+          $(".coin01").addClass("coin-animation");
+          $(".coin-light").addClass("coin-light-show");
+          $(".check01").addClass("check-show");
+        }, 15000);
 
-      $(".check-box").on("click", function () {
-        $(".popup-board-bg").css("display", "block");
-        $(".popup-board").css("display", "block");
-      });
+        setTimeout(() => {
+          btnUnDisabled();
+          canFlipNext = true;
+          $("#right-down-corner").css("color", "#000");
+          $("#right-down-corner").prop("disabled", false);
+        }, 15000);
 
-      $(".popup-board").on("click", function () {
-        $(".popup-board-bg").css("display", "none");
-        $(".popup-board").css("display", "none");
-      });
+        playAudio("audio-11-click", 0);
 
-      $(".popup-board-bg").on("click", function () {
-        $(".popup-board-bg").css("display", "none");
-        $(".popup-board").css("display", "none");
+        $(".check-box").on("click", function () {
+          $(".popup-board-bg").css("display", "block");
+          $(".popup-board").css("display", "block");
+        });
+
+        $(".popup-board").on("click", function () {
+          $(".popup-board-bg").css("display", "none");
+          $(".popup-board").css("display", "none");
+        });
+
+        $(".popup-board-bg").on("click", function () {
+          $(".popup-board-bg").css("display", "none");
+          $(".popup-board").css("display", "none");
+        });
       });
-    } else {
+    }
+
+    if (page === 11 || page === 14) {
       $(".book12").css("opacity", "0");
       $(".book13").css("opacity", "0");
       $(".electfan").css("opacity", "0");
+      $(".electfan-wind").css("opacity", "0");
+      $(".electfan-wind-line").css("opacity", "0");
       $(".magic-wand").css("opacity", "0");
+      $(".click-magic-wand").css("opacity", "0");
+      $(".finish-mission01").css("opacity", "0");
       $(".electfan").removeClass("electfan-move");
       $(".bubble-bg").removeClass("bubble-move");
       $(".magic-wand").removeClass("magic-wand-animation");
@@ -1077,7 +1138,11 @@ $(function () {
       $(".coin-light").removeClass("coin-light-show");
       $(".coin-hint01").removeClass("bubble-fade-in");
       $(".check01").removeClass("check-show");
+      $("#flipbook .click-magic-wand").remove();
+      $("#flipbook .finish-mission01").remove();
       $("#flipbook .electfan").remove();
+      $("#flipbook .electfan-wind").remove();
+      $("#flipbook .electfan-wind-line").remove();
       $("#flipbook .bubble-bg").remove();
       $("#flipbook .bubble12").remove();
       $("#flipbook .check-box").remove();
@@ -1087,22 +1152,6 @@ $(function () {
 
     // 第 14–15 頁：餵牛奶
     if (page === 14 || page === 15) {
-      setTimeout(() => {
-        $(".book14").css("opacity", "1");
-        $(".book15").css("opacity", "1");
-        $(".milk-bottle").css("opacity", "1");
-        $(".bottle").css("opacity", "1");
-        $(".milk").css("opacity", "1");
-        $(".girls-hand ").css("opacity", "1");
-        $(".cows-tongue").css("opacity", "1");
-        $(".board14").css("opacity", "1");
-        $(".cloud14-1").css("opacity", "1");
-        $(".cloud14-2").css("opacity", "1");
-        $(".cloud14-3").css("opacity", "1");
-        $(".text14").css("opacity", "1");
-        $(".small-cow ").css("opacity", "1");
-      }, 1000);
-
       isCanNotFlip();
       setTimeout(() => {
         canFlipPrev = true;
@@ -1115,6 +1164,7 @@ $(function () {
 
         $("#flipbook")
           .append(`<img class="small-cow" src="./images/book/book1415/小牛.png"/>
+          <img class="finish-mission02" src="./images/common/請完成任務2.png"/>
           <img class="board-list02" src="./images/book/book1415/任務清單.png">
           <img class="board14" src="./images/book/book1415/板子.png"/>
           <img class="check check02" src="./images/book/book13/綠勾.png"/>
@@ -1130,11 +1180,37 @@ $(function () {
           );
         }, 300);
 
+        setTimeout(() => {
+          $(".book14").css("opacity", "1");
+          $(".book15").css("opacity", "1");
+          $(".finish-mission02").css("opacity", "1");
+          $(".milk-bottle").css("opacity", "1");
+          $(".bottle").css("opacity", "1");
+          $(".milk").css("opacity", "1");
+          $(".girls-hand ").css("opacity", "1");
+          $(".cows-tongue").css("opacity", "1");
+          $(".board14").css("opacity", "1");
+          $(".cloud14-1").css("opacity", "1");
+          $(".cloud14-2").css("opacity", "1");
+          $(".cloud14-3").css("opacity", "1");
+          $(".text14").css("opacity", "1");
+          $(".small-cow ").css("opacity", "1");
+        }, 1000);
+
         $(".book-section").append(`
-                           <div class="popup-board-bg">
-                              <div class="popup-close-btn">x</div>
-                            </div>
-                           <div class="popup-board"></div>`);
+          <div class="popup-board-bg">
+            <div class="popup-close-btn">x</div>
+          </div>          
+          <div class="popup-board popup-board02">
+          <p>
+            牛牛不只是吃牧草喔！牠們的餐點像人類一樣，</br>
+            有主食、也有配餐，</br>
+            會依據牛牛的年紀與身體狀況加入除了牧草以外的其他食物，</br>
+            像是小牛喝奶粉，少女牛補充蛋白質幫助發育…讓牛牛補充足夠的營養，</br>
+            吃得健康。
+          </p>
+          </div>
+        `);
 
         $(".check-box").on("click", function () {
           $(".popup-board-bg").css("display", "block");
@@ -1177,7 +1253,7 @@ $(function () {
 
         setTimeout(() => {
           $(".click-milk").show();
-        }, 13000);
+        }, 1000);
 
         $("#flipbook .click-milk").on("click", function () {
           setTimeout(() => {
@@ -1186,6 +1262,7 @@ $(function () {
           $(".cows-tongue").addClass("cows-tongue-animation");
           $(".milk").addClass("milk-empty");
           $(".click-milk").hide();
+          $(".finish-mission02").hide();
 
           playAudio("sucking-coin", 0);
           setTimeout(() => {
@@ -1209,6 +1286,7 @@ $(function () {
     if (page === 13 || page === 16) {
       $(".book14").css("opacity", "0");
       $(".book15").css("opacity", "0");
+      $(".finish-mission02").css("opacity", "0");
       $(".milk-bottle").css("opacity", "0");
       $(".bottle").css("opacity", "0");
       $(".milk").css("opacity", "0");
@@ -1220,6 +1298,7 @@ $(function () {
       $(".cloud14-3").css("opacity", "0");
       $(".text14").css("opacity", "0");
       $(".small-cow ").css("opacity", "0");
+      $("#flipbook .finish-mission02").remove();
       $("#flipbook .cloud14-2").remove();
       $("#flipbook .text14").remove();
       $("#flipbook .click-milk").remove();
@@ -1252,6 +1331,7 @@ $(function () {
         btnPreviousDisabled();
         btnDisabled();
         $("#flipbook").append(`
+            <img class="finish-mission03" src="./images/common/請完成任務3.png"/>
             <img class="story-text16" src="./images/book/book1617/故事文.png"/>
             <img class="mom-cow" src="./images/book/book1617/媽媽牛.png"/>
             <img class="stethoscope disabled" src="./images/book/book1617/手.png"/>
@@ -1259,7 +1339,7 @@ $(function () {
             <img class="cow-heart" src="./images/book/book1617/牛愛心.png"/>
             <img class="dondon" src="./images/book/book1617/咚咚.png">
             <img class="nurse-girl" src="./images/book/book1617/鈴鈴護士.png"/>
-            <img class="click-hearing-heart" src="./images/book/book1617/點這裡.png"/>
+            <img class="click-hearing-heart" src="./images/book/book25/點這裡.png"/>
             <img class="board-list03" src="./images/book/book1617/任務清單.png"/>
             <img class="check check03" src="./images/book/book13/綠勾.png" />
             <img class="board16" src="./images/book/book1415/板子.png">
@@ -1267,14 +1347,25 @@ $(function () {
             `);
         $("#flipbook").append(`<div class="check-box"></div>`);
         $(".book-section").append(`
-                           <div class="popup-board-bg">
-                              <div class="popup-close-btn">x</div>
-                            </div>
-                           <div class="popup-board"></div>`);
+          <div class="popup-board-bg">
+            <div class="popup-close-btn">x</div>
+          </div>             
+          <div class="popup-board popup-board03">
+          <p>
+           牛牛是草食性動物，不會輕易表現出身體不適，</br>
+           所以必須透過獸醫師的專業檢查與經驗判斷才能瞭解。</br>
+           除了聽診、量體溫、看糞便、觸診之外，獸醫師也需要檢查牛舍、</br>
+           看飼料、觀察牛隻活動，幫助牧場提前預防問題。</br>
+          除了把關牛牛的健康，也要打造讓牛牛「吃得好、住得好」的牧場環境，</br>
+          才能「預防勝於治療」，減少牛牛生病的機率。
+          </p>
+          </div>
+        `);
 
         setTimeout(() => {
           $(".book16").css("opacity", "1");
           $(".book17").css("opacity", "1");
+          $(".finish-mission03").css("opacity", "1");
           $(".cloud-16-0").css("opacity", "1");
           $(".cloud-16-3").css("opacity", "1");
           $(".cloud14-3").css("opacity", "1");
@@ -1311,7 +1402,7 @@ $(function () {
 
         setTimeout(() => {
           $(".click-hearing-heart").show();
-        }, 15000);
+        }, 1000);
 
         $("#flipbook .click-hearing-heart").on("click", function () {
           const cowEyesImages = [
@@ -1331,6 +1422,7 @@ $(function () {
           $(".stethoscope").addClass("stethoscope-move");
           $(".cow-heart").addClass("heart-beat-animation");
           $(".click-hearing-heart").hide();
+          $(".finish-mission03").hide();
 
           playAudio("hearts-coin", 1000);
 
@@ -1358,6 +1450,7 @@ $(function () {
     if (page === 15 || page === 18) {
       $(".book16").css("opacity", "0");
       $(".book17").css("opacity", "0");
+      $(".finish-mission03").css("opacity", "0");
       $(".cloud-16-0").css("opacity", "0");
       $(".cloud-16-3").css("opacity", "0");
       $(".cloud14-3").css("opacity", "0");
@@ -1379,6 +1472,8 @@ $(function () {
       $(".coin-hint03").removeClass("bubble-fade-in");
       $(".success-hint03").removeClass("bubble-fade-in");
       $(".dondon").removeClass("bubble-fade-in");
+      $("#flipbook .click-hearing-heart").remove();
+      $("#flipbook .finish-mission03").remove();
       $("#flipbook .story-text16").remove();
       $("#flipbook .mom-cow").remove();
       $("#flipbook .stethoscope").remove();
@@ -1662,11 +1757,13 @@ $(function () {
         }, 7000);
       });
 
-    // Animation flow — page 28/29
+    // 第 26–27 頁 家人喝牛奶
     function startFamilyAnimation() {
       setTimeout(() => {
         $(".book26").css("opacity", "1");
         $(".book27").css("opacity", "1");
+      }, 1200);
+      setTimeout(() => {
         $(".cheers").addClass("cheers-show-animation");
         $(".milk-box").css("opacity", "1");
         $(".father-hand").css("opacity", "1");
@@ -1834,6 +1931,9 @@ $(function () {
     // Turn.js event
     $("#flipbook").bind("turning", function (event, page) {
       if (page === 26 || page === 27) {
+        setTimeout(() => {
+          $("#right-down-corner").show();
+        }, 500);
         if (window.matchMedia("(max-height: 500px)").matches) {
           setTimeout(() => {
             $("#flipbook").append(
@@ -1866,6 +1966,19 @@ $(function () {
       }
 
       if (page === 28) {
+        setTimeout(() => {
+          $(".book28").css("opacity", "1");
+          $(".cloud-28").css("opacity", "1");
+          $(".bubble-28").css("opacity", "1");
+          $(".star-28").addClass("star-28-animation");
+          $(".story-28").css("opacity", "1");
+          $(".grass-28").css("opacity", "1");
+          $(".fence-28").css("opacity", "1");
+          $(".cow-28-1").css("opacity", "1");
+          $(".cow-28-2").css("opacity", "1");
+        }, 1000);
+
+        $("#right-down-corner").hide();
         isCanNotFlip();
         setTimeout(() => {
           canFlipPrev = true;
@@ -1943,6 +2056,8 @@ $(function () {
       page !== 1 &&
       page !== 6 &&
       page !== 7 &&
+      page !== 12 &&
+      page !== 13 &&
       page !== 14 &&
       page !== 15 &&
       page !== 16 &&
@@ -2050,8 +2165,8 @@ $(function () {
           });
         }
       }
-      // console.log("visualHeight:", visualHeight);
-      // console.log("screenHeight:", screenHeight);
+      console.log("visualHeight:", visualHeight);
+      console.log("screenHeight:", screenHeight);
 
       if (page === 24 || page === 25) {
         if (isSafari() || isIOSChrome()) {
@@ -2467,6 +2582,24 @@ $(function () {
         setTimeout(() => {
           canSwipeNext = true;
         }, 12000);
+      });
+    }
+
+    // 第 12-13 頁：魔法棒+電風扇
+    if (page === 12 || page === 13) {
+      canSwipePrev = false;
+      canSwipeNext = false;
+
+      // 3 秒後允許往回
+      setTimeout(() => {
+        canSwipePrev = true;
+      }, 3000);
+
+      // 點 knock 才能準備往前
+      $("#flipbook .click-magic-wand").one("click", function () {
+        setTimeout(() => {
+          canSwipeNext = true;
+        }, 15000);
       });
     }
 
