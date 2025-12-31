@@ -2171,7 +2171,11 @@ $(function () {
             $(".mom-hand-cup").css("opacity", "1");
           }, 2000)
         );
-      } else {
+      }
+
+      if (page === 25 || page === 28) {
+        page2627Timeouts.forEach((id) => clearTimeout(id));
+        page2627Timeouts = [];
         if (window.matchMedia("(max-height: 500px)").matches) {
           $(".mom-hand-region-mb").remove();
           $(".mom-hand-region-mb").removeClass("mom-hand-finish-mb");
@@ -2229,6 +2233,18 @@ $(function () {
           $(".prev-page img").attr("src", "./images/common/上一頁.png");
           $(".prev-page").prop("disabled", false);
         }, 3000);
+      }
+
+      if (page === 27) {
+        $(".book28").css("opacity", "0");
+        $(".cloud-28").css("opacity", "0");
+        $(".bubble-28").css("opacity", "0");
+        $(".star-28").removeClass("star-28-animation");
+        $(".story-28").css("opacity", "0");
+        $(".grass-28").css("opacity", "0");
+        $(".fence-28").css("opacity", "0");
+        $(".cow-28-1").css("opacity", "0");
+        $(".cow-28-2").css("opacity", "0");
       }
     });
 
