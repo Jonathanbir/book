@@ -1133,6 +1133,20 @@ $(function () {
         `);
       }
 
+      if (window.matchMedia("(max-height: 500px)").matches) {
+        if (isAndroidChrome()) {
+          $(".magic-wand").css({
+            right: (screenHeight * 85.26) / 609 + "px", //57.68
+          });
+        }
+
+        if (isSafari() || isIOSChrome()) {
+          $(".magic-wand").css({
+            right: (visualHeight * 90.24) / 609 + "px", //67
+          });
+        }
+      }
+
       const fanImages = [
         "./images/book/book12/風扇1.png",
         "./images/book/book12/風扇2.png",
