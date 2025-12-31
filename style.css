@@ -1503,6 +1503,7 @@ button {
   width: 100%;
   height: 100vh;
   background: rgba(0, 0, 0, 0.5);
+  pointer-events: auto;
 }
 
 .popup-board {
@@ -3650,13 +3651,18 @@ button {
     border-radius: 50% 0 0 0;
   }
 
+  .popup-open .mute-mobile-toggle {
+    pointer-events: none;
+    background: rgba(169, 169, 169, 0.2) !important;
+  }
+
   .mute-mobile-toggle {
-    position: absolute;
+    position: fixed;
     top: 0;
     right: 0;
     width: 40px;
     height: 40px;
-    z-index: 1000;
+    z-index: 100;
     border: none;
     border-radius: 100%;
     color: #000;
@@ -3895,6 +3901,25 @@ button {
     }
   }
 
+  .cloud1 {
+    width: 50%;
+  }
+
+  .cloud2 {
+    left: 27%;
+    width: 30%;
+  }
+
+  .cloud3 {
+    width: 50%;
+  }
+
+  .wow {
+    top: 10%;
+    right: 61%;
+    width: 14%;
+  }
+
   .mowmow {
     position: absolute;
     top: 30%;
@@ -3992,7 +4017,9 @@ button {
   }
 
   .popup-board01 p {
-    top: 22%;
+    width: 50%;
+    top: 26%;
+    left: 0%;
     font-size: 1.1rem;
   }
 
@@ -4061,7 +4088,10 @@ button {
   }
 
   .popup-board02 p {
-    top: 21%;
+    top: 27%;
+    left: -1%;
+    width: 50%;
+    font-size: 1.1rem;
   }
 
   .milk-bottle {
@@ -4151,6 +4181,12 @@ button {
   .finish-mission03 {
     width: 17%;
     right: 17%;
+  }
+
+  .popup-board03 p {
+    top: 22%;
+    width: 51%;
+    font-size: 1rem;
   }
 
   /* .mom-hand {

@@ -720,7 +720,6 @@ $(function () {
     currentPage = page;
 
     if (page === 1) {
-      $("#left-down-corner").hide();
       isCanNotFlip();
       setTimeout(() => {
         canFlipNext = true;
@@ -1048,6 +1047,26 @@ $(function () {
       }, 2000);
     }
 
+    let popupBoard = () => {
+      $(".check-box").on("click", function () {
+        $("body").addClass("popup-open"); // 開啟 popup
+        $(".popup-board-bg").css("display", "block");
+        $(".popup-board").css("display", "block");
+      });
+
+      $(".popup-board").on("click", function () {
+        $(".popup-board-bg").css("display", "none");
+        $(".popup-board").css("display", "none");
+        $("body").removeClass("popup-open"); // 關閉 popup
+      });
+
+      $(".popup-board-bg").on("click", function () {
+        $(".popup-board-bg").css("display", "none");
+        $(".popup-board").css("display", "none");
+        $("body").removeClass("popup-open"); // 關閉 popup
+      });
+    };
+
     if (page === 9 || page === 12) {
       $(".book10").css("opacity", "0");
       $(".book11").css("opacity", "0");
@@ -1188,20 +1207,7 @@ $(function () {
         playAudio("audio-11-click", 0);
       });
 
-      $(".check-box").on("click", function () {
-        $(".popup-board-bg").css("display", "block");
-        $(".popup-board").css("display", "block");
-      });
-
-      $(".popup-board").on("click", function () {
-        $(".popup-board-bg").css("display", "none");
-        $(".popup-board").css("display", "none");
-      });
-
-      $(".popup-board-bg").on("click", function () {
-        $(".popup-board-bg").css("display", "none");
-        $(".popup-board").css("display", "none");
-      });
+      popupBoard();
     }
 
     if (page === 11 || page === 14) {
@@ -1296,21 +1302,6 @@ $(function () {
           </div>
         `);
 
-        $(".check-box").on("click", function () {
-          $(".popup-board-bg").css("display", "block");
-          $(".popup-board").css("display", "block");
-        });
-
-        $(".popup-board").on("click", function () {
-          $(".popup-board-bg").css("display", "none");
-          $(".popup-board").css("display", "none");
-        });
-
-        $(".popup-board-bg").on("click", function () {
-          $(".popup-board-bg").css("display", "none");
-          $(".popup-board").css("display", "none");
-        });
-
         if (window.matchMedia("(max-height: 500px)").matches) {
           if (isAndroidChrome()) {
             $(".girls-hand").css({
@@ -1382,6 +1373,7 @@ $(function () {
           );
         });
       }
+      popupBoard();
     }
 
     if (page === 13 || page === 16) {
@@ -1548,20 +1540,7 @@ $(function () {
         });
       }
 
-      $(".check-box").on("click", function () {
-        $(".popup-board-bg").css("display", "block");
-        $(".popup-board").css("display", "block");
-      });
-
-      $(".popup-board").on("click", function () {
-        $(".popup-board-bg").css("display", "none");
-        $(".popup-board").css("display", "none");
-      });
-
-      $(".popup-board-bg").on("click", function () {
-        $(".popup-board-bg").css("display", "none");
-        $(".popup-board").css("display", "none");
-      });
+      popupBoard();
     }
 
     if (page === 15 || page === 18) {
@@ -2659,17 +2638,12 @@ $(function () {
       latestPage = page;
 
       // 書本定位
-      if (!isIPad()) {
+      if (!isIPad() && !window.matchMedia("(max-height: 500px)").matches) {
         if (page === 1) {
-          if (!window.matchMedia("(max-height: 500px)").matches) {
-            $(".book-section").css({
-              left: "-300px",
-            });
-          }
-        } else if (
-          page === 28 &&
-          !window.matchMedia("(max-height: 500px)").matches
-        ) {
+          $(".book-section").css({
+            left: "-300px",
+          });
+        } else if (page === 28) {
           $(".book-section").css({
             left: "17%",
           });
@@ -2815,6 +2789,7 @@ $(function () {
 
     // 第一頁：不能往回
     if (page === 1) {
+      $("#left-down-corner").hide();
       canSwipePrev = false;
       if (isIPad() && isSafari()) {
         $(".book-section").css({
@@ -2837,7 +2812,7 @@ $(function () {
         }
         if (isAndroidChrome()) {
           $(".book-section").css({
-            left: (screenHeight * 153) / 609 + "px",
+            transform: `translateX(` + (screenHeight * 133.034) / 609 + `px)`, //90
           });
         }
       }
@@ -2862,6 +2837,20 @@ $(function () {
         } else {
           $(".book-section").css({
             left: (visualHeight * -120) / 609 + "px", //-342.72
+          });
+        }
+      }
+
+      if (window.matchMedia("(max-height: 500px)").matches) {
+        if (isSafari() || isIOSChrome()) {
+          $(".book-section").css({
+            left: "0px",
+          });
+        }
+
+        if (isAndroidChrome()) {
+          $(".book-section").css({
+            transform: `translateX(` + (screenHeight * 443.4466) / 609 + `px)`, //90
           });
         }
       }
@@ -2956,6 +2945,21 @@ $(function () {
         }, 7000);
       });
     }
+
+    // if (page === 28) {
+    //   if (window.matchMedia("(max-height: 500px)").matches) {
+    //     // if (isSafari() || isIOSChrome()) {
+    //     //   $(".book-section").css({
+    //     //     left: (visualHeight * -312.48) / 609 + "px", //-232
+    //     //   });
+    //     // }
+    //     if (isAndroidChrome()) {
+    //       $(".book-section").css({
+    //         transform: `translateX(` + (screenHeight * 739.08) / 609 + `px)`, //500
+    //       });
+    //     }
+    //   }
+    // }
   }
 
   /* ======================
