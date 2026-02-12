@@ -156,8 +156,8 @@ audio {
 
 .knock {
   position: absolute;
-  right: 21%;
-  bottom: 34%;
+  right: 26%;
+  bottom: 47%;
   z-index: 9999;
   width: 105px;
   opacity: 0;
@@ -201,9 +201,6 @@ audio {
 .book {
   width: 100%;
   height: 600px;
-  background-size: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
 }
 
 button {
@@ -379,10 +376,8 @@ button {
 .cow-0-2 {
   position: absolute;
   bottom: 12%;
-  right: 39%;
+  right: 40%;
   z-index: 10;
-  width: 100px;
-  height: 100px;
 }
 
 .cow-0-3 {
@@ -394,15 +389,39 @@ button {
 }
 
 /* book02 */
+.book02-box {
+  width: 100%;
+  position: relative;
+}
+
+.book020 {
+  position: absolute;
+  left: 0;
+  z-index: 0;
+  transition: all 1s ease-in-out;
+}
+
 .book02 {
+  position: absolute;
+  left: 0;
+  z-index: 2;
   opacity: 0;
   transition: all 1s ease-in-out;
 }
 
-.text-02 {
+.text {
   position: absolute;
-  left: 5%;
-  bottom: 1%;
+  left: 0;
+  opacity: 0;
+  z-index: 2;
+  transition: all 1s ease-in-out;
+}
+
+.text02 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
   opacity: 0;
   font-size: 15px;
   text-align: left;
@@ -411,13 +430,91 @@ button {
 }
 
 /* book03 */
+.book03-box {
+  width: 100%;
+  position: relative;
+}
+
+.book030 {
+  position: absolute;
+  right: 0;
+  z-index: 0;
+  transition: all 1s ease-in-out;
+}
+
 .book03 {
+  position: absolute;
+  right: 0;
+  z-index: 1;
+  opacity: 0;
+  transition: all 1s ease-in-out;
+}
+
+.book03-title {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 33;
+  opacity: 0;
+}
+
+.girls-head03 {
+  position: absolute;
+  right: 90px;
+  bottom: 150px;
+  z-index: 30;
+  width: 375px;
+  opacity: 0;
+  animation: headRotate 2s ease-in-out infinite;
+  transition: all 1s ease-in-out;
+}
+
+@keyframes headRotate {
+  0% {
+    transform: rotate(2deg);
+  }
+  50% {
+    transform: rotate(-2deg);
+  }
+  100% {
+    transform: rotate(2deg);
+  }
+}
+
+.milk03 {
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 31;
+  opacity: 0;
+  transition: all 1s ease-in-out;
+}
+
+.hands03 {
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 32;
   opacity: 0;
   transition: all 1s ease-in-out;
 }
 
 /* book04 小女孩沒牛奶 */
+.book04-box {
+  width: 100%;
+  position: relative;
+}
+
+.book040 {
+  position: absolute;
+  left: 0;
+  z-index: 0;
+  transition: all 1s ease-in-out;
+}
+
 .book04 {
+  position: absolute;
+  left: 0;
   opacity: 0;
   transition: all 1s ease-in-out;
 }
@@ -490,8 +587,21 @@ button {
 }
 
 /* book05 小女孩與媽媽搖手 */
-.book05 {
+.book05-box {
+  width: 100%;
   position: relative;
+}
+
+.book050 {
+  position: absolute;
+  right: 0;
+  z-index: 0;
+  transition: all 1s ease-in-out;
+}
+
+.book05 {
+  position: absolute;
+  right: 0;
   opacity: 0;
   transition: all 1s ease-in-out;
 }
@@ -518,6 +628,18 @@ button {
   background-repeat: no-repeat;
   opacity: 0;
   transition: all 1s ease-in-out;
+}
+
+.text04,
+.text05 {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  z-index: 5;
+  opacity: 0;
 }
 
 .daughter-hand-5 {
@@ -596,6 +718,15 @@ button {
 .door-bg,
 .peoples {
   pointer-events: none;
+}
+
+.text06 {
+  position: absolute;
+  top: 5%;
+  left: 5%;
+  z-index: 999;
+  opacity: 0;
+  transition: all 1s ease-in-out;
 }
 
 .door-common {
@@ -783,10 +914,10 @@ button {
 
 .wow {
   position: absolute;
-  top: 5%;
-  right: 60%;
+  top: 10%;
+  right: 66%;
   z-index: 999;
-  width: 90px;
+  width: 77px;
   opacity: 0;
 }
 
@@ -963,13 +1094,25 @@ button {
   bottom: 0;
   z-index: 1000;
   width: 100%;
-  height: 100%;
+  height: auto;
   transition: all 3s ease-in-out;
   opacity: 0;
 }
 
 /* book09 牛發出哞叫聲*/
 .book09 {
+  opacity: 0;
+  transition: all 1s ease-in-out;
+}
+
+.text09 {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  z-index: 5;
   opacity: 0;
   transition: all 1s ease-in-out;
 }
@@ -986,15 +1129,42 @@ button {
 }
 
 /* book10 農場任務清單*/
+.book10-box {
+  width: 100%;
+  position: relative;
+}
+
+.book100 {
+  position: absolute;
+  left: 0;
+  z-index: 0;
+  transition: all 1s ease-in-out;
+}
+
 .book10 {
+  position: absolute;
+  left: 0;
+  z-index: 3;
   opacity: 0;
   transition: all 1s ease-in-out;
+}
+
+.text10,
+.text11 {
+  position: absolute;
+  z-index: 30;
+  opacity: 0;
+}
+
+.text11 {
+  right: 0;
 }
 
 .cow01 {
   position: absolute;
   left: 10%;
   bottom: 25%;
+  z-index: 5;
   width: 100px;
   opacity: 0;
   animation: cowMove01 10s ease-in-out infinite;
@@ -1023,6 +1193,7 @@ button {
   position: absolute;
   left: 62%;
   bottom: 45%;
+  z-index: 5;
   width: 80px;
   opacity: 0;
   animation: cowMove02 2s ease-in-out infinite;
@@ -1051,6 +1222,7 @@ button {
   position: absolute;
   left: 80%;
   bottom: 45%;
+  z-index: 5;
   width: 80px;
   opacity: 0;
   animation: cowMove03 2s ease-in-out infinite;
@@ -1078,7 +1250,8 @@ button {
 .cow04 {
   position: absolute;
   left: 50%;
-  bottom: 25%;
+  bottom: 26%;
+  z-index: 5;
   width: 150px;
   opacity: 0;
   animation: cowMove01 10s ease-in-out infinite;
@@ -1100,6 +1273,7 @@ button {
   position: absolute;
   left: 0%;
   top: 0%;
+  z-index: 5;
   width: 230px;
   display: none;
   opacity: 0;
@@ -1130,7 +1304,22 @@ button {
 }
 
 /* book11 農場任務清單*/
+.book11-box {
+  width: 100%;
+  position: relative;
+}
+
+.book110 {
+  position: absolute;
+  left: 0;
+  z-index: 0;
+  transition: all 1s ease-in-out;
+}
+
 .book11 {
+  position: absolute;
+  left: 0;
+  z-index: 1;
   opacity: 0;
   transition: all 1s ease-in-out;
 }
@@ -1250,6 +1439,7 @@ button {
   position: absolute;
   right: 0%;
   top: 0%;
+  z-index: 2;
   width: 120px;
   display: none;
   opacity: 0;
@@ -1274,28 +1464,60 @@ button {
 }
 
 /* book12  小女孩魔法棒 電風閃轉出泡泡*/
+.book12-box {
+  width: 100%;
+  position: relative;
+}
+
+.book120 {
+  position: absolute;
+  left: 0;
+  z-index: 0;
+  transition: all 1s ease-in-out;
+}
+
 .book12 {
+  position: absolute;
+  left: 0;
+  z-index: 1;
   opacity: 0;
   transition: all 1s ease-in-out;
 }
 
+.text12 {
+  z-index: 999;
+}
+
 .click-magic-wand {
+  display: none;
   position: absolute;
-  left: 41%;
-  bottom: 28%;
+  left: 31%;
+  bottom: 27%;
   z-index: 9999;
-  width: 105px;
+  width: 65px;
   cursor: pointer;
   pointer-events: auto;
-  opacity: 0;
   animation: dialogKnockShow 2s ease-in-out infinite;
   transition: all 1s ease-in-out;
 }
 
+.click-magic-wand-box {
+  display: none;
+  width: 50px;
+  height: 160px;
+  transform: rotate(20deg);
+  position: absolute;
+  left: 36%;
+  bottom: 22%;
+  z-index: 9999;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
 .finish-mission01 {
   position: absolute;
-  left: 7%;
-  top: 11%;
+  left: 12%;
+  top: 25%;
   z-index: 999;
   cursor: pointer;
   pointer-events: auto;
@@ -1438,22 +1660,22 @@ button {
 .check {
   position: absolute;
   margin: auto;
-  z-index: 103;
+  z-index: 110;
   width: 30px;
   opacity: 0;
-  transition: all 2s ease-in-out;
+  transition: all 1s ease-in-out;
 }
 
 .check01 {
-  right: 32%;
-  top: 27%;
+  right: 16%;
+  top: 28%;
 }
 
 .check-box {
   position: fixed;
   right: 5%;
   top: 15%;
-  z-index: 104;
+  z-index: 1000;
   width: 170px;
   height: 232px;
   transform: rotate(-19deg);
@@ -1496,16 +1718,6 @@ button {
   }
 }
 
-.popup-board-bg {
-  display: none;
-  position: absolute;
-  z-index: 9999;
-  width: 100%;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.5);
-  pointer-events: auto;
-}
-
 .popup-board {
   display: none;
   position: absolute;
@@ -1515,40 +1727,15 @@ button {
   bottom: 0;
   margin: auto;
   z-index: 9999;
-  width: 500px;
-  height: 600px;
+  width: 100%;
+  height: auto;
   background-size: 100%;
-  background-image: url(./images/book/book1415/板子.png);
   background-position: center;
   background-repeat: no-repeat;
-  transform: rotate(15deg);
 }
 
-.popup-board01 p {
-  width: 250px;
-  position: absolute;
-  top: 150px;
-  left: 0;
-  right: 15px;
-  margin: auto;
-  transform: rotate(-15deg);
-  font-size: 20px;
-  font-weight: 500;
-}
-
-.popup-close-btn {
-  position: absolute;
-  right: 1%;
-  top: 1%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 10px;
-  height: 10px;
-  padding: 5px;
-  color: #000;
-  background-color: #ccc;
-  border-radius: 100%;
+.popup-board01 {
+  background-image: url(./images/book/book13/任務板.png);
 }
 
 .check02 {
@@ -1557,7 +1744,30 @@ button {
 }
 
 /* book13 小女孩魔法棒 電風閃轉出泡泡*/
+.book13-box {
+  width: 100%;
+  position: relative;
+}
+
+.book130 {
+  position: absolute;
+  right: 0;
+  z-index: 0;
+  transition: all 1s ease-in-out;
+}
+
 .book13 {
+  position: absolute;
+  right: 0;
+  z-index: 1;
+  opacity: 0;
+  transition: all 1s ease-in-out;
+}
+
+.board {
+  position: absolute;
+  right: 0;
+  z-index: 104;
   opacity: 0;
   transition: all 1s ease-in-out;
 }
@@ -1576,36 +1786,44 @@ button {
 
 .coin-hint01 {
   position: absolute;
-  left: 6%;
   right: 0;
   bottom: 0;
-  margin: auto;
   z-index: 101;
-  width: 300px;
-  height: 40px;
-  background-size: 100%;
-  background-image: url(./images/book/book13/獎牌提示.png);
-  background-position: center;
-  background-repeat: no-repeat;
   opacity: 0;
   transition: all 2s ease-in-out;
 }
 
 /* book14 小女孩餵牛奶*/
+.book14-box {
+  width: 100%;
+  position: relative;
+}
+
+.book140 {
+  position: absolute;
+  right: 0;
+  z-index: 0;
+  transition: all 1s ease-in-out;
+}
+
 .book14 {
+  position: absolute;
+  right: 0;
+  z-index: 1;
   opacity: 0;
   transition: all 1s ease-in-out;
 }
 
 .finish-mission02 {
   position: absolute;
-  left: 40.5%;
-  top: 6%;
+  left: 43%;
+  top: 8%;
   z-index: 999;
-  cursor: pointer;
+  width: 180px;
   pointer-events: auto;
   opacity: 0;
   transition: all 1s ease-in-out;
+  cursor: pointer;
 }
 
 .small-cow {
@@ -1622,7 +1840,22 @@ button {
 }
 
 /* book15 小女孩餵牛奶*/
+.book15-box {
+  width: 100%;
+  position: relative;
+}
+
+.book150 {
+  position: absolute;
+  left: 0;
+  z-index: 0;
+  transition: all 1s ease-in-out;
+}
+
 .book15 {
+  position: absolute;
+  left: 0;
+  z-index: 1;
   opacity: 0;
   transition: all 1s ease-in-out;
 }
@@ -1721,13 +1954,24 @@ button {
 .click-milk {
   display: none;
   position: absolute;
-  right: 29%;
-  bottom: 16%;
+  bottom: 25%;
+  right: 34%;
   z-index: 999;
-  width: 105px;
+  width: 65px;
   cursor: pointer;
   animation: dialogKnockShow 2s ease-in-out infinite;
   transition: all 1s ease-in-out;
+}
+
+.click-milk-box {
+  display: none;
+  width: 121px;
+  height: 73px;
+  position: absolute;
+  bottom: 13%;
+  right: 38%;
+  z-index: 999;
+  cursor: pointer;
 }
 
 .coin-light02 {
@@ -1742,33 +1986,11 @@ button {
   animation: lightShine 2s ease-in-out infinite;
 }
 
-.success-hint02 {
-  position: absolute;
-  top: 5%;
-  right: 22%;
-  z-index: 100;
-  width: 160px;
-  height: 60px;
-  background-size: 100%;
-  background-image: url(./images/book/book1415/提示文字.png);
-  background-position: center;
-  background-repeat: no-repeat;
-  opacity: 0;
-  transition: all 2s ease-in-out;
-}
-
 .coin-hint02 {
   position: absolute;
-  right: 6%;
-  bottom: 1%;
-  margin: auto;
-  z-index: 1;
-  width: 200px;
-  height: 50px;
-  background-size: 100%;
-  background-image: url(./images/book/book1415/獎牌提示.png);
-  background-position: center;
-  background-repeat: no-repeat;
+  right: 0;
+  bottom: 0;
+  z-index: 900;
   opacity: 0;
   transition: all 2s ease-in-out;
 }
@@ -1852,21 +2074,26 @@ button {
   transition: all 1s ease-in-out;
 }
 
-.popup-board02 p {
-  width: 250px;
-  position: absolute;
-  top: 162px;
-  left: 0;
-  right: 15px;
-  margin: auto;
-  transform: rotate(-15deg);
-  font-size: 20px;
-  font-weight: 500;
+.popup-board02 {
+  background-image: url(./images/book/book1415/任務板.png);
+}
+/* book16 小女孩聽牛心跳*/
+.book16-box {
+  width: 100%;
+  position: relative;
 }
 
-/* book16 小女孩聽牛心跳*/
+.book160 {
+  position: absolute;
+  left: 0;
+  z-index: 0;
+  transition: all 1s ease-in-out;
+}
+
 .book16 {
-  position: relative;
+  position: absolute;
+  left: 0;
+  z-index: 1;
   opacity: 0;
   transition: all 1s ease-in-out;
 }
@@ -2026,14 +2253,26 @@ button {
 .click-hearing-heart {
   display: none;
   position: absolute;
-  left: 34.5%;
+  left: 37%;
   bottom: 19%;
   z-index: 999;
-  width: 105px;
+  width: 65px;
   cursor: pointer;
   pointer-events: auto;
   animation: dialogKnockShow 2s ease-in-out infinite;
   transition: all 1s ease-in-out;
+}
+
+.click-hearing-heart-box {
+  display: none;
+  width: 90px;
+  height: 60px;
+  position: absolute;
+  left: 43%;
+  bottom: 18%;
+  z-index: 999;
+  cursor: pointer;
+  pointer-events: auto;
 }
 
 .heart-beat-animation {
@@ -2089,20 +2328,27 @@ button {
   opacity: 0;
 }
 
-.popup-board03 p {
-  width: 250px;
-  position: absolute;
-  left: 0;
-  right: 10px;
-  margin: auto;
-  top: 124px;
-  transform: rotate(-15deg);
-  font-size: 18px;
-  font-weight: 500;
+.popup-board03 {
+  background-image: url(./images/book/book1617/任務板.png);
 }
 
 /* book17 小女孩聽牛心跳*/
+.book17-box {
+  width: 100%;
+  position: relative;
+}
+
+.book170 {
+  position: absolute;
+  right: 0;
+  z-index: 0;
+  transition: all 1s ease-in-out;
+}
+
 .book17 {
+  position: absolute;
+  right: 0;
+  z-index: 1;
   opacity: 0;
   transition: all 1s ease-in-out;
 }
@@ -2145,38 +2391,57 @@ button {
 
 .coin-hint03 {
   position: absolute;
-  right: 6%;
-  bottom: -2%;
-  margin: auto;
+  right: 0;
+  bottom: 0;
   z-index: 1;
-  width: 200px;
-  height: 100px;
-  background-size: 100%;
-  background-image: url(./images/book/book1617/獎牌提示.png);
-  background-position: center;
-  background-repeat: no-repeat;
-  opacity: 0;
-  transition: all 2s ease-in-out;
-}
-
-.success-hint03 {
-  position: absolute;
-  top: 5%;
-  right: 22%;
-  z-index: 100;
-  width: 160px;
-  height: 60px;
-  background-size: 100%;
-  background-image: url(./images/book/book1617/提示文字.png);
-  background-position: center;
-  background-repeat: no-repeat;
   opacity: 0;
   transition: all 2s ease-in-out;
 }
 
 /* book1819 小女孩皇冠金幣*/
-.book18,
+.book18-box {
+  width: 100%;
+  position: relative;
+}
+
+.book18 {
+  position: absolute;
+  left: 0;
+  z-index: 1;
+  opacity: 0;
+  transition: all 1s ease-in-out;
+}
+
+.book180 {
+  position: absolute;
+  left: 0;
+  z-index: 0;
+  transition: all 1s ease-in-out;
+}
+
+.book19-box {
+  width: 100%;
+  position: relative;
+}
+
 .book19 {
+  position: absolute;
+  right: 0;
+  z-index: 1;
+  opacity: 0;
+  transition: all 1s ease-in-out;
+}
+
+.book190 {
+  position: absolute;
+  right: 0;
+  z-index: 0;
+  transition: all 1s ease-in-out;
+}
+
+.girl1819 {
+  position: absolute;
+  z-index: 30;
   opacity: 0;
   transition: all 1s ease-in-out;
 }
@@ -2189,7 +2454,7 @@ button {
 .coin {
   position: absolute;
   right: 12%;
-  bottom: 12%;
+  bottom: 15%;
   z-index: 99;
   width: 150px;
   background-size: 100%;
@@ -2313,9 +2578,26 @@ button {
 }
 
 /* book2021 小女孩夢境浮現*/
-.book20,
+.book20 {
+}
+
+.book21-box {
+  width: 100%;
+  position: relative;
+}
+
 .book21 {
+  position: absolute;
+  right: 0;
+  z-index: 1;
   opacity: 0;
+  transition: all 1s ease-in-out;
+}
+
+.book210 {
+  position: absolute;
+  right: 0;
+  z-index: 0;
   transition: all 1s ease-in-out;
 }
 
@@ -2460,13 +2742,43 @@ button {
 }
 
 /* book2223 媽媽叫醒小女孩*/
+.book22-box {
+  width: 100%;
+  position: relative;
+}
+
 .book22 {
+  position: absolute;
+  right: 0;
+  z-index: 1;
   opacity: 0;
   transition: all 1s ease-in-out;
 }
 
+.book220 {
+  position: absolute;
+  right: 0;
+  z-index: 0;
+  transition: all 1s ease-in-out;
+}
+
+.book23-box {
+  width: 100%;
+  position: relative;
+}
+
 .book23 {
+  position: absolute;
+  right: 0;
+  z-index: 1;
   opacity: 0;
+  transition: all 1s ease-in-out;
+}
+
+.book230 {
+  position: absolute;
+  right: 0;
+  z-index: 0;
   transition: all 1s ease-in-out;
 }
 
@@ -2482,30 +2794,6 @@ button {
   margin: auto;
   opacity: 0;
   transition: all 1s ease-in-out;
-}
-
-.cow-alarm-animation {
-  animation: crownAlarm 10s ease-in-out forwards;
-  animation-delay: 2s;
-  transition: all 1s ease-in-out;
-}
-
-@keyframes crownAlarm {
-  0% {
-    transform: scale(1) rotate(0deg);
-  }
-  25% {
-    transform: scale(1.05) rotate(-3deg);
-  }
-  50% {
-    transform: scale(1) rotate(0deg);
-  }
-  75% {
-    transform: scale(1.05) rotate(3deg);
-  }
-  100% {
-    transform: scale(1) rotate(0deg);
-  }
 }
 
 .sleep-girl-hand {
@@ -2550,8 +2838,23 @@ button {
 }
 
 /* book24 媽媽倒牛奶*/
+.book24-box {
+  width: 100%;
+  position: relative;
+}
+
 .book24 {
+  position: absolute;
+  right: 0;
+  z-index: 1;
   opacity: 0;
+  transition: all 1s ease-in-out;
+}
+
+.book240 {
+  position: absolute;
+  right: 0;
+  z-index: 0;
   transition: all 1s ease-in-out;
 }
 
@@ -2695,8 +2998,23 @@ button {
 }
 
 /* book25 小女孩喝牛奶*/
+.book25-box {
+  width: 100%;
+  position: relative;
+}
+
 .book25 {
+  position: absolute;
+  right: 0;
+  z-index: 1;
   opacity: 0;
+  transition: all 1s ease-in-out;
+}
+
+.book250 {
+  position: absolute;
+  right: 0;
+  z-index: 0;
   transition: all 1s ease-in-out;
 }
 
@@ -2901,27 +3219,35 @@ button {
   transition: all 1s ease-in-out;
 }
 
-/* book27 一家人喝牛奶 */
-.book26 {
+/* book26 一家人喝牛奶 */
+.book26-box {
+  width: 100%;
   position: relative;
+}
+
+.book26 {
+  position: absolute;
+  right: 0;
+  z-index: 1;
   opacity: 0;
+  transition: all 1s ease-in-out;
+}
+
+.book260 {
+  position: absolute;
+  right: 0;
+  z-index: 0;
   transition: all 1s ease-in-out;
 }
 
 .all-milk-stains {
   position: absolute;
   top: 0;
-  bottom: 0;
-  right: 0;
   left: 0;
-  z-index: 4;
-  width: 100%;
-  height: 100%;
+  z-index: 999;
+  /* width: 100%;
+  height: 100%; */
   margin: auto;
-  background-size: 100%;
-  background-image: url(./images/book/book2627/牛奶鬍.png);
-  background-position: center;
-  background-repeat: no-repeat;
   opacity: 0;
   transition: all 1.5s ease-in-out;
 }
@@ -3107,8 +3433,31 @@ button {
 }
 
 /* book27 一家人喝牛奶 */
-.book27 {
+.book27-box {
+  width: 100%;
   position: relative;
+}
+
+.book27 {
+  position: absolute;
+  right: 0;
+  z-index: 1;
+  opacity: 0;
+  transition: all 1s ease-in-out;
+}
+
+.book270 {
+  position: absolute;
+  right: 0;
+  z-index: 0;
+  transition: all 1s ease-in-out;
+}
+
+.book2627 {
+  position: absolute;
+  left: 0;
+  z-index: 99;
+  width: 100%;
   opacity: 0;
   transition: all 1s ease-in-out;
 }
@@ -3161,7 +3510,6 @@ button {
 /* book28 書底*/
 .book28 {
   position: relative;
-  opacity: 0;
   transition: all 1s ease-in-out;
 }
 
@@ -3206,6 +3554,16 @@ button {
   animation: starShow 1s ease-in-out infinite;
 }
 
+.milk28 {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 10;
+  width: 100%;
+  opacity: 0;
+  transition: all 1s ease-in-out;
+}
+
 .grass-28 {
   position: absolute;
   left: 0;
@@ -3227,11 +3585,6 @@ button {
 }
 
 .story-28 {
-  position: absolute;
-  top: 10%;
-  left: 10%;
-  z-index: 10;
-  width: 355px;
   opacity: 0;
   transition: all 1s ease-in-out;
 }
@@ -3425,6 +3778,36 @@ button {
     display: none;
   }
 
+  .book02-box,
+  .book03-box,
+  .book04-box,
+  .book05-box,
+  .book06-box,
+  .book07-box,
+  .book08-box,
+  .book09-box,
+  .book10-box,
+  .book11-box,
+  .book12-box,
+  .book13-box,
+  .book14-box,
+  .book15-box,
+  .book16-box,
+  .book17-box,
+  .book18-box,
+  .book19-box,
+  .book20-box,
+  .book21-box,
+  .book20-box,
+  .book22-box,
+  .book23-box,
+  .book24-box,
+  .book25-box,
+  .book26-box,
+  .book27-box {
+    position: initial;
+  }
+
   .pop-up-box {
     position: fixed;
     z-index: 9999;
@@ -3517,7 +3900,9 @@ button {
     height: 100vh;
     margin: auto;
     pointer-events: auto;
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s ease;
   }
 
   .swipe-hint.show {
@@ -3736,9 +4121,7 @@ button {
 
   .cow-0-2 {
     bottom: 9%;
-    right: 40%;
-    width: 17%;
-    height: 100px;
+    width: 20%;
   }
 
   .cow-0-3 {
@@ -3752,16 +4135,17 @@ button {
     right: 16%;
     width: 23%;
   }
-  /* 
-  .page5 .eyes-left {
-    top: 42%;
-    right: 42%;
+
+  .text04,
+  .text05,
+  .text10,
+  .text11 {
+    width: 100%;
   }
 
-  .page5 .eyes-right {
-    top: 40%;
-    right: 34%;
-  } */
+  .text02 img {
+    width: 100%;
+  }
 
   .daughter-4 {
     bottom: -4%;
@@ -4007,20 +4391,17 @@ button {
   }
 
   .click-magic-wand {
-    width: 8%;
+    width: 6%;
+  }
+
+  .magic-wand {
+    width: 40px;
   }
 
   .electfan {
     top: -1%;
     width: 30%;
     height: 125px;
-  }
-
-  .popup-board01 p {
-    width: 50%;
-    top: 26%;
-    left: 0%;
-    font-size: 1.1rem;
   }
 
   .check {
@@ -4045,7 +4426,7 @@ button {
   .coin {
     width: 25%;
     right: 7%;
-    bottom: 13%;
+    bottom: 15%;
   }
 
   .coin-light,
@@ -4056,8 +4437,9 @@ button {
     width: 250px;
   }
 
-  .popup-board {
-    width: 40%;
+  .girl1819 {
+    width: 100%;
+    bottom: 0;
   }
 
   .finish-mission01 {
@@ -4077,21 +4459,14 @@ button {
 
   .board14,
   .board16 {
-    top: 11%;
+    top: 14%;
     width: 20%;
   }
 
   .board-list02,
   .board-list03 {
-    top: 13%;
+    top: 16%;
     width: 15%;
-  }
-
-  .popup-board02 p {
-    top: 27%;
-    left: -1%;
-    width: 50%;
-    font-size: 1.1rem;
   }
 
   .milk-bottle {
@@ -4181,12 +4556,6 @@ button {
   .finish-mission03 {
     width: 17%;
     right: 17%;
-  }
-
-  .popup-board03 p {
-    top: 22%;
-    width: 51%;
-    font-size: 1rem;
   }
 
   /* .mom-hand {
@@ -4335,12 +4704,12 @@ button {
 
   /* 書底 */
   .story-28 {
-    width: 60%;
+    width: 100%;
+    z-index: 99;
   }
 
   .bubble-28 {
-    width: 600px;
-    height: 100%;
+    width: initial;
   }
 
   .cloud-28 {

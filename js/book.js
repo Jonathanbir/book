@@ -28,8 +28,10 @@ $(function () {
     document.documentElement.style.setProperty("--vh", `${vh}px`);
   }
 
+  let page23Timeouts = [];
   let page67Timeouts = [];
   let page89Timeouts = [];
+  let page1011Timeouts = [];
   let page1213Timeouts = [];
   let page1415Timeouts = [];
   let page1617Timeouts = [];
@@ -313,7 +315,7 @@ $(function () {
   // 判斷是否要顯示（只在手機或小螢幕顯示）
   function maybeShowSwipeHint() {
     const isMobileLike = /Mobi|Android|iPhone|iPad|Mobile/i.test(
-      navigator.userAgent
+      navigator.userAgent,
     );
     if (!isMobileLike) return;
     // 若橫向或寬高比例小於某值，也可判斷
@@ -445,7 +447,7 @@ $(function () {
   //有任務下一頁 鎖定按鈕
   function btnDisabled() {
     isBtnDisabled = true;
-    $(".next-page img").attr("src", "./images/common/下一頁深藍.png");
+    $(".next-page img").attr("src", "./images/common/下一頁灰.png");
     $(".next-page img").css("cursor", "not-allowed");
     $(".next-page").prop("disabled", true);
     $(".next-page, #right-up-corner, #right-down-corner")
@@ -472,7 +474,7 @@ $(function () {
       "mouseenter",
       function () {
         $(".next-page-hint").removeClass("next-page-hint-show");
-      }
+      },
     );
   }
 
@@ -515,7 +517,7 @@ $(function () {
     }
 
     $(".prev-page").prop("disabled", true);
-    $(".prev-page img").attr("src", "./images/common/上一頁深藍.png");
+    $(".prev-page img").attr("src", "./images/common/上一頁灰.png");
     setTimeout(() => {
       $(".prev-page img").attr("src", "./images/common/上一頁.png");
       $(".prev-page").prop("disabled", false);
@@ -670,6 +672,7 @@ $(function () {
 
     function isCanNotFlipPrev() {
       if (!window.matchMedia("(max-height: 500px)").matches) {
+        console.log("pre disabled~~~~");
         $("#left-up-corner")
           .off("click") // 移除舊的
           .on("click", function () {
@@ -724,13 +727,16 @@ $(function () {
       setTimeout(() => {
         canFlipNext = true;
       }, 3000);
+
       let count = 3;
-      $(".next-page img").attr("src", "./images/common/下一頁深藍.png");
+
+      $("#left-down-corner").hide();
+      $(".next-page img").attr("src", "./images/common/下一頁灰.png");
       $(".next-page img").css("cursor", "not-allowed");
       $(".next-page").prop("disabled", true);
       const prevBtn = $(".next-page")[0];
 
-      $(".prev-page img").attr("src", "./images/common/上一頁深藍.png");
+      $(".prev-page img").attr("src", "./images/common/上一頁灰.png");
       $(".prev-page img").css("cursor", "not-allowed");
       $(".next-page img").attr("src", "./images/common/3秒.png");
       $(".prev-page").prop("disabled", true);
@@ -758,40 +764,91 @@ $(function () {
 
     if (page === 2 || page === 3) {
       $("#left-down-corner").show();
+
+      $("#flipbook").append(
+        ` <img class="girls-head03" src="./images/book/book03/girls-head-01.png"/>       
+          <img class="hands03" src="./images/book/book03/hands.png"/>        
+          <img class="milk03" src="./images/book/book03/milk.png"/>       
+          <img class="book03-title" src="./images/book/book03/book-title03.png"/>               
+        `,
+      );
+
+      page23Timeouts.push(
+        setTimeout(() => {
+          $(".book02").css("opacity", "1");
+          $(".text02").css("opacity", "1");
+          $(".book03").css("opacity", "1");
+          $(".book03-title").css("opacity", "1");
+          $(".girls-head03").css("opacity", "1");
+          $(".milk03").css("opacity", "1");
+          $(".hands03").css("opacity", "1");
+        }, 1000),
+      );
+
+      const img = document.querySelector(".girls-head03");
+
+      const images = [
+        "./images/book/book03/girls-head-01.png",
+        "./images/book/book03/girls-head-02.png",
+      ];
+
+      let index = 0;
+
       setTimeout(() => {
-        $(".book02").css("opacity", "1");
-        $(".text-02").css("opacity", "1");
-        $(".book03").css("opacity", "1");
-      }, 1000);
+        setInterval(() => {
+          index = (index + 1) % images.length;
+          img.src = images[index];
+        }, 500);
+      }, 1500);
     } else {
+      page23Timeouts.forEach((id) => clearTimeout(id));
+      page23Timeouts = [];
       $(".book02").css("opacity", "0");
-      $(".text-02").css("opacity", "0");
+      $(".text02").css("opacity", "0");
       $(".book03").css("opacity", "0");
+      $(".book03-title").css("opacity", "0");
+      $(".girls-head03").css("opacity", "0");
+      $(".milk03").css("opacity", "0");
+      $(".hands03").css("opacity", "0");
+      $("#flipbook .girls-head03").remove();
+      $("#flipbook .milk03").remove();
+      $("#flipbook .hands03").remove();
+      $("#flipbook .girls-head03").remove();
     }
 
     if (page === 1 || page === 4) {
       $("#flipbook .cloud01").remove();
+      $("#flipbook .book03-title").remove();
     }
 
     if (page === 4 || page === 5) {
       setTimeout(() => {
         $(".book04").css("opacity", "1");
+        $(".text04").css("opacity", "1");
         $(".eyes-4").css("opacity", "1");
+      }, 1000);
+
+      setTimeout(() => {
+        $(".eyes-ball").addClass("eyes-ball-animation");
+        $(".eyes-4").addClass("eyes-big-animation");
+        $(".question").addClass("question-animation");
+      }, 4000);
+
+      setTimeout(() => {
         $(".book05").css("opacity", "1");
+        $(".text05").css("opacity", "1");
         $(".daughter-5").css("opacity", "1");
         $(".moms-head-5").css("opacity", "1");
         $(".daughter-hand-5").css("opacity", "1");
         $(".moms-hand-5").css("opacity", "1");
         $(".gogo").css("opacity", "1");
-      }, 1000);
-
-      $(".eyes-ball").addClass("eyes-ball-animation");
-      $(".eyes-4").addClass("eyes-big-animation");
-      $(".question").addClass("question-animation");
+      }, 16000);
     } else {
       $(".eyes-4").removeClass("eyes-big-animation");
       $(".question").removeClass("question-animation");
       $(".book04").css("opacity", "0");
+      $(".text04").css("opacity", "0");
+      $(".text05").css("opacity", "0");
       $(".eyes-4").css("opacity", "0");
       $(".book05").css("opacity", "0");
       $(".daughter-5").css("opacity", "0");
@@ -809,7 +866,7 @@ $(function () {
         setTimeout(() => {
           $(".knock").css("opacity", "1");
           $(".door").css("opacity", "1");
-        }, 1000)
+        }, 1000),
       );
 
       isCanNotFlip();
@@ -817,7 +874,7 @@ $(function () {
       page67Timeouts.push(
         setTimeout(() => {
           canFlipPrev = true;
-        }, 3000)
+        }, 3000),
       );
 
       if (!doorClickBound) {
@@ -825,23 +882,24 @@ $(function () {
 
         $("#flipbook").append(
           `<img class="knock" src="./images/book/book0607/點這裡.png"/>
-        <img class="grass0607" src="./images/book/book0607/草地.png"/>
-        <img class="tree1" src="./images/book/book0607/森林1.png"/>
-        <img class="tree2" src="./images/book/book0607/森林2.png"/>           
-        <img class="tree3" src="./images/book/book0607/森林3.png"/>         
-        <img class="cloud2" src="./images/book/book0607/雲2.png"/>           
-        <img class="bubble67" src="./images/book/book0607/牛奶泡泡.png"/>           
-        <img class="star5" src="./images/book/book0607/亮晶晶.png"/>         
-        <img class="door-bg door-common" src="./images/book/book0607/門內.png"/>           
-        <img class="door door-common" src="./images/book/book0607/門.png"/>            
-        <img class="peoples" src="./images/book/book0607/媽媽鈴鈴.png"/>
-        `
+          <img class="grass0607" src="./images/book/book0607/草地.png"/>
+          <img class="tree1" src="./images/book/book0607/森林1.png"/>
+          <img class="tree2" src="./images/book/book0607/森林2.png"/>           
+          <img class="tree3" src="./images/book/book0607/森林3.png"/>         
+          <img class="text06" src="./images/book/book0607/text-06.png"/>        
+          <img class="cloud2" src="./images/book/book0607/雲2.png"/>           
+          <img class="bubble67" src="./images/book/book0607/牛奶泡泡.png"/>           
+          <img class="star5" src="./images/book/book0607/亮晶晶.png"/>         
+          <img class="door-bg door-common" src="./images/book/book0607/門內.png"/>           
+          <img class="door door-common" src="./images/book/book0607/門.png"/>            
+          <img class="peoples" src="./images/book/book0607/媽媽鈴鈴.png"/>
+        `,
         );
 
         page67Timeouts.push(
           setTimeout(() => {
             $(".door-bg").css("opacity", "1");
-          }, 2000)
+          }, 2000),
         );
 
         const door = document.querySelector(".door");
@@ -849,17 +907,24 @@ $(function () {
         btnPreviousDisabled();
         btnDisabled();
 
-        $("#flipbook .knock").on("click", () => {
+        $("#flipbook .knock , #flipbook .door").on("click", () => {
           $(".knock").css("display", "none");
           playAudio("knock", 0);
           $(".door").addClass("door-opening");
           $(".peoples").addClass("peoples-open");
-          $(".grass0607").addClass("tree-fade-in");
+          $(".wow").addClass("wow-animation");
 
           page67Timeouts.push(
             setTimeout(() => {
+              $(".grass0607").addClass("tree-fade-in");
               $(".tree1").addClass("tree-fade-in");
-            }, 1500)
+            }, 1500),
+          );
+
+          page67Timeouts.push(
+            setTimeout(() => {
+              $(".tree2").addClass("tree-fade-in");
+            }, 2000),
           );
 
           page67Timeouts.push(
@@ -867,27 +932,21 @@ $(function () {
               $(".cloud1").addClass("cloud-fade-in");
               $(".cloud2").addClass("cloud-fade-in");
               $(".cloud3").addClass("cloud-fade-in");
-              $(".tree2").addClass("tree-fade-in");
-            }, 3000)
-          );
-
-          page67Timeouts.push(
-            setTimeout(() => {
               $(".tree3").addClass("tree-fade-in");
-            }, 5000)
+            }, 3000),
           );
 
           page67Timeouts.push(
             setTimeout(() => {
               $(".bubble67").addClass("bubble-fade-in");
-            }, 7000)
+              $(".text06").addClass("cloud-fade-in");
+            }, 5000),
           );
 
           page67Timeouts.push(
             setTimeout(() => {
               $(".star5").addClass("star-fade-in");
-              $(".wow").addClass("wow-animation");
-            }, 9000)
+            }, 6000),
           );
 
           page67Timeouts.push(
@@ -896,7 +955,7 @@ $(function () {
               canFlipNext = true;
               $("#right-down-corner").css("color", "#000");
               $("#right-down-corner").prop("disabled", false);
-            }, 12000)
+            }, 12000),
           );
 
           playAudio("audio-4-click", 0);
@@ -913,6 +972,7 @@ $(function () {
       $("#flipbook .tree2").remove();
       $("#flipbook .tree3").remove();
       $("#flipbook .cloud2").remove();
+      $("#flipbook .text06").remove();
       $("#flipbook .door-common").remove();
       $("#flipbook .peoples").remove();
       $("#flipbook .bubble67").remove();
@@ -926,6 +986,7 @@ $(function () {
       $(".cloud1").removeClass("cloud-fade-in");
       $(".cloud2").removeClass("cloud-fade-in");
       $(".cloud3").removeClass("cloud-fade-in");
+      $(".text06").removeClass("tree-fade-in");
       $(".wow").removeClass("wow-animation");
     }
 
@@ -934,7 +995,7 @@ $(function () {
         `<img class="mom-daughter" src="./images/book/book08/鈴鈴媽媽.png"/>
         <img class="bubble7" src="./images/book/book08/牛奶泡泡.png"/>
         <img class="star7" src="./images/book/book09/亮晶晶.png"/>
-        `
+        `,
       );
 
       page89Timeouts.push(
@@ -943,20 +1004,20 @@ $(function () {
           $(".book09").css("opacity", "1");
           $(".eyes-8").css("opacity", "1");
           $(".eyes-ball-8").css("opacity", "1");
-        }, 1000)
+        }, 1000),
       );
 
       page89Timeouts.push(
         setTimeout(() => {
           $(".mom-daughter").css("opacity", "1");
-        }, 1000)
+        }, 1000),
       );
 
       page89Timeouts.push(
         setTimeout(() => {
           $(".eyes-ball-8").addClass("eyes-ball-animation");
           $(".mom-daughter").addClass("mom-daughter-animation");
-        }, 8000)
+        }, 8000),
       );
 
       page89Timeouts.push(
@@ -967,19 +1028,25 @@ $(function () {
           $(".foot4").addClass("foot4-animation");
           $(".foot5").addClass("foot5-animation");
           $(".mowmow").addClass("mowmow-animation");
-        }, 0)
+        }, 0),
+      );
+
+      page89Timeouts.push(
+        setTimeout(() => {
+          $(".text09").addClass("bubble-fade-in");
+        }, 7000),
       );
 
       page89Timeouts.push(
         setTimeout(() => {
           $(".bubble7").addClass("bubble-fade-in");
-        }, 9000)
+        }, 9000),
       );
 
       page89Timeouts.push(
         setTimeout(() => {
           $(".star7").addClass("star-fade-in");
-        }, 10000)
+        }, 10000),
       );
     }
 
@@ -992,6 +1059,7 @@ $(function () {
       $(".foot4").removeClass("foot4-animation");
       $(".foot5").removeClass("foot5-animation");
       $(".mowmow").removeClass("mowmow-animation");
+      $(".text09").removeClass("bubble-fade-in");
       $(".eyes-ball-8").removeClass("eyes-ball-animation");
       $(".mom-daughter").removeClass("mom-daughter-animation");
       $(".bubble7").removeClass("bubble-fade-in");
@@ -1007,12 +1075,9 @@ $(function () {
 
     if (page === 10 || page === 11) {
       $(".list").addClass("list-animation");
-      setTimeout(() => {
-        $(".cloud-01").addClass("cloud-animation");
-        $(".cloud-02").addClass("cloud-animation");
-      }, 50);
       $("#flipbook").append(
-        `<img class="girls-head" src="./images/book/book10/媽媽鈴鈴.png"/>        
+        ` <img class="text11" src="./images/book/book11/text11.png">
+        <img class="girls-head" src="./images/book/book10/媽媽鈴鈴.png"/>        
         <img class="rainbow"  src="./images/book/book11/彩虹.png"/>
         <img class="star11" src="./images/book/book11/亮晶晶.png">
         <img class="bubble11" src="./images/book/book11/牛奶泡泡.png">
@@ -1020,56 +1085,73 @@ $(function () {
         <img class="cow05" src="./images/book/book10/牛05.png"/>
         <img src="./images/book/book11/手.png" class="list-board"/>
         <img src="./images/book/book11/清單內容.png" class="list"/>
-        `
+        `,
       );
 
-      setTimeout(() => {
-        $(".book10").css("opacity", "1");
-        $(".book11").css("opacity", "1");
-        $(".cow01").css("opacity", "1");
-        $(".cow02").css("opacity", "1");
-        $(".cow03").css("opacity", "1");
-        $(".cow04").css("opacity", "1");
-        $(".cow05").css("opacity", "1");
-        $(".cloud-group").css("opacity", "1");
-        $(".cloud-01").css("opacity", "1");
-        $(".cloud-02").css("opacity", "1");
-        $(".list-board").css("opacity", "1");
-        $(".rainbow").css("opacity", "1");
-        $(".girls-head").css("opacity", "1");
-      }, 1000);
+      page1011Timeouts.push(
+        setTimeout(() => {
+          $(".cloud-01").addClass("cloud-animation");
+          $(".cloud-02").addClass("cloud-animation");
+        }, 50),
+      );
 
-      setTimeout(() => {
-        $(".bubble11").addClass("bubble-fade-in");
-      }, 1000);
-      setTimeout(() => {
-        $(".star11").addClass("star-fade-in");
-      }, 2000);
+      page1011Timeouts.push(
+        setTimeout(() => {
+          $(".book10").css("opacity", "1");
+          $(".book11").css("opacity", "1");
+          $(".cow01").css("opacity", "1");
+          $(".cow02").css("opacity", "1");
+          $(".cow03").css("opacity", "1");
+          $(".cow04").css("opacity", "1");
+          $(".cow05").css("opacity", "1");
+          $(".cloud-group").css("opacity", "1");
+          $(".cloud-01").css("opacity", "1");
+          $(".cloud-02").css("opacity", "1");
+          $(".list-board").css("opacity", "1");
+          $(".rainbow").css("opacity", "1");
+          $(".girls-head").css("opacity", "1");
+          $(".bubble11").addClass("bubble-fade-in");
+        }, 1000),
+      );
+
+      page1011Timeouts.push(
+        setTimeout(() => {
+          $(".star11").addClass("star-fade-in");
+        }, 2000),
+      );
     }
+
+    page1011Timeouts.push(
+      setTimeout(() => {
+        $(".text11").css("opacity", "1");
+      }, 10000),
+    );
 
     let popupBoard = () => {
       $(".check-box").on("click", function () {
         $("body").addClass("popup-open"); // 開啟 popup
-        $(".popup-board-bg").css("display", "block");
         $(".popup-board").css("display", "block");
       });
 
       $(".popup-board").on("click", function () {
-        $(".popup-board-bg").css("display", "none");
         $(".popup-board").css("display", "none");
         $("body").removeClass("popup-open"); // 關閉 popup
       });
 
       $(".popup-board-bg").on("click", function () {
-        $(".popup-board-bg").css("display", "none");
         $(".popup-board").css("display", "none");
         $("body").removeClass("popup-open"); // 關閉 popup
       });
     };
 
     if (page === 9 || page === 12) {
+      page1011Timeouts.forEach((id) => clearTimeout(id));
+      page1011Timeouts = [];
+      $(".book100").css("opacity", "1");
       $(".book10").css("opacity", "0");
+      $(".book110").css("opacity", "1");
       $(".book11").css("opacity", "0");
+      $(".text11").css("opacity", "0");
       $(".cow01").css("opacity", "0");
       $(".cow02").css("opacity", "0");
       $(".cow03").css("opacity", "0");
@@ -1092,6 +1174,7 @@ $(function () {
       $("#flipbook .list").remove();
       $("#flipbook .bubble11").remove();
       $("#flipbook .star11").remove();
+      $("#flipbook .text11").remove();
     }
 
     // 確保元素只 append 一次
@@ -1112,23 +1195,21 @@ $(function () {
 
         $("#flipbook")
           .append(`<img class="electfan" src="./images/book/book12/風扇1.png"/>
-                    <img class="electfan-wind" src="./images/book/book12/電風扇氣旋.png"/>
-                    <img class="electfan-wind" src="./images/book/book12/風的線條.png"/>
+                   <img class="text text12" src="./images/book/book12/text12.png"/>
+                   <img class="electfan-wind" src="./images/book/book12/電風扇氣旋.png"/>
+                   <img class="electfan-wind" src="./images/book/book12/風的線條.png"/>
                    <img class="finish-mission01" src="./images/common/請完成任務1.png"/>
                    <img class="click-magic-wand" src="./images/book/book0607/點這裡.png"/>
+                   <div class="click-magic-wand-box"></div>
                    <img class="bubble-bg" src="./images/book/book13/水珠.png"/>
                    <img class="bubble12" src="./images/book/book13/牛奶泡泡.png"/>
+                   <img class="board board13" src="./images/book/book13/board13.png"/>
+                    <img class="check check01" src="./images/book/book13/綠勾.png" />
                    <div class="check-box"></div>
                    `);
 
         $(".book-section").append(`
-          <div class="popup-board-bg">
-            <div class="popup-close-btn">x</div>
-          </div>
           <div class="popup-board popup-board01">
-          <p>
-          牛⽜大部分是來自溫帶品種的荷蘭⽜，台灣夏季高溫潮溼，容易讓牛牛產生「熱緊迫」（就像人類夏天也會中暑一樣喔），牛牛胃口一不好，就會營養不足，容易生病，這就是為什麼牧場裡需要安裝風扇與灑水系統幫牛牛降溫。
-          </p>
           </div>
         `);
       }
@@ -1136,13 +1217,43 @@ $(function () {
       if (window.matchMedia("(max-height: 500px)").matches) {
         if (isAndroidChrome()) {
           $(".magic-wand").css({
-            right: (screenHeight * 85.26) / 609 + "px", //57.68
+            right: (screenHeight * 103.47) / 609 + "px", //70
+            bottom: (screenHeight * 182.7) / 609 + "px", //123.6
+          });
+
+          $(".click-magic-wand-box").css({
+            height: (screenHeight * 162.6) / 609 + "px", //110
+          });
+
+          $(".text12").css({
+            width: screenHeight + "px",
+            height: screenHeight + "px",
+          });
+
+          $(".board13").css({
+            width: screenHeight + "px",
+            height: screenHeight + "px",
           });
         }
 
         if (isSafari() || isIOSChrome()) {
           $(".magic-wand").css({
-            right: (visualHeight * 90.24) / 609 + "px", //67
+            right: (visualHeight * 104.9) / 609 + "px", //78
+            bottom: (visualHeight * 186.95) / 609 + "px", //139
+          });
+
+          $(".click-magic-wand-box").css({
+            height: (visualHeight * 158.7) / 609 + "px", //118
+          });
+
+          $(".text12").css({
+            width: visualHeight + "px",
+            height: visualHeight + "px",
+          });
+
+          $(".board13").css({
+            width: visualHeight + "px",
+            height: visualHeight + "px",
           });
         }
       }
@@ -1160,66 +1271,81 @@ $(function () {
         setTimeout(() => {
           $(".book12").css("opacity", "1");
           $(".book13").css("opacity", "1");
+          $(".board13").css("opacity", "1");
           $(".electfan").css("opacity", "1");
           $(".magic-wand").css("opacity", "1");
-          $(".click-magic-wand").css("opacity", "1");
           $(".finish-mission01").css("opacity", "1");
-        }, 1000)
+        }, 1000),
       );
 
-      $("#flipbook .click-magic-wand").on("click", () => {
-        $(".click-magic-wand").hide();
-        $(".finish-mission01").hide();
+      page1213Timeouts.push(
+        setTimeout(() => {
+          $(".click-magic-wand").show();
+          $(".click-magic-wand-box").show();
+          $(".finish-mission01").hide();
+        }, 4000),
+      );
 
-        page1213Timeouts.push(
-          setTimeout(
-            () => $(".magic-wand").addClass("magic-wand-animation"),
-            500
-          )
-        );
-        page1213Timeouts.push(
-          setTimeout(() => {
-            $(".electfan-wind").css("opacity", "1");
-            $(".electfan-wind-line").css("opacity", "1");
-            setInterval(() => {
-              fanIndex = (fanIndex + 1) % fanImages.length;
-              fanImg.src = fanImages[fanIndex];
-            }, 100);
-          }, 4000)
-        );
-        page1213Timeouts.push(
-          setTimeout(() => $(".bubble-bg").addClass("bubble-move"), 2000)
-        );
+      $("#flipbook .click-magic-wand, #flipbook .click-magic-wand-box").on(
+        "click",
+        () => {
+          $(".click-magic-wand").hide();
+          $(".click-magic-wand-box").hide();
+          $(".finish-mission01").hide();
+          $(".text12").css("opacity", "1");
 
-        page1213Timeouts.push(
-          setTimeout(() => $(".bubble12").addClass("bubble-fade-in"), 3000)
-        );
+          page1213Timeouts.push(
+            setTimeout(
+              () => $(".magic-wand").addClass("magic-wand-animation"),
+              500,
+            ),
+          );
 
-        page1213Timeouts.push(
-          setTimeout(() => {
-            $(".coin-hint01").addClass("bubble-fade-in");
-          }, 12000)
-        );
+          page1213Timeouts.push(
+            setTimeout(() => {
+              $(".electfan-wind").css("opacity", "1");
+              $(".electfan-wind-line").css("opacity", "1");
+              setInterval(() => {
+                fanIndex = (fanIndex + 1) % fanImages.length;
+                fanImg.src = fanImages[fanIndex];
+              }, 100);
+            }, 2000),
+          );
+          page1213Timeouts.push(
+            setTimeout(() => $(".bubble-bg").addClass("bubble-move"), 2000),
+          );
 
-        page1213Timeouts.push(
-          setTimeout(() => {
-            $(".coin01").addClass("coin-animation");
-            $(".coin-light").addClass("coin-light-show");
-            $(".check01").addClass("check-show");
-          }, 15000)
-        );
+          page1213Timeouts.push(
+            setTimeout(() => $(".bubble12").addClass("bubble-fade-in"), 3000),
+          );
 
-        page1213Timeouts.push(
-          setTimeout(() => {
-            btnUnDisabled();
-            canFlipNext = true;
-            $("#right-down-corner").css("color", "#000");
-            $("#right-down-corner").prop("disabled", false);
-          }, 15000)
-        );
+          page1213Timeouts.push(
+            setTimeout(() => {
+              $(".coin01").addClass("coin-animation");
+              $(".coin-light").addClass("coin-light-show");
+              $(".check01").addClass("check-show");
+              $(".coin-hint01").addClass("bubble-fade-in");
+            }, 10000),
+          );
 
-        playAudio("audio-11-click", 0);
-      });
+          page1213Timeouts.push(
+            setTimeout(() => {
+              btnUnDisabled();
+              canFlipNext = true;
+              $("#right-down-corner").css("color", "#000");
+              $("#right-down-corner").prop("disabled", false);
+            }, 15000),
+          );
+
+          page1213Timeouts.push(
+            setTimeout(() => {
+              $(".popup-board01").css("display", "block");
+            }, 16000),
+          );
+
+          playAudio("audio-11-click", 0);
+        },
+      );
 
       popupBoard();
     }
@@ -1229,6 +1355,8 @@ $(function () {
       page1213Timeouts = [];
       $(".book12").css("opacity", "0");
       $(".book13").css("opacity", "0");
+      $(".board13").css("opacity", "0");
+      $(".text12").css("opacity", "0");
       $(".electfan").css("opacity", "0");
       $(".electfan-wind").css("opacity", "0");
       $(".electfan-wind-line").css("opacity", "0");
@@ -1242,6 +1370,7 @@ $(function () {
       $(".coin-light").removeClass("coin-light-show");
       $(".coin-hint01").removeClass("bubble-fade-in");
       $(".check01").removeClass("check-show");
+      $(".popup-board01").css("display", "none");
       $("#flipbook .click-magic-wand").remove();
       $("#flipbook .finish-mission01").remove();
       $("#flipbook .electfan").remove();
@@ -1252,6 +1381,9 @@ $(function () {
       $("#flipbook .check-box").remove();
       $(".book-section .popup-board-bg").remove();
       $(".book-section .popup-board").remove();
+      $(".board13").remove();
+      $(".popup-board01").remove();
+      $(".text12").remove();
     }
 
     // 第 14–15 頁：餵牛奶
@@ -1273,17 +1405,19 @@ $(function () {
           <img class="board14" src="./images/book/book1415/板子.png"/>
           <img class="check check02" src="./images/book/book13/綠勾.png"/>
           <div class="check-box"></div>
-          <img class="click-milk" src="./images/book/book1415/點這裡.png"/>
+          <img class="click-milk" src="./images/book/book0607/點這裡.png"/>
+          <div class="click-milk-box"></div>
           <img class="bubble14" src="./images/book/book1415/牛奶泡泡.png"/>          
+          <img class="coin-hint02" src="./images/book/book1415/text15.png" />
            `);
 
         page1415Timeouts.push(
           setTimeout(() => {
             $("#flipbook").append(
               `<img class="cloud14-2" src="./images/book/book1415/雲2.png"/>      
-             <img class="text14" src="./images/book/book1415/故事14.png"/>`
+             <img class="text14" src="./images/book/book1415/故事14.png"/>`,
             );
-          }, 300)
+          }, 300),
         );
 
         page1415Timeouts.push(
@@ -1302,17 +1436,11 @@ $(function () {
             $(".cloud14-3").css("opacity", "1");
             $(".text14").css("opacity", "1");
             $(".small-cow ").css("opacity", "1");
-          }, 1000)
+          }, 1000),
         );
 
-        $(".book-section").append(`
-          <div class="popup-board-bg">
-            <div class="popup-close-btn">x</div>
-          </div>          
+        $(".book-section").append(`    
           <div class="popup-board popup-board02">
-          <p>
-            牛牛不只是吃牧草喔！牠們的餐點像人類一樣，有主食、也有配餐，會依據牛牛的年紀與身體狀況加入除了牧草以外的其他食物，像是小牛喝奶粉，少女牛補充蛋白質幫助發育…讓牛牛補充足夠的營養，吃得健康。
-          </p>
           </div>
         `);
 
@@ -1322,6 +1450,11 @@ $(function () {
               right: (screenHeight * 473.9) / 609 + "px", //320.6
               bottom: (screenHeight * 75.68) / 609 + "px", //51.2
             });
+
+            $(".click-milk-box").css({
+              width: (screenHeight * 132.4) / 609 + "px", //90
+              height: (screenHeight * 88.26) / 609 + "px", //60
+            });
           }
 
           if (isSafari() || isIOSChrome()) {
@@ -1329,63 +1462,75 @@ $(function () {
               right: (visualHeight * 473.1857) / 609 + "px", //351.312
               bottom: (visualHeight * 81.124) / 609 + "px", //60.2311
             });
+
+            $(".click-milk-box").css({
+              width: (screenHeight * 121) / 609 + "px", //90
+              height: (screenHeight * 80.7) / 609 + "px", //60
+            });
           }
         }
 
         page1415Timeouts.push(
           setTimeout(() => {
             $(".board-list02").addClass("bubble-fade-in");
-          }, 1000)
+          }, 1000),
         );
 
         page1415Timeouts.push(
           setTimeout(() => {
             $(".bubble14").addClass("bubble-fade-in");
-          }, 1000)
+          }, 1000),
         );
 
         page1415Timeouts.push(
           setTimeout(() => {
+            $(".finish-mission02").css("opacity", "0");
             $(".click-milk").show();
-          }, 1000)
+            $(".click-milk-box").show();
+          }, 4000),
         );
 
-        $("#flipbook .click-milk").on("click", function () {
-          page1415Timeouts.push(
-            setTimeout(() => {
-              $(".success-hint02").addClass("bubble-fade-in");
-            }, 5000)
-          );
-          $(".cows-tongue").addClass("cows-tongue-animation");
-          $(".milk").addClass("milk-empty");
-          $(".click-milk").hide();
-          $(".finish-mission02").hide();
+        $("#flipbook .click-milk , #flipbook .click-milk-box ").on(
+          "click",
+          function () {
+            page1415Timeouts.push(
+              setTimeout(() => {
+                $(".success-hint02").addClass("bubble-fade-in");
+              }, 5000),
+            );
+            $(".cows-tongue").addClass("cows-tongue-animation");
+            $(".milk").addClass("milk-empty");
+            $(".click-milk").hide();
+            $(".click-milk-box").hide();
+            $(".finish-mission02").hide();
 
-          playAudio("sucking-coin", 0);
+            playAudio("sucking-coin", 0);
 
-          page1415Timeouts.push(
-            setTimeout(() => {
-              $(".coin-hint02").addClass("bubble-fade-in");
-            }, 7000)
-          );
+            page1415Timeouts.push(
+              setTimeout(() => {
+                $(".coin-hint02").addClass("bubble-fade-in");
+              }, 7000),
+            );
 
-          page1415Timeouts.push(
-            setTimeout(() => {
-              $(".check02").addClass("check-show");
-              $(".coin02").addClass("coin-animation");
-              $(".coin-light02").addClass("coin-light-show");
-            }, 10000)
-          );
+            page1415Timeouts.push(
+              setTimeout(() => {
+                $(".check02").addClass("check-show");
+                $(".coin02").addClass("coin-animation");
+                $(".coin-light02").addClass("coin-light-show");
+              }, 10000),
+            );
 
-          page1415Timeouts.push(
-            setTimeout(() => {
-              btnUnDisabled();
-              canFlipNext = true;
-              $("#right-down-corner").css("color", "#000");
-              $("#right-down-corner").prop("disabled", false);
-            }, 12000)
-          );
-        });
+            page1415Timeouts.push(
+              setTimeout(() => {
+                $(".popup-board02").css("display", "block");
+                btnUnDisabled();
+                canFlipNext = true;
+                $("#right-down-corner").css("color", "#000");
+                $("#right-down-corner").prop("disabled", false);
+              }, 12000),
+            );
+          },
+        );
       }
       popupBoard();
     }
@@ -1407,6 +1552,7 @@ $(function () {
       $(".cloud14-3").css("opacity", "0");
       $(".text14").css("opacity", "0");
       $(".small-cow ").css("opacity", "0");
+      $(".popup-board02").css("display", "none");
       $("#flipbook .finish-mission02").remove();
       $("#flipbook .cloud14-2").remove();
       $("#flipbook .text14").remove();
@@ -1416,6 +1562,9 @@ $(function () {
       $("#flipbook .small-cow").remove();
       $("#flipbook .bubble14").remove();
       $("#flipbook .check02").remove();
+      $(".board14").remove();
+      $(".popup-board02").remove();
+      $(".coin-hint02").remove();
       $(".success-hint02").removeClass("bubble-fade-in");
       $(".cows-tongue").removeClass("cows-tongue-animation");
       $(".milk").removeClass("milk-empty");
@@ -1449,22 +1598,33 @@ $(function () {
             <img class="dondon" src="./images/book/book1617/咚咚.png">
             <img class="nurse-girl" src="./images/book/book1617/鈴鈴護士.png"/>
             <img class="click-hearing-heart" src="./images/book/book25/點這裡.png"/>
+            <div class="click-hearing-heart-box"></div>
             <img class="board-list03" src="./images/book/book1617/任務清單.png"/>
             <img class="check check03" src="./images/book/book13/綠勾.png" />
             <img class="board16" src="./images/book/book1415/板子.png">
             <img class="bubble16" src="./images/book/book1617/牛奶泡泡.png"/>
             `);
         $("#flipbook").append(`<div class="check-box"></div>`);
-        $(".book-section").append(`
-          <div class="popup-board-bg">
-            <div class="popup-close-btn">x</div>
-          </div>             
+        $(".book-section").append(`    
           <div class="popup-board popup-board03">
-          <p>
-           牛牛是草食性動物，不會輕易表現出身體不適，所以必須透過獸醫師的專業檢查與經驗判斷才能瞭解。除了聽診、量體溫、看糞便、觸診之外，獸醫師也需要檢查牛舍、看飼料、觀察牛隻活動，幫助牧場提前預防問題。除了把關牛牛的健康，也要打造讓牛牛「吃得好、住得好」的牧場環境，才能「預防勝於治療」，減少牛牛生病的機率。
-          </p>
           </div>
         `);
+
+        if (window.matchMedia("(max-height: 500px)").matches) {
+          if (isAndroidChrome()) {
+            $(".click-hearing-heart-box").css({
+              width: (screenHeight * 103.47) / 609 + "px", //70
+              height: (screenHeight * 66.512) / 609 + "px", //45
+            });
+          }
+
+          if (isSafari() || isIOSChrome()) {
+            $(".click-hearing-heart-box").css({
+              width: (screenHeight * 94.15) / 609 + "px", //70
+              height: (screenHeight * 60.52) / 609 + "px", //45
+            });
+          }
+        }
 
         page1617Timeouts.push(
           setTimeout(() => {
@@ -1483,23 +1643,27 @@ $(function () {
             $(".board16").css("opacity", "1");
             $(".story-text16").css("opacity", "1");
             $(".nurse-girl").css("opacity", "1");
-          }, 1000)
+          }, 1000),
         );
 
         page1617Timeouts.push(
           setTimeout(() => {
             $(".bubble16").addClass("bubble-fade-in");
             $(".board-list03").addClass("bubble-fade-in");
-          }, 1000)
+          }, 1000),
         );
 
         page1617Timeouts.push(
           setTimeout(() => {
+            $(".finish-mission03").css("opacity", "0");
             $(".click-hearing-heart").show();
-          }, 1000)
+            $(".click-hearing-heart-box").show();
+          }, 4000),
         );
 
-        $("#flipbook .click-hearing-heart").on("click", function () {
+        $(
+          "#flipbook .click-hearing-heart ,#flipbook .click-hearing-heart-box ",
+        ).on("click", function () {
           const cowEyesImages = [
             "./images/book/book1617/牛眼睜開.png",
             "./images/book/book1617/牛眼關閉.png",
@@ -1512,27 +1676,22 @@ $(function () {
             setInterval(() => {
               cowEyesIndex = (cowEyesIndex + 1) % cowEyesImages.length;
               cowEyesImg.src = cowEyesImages[cowEyesIndex];
-            }, 500)
+            }, 500),
           );
 
           $(".dondon").addClass("bubble-fade-in");
           $(".stethoscope").addClass("stethoscope-move");
           $(".cow-heart").addClass("heart-beat-animation");
           $(".click-hearing-heart").hide();
+          $(".click-hearing-heart-box").hide();
           $(".finish-mission03").hide();
 
           playAudio("hearts-coin", 1000);
 
           page1617Timeouts.push(
             setTimeout(() => {
-              $(".success-hint03").addClass("bubble-fade-in");
-            }, 5000)
-          );
-
-          page1617Timeouts.push(
-            setTimeout(() => {
               $(".coin-hint03").addClass("bubble-fade-in");
-            }, 10000)
+            }, 10000),
           );
 
           page1617Timeouts.push(
@@ -1540,16 +1699,17 @@ $(function () {
               $(".check03").addClass("check-show");
               $(".coin03").addClass("coin-animation");
               $(".coin-light03").addClass("coin-light-show");
-            }, 13000)
+            }, 13000),
           );
 
           page1617Timeouts.push(
             setTimeout(() => {
+              $(".popup-board03").css("display", "block");
               btnUnDisabled();
               canFlipNext = true;
               $("#right-down-corner").css("color", "#000");
               $("#right-down-corner").prop("disabled", false);
-            }, 14000)
+            }, 14000),
           );
         });
       }
@@ -1575,6 +1735,7 @@ $(function () {
       $(".board16").css("opacity", "0");
       $(".story-text16").css("opacity", "0");
       $(".nurse-girl").css("opacity", "0");
+      $(".popup-board03").css("display", "none");
       $(".stethoscope").addClass("disabled");
       $("#flipbook .stethoscope").removeClass("stethoscope-move");
       $(".cow-heart").removeClass("heart-beat-animation");
@@ -1582,7 +1743,6 @@ $(function () {
       $(".coin-light03").removeClass("coin-light-show");
       $(".check03").removeClass("check-show");
       $(".coin-hint03").removeClass("bubble-fade-in");
-      $(".success-hint03").removeClass("bubble-fade-in");
       $(".dondon").removeClass("bubble-fade-in");
       $("#flipbook .click-hearing-heart").remove();
       $("#flipbook .finish-mission03").remove();
@@ -1597,6 +1757,7 @@ $(function () {
       $("#flipbook .check03").remove();
       $("#flipbook .board-list03").remove();
       $("#flipbook .board16").remove();
+      $(".popup-board03").remove();
       $("#flipbook .bubble16").remove();
       $("#flipbook .dondon").remove();
     }
@@ -1608,6 +1769,7 @@ $(function () {
       <img class="coin-all coin02-final" src="./images/book/book1819/金幣02.png" />
       <img class="coin-all coin03-final" src="./images/book/book1819/金幣03.png" />
       <img class="coin-all-shine" src="./images/book/book1819/亮晶晶.png" />
+      <img class="girl1819" src="./images/book/book1819/鈴鈴.png" />
       <img class="crown" src="./images/book/book1819/好牛皇冠.png" />
       <img class="bubble18" src="./images/book/book1819/牛奶泡泡.png" />
     `);
@@ -1616,28 +1778,29 @@ $(function () {
         setTimeout(() => {
           $(".book18").css("opacity", "1");
           $(".book19").css("opacity", "1");
-        }, 1000)
+          $(".girl1819").css("opacity", "1");
+        }, 1000),
       );
 
       page1819Timeouts.push(
         setTimeout(() => {
           $(".coin01-final, .coin02-final, .coin03-final").addClass(
-            "coin-all-animation"
+            "coin-all-animation",
           );
-        }, 1200)
+        }, 1200),
       );
 
       page1819Timeouts.push(
         setTimeout(() => {
           $(".coin-all-shine").addClass("bubble-fade-in");
-        }, 1500)
+        }, 1500),
       );
 
       page1819Timeouts.push(
         setTimeout(() => {
           $(".bubble18").addClass("bubble-fade-in");
           $(".crown").addClass("crown-animation");
-        }, 2500)
+        }, 2500),
       );
     }
 
@@ -1646,8 +1809,9 @@ $(function () {
       page1819Timeouts = [];
       $(".book18").css("opacity", "0");
       $(".book19").css("opacity", "0");
+      $(".girl1819").css("opacity", "0");
       $(".coin01-final, .coin02-final, .coin03-final").removeClass(
-        "coin-all-animation"
+        "coin-all-animation",
       );
       $(".crown").removeClass("crown-animation");
       $(".coin-all-shine").removeClass("bubble-fade-in");
@@ -1656,6 +1820,7 @@ $(function () {
       $("#flipbook .crown").remove();
       $("#flipbook .coin-all").remove();
       $("#flipbook .coin-all-shine").remove();
+      $("#flipbook .girl1819").remove();
     }
 
     // 第 20–21 頁：小女孩夢境 + 浮出夢境
@@ -1669,67 +1834,41 @@ $(function () {
         <img class="dialog21" src="./images/book/book2021/嗯.png"/>
         <img class="bubble20" src="./images/book/book2021/牛奶泡泡20.png"/>
         <img class="star20" src="./images/book/book2021/亮晶晶.png"/>
-        `
+        `,
       );
 
       page2021Timeouts.push(
         setTimeout(() => {
           $(".book20").css("opacity", "1");
           $(".book21").css("opacity", "1");
-        }, 1000)
-      );
-
-      page2021Timeouts.push(
-        setTimeout(() => {
           $(".dream01").addClass("dream-animation");
-        }, 2000)
-      );
-
-      page2021Timeouts.push(
-        setTimeout(() => {
           $(".dream02").addClass("dream-animation");
-        }, 3000)
-      );
-
-      page2021Timeouts.push(
-        setTimeout(() => {
           $(".dream03").addClass("dream-animation");
-        }, 4000)
-      );
-
-      page2021Timeouts.push(
-        setTimeout(() => {
           $(".dream04").addClass("dream-animation");
-        }, 5000)
-      );
-
-      page2021Timeouts.push(
-        setTimeout(() => {
           $(".dream-light").addClass("sweet-taste-animation");
           $(".story20").addClass("dream-animation");
           $(".star20").addClass("dialog20-animation");
           $(".dream-girl").addClass("dream-girl-animation");
-        }, 6000)
+        }, 1000),
       );
 
       page2021Timeouts.push(
         setTimeout(() => {
           $(".dialog20").addClass("dialog20-animation");
           $(".dialog21").addClass("dialog20-animation");
-        }, 7000)
+        }, 2000),
       );
 
       page2021Timeouts.push(
         setTimeout(() => {
           $(".bubble20").addClass("bubble-fade-in");
-        }, 9000)
+        }, 3000),
       );
     }
 
     if (page === 19 || page === 22) {
       page2021Timeouts.forEach((id) => clearTimeout(id));
       page2021Timeouts = [];
-      $(".book20").css("opacity", "0");
       $(".book21").css("opacity", "0");
       $(".dream04").remove();
       $(".dream-light").remove();
@@ -1759,16 +1898,12 @@ $(function () {
         $(".sleep-girl-hand").css("opacity", "1");
         $(".sleep-girl-arm").css("opacity", "1");
       }, 1000);
-      setTimeout(() => {
-        $(".cow-alarm").addClass("cow-alarm-animation");
-      }, 2000);
     } else {
       $(".book22").css("opacity", "0");
       $(".book23").css("opacity", "0");
       $(".cow-alarm ").css("opacity", "0");
       $(".sleep-girl-hand ").css("opacity", "0");
       $(".sleep-girl-arm").css("opacity", "0");
-      $(".cow-alarm").removeClass("cow-alarm-animation");
     }
 
     // 重置該頁面的所有動畫與音效
@@ -1823,13 +1958,13 @@ $(function () {
           $(".girl-l-hand-cup").css("opacity", "1");
           $(".girl-r-hand").css("opacity", "1");
           $(".milk-flower").css("dispaly", "block");
-        }, 1000)
+        }, 1000),
       );
 
       page2425Timeouts.push(
         setTimeout(() => {
           $(".flower").css("opacity", "1");
-        }, 3000)
+        }, 3000),
       );
 
       $(".milk-hand").addClass("milk-hand-animation");
@@ -1837,26 +1972,26 @@ $(function () {
       page2425Timeouts.push(
         setTimeout(() => {
           $(".milk-drop").addClass("milk-drop-show");
-        }, 1700)
+        }, 1700),
       );
 
       page2425Timeouts.push(
         setTimeout(() => {
           $(".milk-inner").css("opacity", "1");
-        }, 3000)
+        }, 3000),
       );
 
       page2425Timeouts.push(
         setTimeout(() => {
           $(".milk-flower").addClass("milk-drop-show");
           $(".milk-drop").removeClass("milk-drop-show");
-        }, 5000)
+        }, 5000),
       );
 
       page2425Timeouts.push(
         setTimeout(() => {
           $(".milk-smell").addClass("milk-smell-animation");
-        }, 6000)
+        }, 6000),
       );
     }
 
@@ -1888,7 +2023,7 @@ $(function () {
                   right: (visualHeight * 212.13) / 609 + "px",
                 });
               }
-            }, 100)
+            }, 100),
           );
         }
 
@@ -1902,13 +2037,13 @@ $(function () {
           setTimeout(() => {
             $(".girl-l-hand-milk").css("opacity", "0");
             playAudio("drinking-milk", 0);
-          }, 1000)
+          }, 1000),
         );
 
         page2425Timeouts.push(
           setTimeout(() => {
             $(".milk-stains").addClass("milk-stains-show");
-          }, 1200)
+          }, 1200),
         );
 
         page2425Timeouts.push(
@@ -1917,7 +2052,7 @@ $(function () {
               $(`.flower0${i}`).addClass(`flower0${i}-finish`);
             }
             playAudio("flower-show", 0);
-          }, 2300)
+          }, 2300),
         );
 
         page2425Timeouts.push(
@@ -1926,17 +2061,37 @@ $(function () {
             canFlipNext = true;
             $("#right-down-corner").css("color", "#000");
             $("#right-down-corner").prop("disabled", false);
-          }, 7000)
+          }, 7000),
         );
       });
 
     // 第 26–27 頁 家人喝牛奶
     function startFamilyAnimation() {
+      $("#flipbook").append(`
+      <img class="book2627" src="./images/book/book2627/book2627.png" />
+      <img class="all-milk-stains" src="./images/book/book2627/牛奶鬍.png" />
+    `);
+
+      if (window.matchMedia("(max-height: 500px)").matches) {
+        if (isSafari() || isIOSChrome()) {
+          $(".all-milk-stains").css({
+            width: visualHeight + "px",
+          });
+        }
+
+        if (isAndroidChrome()) {
+          $(".all-milk-stains").css({
+            width: screenHeight + "px",
+          });
+        }
+      }
+
       page2627Timeouts.push(
         setTimeout(() => {
           $(".book26").css("opacity", "1");
           $(".book27").css("opacity", "1");
-        }, 1200)
+          $(".book2627").css("opacity", "1");
+        }, 1200),
       );
 
       page2627Timeouts.push(
@@ -1949,7 +2104,7 @@ $(function () {
           $(".daughter-hand").css("opacity", "1");
           $(".daughter-hand-milk").css("display", "block");
           $(".daughter-hand-cup").css("opacity", "1");
-        }, 1500)
+        }, 1500),
       );
 
       if (window.matchMedia("(max-height: 500px)").matches) {
@@ -1985,7 +2140,30 @@ $(function () {
                   (screenHeight * -75.386) / 609 +
                   `px) rotate(33deg)`,
               }); //transform: translate(40px, -51px) rotate(33deg);
-            }, 3000)
+            }, 3000),
+          );
+
+          page2627Timeouts.push(
+            setTimeout(() => {
+              $(".father-hand-finish-mb").css({
+                width: (screenHeight * 325.197) / 609 + "px", //220px
+                top: (screenHeight * 395.85) / 609 + "px", //267.8px
+                left: (screenHeight * 78.34) / 609 + "px", //53px
+                transform: "translate(0,0) rotate(0deg)",
+              });
+
+              $(".daughter-hand-finish").css({
+                top: (screenHeight * 395.85) / 609 + "px", //267.8px
+                left: (screenHeight * 371.475) / 609 + "px", //251.31px
+                transform: "translate(0,0) rotate(0deg)",
+              });
+
+              $(".mom-hand-finish-mb").css({
+                bottom: (screenHeight * 224.68) / 609 + "px", //152px
+                right: (screenHeight * 711) / 609 + "px", //481px
+                transform: "translate(0,0) rotate(0deg)",
+              });
+            }, 5500),
           );
         }
 
@@ -2021,7 +2199,30 @@ $(function () {
                   (visualHeight * -86.21) / 609 +
                   `px) rotate(33deg)`,
               }); //transform: translate(24px, -64px) rotate(33deg);
-            }, 3000)
+            }, 3000),
+          );
+
+          page2627Timeouts.push(
+            setTimeout(() => {
+              $(".father-hand-finish-mb").css({
+                width: (visualHeight * 296.34) / 609 + "px", //220px
+                top: (visualHeight * 360.727) / 609 + "px", //267.8px
+                left: (visualHeight * 85.39) / 609 + "px", //53px
+                transform: "translate(0,0) rotate(0deg)",
+              });
+
+              $(".daughter-hand-finish").css({
+                top: (visualHeight * 390.6) / 609 + "px", //290
+                left: (visualHeight * 371.74) / 609 + "px", //276
+                transform: "translate(0,0) rotate(0deg)",
+              });
+
+              $(".mom-hand-finish-mb").css({
+                bottom: (visualHeight * 204.744) / 609 + "px", //152px
+                right: (visualHeight * 682.88) / 609 + "px", //507px
+                transform: "translate(0,0) rotate(0deg)",
+              });
+            }, 5500),
           );
         }
       }
@@ -2029,7 +2230,7 @@ $(function () {
       page2627Timeouts.push(
         setTimeout(() => {
           $(".daughter-hand-region").addClass("daughter-hand-finish");
-        }, 3000)
+        }, 3000),
       );
 
       if (window.matchMedia("(max-height: 500px)").matches) {
@@ -2037,14 +2238,14 @@ $(function () {
           setTimeout(() => {
             $(".father-hand-region-mb").addClass("father-hand-finish-mb");
             $(".mom-hand-region-mb").addClass("mom-hand-finish-mb");
-          }, 3000)
+          }, 3000),
         );
       } else {
         page2627Timeouts.push(
           setTimeout(() => {
             $(".father-hand-region").addClass("father-hand-finish");
             $(".mom-hand-region").addClass("mom-hand-finish");
-          }, 3000)
+          }, 3000),
         );
       }
 
@@ -2053,26 +2254,34 @@ $(function () {
           $(".father-hand-milk").css("opacity", "0");
           $(".daughter-hand-milk").css("opacity", "0");
           $(".mom-hand-milk").css("opacity", "0");
-        }, 4000)
+        }, 4000),
       );
 
       page2627Timeouts.push(
         setTimeout(() => {
           $(".all-milk-stains ").addClass("all-milk-stains-show ");
-        }, 4000)
+        }, 4000),
       );
 
       page2627Timeouts.push(
         setTimeout(() => {
           $(".cow-right").addClass("cow-right-move");
-        }, 4000)
+        }, 4000),
       );
 
       page2627Timeouts.push(
         setTimeout(() => {
           $(".sweet-taste").addClass("sweet-taste-animation");
           $(".mow").show();
-        }, 4500)
+        }, 4500),
+      );
+
+      page2627Timeouts.push(
+        setTimeout(() => {
+          $(".father-hand-region").removeClass("father-hand-finish");
+          $(".daughter-hand-region").removeClass("daughter-hand-finish");
+          $(".mom-hand-region").removeClass("mom-hand-finish");
+        }, 5500),
       );
     }
 
@@ -2112,7 +2321,7 @@ $(function () {
 
       // 批次移除所有指定 class
       $(
-        ".father-hand, .daughter-hand, .mom-hand, .all-milk-stains, .girls-milk-ink, .cow-right"
+        ".father-hand, .daughter-hand, .mom-hand, .all-milk-stains, .girls-milk-ink, .cow-right",
       ).removeClass(removeClasses.join(" "));
 
       // 隱藏叫聲
@@ -2135,7 +2344,7 @@ $(function () {
         page2425Timeouts.push(
           setTimeout(() => {
             $(".click-girl").show();
-          }, 1000)
+          }, 8000),
         );
 
         startMilkAnimation();
@@ -2150,14 +2359,14 @@ $(function () {
         page2627Timeouts.push(
           setTimeout(() => {
             $("#right-down-corner").show();
-          }, 500)
+          }, 500),
         );
 
         if (window.matchMedia("(max-height: 500px)").matches) {
           page2627Timeouts.push(
             setTimeout(() => {
               $("#flipbook").append(
-                ' <div class="mom-hand-region-mb"><div class="mom-hand-milk-region"><img class="mom-hand-milk" src="./images/book/book2627/牛奶.png"/><img class="mom-hand-cup" src="./images/book/book2627/空杯.png"/></div><img class="mom-hand" src="./images/book/book2627/媽媽手.png"/></div>'
+                ' <div class="mom-hand-region-mb"><div class="mom-hand-milk-region"><img class="mom-hand-milk" src="./images/book/book2627/牛奶.png"/><img class="mom-hand-cup" src="./images/book/book2627/空杯.png"/></div><img class="mom-hand" src="./images/book/book2627/媽媽手.png"/></div>',
               );
               $(".mom-hand").css({
                 width: (visualHeight * 208.785) / 609 + "px", //155px
@@ -2174,16 +2383,16 @@ $(function () {
                 bottom: (visualHeight * -76.78) / 609 + "px", //-57px
                 left: (visualHeight * 8.082) / 609 + "px", //-6px
               });
-            }, 1500)
+            }, 1500),
           );
         } else {
           if (!$(".mom-hand").length) {
             page2627Timeouts.push(
               setTimeout(() => {
                 $("#flipbook").append(
-                  ' <div class="mom-hand-region"><div class="mom-hand-milk-region"><img class="mom-hand-milk" src="./images/book/book2627/牛奶.png"/><img class="mom-hand-cup" src="./images/book/book2627/空杯.png"/></div><img class="mom-hand" src="./images/book/book2627/媽媽手.png"/></div>'
+                  ' <div class="mom-hand-region"><div class="mom-hand-milk-region"><img class="mom-hand-milk" src="./images/book/book2627/牛奶.png"/><img class="mom-hand-cup" src="./images/book/book2627/空杯.png"/></div><img class="mom-hand" src="./images/book/book2627/媽媽手.png"/></div>',
                 );
-              }, 1500)
+              }, 1500),
             );
           }
         }
@@ -2193,13 +2402,16 @@ $(function () {
             $(".mom-hand").css("opacity", "1");
             $(".mom-hand-milk").css("opacity", "1");
             $(".mom-hand-cup").css("opacity", "1");
-          }, 2000)
+          }, 2000),
         );
       }
 
       if (page === 25 || page === 28) {
         page2627Timeouts.forEach((id) => clearTimeout(id));
         page2627Timeouts = [];
+        $(".book2627").css("opacity", "0");
+        $(".book2627").remove();
+        $(".all-milk-stains").remove();
         if (window.matchMedia("(max-height: 500px)").matches) {
           $(".mom-hand-region-mb").remove();
           $(".mom-hand-region-mb").removeClass("mom-hand-finish-mb");
@@ -2216,6 +2428,7 @@ $(function () {
           $(".bubble-28").css("opacity", "1");
           $(".star-28").addClass("star-28-animation");
           $(".story-28").css("opacity", "1");
+          $(".milk28").css("opacity", "1");
           $(".grass-28").css("opacity", "1");
           $(".fence-28").css("opacity", "1");
           $(".cow-28-1").css("opacity", "1");
@@ -2228,12 +2441,12 @@ $(function () {
           canFlipPrev = true;
         }, 3000);
         let count = 3;
-        $(".next-page img").attr("src", "./images/common/下一頁深藍.png");
+        $(".next-page img").attr("src", "./images/common/下一頁灰.png");
         $(".next-page img").css("cursor", "not-allowed");
         $(".next-page").prop("disabled", true);
         const prevBtn = $(".next-page")[0];
 
-        $(".prev-page img").attr("src", "./images/common/上一頁深藍.png");
+        $(".prev-page img").attr("src", "./images/common/上一頁灰.png");
         $(".prev-page img").css("cursor", "not-allowed");
         $(".prev-page img").attr("src", "./images/common/3秒.png");
         $(".prev-page").prop("disabled", true);
@@ -2260,11 +2473,11 @@ $(function () {
       }
 
       if (page === 27) {
-        $(".book28").css("opacity", "0");
         $(".cloud-28").css("opacity", "0");
         $(".bubble-28").css("opacity", "0");
         $(".star-28").removeClass("star-28-animation");
         $(".story-28").css("opacity", "0");
+        $(".milk28").css("opacity", "0");
         $(".grass-28").css("opacity", "0");
         $(".fence-28").css("opacity", "0");
         $(".cow-28-1").css("opacity", "0");
@@ -2309,7 +2522,6 @@ $(function () {
     });
 
     if (
-      page !== 1 &&
       page !== 6 &&
       page !== 7 &&
       page !== 12 &&
@@ -2318,8 +2530,7 @@ $(function () {
       page !== 15 &&
       page !== 16 &&
       page !== 17 &&
-      page !== 24 &&
-      page !== 28
+      page !== 24
     ) {
       allBtnDisabled(page);
       isCanNotFlip();
@@ -2331,6 +2542,31 @@ $(function () {
     }
 
     if (window.matchMedia("(max-height: 500px)").matches) {
+      if (page === 2 || page === 3) {
+        if (isSafari() || isIOSChrome()) {
+          $(".book03-title, .milk03, .hands03").css({
+            width: visualHeight + "px",
+          });
+
+          $(".girls-head03").css({
+            width: (visualHeight * 377.13) / 609 + "px", //280
+            right: (visualHeight * 94.3) / 609 + "px", //70
+            bottom: (visualHeight * 152.2) / 609 + "px", //113
+          });
+        }
+        if (isAndroidChrome()) {
+          $(".book03-title, .milk03, .hands03").css({
+            width: screenHeight + "px",
+          });
+
+          $(".girls-head03").css({
+            width: (screenHeight * 399.1) / 609 + "px", //270
+            right: (screenHeight * 88.69) / 609 + "px", //60
+            bottom: (screenHeight * 147.82) / 609 + "px", //100
+          });
+        }
+      }
+
       if (page === 4 || page === 5) {
         if (isSafari() || isIOSChrome()) {
           $(".moms-hand-5").css({
@@ -2347,7 +2583,7 @@ $(function () {
       // 第 6–7 頁：點擊門跑出森林
       if (page === 6 || page === 7) {
         $("#flipbook").append(
-          '<img class="clouds" src="./images/book/book0607/雲.png"/>'
+          '<img class="clouds" src="./images/book/book0607/雲.png"/>',
         );
 
         if (isSafari() || isIOSChrome()) {
@@ -2384,19 +2620,123 @@ $(function () {
             width: "15%",
           });
         }
+
+        if (isAndroidChrome()) {
+          $(".text09").css({
+            width: screenHeight + "px",
+            height: screenHeight + "px",
+          });
+        }
+
+        if (isSafari() || isIOSChrome()) {
+          $(".text09").css({
+            width: visualHeight + "px",
+            height: visualHeight + "px",
+          });
+        }
+      }
+
+      if (page === 10 || page === 11) {
+        if (isAndroidChrome()) {
+          $(".text11").css({
+            width: screenHeight + "px",
+            height: screenHeight + "px",
+          });
+        }
+
+        if (isSafari() || isIOSChrome()) {
+          $(".text11").css({
+            width: visualHeight + "px",
+            height: visualHeight + "px",
+          });
+        }
+      }
+
+      if (page === 12 || page === 13) {
+        if (isAndroidChrome()) {
+          $(".check01").css({
+            right: (screenHeight * 198.07) / 609 + "px", //134
+            top: (screenHeight * 177.38) / 609 + "px", //120
+          });
+
+          $(".coin-hint01").css({
+            width: screenHeight + "px",
+            height: screenHeight + "px",
+          });
+        }
+
+        if (isSafari() || isIOSChrome()) {
+          $(".check01").css({
+            right: (visualHeight * 199.34) / 609 + "px", //148
+            top: (visualHeight * 179.137) / 609 + "px", //133
+          });
+
+          $(".coin-hint01").css({
+            width: visualHeight + "px",
+            height: visualHeight + "px",
+          });
+        }
+      }
+
+      if (page === 14 || page === 15) {
+        if (isAndroidChrome()) {
+          $(".check02").css({
+            right: (screenHeight * 196.65) / 609 + "px", //146
+            top: (screenHeight * 215.5) / 609 + "px", //160
+          });
+
+          $(".coin-hint02").css({
+            width: screenHeight + "px",
+            height: screenHeight + "px",
+          });
+        }
+
+        if (isSafari() || isIOSChrome()) {
+          $(".check02").css({
+            right: (visualHeight * 196.65) / 609 + "px", //146
+            top: (visualHeight * 215.5) / 609 + "px", //160
+          });
+
+          $(".coin-hint02").css({
+            width: visualHeight + "px",
+            height: visualHeight + "px",
+          });
+        }
       }
 
       if (page === 16 || page === 17) {
-        $(".click-hearing-heart").css({
-          right: (visualHeight * 180) / 609 + "px",
-          bottom: (visualHeight * 70) / 609 + "px",
-        });
-      }
-      if (isAndroidChrome()) {
-        $(".click-hearing-heart").css({
-          right: (screenHeight * 180) / 609 + "px",
-          bottom: (screenHeight * 70) / 609 + "px",
-        });
+        if (isSafari() || isIOSChrome()) {
+          $(".click-hearing-heart").css({
+            right: (visualHeight * 180) / 609 + "px",
+            bottom: (visualHeight * 70) / 609 + "px",
+          });
+
+          $(".coin-hint03").css({
+            width: visualHeight + "px",
+            height: visualHeight + "px",
+          });
+
+          $(".check03").css({
+            top: (visualHeight * 249.176) / 609 + "px", //185
+            right: (visualHeight * 184.525) / 609 + "px", //137
+          });
+        }
+
+        if (isAndroidChrome()) {
+          $(".click-hearing-heart").css({
+            right: (screenHeight * 180) / 609 + "px",
+            bottom: (screenHeight * 70) / 609 + "px",
+          });
+
+          $(".coin-hint03").css({
+            width: screenHeight + "px",
+            height: screenHeight + "px",
+          });
+
+          $(".check03").css({
+            top: (screenHeight * 246.5) / 609 + "px", //167
+          });
+        }
       }
 
       if (page === 18 || page === 19) {
@@ -2603,7 +2943,7 @@ $(function () {
             left: (screenHeight * 38.432) / 609 + "px", //26px
           });
 
-          $(".all-milk-stains ").css({
+          $(".all-milk-stains").css({
             height: screenHeight + "px",
           });
 
@@ -2927,11 +3267,14 @@ $(function () {
       }, 3000);
 
       // 點 click-magic-wand 才能準備往前
-      $("#flipbook .click-magic-wand").one("click", function () {
-        setTimeout(() => {
-          canSwipeNext = true;
-        }, 15000);
-      });
+      $("#flipbook .click-magic-wand, #flipbook .click-magic-wand-box").one(
+        "click",
+        function () {
+          setTimeout(() => {
+            canSwipeNext = true;
+          }, 15000);
+        },
+      );
     }
 
     // 第 14–15 頁：餵牛奶
@@ -2945,11 +3288,14 @@ $(function () {
       }, 3000);
 
       // 點 click-milk 才能準備往前
-      $("#flipbook .click-milk").one("click", function () {
-        setTimeout(() => {
-          canSwipeNext = true;
-        }, 12000);
-      });
+      $("#flipbook .click-milk, #flipbook .click-milk-box").one(
+        "click",
+        function () {
+          setTimeout(() => {
+            canSwipeNext = true;
+          }, 12000);
+        },
+      );
     }
 
     // 第 16–17 頁：聽牛心跳
@@ -2963,7 +3309,9 @@ $(function () {
       }, 3000);
 
       // 點 knock 才能準備往前
-      $("#flipbook .click-hearing-heart").one("click", function () {
+      $(
+        "#flipbook .click-hearing-heart, #flipbook .click-hearing-heart-box",
+      ).one("click", function () {
         setTimeout(() => {
           canSwipeNext = true;
         }, 14000);
@@ -2988,20 +3336,20 @@ $(function () {
       });
     }
 
-    // if (page === 28) {
-    //   if (window.matchMedia("(max-height: 500px)").matches) {
-    //     // if (isSafari() || isIOSChrome()) {
-    //     //   $(".book-section").css({
-    //     //     left: (visualHeight * -312.48) / 609 + "px", //-232
-    //     //   });
-    //     // }
-    //     if (isAndroidChrome()) {
-    //       $(".book-section").css({
-    //         transform: `translateX(` + (screenHeight * 739.08) / 609 + `px)`, //500
-    //       });
-    //     }
-    //   }
-    // }
+    if (page === 28) {
+      if (window.matchMedia("(max-height: 500px)").matches) {
+        //     // if (isSafari() || isIOSChrome()) {
+        //     //   $(".book-section").css({
+        //     //     left: (visualHeight * -312.48) / 609 + "px", //-232
+        //     //   });
+        //     // }
+        //     if (isAndroidChrome()) {
+        //       $(".book-section").css({
+        //         transform: `translateX(` + (screenHeight * 739.08) / 609 + `px)`, //500
+        //       });
+        //     }
+      }
+    }
   }
 
   /* ======================
