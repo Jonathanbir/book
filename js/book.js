@@ -37,6 +37,7 @@ $(function () {
   let page1617Timeouts = [];
   let page1819Timeouts = [];
   let page2021Timeouts = [];
+  let page2223Timeouts = [];
   let page2425Timeouts = [];
   let page2627Timeouts = [];
 
@@ -832,7 +833,7 @@ $(function () {
         $(".eyes-ball").addClass("eyes-ball-animation");
         $(".eyes-4").addClass("eyes-big-animation");
         $(".question").addClass("question-animation");
-      }, 4000);
+      }, 8000);
 
       setTimeout(() => {
         $(".book05").css("opacity", "1");
@@ -841,8 +842,11 @@ $(function () {
         $(".moms-head-5").css("opacity", "1");
         $(".daughter-hand-5").css("opacity", "1");
         $(".moms-hand-5").css("opacity", "1");
+      }, 22000);
+
+      setTimeout(() => {
         $(".gogo").css("opacity", "1");
-      }, 16000);
+      }, 30000);
     } else {
       $(".eyes-4").removeClass("eyes-big-animation");
       $(".question").removeClass("question-animation");
@@ -912,7 +916,8 @@ $(function () {
           playAudio("knock", 0);
           $(".door").addClass("door-opening");
           $(".peoples").addClass("peoples-open");
-          $(".wow").addClass("wow-animation");
+          $(".text06").addClass("cloud-fade-in");
+          $(".cloud1").addClass("cloud-fade-in");
 
           page67Timeouts.push(
             setTimeout(() => {
@@ -923,23 +928,22 @@ $(function () {
 
           page67Timeouts.push(
             setTimeout(() => {
+              $(".wow").addClass("wow-animation");
               $(".tree2").addClass("tree-fade-in");
             }, 2000),
           );
 
           page67Timeouts.push(
             setTimeout(() => {
-              $(".cloud1").addClass("cloud-fade-in");
+              $(".tree3").addClass("tree-fade-in");
               $(".cloud2").addClass("cloud-fade-in");
               $(".cloud3").addClass("cloud-fade-in");
-              $(".tree3").addClass("tree-fade-in");
             }, 3000),
           );
 
           page67Timeouts.push(
             setTimeout(() => {
               $(".bubble67").addClass("bubble-fade-in");
-              $(".text06").addClass("cloud-fade-in");
             }, 5000),
           );
 
@@ -1015,32 +1019,32 @@ $(function () {
 
       page89Timeouts.push(
         setTimeout(() => {
-          $(".eyes-ball-8").addClass("eyes-ball-animation");
-          $(".mom-daughter").addClass("mom-daughter-animation");
-        }, 8000),
-      );
-
-      page89Timeouts.push(
-        setTimeout(() => {
           $(".foot1").addClass("foot1-animation");
           $(".foot2").addClass("foot2-animation");
           $(".foot3").addClass("foot3-animation");
           $(".foot4").addClass("foot4-animation");
           $(".foot5").addClass("foot5-animation");
-          $(".mowmow").addClass("mowmow-animation");
-        }, 0),
+        }, 8000),
+      );
+
+      page89Timeouts.push(
+        setTimeout(() => {
+          $(".eyes-ball-8").addClass("eyes-ball-animation");
+          $(".mom-daughter").addClass("mom-daughter-animation");
+        }, 9000),
       );
 
       page89Timeouts.push(
         setTimeout(() => {
           $(".text09").addClass("bubble-fade-in");
-        }, 7000),
+        }, 11000),
       );
 
       page89Timeouts.push(
         setTimeout(() => {
+          $(".mowmow").addClass("bubble-fade-in");
           $(".bubble7").addClass("bubble-fade-in");
-        }, 9000),
+        }, 12000),
       );
 
       page89Timeouts.push(
@@ -1058,7 +1062,7 @@ $(function () {
       $(".foot3").removeClass("foot3-animation");
       $(".foot4").removeClass("foot4-animation");
       $(".foot5").removeClass("foot5-animation");
-      $(".mowmow").removeClass("mowmow-animation");
+      $(".mowmow").removeClass("bubble-fade-in");
       $(".text09").removeClass("bubble-fade-in");
       $(".eyes-ball-8").removeClass("eyes-ball-animation");
       $(".mom-daughter").removeClass("mom-daughter-animation");
@@ -1119,12 +1123,18 @@ $(function () {
           $(".star11").addClass("star-fade-in");
         }, 2000),
       );
+
+      page1011Timeouts.push(
+        setTimeout(() => {
+          $(".book10-text").addClass("bubble-fade-in");
+        }, 14000),
+      );
     }
 
     page1011Timeouts.push(
       setTimeout(() => {
         $(".text11").css("opacity", "1");
-      }, 10000),
+      }, 18000),
     );
 
     let popupBoard = () => {
@@ -1166,6 +1176,7 @@ $(function () {
       $(".list").removeClass("list-animation");
       $(".cloud-01").removeClass("cloud-animation");
       $(".cloud-02").removeClass("cloud-animation");
+      $(".book10-text").removeClass("bubble-fade-in");
       $("#flipbook .rainbow").remove();
       $("#flipbook .cloud-group").remove();
       $("#flipbook .girls-head").remove();
@@ -1297,7 +1308,7 @@ $(function () {
           page1213Timeouts.push(
             setTimeout(
               () => $(".magic-wand").addClass("magic-wand-animation"),
-              500,
+              4000,
             ),
           );
 
@@ -1309,14 +1320,20 @@ $(function () {
                 fanIndex = (fanIndex + 1) % fanImages.length;
                 fanImg.src = fanImages[fanIndex];
               }, 100);
-            }, 2000),
+            }, 6000),
           );
           page1213Timeouts.push(
-            setTimeout(() => $(".bubble-bg").addClass("bubble-move"), 2000),
+            setTimeout(() => $(".bubble-bg").addClass("bubble-move"), 6000),
           );
 
           page1213Timeouts.push(
-            setTimeout(() => $(".bubble12").addClass("bubble-fade-in"), 3000),
+            setTimeout(() => $(".bubble12").addClass("bubble-fade-in"), 7000),
+          );
+
+          page1213Timeouts.push(
+            setTimeout(() => {
+              $(".coin-hint01").addClass("bubble-fade-in");
+            }, 18000),
           );
 
           page1213Timeouts.push(
@@ -1324,8 +1341,7 @@ $(function () {
               $(".coin01").addClass("coin-animation");
               $(".coin-light").addClass("coin-light-show");
               $(".check01").addClass("check-show");
-              $(".coin-hint01").addClass("bubble-fade-in");
-            }, 10000),
+            }, 25000),
           );
 
           page1213Timeouts.push(
@@ -1334,13 +1350,13 @@ $(function () {
               canFlipNext = true;
               $("#right-down-corner").css("color", "#000");
               $("#right-down-corner").prop("disabled", false);
-            }, 15000),
+            }, 27000),
           );
 
           page1213Timeouts.push(
             setTimeout(() => {
               $(".popup-board01").css("display", "block");
-            }, 16000),
+            }, 27000),
           );
 
           playAudio("audio-11-click", 0);
@@ -1487,29 +1503,36 @@ $(function () {
             $(".finish-mission02").css("opacity", "0");
             $(".click-milk").show();
             $(".click-milk-box").show();
-          }, 4000),
+          }, 16000),
         );
 
         $("#flipbook .click-milk , #flipbook .click-milk-box ").on(
           "click",
           function () {
-            page1415Timeouts.push(
-              setTimeout(() => {
-                $(".success-hint02").addClass("bubble-fade-in");
-              }, 5000),
-            );
-            $(".cows-tongue").addClass("cows-tongue-animation");
-            $(".milk").addClass("milk-empty");
             $(".click-milk").hide();
             $(".click-milk-box").hide();
             $(".finish-mission02").hide();
+
+            page1415Timeouts.push(
+              setTimeout(() => {
+                $(".cows-tongue").addClass("cows-tongue-animation");
+                $(".milk").addClass("milk-empty");
+              }, 2000),
+            );
+
+            page1415Timeouts.push(
+              setTimeout(() => {
+                $(".success-hint02").addClass("bubble-fade-in");
+                $(".cows-tongue").removeClass("cows-tongue-animation");
+              }, 5000),
+            );
 
             playAudio("sucking-coin", 0);
 
             page1415Timeouts.push(
               setTimeout(() => {
                 $(".coin-hint02").addClass("bubble-fade-in");
-              }, 7000),
+              }, 6000),
             );
 
             page1415Timeouts.push(
@@ -1517,7 +1540,7 @@ $(function () {
                 $(".check02").addClass("check-show");
                 $(".coin02").addClass("coin-animation");
                 $(".coin-light02").addClass("coin-light-show");
-              }, 10000),
+              }, 12000),
             );
 
             page1415Timeouts.push(
@@ -1527,7 +1550,7 @@ $(function () {
                 canFlipNext = true;
                 $("#right-down-corner").css("color", "#000");
                 $("#right-down-corner").prop("disabled", false);
-              }, 12000),
+              }, 15000),
             );
           },
         );
@@ -1658,7 +1681,7 @@ $(function () {
             $(".finish-mission03").css("opacity", "0");
             $(".click-hearing-heart").show();
             $(".click-hearing-heart-box").show();
-          }, 4000),
+          }, 15000),
         );
 
         $(
@@ -1681,7 +1704,12 @@ $(function () {
 
           $(".dondon").addClass("bubble-fade-in");
           $(".stethoscope").addClass("stethoscope-move");
-          $(".cow-heart").addClass("heart-beat-animation");
+
+          page1617Timeouts.push(
+            setTimeout(() => {
+              $(".cow-heart").addClass("heart-beat-animation");
+            }, 1000),
+          );
           $(".click-hearing-heart").hide();
           $(".click-hearing-heart-box").hide();
           $(".finish-mission03").hide();
@@ -1691,7 +1719,7 @@ $(function () {
           page1617Timeouts.push(
             setTimeout(() => {
               $(".coin-hint03").addClass("bubble-fade-in");
-            }, 10000),
+            }, 6000),
           );
 
           page1617Timeouts.push(
@@ -1699,7 +1727,7 @@ $(function () {
               $(".check03").addClass("check-show");
               $(".coin03").addClass("coin-animation");
               $(".coin-light03").addClass("coin-light-show");
-            }, 13000),
+            }, 15000),
           );
 
           page1617Timeouts.push(
@@ -1709,7 +1737,7 @@ $(function () {
               canFlipNext = true;
               $("#right-down-corner").css("color", "#000");
               $("#right-down-corner").prop("disabled", false);
-            }, 14000),
+            }, 16000),
           );
         });
       }
@@ -1765,6 +1793,7 @@ $(function () {
     // 第 20–21 頁：獲得皇冠 + 投硬幣動畫
     if (page === 18 || page === 19) {
       $("#flipbook").append(`
+      <img class="book19-text" src="./images/book/book1819/book19-text.png" />
       <img class="coin-all  coin01-final" src="./images/book/book1819/金幣01.png" />
       <img class="coin-all coin02-final" src="./images/book/book1819/金幣02.png" />
       <img class="coin-all coin03-final" src="./images/book/book1819/金幣03.png" />
@@ -1787,20 +1816,31 @@ $(function () {
           $(".coin01-final, .coin02-final, .coin03-final").addClass(
             "coin-all-animation",
           );
-        }, 1200),
+        }, 4000),
       );
 
       page1819Timeouts.push(
         setTimeout(() => {
           $(".coin-all-shine").addClass("bubble-fade-in");
-        }, 1500),
+        }, 4500),
       );
 
       page1819Timeouts.push(
         setTimeout(() => {
           $(".bubble18").addClass("bubble-fade-in");
-          $(".crown").addClass("crown-animation");
         }, 2500),
+      );
+
+      page1819Timeouts.push(
+        setTimeout(() => {
+          $(".crown").addClass("crown-animation");
+        }, 12000),
+      );
+
+      page1819Timeouts.push(
+        setTimeout(() => {
+          $(".book19-text").addClass("bubble-fade-in");
+        }, 19000),
       );
     }
 
@@ -1813,6 +1853,7 @@ $(function () {
       $(".coin01-final, .coin02-final, .coin03-final").removeClass(
         "coin-all-animation",
       );
+      $(".book19-text").removeClass("bubble-fade-in");
       $(".crown").removeClass("crown-animation");
       $(".coin-all-shine").removeClass("bubble-fade-in");
       $(".bubble18").removeClass("bubble-fade-in");
@@ -1821,6 +1862,7 @@ $(function () {
       $("#flipbook .coin-all").remove();
       $("#flipbook .coin-all-shine").remove();
       $("#flipbook .girl1819").remove();
+      $("#flipbook .book19-text").remove();
     }
 
     // 第 20–21 頁：小女孩夢境 + 浮出夢境
@@ -1829,6 +1871,7 @@ $(function () {
         `<img class="dream04" src="./images/book/book2021/夢泡04.png"/>
         <img class="dream-light" src="./images/book/book2021/夢泡光.png"/>
         <img class="story20" src="./images/book/book2021/故事20.png"/>
+        <img class="book21-text" src="./images/book/book2021/book21-text.png"/>
         <img class="dream-girl" src="./images/book/book2021/鈴鈴.png"/>
         <img class="dialog20" src="./images/book/book2021/哇!.png"/>
         <img class="dialog21" src="./images/book/book2021/嗯.png"/>
@@ -1854,15 +1897,26 @@ $(function () {
 
       page2021Timeouts.push(
         setTimeout(() => {
-          $(".dialog20").addClass("dialog20-animation");
-          $(".dialog21").addClass("dialog20-animation");
-        }, 2000),
+          $(".dialog20").addClass("bubble-fade-in");
+        }, 5000),
       );
 
       page2021Timeouts.push(
         setTimeout(() => {
           $(".bubble20").addClass("bubble-fade-in");
-        }, 3000),
+        }, 7000),
+      );
+
+      page2021Timeouts.push(
+        setTimeout(() => {
+          $(".dialog21").addClass("bubble-fade-in");
+        }, 10000),
+      );
+
+      page2021Timeouts.push(
+        setTimeout(() => {
+          $(".book21-text").addClass("bubble-fade-in");
+        }, 11000),
       );
     }
 
@@ -1879,6 +1933,8 @@ $(function () {
       $(".bubble20").remove();
       $(".dialog20").remove();
       $(".dialog21").remove();
+      $(".book21-text").remove();
+      $(".book21-text").removeClass("bubble-fade-in");
       $(".dream01").removeClass("dream-animation");
       $(".dream02").removeClass("dream-animation");
       $(".dream03").removeClass("dream-animation");
@@ -1891,19 +1947,30 @@ $(function () {
     }
 
     if (page === 22 || page === 23) {
-      setTimeout(() => {
-        $(".book22").css("opacity", "1");
-        $(".book23").css("opacity", "1");
-        $(".cow-alarm ").css("opacity", "1");
-        $(".sleep-girl-hand").css("opacity", "1");
-        $(".sleep-girl-arm").css("opacity", "1");
-      }, 1000);
+      page2223Timeouts.push(
+        setTimeout(() => {
+          $(".book22").css("opacity", "1");
+          $(".book23").css("opacity", "1");
+          $(".cow-alarm ").css("opacity", "1");
+          $(".sleep-girl-hand").css("opacity", "1");
+          $(".sleep-girl-arm").css("opacity", "1");
+        }, 1000),
+      );
+
+      page2223Timeouts.push(
+        setTimeout(() => {
+          $(".book23-text").addClass("bubble-fade-in");
+        }, 5000),
+      );
     } else {
+      page2223Timeouts.forEach((id) => clearTimeout(id));
+      page2223Timeouts = [];
       $(".book22").css("opacity", "0");
       $(".book23").css("opacity", "0");
       $(".cow-alarm ").css("opacity", "0");
       $(".sleep-girl-hand ").css("opacity", "0");
       $(".sleep-girl-arm").css("opacity", "0");
+      $(".book23-text").removeClass("bubble-fade-in");
     }
 
     // 重置該頁面的所有動畫與音效
@@ -1928,6 +1995,8 @@ $(function () {
       $(".girl-r-hand").removeClass("girl-r-hand-finish");
       $(".milk-stains").removeClass("milk-stains-show");
       $(".milk-drop").removeClass("milk-drop-show");
+      $(".book25-story").removeClass("milk-stains-show");
+      $(".book25-text").removeClass("milk-stains-show");
       $(".milk-flower").css("dispaly", "none");
       $(".milk-flower").removeClass("milk-drop-show");
       $(".milk-smell").removeClass("milk-smell-animation");
@@ -1963,35 +2032,39 @@ $(function () {
 
       page2425Timeouts.push(
         setTimeout(() => {
-          $(".flower").css("opacity", "1");
-        }, 3000),
+          $(".milk-hand").addClass("milk-hand-animation");
+        }, 3300),
       );
-
-      $(".milk-hand").addClass("milk-hand-animation");
 
       page2425Timeouts.push(
         setTimeout(() => {
           $(".milk-drop").addClass("milk-drop-show");
-        }, 1700),
+        }, 5000),
       );
 
       page2425Timeouts.push(
         setTimeout(() => {
           $(".milk-inner").css("opacity", "1");
-        }, 3000),
+        }, 6300),
       );
 
       page2425Timeouts.push(
         setTimeout(() => {
           $(".milk-flower").addClass("milk-drop-show");
           $(".milk-drop").removeClass("milk-drop-show");
-        }, 5000),
+        }, 8300),
       );
 
       page2425Timeouts.push(
         setTimeout(() => {
           $(".milk-smell").addClass("milk-smell-animation");
-        }, 6000),
+        }, 9300),
+      );
+
+      page2425Timeouts.push(
+        setTimeout(() => {
+          $(".click-girl").show();
+        }, 15000),
       );
     }
 
@@ -2027,6 +2100,9 @@ $(function () {
           );
         }
 
+        $(".book25-story").addClass("milk-stains-show");
+        page2425Timeouts.push($(".flower").css("opacity", "1"));
+
         $(".click-girl").hide();
         $(".girl-l-hand-region").addClass("girl-l-hand-finish");
         $(".girl-r-hand").addClass("girl-r-hand-finish");
@@ -2048,10 +2124,15 @@ $(function () {
 
         page2425Timeouts.push(
           setTimeout(() => {
+            $(".book25-text").addClass("milk-stains-show");
+          }, 5000),
+        );
+
+        page2425Timeouts.push(
+          setTimeout(() => {
             for (let i = 1; i <= 6; i++) {
               $(`.flower0${i}`).addClass(`flower0${i}-finish`);
             }
-            playAudio("flower-show", 0);
           }, 2300),
         );
 
@@ -2096,7 +2177,6 @@ $(function () {
 
       page2627Timeouts.push(
         setTimeout(() => {
-          $(".cheers").addClass("cheers-show-animation");
           $(".milk-box").css("opacity", "1");
           $(".father-hand").css("opacity", "1");
           $(".father-hand-milk").css("display", "block");
@@ -2120,7 +2200,7 @@ $(function () {
                 (screenHeight * 0) / 609 +
                 `px) rotate(-72deg)`,
             });
-          }, 3000);
+          }, 5000);
 
           page2627Timeouts.push(
             setTimeout(() => {
@@ -2140,7 +2220,7 @@ $(function () {
                   (screenHeight * -75.386) / 609 +
                   `px) rotate(33deg)`,
               }); //transform: translate(40px, -51px) rotate(33deg);
-            }, 3000),
+            }, 5000),
           );
 
           page2627Timeouts.push(
@@ -2163,7 +2243,7 @@ $(function () {
                 right: (screenHeight * 711) / 609 + "px", //481px
                 transform: "translate(0,0) rotate(0deg)",
               });
-            }, 5500),
+            }, 7500),
           );
         }
 
@@ -2179,7 +2259,7 @@ $(function () {
                 (screenHeight * 0) / 609 +
                 `px) rotate(-72deg)`,
             });
-          }, 3000);
+          }, 5000);
 
           page2627Timeouts.push(
             setTimeout(() => {
@@ -2199,7 +2279,7 @@ $(function () {
                   (visualHeight * -86.21) / 609 +
                   `px) rotate(33deg)`,
               }); //transform: translate(24px, -64px) rotate(33deg);
-            }, 3000),
+            }, 5000),
           );
 
           page2627Timeouts.push(
@@ -2222,7 +2302,7 @@ $(function () {
                 right: (visualHeight * 682.88) / 609 + "px", //507px
                 transform: "translate(0,0) rotate(0deg)",
               });
-            }, 5500),
+            }, 7500),
           );
         }
       }
@@ -2230,7 +2310,7 @@ $(function () {
       page2627Timeouts.push(
         setTimeout(() => {
           $(".daughter-hand-region").addClass("daughter-hand-finish");
-        }, 3000),
+        }, 5000),
       );
 
       if (window.matchMedia("(max-height: 500px)").matches) {
@@ -2238,42 +2318,48 @@ $(function () {
           setTimeout(() => {
             $(".father-hand-region-mb").addClass("father-hand-finish-mb");
             $(".mom-hand-region-mb").addClass("mom-hand-finish-mb");
-          }, 3000),
+          }, 5000),
         );
       } else {
         page2627Timeouts.push(
           setTimeout(() => {
             $(".father-hand-region").addClass("father-hand-finish");
             $(".mom-hand-region").addClass("mom-hand-finish");
-          }, 3000),
+          }, 5000),
         );
       }
 
       page2627Timeouts.push(
         setTimeout(() => {
+          $(".cheers").addClass("bubble-fade-in");
           $(".father-hand-milk").css("opacity", "0");
           $(".daughter-hand-milk").css("opacity", "0");
           $(".mom-hand-milk").css("opacity", "0");
-        }, 4000),
+        }, 6000),
       );
 
       page2627Timeouts.push(
         setTimeout(() => {
           $(".all-milk-stains ").addClass("all-milk-stains-show ");
-        }, 4000),
+        }, 6500),
+      );
+
+      page2627Timeouts.push(
+        setTimeout(() => {
+          $(".sweet-taste").addClass("bubble-fade-in");
+        }, 8500),
       );
 
       page2627Timeouts.push(
         setTimeout(() => {
           $(".cow-right").addClass("cow-right-move");
-        }, 4000),
+        }, 12000),
       );
 
       page2627Timeouts.push(
         setTimeout(() => {
-          $(".sweet-taste").addClass("sweet-taste-animation");
           $(".mow").show();
-        }, 4500),
+        }, 15000),
       );
 
       page2627Timeouts.push(
@@ -2281,7 +2367,7 @@ $(function () {
           $(".father-hand-region").removeClass("father-hand-finish");
           $(".daughter-hand-region").removeClass("daughter-hand-finish");
           $(".mom-hand-region").removeClass("mom-hand-finish");
-        }, 5500),
+        }, 9500),
       );
     }
 
@@ -2298,7 +2384,7 @@ $(function () {
       $(".daughter-hand-milk").css("display", "none");
       $(".daughter-hand-cup").css("opacity", "0");
       $(".mom-hand-milk").css("opacity", "0");
-      $(".cheers").removeClass("cheers-show-animation");
+      $(".cheers").removeClass("bubble-fade-in");
       const removeClasses = [
         // 手部完成、移除
         "father-hand-finish",
@@ -2340,12 +2426,6 @@ $(function () {
         btnDisabled();
 
         resetMilkPage(); // 每次重進頁面重置一次
-
-        page2425Timeouts.push(
-          setTimeout(() => {
-            $(".click-girl").show();
-          }, 8000),
-        );
 
         startMilkAnimation();
       } else {
@@ -2517,7 +2597,7 @@ $(function () {
         $(".daughter-hand-milk").css("opacity", "1");
         $(".mom-hand-milk").css("opacity", "1");
         $(".daughter-hand-milk").removeClass("daughter-hand-milk-empty");
-        $(".sweet-taste").removeClass("sweet-taste-animation");
+        $(".sweet-taste").removeClass("bubble-fade-in");
       }
     });
 
