@@ -44,6 +44,7 @@
     <div class="swipe-cotainer mobile"></div>
     <div class="swipe-pointer"></div>
     <div class="arrow"></div>
+    <div class="book-cover desktop"></div>
     <div class="book-section">
       <!-- 向下滑提示（手機顯示） -->
       <div id="swipe-hint" class="swipe-hint mobile" aria-hidden="true">
@@ -60,6 +61,9 @@
         <div class="mb-hint"></div>
         <div class="mb-icon"></div>
       </div>
+      <audio id="background" loop>
+        <source src="./mp3/background.wav" type="audio/mpeg" />
+      </audio>
       <div id="flipbook">
         <div class="page" id="cover">
           <img class="book book01" src="./images/book/book01/book01.png" />
@@ -78,6 +82,9 @@
           <img class="cow-0-1" src="./images/book/book01/牛1.png" />
           <img class="cow-0-2" src="./images/book/book01/牛2.png" />
           <img class="cow-0-3" src="./images/book/book01/牛3.png" />
+          <audio id="audio-1" controls>
+            <source src="./mp3/01.mp3" type="audio/mpeg" />
+          </audio>
         </div>
         <div class="page">
           <div class="book02-box">
@@ -352,9 +359,6 @@
           <div class="milk-flower"></div>
           <div class="milk-smell"></div>
           <div class="milk-spot"></div>
-          <audio id="milk-drop" controls>
-            <source src="./mp3/pouring.mp3" type="audio/mpeg" />
-          </audio>
         </div>
         <div class="page">
           <img class="book book25" src="./images/book/book25/book25.png" />
@@ -380,9 +384,6 @@
           <img class="girl-r-hand" src="./images/book/book25/右手臂.png" />
           <audio id="audio-13" controls>
             <source src="./mp3/13.mp3" type="audio/mpeg" />
-          </audio>
-          <audio id="drinking-milk" controls>
-            <source src="./mp3/drinking-liquid.mp3" type="audio/mpeg" />
           </audio>
           <audio id="girl-drink-milk" controls>
             <source src="./mp3/girl-drink.mp3" type="audio/mpeg" />
@@ -438,9 +439,6 @@
             />
           </div>
           <div class="cheers"></div>
-          <audio id="drinking-milk" controls>
-            <source src="./mp3/drinking-liquid.mp3" type="audio/mpeg" />
-          </audio>
           <audio id="audio-14" controls>
             <source src="./mp3/14.mp3" type="audio/mpeg" />
           </audio>
@@ -474,6 +472,9 @@
           <img class="fence-28" src="./images/book/book28/柵欄.png" />
           <img class="cow-28-1" src="./images/book/book28/牛1.png" />
           <img class="cow-28-2" src="./images/book/book28/牛2.png" />
+          <audio id="audio-15" controls>
+            <source src="./mp3/15.mp3" type="audio/mpeg" />
+          </audio>
         </div>
       </div>
       <!-- 左右角落區域 -->
@@ -501,7 +502,7 @@
     <div class="controls desktop">
       <button
         class="page-btn prev-page disabled-btn"
-        style="cursor: not-allowed"
+        style="cursor: not-allowed; display: none"
       >
         <img src="./images/common/上一頁灰.png" />
       </button>

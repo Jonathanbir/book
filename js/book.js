@@ -28,6 +28,8 @@ $(function () {
     document.documentElement.style.setProperty("--vh", `${vh}px`);
   }
 
+  let isBookStarted = false;
+
   let page23Timeouts = [];
   let page67Timeouts = [];
   let page89Timeouts = [];
@@ -601,6 +603,33 @@ $(function () {
 
   // 下一頁按鈕
   $(".next-page").on("click", function () {
+    if (!isBookStarted) {
+      isBookStarted = true;
+
+      const bgAudio = document.getElementById("background");
+      const coverAudio = document.getElementById("audio-1");
+
+      // 播放背景音樂
+      if (bgAudio) {
+        bgAudio.loop = true;
+        bgAudio.muted = false;
+        bgAudio.play().catch(() => {});
+      }
+
+      // 播放封面語音
+      if (coverAudio) {
+        coverAudio.currentTime = 0;
+        coverAudio.muted = isMuted;
+        coverAudio.play().catch(() => {});
+      }
+
+      $(".next-page img").attr("src", "./images/common/下一頁.png");
+      $(".prev-page").show();
+      $(".book-cover").remove();
+
+      return;
+    }
+
     $flipbook.turn("next");
   });
 
@@ -642,7 +671,10 @@ $(function () {
 
   function allAudioPause() {
     $("audio").each(function () {
-      this.pause();
+      if (this.id.startsWith("audio-")) {
+        this.pause();
+        this.currentTime = 0;
+      }
     });
   }
 
@@ -2039,7 +2071,7 @@ $(function () {
       page2425Timeouts.push(
         setTimeout(() => {
           $(".milk-drop").addClass("milk-drop-show");
-        }, 5000),
+        }, 4000),
       );
 
       page2425Timeouts.push(
@@ -2112,7 +2144,6 @@ $(function () {
         page2425Timeouts.push(
           setTimeout(() => {
             $(".girl-l-hand-milk").css("opacity", "0");
-            playAudio("drinking-milk", 0);
           }, 1000),
         );
 
@@ -2416,6 +2447,11 @@ $(function () {
 
     // 翻到該頁才開始動作
     $("#flipbook").bind("turned", function (event, page) {
+      if (page > 1 && !window.matchMedia("(max-height: 500px)").matches) {
+        $("#right-up-corner, #right-down-corner")
+          .prop("disabled", false)
+          .show();
+      }
       // 第 24–25 頁：點擊小女孩喝牛奶
       if (page === 24 || page === 25) {
         isCanNotFlip();
@@ -2667,12 +2703,18 @@ $(function () {
         );
 
         if (isSafari() || isIOSChrome()) {
+          $(".text06").css({
+            width: visualHeight + "px",
+          });
           $(".knock").css({
             right: (visualHeight * 296.34) / 609 + "px", //220
             bottom: (visualHeight * 188.58) / 609 + "px", //140
           });
         }
         if (isAndroidChrome()) {
+          $(".text06").css({
+            width: screenHeight + "px",
+          });
           $(".knock").css({
             right: (screenHeight * 280.85) / 609 + "px", //190
             bottom: (screenHeight * 184.77) / 609 + "px", //125
@@ -3054,47 +3096,6 @@ $(function () {
       }
     }
 
-    let playTimeout;
-    let latestPage = 1;
-
-    // 頁面對應的音檔 ID 對照表
-    const pageAudioMap = {
-      2: "audio-2",
-      3: "audio-2",
-      4: "audio-3",
-      5: "audio-3",
-      6: "audio-4",
-      7: "audio-4",
-      8: "audio-5",
-      9: "audio-5",
-      10: "audio-6",
-      11: "audio-6",
-      12: "audio-7",
-      13: "audio-7",
-      14: "audio-8",
-      15: "audio-8",
-      16: "audio-9",
-      17: "audio-9",
-      18: "audio-10",
-      19: "audio-10",
-      20: "audio-11",
-      21: "audio-11",
-      22: "audio-12",
-      23: "audio-12",
-      24: "audio-13",
-      25: "audio-13",
-      26: "audio-14",
-      27: "audio-14",
-    };
-
-    // 停止所有音樂
-    function allAudioPause() {
-      $("audio").each(function () {
-        this.pause();
-        this.currentTime = 0;
-      });
-    }
-
     // 翻頁事件
     $("#flipbook").bind("turned", function (event, page) {
       latestPage = page;
@@ -3116,28 +3117,13 @@ $(function () {
         }
       }
 
-      // 若已有計時器，清除
       if (playTimeout) clearTimeout(playTimeout);
 
       playTimeout = setTimeout(() => {
-        if (page !== latestPage) return; // 防止快速切頁
+        if (page !== latestPage) return;
 
-        allAudioPause();
-
-        setTimeout(() => {
-          const audioId = pageAudioMap[page];
-          if (audioId) {
-            const audio = document.getElementById(audioId);
-            if (audio) {
-              audio.currentTime = 0;
-              audio.muted = isMuted; // 🔸 關鍵：重新套用靜音狀態
-              audio.play().catch(() => {
-                console.log("自動播放被阻擋，請點擊頁面再播放");
-              });
-            }
-          }
-        }, 1000);
-      }, 100);
+        playAudioByPage(page);
+      }, 300);
     });
 
     $("#flipbook").on("mouseup", function (e) {
@@ -3440,15 +3426,87 @@ $(function () {
     applyPageRule(page);
   });
 
+  let playTimeout;
+  let latestPage = 1;
+
+  // 頁面對應的音檔 ID 對照表
+  const pageAudioMap = {
+    1: "audio-1",
+    2: "audio-2",
+    3: "audio-2",
+    4: "audio-3",
+    5: "audio-3",
+    6: "audio-4",
+    7: "audio-4",
+    8: "audio-5",
+    9: "audio-5",
+    10: "audio-6",
+    11: "audio-6",
+    12: "audio-7",
+    13: "audio-7",
+    14: "audio-8",
+    15: "audio-8",
+    16: "audio-9",
+    17: "audio-9",
+    18: "audio-10",
+    19: "audio-10",
+    20: "audio-11",
+    21: "audio-11",
+    22: "audio-12",
+    23: "audio-12",
+    24: "audio-13",
+    25: "audio-13",
+    26: "audio-14",
+    27: "audio-14",
+    28: "audio-15",
+  };
+
+  // 停止所有音樂
+  function allAudioPause() {
+    $("audio").each(function () {
+      if (this.id.startsWith("audio-")) {
+        this.pause();
+        this.currentTime = 0;
+      }
+    });
+  }
+
+  // 若已有計時器，清除
+  function playAudioByPage(page) {
+    allAudioPause();
+
+    const audioId = pageAudioMap[page];
+    if (audioId) {
+      const audio = document.getElementById(audioId);
+      if (audio) {
+        audio.currentTime = 0;
+        audio.muted = isMuted;
+        audio.play().catch(() => {
+          console.log("瀏覽器阻擋自動播放");
+        });
+      }
+    }
+  }
+
   /* ======================
    🔥 初始化補救（一開始page是undefined關鍵）
 ====================== */
   $(document).ready(function () {
-    const initPage = $("#flipbook").turn("page") || 1;
-    currentMobilePage = initPage;
-    applyPageRule(initPage);
-  });
+    if (!window.matchMedia("(max-height: 500px)").matches) {
+      // 封面剛載入，禁用角落按鈕
+      $("#right-up-corner, #right-down-corner").prop("disabled", true);
 
+      // 如果你想同時隱藏它們（避免被 hover 或看到折角效果）
+      $("#right-up-corner, #right-down-corner").hide();
+
+      // 初始狀態改成「開啟」
+      $(".next-page img").attr("src", "./images/common/開始.png");
+    }
+    // 取得目前頁數（預設應該是 1）
+    let currentPage = $("#flipbook").turn("page") || 1;
+
+    playAudioByPage(currentPage);
+  });
   /* ======================
    touch events
 ====================== */
