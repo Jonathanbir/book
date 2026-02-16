@@ -1356,6 +1356,17 @@ button {
   animation: listRotate 2s ease-in-out 1s infinite;
 }
 
+.list {
+  position: absolute;
+  right: 36%;
+  bottom: 20%;
+  z-index: 101;
+  width: 119px;
+  animation: listRotate 2s ease-in-out 1s infinite;
+  transition: all 1s ease-in-out;
+  opacity: 0;
+}
+
 @keyframes listRotate {
   0% {
     transform: rotate(-10deg);
@@ -1365,31 +1376,6 @@ button {
   }
   100% {
     transform: rotate(-10deg);
-  }
-}
-
-.list {
-  position: absolute;
-  right: 36%;
-  bottom: 20%;
-  z-index: 101;
-  width: 119px;
-  animation: listShow 2s ease-in-out 1s infinite;
-  transition: all 1s ease-in-out;
-  opacity: 0;
-}
-
-@keyframes listShow {
-  0% {
-    opacity: 0;
-    transform: rotate(-15deg);
-  }
-  50% {
-    transform: rotate(15deg);
-  }
-  100% {
-    opacity: 1;
-    transform: rotate(-15deg);
   }
 }
 

@@ -110,6 +110,37 @@ $(function () {
   //     isIPad()
   // );
 
+  const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
+  // 背景音樂音量控制
+  const bgGainNode = audioContext.createGain();
+  bgGainNode.gain.value = 0.3; // 🔹 背景音量（0 ~ 1）
+
+  // 語音音量控制
+  const voiceGainNode = audioContext.createGain();
+  voiceGainNode.gain.value = 1.5; // 🔹 語音音量（可超過1，但小心失真）
+
+  // 接到輸出
+  bgGainNode.connect(audioContext.destination);
+
+  let bgSource = null;
+
+  async function playBackground() {
+    const response = await fetch("./mp3/background.wav");
+    console.log("response:", response);
+    const arrayBuffer = await response.arrayBuffer();
+    const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
+
+    bgSource = audioContext.createBufferSource();
+    bgSource.buffer = audioBuffer;
+    bgSource.loop = true;
+
+    // 接到背景音量控制
+    bgSource.connect(bgGainNode);
+
+    bgSource.start(0);
+  }
+
   if (!window.matchMedia("(max-height: 500px)").matches) {
     $flipbook.turn({
       width: 1200,
@@ -602,27 +633,17 @@ $(function () {
   });
 
   // 下一頁按鈕
-  $(".next-page").on("click", function () {
+  $(".next-page").on("click", async function () {
     if (!isBookStarted) {
       isBookStarted = true;
 
-      const bgAudio = document.getElementById("background");
-      const coverAudio = document.getElementById("audio-1");
-
-      // 播放背景音樂
-      if (bgAudio) {
-        bgAudio.loop = true;
-        bgAudio.muted = false;
-        bgAudio.play().catch(() => {});
+      if (audioContext.state === "suspended") {
+        await audioContext.resume();
       }
 
-      // 播放封面語音
-      if (coverAudio) {
-        coverAudio.currentTime = 0;
-        coverAudio.muted = isMuted;
-        coverAudio.play().catch(() => {});
-      }
-
+      playBackground();
+      playVoice("./mp3/01.mp3");
+      console.log(voiceGainNode.gain.value);
       $(".next-page img").attr("src", "./images/common/下一頁.png");
       $(".prev-page").show();
       $(".book-cover").remove();
@@ -676,22 +697,6 @@ $(function () {
         this.currentTime = 0;
       }
     });
-  }
-
-  // 統一音效播放函式（避免重複 code）
-  function playAudio(id, delay = 0) {
-    const audio = document.getElementById(id);
-    if (!audio) return;
-
-    // 用 muted 屬性控制輸出，不中斷播放
-    audio.muted = isMuted;
-
-    setTimeout(() => {
-      audio.currentTime = 0;
-      audio.play().catch(() => {
-        console.log("播放被瀏覽器阻止，請點擊頁面後再播放。");
-      });
-    }, delay);
   }
 
   // 監聽 mouseup，更新目前頁碼狀態
@@ -945,7 +950,7 @@ $(function () {
 
         $("#flipbook .knock , #flipbook .door").on("click", () => {
           $(".knock").css("display", "none");
-          playAudio("knock", 0);
+          playVoice("./mp3/knock.mp3");
           $(".door").addClass("door-opening");
           $(".peoples").addClass("peoples-open");
           $(".text06").addClass("cloud-fade-in");
@@ -994,7 +999,7 @@ $(function () {
             }, 12000),
           );
 
-          playAudio("audio-4-click", 0);
+          playVoice("./mp3/04.mp3");
         });
       }
     }
@@ -1110,7 +1115,6 @@ $(function () {
     }
 
     if (page === 10 || page === 11) {
-      $(".list").addClass("list-animation");
       $("#flipbook").append(
         ` <img class="text11" src="./images/book/book11/text11.png">
         <img class="girls-head" src="./images/book/book10/媽媽鈴鈴.png"/>        
@@ -1152,6 +1156,7 @@ $(function () {
 
       page1011Timeouts.push(
         setTimeout(() => {
+          $(".list").addClass("bubble-fade-in");
           $(".star11").addClass("star-fade-in");
         }, 2000),
       );
@@ -1205,7 +1210,7 @@ $(function () {
       $(".list-board").css("opacity", "0");
       $(".rainbow").css("opacity", "0");
       $(".girls-head").css("opacity", "0");
-      $(".list").removeClass("list-animation");
+      $(".list").removeClass("bubble-fade-in");
       $(".cloud-01").removeClass("cloud-animation");
       $(".cloud-02").removeClass("cloud-animation");
       $(".book10-text").removeClass("bubble-fade-in");
@@ -1391,7 +1396,7 @@ $(function () {
             }, 27000),
           );
 
-          playAudio("audio-11-click", 0);
+          playVoice("./mp3/07.mp3");
         },
       );
 
@@ -1559,7 +1564,7 @@ $(function () {
               }, 5000),
             );
 
-            playAudio("sucking-coin", 0);
+            playVoice("./mp3/sucking-coin.mp3");
 
             page1415Timeouts.push(
               setTimeout(() => {
@@ -1746,7 +1751,9 @@ $(function () {
           $(".click-hearing-heart-box").hide();
           $(".finish-mission03").hide();
 
-          playAudio("hearts-coin", 1000);
+          setTimeout(() => {
+            playVoice("./mp3/hear-coin.mp3");
+          }, 1000);
 
           page1617Timeouts.push(
             setTimeout(() => {
@@ -1848,13 +1855,13 @@ $(function () {
           $(".coin01-final, .coin02-final, .coin03-final").addClass(
             "coin-all-animation",
           );
-        }, 4000),
+        }, 3000),
       );
 
       page1819Timeouts.push(
         setTimeout(() => {
           $(".coin-all-shine").addClass("bubble-fade-in");
-        }, 4500),
+        }, 3500),
       );
 
       page1819Timeouts.push(
@@ -1866,13 +1873,13 @@ $(function () {
       page1819Timeouts.push(
         setTimeout(() => {
           $(".crown").addClass("crown-animation");
-        }, 12000),
+        }, 11000),
       );
 
       page1819Timeouts.push(
         setTimeout(() => {
           $(".book19-text").addClass("bubble-fade-in");
-        }, 19000),
+        }, 18000),
       );
     }
 
@@ -1920,9 +1927,7 @@ $(function () {
           $(".dream02").addClass("dream-animation");
           $(".dream03").addClass("dream-animation");
           $(".dream04").addClass("dream-animation");
-          $(".dream-light").addClass("sweet-taste-animation");
           $(".story20").addClass("dream-animation");
-          $(".star20").addClass("dialog20-animation");
           $(".dream-girl").addClass("dream-girl-animation");
         }, 1000),
       );
@@ -1936,19 +1941,21 @@ $(function () {
       page2021Timeouts.push(
         setTimeout(() => {
           $(".bubble20").addClass("bubble-fade-in");
-        }, 7000),
+          $(".dream-light").addClass("sweet-taste-animation");
+          $(".star20").addClass("dialog20-animation");
+        }, 6000),
       );
 
       page2021Timeouts.push(
         setTimeout(() => {
           $(".dialog21").addClass("bubble-fade-in");
-        }, 10000),
+        }, 9000),
       );
 
       page2021Timeouts.push(
         setTimeout(() => {
           $(".book21-text").addClass("bubble-fade-in");
-        }, 11000),
+        }, 10000),
       );
     }
 
@@ -2036,8 +2043,6 @@ $(function () {
       for (let i = 1; i <= 6; i++) {
         $(`.flower0${i}`).removeClass(`flower0${i}-finish`);
       }
-
-      // $(".girl-click-region").removeClass("played"); // ✅ 允許重複進入頁面動畫
 
       $("audio").each(function () {
         this.pause();
@@ -2139,7 +2144,7 @@ $(function () {
         $(".girl-l-hand-region").addClass("girl-l-hand-finish");
         $(".girl-r-hand").addClass("girl-r-hand-finish");
 
-        playAudio("girl-drink-milk", 0);
+        playVoice("./mp3/girl-drink.mp3");
 
         page2425Timeouts.push(
           setTimeout(() => {
@@ -2340,6 +2345,7 @@ $(function () {
 
       page2627Timeouts.push(
         setTimeout(() => {
+          $(".cheers").addClass("bubble-fade-in");
           $(".daughter-hand-region").addClass("daughter-hand-finish");
         }, 5000),
       );
@@ -2362,7 +2368,6 @@ $(function () {
 
       page2627Timeouts.push(
         setTimeout(() => {
-          $(".cheers").addClass("bubble-fade-in");
           $(".father-hand-milk").css("opacity", "0");
           $(".daughter-hand-milk").css("opacity", "0");
           $(".mom-hand-milk").css("opacity", "0");
@@ -2378,7 +2383,7 @@ $(function () {
       page2627Timeouts.push(
         setTimeout(() => {
           $(".sweet-taste").addClass("bubble-fade-in");
-        }, 8500),
+        }, 7000),
       );
 
       page2627Timeouts.push(
@@ -2398,7 +2403,7 @@ $(function () {
           $(".father-hand-region").removeClass("father-hand-finish");
           $(".daughter-hand-region").removeClass("daughter-hand-finish");
           $(".mom-hand-region").removeClass("mom-hand-finish");
-        }, 9500),
+        }, 8000),
       );
     }
 
@@ -3116,14 +3121,6 @@ $(function () {
           });
         }
       }
-
-      if (playTimeout) clearTimeout(playTimeout);
-
-      playTimeout = setTimeout(() => {
-        if (page !== latestPage) return;
-
-        playAudioByPage(page);
-      }, 300);
     });
 
     $("#flipbook").on("mouseup", function (e) {
@@ -3423,43 +3420,11 @@ $(function () {
 ====================== */
   $("#flipbook").on("turned", function (e, page) {
     currentMobilePage = page;
+    playAudioByPage(page);
     applyPageRule(page);
   });
 
-  let playTimeout;
   let latestPage = 1;
-
-  // 頁面對應的音檔 ID 對照表
-  const pageAudioMap = {
-    1: "audio-1",
-    2: "audio-2",
-    3: "audio-2",
-    4: "audio-3",
-    5: "audio-3",
-    6: "audio-4",
-    7: "audio-4",
-    8: "audio-5",
-    9: "audio-5",
-    10: "audio-6",
-    11: "audio-6",
-    12: "audio-7",
-    13: "audio-7",
-    14: "audio-8",
-    15: "audio-8",
-    16: "audio-9",
-    17: "audio-9",
-    18: "audio-10",
-    19: "audio-10",
-    20: "audio-11",
-    21: "audio-11",
-    22: "audio-12",
-    23: "audio-12",
-    24: "audio-13",
-    25: "audio-13",
-    26: "audio-14",
-    27: "audio-14",
-    28: "audio-15",
-  };
 
   // 停止所有音樂
   function allAudioPause() {
@@ -3471,20 +3436,77 @@ $(function () {
     });
   }
 
-  // 若已有計時器，清除
-  function playAudioByPage(page) {
-    allAudioPause();
+  // 動態播放語音（不影響 background）
+  let currentVoiceSource = null;
 
-    const audioId = pageAudioMap[page];
-    if (audioId) {
-      const audio = document.getElementById(audioId);
-      if (audio) {
-        audio.currentTime = 0;
-        audio.muted = isMuted;
-        audio.play().catch(() => {
-          console.log("瀏覽器阻擋自動播放");
-        });
+  async function playVoice(src) {
+    try {
+      // 如果之前有播放中的語音，先停止
+      if (currentVoiceSource) {
+        currentVoiceSource.stop();
+        currentVoiceSource.disconnect();
+        currentVoiceSource = null;
       }
+
+      // 取得音檔
+      const response = await fetch(src);
+      const arrayBuffer = await response.arrayBuffer();
+      const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
+
+      // 建立新的播放來源
+      const voiceSource = audioContext.createBufferSource();
+      voiceSource.buffer = audioBuffer;
+
+      // 接到語音音量控制節點
+      voiceSource.connect(voiceGainNode);
+      voiceGainNode.connect(audioContext.destination);
+
+      // 播放
+      voiceSource.start(0);
+
+      currentVoiceSource = voiceSource;
+
+      console.log("語音播放成功");
+    } catch (err) {
+      console.log("語音播放失敗:", err);
+    }
+  }
+
+  function playAudioByPage(page) {
+    const audioFileMap = {
+      2: "./mp3/02.mp3",
+      3: "./mp3/02.mp3",
+      4: "./mp3/03.mp3",
+      5: "./mp3/03.mp3",
+      6: "audio-4",
+      7: "audio-4",
+      8: "./mp3/05.mp3",
+      9: "./mp3/05.mp3",
+      10: "./mp3/06.mp3",
+      11: "./mp3/06.mp3",
+      12: "audio-7",
+      13: "audio-7",
+      14: "./mp3/08.mp3",
+      15: "./mp3/08.mp3",
+      16: "./mp3/09.mp3",
+      17: "./mp3/09.mp3",
+      18: "./mp3/10.mp3",
+      19: "./mp3/10.mp3",
+      20: "./mp3/11.mp3",
+      21: "./mp3/11.mp3",
+      22: "./mp3/12.mp3",
+      23: "./mp3/12.mp3",
+      24: "./mp3/13.mp3",
+      25: "./mp3/13.mp3",
+      26: "./mp3/14.mp3",
+      27: "./mp3/14.mp3",
+      28: "./mp3/15.mp3",
+      // 依照你實際檔案寫
+    };
+
+    const src = audioFileMap[page];
+    if (src) {
+      playVoice(src);
     }
   }
 
@@ -3502,10 +3524,11 @@ $(function () {
       // 初始狀態改成「開啟」
       $(".next-page img").attr("src", "./images/common/開始.png");
     }
+
     // 取得目前頁數（預設應該是 1）
     let currentPage = $("#flipbook").turn("page") || 1;
 
-    playAudioByPage(currentPage);
+    // playAudioByPage(currentPage);
   });
   /* ======================
    touch events
