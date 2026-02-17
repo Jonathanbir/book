@@ -162,6 +162,7 @@ $(function () {
 
         playBackground();
         playVoice("./mp3/01.mp3");
+        $("#cover").addClass("book01-start");
         console.log(voiceGainNode.gain.value);
       }
     });
@@ -666,7 +667,7 @@ $(function () {
 
       playBackground();
       playVoice("./mp3/01.mp3");
-      console.log(voiceGainNode.gain.value);
+      $("#cover").addClass("book01-start");
       $(".next-page img").attr("src", "./images/common/下一頁.png");
       $(".prev-page").show();
       $(".book-cover").remove();

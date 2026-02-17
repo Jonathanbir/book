@@ -251,8 +251,11 @@ button {
   right: -20%;
   z-index: 1;
   width: 1200px;
-  animation: cloudMove 10s ease-in-out infinite;
   transition: all 10s ease-in-out;
+}
+
+.book01-start .cloud-0 {
+  animation: cloudMove 10s ease-in-out infinite;
 }
 
 .bubble-0 {
@@ -261,8 +264,11 @@ button {
   right: -20%;
   z-index: 4;
   width: 1500px;
-  animation: bubbleMove 10s ease-in-out infinite;
   transition: all 10s ease-in-out;
+}
+
+.book01-start .bubble-0 {
+  animation: bubbleMove 10s ease-in-out infinite;
 }
 
 .star-0 {
@@ -271,8 +277,11 @@ button {
   right: 3%;
   z-index: 10;
   width: 1200px;
-  animation: starShow 1s ease-in-out infinite;
   transition: all 0.5s ease-in-out;
+}
+
+.book01-start .star-0 {
+  animation: starShow 1s ease-in-out infinite;
 }
 
 @keyframes starShow {
@@ -356,8 +365,11 @@ button {
   margin: auto;
   width: 100%;
   height: 100%;
-  animation: magnifierMove 2s ease-in-out infinite;
   transition: all 1s ease-in-out;
+}
+
+.book01-start .left-hand-magnifier {
+  animation: magnifierMove 2s ease-in-out infinite;
 }
 
 @keyframes magnifierMove {
