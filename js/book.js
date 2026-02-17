@@ -30,6 +30,9 @@ $(function () {
 
   let isBookStarted = false;
 
+  const BG_VOLUME = 0.3;
+  const VOICE_VOLUME = 1.2;
+
   let page23Timeouts = [];
   let page67Timeouts = [];
   let page89Timeouts = [];
@@ -114,7 +117,7 @@ $(function () {
 
   // 背景音樂音量控制
   const bgGainNode = audioContext.createGain();
-  bgGainNode.gain.value = 0.3; // 🔹 背景音量（0 ~ 1）
+  bgGainNode.gain.value = BG_VOLUME; // 🔹 背景音量（0 ~ 1）
 
   // 語音音量控制
   const voiceGainNode = audioContext.createGain();
@@ -668,10 +671,15 @@ $(function () {
   $(".mute-toggle,.mute-mobile-toggle").on("click", function () {
     isMuted = !isMuted;
 
-    // 控制所有 audio 是否靜音
-    $("audio").prop("muted", isMuted);
+    if (isMuted) {
+      bgGainNode.gain.value = 0;
+      voiceGainNode.gain.value = 0;
+    } else {
+      bgGainNode.gain.value = BG_VOLUME; // 你原本背景音量
+      voiceGainNode.gain.value = VOICE_VOLUME; // 你原本語音音量
+    }
 
-    // 切換 icon + 文字
+    // 切換 icon + 文字（保留你原本 UI）
     if (isMuted) {
       if (!window.matchMedia("(max-height: 500px)").matches) {
         $(".mute-toggle img").attr("src", "./images/common/靜音按鈕開啟.png");
