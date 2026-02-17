@@ -3915,6 +3915,7 @@ button {
   .book-section {
     width: 100vw;
     height: 100vh;
+    left: -23%;
     margin-top: 0;
   }
 
@@ -4375,8 +4376,7 @@ button {
   }
 
   .bubble7 {
-    width: 87%;
-    height: 86%;
+    width: 100%;
   }
 
   .eyes-8 {

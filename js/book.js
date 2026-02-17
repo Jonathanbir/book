@@ -22,6 +22,7 @@ $(function () {
   const visualWidth = visualViewport.width;
   const visualHeight = visualViewport.height;
   const widthGap = (visualWidth - visualHeight * 2) / 2;
+  const widtScreenhGap = (screenWidth - screenHeight * 2) / 2;
 
   const vh = window.visualViewport.height;
   function updateHeight() {
@@ -150,8 +151,19 @@ $(function () {
       autoCenter: true,
     });
   } else {
-    $(".pop-up-box").on("click", function () {
+    $(".pop-up-box").on("click", async function () {
       $(".pop-up-box").css("display", "none");
+      if (!isBookStarted) {
+        isBookStarted = true;
+
+        if (audioContext.state === "suspended") {
+          await audioContext.resume();
+        }
+
+        playBackground();
+        playVoice("./mp3/01.mp3");
+        console.log(voiceGainNode.gain.value);
+      }
     });
 
     if (isSafari()) {
@@ -213,6 +225,15 @@ $(function () {
         width: screenHeight * 2,
         height: screenHeight,
         autoCenter: true,
+      });
+      console.log("widtScreenhGap;", widtScreenhGap);
+      $("#left-up-corner").css({
+        top: barHeight,
+        left: (visualWidth - screenHeight * 2) / 2 + "px",
+      });
+      $("#right-up-corner").css({
+        top: barHeight,
+        right: (visualWidth - screenHeight * 2) / 2 + "px",
       });
       $(".book").css("height", screenHeight + "px");
       $("#left-down-corner").css({
@@ -2727,8 +2748,8 @@ $(function () {
             width: visualHeight + "px",
           });
           $(".knock").css({
-            right: (visualHeight * 296.34) / 609 + "px", //220
-            bottom: (visualHeight * 188.58) / 609 + "px", //140
+            right: (visualHeight * 336.725) / 609 + "px", //250
+            bottom: (visualHeight * 269.38) / 609 + "px", //200
           });
         }
         if (isAndroidChrome()) {
@@ -2736,8 +2757,8 @@ $(function () {
             width: screenHeight + "px",
           });
           $(".knock").css({
-            right: (screenHeight * 280.85) / 609 + "px", //190
-            bottom: (screenHeight * 184.77) / 609 + "px", //125
+            right: (screenHeight * 331.1) / 609 + "px", //224
+            bottom: (screenHeight * 273.46) / 609 + "px", //185
           });
 
           if (screenHeight <= 360) {
@@ -2796,6 +2817,11 @@ $(function () {
 
       if (page === 12 || page === 13) {
         if (isAndroidChrome()) {
+          $(".finish-mission01").css({
+            left: (screenHeight * 114.486) / 609 + "px", //85
+            top: (screenHeight * 121.22) / 609 + "px", //90
+          });
+
           $(".check01").css({
             right: (screenHeight * 198.07) / 609 + "px", //134
             top: (screenHeight * 177.38) / 609 + "px", //120
@@ -2808,6 +2834,11 @@ $(function () {
         }
 
         if (isSafari() || isIOSChrome()) {
+          $(".finish-mission01").css({
+            left: (visualHeight * 114.486) / 609 + "px", //85
+            top: (visualHeight * 121.22) / 609 + "px", //90
+          });
+
           $(".check01").css({
             right: (visualHeight * 199.34) / 609 + "px", //148
             top: (visualHeight * 179.137) / 609 + "px", //133
@@ -2822,6 +2853,12 @@ $(function () {
 
       if (page === 14 || page === 15) {
         if (isAndroidChrome()) {
+          $(".finish-mission02").css({
+            width: (screenHeight * 192.16) / 609 + "px", //130
+            left: (screenHeight * 517.354) / 609 + "px", //350
+            top: (screenHeight * 44.345) / 609 + "px", //30
+          });
+
           $(".check02").css({
             right: (screenHeight * 196.65) / 609 + "px", //146
             top: (screenHeight * 215.5) / 609 + "px", //160
@@ -2834,6 +2871,12 @@ $(function () {
         }
 
         if (isSafari() || isIOSChrome()) {
+          $(".finish-mission02").css({
+            width: (visualHeight * 192.16) / 609 + "px", //130
+            left: (visualHeight * 517.354) / 609 + "px", //350
+            top: (visualHeight * 44.345) / 609 + "px", //30
+          });
+
           $(".check02").css({
             right: (visualHeight * 196.65) / 609 + "px", //146
             top: (visualHeight * 215.5) / 609 + "px", //160
@@ -2883,6 +2926,9 @@ $(function () {
 
       if (page === 18 || page === 19) {
         if (isSafari() || isIOSChrome()) {
+          $(".book19-text").css({
+            width: visualHeight + "px",
+          });
           $(".crown").css({
             width: (visualHeight * 150) / 609 + "px",
             height: (visualHeight * 150) / 609 + "px",
@@ -2893,6 +2939,9 @@ $(function () {
           });
         }
         if (isAndroidChrome()) {
+          $(".book19-text").css({
+            width: screenHeight + "px",
+          });
           $(".crown").css({
             width: (screenHeight * 150) / 609 + "px",
             height: (screenHeight * 150) / 609 + "px",
@@ -2905,6 +2954,32 @@ $(function () {
       }
       console.log("visualHeight:", visualHeight);
       console.log("screenHeight:", screenHeight);
+
+      if (page === 20 || page === 21) {
+        if (isSafari() || isIOSChrome()) {
+          $(".book21-text").css({
+            width: visualHeight + "px",
+          });
+        }
+        if (isAndroidChrome()) {
+          $(".book21-text").css({
+            width: screenHeight + "px",
+          });
+        }
+      }
+
+      if (page === 22 || page === 23) {
+        if (isSafari() || isIOSChrome()) {
+          $(".book23-text").css({
+            width: visualHeight + "px",
+          });
+        }
+        if (isAndroidChrome()) {
+          $(".book23-text").css({
+            width: screenHeight + "px",
+          });
+        }
+      }
 
       if (page === 24 || page === 25) {
         if (isSafari() || isIOSChrome()) {
@@ -3018,6 +3093,15 @@ $(function () {
             left: (visualHeight * 35) / 609 + "px", //26px
           });
 
+          $(".cow-right").css({
+            width: (visualHeight * 345) / 609 + "px", //250px
+          });
+
+          $(".mow").css({
+            top: (visualHeight * 255.9) / 609 + "px", //190px
+            right: (visualHeight * 255.9) / 609 + "px", //190px
+          });
+
           setTimeout(() => {
             $(".mom-hand-region-mb").css({
               bottom: (visualHeight * 204.744) / 609 + "px", //152px
@@ -3083,6 +3167,15 @@ $(function () {
             width: (screenHeight * 59.126) / 609 + "px", //40px
             bottom: (screenHeight * -107.9) / 609 + "px", //-73
             left: (screenHeight * 38.432) / 609 + "px", //26px
+          });
+
+          $(".cow-right").css({
+            width: (screenHeight * 340) / 609 + "px", //230px
+          });
+
+          $(".mow").css({
+            top: (screenHeight * 255.9) / 609 + "px", //190px
+            right: (screenHeight * 255.9) / 609 + "px", //190px
           });
 
           $(".all-milk-stains").css({
@@ -3262,7 +3355,7 @@ $(function () {
         }
         if (isAndroidChrome()) {
           $(".book-section").css({
-            transform: `translateX(` + (screenHeight * 133.034) / 609 + `px)`, //90
+            left: (screenHeight * -351.7) / 609 + "px", //-210
           });
         }
       }
@@ -3300,7 +3393,7 @@ $(function () {
 
         if (isAndroidChrome()) {
           $(".book-section").css({
-            transform: `translateX(` + (screenHeight * 443.4466) / 609 + `px)`, //90
+            left: "0px",
           });
         }
       }
