@@ -671,6 +671,7 @@ $(function () {
       $(".next-page img").attr("src", "./images/common/下一頁.png");
       $(".prev-page").show();
       $(".book-cover").remove();
+      $(".replay-btn").css("display", "block");
 
       return;
     }
@@ -718,6 +719,8 @@ $(function () {
       }
     }
   });
+
+  $(".replay-btn").on("click", function () {});
 
   function allAudioPause() {
     $("audio").each(function () {
@@ -2487,8 +2490,78 @@ $(function () {
       $(".mow").hide();
     }
 
+    if (page === 26 || page === 27) {
+      page2627Timeouts.push(
+        setTimeout(() => {
+          $("#right-down-corner").show();
+        }, 500),
+      );
+
+      if (window.matchMedia("(max-height: 500px)").matches) {
+        page2627Timeouts.push(
+          setTimeout(() => {
+            $("#flipbook").append(
+              ' <div class="mom-hand-region-mb"><div class="mom-hand-milk-region"><img class="mom-hand-milk" src="./images/book/book2627/牛奶.png"/><img class="mom-hand-cup" src="./images/book/book2627/空杯.png"/></div><img class="mom-hand" src="./images/book/book2627/媽媽手.png"/></div>',
+            );
+            $(".mom-hand").css({
+              width: (visualHeight * 208.785) / 609 + "px", //155px
+            });
+
+            $(".mom-hand-cup").css({
+              width: (visualHeight * 53.88) / 609 + "px", //40px
+              bottom: (visualHeight * -76.78) / 609 + "px", //-57px
+              left: (visualHeight * 8.082) / 609 + "px", //-6px
+            });
+
+            $(".mom-hand-milk").css({
+              width: (visualHeight * 53.88) / 609 + "px", //40px
+              bottom: (visualHeight * -76.78) / 609 + "px", //-57px
+              left: (visualHeight * 8.082) / 609 + "px", //-6px
+            });
+          }, 1500),
+        );
+      } else {
+        if (!$(".mom-hand").length) {
+          page2627Timeouts.push(
+            setTimeout(() => {
+              $("#flipbook").append(
+                ' <div class="mom-hand-region"><div class="mom-hand-milk-region"><img class="mom-hand-milk" src="./images/book/book2627/牛奶.png"/><img class="mom-hand-cup" src="./images/book/book2627/空杯.png"/></div><img class="mom-hand" src="./images/book/book2627/媽媽手.png"/></div>',
+              );
+            }, 1500),
+          );
+        }
+      }
+
+      page2627Timeouts.push(
+        setTimeout(() => {
+          $(".mom-hand").css("opacity", "1");
+          $(".mom-hand-milk").css("opacity", "1");
+          $(".mom-hand-cup").css("opacity", "1");
+        }, 2000),
+      );
+    }
+
     // 翻到該頁才開始動作
     $("#flipbook").bind("turned", function (event, page) {
+      latestPage = page;
+
+      // 書本定位
+      if (!isIPad() && !window.matchMedia("(max-height: 500px)").matches) {
+        if (page === 1) {
+          $(".book-section").css({
+            left: "-300px",
+          });
+        } else if (page === 28) {
+          $(".book-section").css({
+            left: "17%",
+          });
+        } else {
+          $(".book-section").css({
+            left: "0px",
+          });
+        }
+      }
+
       if (page > 1 && !window.matchMedia("(max-height: 500px)").matches) {
         $("#right-up-corner, #right-down-corner")
           .prop("disabled", false)
@@ -2509,141 +2582,7 @@ $(function () {
       } else {
         resetMilkPage();
       }
-    });
 
-    // Turn.js event
-    $("#flipbook").bind("turning", function (event, page) {
-      if (page === 26 || page === 27) {
-        page2627Timeouts.push(
-          setTimeout(() => {
-            $("#right-down-corner").show();
-          }, 500),
-        );
-
-        if (window.matchMedia("(max-height: 500px)").matches) {
-          page2627Timeouts.push(
-            setTimeout(() => {
-              $("#flipbook").append(
-                ' <div class="mom-hand-region-mb"><div class="mom-hand-milk-region"><img class="mom-hand-milk" src="./images/book/book2627/牛奶.png"/><img class="mom-hand-cup" src="./images/book/book2627/空杯.png"/></div><img class="mom-hand" src="./images/book/book2627/媽媽手.png"/></div>',
-              );
-              $(".mom-hand").css({
-                width: (visualHeight * 208.785) / 609 + "px", //155px
-              });
-
-              $(".mom-hand-cup").css({
-                width: (visualHeight * 53.88) / 609 + "px", //40px
-                bottom: (visualHeight * -76.78) / 609 + "px", //-57px
-                left: (visualHeight * 8.082) / 609 + "px", //-6px
-              });
-
-              $(".mom-hand-milk").css({
-                width: (visualHeight * 53.88) / 609 + "px", //40px
-                bottom: (visualHeight * -76.78) / 609 + "px", //-57px
-                left: (visualHeight * 8.082) / 609 + "px", //-6px
-              });
-            }, 1500),
-          );
-        } else {
-          if (!$(".mom-hand").length) {
-            page2627Timeouts.push(
-              setTimeout(() => {
-                $("#flipbook").append(
-                  ' <div class="mom-hand-region"><div class="mom-hand-milk-region"><img class="mom-hand-milk" src="./images/book/book2627/牛奶.png"/><img class="mom-hand-cup" src="./images/book/book2627/空杯.png"/></div><img class="mom-hand" src="./images/book/book2627/媽媽手.png"/></div>',
-                );
-              }, 1500),
-            );
-          }
-        }
-
-        page2627Timeouts.push(
-          setTimeout(() => {
-            $(".mom-hand").css("opacity", "1");
-            $(".mom-hand-milk").css("opacity", "1");
-            $(".mom-hand-cup").css("opacity", "1");
-          }, 2000),
-        );
-      }
-
-      if (page === 25 || page === 28) {
-        page2627Timeouts.forEach((id) => clearTimeout(id));
-        page2627Timeouts = [];
-        $(".book2627").css("opacity", "0");
-        $(".book2627").remove();
-        $(".all-milk-stains").remove();
-        if (window.matchMedia("(max-height: 500px)").matches) {
-          $(".mom-hand-region-mb").remove();
-          $(".mom-hand-region-mb").removeClass("mom-hand-finish-mb");
-        } else {
-          $(".mom-hand-region").remove();
-          $(".mom-hand").removeClass("mom-hand-finish");
-        }
-      }
-
-      if (page === 28) {
-        setTimeout(() => {
-          $(".book28").css("opacity", "1");
-          $(".cloud-28").css("opacity", "1");
-          $(".bubble-28").css("opacity", "1");
-          $(".star-28").addClass("star-28-animation");
-          $(".story-28").css("opacity", "1");
-          $(".milk28").css("opacity", "1");
-          $(".grass-28").css("opacity", "1");
-          $(".fence-28").css("opacity", "1");
-          $(".cow-28-1").css("opacity", "1");
-          $(".cow-28-2").css("opacity", "1");
-        }, 1000);
-
-        $("#right-down-corner").hide();
-        isCanNotFlip();
-        setTimeout(() => {
-          canFlipPrev = true;
-        }, 3000);
-        let count = 3;
-        $(".next-page img").attr("src", "./images/common/下一頁灰.png");
-        $(".next-page img").css("cursor", "not-allowed");
-        $(".next-page").prop("disabled", true);
-        const prevBtn = $(".next-page")[0];
-
-        $(".prev-page img").attr("src", "./images/common/上一頁灰.png");
-        $(".prev-page img").css("cursor", "not-allowed");
-        $(".prev-page img").attr("src", "./images/common/3秒.png");
-        $(".prev-page").prop("disabled", true);
-
-        const timer = setInterval(() => {
-          count--;
-
-          if (count > 0) {
-            $(".prev-page img").attr("src", `./images/common/${count}秒.png`);
-            $(".prev-page").css("cursor", "not-allowed");
-            $(".prev-page").prop("disabled", true);
-          } else {
-            clearInterval(timer);
-            $(".prev-page img").attr("src", "./images/common/上一頁.png");
-            $(".prev-page").css("cursor", "pointer");
-            $(".prev-page").prop("disabled", false);
-          }
-        }, 1000);
-
-        setTimeout(() => {
-          $(".prev-page img").attr("src", "./images/common/上一頁.png");
-          $(".prev-page").prop("disabled", false);
-        }, 3000);
-      }
-
-      if (page === 27) {
-        $(".cloud-28").css("opacity", "0");
-        $(".bubble-28").css("opacity", "0");
-        $(".star-28").removeClass("star-28-animation");
-        $(".story-28").css("opacity", "0");
-        $(".milk28").css("opacity", "0");
-        $(".grass-28").css("opacity", "0");
-        $(".fence-28").css("opacity", "0");
-        $(".cow-28-1").css("opacity", "0");
-        $(".cow-28-2").css("opacity", "0");
-      }
-    });
-
-    $("#flipbook").bind("turned", function (event, page) {
       // 第 26–27 頁：家人一起喝牛奶
       if (page === 26 || page === 27) {
         startFamilyAnimation();
@@ -2678,6 +2617,84 @@ $(function () {
         $(".sweet-taste").removeClass("bubble-fade-in");
       }
     });
+
+    if (page === 27) {
+      $(".cloud-28").css("opacity", "0");
+      $(".bubble-28").css("opacity", "0");
+      $(".star-28").removeClass("star-28-animation");
+      $(".story-28").css("opacity", "0");
+      $(".milk28").css("opacity", "0");
+      $(".grass-28").css("opacity", "0");
+      $(".fence-28").css("opacity", "0");
+      $(".cow-28-1").css("opacity", "0");
+      $(".cow-28-2").css("opacity", "0");
+    }
+
+    if (page === 25 || page === 28) {
+      page2627Timeouts.forEach((id) => clearTimeout(id));
+      page2627Timeouts = [];
+      $(".book2627").css("opacity", "0");
+      $(".book2627").remove();
+      $(".all-milk-stains").remove();
+      if (window.matchMedia("(max-height: 500px)").matches) {
+        $(".mom-hand-region-mb").remove();
+        $(".mom-hand-region-mb").removeClass("mom-hand-finish-mb");
+      } else {
+        $(".mom-hand-region").remove();
+        $(".mom-hand").removeClass("mom-hand-finish");
+      }
+    }
+
+    if (page === 28) {
+      setTimeout(() => {
+        $(".book28").css("opacity", "1");
+        $(".cloud-28").css("opacity", "1");
+        $(".bubble-28").css("opacity", "1");
+        $(".star-28").addClass("star-28-animation");
+        $(".story-28").css("opacity", "1");
+        $(".milk28").css("opacity", "1");
+        $(".grass-28").css("opacity", "1");
+        $(".fence-28").css("opacity", "1");
+        $(".cow-28-1").css("opacity", "1");
+        $(".cow-28-2").css("opacity", "1");
+      }, 1000);
+
+      $("#right-down-corner").hide();
+      isCanNotFlip();
+      setTimeout(() => {
+        canFlipPrev = true;
+      }, 3000);
+      let count = 3;
+      $(".next-page img").attr("src", "./images/common/下一頁灰.png");
+      $(".next-page img").css("cursor", "not-allowed");
+      $(".next-page").prop("disabled", true);
+      const prevBtn = $(".next-page")[0];
+
+      $(".prev-page img").attr("src", "./images/common/上一頁灰.png");
+      $(".prev-page img").css("cursor", "not-allowed");
+      $(".prev-page img").attr("src", "./images/common/3秒.png");
+      $(".prev-page").prop("disabled", true);
+
+      const timer = setInterval(() => {
+        count--;
+
+        if (count > 0) {
+          $(".prev-page img").attr("src", `./images/common/${count}秒.png`);
+          $(".prev-page").css("cursor", "not-allowed");
+          $(".prev-page").prop("disabled", true);
+        } else {
+          clearInterval(timer);
+          $(".prev-page img").attr("src", "./images/common/上一頁.png");
+          $(".prev-page").css("cursor", "pointer");
+          $(".prev-page").prop("disabled", false);
+        }
+      }, 1000);
+
+      setTimeout(() => {
+        $(".prev-page img").attr("src", "./images/common/上一頁.png");
+        $(".prev-page").prop("disabled", false);
+      }, 3000);
+    }
 
     if (
       page !== 6 &&
@@ -3209,28 +3226,6 @@ $(function () {
         }
       }
     }
-
-    // 翻頁事件
-    $("#flipbook").bind("turned", function (event, page) {
-      latestPage = page;
-
-      // 書本定位
-      if (!isIPad() && !window.matchMedia("(max-height: 500px)").matches) {
-        if (page === 1) {
-          $(".book-section").css({
-            left: "-300px",
-          });
-        } else if (page === 28) {
-          $(".book-section").css({
-            left: "17%",
-          });
-        } else {
-          $(".book-section").css({
-            left: "0px",
-          });
-        }
-      }
-    });
 
     $("#flipbook").on("mouseup", function (e) {
       const page = $("#flipbook").turn("page");
