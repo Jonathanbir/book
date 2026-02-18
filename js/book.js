@@ -734,6 +734,275 @@ $(function () {
     });
   }
 
+  // 第 26–27 頁 家人喝牛奶
+  function startFamilyAnimation() {
+    $("#flipbook").append(`
+      <img class="book2627" src="./images/book/book2627/book2627.png" />
+      <img class="all-milk-stains" src="./images/book/book2627/牛奶鬍.png" />
+    `);
+
+    if (window.matchMedia("(max-height: 500px)").matches) {
+      if (isSafari() || isIOSChrome()) {
+        $(".all-milk-stains").css({
+          width: visualHeight + "px",
+        });
+      }
+
+      if (isAndroidChrome()) {
+        $(".all-milk-stains").css({
+          width: screenHeight + "px",
+        });
+      }
+    }
+
+    page2627Timeouts.push(
+      setTimeout(() => {
+        $(".book26").css("opacity", "1");
+        $(".book27").css("opacity", "1");
+        $(".book2627").css("opacity", "1");
+      }, 1200),
+    );
+
+    page2627Timeouts.push(
+      setTimeout(() => {
+        $(".milk-box").css("opacity", "1");
+        $(".father-hand").css("opacity", "1");
+        $(".father-hand-milk").css("display", "block");
+        $(".father-hand-cup").css("opacity", "1");
+        $(".daughter-hand").css("opacity", "1");
+        $(".daughter-hand-milk").css("display", "block");
+        $(".daughter-hand-cup").css("opacity", "1");
+      }, 1500),
+    );
+
+    if (window.matchMedia("(max-height: 500px)").matches) {
+      if (isAndroidChrome()) {
+        setTimeout(() => {
+          $(".daughter-hand-finish").css({
+            top: (screenHeight * 403.536) / 609 + "px", //273
+            left: (screenHeight * 376.93) / 609 + "px", //254
+            transform:
+              `translate(` +
+              (screenHeight * 0) / 609 +
+              `px,` +
+              (screenHeight * 0) / 609 +
+              `px) rotate(-72deg)`,
+          });
+        }, 5000);
+
+        page2627Timeouts.push(
+          setTimeout(() => {
+            $(".father-hand-finish-mb").css({
+              transform:
+                `translate(` +
+                (screenHeight * -23.65) / 609 +
+                `px,` +
+                (screenHeight * -44.34) / 609 +
+                `px) rotate(-39deg)`, //transform: translate(-16px, -30px) rotate(-39deg);
+            });
+            $(".mom-hand-finish-mb").css({
+              transform:
+                `translate(` +
+                (screenHeight * 59.126) / 609 +
+                `px,` +
+                (screenHeight * -75.386) / 609 +
+                `px) rotate(33deg)`,
+            }); //transform: translate(40px, -51px) rotate(33deg);
+          }, 5000),
+        );
+
+        page2627Timeouts.push(
+          setTimeout(() => {
+            $(".father-hand-finish-mb").css({
+              width: (screenHeight * 325.197) / 609 + "px", //220px
+              top: (screenHeight * 395.85) / 609 + "px", //267.8px
+              left: (screenHeight * 78.34) / 609 + "px", //53px
+              transform: "translate(0,0) rotate(0deg)",
+            });
+
+            $(".daughter-hand-finish").css({
+              top: (screenHeight * 395.85) / 609 + "px", //267.8px
+              left: (screenHeight * 371.475) / 609 + "px", //251.31px
+              transform: "translate(0,0) rotate(0deg)",
+            });
+
+            $(".mom-hand-finish-mb").css({
+              bottom: (screenHeight * 224.68) / 609 + "px", //152px
+              right: (screenHeight * 711) / 609 + "px", //481px
+              transform: "translate(0,0) rotate(0deg)",
+            });
+          }, 7500),
+        );
+      }
+
+      if (isSafari() || isIOSChrome()) {
+        setTimeout(() => {
+          $(".daughter-hand-finish").css({
+            top: (visualHeight * 404.073) / 609 + "px", //300
+            left: (visualHeight * 377.1348) / 609 + "px", //280
+            transform:
+              `translate(` +
+              (screenHeight * 0) / 609 +
+              `px,` +
+              (screenHeight * 0) / 609 +
+              `px) rotate(-72deg)`,
+          });
+        }, 5000);
+
+        page2627Timeouts.push(
+          setTimeout(() => {
+            $(".father-hand-finish-mb").css({
+              transform:
+                `translate(` +
+                (visualHeight * 2.694) / 609 +
+                `px,` +
+                (visualHeight * -18.858) / 609 +
+                `px) rotate(-39deg)`, //transform: translate(2px, -14px) rotate(-39deg);
+            });
+            $(".mom-hand-finish-mb").css({
+              transform:
+                `translate(` +
+                (visualHeight * 32.33) / 609 +
+                `px,` +
+                (visualHeight * -86.21) / 609 +
+                `px) rotate(33deg)`,
+            }); //transform: translate(24px, -64px) rotate(33deg);
+          }, 5000),
+        );
+
+        page2627Timeouts.push(
+          setTimeout(() => {
+            $(".father-hand-finish-mb").css({
+              width: (visualHeight * 296.34) / 609 + "px", //220px
+              top: (visualHeight * 360.727) / 609 + "px", //267.8px
+              left: (visualHeight * 85.39) / 609 + "px", //53px
+              transform: "translate(0,0) rotate(0deg)",
+            });
+
+            $(".daughter-hand-finish").css({
+              top: (visualHeight * 390.6) / 609 + "px", //290
+              left: (visualHeight * 371.74) / 609 + "px", //276
+              transform: "translate(0,0) rotate(0deg)",
+            });
+
+            $(".mom-hand-finish-mb").css({
+              bottom: (visualHeight * 204.744) / 609 + "px", //152px
+              right: (visualHeight * 682.88) / 609 + "px", //507px
+              transform: "translate(0,0) rotate(0deg)",
+            });
+          }, 7500),
+        );
+      }
+    }
+
+    page2627Timeouts.push(
+      setTimeout(() => {
+        $(".cheers").addClass("bubble-fade-in");
+        $(".daughter-hand-region").addClass("daughter-hand-finish");
+      }, 5000),
+    );
+
+    if (window.matchMedia("(max-height: 500px)").matches) {
+      page2627Timeouts.push(
+        setTimeout(() => {
+          $(".father-hand-region-mb").addClass("father-hand-finish-mb");
+          $(".mom-hand-region-mb").addClass("mom-hand-finish-mb");
+        }, 5000),
+      );
+    } else {
+      page2627Timeouts.push(
+        setTimeout(() => {
+          $(".father-hand-region").addClass("father-hand-finish");
+          $(".mom-hand-region").addClass("mom-hand-finish");
+        }, 5000),
+      );
+    }
+
+    page2627Timeouts.push(
+      setTimeout(() => {
+        $(".father-hand-milk").css("opacity", "0");
+        $(".daughter-hand-milk").css("opacity", "0");
+        $(".mom-hand-milk").css("opacity", "0");
+      }, 6000),
+    );
+
+    page2627Timeouts.push(
+      setTimeout(() => {
+        $(".all-milk-stains ").addClass("all-milk-stains-show ");
+      }, 6500),
+    );
+
+    page2627Timeouts.push(
+      setTimeout(() => {
+        $(".sweet-taste").addClass("bubble-fade-in");
+      }, 7000),
+    );
+
+    page2627Timeouts.push(
+      setTimeout(() => {
+        $(".cow-right").addClass("cow-right-move");
+      }, 12000),
+    );
+
+    page2627Timeouts.push(
+      setTimeout(() => {
+        $(".mow").show();
+      }, 15000),
+    );
+
+    page2627Timeouts.push(
+      setTimeout(() => {
+        $(".father-hand-region").removeClass("father-hand-finish");
+        $(".daughter-hand-region").removeClass("daughter-hand-finish");
+        $(".mom-hand-region").removeClass("mom-hand-finish");
+      }, 8000),
+    );
+  }
+
+  // Reset function
+  // 重置家人手部與牛相關動畫狀態
+  function resetFamilyPage() {
+    $(".book26").css("opacity", "0");
+    $(".book27").css("opacity", "0");
+    $(".book2627").css("opacity", "0");
+    $(".milk-box").css("opacity", "0");
+    $(".father-hand").css("opacity", "0");
+    $(".father-hand-milk").css("display", "none");
+    $(".father-hand-cup").css("opacity", "0");
+    $(".daughter-hand").css("opacity", "0");
+    $(".daughter-hand-milk").css("display", "none");
+    $(".daughter-hand-cup").css("opacity", "0");
+    $(".mom-hand-milk").css("opacity", "0");
+    $(".cheers").removeClass("bubble-fade-in");
+    const removeClasses = [
+      // 手部完成、移除
+      "father-hand-finish",
+      "daughter-hand-finish",
+      "mom-hand-finish",
+      "mom-hand-finish-mb",
+      "father-hand-finish-mb",
+
+      // 空手動畫
+      "father-hand-milk-empty",
+      "daughter-hand-milk-empty",
+      "mom-hand-milk-empty",
+
+      // 墨水效果
+      "all-milk-stains-show",
+
+      // 牛移動動畫
+      "cow-right-move",
+    ];
+
+    // 批次移除所有指定 class
+    $(
+      ".father-hand, .daughter-hand, .mom-hand, .all-milk-stains, .girls-milk-ink, .cow-right",
+    ).removeClass(removeClasses.join(" "));
+
+    // 隱藏叫聲
+    $(".mow").hide();
+  }
+
   function handlePage(page, replay) {
     if (currentVoiceSource) {
       currentVoiceSource.stop();
@@ -1454,6 +1723,22 @@ $(function () {
     }
 
     if (page === 26 || page === 27) {
+      if (replay) {
+        resetFamilyPage();
+        $(".mom-hand-region").hide();
+        $(".mow").hide();
+        $(".father-hand-region").removeClass("father-hand-finish");
+        $(".daughter-hand-region").removeClass("daughter-hand-finish");
+        $(".father-hand-milk").css("opacity", "1");
+        $(".daughter-hand-milk").css("opacity", "1");
+        $(".mom-hand-milk").css("opacity", "1");
+        $(".daughter-hand-milk").removeClass("daughter-hand-milk-empty");
+        $(".sweet-taste").removeClass("bubble-fade-in");
+        startFamilyAnimation();
+        setTimeout(() => {
+          $(".mom-hand-region").show();
+        }, 1500);
+      }
     }
   }
 
@@ -2440,274 +2725,6 @@ $(function () {
           }, 8000),
         );
       });
-
-    // 第 26–27 頁 家人喝牛奶
-    function startFamilyAnimation() {
-      $("#flipbook").append(`
-      <img class="book2627" src="./images/book/book2627/book2627.png" />
-      <img class="all-milk-stains" src="./images/book/book2627/牛奶鬍.png" />
-    `);
-
-      if (window.matchMedia("(max-height: 500px)").matches) {
-        if (isSafari() || isIOSChrome()) {
-          $(".all-milk-stains").css({
-            width: visualHeight + "px",
-          });
-        }
-
-        if (isAndroidChrome()) {
-          $(".all-milk-stains").css({
-            width: screenHeight + "px",
-          });
-        }
-      }
-
-      page2627Timeouts.push(
-        setTimeout(() => {
-          $(".book26").css("opacity", "1");
-          $(".book27").css("opacity", "1");
-          $(".book2627").css("opacity", "1");
-        }, 1200),
-      );
-
-      page2627Timeouts.push(
-        setTimeout(() => {
-          $(".milk-box").css("opacity", "1");
-          $(".father-hand").css("opacity", "1");
-          $(".father-hand-milk").css("display", "block");
-          $(".father-hand-cup").css("opacity", "1");
-          $(".daughter-hand").css("opacity", "1");
-          $(".daughter-hand-milk").css("display", "block");
-          $(".daughter-hand-cup").css("opacity", "1");
-        }, 1500),
-      );
-
-      if (window.matchMedia("(max-height: 500px)").matches) {
-        if (isAndroidChrome()) {
-          setTimeout(() => {
-            $(".daughter-hand-finish").css({
-              top: (screenHeight * 403.536) / 609 + "px", //273
-              left: (screenHeight * 376.93) / 609 + "px", //254
-              transform:
-                `translate(` +
-                (screenHeight * 0) / 609 +
-                `px,` +
-                (screenHeight * 0) / 609 +
-                `px) rotate(-72deg)`,
-            });
-          }, 5000);
-
-          page2627Timeouts.push(
-            setTimeout(() => {
-              $(".father-hand-finish-mb").css({
-                transform:
-                  `translate(` +
-                  (screenHeight * -23.65) / 609 +
-                  `px,` +
-                  (screenHeight * -44.34) / 609 +
-                  `px) rotate(-39deg)`, //transform: translate(-16px, -30px) rotate(-39deg);
-              });
-              $(".mom-hand-finish-mb").css({
-                transform:
-                  `translate(` +
-                  (screenHeight * 59.126) / 609 +
-                  `px,` +
-                  (screenHeight * -75.386) / 609 +
-                  `px) rotate(33deg)`,
-              }); //transform: translate(40px, -51px) rotate(33deg);
-            }, 5000),
-          );
-
-          page2627Timeouts.push(
-            setTimeout(() => {
-              $(".father-hand-finish-mb").css({
-                width: (screenHeight * 325.197) / 609 + "px", //220px
-                top: (screenHeight * 395.85) / 609 + "px", //267.8px
-                left: (screenHeight * 78.34) / 609 + "px", //53px
-                transform: "translate(0,0) rotate(0deg)",
-              });
-
-              $(".daughter-hand-finish").css({
-                top: (screenHeight * 395.85) / 609 + "px", //267.8px
-                left: (screenHeight * 371.475) / 609 + "px", //251.31px
-                transform: "translate(0,0) rotate(0deg)",
-              });
-
-              $(".mom-hand-finish-mb").css({
-                bottom: (screenHeight * 224.68) / 609 + "px", //152px
-                right: (screenHeight * 711) / 609 + "px", //481px
-                transform: "translate(0,0) rotate(0deg)",
-              });
-            }, 7500),
-          );
-        }
-
-        if (isSafari() || isIOSChrome()) {
-          setTimeout(() => {
-            $(".daughter-hand-finish").css({
-              top: (visualHeight * 404.073) / 609 + "px", //300
-              left: (visualHeight * 377.1348) / 609 + "px", //280
-              transform:
-                `translate(` +
-                (screenHeight * 0) / 609 +
-                `px,` +
-                (screenHeight * 0) / 609 +
-                `px) rotate(-72deg)`,
-            });
-          }, 5000);
-
-          page2627Timeouts.push(
-            setTimeout(() => {
-              $(".father-hand-finish-mb").css({
-                transform:
-                  `translate(` +
-                  (visualHeight * 2.694) / 609 +
-                  `px,` +
-                  (visualHeight * -18.858) / 609 +
-                  `px) rotate(-39deg)`, //transform: translate(2px, -14px) rotate(-39deg);
-              });
-              $(".mom-hand-finish-mb").css({
-                transform:
-                  `translate(` +
-                  (visualHeight * 32.33) / 609 +
-                  `px,` +
-                  (visualHeight * -86.21) / 609 +
-                  `px) rotate(33deg)`,
-              }); //transform: translate(24px, -64px) rotate(33deg);
-            }, 5000),
-          );
-
-          page2627Timeouts.push(
-            setTimeout(() => {
-              $(".father-hand-finish-mb").css({
-                width: (visualHeight * 296.34) / 609 + "px", //220px
-                top: (visualHeight * 360.727) / 609 + "px", //267.8px
-                left: (visualHeight * 85.39) / 609 + "px", //53px
-                transform: "translate(0,0) rotate(0deg)",
-              });
-
-              $(".daughter-hand-finish").css({
-                top: (visualHeight * 390.6) / 609 + "px", //290
-                left: (visualHeight * 371.74) / 609 + "px", //276
-                transform: "translate(0,0) rotate(0deg)",
-              });
-
-              $(".mom-hand-finish-mb").css({
-                bottom: (visualHeight * 204.744) / 609 + "px", //152px
-                right: (visualHeight * 682.88) / 609 + "px", //507px
-                transform: "translate(0,0) rotate(0deg)",
-              });
-            }, 7500),
-          );
-        }
-      }
-
-      page2627Timeouts.push(
-        setTimeout(() => {
-          $(".cheers").addClass("bubble-fade-in");
-          $(".daughter-hand-region").addClass("daughter-hand-finish");
-        }, 5000),
-      );
-
-      if (window.matchMedia("(max-height: 500px)").matches) {
-        page2627Timeouts.push(
-          setTimeout(() => {
-            $(".father-hand-region-mb").addClass("father-hand-finish-mb");
-            $(".mom-hand-region-mb").addClass("mom-hand-finish-mb");
-          }, 5000),
-        );
-      } else {
-        page2627Timeouts.push(
-          setTimeout(() => {
-            $(".father-hand-region").addClass("father-hand-finish");
-            $(".mom-hand-region").addClass("mom-hand-finish");
-          }, 5000),
-        );
-      }
-
-      page2627Timeouts.push(
-        setTimeout(() => {
-          $(".father-hand-milk").css("opacity", "0");
-          $(".daughter-hand-milk").css("opacity", "0");
-          $(".mom-hand-milk").css("opacity", "0");
-        }, 6000),
-      );
-
-      page2627Timeouts.push(
-        setTimeout(() => {
-          $(".all-milk-stains ").addClass("all-milk-stains-show ");
-        }, 6500),
-      );
-
-      page2627Timeouts.push(
-        setTimeout(() => {
-          $(".sweet-taste").addClass("bubble-fade-in");
-        }, 7000),
-      );
-
-      page2627Timeouts.push(
-        setTimeout(() => {
-          $(".cow-right").addClass("cow-right-move");
-        }, 12000),
-      );
-
-      page2627Timeouts.push(
-        setTimeout(() => {
-          $(".mow").show();
-        }, 15000),
-      );
-
-      page2627Timeouts.push(
-        setTimeout(() => {
-          $(".father-hand-region").removeClass("father-hand-finish");
-          $(".daughter-hand-region").removeClass("daughter-hand-finish");
-          $(".mom-hand-region").removeClass("mom-hand-finish");
-        }, 8000),
-      );
-    }
-
-    // Reset function
-    // 重置家人手部與牛相關動畫狀態
-    function resetFamilyPage() {
-      $(".book26").css("opacity", "0");
-      $(".book27").css("opacity", "0");
-      $(".milk-box").css("opacity", "0");
-      $(".father-hand").css("opacity", "0");
-      $(".father-hand-milk").css("display", "none");
-      $(".father-hand-cup").css("opacity", "0");
-      $(".daughter-hand").css("opacity", "0");
-      $(".daughter-hand-milk").css("display", "none");
-      $(".daughter-hand-cup").css("opacity", "0");
-      $(".mom-hand-milk").css("opacity", "0");
-      $(".cheers").removeClass("bubble-fade-in");
-      const removeClasses = [
-        // 手部完成、移除
-        "father-hand-finish",
-        "daughter-hand-finish",
-        "mom-hand-finish",
-        "mom-hand-finish-mb",
-        "father-hand-finish-mb",
-
-        // 空手動畫
-        "father-hand-milk-empty",
-        "daughter-hand-milk-empty",
-        "mom-hand-milk-empty",
-
-        // 墨水效果
-        "all-milk-stains-show",
-
-        // 牛移動動畫
-        "cow-right-move",
-      ];
-
-      // 批次移除所有指定 class
-      $(
-        ".father-hand, .daughter-hand, .mom-hand, .all-milk-stains, .girls-milk-ink, .cow-right",
-      ).removeClass(removeClasses.join(" "));
-
-      // 隱藏叫聲
-      $(".mow").hide();
-    }
 
     if (page === 26 || page === 27) {
       page2627Timeouts.push(
