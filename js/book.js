@@ -1236,6 +1236,146 @@ $(function () {
       $(".gogo").css("opacity", "0");
     }
 
+    let doorClickBound = false;
+
+    function reset67() {
+      page67Timeouts.forEach((id) => clearTimeout(id));
+      page67Timeouts = [];
+      $("#flipbook .knock").remove();
+      $("#flipbook .grass0607").remove();
+      $("#flipbook .tree1").remove();
+      $("#flipbook .tree2").remove();
+      $("#flipbook .tree3").remove();
+      $("#flipbook .cloud2").remove();
+      $("#flipbook .text06").remove();
+      $("#flipbook .door-common").remove();
+      $("#flipbook .peoples").remove();
+      $("#flipbook .bubble67").remove();
+      $("#flipbook .star5").remove();
+      $(".door").removeClass("door-opening");
+      $(".peoples").removeClass("peoples-open");
+      $(".grass0607").removeClass("tree-fade-in");
+      $(".tree1").removeClass("tree-fade-in");
+      $(".tree2").removeClass("tree-fade-in");
+      $(".tree3").removeClass("tree-fade-in");
+      $(".cloud1").removeClass("cloud-fade-in");
+      $(".cloud2").removeClass("cloud-fade-in");
+      $(".cloud3").removeClass("cloud-fade-in");
+      $(".text06").removeClass("tree-fade-in");
+      $(".wow").removeClass("wow-animation");
+    }
+
+    // 第 6–7 頁：點擊門跑出森林
+    if (page === 6 || page === 7) {
+      if (replay) {
+        reset67();
+      }
+
+      page67Timeouts.push(
+        setTimeout(() => {
+          $(".knock").css("opacity", "1");
+          $(".door").css("opacity", "1");
+        }, 1000),
+      );
+
+      isCanNotFlip();
+
+      page67Timeouts.push(
+        setTimeout(() => {
+          canFlipPrev = true;
+        }, 3000),
+      );
+
+      if (!doorClickBound) {
+        doorClickBound = true;
+
+        $("#flipbook").append(
+          `<img class="knock" src="./images/book/book0607/點這裡.png"/>
+          <img class="grass0607" src="./images/book/book0607/草地.png"/>
+          <img class="tree1" src="./images/book/book0607/森林1.png"/>
+          <img class="tree2" src="./images/book/book0607/森林2.png"/>           
+          <img class="tree3" src="./images/book/book0607/森林3.png"/>         
+          <img class="text06" src="./images/book/book0607/text-06.png"/>        
+          <img class="cloud2" src="./images/book/book0607/雲2.png"/>           
+          <img class="bubble67" src="./images/book/book0607/牛奶泡泡.png"/>           
+          <img class="star5" src="./images/book/book0607/亮晶晶.png"/>         
+          <img class="door-bg door-common" src="./images/book/book0607/門內.png"/>           
+          <img class="door door-common" src="./images/book/book0607/門.png"/>            
+          <img class="peoples" src="./images/book/book0607/媽媽鈴鈴.png"/>
+        `,
+        );
+
+        page67Timeouts.push(
+          setTimeout(() => {
+            $(".door-bg").css("opacity", "1");
+          }, 2000),
+        );
+
+        const door = document.querySelector(".door");
+
+        btnPreviousDisabled();
+        btnDisabled();
+
+        $("#flipbook .knock , #flipbook .door").on("click", () => {
+          $(".knock").css("display", "none");
+          playVoice("./mp3/knock.mp3");
+          $(".text06").addClass("cloud-fade-in");
+          $(".cloud1").addClass("cloud-fade-in");
+
+          page67Timeouts.push(
+            setTimeout(() => {
+              $(".grass0607").addClass("tree-fade-in");
+              $(".tree1").addClass("tree-fade-in");
+            }, 2500),
+          );
+
+          page67Timeouts.push(
+            setTimeout(() => {
+              $(".wow").addClass("wow-animation");
+              $(".tree2").addClass("tree-fade-in");
+              $(".door").addClass("door-opening");
+              $(".peoples").addClass("peoples-open");
+            }, 3000),
+          );
+
+          page67Timeouts.push(
+            setTimeout(() => {
+              $(".tree3").addClass("tree-fade-in");
+              $(".cloud2").addClass("cloud-fade-in");
+              $(".cloud3").addClass("cloud-fade-in");
+            }, 4000),
+          );
+
+          page67Timeouts.push(
+            setTimeout(() => {
+              $(".bubble67").addClass("bubble-fade-in");
+            }, 6000),
+          );
+
+          page67Timeouts.push(
+            setTimeout(() => {
+              $(".star5").addClass("star-fade-in");
+            }, 7000),
+          );
+
+          page67Timeouts.push(
+            setTimeout(() => {
+              btnUnDisabled();
+              canFlipNext = true;
+              $("#right-down-corner").css("color", "#000");
+              $("#right-down-corner").prop("disabled", false);
+            }, 11000),
+          );
+
+          playVoice("./mp3/04.mp3");
+        });
+      }
+    }
+
+    if (page === 5 || page === 8) {
+      reset67();
+    }
+
     if (page === 8 || page === 9) {
       if (replay) {
         page89Timeouts.forEach((id) => clearTimeout(id));
@@ -1470,472 +1610,7 @@ $(function () {
       $("#flipbook .text11").remove();
     }
 
-    // 第 20–21 頁：獲得皇冠 + 投硬幣動畫
-    if (page === 18 || page === 19) {
-      if (replay) {
-        page1819Timeouts.forEach((id) => clearTimeout(id));
-        page1819Timeouts = [];
-        $(".book18").css("opacity", "0");
-        $(".book19").css("opacity", "0");
-        $(".girl1819").css("opacity", "0");
-        $(".coin01-final, .coin02-final, .coin03-final").removeClass(
-          "coin-all-animation",
-        );
-        $(".book19-text").removeClass("bubble-fade-in");
-        $(".crown").removeClass("crown-animation");
-        $(".crown-shine").removeClass("bubble-fade-in");
-        $(".coin-all-shine").removeClass("bubble-fade-in");
-        $(".bubble18").removeClass("bubble-fade-in");
-        $("#flipbook .bubble18").remove();
-        $("#flipbook .crown").remove();
-        $("#flipbook .crown-shine").remove();
-        $("#flipbook .coin-all").remove();
-        $("#flipbook .coin-all-shine").remove();
-        $("#flipbook .girl1819").remove();
-        $("#flipbook .book19-text").remove();
-      }
-
-      $("#flipbook").append(`
-      <img class="book19-text" src="./images/book/book1819/book19-text.png" />
-      <img class="coin-all  coin01-final" src="./images/book/book1819/金幣01.png" />
-      <img class="coin-all coin02-final" src="./images/book/book1819/金幣02.png" />
-      <img class="coin-all coin03-final" src="./images/book/book1819/金幣03.png" />
-      <img class="coin-all-shine" src="./images/book/book1819/亮晶晶.png" />
-      <img class="girl1819" src="./images/book/book1819/鈴鈴.png" />
-      <img class="crown" src="./images/book/book1819/好牛皇冠.png" />
-      <img class="crown-shine" src="./images/book/book1819/皇冠光芒.png" />
-      <img class="bubble18" src="./images/book/book1819/牛奶泡泡.png" />
-    `);
-
-      page1819Timeouts.push(
-        setTimeout(() => {
-          $(".book18").css("opacity", "1");
-          $(".book19").css("opacity", "1");
-          $(".girl1819").css("opacity", "1");
-        }, 1000),
-      );
-
-      page1819Timeouts.push(
-        setTimeout(() => {
-          $(".coin01-final, .coin02-final, .coin03-final").addClass(
-            "coin-all-animation",
-          );
-        }, 4000),
-      );
-
-      page1819Timeouts.push(
-        setTimeout(() => {
-          $(".coin-all-shine").addClass("bubble-fade-in");
-        }, 4500),
-      );
-
-      page1819Timeouts.push(
-        setTimeout(() => {
-          $(".bubble18").addClass("bubble-fade-in");
-        }, 3500),
-      );
-
-      page1819Timeouts.push(
-        setTimeout(() => {
-          $(".crown").addClass("crown-animation");
-        }, 12000),
-      );
-
-      page1819Timeouts.push(
-        setTimeout(() => {
-          $(".crown-shine").addClass("bubble-fade-in");
-        }, 13000),
-      );
-
-      page1819Timeouts.push(
-        setTimeout(() => {
-          $(".book19-text").addClass("bubble-fade-in");
-        }, 19000),
-      );
-    }
-
-    if (page === 17 || page === 20) {
-      page1819Timeouts.forEach((id) => clearTimeout(id));
-      page1819Timeouts = [];
-      $(".book18").css("opacity", "0");
-      $(".book19").css("opacity", "0");
-      $(".girl1819").css("opacity", "0");
-      $(".coin01-final, .coin02-final, .coin03-final").removeClass(
-        "coin-all-animation",
-      );
-      $(".book19-text").removeClass("bubble-fade-in");
-      $(".crown").removeClass("crown-animation");
-      $(".crown-shine").removeClass("bubble-fade-in");
-      $(".coin-all-shine").removeClass("bubble-fade-in");
-      $(".bubble18").removeClass("bubble-fade-in");
-      $("#flipbook .bubble18").remove();
-      $("#flipbook .crown").remove();
-      $("#flipbook .crown-shine").remove();
-      $("#flipbook .coin-all").remove();
-      $("#flipbook .coin-all-shine").remove();
-      $("#flipbook .girl1819").remove();
-      $("#flipbook .book19-text").remove();
-    }
-
-    // 第 20–21 頁：小女孩夢境 + 浮出夢境
-    if (page === 20 || page === 21) {
-      if (replay) {
-        page2021Timeouts.forEach((id) => clearTimeout(id));
-        page2021Timeouts = [];
-        $(".book21").css("opacity", "0");
-        $(".dream04").remove();
-        $(".dream-light").remove();
-        $(".story20").remove();
-        $(".dream-girl").remove();
-        $(".dialog20").remove();
-        $(".star20").remove();
-        $(".bubble20").remove();
-        $(".dialog20").remove();
-        $(".dialog21").remove();
-        $(".book21-text").remove();
-        $(".book21-text").removeClass("bubble-fade-in");
-        $(".dream01").removeClass("dream-animation");
-        $(".dream02").removeClass("dream-animation");
-        $(".dream03").removeClass("dream-animation");
-        $(".dream04").removeClass("dream-animation");
-        $(".dialog20").removeClass("dialog20-animation");
-        $(".dialog21").removeClass("dialog20-animation");
-        $(".star20").removeClass("dialog20-animation");
-        $(".bubble20").removeClass("bubble-fade-in");
-        $(".dream-girl").removeClass("dream-girl-animation");
-      }
-
-      $("#flipbook").append(
-        `<img class="dream04" src="./images/book/book2021/夢泡04.png"/>
-        <img class="dream-light" src="./images/book/book2021/夢泡光.png"/>
-        <img class="story20" src="./images/book/book2021/故事20.png"/>
-        <img class="book21-text" src="./images/book/book2021/book21-text.png"/>
-        <img class="dream-girl" src="./images/book/book2021/鈴鈴.png"/>
-        <img class="dialog20" src="./images/book/book2021/哇!.png"/>
-        <img class="dialog21" src="./images/book/book2021/嗯.png"/>
-        <img class="bubble20" src="./images/book/book2021/牛奶泡泡20.png"/>
-        <img class="star20" src="./images/book/book2021/亮晶晶.png"/>
-        `,
-      );
-
-      page2021Timeouts.push(
-        setTimeout(() => {
-          $(".book20").css("opacity", "1");
-          $(".book21").css("opacity", "1");
-          $(".dream01").addClass("dream-animation");
-          $(".dream02").addClass("dream-animation");
-          $(".dream03").addClass("dream-animation");
-          $(".dream04").addClass("dream-animation");
-          $(".story20").addClass("dream-animation");
-          $(".dream-girl").addClass("dream-girl-animation");
-        }, 1000),
-      );
-
-      page2021Timeouts.push(
-        setTimeout(() => {
-          $(".dialog20").addClass("bubble-fade-in");
-        }, 6000),
-      );
-
-      page2021Timeouts.push(
-        setTimeout(() => {
-          $(".bubble20").addClass("bubble-fade-in");
-          $(".dream-light").addClass("sweet-taste-animation");
-          $(".star20").addClass("dialog20-animation");
-        }, 7000),
-      );
-
-      page2021Timeouts.push(
-        setTimeout(() => {
-          $(".dialog21").addClass("bubble-fade-in");
-        }, 10000),
-      );
-
-      page2021Timeouts.push(
-        setTimeout(() => {
-          $(".book21-text").addClass("bubble-fade-in");
-        }, 11000),
-      );
-    }
-
-    if (page === 19 || page === 22) {
-      page2021Timeouts.forEach((id) => clearTimeout(id));
-      page2021Timeouts = [];
-      $(".book21").css("opacity", "0");
-      $(".dream04").remove();
-      $(".dream-light").remove();
-      $(".story20").remove();
-      $(".dream-girl").remove();
-      $(".dialog20").remove();
-      $(".star20").remove();
-      $(".bubble20").remove();
-      $(".dialog20").remove();
-      $(".dialog21").remove();
-      $(".book21-text").remove();
-      $(".book21-text").removeClass("bubble-fade-in");
-      $(".dream01").removeClass("dream-animation");
-      $(".dream02").removeClass("dream-animation");
-      $(".dream03").removeClass("dream-animation");
-      $(".dream04").removeClass("dream-animation");
-      $(".dialog20").removeClass("dialog20-animation");
-      $(".dialog21").removeClass("dialog20-animation");
-      $(".star20").removeClass("dialog20-animation");
-      $(".bubble20").removeClass("bubble-fade-in");
-      $(".dream-girl").removeClass("dream-girl-animation");
-    }
-
-    if (page === 22 || page === 23) {
-      if (replay) {
-        page2223Timeouts.forEach((id) => clearTimeout(id));
-        page2223Timeouts = [];
-        $(".book22").css("opacity", "0");
-        $(".book23").css("opacity", "0");
-        $(".cow-alarm ").css("opacity", "0");
-        $(".sleep-girl-hand ").css("opacity", "0");
-        $(".sleep-girl-arm").css("opacity", "0");
-        $(".book23-text").removeClass("bubble-fade-in");
-      }
-
-      page2223Timeouts.push(
-        setTimeout(() => {
-          $(".book22").css("opacity", "1");
-          $(".book23").css("opacity", "1");
-          $(".cow-alarm ").css("opacity", "1");
-          $(".sleep-girl-hand").css("opacity", "1");
-          $(".sleep-girl-arm").css("opacity", "1");
-        }, 1000),
-      );
-
-      page2223Timeouts.push(
-        setTimeout(() => {
-          $(".book23-text").addClass("bubble-fade-in");
-        }, 6000),
-      );
-    } else {
-      page2223Timeouts.forEach((id) => clearTimeout(id));
-      page2223Timeouts = [];
-      $(".book22").css("opacity", "0");
-      $(".book23").css("opacity", "0");
-      $(".cow-alarm ").css("opacity", "0");
-      $(".sleep-girl-hand ").css("opacity", "0");
-      $(".sleep-girl-arm").css("opacity", "0");
-      $(".book23-text").removeClass("bubble-fade-in");
-    }
-
-    if (page === 26 || page === 27) {
-      if (replay) {
-        resetFamilyPage();
-        $(".mom-hand-region").hide();
-        $(".mow").hide();
-        $(".father-hand-region").removeClass("father-hand-finish");
-        $(".daughter-hand-region").removeClass("daughter-hand-finish");
-        $(".father-hand-milk").css("opacity", "1");
-        $(".daughter-hand-milk").css("opacity", "1");
-        $(".mom-hand-milk").css("opacity", "1");
-        $(".daughter-hand-milk").removeClass("daughter-hand-milk-empty");
-        $(".sweet-taste").removeClass("bubble-fade-in");
-        startFamilyAnimation();
-        setTimeout(() => {
-          $(".mom-hand-region").show();
-        }, 1500);
-      }
-    }
-  }
-
-  // 監聽 mouseup，更新目前頁碼狀態
-  let currentPage = 1;
-
-  // 當頁面翻轉完成後觸發
-  $("#flipbook").bind("turning", function (event, page, view) {
-    console.log("page:", page);
-    let canFlipPrev = false; // 初始禁止往前翻頁
-    let canFlipNext = false; // 初始禁止往後翻頁
-
-    function isCanNotFlipPrev() {
-      if (!window.matchMedia("(max-height: 500px)").matches) {
-        $("#left-up-corner")
-          .off("click") // 移除舊的
-          .on("click", function () {
-            if (!canFlipPrev) {
-              return;
-            }
-            $("#flipbook").turn("previous");
-          });
-      }
-
-      $("#left-down-corner")
-        .off("click") // 移除舊的
-        .on("click", function () {
-          if (!canFlipPrev) {
-            return;
-          }
-          $("#flipbook").turn("previous");
-        });
-    }
-
-    function isCanNotFlipNext() {
-      if (!window.matchMedia("(max-height: 500px)").matches) {
-        $("#right-up-corner")
-          .off("click")
-          .on("click", function () {
-            if (!canFlipNext) {
-              return;
-            }
-            $("#flipbook").turn("next");
-          });
-      }
-
-      $("#right-down-corner")
-        .off("click")
-        .on("click", function () {
-          if (!canFlipNext) {
-            return;
-          }
-          $("#flipbook").turn("next");
-        });
-    }
-
-    function isCanNotFlip() {
-      isCanNotFlipPrev();
-      isCanNotFlipNext();
-    }
-
-    currentPage = page;
-
-    handlePage(currentPage);
-
-    let doorClickBound = false;
-
-    // 第 6–7 頁：點擊門跑出森林
-    if (page === 6 || page === 7) {
-      page67Timeouts.push(
-        setTimeout(() => {
-          $(".knock").css("opacity", "1");
-          $(".door").css("opacity", "1");
-        }, 1000),
-      );
-
-      isCanNotFlip();
-
-      page67Timeouts.push(
-        setTimeout(() => {
-          canFlipPrev = true;
-        }, 3000),
-      );
-
-      if (!doorClickBound) {
-        doorClickBound = true;
-
-        $("#flipbook").append(
-          `<img class="knock" src="./images/book/book0607/點這裡.png"/>
-          <img class="grass0607" src="./images/book/book0607/草地.png"/>
-          <img class="tree1" src="./images/book/book0607/森林1.png"/>
-          <img class="tree2" src="./images/book/book0607/森林2.png"/>           
-          <img class="tree3" src="./images/book/book0607/森林3.png"/>         
-          <img class="text06" src="./images/book/book0607/text-06.png"/>        
-          <img class="cloud2" src="./images/book/book0607/雲2.png"/>           
-          <img class="bubble67" src="./images/book/book0607/牛奶泡泡.png"/>           
-          <img class="star5" src="./images/book/book0607/亮晶晶.png"/>         
-          <img class="door-bg door-common" src="./images/book/book0607/門內.png"/>           
-          <img class="door door-common" src="./images/book/book0607/門.png"/>            
-          <img class="peoples" src="./images/book/book0607/媽媽鈴鈴.png"/>
-        `,
-        );
-
-        page67Timeouts.push(
-          setTimeout(() => {
-            $(".door-bg").css("opacity", "1");
-          }, 2000),
-        );
-
-        const door = document.querySelector(".door");
-
-        btnPreviousDisabled();
-        btnDisabled();
-
-        $("#flipbook .knock , #flipbook .door").on("click", () => {
-          $(".knock").css("display", "none");
-          playVoice("./mp3/knock.mp3");
-          $(".text06").addClass("cloud-fade-in");
-          $(".cloud1").addClass("cloud-fade-in");
-
-          page67Timeouts.push(
-            setTimeout(() => {
-              $(".grass0607").addClass("tree-fade-in");
-              $(".tree1").addClass("tree-fade-in");
-            }, 2500),
-          );
-
-          page67Timeouts.push(
-            setTimeout(() => {
-              $(".wow").addClass("wow-animation");
-              $(".tree2").addClass("tree-fade-in");
-              $(".door").addClass("door-opening");
-              $(".peoples").addClass("peoples-open");
-            }, 3000),
-          );
-
-          page67Timeouts.push(
-            setTimeout(() => {
-              $(".tree3").addClass("tree-fade-in");
-              $(".cloud2").addClass("cloud-fade-in");
-              $(".cloud3").addClass("cloud-fade-in");
-            }, 4000),
-          );
-
-          page67Timeouts.push(
-            setTimeout(() => {
-              $(".bubble67").addClass("bubble-fade-in");
-            }, 6000),
-          );
-
-          page67Timeouts.push(
-            setTimeout(() => {
-              $(".star5").addClass("star-fade-in");
-            }, 7000),
-          );
-
-          page67Timeouts.push(
-            setTimeout(() => {
-              btnUnDisabled();
-              canFlipNext = true;
-              $("#right-down-corner").css("color", "#000");
-              $("#right-down-corner").prop("disabled", false);
-            }, 11000),
-          );
-
-          playVoice("./mp3/04.mp3");
-        });
-      }
-    }
-
-    if (page === 5 || page === 8) {
-      page67Timeouts.forEach((id) => clearTimeout(id));
-      page67Timeouts = [];
-      $("#flipbook .knock").remove();
-      $("#flipbook .grass0607").remove();
-      $("#flipbook .tree1").remove();
-      $("#flipbook .tree2").remove();
-      $("#flipbook .tree3").remove();
-      $("#flipbook .cloud2").remove();
-      $("#flipbook .text06").remove();
-      $("#flipbook .door-common").remove();
-      $("#flipbook .peoples").remove();
-      $("#flipbook .bubble67").remove();
-      $("#flipbook .star5").remove();
-      $(".door").removeClass("door-opening");
-      $(".peoples").removeClass("peoples-open");
-      $(".grass0607").removeClass("tree-fade-in");
-      $(".tree1").removeClass("tree-fade-in");
-      $(".tree2").removeClass("tree-fade-in");
-      $(".tree3").removeClass("tree-fade-in");
-      $(".cloud1").removeClass("cloud-fade-in");
-      $(".cloud2").removeClass("cloud-fade-in");
-      $(".cloud3").removeClass("cloud-fade-in");
-      $(".text06").removeClass("tree-fade-in");
-      $(".wow").removeClass("wow-animation");
-    }
-
+    //跳出看板
     let popupBoard = () => {
       $(".check-box").on("click", function () {
         $("body").addClass("popup-open"); // 開啟 popup
@@ -1957,7 +1632,47 @@ $(function () {
     let fanAndBubbleCreated = false;
     let milkClickBound = false;
 
+    function reset1213() {
+      page1213Timeouts.forEach((id) => clearTimeout(id));
+      page1213Timeouts = [];
+      $(".book12").css("opacity", "0");
+      $(".book13").css("opacity", "0");
+      $(".board13").css("opacity", "0");
+      $(".text12").css("opacity", "0");
+      $(".electfan").css("opacity", "0");
+      $(".electfan-wind").css("opacity", "0");
+      $(".electfan-wind-line").css("opacity", "0");
+      $(".magic-wand").css("opacity", "0");
+      $(".click-magic-wand").css("opacity", "0");
+      $(".finish-mission01").css("opacity", "0");
+      $(".electfan").removeClass("electfan-move");
+      $(".bubble-bg").removeClass("bubble-move");
+      $(".magic-wand").removeClass("magic-wand-animation");
+      $(".coin01").removeClass("coin-animation");
+      $(".coin-light").removeClass("coin-light-show");
+      $(".coin-hint01").removeClass("bubble-fade-in");
+      $(".check01").removeClass("check-show");
+      $(".popup-board01").css("display", "none");
+      $("#flipbook .click-magic-wand").remove();
+      $("#flipbook .finish-mission01").remove();
+      $("#flipbook .electfan").remove();
+      $("#flipbook .electfan-wind").remove();
+      $("#flipbook .electfan-wind-line").remove();
+      $("#flipbook .bubble-bg").remove();
+      $("#flipbook .bubble12").remove();
+      $("#flipbook .check-box").remove();
+      $(".book-section .popup-board-bg").remove();
+      $(".book-section .popup-board").remove();
+      $(".board13").remove();
+      $(".popup-board01").remove();
+      $(".text12").remove();
+    }
+
     if (page === 12 || page === 13) {
+      if (replay) {
+        reset1213();
+      }
+
       isCanNotFlip();
       setTimeout(() => {
         canFlipPrev = true;
@@ -2133,43 +1848,54 @@ $(function () {
     }
 
     if (page === 11 || page === 14) {
-      page1213Timeouts.forEach((id) => clearTimeout(id));
-      page1213Timeouts = [];
-      $(".book12").css("opacity", "0");
-      $(".book13").css("opacity", "0");
-      $(".board13").css("opacity", "0");
-      $(".text12").css("opacity", "0");
-      $(".electfan").css("opacity", "0");
-      $(".electfan-wind").css("opacity", "0");
-      $(".electfan-wind-line").css("opacity", "0");
-      $(".magic-wand").css("opacity", "0");
-      $(".click-magic-wand").css("opacity", "0");
-      $(".finish-mission01").css("opacity", "0");
-      $(".electfan").removeClass("electfan-move");
-      $(".bubble-bg").removeClass("bubble-move");
-      $(".magic-wand").removeClass("magic-wand-animation");
-      $(".coin01").removeClass("coin-animation");
-      $(".coin-light").removeClass("coin-light-show");
-      $(".coin-hint01").removeClass("bubble-fade-in");
-      $(".check01").removeClass("check-show");
-      $(".popup-board01").css("display", "none");
-      $("#flipbook .click-magic-wand").remove();
-      $("#flipbook .finish-mission01").remove();
-      $("#flipbook .electfan").remove();
-      $("#flipbook .electfan-wind").remove();
-      $("#flipbook .electfan-wind-line").remove();
-      $("#flipbook .bubble-bg").remove();
-      $("#flipbook .bubble12").remove();
-      $("#flipbook .check-box").remove();
-      $(".book-section .popup-board-bg").remove();
-      $(".book-section .popup-board").remove();
-      $(".board13").remove();
-      $(".popup-board01").remove();
-      $(".text12").remove();
+      reset1213();
+    }
+
+    function reset1415() {
+      page1415Timeouts.forEach((id) => clearTimeout(id));
+      page1415Timeouts = [];
+      $(".book14").css("opacity", "0");
+      $(".book15").css("opacity", "0");
+      $(".finish-mission02").css("opacity", "0");
+      $(".milk-bottle").css("opacity", "0");
+      $(".bottle").css("opacity", "0");
+      $(".milk").css("opacity", "0");
+      $(".girls-hand ").css("opacity", "0");
+      $(".cows-tongue").css("opacity", "0");
+      $(".board14").css("opacity", "0");
+      $(".cloud14-1").css("opacity", "0");
+      $(".cloud14-2").css("opacity", "0");
+      $(".cloud14-3").css("opacity", "0");
+      $(".text14").css("opacity", "0");
+      $(".small-cow ").css("opacity", "0");
+      $(".popup-board02").css("display", "none");
+      $("#flipbook .finish-mission02").remove();
+      $("#flipbook .cloud14-2").remove();
+      $("#flipbook .text14").remove();
+      $("#flipbook .click-milk").remove();
+      $("#flipbook .board14").remove();
+      $("#flipbook .board-list02").remove();
+      $("#flipbook .small-cow").remove();
+      $("#flipbook .bubble14").remove();
+      $("#flipbook .check02").remove();
+      $(".board14").remove();
+      $(".popup-board02").remove();
+      $(".coin-hint02").remove();
+      $(".success-hint02").removeClass("bubble-fade-in");
+      $(".cows-tongue").removeClass("cows-tongue-animation");
+      $(".milk").removeClass("milk-empty");
+      $(".coin02").removeClass("coin-animation");
+      $(".coin-light02").removeClass("coin-light-show");
+      $(".check02").removeClass("check-show");
+      $(".coin-hint02").removeClass("bubble-fade-in");
     }
 
     // 第 14–15 頁：餵牛奶
     if (page === 14 || page === 15) {
+      if (replay) {
+        reset1415();
+      }
+
       isCanNotFlip();
       setTimeout(() => {
         canFlipPrev = true;
@@ -2325,49 +2051,63 @@ $(function () {
     }
 
     if (page === 13 || page === 16) {
-      page1415Timeouts.forEach((id) => clearTimeout(id));
-      page1415Timeouts = [];
-      $(".book14").css("opacity", "0");
-      $(".book15").css("opacity", "0");
-      $(".finish-mission02").css("opacity", "0");
-      $(".milk-bottle").css("opacity", "0");
-      $(".bottle").css("opacity", "0");
-      $(".milk").css("opacity", "0");
-      $(".girls-hand ").css("opacity", "0");
-      $(".cows-tongue").css("opacity", "0");
-      $(".board14").css("opacity", "0");
-      $(".cloud14-1").css("opacity", "0");
-      $(".cloud14-2").css("opacity", "0");
-      $(".cloud14-3").css("opacity", "0");
-      $(".text14").css("opacity", "0");
-      $(".small-cow ").css("opacity", "0");
-      $(".popup-board02").css("display", "none");
-      $("#flipbook .finish-mission02").remove();
-      $("#flipbook .cloud14-2").remove();
-      $("#flipbook .text14").remove();
-      $("#flipbook .click-milk").remove();
-      $("#flipbook .board14").remove();
-      $("#flipbook .board-list02").remove();
-      $("#flipbook .small-cow").remove();
-      $("#flipbook .bubble14").remove();
-      $("#flipbook .check02").remove();
-      $(".board14").remove();
-      $(".popup-board02").remove();
-      $(".coin-hint02").remove();
-      $(".success-hint02").removeClass("bubble-fade-in");
-      $(".cows-tongue").removeClass("cows-tongue-animation");
-      $(".milk").removeClass("milk-empty");
-      $(".coin02").removeClass("coin-animation");
-      $(".coin-light02").removeClass("coin-light-show");
-      $(".check02").removeClass("check-show");
-      $(".coin-hint02").removeClass("bubble-fade-in");
+      reset1415();
     }
 
     // 全域：避免重複 append coin 與 crown
     let stethoscopeBound = false;
 
+    function reset1617() {
+      page1617Timeouts.forEach((id) => clearTimeout(id));
+      page1617Timeouts = [];
+      $(".book16").css("opacity", "0");
+      $(".book17").css("opacity", "0");
+      $(".finish-mission03").css("opacity", "0");
+      $(".cloud-16-0").css("opacity", "0");
+      $(".cloud-16-3").css("opacity", "0");
+      $(".cloud14-3").css("opacity", "0");
+      $(".moutain-left").css("opacity", "0");
+      $(".moutain-right").css("opacity", "0");
+      $(".mom-cow").css("opacity", "0");
+      $(".cow-eyes").css("opacity", "0");
+      $(".cow-heart").css("opacity", "0");
+      $(".stethoscope").css("opacity", "0");
+      $(".board16").css("opacity", "0");
+      $(".story-text16").css("opacity", "0");
+      $(".nurse-girl").css("opacity", "0");
+      $(".popup-board03").css("display", "none");
+      $(".stethoscope").addClass("disabled");
+      $("#flipbook .stethoscope").removeClass("stethoscope-move");
+      $(".cow-heart").removeClass("heart-beat-animation");
+      $(".coin03").removeClass("coin-animation");
+      $(".coin-light03").removeClass("coin-light-show");
+      $(".check03").removeClass("check-show");
+      $(".coin-hint03").removeClass("bubble-fade-in");
+      $(".dondon").removeClass("bubble-fade-in");
+      $("#flipbook .click-hearing-heart").remove();
+      $("#flipbook .finish-mission03").remove();
+      $("#flipbook .story-text16").remove();
+      $("#flipbook .mom-cow").remove();
+      $("#flipbook .stethoscope").remove();
+      $("#flipbook .cow-eyes").remove();
+      $("#flipbook .cow-heart").remove();
+      $("#flipbook .dondon").remove();
+      $("#flipbook .nurse-girl").remove();
+      $("#flipbook .click-hearing-heart").remove();
+      $("#flipbook .check03").remove();
+      $("#flipbook .board-list03").remove();
+      $("#flipbook .board16").remove();
+      $(".popup-board03").remove();
+      $("#flipbook .bubble16").remove();
+      $("#flipbook .dondon").remove();
+    }
+
     // 第 16–17 頁：聽牛心跳
     if (page === 16 || page === 17) {
+      if (replay) {
+        reset1617();
+      }
+
       isCanNotFlip();
       setTimeout(() => {
         canFlipPrev = true;
@@ -2512,49 +2252,342 @@ $(function () {
     }
 
     if (page === 15 || page === 18) {
-      page1617Timeouts.forEach((id) => clearTimeout(id));
-      page1617Timeouts = [];
-      $(".book16").css("opacity", "0");
-      $(".book17").css("opacity", "0");
-      $(".finish-mission03").css("opacity", "0");
-      $(".cloud-16-0").css("opacity", "0");
-      $(".cloud-16-3").css("opacity", "0");
-      $(".cloud14-3").css("opacity", "0");
-      $(".moutain-left").css("opacity", "0");
-      $(".moutain-right").css("opacity", "0");
-      $(".mom-cow").css("opacity", "0");
-      $(".cow-eyes").css("opacity", "0");
-      $(".cow-heart").css("opacity", "0");
-      $(".stethoscope").css("opacity", "0");
-      $(".board16").css("opacity", "0");
-      $(".story-text16").css("opacity", "0");
-      $(".nurse-girl").css("opacity", "0");
-      $(".popup-board03").css("display", "none");
-      $(".stethoscope").addClass("disabled");
-      $("#flipbook .stethoscope").removeClass("stethoscope-move");
-      $(".cow-heart").removeClass("heart-beat-animation");
-      $(".coin03").removeClass("coin-animation");
-      $(".coin-light03").removeClass("coin-light-show");
-      $(".check03").removeClass("check-show");
-      $(".coin-hint03").removeClass("bubble-fade-in");
-      $(".dondon").removeClass("bubble-fade-in");
-      $("#flipbook .click-hearing-heart").remove();
-      $("#flipbook .finish-mission03").remove();
-      $("#flipbook .story-text16").remove();
-      $("#flipbook .mom-cow").remove();
-      $("#flipbook .stethoscope").remove();
-      $("#flipbook .cow-eyes").remove();
-      $("#flipbook .cow-heart").remove();
-      $("#flipbook .dondon").remove();
-      $("#flipbook .nurse-girl").remove();
-      $("#flipbook .click-hearing-heart").remove();
-      $("#flipbook .check03").remove();
-      $("#flipbook .board-list03").remove();
-      $("#flipbook .board16").remove();
-      $(".popup-board03").remove();
-      $("#flipbook .bubble16").remove();
-      $("#flipbook .dondon").remove();
+      reset1617();
     }
+
+    // 第 20–21 頁：獲得皇冠 + 投硬幣動畫
+    if (page === 18 || page === 19) {
+      if (replay) {
+        page1819Timeouts.forEach((id) => clearTimeout(id));
+        page1819Timeouts = [];
+        $(".book18").css("opacity", "0");
+        $(".book19").css("opacity", "0");
+        $(".girl1819").css("opacity", "0");
+        $(".coin01-final, .coin02-final, .coin03-final").removeClass(
+          "coin-all-animation",
+        );
+        $(".book19-text").removeClass("bubble-fade-in");
+        $(".crown").removeClass("crown-animation");
+        $(".crown-shine").removeClass("bubble-fade-in");
+        $(".coin-all-shine").removeClass("bubble-fade-in");
+        $(".bubble18").removeClass("bubble-fade-in");
+        $("#flipbook .bubble18").remove();
+        $("#flipbook .crown").remove();
+        $("#flipbook .crown-shine").remove();
+        $("#flipbook .coin-all").remove();
+        $("#flipbook .coin-all-shine").remove();
+        $("#flipbook .girl1819").remove();
+        $("#flipbook .book19-text").remove();
+      }
+
+      $("#flipbook").append(`
+      <img class="book19-text" src="./images/book/book1819/book19-text.png" />
+      <img class="coin-all  coin01-final" src="./images/book/book1819/金幣01.png" />
+      <img class="coin-all coin02-final" src="./images/book/book1819/金幣02.png" />
+      <img class="coin-all coin03-final" src="./images/book/book1819/金幣03.png" />
+      <img class="coin-all-shine" src="./images/book/book1819/亮晶晶.png" />
+      <img class="girl1819" src="./images/book/book1819/鈴鈴.png" />
+      <img class="crown" src="./images/book/book1819/好牛皇冠.png" />
+      <img class="crown-shine" src="./images/book/book1819/皇冠光芒.png" />
+      <img class="bubble18" src="./images/book/book1819/牛奶泡泡.png" />
+    `);
+
+      page1819Timeouts.push(
+        setTimeout(() => {
+          $(".book18").css("opacity", "1");
+          $(".book19").css("opacity", "1");
+          $(".girl1819").css("opacity", "1");
+        }, 1000),
+      );
+
+      page1819Timeouts.push(
+        setTimeout(() => {
+          $(".coin01-final, .coin02-final, .coin03-final").addClass(
+            "coin-all-animation",
+          );
+        }, 4000),
+      );
+
+      page1819Timeouts.push(
+        setTimeout(() => {
+          $(".coin-all-shine").addClass("bubble-fade-in");
+        }, 4500),
+      );
+
+      page1819Timeouts.push(
+        setTimeout(() => {
+          $(".bubble18").addClass("bubble-fade-in");
+        }, 3500),
+      );
+
+      page1819Timeouts.push(
+        setTimeout(() => {
+          $(".crown").addClass("crown-animation");
+        }, 12000),
+      );
+
+      page1819Timeouts.push(
+        setTimeout(() => {
+          $(".crown-shine").addClass("bubble-fade-in");
+        }, 13000),
+      );
+
+      page1819Timeouts.push(
+        setTimeout(() => {
+          $(".book19-text").addClass("bubble-fade-in");
+        }, 19000),
+      );
+    }
+
+    if (page === 17 || page === 20) {
+      page1819Timeouts.forEach((id) => clearTimeout(id));
+      page1819Timeouts = [];
+      $(".book18").css("opacity", "0");
+      $(".book19").css("opacity", "0");
+      $(".girl1819").css("opacity", "0");
+      $(".coin01-final, .coin02-final, .coin03-final").removeClass(
+        "coin-all-animation",
+      );
+      $(".book19-text").removeClass("bubble-fade-in");
+      $(".crown").removeClass("crown-animation");
+      $(".crown-shine").removeClass("bubble-fade-in");
+      $(".coin-all-shine").removeClass("bubble-fade-in");
+      $(".bubble18").removeClass("bubble-fade-in");
+      $("#flipbook .bubble18").remove();
+      $("#flipbook .crown").remove();
+      $("#flipbook .crown-shine").remove();
+      $("#flipbook .coin-all").remove();
+      $("#flipbook .coin-all-shine").remove();
+      $("#flipbook .girl1819").remove();
+      $("#flipbook .book19-text").remove();
+    }
+
+    // 第 20–21 頁：小女孩夢境 + 浮出夢境
+    if (page === 20 || page === 21) {
+      if (replay) {
+        page2021Timeouts.forEach((id) => clearTimeout(id));
+        page2021Timeouts = [];
+        $(".book21").css("opacity", "0");
+        $(".dream04").remove();
+        $(".dream-light").remove();
+        $(".story20").remove();
+        $(".dream-girl").remove();
+        $(".dialog20").remove();
+        $(".star20").remove();
+        $(".bubble20").remove();
+        $(".dialog20").remove();
+        $(".dialog21").remove();
+        $(".book21-text").remove();
+        $(".book21-text").removeClass("bubble-fade-in");
+        $(".dream01").removeClass("dream-animation");
+        $(".dream02").removeClass("dream-animation");
+        $(".dream03").removeClass("dream-animation");
+        $(".dream04").removeClass("dream-animation");
+        $(".dialog20").removeClass("dialog20-animation");
+        $(".dialog21").removeClass("dialog20-animation");
+        $(".star20").removeClass("dialog20-animation");
+        $(".bubble20").removeClass("bubble-fade-in");
+        $(".dream-girl").removeClass("dream-girl-animation");
+      }
+
+      $("#flipbook").append(
+        `<img class="dream04" src="./images/book/book2021/夢泡04.png"/>
+        <img class="dream-light" src="./images/book/book2021/夢泡光.png"/>
+        <img class="story20" src="./images/book/book2021/故事20.png"/>
+        <img class="book21-text" src="./images/book/book2021/book21-text.png"/>
+        <img class="dream-girl" src="./images/book/book2021/鈴鈴.png"/>
+        <img class="dialog20" src="./images/book/book2021/哇!.png"/>
+        <img class="dialog21" src="./images/book/book2021/嗯.png"/>
+        <img class="bubble20" src="./images/book/book2021/牛奶泡泡20.png"/>
+        <img class="star20" src="./images/book/book2021/亮晶晶.png"/>
+        `,
+      );
+
+      page2021Timeouts.push(
+        setTimeout(() => {
+          $(".book20").css("opacity", "1");
+          $(".book21").css("opacity", "1");
+          $(".dream01").addClass("dream-animation");
+          $(".dream02").addClass("dream-animation");
+          $(".dream03").addClass("dream-animation");
+          $(".dream04").addClass("dream-animation");
+          $(".story20").addClass("dream-animation");
+          $(".dream-girl").addClass("dream-girl-animation");
+        }, 1000),
+      );
+
+      page2021Timeouts.push(
+        setTimeout(() => {
+          $(".dialog20").addClass("bubble-fade-in");
+        }, 5000),
+      );
+
+      page2021Timeouts.push(
+        setTimeout(() => {
+          $(".bubble20").addClass("bubble-fade-in");
+          $(".dream-light").addClass("sweet-taste-animation");
+          $(".star20").addClass("dialog20-animation");
+        }, 7000),
+      );
+
+      page2021Timeouts.push(
+        setTimeout(() => {
+          $(".dialog21").addClass("bubble-fade-in");
+        }, 9000),
+      );
+
+      page2021Timeouts.push(
+        setTimeout(() => {
+          $(".book21-text").addClass("bubble-fade-in");
+        }, 11000),
+      );
+    }
+
+    if (page === 19 || page === 22) {
+      page2021Timeouts.forEach((id) => clearTimeout(id));
+      page2021Timeouts = [];
+      $(".book21").css("opacity", "0");
+      $(".dream04").remove();
+      $(".dream-light").remove();
+      $(".story20").remove();
+      $(".dream-girl").remove();
+      $(".dialog20").remove();
+      $(".star20").remove();
+      $(".bubble20").remove();
+      $(".dialog20").remove();
+      $(".dialog21").remove();
+      $(".book21-text").remove();
+      $(".book21-text").removeClass("bubble-fade-in");
+      $(".dream01").removeClass("dream-animation");
+      $(".dream02").removeClass("dream-animation");
+      $(".dream03").removeClass("dream-animation");
+      $(".dream04").removeClass("dream-animation");
+      $(".dialog20").removeClass("dialog20-animation");
+      $(".dialog21").removeClass("dialog20-animation");
+      $(".star20").removeClass("dialog20-animation");
+      $(".bubble20").removeClass("bubble-fade-in");
+      $(".dream-girl").removeClass("dream-girl-animation");
+    }
+
+    if (page === 22 || page === 23) {
+      if (replay) {
+        page2223Timeouts.forEach((id) => clearTimeout(id));
+        page2223Timeouts = [];
+        $(".book22").css("opacity", "0");
+        $(".book23").css("opacity", "0");
+        $(".cow-alarm ").css("opacity", "0");
+        $(".sleep-girl-hand ").css("opacity", "0");
+        $(".sleep-girl-arm").css("opacity", "0");
+        $(".book23-text").removeClass("bubble-fade-in");
+      }
+
+      page2223Timeouts.push(
+        setTimeout(() => {
+          $(".book22").css("opacity", "1");
+          $(".book23").css("opacity", "1");
+          $(".cow-alarm ").css("opacity", "1");
+          $(".sleep-girl-hand").css("opacity", "1");
+          $(".sleep-girl-arm").css("opacity", "1");
+        }, 1000),
+      );
+
+      page2223Timeouts.push(
+        setTimeout(() => {
+          $(".book23-text").addClass("bubble-fade-in");
+        }, 6000),
+      );
+    } else {
+      page2223Timeouts.forEach((id) => clearTimeout(id));
+      page2223Timeouts = [];
+      $(".book22").css("opacity", "0");
+      $(".book23").css("opacity", "0");
+      $(".cow-alarm ").css("opacity", "0");
+      $(".sleep-girl-hand ").css("opacity", "0");
+      $(".sleep-girl-arm").css("opacity", "0");
+      $(".book23-text").removeClass("bubble-fade-in");
+    }
+
+    if (page === 26 || page === 27) {
+      if (replay) {
+        resetFamilyPage();
+        $(".mom-hand-region").hide();
+        $(".mow").hide();
+        $(".father-hand-region").removeClass("father-hand-finish");
+        $(".daughter-hand-region").removeClass("daughter-hand-finish");
+        $(".father-hand-milk").css("opacity", "1");
+        $(".daughter-hand-milk").css("opacity", "1");
+        $(".mom-hand-milk").css("opacity", "1");
+        $(".daughter-hand-milk").removeClass("daughter-hand-milk-empty");
+        $(".sweet-taste").removeClass("bubble-fade-in");
+        startFamilyAnimation();
+        setTimeout(() => {
+          $(".mom-hand-region").show();
+        }, 1500);
+      }
+    }
+  }
+
+  // 監聽 mouseup，更新目前頁碼狀態
+  let currentPage = 1;
+
+  // 當頁面翻轉完成後觸發
+  $("#flipbook").bind("turning", function (event, page, view) {
+    console.log("page:", page);
+    let canFlipPrev = false; // 初始禁止往前翻頁
+    let canFlipNext = false; // 初始禁止往後翻頁
+
+    function isCanNotFlipPrev() {
+      if (!window.matchMedia("(max-height: 500px)").matches) {
+        $("#left-up-corner")
+          .off("click") // 移除舊的
+          .on("click", function () {
+            if (!canFlipPrev) {
+              return;
+            }
+            $("#flipbook").turn("previous");
+          });
+      }
+
+      $("#left-down-corner")
+        .off("click") // 移除舊的
+        .on("click", function () {
+          if (!canFlipPrev) {
+            return;
+          }
+          $("#flipbook").turn("previous");
+        });
+    }
+
+    function isCanNotFlipNext() {
+      if (!window.matchMedia("(max-height: 500px)").matches) {
+        $("#right-up-corner")
+          .off("click")
+          .on("click", function () {
+            if (!canFlipNext) {
+              return;
+            }
+            $("#flipbook").turn("next");
+          });
+      }
+
+      $("#right-down-corner")
+        .off("click")
+        .on("click", function () {
+          if (!canFlipNext) {
+            return;
+          }
+          $("#flipbook").turn("next");
+        });
+    }
+
+    function isCanNotFlip() {
+      isCanNotFlipPrev();
+      isCanNotFlipNext();
+    }
+
+    currentPage = page;
+
+    handlePage(currentPage);
 
     // 重置該頁面的所有動畫與音效
     function resetMilkPage() {
