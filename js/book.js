@@ -734,6 +734,99 @@ $(function () {
     });
   }
 
+  // 重置該頁面的所有動畫與音效
+  function resetMilkPage() {
+    $(".book24").css("opacity", "0");
+    $(".book25").css("opacity", "0");
+    $(".milk-hand").css("opacity", "0");
+    $(".milk-cup").css("opacity", "0");
+    $(".mom-right-hand").css("opacity", "0");
+    $(".little-girl").css("opacity", "0");
+    $(".girl-l-hand").css("opacity", "0");
+    $(".girl-l-hand-milk").css("opacity", "0");
+    $(".girl-l-hand-cup").css("opacity", "0");
+    $(".girl-r-hand").css("opacity", "0");
+    $(".flower").css("opacity", "0");
+    $(".milk-inner").css("opacity", "0");
+    $(".click-girl").hide();
+    $(".milk-hand").removeClass("milk-hand-animation");
+    $(".milk-drop").removeClass("milk-drop-show");
+    $(".girl-l-hand").removeClass("girl-l-hand-empty");
+    $(".girl-l-hand-region").removeClass("girl-l-hand-finish");
+    $(".girl-r-hand").removeClass("girl-r-hand-finish");
+    $(".milk-stains").removeClass("milk-stains-show");
+    $(".milk-drop").removeClass("milk-drop-show");
+    $(".book25-story").removeClass("milk-stains-show");
+    $(".book25-text").removeClass("milk-stains-show");
+    $(".milk-flower").css("dispaly", "none");
+    $(".milk-flower").removeClass("milk-drop-show");
+    $(".milk-smell").removeClass("milk-smell-animation");
+
+    for (let i = 1; i <= 6; i++) {
+      $(`.flower0${i}`).removeClass(`flower0${i}-finish`);
+    }
+
+    $("audio").each(function () {
+      this.pause();
+    });
+  }
+
+  // 牛奶倒動畫流程
+  function startMilkAnimation() {
+    page2425Timeouts.push(
+      setTimeout(() => {
+        $(".book24").css("opacity", "1");
+        $(".book25").css("opacity", "1");
+        $(".milk-hand").css("opacity", "1");
+        $(".milk-cup").css("opacity", "1");
+        $(".mom-right-hand").css("opacity", "1");
+        $(".little-girl").css("opacity", "1");
+        $(".girl-l-hand").css("opacity", "1");
+        $(".girl-l-hand-milk").css("opacity", "1");
+        $(".girl-l-hand-cup").css("opacity", "1");
+        $(".girl-r-hand").css("opacity", "1");
+        $(".milk-flower").css("dispaly", "block");
+      }, 1000),
+    );
+
+    page2425Timeouts.push(
+      setTimeout(() => {
+        $(".milk-hand").addClass("milk-hand-animation");
+      }, 3300),
+    );
+
+    page2425Timeouts.push(
+      setTimeout(() => {
+        $(".milk-drop").addClass("milk-drop-show");
+      }, 4000),
+    );
+
+    page2425Timeouts.push(
+      setTimeout(() => {
+        $(".milk-inner").css("opacity", "1");
+      }, 6300),
+    );
+
+    page2425Timeouts.push(
+      setTimeout(() => {
+        $(".milk-flower").addClass("milk-drop-show");
+        $(".milk-drop").removeClass("milk-drop-show");
+      }, 8300),
+    );
+
+    page2425Timeouts.push(
+      setTimeout(() => {
+        $(".milk-smell").addClass("milk-smell-animation");
+      }, 9300),
+    );
+
+    page2425Timeouts.push(
+      setTimeout(() => {
+        $(".click-girl").show();
+      }, 15000),
+    );
+  }
+
   // 第 26–27 頁 家人喝牛奶
   function startFamilyAnimation() {
     $("#flipbook").append(`
@@ -1105,22 +1198,26 @@ $(function () {
       }, 3000);
     }
 
+    function reset23() {
+      page23Timeouts.forEach((id) => clearTimeout(id));
+      page23Timeouts = [];
+      $(".book02").css("opacity", "0");
+      $(".text02").css("opacity", "0");
+      $(".book03").css("opacity", "0");
+      $(".book03-title").css("opacity", "0");
+      $(".girls-head03").css("opacity", "0");
+      $(".milk03").css("opacity", "0");
+      $(".hands03").css("opacity", "0");
+      $("#flipbook .girls-head03").remove();
+      $("#flipbook .milk03").remove();
+      $("#flipbook .hands03").remove();
+      $("#flipbook .book03-title").remove();
+      $("#flipbook .girls-head03").remove();
+    }
+
     if (page === 2 || page === 3) {
       if (replay) {
-        page23Timeouts.forEach((id) => clearTimeout(id));
-        page23Timeouts = [];
-        $(".book02").css("opacity", "0");
-        $(".text02").css("opacity", "0");
-        $(".book03").css("opacity", "0");
-        $(".book03-title").css("opacity", "0");
-        $(".girls-head03").css("opacity", "0");
-        $(".milk03").css("opacity", "0");
-        $(".hands03").css("opacity", "0");
-        $("#flipbook .girls-head03").remove();
-        $("#flipbook .milk03").remove();
-        $("#flipbook .hands03").remove();
-        $("#flipbook .book03-title").remove();
-        $("#flipbook .girls-head03").remove();
+        reset23();
       }
 
       $("#left-down-corner").show();
@@ -1161,19 +1258,7 @@ $(function () {
         }, 500);
       }, 1500);
     } else {
-      page23Timeouts.forEach((id) => clearTimeout(id));
-      page23Timeouts = [];
-      $(".book02").css("opacity", "0");
-      $(".text02").css("opacity", "0");
-      $(".book03").css("opacity", "0");
-      $(".book03-title").css("opacity", "0");
-      $(".girls-head03").css("opacity", "0");
-      $(".milk03").css("opacity", "0");
-      $(".hands03").css("opacity", "0");
-      $("#flipbook .girls-head03").remove();
-      $("#flipbook .milk03").remove();
-      $("#flipbook .hands03").remove();
-      $("#flipbook .girls-head03").remove();
+      reset23();
     }
 
     if (page === 1 || page === 4) {
@@ -1181,20 +1266,24 @@ $(function () {
       $("#flipbook .book03-title").remove();
     }
 
+    function reset45() {
+      $(".eyes-4").removeClass("eyes-big-animation");
+      $(".question").removeClass("question-animation");
+      $(".book04").css("opacity", "0");
+      $(".text04").css("opacity", "0");
+      $(".text05").css("opacity", "0");
+      $(".eyes-4").css("opacity", "0");
+      $(".book05").css("opacity", "0");
+      $(".daughter-5").css("opacity", "0");
+      $(".moms-head-5").css("opacity", "0");
+      $(".daughter-hand-5").css("opacity", "0");
+      $(".moms-hand-5").css("opacity", "0");
+      $(".gogo").css("opacity", "0");
+    }
+
     if (page === 4 || page === 5) {
       if (replay) {
-        $(".eyes-4").removeClass("eyes-big-animation");
-        $(".question").removeClass("question-animation");
-        $(".book04").css("opacity", "0");
-        $(".text04").css("opacity", "0");
-        $(".text05").css("opacity", "0");
-        $(".eyes-4").css("opacity", "0");
-        $(".book05").css("opacity", "0");
-        $(".daughter-5").css("opacity", "0");
-        $(".moms-head-5").css("opacity", "0");
-        $(".daughter-hand-5").css("opacity", "0");
-        $(".moms-hand-5").css("opacity", "0");
-        $(".gogo").css("opacity", "0");
+        reset45();
       }
 
       setTimeout(() => {
@@ -1222,18 +1311,7 @@ $(function () {
         $(".gogo").css("opacity", "1");
       }, 30000);
     } else {
-      $(".eyes-4").removeClass("eyes-big-animation");
-      $(".question").removeClass("question-animation");
-      $(".book04").css("opacity", "0");
-      $(".text04").css("opacity", "0");
-      $(".text05").css("opacity", "0");
-      $(".eyes-4").css("opacity", "0");
-      $(".book05").css("opacity", "0");
-      $(".daughter-5").css("opacity", "0");
-      $(".moms-head-5").css("opacity", "0");
-      $(".daughter-hand-5").css("opacity", "0");
-      $(".moms-hand-5").css("opacity", "0");
-      $(".gogo").css("opacity", "0");
+      reset45();
     }
 
     let doorClickBound = false;
@@ -1376,28 +1454,32 @@ $(function () {
       reset67();
     }
 
+    function reset89() {
+      page89Timeouts.forEach((id) => clearTimeout(id));
+      page89Timeouts = [];
+      $(".foot1").removeClass("foot1-animation");
+      $(".foot2").removeClass("foot2-animation");
+      $(".foot3").removeClass("foot3-animation");
+      $(".foot4").removeClass("foot4-animation");
+      $(".foot5").removeClass("foot5-animation");
+      $(".mowmow").removeClass("bubble-fade-in");
+      $(".text09").removeClass("bubble-fade-in");
+      $(".eyes-ball-8").removeClass("eyes-ball-animation");
+      $(".mom-daughter").removeClass("mom-daughter-animation");
+      $(".bubble7").removeClass("bubble-fade-in");
+      $(".star7").removeClass("star-fade-in");
+      $("#flipbook .mom-daughter").remove();
+      $("#flipbook .bubble7").remove();
+      $("#flipbook .star7").remove();
+      $(".book08").css("opacity", "0");
+      $(".book09").css("opacity", "0");
+      $(".eyes-8").css("opacity", "0");
+      $(".eyes-ball-8").css("opacity", "0");
+    }
+
     if (page === 8 || page === 9) {
       if (replay) {
-        page89Timeouts.forEach((id) => clearTimeout(id));
-        page89Timeouts = [];
-        $(".foot1").removeClass("foot1-animation");
-        $(".foot2").removeClass("foot2-animation");
-        $(".foot3").removeClass("foot3-animation");
-        $(".foot4").removeClass("foot4-animation");
-        $(".foot5").removeClass("foot5-animation");
-        $(".mowmow").removeClass("bubble-fade-in");
-        $(".text09").removeClass("bubble-fade-in");
-        $(".eyes-ball-8").removeClass("eyes-ball-animation");
-        $(".mom-daughter").removeClass("mom-daughter-animation");
-        $(".bubble7").removeClass("bubble-fade-in");
-        $(".star7").removeClass("star-fade-in");
-        $("#flipbook .mom-daughter").remove();
-        $("#flipbook .bubble7").remove();
-        $("#flipbook .star7").remove();
-        $(".book08").css("opacity", "0");
-        $(".book09").css("opacity", "0");
-        $(".eyes-8").css("opacity", "0");
-        $(".eyes-ball-8").css("opacity", "0");
+        reset89();
       }
 
       $("#flipbook").append(
@@ -1460,61 +1542,45 @@ $(function () {
     }
 
     if (page === 7 || page === 10) {
-      page89Timeouts.forEach((id) => clearTimeout(id));
-      page89Timeouts = [];
-      $(".foot1").removeClass("foot1-animation");
-      $(".foot2").removeClass("foot2-animation");
-      $(".foot3").removeClass("foot3-animation");
-      $(".foot4").removeClass("foot4-animation");
-      $(".foot5").removeClass("foot5-animation");
-      $(".mowmow").removeClass("bubble-fade-in");
-      $(".text09").removeClass("bubble-fade-in");
-      $(".eyes-ball-8").removeClass("eyes-ball-animation");
-      $(".mom-daughter").removeClass("mom-daughter-animation");
-      $(".bubble7").removeClass("bubble-fade-in");
-      $(".star7").removeClass("star-fade-in");
-      $("#flipbook .mom-daughter").remove();
-      $("#flipbook .bubble7").remove();
-      $("#flipbook .star7").remove();
-      $(".book08").css("opacity", "0");
-      $(".book09").css("opacity", "0");
-      $(".eyes-8").css("opacity", "0");
-      $(".eyes-ball-8").css("opacity", "0");
+      reset89();
+    }
+
+    function reset1011() {
+      page1011Timeouts.forEach((id) => clearTimeout(id));
+      page1011Timeouts = [];
+      $(".book100").css("opacity", "1");
+      $(".book10").css("opacity", "0");
+      $(".book110").css("opacity", "1");
+      $(".book11").css("opacity", "0");
+      $(".text11").css("opacity", "0");
+      $(".cow01").css("opacity", "0");
+      $(".cow02").css("opacity", "0");
+      $(".cow03").css("opacity", "0");
+      $(".cow04").css("opacity", "0");
+      $(".cow05").css("opacity", "0");
+      $(".cloud-group").css("opacity", "0");
+      $(".cloud-01").css("opacity", "0");
+      $(".cloud-02").css("opacity", "0");
+      $(".list-board").css("opacity", "0");
+      $(".rainbow").css("opacity", "0");
+      $(".girls-head").css("opacity", "0");
+      $(".list").removeClass("bubble-fade-in");
+      $(".cloud-01").removeClass("cloud-animation");
+      $(".cloud-02").removeClass("cloud-animation");
+      $(".book10-text").removeClass("bubble-fade-in");
+      $("#flipbook .rainbow").remove();
+      $("#flipbook .cloud-group").remove();
+      $("#flipbook .girls-head").remove();
+      $("#flipbook .cow05").remove();
+      $("#flipbook .list-board").remove();
+      $("#flipbook .list").remove();
+      $("#flipbook .bubble11").remove();
+      $("#flipbook .star11").remove();
+      $("#flipbook .text11").remove();
     }
 
     if (page === 10 || page === 11) {
       if (replay) {
-        page1011Timeouts.forEach((id) => clearTimeout(id));
-        page1011Timeouts = [];
-        $(".book100").css("opacity", "1");
-        $(".book10").css("opacity", "0");
-        $(".book110").css("opacity", "1");
-        $(".book11").css("opacity", "0");
-        $(".text11").css("opacity", "0");
-        $(".cow01").css("opacity", "0");
-        $(".cow02").css("opacity", "0");
-        $(".cow03").css("opacity", "0");
-        $(".cow04").css("opacity", "0");
-        $(".cow05").css("opacity", "0");
-        $(".cloud-group").css("opacity", "0");
-        $(".cloud-01").css("opacity", "0");
-        $(".cloud-02").css("opacity", "0");
-        $(".list-board").css("opacity", "0");
-        $(".rainbow").css("opacity", "0");
-        $(".girls-head").css("opacity", "0");
-        $(".list").removeClass("bubble-fade-in");
-        $(".cloud-01").removeClass("cloud-animation");
-        $(".cloud-02").removeClass("cloud-animation");
-        $(".book10-text").removeClass("bubble-fade-in");
-        $("#flipbook .rainbow").remove();
-        $("#flipbook .cloud-group").remove();
-        $("#flipbook .girls-head").remove();
-        $("#flipbook .cow05").remove();
-        $("#flipbook .list-board").remove();
-        $("#flipbook .list").remove();
-        $("#flipbook .bubble11").remove();
-        $("#flipbook .star11").remove();
-        $("#flipbook .text11").remove();
       }
 
       $("#flipbook").append(
@@ -1577,37 +1643,7 @@ $(function () {
     );
 
     if (page === 9 || page === 12) {
-      page1011Timeouts.forEach((id) => clearTimeout(id));
-      page1011Timeouts = [];
-      $(".book100").css("opacity", "1");
-      $(".book10").css("opacity", "0");
-      $(".book110").css("opacity", "1");
-      $(".book11").css("opacity", "0");
-      $(".text11").css("opacity", "0");
-      $(".cow01").css("opacity", "0");
-      $(".cow02").css("opacity", "0");
-      $(".cow03").css("opacity", "0");
-      $(".cow04").css("opacity", "0");
-      $(".cow05").css("opacity", "0");
-      $(".cloud-group").css("opacity", "0");
-      $(".cloud-01").css("opacity", "0");
-      $(".cloud-02").css("opacity", "0");
-      $(".list-board").css("opacity", "0");
-      $(".rainbow").css("opacity", "0");
-      $(".girls-head").css("opacity", "0");
-      $(".list").removeClass("bubble-fade-in");
-      $(".cloud-01").removeClass("cloud-animation");
-      $(".cloud-02").removeClass("cloud-animation");
-      $(".book10-text").removeClass("bubble-fade-in");
-      $("#flipbook .rainbow").remove();
-      $("#flipbook .cloud-group").remove();
-      $("#flipbook .girls-head").remove();
-      $("#flipbook .cow05").remove();
-      $("#flipbook .list-board").remove();
-      $("#flipbook .list").remove();
-      $("#flipbook .bubble11").remove();
-      $("#flipbook .star11").remove();
-      $("#flipbook .text11").remove();
+      reset1011();
     }
 
     //跳出看板
@@ -2362,32 +2398,36 @@ $(function () {
       $("#flipbook .book19-text").remove();
     }
 
+    function reset2021() {
+      page2021Timeouts.forEach((id) => clearTimeout(id));
+      page2021Timeouts = [];
+      $(".book21").css("opacity", "0");
+      $(".dream04").remove();
+      $(".dream-light").remove();
+      $(".story20").remove();
+      $(".dream-girl").remove();
+      $(".dialog20").remove();
+      $(".star20").remove();
+      $(".bubble20").remove();
+      $(".dialog20").remove();
+      $(".dialog21").remove();
+      $(".book21-text").remove();
+      $(".book21-text").removeClass("bubble-fade-in");
+      $(".dream01").removeClass("dream-animation");
+      $(".dream02").removeClass("dream-animation");
+      $(".dream03").removeClass("dream-animation");
+      $(".dream04").removeClass("dream-animation");
+      $(".dialog20").removeClass("dialog20-animation");
+      $(".dialog21").removeClass("dialog20-animation");
+      $(".star20").removeClass("dialog20-animation");
+      $(".bubble20").removeClass("bubble-fade-in");
+      $(".dream-girl").removeClass("dream-girl-animation");
+    }
+
     // 第 20–21 頁：小女孩夢境 + 浮出夢境
     if (page === 20 || page === 21) {
       if (replay) {
-        page2021Timeouts.forEach((id) => clearTimeout(id));
-        page2021Timeouts = [];
-        $(".book21").css("opacity", "0");
-        $(".dream04").remove();
-        $(".dream-light").remove();
-        $(".story20").remove();
-        $(".dream-girl").remove();
-        $(".dialog20").remove();
-        $(".star20").remove();
-        $(".bubble20").remove();
-        $(".dialog20").remove();
-        $(".dialog21").remove();
-        $(".book21-text").remove();
-        $(".book21-text").removeClass("bubble-fade-in");
-        $(".dream01").removeClass("dream-animation");
-        $(".dream02").removeClass("dream-animation");
-        $(".dream03").removeClass("dream-animation");
-        $(".dream04").removeClass("dream-animation");
-        $(".dialog20").removeClass("dialog20-animation");
-        $(".dialog21").removeClass("dialog20-animation");
-        $(".star20").removeClass("dialog20-animation");
-        $(".bubble20").removeClass("bubble-fade-in");
-        $(".dream-girl").removeClass("dream-girl-animation");
+        reset2021();
       }
 
       $("#flipbook").append(
@@ -2444,41 +2484,23 @@ $(function () {
     }
 
     if (page === 19 || page === 22) {
-      page2021Timeouts.forEach((id) => clearTimeout(id));
-      page2021Timeouts = [];
-      $(".book21").css("opacity", "0");
-      $(".dream04").remove();
-      $(".dream-light").remove();
-      $(".story20").remove();
-      $(".dream-girl").remove();
-      $(".dialog20").remove();
-      $(".star20").remove();
-      $(".bubble20").remove();
-      $(".dialog20").remove();
-      $(".dialog21").remove();
-      $(".book21-text").remove();
-      $(".book21-text").removeClass("bubble-fade-in");
-      $(".dream01").removeClass("dream-animation");
-      $(".dream02").removeClass("dream-animation");
-      $(".dream03").removeClass("dream-animation");
-      $(".dream04").removeClass("dream-animation");
-      $(".dialog20").removeClass("dialog20-animation");
-      $(".dialog21").removeClass("dialog20-animation");
-      $(".star20").removeClass("dialog20-animation");
-      $(".bubble20").removeClass("bubble-fade-in");
-      $(".dream-girl").removeClass("dream-girl-animation");
+      reset2021();
+    }
+
+    function reset2223() {
+      page2223Timeouts.forEach((id) => clearTimeout(id));
+      page2223Timeouts = [];
+      $(".book22").css("opacity", "0");
+      $(".book23").css("opacity", "0");
+      $(".cow-alarm ").css("opacity", "0");
+      $(".sleep-girl-hand ").css("opacity", "0");
+      $(".sleep-girl-arm").css("opacity", "0");
+      $(".book23-text").removeClass("bubble-fade-in");
     }
 
     if (page === 22 || page === 23) {
       if (replay) {
-        page2223Timeouts.forEach((id) => clearTimeout(id));
-        page2223Timeouts = [];
-        $(".book22").css("opacity", "0");
-        $(".book23").css("opacity", "0");
-        $(".cow-alarm ").css("opacity", "0");
-        $(".sleep-girl-hand ").css("opacity", "0");
-        $(".sleep-girl-arm").css("opacity", "0");
-        $(".book23-text").removeClass("bubble-fade-in");
+        reset2223();
       }
 
       page2223Timeouts.push(
@@ -2497,14 +2519,27 @@ $(function () {
         }, 6000),
       );
     } else {
-      page2223Timeouts.forEach((id) => clearTimeout(id));
-      page2223Timeouts = [];
-      $(".book22").css("opacity", "0");
-      $(".book23").css("opacity", "0");
-      $(".cow-alarm ").css("opacity", "0");
-      $(".sleep-girl-hand ").css("opacity", "0");
-      $(".sleep-girl-arm").css("opacity", "0");
-      $(".book23-text").removeClass("bubble-fade-in");
+      reset2223();
+    }
+
+    // 第 24–25 頁：點擊小女孩喝牛奶
+    if (page === 24 || page === 25) {
+      if (replay) {
+        resetMilkPage();
+      }
+
+      isCanNotFlip();
+      setTimeout(() => {
+        canFlipPrev = true;
+      }, 3000);
+      btnPreviousDisabled();
+      btnDisabled();
+
+      resetMilkPage(); // 每次重進頁面重置一次
+
+      startMilkAnimation();
+    } else {
+      resetMilkPage();
     }
 
     if (page === 26 || page === 27) {
@@ -2589,99 +2624,6 @@ $(function () {
 
     handlePage(currentPage);
 
-    // 重置該頁面的所有動畫與音效
-    function resetMilkPage() {
-      $(".book24").css("opacity", "0");
-      $(".book25").css("opacity", "0");
-      $(".milk-hand").css("opacity", "0");
-      $(".milk-cup").css("opacity", "0");
-      $(".mom-right-hand").css("opacity", "0");
-      $(".little-girl").css("opacity", "0");
-      $(".girl-l-hand").css("opacity", "0");
-      $(".girl-l-hand-milk").css("opacity", "0");
-      $(".girl-l-hand-cup").css("opacity", "0");
-      $(".girl-r-hand").css("opacity", "0");
-      $(".flower").css("opacity", "0");
-      $(".milk-inner").css("opacity", "0");
-      $(".click-girl").hide();
-      $(".milk-hand").removeClass("milk-hand-animation");
-      $(".milk-drop").removeClass("milk-drop-show");
-      $(".girl-l-hand").removeClass("girl-l-hand-empty");
-      $(".girl-l-hand-region").removeClass("girl-l-hand-finish");
-      $(".girl-r-hand").removeClass("girl-r-hand-finish");
-      $(".milk-stains").removeClass("milk-stains-show");
-      $(".milk-drop").removeClass("milk-drop-show");
-      $(".book25-story").removeClass("milk-stains-show");
-      $(".book25-text").removeClass("milk-stains-show");
-      $(".milk-flower").css("dispaly", "none");
-      $(".milk-flower").removeClass("milk-drop-show");
-      $(".milk-smell").removeClass("milk-smell-animation");
-
-      for (let i = 1; i <= 6; i++) {
-        $(`.flower0${i}`).removeClass(`flower0${i}-finish`);
-      }
-
-      $("audio").each(function () {
-        this.pause();
-      });
-    }
-
-    // 牛奶倒動畫流程
-    function startMilkAnimation() {
-      page2425Timeouts.push(
-        setTimeout(() => {
-          $(".book24").css("opacity", "1");
-          $(".book25").css("opacity", "1");
-          $(".milk-hand").css("opacity", "1");
-          $(".milk-cup").css("opacity", "1");
-          $(".mom-right-hand").css("opacity", "1");
-          $(".little-girl").css("opacity", "1");
-          $(".girl-l-hand").css("opacity", "1");
-          $(".girl-l-hand-milk").css("opacity", "1");
-          $(".girl-l-hand-cup").css("opacity", "1");
-          $(".girl-r-hand").css("opacity", "1");
-          $(".milk-flower").css("dispaly", "block");
-        }, 1000),
-      );
-
-      page2425Timeouts.push(
-        setTimeout(() => {
-          $(".milk-hand").addClass("milk-hand-animation");
-        }, 3300),
-      );
-
-      page2425Timeouts.push(
-        setTimeout(() => {
-          $(".milk-drop").addClass("milk-drop-show");
-        }, 4000),
-      );
-
-      page2425Timeouts.push(
-        setTimeout(() => {
-          $(".milk-inner").css("opacity", "1");
-        }, 6300),
-      );
-
-      page2425Timeouts.push(
-        setTimeout(() => {
-          $(".milk-flower").addClass("milk-drop-show");
-          $(".milk-drop").removeClass("milk-drop-show");
-        }, 8300),
-      );
-
-      page2425Timeouts.push(
-        setTimeout(() => {
-          $(".milk-smell").addClass("milk-smell-animation");
-        }, 9300),
-      );
-
-      page2425Timeouts.push(
-        setTimeout(() => {
-          $(".click-girl").show();
-        }, 15000),
-      );
-    }
-
     // 小女孩喝奶動畫流程（只綁一次，不堆疊）
     $(".click-girl")
       .off("click")
@@ -2755,7 +2697,7 @@ $(function () {
             canFlipNext = true;
             $("#right-down-corner").css("color", "#000");
             $("#right-down-corner").prop("disabled", false);
-          }, 8000),
+          }, 12000),
         );
       });
 
@@ -2836,21 +2778,6 @@ $(function () {
         $("#right-up-corner, #right-down-corner")
           .prop("disabled", false)
           .show();
-      }
-      // 第 24–25 頁：點擊小女孩喝牛奶
-      if (page === 24 || page === 25) {
-        isCanNotFlip();
-        setTimeout(() => {
-          canFlipPrev = true;
-        }, 3000);
-        btnPreviousDisabled();
-        btnDisabled();
-
-        resetMilkPage(); // 每次重進頁面重置一次
-
-        startMilkAnimation();
-      } else {
-        resetMilkPage();
       }
 
       // 第 26–27 頁：家人一起喝牛奶
