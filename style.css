@@ -4114,10 +4114,10 @@ button {
     background: rgba(169, 169, 169, 0.2) !important;
   }
 
-  .mute-mobile-toggle {
+  .mute-mobile-toggle,
+  .replay-mobile-btn {
     position: fixed;
-    top: 0;
-    right: 0;
+
     width: 40px;
     height: 40px;
     z-index: 100;
@@ -4127,6 +4127,16 @@ button {
     background-color: rgba(169, 169, 169, 0.2);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     margin: 10px;
+  }
+
+  .mute-mobile-toggle {
+    top: 0;
+    right: 0;
+  }
+
+  .replay-mobile-btn {
+    top: 60px;
+    right: 0;
   }
 
   .prev-page,
