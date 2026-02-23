@@ -659,6 +659,10 @@ $(function () {
 
   // 下一頁按鈕
   $(".next-page").on("click", async function () {
+    $flipbook.turn("next");
+  });
+
+  $(".book-cover-pc").on("click", async function () {
     if (!isBookStarted) {
       isBookStarted = true;
 
@@ -666,6 +670,8 @@ $(function () {
         await audioContext.resume();
       }
 
+      $(".prev-page img").hide();
+      $(".book-cover-pc").hide();
       playBackground();
       playVoice("./mp3/01.mp3");
       $("#cover").addClass("book01-start");
@@ -676,8 +682,6 @@ $(function () {
 
       return;
     }
-
-    $flipbook.turn("next");
   });
 
   // 鍵盤方向鍵控制翻頁
@@ -837,6 +841,8 @@ $(function () {
       <img class="book2627" src="./images/book/book2627/book2627.png" />
       <img class="all-milk-stains" src="./images/book/book2627/牛奶鬍.png" />
     `);
+
+    $(".next-page img").show();
 
     if (window.matchMedia("(max-height: 500px)").matches) {
       $(".mom-hand-region-mb").css({
@@ -1419,15 +1425,11 @@ $(function () {
       let count = 3;
 
       $("#left-down-corner").hide();
+      $(".prev-page img").hide();
       $(".next-page img").attr("src", "./images/common/下一頁灰.png");
       $(".next-page img").css("cursor", "not-allowed");
       $(".next-page").prop("disabled", true);
       const prevBtn = $(".next-page")[0];
-
-      $(".prev-page img").attr("src", "./images/common/上一頁灰.png");
-      $(".prev-page img").css("cursor", "not-allowed");
-      $(".next-page img").attr("src", "./images/common/3秒.png");
-      $(".prev-page").prop("disabled", true);
 
       const timer = setInterval(() => {
         count--;
@@ -1472,6 +1474,7 @@ $(function () {
         reset23();
       }
 
+      $(".prev-page img").show();
       $("#left-down-corner").show();
 
       $("#flipbook").append(
@@ -3449,6 +3452,7 @@ $(function () {
       }, 1000);
 
       $("#right-down-corner").hide();
+      $(".next-page img").hide();
       isCanNotFlip();
       setTimeout(() => {
         canFlipPrev = true;
@@ -3907,7 +3911,7 @@ $(function () {
       $("#right-up-corner, #right-down-corner").hide();
 
       // 初始狀態改成「開啟」
-      $(".next-page img").attr("src", "./images/common/開始.png");
+      // $(".next-page img").attr("src", "./images/common/開始.png");
     }
 
     // 取得目前頁數（預設應該是 1）
