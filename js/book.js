@@ -1732,7 +1732,6 @@ $(function () {
 
         $("#flipbook .knock , #flipbook .door").on("click", () => {
           $(".knock").css("display", "none");
-          playVoice("./mp3/knock.mp3");
           $(".text06").addClass("cloud-fade-in");
           $(".cloud1").addClass("cloud-fade-in");
 
@@ -2022,20 +2021,34 @@ $(function () {
     }
 
     //跳出看板
-    let popupBoard = () => {
+    let popupBoard = (page) => {
       $(".check-box").on("click", function () {
         $("body").addClass("popup-open"); // 開啟 popup
         $(".popup-board").css("display", "block");
+
+        if (page === 12 || page === 13) {
+          playVoice("./mp3/07b.mp3");
+        }
+
+        if (page === 14 || page === 15) {
+          playVoice("./mp3/08b.mp3");
+        }
+
+        if (page === 16 || page === 17) {
+          playVoice("./mp3/09b.mp3");
+        }
       });
 
       $(".popup-board").on("click", function () {
         $(".popup-board").css("display", "none");
         $("body").removeClass("popup-open"); // 關閉 popup
+        stopVoice();
       });
 
       $(".popup-board-bg").on("click", function () {
         $(".popup-board").css("display", "none");
         $("body").removeClass("popup-open"); // 關閉 popup
+        stopVoice();
       });
     };
 
@@ -2278,6 +2291,7 @@ $(function () {
           page1213Timeouts.push(
             setTimeout(() => {
               $(".popup-board01").css("display", "block");
+              playVoice("./mp3/07b.mp3");
             }, 27000),
           );
 
@@ -2285,7 +2299,7 @@ $(function () {
         },
       );
 
-      popupBoard();
+      popupBoard(page);
     }
 
     if (page === 11 || page === 14) {
@@ -2511,6 +2525,7 @@ $(function () {
             page1415Timeouts.push(
               setTimeout(() => {
                 $(".popup-board02").css("display", "block");
+                playVoice("./mp3/08b.mp3");
                 btnUnDisabled();
                 canFlipNext = true;
                 $("#right-down-corner").css("color", "#000");
@@ -2520,7 +2535,7 @@ $(function () {
           },
         );
       }
-      popupBoard();
+      popupBoard(page);
     }
 
     if (page === 13 || page === 16) {
@@ -2741,6 +2756,7 @@ $(function () {
           page1617Timeouts.push(
             setTimeout(() => {
               $(".popup-board03").css("display", "block");
+              playVoice("./mp3/09b.mp3");
               btnUnDisabled();
               canFlipNext = true;
               $("#right-down-corner").css("color", "#000");
@@ -2750,7 +2766,7 @@ $(function () {
         });
       }
 
-      popupBoard();
+      popupBoard(page);
     }
 
     if (page === 15 || page === 18) {
@@ -3826,6 +3842,17 @@ $(function () {
       console.log("語音播放成功");
     } catch (err) {
       console.log("語音播放失敗:", err);
+    }
+  }
+
+  function stopVoice() {
+    if (currentVoiceSource) {
+      try {
+        currentVoiceSource.stop(0);
+        currentVoiceSource.disconnect();
+      } catch (e) {}
+
+      currentVoiceSource = null;
     }
   }
 
