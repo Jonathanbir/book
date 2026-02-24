@@ -30,10 +30,10 @@ $(function () {
   }
 
   let isBookStarted = false;
-  let replayTimer = null;
   let pageFirst = false;
-  let isReplaying = false;
+  let replayTimer = null;
   let replayGeneration = 0;
+  let isReplaying = false;
   let pageTimers = [];
 
   let currentVoiceSource = null;
@@ -56,6 +56,11 @@ $(function () {
   function clearPageTimers() {
     pageTimers.forEach((t) => clearTimeout(t));
     pageTimers = [];
+  }
+
+  function addPageTimeout(fn, delay) {
+    const id = setTimeout(fn, delay);
+    pageTimers.push(id);
   }
 
   // 頁面初次載入
@@ -174,8 +179,6 @@ $(function () {
         playBackground();
         playVoice("./mp3/01.mp3");
         $("#cover").addClass("book01-start");
-        console.log(voiceGainNode.gain.value);
-
         startReplayTimer(7000);
       }
     });
@@ -668,6 +671,7 @@ $(function () {
   });
 
   function startReplayTimer(delay) {
+    const pageAtStart = currentPage;
     //記住這次世代
     const myGeneration = replayGeneration;
 
@@ -676,6 +680,8 @@ $(function () {
       clearTimeout(replayTimer);
       replayTimer = null;
     }
+
+    replayBtnTrunGray();
 
     if (window.matchMedia("(max-height: 500px)").matches) {
       $(".replay-mobile-btn").prop("disabled", true);
@@ -688,12 +694,12 @@ $(function () {
 
     // 建立新 timer
     replayTimer = setTimeout(() => {
+      //新增這行
+      if (pageAtStart !== currentPage) return;
       // 如果不是最新 replay → 不准執行
       if (myGeneration !== replayGeneration) return;
 
       if (window.matchMedia("(max-height: 500px)").matches) {
-        console.log("進來囉");
-        console.log("delay:", delay);
         $(".replay-mobile-btn").prop("disabled", false);
         $(".replay-mobile-btn").removeClass("replay-mobile-btn-disabled");
       } else {
@@ -787,31 +793,66 @@ $(function () {
     }
   });
 
-  $(".replay-btn").on("click", function () {
-    replayGeneration++; // kill 所有舊 timer
-    clearPageTimers(); // kill 舊動畫
-    isReplaying = true;
+  $(".replay-btn")
+    .off("click.replay")
+    .on("click.replay", function () {
+      //新世代（讓舊 timer 全部失效）
+      replayGeneration++;
+      // 先強制變灰（避免被舊timer覆蓋）
+      replayBtnTrunGray();
 
-    handlePage(currentPage, true);
+      clearPageTimers(); // kill 舊動畫
 
-    if (pageFirst === true) {
-      startReplayTimer(7000);
-      pageFirst = false;
-    }
+      isReplaying = true;
 
-    setTimeout(() => {
-      isReplaying = false;
-    }, 50);
-  });
+      handlePage(currentPage, true);
 
-  $(".replay-mobile-btn").on("click", function () {
-    handlePage(currentPage, true);
+      // page 28 專用：重新開始20秒計時
+      if (currentPage === 28) {
+        startReplayTimer(20000);
+      }
 
-    if (pageFirst === true) {
-      startReplayTimer(7000);
-      pageFirst = false;
-    }
-  });
+      if (pageFirst === true) {
+        startReplayTimer(7000);
+        pageFirst = false;
+      }
+
+      setTimeout(() => {
+        isReplaying = false;
+      }, 50);
+    });
+
+  $(".replay-mobile-btn")
+    .off("click.replay")
+    .on("click.replay", function () {
+      // 只加一次！！
+      replayGeneration++;
+
+      // 立即變灰（鎖住按鈕）
+      replayBtnTrunGray();
+
+      // 清除舊動畫 timer
+      clearPageTimers();
+
+      isReplaying = true;
+
+      handlePage(currentPage, true);
+
+      // page 28：重新計時 20 秒亮
+      if (currentPage === 28) {
+        startReplayTimer(20000);
+      }
+
+      // 封面用
+      if (pageFirst === true) {
+        startReplayTimer(7000);
+        pageFirst = false;
+      }
+
+      setTimeout(() => {
+        isReplaying = false;
+      }, 50);
+    });
 
   function allAudioPause() {
     $("audio").each(function () {
@@ -1450,13 +1491,15 @@ $(function () {
   }
 
   function replayBtnTrunGray() {
-    console.log("變灰色按鈕");
     // 可選：恢復灰色按鈕
-    $(".replay-btn").prop("disabled", true);
-    $(".replay-btn img").attr("src", "./images/common/再聽一次灰.png");
-
-    $(".replay-mobile-btn").prop("disabled", true);
-    $(".replay-mobile-btn").addClass("replay-mobile-btn-disabled");
+    if (window.matchMedia("(max-height: 500px)").matches) {
+      $(".replay-mobile-btn")
+        .prop("disabled", true)
+        .addClass("replay-mobile-btn-disabled");
+    } else {
+      $(".replay-btn").prop("disabled", true);
+      $(".replay-btn img").attr("src", "./images/common/再聽一次灰.png");
+    }
   }
 
   function handlePage(page, replay) {
@@ -1776,11 +1819,9 @@ $(function () {
 
       isCanNotFlip();
 
-      page67Timeouts.push(
-        setTimeout(() => {
-          canFlipPrev = true;
-        }, 3000),
-      );
+      addPageTimeout(() => {
+        canFlipPrev = true;
+      }, 3000);
 
       if (!doorClickBound) {
         doorClickBound = true;
@@ -2226,7 +2267,8 @@ $(function () {
       replayBtnTrunGray();
 
       isCanNotFlip();
-      setTimeout(() => {
+
+      addPageTimeout(() => {
         canFlipPrev = true;
       }, 3000);
 
@@ -2484,9 +2526,11 @@ $(function () {
       replayBtnTrunGray();
 
       isCanNotFlip();
-      setTimeout(() => {
+
+      addPageTimeout(() => {
         canFlipPrev = true;
       }, 3000);
+
       // 避免多次 click＝動作卡、音效重複
       if (!milkClickBound) {
         milkClickBound = true;
@@ -2733,9 +2777,11 @@ $(function () {
       replayBtnTrunGray();
 
       isCanNotFlip();
-      setTimeout(() => {
+
+      addPageTimeout(() => {
         canFlipPrev = true;
       }, 3000);
+
       // 只綁一次 click，不會因翻頁重複綁定
       if (!stethoscopeBound) {
         stethoscopeBound = true;
@@ -3215,9 +3261,11 @@ $(function () {
       replayBtnTrunGray();
 
       isCanNotFlip();
-      setTimeout(() => {
+
+      addPageTimeout(() => {
         canFlipPrev = true;
       }, 3000);
+
       btnPreviousDisabled();
       btnDisabled();
 
@@ -3302,6 +3350,12 @@ $(function () {
 
   // 監聽 mouseup，更新目前頁碼狀態
   let currentPage = 1;
+
+  $("#flipbook").on("turning", function (e, page) {
+    currentPage = page;
+    replayGeneration++; // ⭐ 直接殺死所有舊timer
+    clearPageTimers(); // ⭐ 清動畫timer
+  });
 
   // 當頁面翻轉完成後觸發
   $("#flipbook").bind("turning", function (event, page, view) {
@@ -3584,6 +3638,11 @@ $(function () {
     if (page === 28) {
       clearPageTimers();
 
+      // 只有「正常翻頁」才清動畫
+      if (!isReplaying) {
+        clearPageTimers();
+      }
+
       replayBtnTrunGray();
 
       // 一律記錄 timer
@@ -3607,11 +3666,9 @@ $(function () {
 
       isCanNotFlip();
 
-      pageTimers.push(
-        setTimeout(() => {
-          canFlipPrev = true;
-        }, 3000),
-      );
+      addPageTimeout(() => {
+        canFlipPrev = true;
+      }, 3000);
 
       let count = 3;
 
@@ -3622,22 +3679,20 @@ $(function () {
       $(".prev-page img").attr("src", "./images/common/3秒.png");
       $(".prev-page").prop("disabled", true);
 
-      const timer = setInterval(() => {
+      const interval = setInterval(() => {
         count--;
 
         if (count > 0) {
           $(".prev-page img").attr("src", `./images/common/${count}秒.png`);
           $(".prev-page").prop("disabled", true);
         } else {
-          clearInterval(timer);
+          clearInterval(interval);
           $(".prev-page img").attr("src", "./images/common/上一頁.png");
-          $(".prev-page").css("cursor", "pointer");
           $(".prev-page").prop("disabled", false);
         }
       }, 1000);
 
-      // interval 也要記錄
-      pageTimers.push(timer);
+      pageTimers.push(interval); //正確
 
       pageTimers.push(
         setTimeout(() => {
@@ -3662,8 +3717,9 @@ $(function () {
     ) {
       allBtnDisabled(page);
       isCanNotFlip();
+
       // 延遲三秒後才能翻頁
-      setTimeout(() => {
+      addPageTimeout(() => {
         canFlipPrev = true;
         canFlipNext = true;
       }, 3000);
