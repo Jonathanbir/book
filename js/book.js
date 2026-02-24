@@ -30,6 +30,11 @@ $(function () {
   }
 
   let isBookStarted = false;
+  let replayTimer = null;
+  let pageFirst = false;
+  let isReplaying = false;
+  let replayGeneration = 0;
+  let pageTimers = [];
 
   let currentVoiceSource = null;
   const BG_VOLUME = 0.3;
@@ -47,6 +52,11 @@ $(function () {
   let page2223Timeouts = [];
   let page2425Timeouts = [];
   let page2627Timeouts = [];
+
+  function clearPageTimers() {
+    pageTimers.forEach((t) => clearTimeout(t));
+    pageTimers = [];
+  }
 
   // 頁面初次載入
   updateHeight();
@@ -165,6 +175,8 @@ $(function () {
         playVoice("./mp3/01.mp3");
         $("#cover").addClass("book01-start");
         console.log(voiceGainNode.gain.value);
+
+        startReplayTimer(7000);
       }
     });
 
@@ -507,7 +519,6 @@ $(function () {
   function btnDisabled() {
     isBtnDisabled = true;
     $(".next-page img").attr("src", "./images/common/下一頁灰.png");
-    $(".next-page img").css("cursor", "not-allowed");
     $(".next-page").prop("disabled", true);
     $(".next-page, #right-up-corner, #right-down-corner")
       .on("mouseenter", function () {
@@ -542,7 +553,6 @@ $(function () {
     console.log("btnPreviousDisabled!");
     let count = 3;
     let countMobile = 3;
-    const prevBtn = $(".prev-page")[0];
     const prevMobileBtn = $("#left-down-corner")[0];
 
     const timer = setInterval(() => {
@@ -550,7 +560,6 @@ $(function () {
 
       if (count > 0) {
         $(".prev-page img").attr("src", `./images/common/${count}秒.png`);
-        $(".prev-page img").css("cursor", "not-allowed");
       } else {
         clearInterval(timer);
         $(".prev-page img").attr("src", "./images/common/上一頁.png");
@@ -591,8 +600,6 @@ $(function () {
     //一開始先顯示 3 秒
     $(".prev-page img").attr("src", "./images/common/3秒.png");
     $(".next-page img").attr("src", "./images/common/3秒.png");
-    $(".prev-page").css("cursor", "not-allowed");
-    $(".next-page").css("cursor", "not-allowed");
     $(".prev-page").prop("disabled", true);
     $(".next-page").prop("disabled", true);
 
@@ -605,8 +612,6 @@ $(function () {
       if (count > 0) {
         $(".prev-page img").attr("src", `./images/common/${count}秒.png`);
         $(".next-page img").attr("src", `./images/common/${count}秒.png`);
-        $(".prev-page").css("cursor", "not-allowed");
-        $(".next-page").css("cursor", "not-allowed");
         $(".prev-page").prop("disabled", true);
         $(".next-page").prop("disabled", true);
       } else {
@@ -662,9 +667,46 @@ $(function () {
     $flipbook.turn("next");
   });
 
+  function startReplayTimer(delay) {
+    //記住這次世代
+    const myGeneration = replayGeneration;
+
+    // 清掉舊 timer
+    if (replayTimer) {
+      clearTimeout(replayTimer);
+      replayTimer = null;
+    }
+
+    if (window.matchMedia("(max-height: 500px)").matches) {
+      $(".replay-mobile-btn").prop("disabled", true);
+      $(".replay-mobile-btn").addClass("replay-mobile-btn-disabled");
+    } else {
+      // 先鎖按鈕
+      $(".replay-btn").prop("disabled", true);
+      $(".replay-btn img").attr("src", "./images/common/再聽一次灰.png");
+    }
+
+    // 建立新 timer
+    replayTimer = setTimeout(() => {
+      // 如果不是最新 replay → 不准執行
+      if (myGeneration !== replayGeneration) return;
+
+      if (window.matchMedia("(max-height: 500px)").matches) {
+        console.log("進來囉");
+        console.log("delay:", delay);
+        $(".replay-mobile-btn").prop("disabled", false);
+        $(".replay-mobile-btn").removeClass("replay-mobile-btn-disabled");
+      } else {
+        $(".replay-btn").prop("disabled", false);
+        $(".replay-btn img").attr("src", "./images/common/再聽一次.png");
+      }
+    }, delay);
+  }
+
   $(".book-cover-pc").on("click", async function () {
     if (!isBookStarted) {
       isBookStarted = true;
+      pageFirst = true;
 
       if (audioContext.state === "suspended") {
         await audioContext.resume();
@@ -675,10 +717,30 @@ $(function () {
       playBackground();
       playVoice("./mp3/01.mp3");
       $("#cover").addClass("book01-start");
-      $(".next-page img").attr("src", "./images/common/下一頁.png");
+      $(".next-page img").attr("src", "./images/common/下一頁灰.png");
+      $(".next-page img").attr("src", "./images/common/3秒.png");
+
+      let count = 3;
+      const timer = setInterval(() => {
+        count--;
+
+        if (count > 0) {
+          $(".next-page img").attr("src", `./images/common/${count}秒.png`);
+          $(".next-page").prop("disabled", true);
+        } else {
+          clearInterval(timer);
+          $(".next-page img").attr("src", "./images/common/下一頁.png");
+          $(".next-page").css("cursor", "pointer");
+          $(".next-page").prop("disabled", false);
+        }
+      }, 1000);
+
+      $(".prev-page").prop("disabled", true);
       $(".prev-page").show();
       $(".book-cover").remove();
       $(".replay-btn").css("display", "block");
+
+      startReplayTimer(7000);
 
       return;
     }
@@ -726,11 +788,29 @@ $(function () {
   });
 
   $(".replay-btn").on("click", function () {
+    replayGeneration++; // kill 所有舊 timer
+    clearPageTimers(); // kill 舊動畫
+    isReplaying = true;
+
     handlePage(currentPage, true);
+
+    if (pageFirst === true) {
+      startReplayTimer(7000);
+      pageFirst = false;
+    }
+
+    setTimeout(() => {
+      isReplaying = false;
+    }, 50);
   });
 
   $(".replay-mobile-btn").on("click", function () {
     handlePage(currentPage, true);
+
+    if (pageFirst === true) {
+      startReplayTimer(7000);
+      pageFirst = false;
+    }
   });
 
   function allAudioPause() {
@@ -742,8 +822,21 @@ $(function () {
     });
   }
 
+  function addMilkTimeout(fn, delay) {
+    const id = setTimeout(fn, delay);
+    page2425Timeouts.push(id);
+  }
+
+  addMilkTimeout(() => {
+    btnUnDisabled();
+    canFlipNext = true;
+  }, 12000);
+
   // 重置該頁面的所有動畫與音效
   function resetMilkPage() {
+    // ⭐ 清除所有 timeout
+    page2425Timeouts.forEach((id) => clearTimeout(id));
+    page2425Timeouts = [];
     $(".book24").css("opacity", "0");
     $(".book25").css("opacity", "0");
     $(".milk-hand").css("opacity", "0");
@@ -1291,6 +1384,14 @@ $(function () {
 
     page2627Timeouts.push(
       setTimeout(() => {
+        $(".father-hand-region").removeClass("father-hand-finish");
+        $(".daughter-hand-region").removeClass("daughter-hand-finish");
+        $(".mom-hand-region").removeClass("mom-hand-finish");
+      }, 8000),
+    );
+
+    page2627Timeouts.push(
+      setTimeout(() => {
         $(".cow-right").addClass("cow-right-move");
       }, 12000),
     );
@@ -1301,13 +1402,7 @@ $(function () {
       }, 15000),
     );
 
-    page2627Timeouts.push(
-      setTimeout(() => {
-        $(".father-hand-region").removeClass("father-hand-finish");
-        $(".daughter-hand-region").removeClass("daughter-hand-finish");
-        $(".mom-hand-region").removeClass("mom-hand-finish");
-      }, 8000),
-    );
+    startReplayTimer(16000);
   }
 
   // Reset function
@@ -1352,6 +1447,16 @@ $(function () {
 
     // 隱藏叫聲
     $(".mow").hide();
+  }
+
+  function replayBtnTrunGray() {
+    console.log("變灰色按鈕");
+    // 可選：恢復灰色按鈕
+    $(".replay-btn").prop("disabled", true);
+    $(".replay-btn img").attr("src", "./images/common/再聽一次灰.png");
+
+    $(".replay-mobile-btn").prop("disabled", true);
+    $(".replay-mobile-btn").addClass("replay-mobile-btn-disabled");
   }
 
   function handlePage(page, replay) {
@@ -1422,21 +1527,19 @@ $(function () {
         canFlipNext = true;
       }, 3000);
 
+      pageFirst = true;
       let count = 3;
 
       $("#left-down-corner").hide();
       $(".prev-page img").hide();
       $(".next-page img").attr("src", "./images/common/下一頁灰.png");
-      $(".next-page img").css("cursor", "not-allowed");
       $(".next-page").prop("disabled", true);
-      const prevBtn = $(".next-page")[0];
 
       const timer = setInterval(() => {
         count--;
 
         if (count > 0) {
           $(".next-page img").attr("src", `./images/common/${count}秒.png`);
-          $(".next-page").css("cursor", "not-allowed");
           $(".next-page").prop("disabled", true);
         } else {
           clearInterval(timer);
@@ -1460,6 +1563,7 @@ $(function () {
       $(".book03").css("opacity", "0");
       $(".book03-title").css("opacity", "0");
       $(".girls-head03").css("opacity", "0");
+      $(".girls-body03").hide();
       $(".milk03").css("opacity", "0");
       $(".hands03").css("opacity", "0");
       $("#flipbook .girls-head03").remove();
@@ -1474,11 +1578,16 @@ $(function () {
         reset23();
       }
 
+      pageFirst = false;
+
+      replayBtnTrunGray();
+
       $(".prev-page img").show();
       $("#left-down-corner").show();
 
       $("#flipbook").append(
         ` <img class="girls-head03" src="./images/book/book03/girls-head-01.png"/>       
+          <img class="girls-body03" src="./images/book/book03/girls-body.png"/>     
           <img class="hands03" src="./images/book/book03/hands.png"/>        
           <img class="milk03" src="./images/book/book03/milk.png"/>       
           <img class="book03-title" src="./images/book/book03/book-title03.png"/>               
@@ -1488,7 +1597,7 @@ $(function () {
       if (window.matchMedia("(max-height: 500px)").matches) {
         if (page === 2 || page === 3) {
           if (isSafari() || isIOSChrome()) {
-            $(".book03-title, .milk03, .hands03").css({
+            $(".book03-title, .milk03, .hands03, .girls-body03").css({
               width: visualHeight + "px",
             });
 
@@ -1499,7 +1608,7 @@ $(function () {
             });
           }
           if (isAndroidChrome()) {
-            $(".book03-title, .milk03, .hands03").css({
+            $(".book03-title, .milk03, .hands03, .girls-body03").css({
               width: screenHeight + "px",
             });
 
@@ -1519,6 +1628,7 @@ $(function () {
           $(".book03").css("opacity", "1");
           $(".book03-title").css("opacity", "1");
           $(".girls-head03").css("opacity", "1");
+          $(".girls-body03").css("opacity", "1");
           $(".milk03").css("opacity", "1");
           $(".hands03").css("opacity", "1");
         }, 1000),
@@ -1539,6 +1649,8 @@ $(function () {
           img.src = images[index];
         }, 500);
       }, 1500);
+
+      startReplayTimer(15000);
     } else {
       reset23();
     }
@@ -1607,6 +1719,8 @@ $(function () {
       setTimeout(() => {
         $(".gogo").css("opacity", "1");
       }, 30000);
+
+      startReplayTimer(30000);
     } else {
       reset45();
     }
@@ -1650,6 +1764,8 @@ $(function () {
       if (replay) {
         reset67();
       }
+
+      replayBtnTrunGray();
 
       page67Timeouts.push(
         setTimeout(() => {
@@ -1783,6 +1899,8 @@ $(function () {
             }, 11000),
           );
 
+          startReplayTimer(11000);
+
           playVoice("./mp3/04.mp3");
         });
       }
@@ -1899,6 +2017,8 @@ $(function () {
           $(".star7").addClass("star-fade-in");
         }, 10000),
       );
+
+      startReplayTimer(20000);
     }
 
     if (page === 7 || page === 10) {
@@ -2011,6 +2131,8 @@ $(function () {
           $(".book10-text").addClass("bubble-fade-in");
         }, 13000),
       );
+
+      startReplayTimer(23000);
     }
 
     page1011Timeouts.push(
@@ -2079,6 +2201,7 @@ $(function () {
       $(".coin-light").removeClass("coin-light-show");
       $(".coin-hint01").removeClass("bubble-fade-in");
       $(".check01").removeClass("check-show");
+      $(".check01").remove();
       $(".popup-board01").css("display", "none");
       $("#flipbook .click-magic-wand").remove();
       $("#flipbook .finish-mission01").remove();
@@ -2099,6 +2222,8 @@ $(function () {
       if (replay) {
         reset1213();
       }
+
+      replayBtnTrunGray();
 
       isCanNotFlip();
       setTimeout(() => {
@@ -2298,6 +2423,8 @@ $(function () {
             }, 27000),
           );
 
+          startReplayTimer(28000);
+
           playVoice("./mp3/07.mp3");
         },
       );
@@ -2353,6 +2480,8 @@ $(function () {
       if (replay) {
         reset1415();
       }
+
+      replayBtnTrunGray();
 
       isCanNotFlip();
       setTimeout(() => {
@@ -2535,6 +2664,8 @@ $(function () {
                 $("#right-down-corner").prop("disabled", false);
               }, 16000),
             );
+
+            startReplayTimer(16000);
           },
         );
       }
@@ -2598,6 +2729,8 @@ $(function () {
       if (replay) {
         reset1617();
       }
+
+      replayBtnTrunGray();
 
       isCanNotFlip();
       setTimeout(() => {
@@ -2766,6 +2899,8 @@ $(function () {
               $("#right-down-corner").prop("disabled", false);
             }, 17000),
           );
+
+          startReplayTimer(17000);
         });
       }
 
@@ -2888,6 +3023,8 @@ $(function () {
           $(".book19-text").addClass("bubble-fade-in");
         }, 19000),
       );
+
+      startReplayTimer(24000);
     }
 
     if (page === 17 || page === 20) {
@@ -3010,6 +3147,8 @@ $(function () {
           $(".book21-text").addClass("bubble-fade-in");
         }, 11000),
       );
+
+      startReplayTimer(13000);
     }
 
     if (page === 19 || page === 22) {
@@ -3061,6 +3200,8 @@ $(function () {
           $(".book23-text").addClass("bubble-fade-in");
         }, 6000),
       );
+
+      startReplayTimer(12000);
     } else {
       reset2223();
     }
@@ -3070,6 +3211,8 @@ $(function () {
       if (replay) {
         resetMilkPage();
       }
+
+      replayBtnTrunGray();
 
       isCanNotFlip();
       setTimeout(() => {
@@ -3252,7 +3395,7 @@ $(function () {
         }
 
         $(".book25-story").addClass("milk-stains-show");
-        page2425Timeouts.push($(".flower").css("opacity", "1"));
+        $(".flower").css("opacity", "1");
 
         $(".click-girl").hide();
         $(".girl-l-hand-region").addClass("girl-l-hand-finish");
@@ -3294,6 +3437,7 @@ $(function () {
             $("#right-down-corner").prop("disabled", false);
           }, 12000),
         );
+        startReplayTimer(12000);
       });
 
     if (page === 26 || page === 27) {
@@ -3438,33 +3582,43 @@ $(function () {
     }
 
     if (page === 28) {
-      setTimeout(() => {
-        $(".book28").css("opacity", "1");
-        $(".cloud-28").css("opacity", "1");
-        $(".bubble-28").css("opacity", "1");
-        $(".star-28").addClass("star-28-animation");
-        $(".story-28").css("opacity", "1");
-        $(".milk28").css("opacity", "1");
-        $(".grass-28").css("opacity", "1");
-        $(".fence-28").css("opacity", "1");
-        $(".cow-28-1").css("opacity", "1");
-        $(".cow-28-2").css("opacity", "1");
-      }, 1000);
+      clearPageTimers();
+
+      replayBtnTrunGray();
+
+      // 一律記錄 timer
+      pageTimers.push(
+        setTimeout(() => {
+          $(".book28").css("opacity", "1");
+          $(".cloud-28").css("opacity", "1");
+          $(".bubble-28").css("opacity", "1");
+          $(".star-28").addClass("star-28-animation");
+          $(".story-28").css("opacity", "1");
+          $(".milk28").css("opacity", "1");
+          $(".grass-28").css("opacity", "1");
+          $(".fence-28").css("opacity", "1");
+          $(".cow-28-1").css("opacity", "1");
+          $(".cow-28-2").css("opacity", "1");
+        }, 1000),
+      );
 
       $("#right-down-corner").hide();
       $(".next-page img").hide();
+
       isCanNotFlip();
-      setTimeout(() => {
-        canFlipPrev = true;
-      }, 3000);
+
+      pageTimers.push(
+        setTimeout(() => {
+          canFlipPrev = true;
+        }, 3000),
+      );
+
       let count = 3;
+
       $(".next-page img").attr("src", "./images/common/下一頁灰.png");
-      $(".next-page img").css("cursor", "not-allowed");
       $(".next-page").prop("disabled", true);
-      const prevBtn = $(".next-page")[0];
 
       $(".prev-page img").attr("src", "./images/common/上一頁灰.png");
-      $(".prev-page img").css("cursor", "not-allowed");
       $(".prev-page img").attr("src", "./images/common/3秒.png");
       $(".prev-page").prop("disabled", true);
 
@@ -3473,7 +3627,6 @@ $(function () {
 
         if (count > 0) {
           $(".prev-page img").attr("src", `./images/common/${count}秒.png`);
-          $(".prev-page").css("cursor", "not-allowed");
           $(".prev-page").prop("disabled", true);
         } else {
           clearInterval(timer);
@@ -3483,10 +3636,17 @@ $(function () {
         }
       }, 1000);
 
-      setTimeout(() => {
-        $(".prev-page img").attr("src", "./images/common/上一頁.png");
-        $(".prev-page").prop("disabled", false);
-      }, 3000);
+      // interval 也要記錄
+      pageTimers.push(timer);
+
+      pageTimers.push(
+        setTimeout(() => {
+          $(".prev-page img").attr("src", "./images/common/上一頁.png");
+          $(".prev-page").prop("disabled", false);
+        }, 3000),
+      );
+
+      startReplayTimer(20000);
     }
 
     if (

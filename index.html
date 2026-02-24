@@ -52,7 +52,6 @@
           <li>上一頁按鈕可回上一頁,下一頁按鈕可回下一頁</li>
           <li>靜音按鈕可以點選來控制靜音狀態</li>
           <li>播放完畢後,可點選再聽一次重複朗讀該頁面</li>
-          <li>播放完畢後,可點選再聽一次重複朗讀該頁面</li>
           <li>不論回上下頁都有 3秒 的等待時間</li>
           <li>任務頁 需解完任務才能到下一頁</li>
         </ul>
@@ -443,17 +442,14 @@
       <div class="next-page-hint">請完成任務</div>
     </div>
     <div class="controls desktop">
-      <button
-        class="page-btn prev-page disabled-btn"
-        style="cursor: not-allowed; display: none"
-      >
+      <button class="page-btn prev-page disabled-btn" style="display: none">
         <img src="./images/common/上一頁灰.png" />
       </button>
       <button class="page-btn next-page">
         <img src="./images/common/下一頁.png" />
       </button>
-      <button class="page-btn replay-btn" style="display: none">
-        <img src="./images/common/再聽一次.png" />
+      <button class="page-btn replay-btn" style="display: none" disabled="true">
+        <img src="./images/common/再聽一次灰.png" />
       </button>
       <div class="page-btn mute-toggle">
         <img src="./images/common/靜音按鈕關閉.png" />

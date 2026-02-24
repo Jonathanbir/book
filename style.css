@@ -145,13 +145,6 @@ audio {
   cursor: pointer;
 }
 
-/* .controls .disabled-btn {
-  color: #aaa;
-  background-color: #ccc;
-  box-shadow: initial;
-  cursor: not-allowed;
-} */
-
 .controls .undisabled-btn {
   color: brown;
   background-color: #fff;
@@ -529,6 +522,17 @@ button {
   100% {
     transform: rotate(2deg);
   }
+}
+
+.girls-body03 {
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 30;
+  width: 600px;
+  margin: auto;
+  transition: all 1s ease-in-out;
+  opacity: 0;
 }
 
 .milk03 {
@@ -3920,7 +3924,7 @@ button {
     width: 100%;
     height: 100vh;
     color: #fff;
-    background: rgba(0, 0, 0, 0.9);
+    background: rgba(0, 0, 0, 0.8);
   }
 
   .pop-up-text {
@@ -4148,16 +4152,19 @@ button {
   .mute-mobile-toggle,
   .replay-mobile-btn {
     position: fixed;
-
     width: 40px;
     height: 40px;
-    z-index: 100;
+    z-index: 1000;
     border: none;
     border-radius: 100%;
     color: #000;
     background-color: rgba(169, 169, 169, 0.2);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     margin: 10px;
+  }
+
+  .replay-mobile-btn-disabled {
+    background: rgb(255, 255, 255);
   }
 
   .mute-mobile-toggle {
