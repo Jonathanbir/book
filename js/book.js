@@ -347,61 +347,6 @@ $(function () {
     previous = current;
   });
 
-  // ---------- Swipe hint 功能 ----------
-  const swipeHint = document.getElementById("swipe-hint");
-  const swipeClose = swipeHint && swipeHint.querySelector(".swipe-close");
-
-  function showSwipeHint() {
-    if (!swipeHint) return;
-    $(".swipe-cotainer").show();
-    swipeHint.classList.add("show");
-    swipeHint.setAttribute("aria-hidden", "false");
-  }
-
-  function hideSwipeHint() {
-    if (!swipeHint) return;
-
-    swipeHint.classList.remove("show");
-    swipeHint.setAttribute("aria-hidden", "true");
-    $(".swipe-pointer").show();
-    $(".arrow").show();
-  }
-
-  // 綁一次性使用者互動：若使用者觸碰畫面視為已知，消失
-  function bindSwipeHintDismiss() {
-    const userDismiss = () => {
-      hideSwipeHint();
-      window.removeEventListener("touchstart", userDismiss);
-      window.removeEventListener("mousedown", userDismiss);
-    };
-    window.addEventListener("touchstart", userDismiss, { passive: true });
-    window.addEventListener("mousedown", userDismiss);
-  }
-
-  // 阻止點擊穿透整個提示層
-  swipeHint.addEventListener("click", (e) => {
-    e.stopPropagation();
-    e.preventDefault();
-  });
-
-  if (swipeClose) swipeClose.addEventListener("click", hideSwipeHint);
-
-  // 判斷是否要顯示（只在手機或小螢幕顯示）
-  function maybeShowSwipeHint() {
-    const isMobileLike = /Mobi|Android|iPhone|iPad|Mobile/i.test(
-      navigator.userAgent,
-    );
-    if (!isMobileLike) return;
-    // 若橫向或寬高比例小於某值，也可判斷
-    // 這裡示範：若寬>高度（橫向）或高度小於 500 則顯示
-    const w = window.innerWidth,
-      h = window.innerHeight;
-    if (w > h || h < 600) {
-      showSwipeHint(); // 顯示 5 秒
-      bindSwipeHintDismiss();
-    }
-  }
-
   // ---------- custom alert（覆寫 window.alert） ----------
   const customAlertEl = document.getElementById("custom-alert");
   const customAlertMsg = document.getElementById("custom-alert-message");
