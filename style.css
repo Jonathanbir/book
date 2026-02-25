@@ -1726,6 +1726,7 @@ button {
 }
 
 .check-box {
+  display: none;
   position: fixed;
   right: 5%;
   top: 15%;

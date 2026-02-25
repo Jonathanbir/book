@@ -168,19 +168,21 @@ $(function () {
     });
   } else {
     $(".pop-up-box").on("click", async function () {
-      $(".pop-up-box").css("display", "none");
-      if (!isBookStarted) {
-        isBookStarted = true;
-
-        if (audioContext.state === "suspended") {
-          await audioContext.resume();
-        }
-
-        playBackground();
-        playVoice("./mp3/01.mp3");
-        $("#cover").addClass("book01-start");
-        startReplayTimer(7000);
+      if (audioContext.state === "suspended") {
+        await audioContext.resume();
       }
+
+      setTimeout(() => {
+        $(".pop-up-box").css("display", "none");
+        if (!isBookStarted) {
+          isBookStarted = true;
+
+          playBackground();
+          playVoice("./mp3/01.mp3");
+          $("#cover").addClass("book01-start");
+          startReplayTimer(5500);
+        }
+      }, 200);
     });
 
     if (isSafari()) {
@@ -655,45 +657,30 @@ $(function () {
   }
 
   $(".book-cover-pc").on("click", async function () {
+    if (audioContext.state === "suspended") {
+      await audioContext.resume();
+    }
+
     if (!isBookStarted) {
       isBookStarted = true;
       pageFirst = true;
+      setTimeout(() => {
+        $(".prev-page img").hide();
+        $(".book-cover-pc").hide();
+        playBackground();
+        playVoice("./mp3/01.mp3");
+        $("#cover").addClass("book01-start");
+        $(".next-page img").attr("src", "./images/common/下一頁.png");
 
-      if (audioContext.state === "suspended") {
-        await audioContext.resume();
-      }
+        $(".prev-page").prop("disabled", true);
+        $(".prev-page").show();
+        $(".book-cover").remove();
+        $(".replay-btn").css("display", "block");
 
-      $(".prev-page img").hide();
-      $(".book-cover-pc").hide();
-      playBackground();
-      playVoice("./mp3/01.mp3");
-      $("#cover").addClass("book01-start");
-      $(".next-page img").attr("src", "./images/common/下一頁灰.png");
-      $(".next-page img").attr("src", "./images/common/3秒.png");
+        startReplayTimer(5500);
 
-      let count = 3;
-      const timer = setInterval(() => {
-        count--;
-
-        if (count > 0) {
-          $(".next-page img").attr("src", `./images/common/${count}秒.png`);
-          $(".next-page").prop("disabled", true);
-        } else {
-          clearInterval(timer);
-          $(".next-page img").attr("src", "./images/common/下一頁.png");
-          $(".next-page").css("cursor", "pointer");
-          $(".next-page").prop("disabled", false);
-        }
-      }, 1000);
-
-      $(".prev-page").prop("disabled", true);
-      $(".prev-page").show();
-      $(".book-cover").remove();
-      $(".replay-btn").css("display", "block");
-
-      startReplayTimer(7000);
-
-      return;
+        return;
+      }, 200);
     }
   });
 
@@ -758,7 +745,7 @@ $(function () {
       }
 
       if (pageFirst === true) {
-        startReplayTimer(7000);
+        startReplayTimer(5500);
         pageFirst = false;
       }
 
@@ -790,7 +777,7 @@ $(function () {
 
       // 封面用
       if (pageFirst === true) {
-        startReplayTimer(7000);
+        startReplayTimer(5500);
         pageFirst = false;
       }
 
@@ -1706,9 +1693,9 @@ $(function () {
 
       setTimeout(() => {
         $(".gogo").css("opacity", "1");
-      }, 30000);
+      }, 29500);
 
-      startReplayTimer(30000);
+      startReplayTimer(31000);
     } else {
       reset45();
     }
@@ -1853,7 +1840,7 @@ $(function () {
               $(".tree2").addClass("tree-fade-in");
               $(".door").addClass("door-opening");
               $(".peoples").addClass("peoples-open");
-            }, 3000),
+            }, 2500),
           );
 
           page67Timeouts.push(
@@ -1975,7 +1962,7 @@ $(function () {
           $(".foot3").addClass("foot3-animation");
           $(".foot4").addClass("foot4-animation");
           $(".foot5").addClass("foot5-animation");
-        }, 8000),
+        }, 7500),
       );
 
       page89Timeouts.push(
@@ -1995,7 +1982,7 @@ $(function () {
         setTimeout(() => {
           $(".mowmow").addClass("bubble-fade-in");
           $(".bubble7").addClass("bubble-fade-in");
-        }, 12000),
+        }, 11500),
       );
 
       page89Timeouts.push(
@@ -2133,34 +2120,52 @@ $(function () {
 
     //跳出看板
     let popupBoard = (page) => {
-      $(".check-box").on("click", function () {
-        $("body").addClass("popup-open"); // 開啟 popup
-        $(".popup-board").css("display", "block");
+      $(".check-box")
+        .off("click touchstart")
+        .on("click touchstart", function (e) {
+          // 防止事件重複觸發（避免 click 跟 touchstart 同時跑兩次）
+          e.preventDefault();
+          e.stopPropagation();
 
-        if (page === 12 || page === 13) {
-          playVoice("./mp3/07b.mp3");
-        }
+          $("body").addClass("popup-open"); // 開啟 popup
+          $(".popup-board").css("display", "block");
 
-        if (page === 14 || page === 15) {
-          playVoice("./mp3/08b.mp3");
-        }
+          if (page === 12 || page === 13) {
+            playVoice("./mp3/07b.mp3");
+          }
 
-        if (page === 16 || page === 17) {
-          playVoice("./mp3/09b.mp3");
-        }
-      });
+          if (page === 14 || page === 15) {
+            playVoice("./mp3/08b.mp3");
+          }
 
-      $(".popup-board").on("click", function () {
-        $(".popup-board").css("display", "none");
-        $("body").removeClass("popup-open"); // 關閉 popup
-        stopVoice();
-      });
+          if (page === 16 || page === 17) {
+            playVoice("./mp3/09b.mp3");
+          }
+        });
 
-      $(".popup-board-bg").on("click", function () {
-        $(".popup-board").css("display", "none");
-        $("body").removeClass("popup-open"); // 關閉 popup
-        stopVoice();
-      });
+      $(".popup-board")
+        .off("click touchstart")
+        .on("click touchstart", function (e) {
+          // 防止事件重複觸發（避免 click 跟 touchstart 同時跑兩次）
+          e.preventDefault();
+          e.stopPropagation();
+
+          $(".popup-board").css("display", "none");
+          $("body").removeClass("popup-open"); // 關閉 popup
+          stopVoice();
+        });
+
+      $(".popup-board-bg")
+        .off("click touchstart")
+        .on("click touchstart", function (e) {
+          // 防止事件重複觸發（避免 click 跟 touchstart 同時跑兩次）
+          e.preventDefault();
+          e.stopPropagation();
+
+          $(".popup-board").css("display", "none");
+          $("body").removeClass("popup-open"); // 關閉 popup
+          stopVoice();
+        });
     };
 
     // 確保元素只 append 一次
@@ -2202,6 +2207,7 @@ $(function () {
       $(".board13").remove();
       $(".popup-board01").remove();
       $(".text12").remove();
+      $(".check-box").hide();
     }
 
     if (page === 12 || page === 13) {
@@ -2405,6 +2411,7 @@ $(function () {
 
           page1213Timeouts.push(
             setTimeout(() => {
+              $(".check-box").show();
               $(".popup-board01").css("display", "block");
               playVoice("./mp3/07b.mp3");
             }, 27000),
@@ -2460,6 +2467,7 @@ $(function () {
       $(".coin-light02").removeClass("coin-light-show");
       $(".check02").removeClass("check-show");
       $(".coin-hint02").removeClass("bubble-fade-in");
+      $(".check-box").hide();
     }
 
     // 第 14–15 頁：餵牛奶
@@ -2617,7 +2625,7 @@ $(function () {
               setTimeout(() => {
                 $(".cows-tongue").addClass("cows-tongue-animation");
                 $(".milk").addClass("milk-empty");
-              }, 3000),
+              }, 2500),
             );
 
             page1415Timeouts.push(
@@ -2645,6 +2653,7 @@ $(function () {
 
             page1415Timeouts.push(
               setTimeout(() => {
+                $(".check-box").show();
                 $(".popup-board02").css("display", "block");
                 playVoice("./mp3/08b.mp3");
                 btnUnDisabled();
@@ -2711,6 +2720,7 @@ $(function () {
       $(".popup-board03").remove();
       $("#flipbook .bubble16").remove();
       $("#flipbook .dondon").remove();
+      $(".check-box").hide();
     }
 
     // 第 16–17 頁：聽牛心跳
@@ -2877,21 +2887,22 @@ $(function () {
               $(".check03").addClass("check-show");
               $(".coin03").addClass("coin-animation");
               $(".coin-light03").addClass("coin-light-show");
-            }, 15000),
+            }, 14000),
           );
 
           page1617Timeouts.push(
             setTimeout(() => {
+              $(".check-box").show();
               $(".popup-board03").css("display", "block");
               playVoice("./mp3/09b.mp3");
               btnUnDisabled();
               canFlipNext = true;
               $("#right-down-corner").css("color", "#000");
               $("#right-down-corner").prop("disabled", false);
-            }, 17000),
+            }, 16000),
           );
 
-          startReplayTimer(17000);
+          startReplayTimer(16000);
         });
       }
 
@@ -2982,13 +2993,13 @@ $(function () {
           $(".coin01-final, .coin02-final, .coin03-final").addClass(
             "coin-all-animation",
           );
-        }, 4000),
+        }, 3500),
       );
 
       page1819Timeouts.push(
         setTimeout(() => {
           $(".coin-all-shine").addClass("bubble-fade-in");
-        }, 4500),
+        }, 4000),
       );
 
       page1819Timeouts.push(
@@ -3000,19 +3011,19 @@ $(function () {
       page1819Timeouts.push(
         setTimeout(() => {
           $(".crown").addClass("crown-animation");
-        }, 12000),
+        }, 11500),
       );
 
       page1819Timeouts.push(
         setTimeout(() => {
           $(".crown-shine").addClass("bubble-fade-in");
-        }, 13000),
+        }, 12500),
       );
 
       page1819Timeouts.push(
         setTimeout(() => {
           $(".book19-text").addClass("bubble-fade-in");
-        }, 19000),
+        }, 18500),
       );
 
       startReplayTimer(24000);
@@ -3646,7 +3657,7 @@ $(function () {
         }, 3000),
       );
 
-      startReplayTimer(20000);
+      startReplayTimer(19000);
     }
 
     if (
@@ -3935,21 +3946,6 @@ $(function () {
         }, 7000);
       });
     }
-
-    if (page === 28) {
-      if (window.matchMedia("(max-height: 500px)").matches) {
-        //     // if (isSafari() || isIOSChrome()) {
-        //     //   $(".book-section").css({
-        //     //     left: (visualHeight * -312.48) / 609 + "px", //-232
-        //     //   });
-        //     // }
-        //     if (isAndroidChrome()) {
-        //       $(".book-section").css({
-        //         transform: `translateX(` + (screenHeight * 739.08) / 609 + `px)`, //500
-        //       });
-        //     }
-      }
-    }
   }
 
   /* ======================
@@ -4000,7 +3996,7 @@ $(function () {
       // 播放
       setTimeout(() => {
         voiceSource.start(0);
-      }, 1000);
+      }, 500);
 
       currentVoiceSource = voiceSource;
 
