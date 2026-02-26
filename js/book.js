@@ -4,7 +4,6 @@ $(function () {
   const bookHeight = window.innerHeight;
   const bookWidth = bookHeight * (1200 / 600); // 保持原始比例 1200:600
 
-  console.log("新的寬高:", bookWidth, bookHeight);
   $(window).on("resize", function () {
     const newWidth = window.innerWidth;
     const newHeight = window.innerHeight;
@@ -23,6 +22,11 @@ $(function () {
   const visualHeight = visualViewport.height;
   const widthGap = (visualWidth - visualHeight * 2) / 2;
   const widtScreenhGap = (screenWidth - screenHeight * 2) / 2;
+
+  const isTablet =
+    window.matchMedia("(pointer: coarse)").matches &&
+    innerHeight >= 500 &&
+    innerHeight <= 850;
 
   const vh = window.visualViewport.height;
   function updateHeight() {
@@ -110,16 +114,16 @@ $(function () {
   // window.alert(
   //   "visualHeight: " +
   //     visualHeight +
-  //     "\nwidthGap " +
-  //     widthGap / 2 +
+  //     "\nvisualWidth: " +
+  //     visualWidth +
+  //     "\ninnerHeight " +
+  //     innerHeight +
   //     "\ninnerWidth " +
   //     innerWidth +
   //     "\nscreenHeight " +
   //     screenHeight +
-  //     "\ninnerHeight " +
-  //     innerHeight +
-  //     "\n推算工具列高度" +
-  //     barHeight +
+  //     "\nscreenWidth " +
+  //     screenWidth +
   //     "\nisIOSChrome(): " +
   //     isIOSChrome() +
   //     "\nisAndroidChrome(): " +
@@ -127,7 +131,7 @@ $(function () {
   //     "\nisSafari(): " +
   //     isSafari() +
   //     "\nisIPad(): " +
-  //     isIPad()
+  //     isIPad(),
   // );
 
   const audioContext = new (window.AudioContext || window.webkitAudioContext)();
@@ -160,11 +164,20 @@ $(function () {
     bgSource.start(0);
   }
 
-  if (!window.matchMedia("(max-height: 500px)").matches) {
+  if (innerWidth > 1200) {
     $flipbook.turn({
       width: 1200,
       height: 600,
       autoCenter: true,
+    });
+  } else if (isTablet) {
+    $flipbook.turn({
+      width: 1200,
+      height: 600,
+      autoCenter: true,
+    });
+    window.addEventListener("load", () => {
+      $(".book-container").css("height", innerHeight);
     });
   } else {
     $(".pop-up-box").on("click", async function () {
@@ -193,6 +206,9 @@ $(function () {
         height: visualHeight,
         autoCenter: true,
       });
+      $("#flipbook").css({
+        left: widthGap + "px",
+      });
       $("#left-up-corner").css({
         left: widthGap + "px",
       });
@@ -218,6 +234,9 @@ $(function () {
         width: visualHeight * 2,
         height: visualHeight,
         autoCenter: true,
+      });
+      $("#flipbook").css({
+        left: widthGap + "px",
       });
       $("#left-up-corner").css({
         left: widthGap + "px",
@@ -245,7 +264,10 @@ $(function () {
         height: screenHeight,
         autoCenter: true,
       });
-      console.log("widtScreenhGap;", widtScreenhGap);
+
+      $("#flipbook").css({
+        left: (visualWidth - screenHeight * 2) / 2 + "px",
+      });
       $("#left-up-corner").css({
         top: barHeight,
         left: (visualWidth - screenHeight * 2) / 2 + "px",
@@ -274,7 +296,6 @@ $(function () {
 
       // 顯示提示（只在第一次進站顯示）
       function showFullscreenHint() {
-        // window.alert("請向下滑一下即可全螢幕觀看");
         if (localStorage.getItem("fullscreenHintShown")) return;
 
         const hint = document.getElementById("swipe-fullscreen-hint");
@@ -317,8 +338,61 @@ $(function () {
     }
   }
 
-  //翻轉手機提示
-  function checkOrientation() {
+  function setBookMode(isSinglePage) {
+    const width = isSinglePage ? 600 : 1200;
+    const height = 600;
+
+    $("#flipbook").turn("size", width, height);
+
+    // ⭐ 等 turn.js layout 完成再置中
+    setTimeout(centerBook, 50);
+  }
+
+  function centerBook() {
+    const wrapperWidth = $(".book-scale-wrapper").width();
+    const bookWidth = $("#flipbook").width();
+
+    const offset = (wrapperWidth - bookWidth) / 2;
+
+    $("#flipbook").css({
+      marginLeft: offset + "px",
+    });
+  }
+
+  function resizeFunction() {
+    //resize書本大小
+    const wrapper = $(".book-scale-wrapper");
+
+    let scale = 1;
+
+    // ===== Desktop =====
+    if (innerWidth > 1200) {
+      scale = 1;
+    }
+
+    // ===== Tablet =====
+    else if (isTablet) {
+      scale = 0.85; // 你要的固定值
+      $(".book-section").css({
+        transform: `scale(` + scale + `)`,
+        height: scale * 510 + "px",
+      });
+
+      $("#flipbook").css({
+        transform: `scale(` + scale + `) translateY(` + scale * -65.88 + `px)`,
+      });
+    }
+
+    wrapper.css({
+      transform: `scale(${scale})`,
+    });
+
+    // ⭐ turn.js 重新計算翻頁區域
+    setTimeout(() => {
+      $("#flipbook").turn("resize");
+    }, 200);
+
+    //翻轉手機提示
     const isPortrait = window.innerHeight > window.innerWidth;
     document.getElementById("rotate-notice").style.display = isPortrait
       ? "block"
@@ -326,10 +400,10 @@ $(function () {
   }
 
   // 初始檢查
-  checkOrientation();
+  resizeFunction();
 
   // 當裝置旋轉時重新檢查
-  window.addEventListener("resize", checkOrientation);
+  window.addEventListener("resize", resizeFunction);
 
   // 當裝置旋轉時重新載入
   let previous = window.orientation;
@@ -2125,45 +2199,48 @@ $(function () {
         .on("click touchstart", function (e) {
           // 防止事件重複觸發（避免 click 跟 touchstart 同時跑兩次）
           e.preventDefault();
-          e.stopPropagation();
+          e.stopImmediatePropagation();
 
           $("body").addClass("popup-open"); // 開啟 popup
+          $("#flipbook").turn("disable", true);
           $(".popup-board").css("display", "block");
 
           if (page === 12 || page === 13) {
+            if (isTablet) {
+              $(".popup-board-bg01").css("display", "block");
+              $(".popup-board-bg02, .popup-board-bg03").css("display", "none");
+            }
             playVoice("./mp3/07b.mp3");
           }
 
           if (page === 14 || page === 15) {
+            if (isTablet) {
+              $(".popup-board-bg02").css("display", "block");
+              $(".popup-board-bg01, .popup-board-bg03").css("display", "none");
+            }
             playVoice("./mp3/08b.mp3");
           }
 
           if (page === 16 || page === 17) {
+            if (isTablet) {
+              $(".popup-board-bg03").css("display", "block");
+              $(".popup-board-bg01, .popup-board-bg02").css("display", "none");
+            }
             playVoice("./mp3/09b.mp3");
           }
         });
 
-      $(".popup-board")
+      $(".popup-board, .popup-board-bg")
         .off("click touchstart")
         .on("click touchstart", function (e) {
           // 防止事件重複觸發（避免 click 跟 touchstart 同時跑兩次）
           e.preventDefault();
-          e.stopPropagation();
+          e.stopImmediatePropagation();
 
           $(".popup-board").css("display", "none");
+          $(".popup-board-bg").css("display", "none");
           $("body").removeClass("popup-open"); // 關閉 popup
-          stopVoice();
-        });
-
-      $(".popup-board-bg")
-        .off("click touchstart")
-        .on("click touchstart", function (e) {
-          // 防止事件重複觸發（避免 click 跟 touchstart 同時跑兩次）
-          e.preventDefault();
-          e.stopPropagation();
-
-          $(".popup-board").css("display", "none");
-          $("body").removeClass("popup-open"); // 關閉 popup
+          $("#flipbook").turn("disable", false);
           stopVoice();
         });
     };
@@ -2244,10 +2321,17 @@ $(function () {
                    <div class="check-box"></div>
                    `);
 
-        $(".book-section").append(`
+        if (isTablet) {
+          $("body").append(`
+          <div class="popup-board popup-board01"></div>
+          <div class="popup-board-bg popup-board-bg01">
+        `);
+        } else {
+          $(".book-section").append(`
           <div class="popup-board popup-board01">
           </div>
         `);
+        }
       }
 
       if (window.matchMedia("(max-height: 500px)").matches) {
@@ -2412,6 +2496,9 @@ $(function () {
           page1213Timeouts.push(
             setTimeout(() => {
               $(".check-box").show();
+              if (isTablet) {
+                $(".popup-board-bg01").css("display", "block");
+              }
               $(".popup-board01").css("display", "block");
               playVoice("./mp3/07b.mp3");
             }, 27000),
@@ -2422,7 +2509,6 @@ $(function () {
           playVoice("./mp3/07.mp3");
         },
       );
-
       popupBoard(page);
     }
 
@@ -2503,6 +2589,18 @@ $(function () {
           <img class="coin-hint02" src="./images/book/book1415/text15.png" />
            `);
 
+        if (isTablet) {
+          $("body").append(`
+          <div class="popup-board popup-board02"></div>
+          <div class="popup-board-bg popup-board-bg02">
+        `);
+        } else {
+          $(".book-section").append(`
+          <div class="popup-board popup-board02">
+          </div>
+        `);
+        }
+
         page1415Timeouts.push(
           setTimeout(() => {
             $("#flipbook").append(
@@ -2530,11 +2628,6 @@ $(function () {
             $(".small-cow ").css("opacity", "1");
           }, 1000),
         );
-
-        $(".book-section").append(`    
-          <div class="popup-board popup-board02">
-          </div>
-        `);
 
         if (window.matchMedia("(max-height: 500px)").matches) {
           if (isAndroidChrome()) {
@@ -2654,6 +2747,9 @@ $(function () {
             page1415Timeouts.push(
               setTimeout(() => {
                 $(".check-box").show();
+                if (isTablet) {
+                  $(".popup-board-bg02").css("display", "block");
+                }
                 $(".popup-board02").css("display", "block");
                 playVoice("./mp3/08b.mp3");
                 btnUnDisabled();
@@ -2753,16 +2849,24 @@ $(function () {
             <img class="nurse-girl" src="./images/book/book1617/鈴鈴護士.png"/>
             <img class="click-hearing-heart" src="./images/book/book25/點這裡.png"/>
             <div class="click-hearing-heart-box"></div>
+            <div class="check-box"></div>
             <img class="board-list03" src="./images/book/book1617/任務清單.png"/>
             <img class="check check03" src="./images/book/book13/綠勾.png" />
             <img class="board16" src="./images/book/book1415/板子.png">
             <img class="bubble16" src="./images/book/book1617/牛奶泡泡.png"/>
             `);
-        $("#flipbook").append(`<div class="check-box"></div>`);
-        $(".book-section").append(`    
+
+        if (isTablet) {
+          $("body").append(`
+          <div class="popup-board popup-board03"></div>
+          <div class="popup-board-bg popup-board-bg03">
+        `);
+        } else {
+          $(".book-section").append(`
           <div class="popup-board popup-board03">
           </div>
         `);
+        }
 
         if (window.matchMedia("(max-height: 500px)").matches) {
           if (isAndroidChrome()) {
@@ -2893,6 +2997,9 @@ $(function () {
           page1617Timeouts.push(
             setTimeout(() => {
               $(".check-box").show();
+              if (isTablet) {
+                $(".popup-board-bg03").css("display", "block");
+              }
               $(".popup-board03").css("display", "block");
               playVoice("./mp3/09b.mp3");
               btnUnDisabled();
@@ -3506,6 +3613,9 @@ $(function () {
       latestPage = page;
       currentPage = page;
 
+      if (isTablet) {
+      }
+
       // 書本定位
       if (!isIPad() && !window.matchMedia("(max-height: 500px)").matches) {
         if (page === 1) {
@@ -3681,6 +3791,14 @@ $(function () {
       }, 3000);
     }
 
+    $("#flipbook").on("mousedown touchstart", function (e) {
+      if ($("body").hasClass("popup-open")) {
+        e.stopImmediatePropagation();
+        e.preventDefault();
+        return false;
+      }
+    });
+
     $("#flipbook").on("mouseup", function (e) {
       const page = $("#flipbook").turn("page");
       console.log("目前頁面是：" + page);
@@ -3772,12 +3890,10 @@ $(function () {
     canSwipeNext = true;
 
     if (isIPad() && isSafari()) {
-      $(".book-section").addClass("book-section-ipad-safari");
-      $(".controls").addClass("controls-ipad-safari");
+      // $(".controls").addClass("controls-ipad-safari");
     }
     if (isIPad() && isIOSChrome()) {
-      $(".book-section").addClass("book-section-ipad-chorme");
-      $(".controls").addClass("controls-ipad-chorme");
+      // $(".controls").addClass("controls-ipad-chorme");
     }
 
     // 第一頁：不能往回
@@ -3786,14 +3902,12 @@ $(function () {
       canSwipePrev = false;
       if (isIPad() && isSafari()) {
         $(".book-section").css({
-          left: (visualHeight * -240) / 609 + "px", //-342.72
-          marginTop: (visualHeight * 20) / 609 + "px",
+          left: (visualHeight * -291.85) / 609 + "px", //-300
         });
       }
       if (isIPad() && isIOSChrome()) {
         $(".book-section").css({
-          left: (visualHeight * -330) / 609 + "px", //-342.72
-          marginTop: (visualHeight * -30) / 609 + "px",
+          left: (visualHeight * -291.85) / 609 + "px", //-300
         });
       }
 
