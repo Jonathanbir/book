@@ -1756,6 +1756,33 @@ button {
   border-radius: 0 24px 24px;
 }
 
+.star13 {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 99;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: all 1s ease-in-out;
+}
+
+.star3-animation {
+  animation: starShine 1s ease-in-out infinite;
+}
+
+@keyframes starShine {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 .bubble12 {
   position: absolute;
   left: 0;

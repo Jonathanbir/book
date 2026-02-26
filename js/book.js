@@ -2276,6 +2276,7 @@ $(function () {
       $(".magic-wand").css("opacity", "0");
       $(".click-magic-wand").css("opacity", "0");
       $(".finish-mission01").css("opacity", "0");
+      $(".star13").removeClass("star3-animation");
       $(".electfan").removeClass("electfan-move");
       $(".bubble-bg").removeClass("bubble-move");
       $(".magic-wand").removeClass("magic-wand-animation");
@@ -2292,6 +2293,7 @@ $(function () {
       $("#flipbook .electfan-wind-line").remove();
       $("#flipbook .bubble-bg").remove();
       $("#flipbook .bubble12").remove();
+      $(".star13").remove();
       $("#flipbook .check-box").remove();
       $(".book-section .popup-board-bg").remove();
       $(".book-section .popup-board").remove();
@@ -2330,6 +2332,7 @@ $(function () {
                    <img class="click-magic-wand" src="./images/book/book0607/點這裡.png"/>
                    <div class="click-magic-wand-box"></div>
                    <img class="bubble-bg" src="./images/book/book13/水珠.png"/>
+                   <img class="star13" src="./images/book/book13/星星.png"/>
                    <img class="bubble12" src="./images/book/book13/牛奶泡泡.png"/>
                    <img class="board board13" src="./images/book/book13/board13.png"/>
                     <img class="check check01" src="./images/book/book13/綠勾.png" />
@@ -2482,7 +2485,10 @@ $(function () {
           );
 
           page1213Timeouts.push(
-            setTimeout(() => $(".bubble12").addClass("bubble-fade-in"), 7000),
+            setTimeout(() => {
+              $(".star13").addClass("star3-animation");
+              $(".bubble12").addClass("bubble-fade-in");
+            }, 7000),
           );
 
           page1213Timeouts.push(
