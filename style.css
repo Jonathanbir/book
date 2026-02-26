@@ -4805,6 +4805,40 @@ button {
     background-size: 80%;
     background-position-x: 240%;
   }
+
+  .popup-board01 {
+    background-image: url("./images/book/book13/任務板平板.png");
+  }
+
+  .popup-board02 {
+    background-image: url("./images/book/book1415/任務板平板.png");
+  }
+
+  .popup-board03 {
+    background-image: url("./images/book/book1617/任務板平板.png");
+  }
+
+  .popup-board-bg {
+    display: none;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+    width: 200vw;
+    height: 200vh;
+    z-index: 999;
+  }
+
+  .popup-board-bg01 {
+    background-color: rgba(290, 190, 80, 0.5);
+  }
+
+  .popup-board-bg02,
+  .popup-board-bg03 {
+    background-color: rgba(3, 147, 3, 0.5);
+  }
 }
 
 .cloud-fade-in {

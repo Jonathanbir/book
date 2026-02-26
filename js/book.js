@@ -2217,25 +2217,28 @@ $(function () {
           $(".popup-board").css("display", "block");
 
           if (page === 12 || page === 13) {
-            if (isTablet) {
+            if (isTablet || window.matchMedia("(max-height: 500px)").matches) {
               $(".popup-board-bg01").css("display", "block");
               $(".popup-board-bg02, .popup-board-bg03").css("display", "none");
+              $(".popup-board-bg02, .popup-board-bg03").remove();
             }
             playVoice("./mp3/07b.mp3");
           }
 
           if (page === 14 || page === 15) {
-            if (isTablet) {
+            if (isTablet || window.matchMedia("(max-height: 500px)").matches) {
               $(".popup-board-bg02").css("display", "block");
               $(".popup-board-bg01, .popup-board-bg03").css("display", "none");
+              $(".popup-board-bg01, .popup-board-bg03").remove();
             }
             playVoice("./mp3/08b.mp3");
           }
 
           if (page === 16 || page === 17) {
-            if (isTablet) {
+            if (isTablet || window.matchMedia("(max-height: 500px)").matches) {
               $(".popup-board-bg03").css("display", "block");
               $(".popup-board-bg01, .popup-board-bg02").css("display", "none");
+              $(".popup-board-bg01, .popup-board-bg02").remove();
             }
             playVoice("./mp3/09b.mp3");
           }
@@ -2294,6 +2297,7 @@ $(function () {
       $(".book-section .popup-board").remove();
       $(".board13").remove();
       $(".popup-board01").remove();
+      $(".popup-board-bg01").remove();
       $(".text12").remove();
       $(".check-box").hide();
     }
@@ -2332,7 +2336,7 @@ $(function () {
                    <div class="check-box"></div>
                    `);
 
-        if (isTablet) {
+        if (isTablet || window.matchMedia("(max-height: 500px)").matches) {
           $("body").append(`
           <div class="popup-board popup-board01"></div>
           <div class="popup-board-bg popup-board-bg01">
@@ -2507,7 +2511,10 @@ $(function () {
           page1213Timeouts.push(
             setTimeout(() => {
               $(".check-box").show();
-              if (isTablet) {
+              if (
+                isTablet ||
+                window.matchMedia("(max-height: 500px)").matches
+              ) {
                 $(".popup-board-bg01").css("display", "block");
               }
               $(".popup-board01").css("display", "block");
@@ -2556,6 +2563,7 @@ $(function () {
       $("#flipbook .check02").remove();
       $(".board14").remove();
       $(".popup-board02").remove();
+      $(".popup-board-bg02").remove();
       $(".coin-hint02").remove();
       $(".success-hint02").removeClass("bubble-fade-in");
       $(".cows-tongue").removeClass("cows-tongue-animation");
@@ -2600,7 +2608,7 @@ $(function () {
           <img class="coin-hint02" src="./images/book/book1415/text15.png" />
            `);
 
-        if (isTablet) {
+        if (isTablet || window.matchMedia("(max-height: 500px)").matches) {
           $("body").append(`
           <div class="popup-board popup-board02"></div>
           <div class="popup-board-bg popup-board-bg02">
@@ -2758,7 +2766,10 @@ $(function () {
             page1415Timeouts.push(
               setTimeout(() => {
                 $(".check-box").show();
-                if (isTablet) {
+                if (
+                  isTablet ||
+                  window.matchMedia("(max-height: 500px)").matches
+                ) {
                   $(".popup-board-bg02").css("display", "block");
                 }
                 $(".popup-board02").css("display", "block");
@@ -2825,6 +2836,7 @@ $(function () {
       $("#flipbook .board-list03").remove();
       $("#flipbook .board16").remove();
       $(".popup-board03").remove();
+      $(".popup-board-bg03").remove();
       $("#flipbook .bubble16").remove();
       $("#flipbook .dondon").remove();
       $(".check-box").hide();
@@ -2867,7 +2879,7 @@ $(function () {
             <img class="bubble16" src="./images/book/book1617/牛奶泡泡.png"/>
             `);
 
-        if (isTablet) {
+        if (isTablet || window.matchMedia("(max-height: 500px)").matches) {
           $("body").append(`
           <div class="popup-board popup-board03"></div>
           <div class="popup-board-bg popup-board-bg03">
@@ -3008,7 +3020,10 @@ $(function () {
           page1617Timeouts.push(
             setTimeout(() => {
               $(".check-box").show();
-              if (isTablet) {
+              if (
+                isTablet ||
+                window.matchMedia("(max-height: 500px)").matches
+              ) {
                 $(".popup-board-bg03").css("display", "block");
               }
               $(".popup-board03").css("display", "block");
