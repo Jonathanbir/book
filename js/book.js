@@ -67,6 +67,17 @@ $(function () {
     pageTimers.push(id);
   }
 
+  //判斷是否為Android平板
+  function isAndroidTablet() {
+    const ua = navigator.userAgent.toLowerCase();
+
+    const isAndroid = ua.includes("android");
+    const isMobile = ua.includes("mobile");
+
+    // Android 平板 = Android + 沒有 mobile 字樣
+    return isAndroid && !isMobile;
+  }
+
   // 頁面初次載入
   updateHeight();
 
@@ -3550,6 +3561,7 @@ $(function () {
           setTimeout(() => {
             btnUnDisabled();
             canFlipNext = true;
+            isCanNotFlipNext();
             $("#right-down-corner").css("color", "#000");
             $("#right-down-corner").prop("disabled", false);
           }, 12000),
@@ -3612,9 +3624,6 @@ $(function () {
     $("#flipbook").bind("turned", function (event, page) {
       latestPage = page;
       currentPage = page;
-
-      if (isTablet) {
-      }
 
       // 書本定位
       if (!isIPad() && !window.matchMedia("(max-height: 500px)").matches) {
@@ -3889,13 +3898,6 @@ $(function () {
     canSwipePrev = true;
     canSwipeNext = true;
 
-    if (isIPad() && isSafari()) {
-      // $(".controls").addClass("controls-ipad-safari");
-    }
-    if (isIPad() && isIOSChrome()) {
-      // $(".controls").addClass("controls-ipad-chorme");
-    }
-
     // 第一頁：不能往回
     if (page === 1) {
       $("#left-down-corner").hide();
@@ -3906,6 +3908,12 @@ $(function () {
         });
       }
       if (isIPad() && isIOSChrome()) {
+        $(".book-section").css({
+          left: (visualHeight * -291.85) / 609 + "px", //-300
+        });
+      }
+
+      if (isAndroidTablet()) {
         $(".book-section").css({
           left: (visualHeight * -291.85) / 609 + "px", //-300
         });
@@ -3937,6 +3945,18 @@ $(function () {
       }
 
       if (isIPad() && isIOSChrome()) {
+        if (page === 28) {
+          $(".book-section").css({
+            left: (visualHeight * 120) / 609 + "px", //164.46
+          });
+        } else {
+          $(".book-section").css({
+            left: (visualHeight * -120) / 609 + "px", //-342.72
+          });
+        }
+      }
+
+      if (isAndroidTablet()) {
         if (page === 28) {
           $(".book-section").css({
             left: (visualHeight * 120) / 609 + "px", //164.46
