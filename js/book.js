@@ -161,7 +161,7 @@ $(function () {
   let bgSource = null;
 
   async function playBackground() {
-    const response = await fetch("./mp3/background.wav");
+    const response = await fetch("./mp3/background.mp3");
     const arrayBuffer = await response.arrayBuffer();
     const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
 
@@ -188,6 +188,13 @@ $(function () {
       autoCenter: true,
     });
     window.addEventListener("load", () => {
+      const flipbookWidth = document
+        .querySelector(".book-title")
+        .getBoundingClientRect().width;
+      $("#left-down-corner").hide();
+      $(".book-section").css({
+        left: -1 * flipbookWidth + "px",
+      });
       $(".book-container").css("height", innerHeight);
     });
   } else {
@@ -386,6 +393,7 @@ $(function () {
       scale = 0.85; // 你要的固定值
       $(".book-section").css({
         transform: `scale(` + scale + `)`,
+        width: scale * 1020 + "px",
         height: scale * 510 + "px",
       });
 
@@ -555,15 +563,8 @@ $(function () {
     isBtnDisabled = true;
     $(".next-page img").attr("src", "./images/common/下一頁灰.png");
     $(".next-page").prop("disabled", true);
-    $(".next-page, #right-up-corner, #right-down-corner")
-      .on("mouseenter", function () {
-        $(".next-page-hint").addClass("next-page-hint-show");
-      })
-      .on("mouseleave", function () {
-        $(".next-page-hint").removeClass("next-page-hint-show");
-      });
 
-    if (window.matchMedia("(max-height: 500px)").matches) {
+    if (window.matchMedia("(max-height: 500px)").matches || isTablet) {
       $("#right-down-corner").css("color", "##969696");
       $("#right-down-corner").prop("disabled", true);
     }
@@ -575,12 +576,6 @@ $(function () {
     $(".next-page img").attr("src", "./images/common/下一頁.png");
     $(".next-page img").css("cursor", "pointer");
     $(".next-page").prop("disabled", false);
-    $(".next-page, #right-up-corner, #right-down-corner").on(
-      "mouseenter",
-      function () {
-        $(".next-page-hint").removeClass("next-page-hint-show");
-      },
-    );
   }
 
   //上一頁按鈕 倒數三秒
@@ -602,7 +597,7 @@ $(function () {
       }
     }, 1000);
 
-    if (window.matchMedia("(max-height: 500px)").matches) {
+    if (window.matchMedia("(max-height: 500px)").matches || isTablet) {
       // 每秒更新一次按鈕文字
       prevMobileBtn.innerText = countMobile + "秒";
       $("#left-down-corner").css("color", "##969696");
@@ -662,7 +657,7 @@ $(function () {
 
     if (page !== 6) {
       //手機版 控制按鈕
-      if (window.matchMedia("(max-height: 500px)").matches) {
+      if (window.matchMedia("(max-height: 500px)").matches || isTablet) {
         // 每秒更新一次按鈕文字
         prevMobileBtn.innerText = countMobile + "秒";
         nextMobileBtn.innerText = countMobile + "秒";
@@ -715,6 +710,10 @@ $(function () {
 
     replayBtnTrunGray();
 
+    if (isTablet) {
+      $(".replay-mobile-btn").addClass("replay-mobile-btn-disabled");
+    }
+
     if (window.matchMedia("(max-height: 500px)").matches) {
       $(".replay-mobile-btn").prop("disabled", true);
       $(".replay-mobile-btn").addClass("replay-mobile-btn-disabled");
@@ -730,6 +729,11 @@ $(function () {
       if (pageAtStart !== currentPage) return;
       // 如果不是最新 replay → 不准執行
       if (myGeneration !== replayGeneration) return;
+
+      if (isTablet) {
+        $(".replay-mobile-btn").prop("disabled", false);
+        $(".replay-mobile-btn").removeClass("replay-mobile-btn-disabled");
+      }
 
       if (window.matchMedia("(max-height: 500px)").matches) {
         $(".replay-mobile-btn").prop("disabled", false);
@@ -760,7 +764,6 @@ $(function () {
         $(".prev-page").prop("disabled", true);
         $(".prev-page").show();
         $(".book-cover").remove();
-        $(".replay-btn").css("display", "block");
 
         startReplayTimer(5500);
 
@@ -794,6 +797,11 @@ $(function () {
 
     // 切換 icon + 文字（保留你原本 UI）
     if (isMuted) {
+      if (isTablet) {
+        $(".mute-mobile-toggle").css("background", "#fff");
+        $(".mute-mobile-toggle").html('<i class="fas fa-volume-mute"></i>');
+      }
+
       if (!window.matchMedia("(max-height: 500px)").matches) {
         $(".mute-toggle img").attr("src", "./images/common/靜音按鈕開啟.png");
       } else {
@@ -801,6 +809,11 @@ $(function () {
         $(".mute-mobile-toggle").html('<i class="fas fa-volume-mute"></i>');
       }
     } else {
+      if (isTablet) {
+        $(".mute-mobile-toggle").css("background", "rgba(169, 169, 169, 0.2)");
+        $(".mute-mobile-toggle").html('<i class="fas fa-volume-up"></i>');
+      }
+
       if (!window.matchMedia("(max-height: 500px)").matches) {
         $(".mute-toggle img").attr("src", "./images/common/靜音按鈕關閉.png");
       } else {
@@ -1508,6 +1521,12 @@ $(function () {
   }
 
   function replayBtnTrunGray() {
+    if (isTablet) {
+      $(".replay-mobile-btn")
+        .prop("disabled", true)
+        .addClass("replay-mobile-btn-disabled");
+    }
+
     // 可選：恢復灰色按鈕
     if (window.matchMedia("(max-height: 500px)").matches) {
       $(".replay-mobile-btn")
@@ -3647,14 +3666,24 @@ $(function () {
       currentPage = page;
 
       // 書本定位
-      if (!isIPad() && !window.matchMedia("(max-height: 500px)").matches) {
+      if (!isTablet && !window.matchMedia("(max-height: 500px)").matches) {
         if (page === 1) {
           $(".book-section").css({
             left: "-300px",
           });
         } else if (page === 28) {
           $(".book-section").css({
-            left: "17%",
+            left: "300px",
+          });
+        } else {
+          $(".book-section").css({
+            left: "0px",
+          });
+        }
+      } else if (isTablet || isIPad()) {
+        if (page === 28) {
+          $(".book-section").css({
+            left: "300px",
           });
         } else {
           $(".book-section").css({
@@ -3663,7 +3692,11 @@ $(function () {
         }
       }
 
-      if (page > 1 && !window.matchMedia("(max-height: 500px)").matches) {
+      if (
+        page > 1 &&
+        page !== 28 &&
+        !window.matchMedia("(max-height: 500px)").matches
+      ) {
         $("#right-up-corner, #right-down-corner")
           .prop("disabled", false)
           .show();
@@ -3701,6 +3734,22 @@ $(function () {
         $(".mom-hand-milk").css("opacity", "1");
         $(".daughter-hand-milk").removeClass("daughter-hand-milk-empty");
         $(".sweet-taste").removeClass("bubble-fade-in");
+      }
+
+      if (isTablet || isIPad()) {
+        const flipbookWidth = document
+          .querySelector(".book-title")
+          .getBoundingClientRect().width;
+
+        if (page === 1) {
+          $(".book-section").css({
+            left: -1 * flipbookWidth + "px",
+          });
+        } else {
+          $(".book-section").css({
+            left: "0px",
+          });
+        }
       }
     });
 
@@ -3923,22 +3972,6 @@ $(function () {
     if (page === 1) {
       $("#left-down-corner").hide();
       canSwipePrev = false;
-      if (isIPad() && isSafari()) {
-        $(".book-section").css({
-          left: (visualHeight * -291.85) / 609 + "px", //-300
-        });
-      }
-      if (isIPad() && isIOSChrome()) {
-        $(".book-section").css({
-          left: (visualHeight * -291.85) / 609 + "px", //-300
-        });
-      }
-
-      if (isAndroidTablet()) {
-        $(".book-section").css({
-          left: (visualHeight * -291.85) / 609 + "px", //-300
-        });
-      }
 
       if (window.matchMedia("(max-height: 500px)").matches) {
         if (isSafari() || isIOSChrome()) {
@@ -3953,42 +3986,6 @@ $(function () {
         }
       }
     } else {
-      if (isIPad() && isSafari()) {
-        if (page === 28) {
-          $(".book-section").css({
-            left: (visualHeight * 180) / 609 + "px", //-342.72
-          });
-        } else {
-          $(".book-section").css({
-            left: (visualHeight * -40) / 609 + "px",
-          });
-        }
-      }
-
-      if (isIPad() && isIOSChrome()) {
-        if (page === 28) {
-          $(".book-section").css({
-            left: (visualHeight * 120) / 609 + "px", //164.46
-          });
-        } else {
-          $(".book-section").css({
-            left: (visualHeight * -120) / 609 + "px", //-342.72
-          });
-        }
-      }
-
-      if (isAndroidTablet()) {
-        if (page === 28) {
-          $(".book-section").css({
-            left: (visualHeight * 120) / 609 + "px", //164.46
-          });
-        } else {
-          $(".book-section").css({
-            left: (visualHeight * -120) / 609 + "px", //-342.72
-          });
-        }
-      }
-
       if (window.matchMedia("(max-height: 500px)").matches) {
         if (isSafari() || isIOSChrome()) {
           $(".book-section").css({
@@ -4215,17 +4212,6 @@ $(function () {
    🔥 初始化補救（一開始page是undefined關鍵）
 ====================== */
   $(document).ready(function () {
-    if (!window.matchMedia("(max-height: 500px)").matches) {
-      // 封面剛載入，禁用角落按鈕
-      $("#right-up-corner, #right-down-corner").prop("disabled", true);
-
-      // 如果你想同時隱藏它們（避免被 hover 或看到折角效果）
-      $("#right-up-corner, #right-down-corner").hide();
-
-      // 初始狀態改成「開啟」
-      // $(".next-page img").attr("src", "./images/common/開始.png");
-    }
-
     // 取得目前頁數（預設應該是 1）
     let currentPage = $("#flipbook").turn("page") || 1;
   });
