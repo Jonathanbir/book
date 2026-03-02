@@ -3876,8 +3876,9 @@ button {
   }
 }
 
+/* @media (pointer: coarse) and (max-height: 850px) and (min-height: 500px) {
 /* 平板 */
-@media (hover: none) and (min-height: 500px) {
+@media (pointer: coarse) and (min-width: 768px) and (max-width: 1366px) and (max-aspect-ratio: 3/2) {
   .tablet-none {
     display: none !important;
   }

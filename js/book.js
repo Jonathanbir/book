@@ -21,12 +21,31 @@ $(function () {
   const visualWidth = visualViewport.width;
   const visualHeight = visualViewport.height;
   const widthGap = (visualWidth - visualHeight * 2) / 2;
-  const widtScreenhGap = (screenWidth - screenHeight * 2) / 2;
+  let notPhoneRatio = matchMedia("(max-aspect-ratio:3/2)").matches;
+  function getDeviceLayout() {
+    const coarse = matchMedia("(pointer: coarse)").matches;
+    const width = innerWidth;
+    const height = innerHeight;
+    const ratio = width / height;
 
-  const isTablet =
-    window.matchMedia("(pointer: coarse)").matches &&
-    innerHeight >= 500 &&
-    innerHeight <= 850;
+    if (!coarse && width >= 1024 && height > 500) return "desktop";
+    if (coarse && ratio <= 1.6) return "tablet";
+    return "mobile";
+  }
+
+  const isTablet = getDeviceLayout() === "tablet";
+
+  // const isTablet =
+  //   window.matchMedia("(pointer: coarse)").matches &&
+  //   innerHeight >= 500 &&
+  //   innerHeight <= 850;
+
+  // const isTablet = window.matchMedia(`
+  //   (pointer: coarse)
+  //   and (min-width: 768px)
+  //   and (max-width: 1366px)
+  //   and (max-aspect-ratio: 3/2)
+  // `).matches;
 
   const vh = window.visualViewport.height;
   function updateHeight() {
@@ -135,6 +154,8 @@ $(function () {
   //     screenHeight +
   //     "\nscreenWidth " +
   //     screenWidth +
+  //     "\nnotPhoneRatio: " +
+  //     notPhoneRatio +
   //     "\nisIOSChrome(): " +
   //     isIOSChrome() +
   //     "\nisAndroidChrome(): " +
@@ -144,6 +165,8 @@ $(function () {
   //     "\nisIPad(): " +
   //     isIPad(),
   // );
+
+  // window.alert("getDeviceLayout(): " + getDeviceLayout());
 
   const audioContext = new (window.AudioContext || window.webkitAudioContext)();
 
@@ -175,27 +198,31 @@ $(function () {
     bgSource.start(0);
   }
 
-  if (innerWidth > 1200) {
+  if (innerHeight > 500 && !matchMedia("(pointer: coarse)").matches) {
     $flipbook.turn({
       width: 1200,
       height: 600,
       autoCenter: true,
     });
-  } else if (isTablet) {
+  } else if (isTablet || isIPad()) {
     $flipbook.turn({
       width: 1200,
       height: 600,
       autoCenter: true,
     });
-    window.addEventListener("load", () => {
+    // 等 turn.js 完成 layout
+    requestAnimationFrame(() => {
       const flipbookWidth = document
         .querySelector(".book-title")
         .getBoundingClientRect().width;
+
       $("#left-down-corner").hide();
+
       $(".book-section").css({
-        left: -1 * flipbookWidth + "px",
+        left: -flipbookWidth + "px",
       });
-      $(".book-container").css("height", innerHeight);
+      $(".controls").hide();
+      $(".book-container").css("height", window.innerHeight);
     });
   } else {
     $(".pop-up-box").on("click", async function () {
@@ -216,143 +243,155 @@ $(function () {
       }, 200);
     });
 
-    if (isSafari()) {
-      console.log("safari~~~");
-      // 初始化 safri turn.js
+    if (
+      window.matchMedia(`
+    (pointer: fine) and (max-aspect-ratio: 3/2)
+  `).matches
+    ) {
       $flipbook.turn({
-        width: visualHeight * 2,
-        height: visualHeight,
+        width: 1200,
+        height: 600,
         autoCenter: true,
       });
-      $("#flipbook").css({
-        left: widthGap + "px",
-      });
-      $("#left-up-corner").css({
-        left: widthGap + "px",
-      });
-      $("#left-down-corner").css({
-        top: visualHeight - 100 + "px",
-        left: widthGap + "px",
-      });
-      $("#right-up-corner").css({
-        right: widthGap + "px",
-      });
-      $("#right-down-corner").css({
-        top: visualHeight - 100 + "px",
-        right: widthGap + "px",
-      });
-      // $("#left-down-corner,#right-down-corner").css("bottom", "18vh");
-      // $("#flipbook").css("marginTop", "1vh");
-    }
-
-    if (isIOSChrome()) {
-      console.log("ios Chrome~~~");
-      // 初始化 chorme turn.js
-      $flipbook.turn({
-        width: visualHeight * 2,
-        height: visualHeight,
-        autoCenter: true,
-      });
-      $("#flipbook").css({
-        left: widthGap + "px",
-      });
-      $("#left-up-corner").css({
-        left: widthGap + "px",
-      });
-      $("#left-down-corner").css({
-        top: visualHeight - 100,
-        left: widthGap + "px",
-      });
-      $("#right-up-corner").css({
-        right: widthGap + "px",
-      });
-      $("#right-down-corner").css({
-        top: visualHeight - 100,
-        right: widthGap + "px",
-      });
-      // $("#left-down-corner,#right-down-corner").css("bottom", "8vh");
-      // $("#flipbook").css("marginTop", "1vh");
-    }
-
-    if (isAndroidChrome()) {
-      console.log("android Chrome~~~");
-      // 初始化 chorme turn.js
-      $flipbook.turn({
-        width: screenHeight * 2,
-        height: screenHeight,
-        autoCenter: true,
-      });
-
-      $("#flipbook").css({
-        left: (visualWidth - screenHeight * 2) / 2 + "px",
-      });
-      $("#left-up-corner").css({
-        top: barHeight,
-        left: (visualWidth - screenHeight * 2) / 2 + "px",
-      });
-      $("#right-up-corner").css({
-        top: barHeight,
-        right: (visualWidth - screenHeight * 2) / 2 + "px",
-      });
-      $(".book").css("height", screenHeight + "px");
-      $("#left-down-corner").css({
-        top: screenHeight + barHeight - 100 + "px",
-        left: (visualWidth - screenHeight * 2) / 2 + "px",
-      });
-      $("#right-down-corner").css({
-        top: screenHeight + barHeight - 100 + "px",
-        right: (visualWidth - screenHeight * 2) / 2 + "px",
-      });
-      console.log("推算工具列高度≈ ", barHeight);
-      console.log("工具列高度≈ ", screenHeight);
-
-      $(".scroll-box").css("display", "block");
-      // $("#left-down-corner,#right-down-corner").css("bottom", "0vh");
-      $("#flipbook").css("marginTop", barHeight);
-
-      // call on load & on orientation change
-
-      // 顯示提示（只在第一次進站顯示）
-      function showFullscreenHint() {
-        if (localStorage.getItem("fullscreenHintShown")) return;
-
-        const hint = document.getElementById("swipe-fullscreen-hint");
-        hint.classList.add("show");
-
-        // 記錄下次不要再顯示
-        localStorage.setItem("fullscreenHintShown", "true");
+    } else {
+      if (isSafari()) {
+        console.log("safari~~~");
+        // 初始化 safri turn.js
+        $flipbook.turn({
+          width: visualHeight * 2,
+          height: visualHeight,
+          autoCenter: true,
+        });
+        $("#flipbook").css({
+          left: widthGap + "px",
+        });
+        $("#left-up-corner").css({
+          left: widthGap + "px",
+        });
+        $("#left-down-corner").css({
+          top: visualHeight - 100 + "px",
+          left: widthGap + "px",
+        });
+        $("#right-up-corner").css({
+          right: widthGap + "px",
+        });
+        $("#right-down-corner").css({
+          top: visualHeight - 100 + "px",
+          right: widthGap + "px",
+        });
+        // $("#left-down-corner,#right-down-corner").css("bottom", "18vh");
+        // $("#flipbook").css("marginTop", "1vh");
       }
 
-      // 隱藏提示
-      function hideFullscreenHint() {
-        const hint = document.getElementById("swipe-fullscreen-hint");
-        hint.classList.remove("show");
+      if (isIOSChrome()) {
+        console.log("ios Chrome~~~");
+        // 初始化 chorme turn.js
+        $flipbook.turn({
+          width: visualHeight * 2,
+          height: visualHeight,
+          autoCenter: true,
+        });
+        $("#flipbook").css({
+          left: widthGap + "px",
+        });
+        $("#left-up-corner").css({
+          left: widthGap + "px",
+        });
+        $("#left-down-corner").css({
+          top: visualHeight - 100,
+          left: widthGap + "px",
+        });
+        $("#right-up-corner").css({
+          right: widthGap + "px",
+        });
+        $("#right-down-corner").css({
+          top: visualHeight - 100,
+          right: widthGap + "px",
+        });
+        // $("#left-down-corner,#right-down-corner").css("bottom", "8vh");
+        // $("#flipbook").css("marginTop", "1vh");
       }
 
-      // 檢查使用者是否滑動（手動觸發全螢幕）
-      let touchStartY = 0;
+      if (isAndroidChrome()) {
+        console.log("android Chrome~~~");
+        // 初始化 chorme turn.js
+        $flipbook.turn({
+          width: screenHeight * 2,
+          height: screenHeight,
+          autoCenter: true,
+        });
 
-      window.addEventListener("touchstart", (e) => {
-        touchStartY = e.touches[0].clientY;
-      });
+        $("#flipbook").css({
+          left: (visualWidth - screenHeight * 2) / 2 + "px",
+        });
+        $("#left-up-corner").css({
+          top: barHeight,
+          left: (visualWidth - screenHeight * 2) / 2 + "px",
+        });
+        $("#right-up-corner").css({
+          top: barHeight,
+          right: (visualWidth - screenHeight * 2) / 2 + "px",
+        });
+        $(".book").css("height", screenHeight + "px");
+        $("#left-down-corner").css({
+          top: screenHeight + barHeight - 100 + "px",
+          left: (visualWidth - screenHeight * 2) / 2 + "px",
+        });
+        $("#right-down-corner").css({
+          top: screenHeight + barHeight - 100 + "px",
+          right: (visualWidth - screenHeight * 2) / 2 + "px",
+        });
+        console.log("推算工具列高度≈ ", barHeight);
+        console.log("工具列高度≈ ", screenHeight);
 
-      window.addEventListener("touchmove", (e) => {
-        const deltaY = e.touches[0].clientY - touchStartY;
+        $(".scroll-box").css("display", "block");
+        // $("#left-down-corner,#right-down-corner").css("bottom", "0vh");
+        $("#flipbook").css("marginTop", barHeight);
 
-        if (deltaY > 20) {
-          hideFullscreenHint();
+        // call on load & on orientation change
 
-          // 觸發微小滾動 → Android/Safari 會隱藏網址列
-          window.scrollTo(0, 1);
+        // 顯示提示（只在第一次進站顯示）
+        function showFullscreenHint() {
+          if (localStorage.getItem("fullscreenHintShown")) return;
+
+          const hint = document.getElementById("swipe-fullscreen-hint");
+          hint.classList.add("show");
+
+          // 記錄下次不要再顯示
+          localStorage.setItem("fullscreenHintShown", "true");
         }
-      });
 
-      window.addEventListener("load", () => {
-        setTimeout(() => {
-          window.scrollTo(0, 0);
-        }, 0);
-        setTimeout(showFullscreenHint, 600);
-      });
+        // 隱藏提示
+        function hideFullscreenHint() {
+          const hint = document.getElementById("swipe-fullscreen-hint");
+          hint.classList.remove("show");
+        }
+
+        // 檢查使用者是否滑動（手動觸發全螢幕）
+        let touchStartY = 0;
+
+        window.addEventListener("touchstart", (e) => {
+          touchStartY = e.touches[0].clientY;
+        });
+
+        window.addEventListener("touchmove", (e) => {
+          const deltaY = e.touches[0].clientY - touchStartY;
+
+          if (deltaY > 20) {
+            hideFullscreenHint();
+
+            // 觸發微小滾動 → Android/Safari 會隱藏網址列
+            window.scrollTo(0, 1);
+          }
+        });
+
+        window.addEventListener("load", () => {
+          setTimeout(() => {
+            window.scrollTo(0, 0);
+          }, 0);
+          setTimeout(showFullscreenHint, 600);
+        });
+      }
     }
   }
 
@@ -564,7 +603,11 @@ $(function () {
     $(".next-page img").attr("src", "./images/common/下一頁灰.png");
     $(".next-page").prop("disabled", true);
 
-    if (window.matchMedia("(max-height: 500px)").matches || isTablet) {
+    if (
+      window.matchMedia("(max-height: 500px)").matches ||
+      isTablet ||
+      isIPad()
+    ) {
       $("#right-down-corner").css("color", "##969696");
       $("#right-down-corner").prop("disabled", true);
     }
@@ -597,7 +640,11 @@ $(function () {
       }
     }, 1000);
 
-    if (window.matchMedia("(max-height: 500px)").matches || isTablet) {
+    if (
+      window.matchMedia("(max-height: 500px)").matches ||
+      isTablet ||
+      isIPad()
+    ) {
       // 每秒更新一次按鈕文字
       prevMobileBtn.innerText = countMobile + "秒";
       $("#left-down-corner").css("color", "##969696");
@@ -657,7 +704,11 @@ $(function () {
 
     if (page !== 6) {
       //手機版 控制按鈕
-      if (window.matchMedia("(max-height: 500px)").matches || isTablet) {
+      if (
+        window.matchMedia("(max-height: 500px)").matches ||
+        isTablet ||
+        isIPad()
+      ) {
         // 每秒更新一次按鈕文字
         prevMobileBtn.innerText = countMobile + "秒";
         nextMobileBtn.innerText = countMobile + "秒";
@@ -2236,7 +2287,11 @@ $(function () {
           $(".popup-board").css("display", "block");
 
           if (page === 12 || page === 13) {
-            if (isTablet || window.matchMedia("(max-height: 500px)").matches) {
+            if (
+              window.matchMedia("(max-height: 500px)").matches ||
+              isTablet ||
+              isIPad()
+            ) {
               $(".popup-board-bg01").css("display", "block");
               $(".popup-board-bg02, .popup-board-bg03").css("display", "none");
               $(".popup-board-bg02, .popup-board-bg03").remove();
@@ -2245,7 +2300,11 @@ $(function () {
           }
 
           if (page === 14 || page === 15) {
-            if (isTablet || window.matchMedia("(max-height: 500px)").matches) {
+            if (
+              window.matchMedia("(max-height: 500px)").matches ||
+              isTablet ||
+              isIPad()
+            ) {
               $(".popup-board-bg02").css("display", "block");
               $(".popup-board-bg01, .popup-board-bg03").css("display", "none");
               $(".popup-board-bg01, .popup-board-bg03").remove();
@@ -2254,7 +2313,11 @@ $(function () {
           }
 
           if (page === 16 || page === 17) {
-            if (isTablet || window.matchMedia("(max-height: 500px)").matches) {
+            if (
+              window.matchMedia("(max-height: 500px)").matches ||
+              isTablet ||
+              isIPad()
+            ) {
               $(".popup-board-bg03").css("display", "block");
               $(".popup-board-bg01, .popup-board-bg02").css("display", "none");
               $(".popup-board-bg01, .popup-board-bg02").remove();
@@ -2358,7 +2421,11 @@ $(function () {
                    <div class="check-box"></div>
                    `);
 
-        if (isTablet || window.matchMedia("(max-height: 500px)").matches) {
+        if (
+          window.matchMedia("(max-height: 500px)").matches ||
+          isTablet ||
+          isIPad()
+        ) {
           $("body").append(`
           <div class="popup-board popup-board01"></div>
           <div class="popup-board-bg popup-board-bg01">
@@ -2537,8 +2604,9 @@ $(function () {
             setTimeout(() => {
               $(".check-box").show();
               if (
+                window.matchMedia("(max-height: 500px)").matches ||
                 isTablet ||
-                window.matchMedia("(max-height: 500px)").matches
+                isIPad()
               ) {
                 $(".popup-board-bg01").css("display", "block");
               }
@@ -2633,7 +2701,11 @@ $(function () {
           <img class="coin-hint02" src="./images/book/book1415/text15.png" />
            `);
 
-        if (isTablet || window.matchMedia("(max-height: 500px)").matches) {
+        if (
+          window.matchMedia("(max-height: 500px)").matches ||
+          isTablet ||
+          isIPad()
+        ) {
           $("body").append(`
           <div class="popup-board popup-board02"></div>
           <div class="popup-board-bg popup-board-bg02">
@@ -2792,8 +2864,9 @@ $(function () {
               setTimeout(() => {
                 $(".check-box").show();
                 if (
+                  window.matchMedia("(max-height: 500px)").matches ||
                   isTablet ||
-                  window.matchMedia("(max-height: 500px)").matches
+                  isIPad()
                 ) {
                   $(".popup-board-bg02").css("display", "block");
                 }
@@ -2904,7 +2977,11 @@ $(function () {
             <img class="bubble16" src="./images/book/book1617/牛奶泡泡.png"/>
             `);
 
-        if (isTablet || window.matchMedia("(max-height: 500px)").matches) {
+        if (
+          window.matchMedia("(max-height: 500px)").matches ||
+          isTablet ||
+          isIPad()
+        ) {
           $("body").append(`
           <div class="popup-board popup-board03"></div>
           <div class="popup-board-bg popup-board-bg03">
@@ -3046,8 +3123,9 @@ $(function () {
             setTimeout(() => {
               $(".check-box").show();
               if (
+                window.matchMedia("(max-height: 500px)").matches ||
                 isTablet ||
-                window.matchMedia("(max-height: 500px)").matches
+                isIPad()
               ) {
                 $(".popup-board-bg03").css("display", "block");
               }
