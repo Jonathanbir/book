@@ -21,6 +21,10 @@ $(function () {
   const visualWidth = visualViewport.width;
   const visualHeight = visualViewport.height;
   const widthGap = (visualWidth - visualHeight * 2) / 2;
+
+  function getBookWidth() {
+    return document.querySelector("#flipbook").getBoundingClientRect().width;
+  }
   // let notPhoneRatio = matchMedia("(max-aspect-ratio:3/2)").matches;
   // function getDeviceLayout() {
   //   const coarse = matchMedia("(pointer: coarse)").matches;
@@ -152,8 +156,6 @@ $(function () {
   //     screenHeight +
   //     "\nscreenWidth " +
   //     screenWidth +
-  //     "\nnotPhoneRatio: " +
-  //     notPhoneRatio +
   //     "\nisIOSChrome(): " +
   //     isIOSChrome() +
   //     "\nisAndroidChrome(): " +
@@ -210,15 +212,22 @@ $(function () {
     });
     // 等 turn.js 完成 layout
     requestAnimationFrame(() => {
-      const flipbookWidth = document
-        .querySelector(".book-title")
-        .getBoundingClientRect().width;
-
+      const w = getBookWidth();
       $("#left-down-corner").hide();
+      if (innerWidth > 1280) {
+        $(".book-section").css({
+          left: (-w / 2) * 1.01 + "px",
+        });
+      } else if (innerWidth > 1000 && innerWidth <= 1280) {
+        $(".book-section").css({
+          left: (-w / 2) * 0.85 + "px",
+        });
+      } else {
+        $(".book-section").css({
+          left: (-w / 2) * 0.85 + "px",
+        });
+      }
 
-      $(".book-section").css({
-        left: -flipbookWidth + "px",
-      });
       $(".controls").hide();
       $(".book-container").css("height", window.innerHeight);
     });
@@ -241,11 +250,7 @@ $(function () {
       }, 200);
     });
 
-    if (
-      window.matchMedia(`
-    (pointer: fine) and (max-aspect-ratio: 3/2)
-  `).matches
-    ) {
+    if (isTablet) {
       $flipbook.turn({
         width: 1200,
         height: 600,
@@ -3758,8 +3763,25 @@ $(function () {
         }
       } else if (isTablet || isIPad()) {
         if (page === 28) {
-          $(".book-section").css({
-            left: "300px",
+          requestAnimationFrame(() => {
+            const w = getBookWidth();
+            if (innerWidth > 1280) {
+              $(".book-section").css({
+                left: w * 0.32333 + "px", //388
+              });
+            } else if (innerWidth > 1000 && innerWidth <= 1280) {
+              $(".book-section").css({
+                left: w * 0.3528 + "px", //260
+              });
+            } else if (innerWidth > 1000) {
+              $(".book-section").css({
+                left: w * 0.28083 + "px", //337
+              });
+            } else {
+              $(".book-section").css({
+                left: w * 0.3528 + "px", //260
+              });
+            }
           });
         } else {
           $(".book-section").css({
@@ -3813,11 +3835,11 @@ $(function () {
       }
 
       if (isTablet || isIPad()) {
-        const flipbookWidth = document
-          .querySelector(".book-title")
-          .getBoundingClientRect().width;
-
         if (page === 1) {
+          const flipbookWidth = document
+            .querySelector(".book-title")
+            .getBoundingClientRect().width;
+
           $(".book-section").css({
             left: -1 * flipbookWidth + "px",
           });
