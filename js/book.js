@@ -21,24 +21,22 @@ $(function () {
   const visualWidth = visualViewport.width;
   const visualHeight = visualViewport.height;
   const widthGap = (visualWidth - visualHeight * 2) / 2;
-  let notPhoneRatio = matchMedia("(max-aspect-ratio:3/2)").matches;
-  function getDeviceLayout() {
-    const coarse = matchMedia("(pointer: coarse)").matches;
-    const width = innerWidth;
-    const height = innerHeight;
-    const ratio = width / height;
+  // let notPhoneRatio = matchMedia("(max-aspect-ratio:3/2)").matches;
+  // function getDeviceLayout() {
+  //   const coarse = matchMedia("(pointer: coarse)").matches;
+  //   const width = innerWidth;
+  //   const height = innerHeight;
+  //   const ratio = width / height;
 
-    if (!coarse && width >= 1024 && height > 500) return "desktop";
-    if (coarse && ratio <= 1.6) return "tablet";
-    return "mobile";
-  }
+  //   if (!coarse && width >= 1024 && height > 500) return "desktop";
+  //   if (coarse && ratio <= 1.6) return "tablet";
+  //   return "mobile";
+  // }
 
-  const isTablet = getDeviceLayout() === "tablet";
-
-  // const isTablet =
-  //   window.matchMedia("(pointer: coarse)").matches &&
-  //   innerHeight >= 500 &&
-  //   innerHeight <= 850;
+  const isTablet =
+    window.matchMedia("(pointer: coarse)").matches &&
+    innerHeight >= 500 &&
+    innerHeight <= 1200;
 
   // const isTablet = window.matchMedia(`
   //   (pointer: coarse)
