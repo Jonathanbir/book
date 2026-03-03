@@ -765,12 +765,12 @@ $(function () {
     replayBtnTrunGray();
 
     if (isTablet) {
-      $(".replay-mobile-btn").addClass("replay-mobile-btn-disabled");
+      $(".replay-mobile-btn-body").addClass("replay-mobile-btn-disabled");
     }
 
     if (window.matchMedia("(max-height: 500px)").matches) {
-      $(".replay-mobile-btn").prop("disabled", true);
-      $(".replay-mobile-btn").addClass("replay-mobile-btn-disabled");
+      $(".replay-mobile-btn-body").prop("disabled", true);
+      $(".replay-mobile-btn-body").addClass("replay-mobile-btn-disabled");
     } else {
       // 先鎖按鈕
       $(".replay-btn").prop("disabled", true);
@@ -785,13 +785,13 @@ $(function () {
       if (myGeneration !== replayGeneration) return;
 
       if (isTablet) {
-        $(".replay-mobile-btn").prop("disabled", false);
-        $(".replay-mobile-btn").removeClass("replay-mobile-btn-disabled");
+        $(".replay-mobile-btn-body").prop("disabled", false);
+        $(".replay-mobile-btn-body").removeClass("replay-mobile-btn-disabled");
       }
 
       if (window.matchMedia("(max-height: 500px)").matches) {
-        $(".replay-mobile-btn").prop("disabled", false);
-        $(".replay-mobile-btn").removeClass("replay-mobile-btn-disabled");
+        $(".replay-mobile-btn-body").prop("disabled", false);
+        $(".replay-mobile-btn-body").removeClass("replay-mobile-btn-disabled");
       } else {
         $(".replay-btn").prop("disabled", false);
         $(".replay-btn img").attr("src", "./images/common/再聽一次.png");
@@ -906,7 +906,7 @@ $(function () {
       }, 50);
     });
 
-  $(".replay-mobile-btn")
+  $(".replay-mobile-btn-body")
     .off("click.replay")
     .on("click.replay", function () {
       // 只加一次！！
@@ -1576,14 +1576,14 @@ $(function () {
 
   function replayBtnTrunGray() {
     if (isTablet) {
-      $(".replay-mobile-btn")
+      $(".replay-mobile-btn-body")
         .prop("disabled", true)
         .addClass("replay-mobile-btn-disabled");
     }
 
     // 可選：恢復灰色按鈕
     if (window.matchMedia("(max-height: 500px)").matches) {
-      $(".replay-mobile-btn")
+      $(".replay-mobile-btn-body")
         .prop("disabled", true)
         .addClass("replay-mobile-btn-disabled");
     } else {
