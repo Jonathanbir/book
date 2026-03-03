@@ -39,7 +39,7 @@ $(function () {
 
   const isTablet =
     window.matchMedia("(pointer: coarse)").matches &&
-    innerHeight >= 500 &&
+    innerHeight >= 460 &&
     innerHeight <= 1000;
 
   // const isTablet = window.matchMedia(`
@@ -604,7 +604,7 @@ $(function () {
     $(".next-page").prop("disabled", true);
 
     if (
-      window.matchMedia("(max-height: 500px)").matches ||
+      window.matchMedia("(max-height: 460px)").matches ||
       isTablet ||
       isIPad()
     ) {
@@ -641,7 +641,7 @@ $(function () {
     }, 1000);
 
     if (
-      window.matchMedia("(max-height: 500px)").matches ||
+      window.matchMedia("(max-height: 460px)").matches ||
       isTablet ||
       isIPad()
     ) {
@@ -705,7 +705,7 @@ $(function () {
     if (page !== 6) {
       //手機版 控制按鈕
       if (
-        window.matchMedia("(max-height: 500px)").matches ||
+        window.matchMedia("(max-height: 460px)").matches ||
         isTablet ||
         isIPad()
       ) {
@@ -765,7 +765,7 @@ $(function () {
       $(".replay-mobile-btn-body").addClass("replay-mobile-btn-disabled");
     }
 
-    if (window.matchMedia("(max-height: 500px)").matches) {
+    if (window.matchMedia("(max-height: 460px)").matches) {
       $(".replay-mobile-btn-body").prop("disabled", true);
       $(".replay-mobile-btn-body").addClass("replay-mobile-btn-disabled");
     } else {
@@ -786,7 +786,7 @@ $(function () {
         $(".replay-mobile-btn-body").removeClass("replay-mobile-btn-disabled");
       }
 
-      if (window.matchMedia("(max-height: 500px)").matches) {
+      if (window.matchMedia("(max-height: 460px)").matches) {
         $(".replay-mobile-btn-body").prop("disabled", false);
         $(".replay-mobile-btn-body").removeClass("replay-mobile-btn-disabled");
       } else {
@@ -853,7 +853,7 @@ $(function () {
         $(".mute-mobile-toggle").html('<i class="fas fa-volume-mute"></i>');
       }
 
-      if (!window.matchMedia("(max-height: 500px)").matches) {
+      if (!window.matchMedia("(max-height: 460px)").matches) {
         $(".mute-toggle img").attr("src", "./images/common/靜音按鈕開啟.png");
       } else {
         $(".mute-mobile-toggle").css("background", "#fff");
@@ -865,7 +865,7 @@ $(function () {
         $(".mute-mobile-toggle").html('<i class="fas fa-volume-up"></i>');
       }
 
-      if (!window.matchMedia("(max-height: 500px)").matches) {
+      if (!window.matchMedia("(max-height: 460px)").matches) {
         $(".mute-toggle img").attr("src", "./images/common/靜音按鈕關閉.png");
       } else {
         $(".mute-mobile-toggle").css("background", "rgba(169, 169, 169, 0.2)");
@@ -1059,7 +1059,7 @@ $(function () {
 
     $(".next-page img").show();
 
-    if (window.matchMedia("(max-height: 500px)").matches) {
+    if (window.matchMedia("(max-height: 460px)").matches) {
       $(".mom-hand-region-mb").css({
         zIndex: "999",
         opacity: "0",
@@ -1462,13 +1462,13 @@ $(function () {
     page2627Timeouts.push(
       setTimeout(() => {
         $(".cheers").addClass("bubble-fade-in");
-        if (!window.matchMedia("(max-height: 500px)").matches) {
+        if (!window.matchMedia("(max-height: 460px)").matches) {
           $(".daughter-hand-region").addClass("daughter-hand-finish");
         }
       }, 5000),
     );
 
-    if (window.matchMedia("(max-height: 500px)").matches) {
+    if (window.matchMedia("(max-height: 460px)").matches) {
       page2627Timeouts.push(
         setTimeout(() => {
           $(".father-hand-region-mb").addClass("father-hand-finish-mb");
@@ -1579,7 +1579,7 @@ $(function () {
     }
 
     // 可選：恢復灰色按鈕
-    if (window.matchMedia("(max-height: 500px)").matches) {
+    if (window.matchMedia("(max-height: 460px)").matches) {
       $(".replay-mobile-btn-body")
         .prop("disabled", true)
         .addClass("replay-mobile-btn-disabled");
@@ -1602,7 +1602,7 @@ $(function () {
     let canFlipNext = false; // 初始禁止往後翻頁
 
     function isCanNotFlipPrev() {
-      if (!window.matchMedia("(max-height: 500px)").matches) {
+      if (!window.matchMedia("(max-height: 460px)").matches) {
         console.log("pre disabled~~~~");
         $("#left-up-corner")
           .off("click") // 移除舊的
@@ -1625,7 +1625,7 @@ $(function () {
     }
 
     function isCanNotFlipNext() {
-      if (!window.matchMedia("(max-height: 500px)").matches) {
+      if (!window.matchMedia("(max-height: 460px)").matches) {
         $("#right-up-corner")
           .off("click")
           .on("click", function () {
@@ -1724,7 +1724,7 @@ $(function () {
         `,
       );
 
-      if (window.matchMedia("(max-height: 500px)").matches) {
+      if (window.matchMedia("(max-height: 460px)").matches) {
         if (page === 2 || page === 3) {
           if (isSafari() || isIOSChrome()) {
             $(".book03-title, .milk03, .hands03, .girls-body03").css({
@@ -1810,7 +1810,7 @@ $(function () {
         reset45();
       }
 
-      if (window.matchMedia("(max-height: 500px)").matches) {
+      if (window.matchMedia("(max-height: 460px)").matches) {
         if (page === 4 || page === 5) {
           if (isSafari() || isIOSChrome()) {
             $(".moms-hand-5").css({
@@ -1883,7 +1883,7 @@ $(function () {
       $(".text06").removeClass("tree-fade-in");
       $(".wow").removeClass("wow-animation");
 
-      if (window.matchMedia("(max-height: 500px)").matches) {
+      if (window.matchMedia("(max-height: 460px)").matches) {
         $("#flipbook .clouds").remove();
         $(".clouds").removeClass("cloud-fade-in");
       }
@@ -1929,7 +1929,7 @@ $(function () {
         `,
         );
 
-        if (window.matchMedia("(max-height: 500px)").matches) {
+        if (window.matchMedia("(max-height: 460px)").matches) {
           // 第 6–7 頁：點擊門跑出森林
           $("#flipbook").append(
             '<img class="clouds" src="./images/book/book0607/雲.png"/>',
@@ -2066,7 +2066,7 @@ $(function () {
         reset89();
       }
 
-      if (window.matchMedia("(max-height: 500px)").matches) {
+      if (window.matchMedia("(max-height: 460px)").matches) {
         if (screenHeight <= 360) {
           $(".foot").css({
             width: "15%",
@@ -2205,7 +2205,7 @@ $(function () {
         `,
       );
 
-      if (window.matchMedia("(max-height: 500px)").matches) {
+      if (window.matchMedia("(max-height: 460px)").matches) {
         if (isAndroidChrome()) {
           $(".text11").css({
             width: screenHeight + "px",
@@ -2288,7 +2288,7 @@ $(function () {
 
           if (page === 12 || page === 13) {
             if (
-              window.matchMedia("(max-height: 500px)").matches ||
+              window.matchMedia("(max-height: 460px)").matches ||
               isTablet ||
               isIPad()
             ) {
@@ -2301,7 +2301,7 @@ $(function () {
 
           if (page === 14 || page === 15) {
             if (
-              window.matchMedia("(max-height: 500px)").matches ||
+              window.matchMedia("(max-height: 460px)").matches ||
               isTablet ||
               isIPad()
             ) {
@@ -2314,7 +2314,7 @@ $(function () {
 
           if (page === 16 || page === 17) {
             if (
-              window.matchMedia("(max-height: 500px)").matches ||
+              window.matchMedia("(max-height: 460px)").matches ||
               isTablet ||
               isIPad()
             ) {
@@ -2422,7 +2422,7 @@ $(function () {
                    `);
 
         if (
-          window.matchMedia("(max-height: 500px)").matches ||
+          window.matchMedia("(max-height: 460px)").matches ||
           isTablet ||
           isIPad()
         ) {
@@ -2438,7 +2438,7 @@ $(function () {
         }
       }
 
-      if (window.matchMedia("(max-height: 500px)").matches) {
+      if (window.matchMedia("(max-height: 460px)").matches) {
         if (isAndroidChrome()) {
           $(".magic-wand").css({
             right: (screenHeight * 103.47) / 609 + "px", //70
@@ -2604,7 +2604,7 @@ $(function () {
             setTimeout(() => {
               $(".check-box").show();
               if (
-                window.matchMedia("(max-height: 500px)").matches ||
+                window.matchMedia("(max-height: 460px)").matches ||
                 isTablet ||
                 isIPad()
               ) {
@@ -2702,7 +2702,7 @@ $(function () {
            `);
 
         if (
-          window.matchMedia("(max-height: 500px)").matches ||
+          window.matchMedia("(max-height: 460px)").matches ||
           isTablet ||
           isIPad()
         ) {
@@ -2745,7 +2745,7 @@ $(function () {
           }, 1000),
         );
 
-        if (window.matchMedia("(max-height: 500px)").matches) {
+        if (window.matchMedia("(max-height: 460px)").matches) {
           if (isAndroidChrome()) {
             $(".girls-hand").css({
               right: (screenHeight * 473.9) / 609 + "px", //320.6
@@ -2864,7 +2864,7 @@ $(function () {
               setTimeout(() => {
                 $(".check-box").show();
                 if (
-                  window.matchMedia("(max-height: 500px)").matches ||
+                  window.matchMedia("(max-height: 460px)").matches ||
                   isTablet ||
                   isIPad()
                 ) {
@@ -2978,7 +2978,7 @@ $(function () {
             `);
 
         if (
-          window.matchMedia("(max-height: 500px)").matches ||
+          window.matchMedia("(max-height: 460px)").matches ||
           isTablet ||
           isIPad()
         ) {
@@ -2993,7 +2993,7 @@ $(function () {
         `);
         }
 
-        if (window.matchMedia("(max-height: 500px)").matches) {
+        if (window.matchMedia("(max-height: 460px)").matches) {
           if (isAndroidChrome()) {
             $(".click-hearing-heart-box").css({
               width: (screenHeight * 103.47) / 609 + "px", //70
@@ -3123,7 +3123,7 @@ $(function () {
             setTimeout(() => {
               $(".check-box").show();
               if (
-                window.matchMedia("(max-height: 500px)").matches ||
+                window.matchMedia("(max-height: 460px)").matches ||
                 isTablet ||
                 isIPad()
               ) {
@@ -3186,7 +3186,7 @@ $(function () {
       <img class="bubble18" src="./images/book/book1819/牛奶泡泡.png" />
     `);
 
-      if (window.matchMedia("(max-height: 500px)").matches) {
+      if (window.matchMedia("(max-height: 460px)").matches) {
         if (isAndroidChrome()) {
           $(".book19-text").css({
             width: screenHeight + "px",
@@ -3333,7 +3333,7 @@ $(function () {
         `,
       );
 
-      if (window.matchMedia("(max-height: 500px)").matches) {
+      if (window.matchMedia("(max-height: 460px)").matches) {
         if (isAndroidChrome()) {
           $(".book21-text").css({
             width: screenHeight + "px",
@@ -3409,7 +3409,7 @@ $(function () {
         reset2223();
       }
 
-      if (window.matchMedia("(max-height: 500px)").matches) {
+      if (window.matchMedia("(max-height: 460px)").matches) {
         if (isAndroidChrome()) {
           $(".book23-text").css({
             width: screenHeight + "px",
@@ -3463,7 +3463,7 @@ $(function () {
 
       resetMilkPage(); // 每次重進頁面重置一次
 
-      if (window.matchMedia("(max-height: 500px)").matches) {
+      if (window.matchMedia("(max-height: 460px)").matches) {
         if (isSafari() || isIOSChrome()) {
           $(".girl-l-hand-region").css({
             top: (visualHeight * 373.1) / 609 + "px",
@@ -3556,7 +3556,7 @@ $(function () {
     let canFlipNext = false; // 初始禁止往後翻頁
 
     function isCanNotFlipPrev() {
-      if (!window.matchMedia("(max-height: 500px)").matches) {
+      if (!window.matchMedia("(max-height: 460px)").matches) {
         $("#left-up-corner")
           .off("click") // 移除舊的
           .on("click", function () {
@@ -3578,7 +3578,7 @@ $(function () {
     }
 
     function isCanNotFlipNext() {
-      if (!window.matchMedia("(max-height: 500px)").matches) {
+      if (!window.matchMedia("(max-height: 460px)").matches) {
         $("#right-up-corner")
           .off("click")
           .on("click", function () {
@@ -3612,7 +3612,7 @@ $(function () {
     $(".click-girl")
       .off("click")
       .on("click", function () {
-        if (window.matchMedia("(max-height: 500px)").matches) {
+        if (window.matchMedia("(max-height: 460px)").matches) {
           page2425Timeouts.push(
             setTimeout(() => {
               if (isAndroidChrome()) {
@@ -3694,7 +3694,7 @@ $(function () {
         }, 500),
       );
 
-      if (window.matchMedia("(max-height: 500px)").matches) {
+      if (window.matchMedia("(max-height: 460px)").matches) {
         page2627Timeouts.push(
           setTimeout(() => {
             $("#flipbook").append(
@@ -3744,7 +3744,7 @@ $(function () {
       currentPage = page;
 
       // 書本定位
-      if (!isTablet && !window.matchMedia("(max-height: 500px)").matches) {
+      if (!isTablet && !window.matchMedia("(max-height: 460px)").matches) {
         if (page === 1) {
           $(".book-section").css({
             left: "-300px",
@@ -3790,7 +3790,7 @@ $(function () {
       if (
         page > 1 &&
         page !== 28 &&
-        !window.matchMedia("(max-height: 500px)").matches
+        !window.matchMedia("(max-height: 460px)").matches
       ) {
         $("#right-up-corner, #right-down-corner")
           .prop("disabled", false)
@@ -3803,7 +3803,7 @@ $(function () {
       } else {
         resetFamilyPage();
 
-        if (window.matchMedia("(max-height: 500px)").matches) {
+        if (window.matchMedia("(max-height: 460px)").matches) {
           if (isSafari() || isIOSChrome()) {
             $(".father-hand-region-mb").css({
               width: (visualHeight * 296.34) / 609 + "px", //220px
@@ -3866,7 +3866,7 @@ $(function () {
       $(".book2627").css("opacity", "0");
       $(".book2627").remove();
       $(".all-milk-stains").remove();
-      if (window.matchMedia("(max-height: 500px)").matches) {
+      if (window.matchMedia("(max-height: 460px)").matches) {
         $(".mom-hand-region-mb").remove();
         $(".mom-hand-region-mb").removeClass("mom-hand-finish-mb");
       } else {
@@ -4068,7 +4068,7 @@ $(function () {
       $("#left-down-corner").hide();
       canSwipePrev = false;
 
-      if (window.matchMedia("(max-height: 500px)").matches) {
+      if (window.matchMedia("(max-height: 460px)").matches) {
         if (isSafari() || isIOSChrome()) {
           $(".book-section").css({
             left: (visualHeight * -312.48) / 609 + "px", //-232
@@ -4081,7 +4081,7 @@ $(function () {
         }
       }
     } else {
-      if (window.matchMedia("(max-height: 500px)").matches) {
+      if (window.matchMedia("(max-height: 460px)").matches) {
         if (isSafari() || isIOSChrome()) {
           $(".book-section").css({
             left: "0px",

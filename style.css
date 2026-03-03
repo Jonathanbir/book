@@ -3864,7 +3864,7 @@ button {
 
 /*@media (pointer: coarse) and (min-width: 768px) and (max-width: 1366px) and (max-aspect-ratio: 3/2) {
 /* 平板 */
-@media (pointer: coarse) and (max-height: 1000px) and (min-height: 500px) {
+@media (pointer: coarse) and (max-height: 1000px) and (min-height: 460px) {
   .tablet-none {
     display: none !important;
   }
@@ -4006,7 +4006,7 @@ button {
 }
 
 /* 手機 */
-@media screen and (max-height: 500px) {
+@media screen and (max-height: 460px) {
   .mobile {
     display: block;
   }
