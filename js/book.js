@@ -40,7 +40,7 @@ $(function () {
   const isTablet =
     window.matchMedia("(pointer: coarse)").matches &&
     innerHeight >= 500 &&
-    innerHeight <= 1200;
+    innerHeight <= 1000;
 
   // const isTablet = window.matchMedia(`
   //   (pointer: coarse)
@@ -432,15 +432,15 @@ $(function () {
 
     // ===== Tablet =====
     else if (isTablet) {
-      scale = 0.85; // 你要的固定值
+      scale = 0.9; // 你要的固定值
       $(".book-section").css({
         transform: `scale(` + scale + `)`,
-        width: scale * 1020 + "px",
-        height: scale * 510 + "px",
+        width: scale * 1080 + "px",
+        height: scale * 540 + "px",
       });
 
       $("#flipbook").css({
-        transform: `scale(` + scale + `) translateY(` + scale * -65.88 + `px)`,
+        transform: `scale(` + scale + `) translateY(` + scale * -16 + `px)`,
       });
     }
 
@@ -467,22 +467,19 @@ $(function () {
   window.addEventListener("resize", resizeFunction);
 
   // 當裝置旋轉時重新載入
-  let previous = window.orientation;
+  const orientationMedia = window.matchMedia("(orientation: portrait)");
 
-  window.addEventListener("orientationchange", function () {
-    const current = window.orientation;
+  let reloadTimer = null;
 
-    // 0 或 180 = 直向
-    // 90 或 -90 = 橫向
-    if (
-      (previous === 0 || previous === 180) &&
-      (current === 90 || current === -90)
-    ) {
-      location.reload();
-    }
+  if (matchMedia("(pointer: coarse)").matches) {
+    orientationMedia.addEventListener("change", () => {
+      clearTimeout(reloadTimer);
 
-    previous = current;
-  });
+      reloadTimer = setTimeout(() => {
+        location.reload();
+      }, 300); // 等旋轉動畫結束
+    });
+  }
 
   // ---------- custom alert（覆寫 window.alert） ----------
   const customAlertEl = document.getElementById("custom-alert");

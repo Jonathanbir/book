@@ -69,26 +69,12 @@ body {
   transition: all 1s ease-in-out;
 }
 
-.mb-hint {
-  position: fixed;
-  bottom: 500px;
-  z-index: 9999999;
-  width: 80%;
-  height: 650px;
-  background-image: url(./images/common/mb-hint.png);
-  background-size: 100%;
-  background-repeat: no-repeat;
-}
-
 .mb-icon {
   position: fixed;
+  left: 0;
   bottom: 0;
-  z-index: 999999;
+  z-index: 9999;
   width: 100%;
-  height: 640px;
-  background-image: url(./images/common/mb-icon.png);
-  background-size: 100%;
-  background-repeat: no-repeat;
 }
 
 #rotate-notice p {
@@ -3878,7 +3864,7 @@ button {
 
 /*@media (pointer: coarse) and (min-width: 768px) and (max-width: 1366px) and (max-aspect-ratio: 3/2) {
 /* 平板 */
-@media (pointer: coarse) and (max-height: 1200px) and (min-height: 500px) {
+@media (pointer: coarse) and (max-height: 1000px) and (min-height: 500px) {
   .tablet-none {
     display: none !important;
   }
