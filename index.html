@@ -2,6 +2,14 @@
 <html lang="zh-TW">
   <head>
     <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,
+               initial-scale=1,
+               maximum-scale=1,
+               minimum-scale=1,
+               user-scalable=no"
+    />
     <title>林鳳營鮮乳</title>
     <link rel="stylesheet" href="style.css" />
     <link
@@ -25,6 +33,12 @@
     <style></style>
   </head>
   <body>
+    <!-- 向下滑提示（手機顯示） -->
+    <div id="rotate-notice" style="display: block">
+      <!-- <p>請將裝置旋轉為橫向以觀看最佳效果</p> -->
+      <div class="mb-hint"></div>
+      <div class="mb-icon"></div>
+    </div>
     <button class="mute-mobile-toggle mobile tablet-show">
       <i class="fas fa-volume-up"></i>
     </button>
@@ -65,12 +79,6 @@
     <div class="book-cover desktop"></div>
     <div class="book-container">
       <div class="book-section">
-        <!-- 向下滑提示（手機顯示） -->
-        <div id="rotate-notice" style="display: block">
-          <!-- <p>請將裝置旋轉為橫向以觀看最佳效果</p> -->
-          <div class="mb-hint"></div>
-          <div class="mb-icon"></div>
-        </div>
         <audio id="background" loop preload="auto" playsinline>
           <source src="./mp3/background.mp3" type="audio/mpeg" />
         </audio>
