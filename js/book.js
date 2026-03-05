@@ -896,13 +896,6 @@ $(function () {
 
     $(".next-page img").show();
 
-    if (window.matchMedia("(max-height: 460px)").matches) {
-      $(".mom-hand-region-mb").css({
-        zIndex: "999",
-        opacity: "0",
-      });
-    }
-
     page2627Timeouts.push(
       setTimeout(() => {
         $(".book26").css("opacity", "1");
@@ -932,21 +925,12 @@ $(function () {
       }, 5000),
     );
 
-    if (window.matchMedia("(max-height: 460px)").matches) {
-      page2627Timeouts.push(
-        setTimeout(() => {
-          $(".father-hand-region-mb").addClass("father-hand-finish-mb");
-          $(".mom-hand-region-mb").addClass("mom-hand-finish-mb");
-        }, 5000),
-      );
-    } else {
-      page2627Timeouts.push(
-        setTimeout(() => {
-          $(".father-hand-region").addClass("father-hand-finish");
-          $(".mom-hand-region").addClass("mom-hand-finish");
-        }, 5000),
-      );
-    }
+    page2627Timeouts.push(
+      setTimeout(() => {
+        $(".father-hand-region").addClass("father-hand-finish");
+        $(".mom-hand-region").addClass("mom-hand-finish");
+      }, 5000),
+    );
 
     page2627Timeouts.push(
       setTimeout(() => {
@@ -1304,11 +1288,6 @@ $(function () {
       $(".cloud3").removeClass("cloud-fade-in");
       $(".text06").removeClass("tree-fade-in");
       $(".wow").removeClass("wow-animation");
-
-      if (window.matchMedia("(max-height: 460px)").matches) {
-        $("#flipbook .clouds").remove();
-        $(".clouds").removeClass("cloud-fade-in");
-      }
     }
 
     // 第 6–7 頁：點擊門跑出森林
@@ -2856,13 +2835,8 @@ $(function () {
       $(".book2627").css("opacity", "0");
       $(".book2627").remove();
       $(".all-milk-stains").remove();
-      if (window.matchMedia("(max-height: 460px)").matches) {
-        $(".mom-hand-region-mb").remove();
-        $(".mom-hand-region-mb").removeClass("mom-hand-finish-mb");
-      } else {
-        $(".mom-hand-region").remove();
-        $(".mom-hand").removeClass("mom-hand-finish");
-      }
+      $(".mom-hand-region").remove();
+      $(".mom-hand").removeClass("mom-hand-finish");
     }
 
     if (page === 28) {
