@@ -232,6 +232,33 @@ $(function () {
       $(".book-container").css("height", window.innerHeight);
     });
   } else {
+    $flipbook.turn({
+      width: 1200,
+      height: 600,
+      autoCenter: true,
+    });
+    // 等 turn.js 完成 layout
+    requestAnimationFrame(() => {
+      const w = getBookWidth();
+      $("#left-down-corner").hide();
+      if (innerWidth > 1280) {
+        $(".book-section").css({
+          left: (-w / 2) * 1.01 + "px",
+        });
+      } else if (innerWidth > 1000 && innerWidth <= 1280) {
+        $(".book-section").css({
+          left: (-w / 2) * 0.85 + "px",
+        });
+      } else {
+        $(".book-section").css({
+          left: (-w / 2) * 0.85 + "px",
+        });
+      }
+
+      $(".controls").hide();
+      $(".book-container").css("height", window.innerHeight);
+    });
+
     $(".pop-up-box").on("click", async function () {
       if (audioContext.state === "suspended") {
         await audioContext.resume();
@@ -249,177 +276,19 @@ $(function () {
         }
       }, 200);
     });
-
-    if (isTablet) {
-      $flipbook.turn({
-        width: 1200,
-        height: 600,
-        autoCenter: true,
-      });
-    } else {
-      if (isSafari()) {
-        console.log("safari~~~");
-        // 初始化 safri turn.js
-        $flipbook.turn({
-          width: visualHeight * 2,
-          height: visualHeight,
-          autoCenter: true,
-        });
-        $("#flipbook").css({
-          left: widthGap + "px",
-        });
-        $("#left-up-corner").css({
-          left: widthGap + "px",
-        });
-        $("#left-down-corner").css({
-          top: visualHeight - 100 + "px",
-          left: widthGap + "px",
-        });
-        $("#right-up-corner").css({
-          right: widthGap + "px",
-        });
-        $("#right-down-corner").css({
-          top: visualHeight - 100 + "px",
-          right: widthGap + "px",
-        });
-        // $("#left-down-corner,#right-down-corner").css("bottom", "18vh");
-        // $("#flipbook").css("marginTop", "1vh");
-      }
-
-      if (isIOSChrome()) {
-        console.log("ios Chrome~~~");
-        // 初始化 chorme turn.js
-        $flipbook.turn({
-          width: visualHeight * 2,
-          height: visualHeight,
-          autoCenter: true,
-        });
-        $("#flipbook").css({
-          left: widthGap + "px",
-        });
-        $("#left-up-corner").css({
-          left: widthGap + "px",
-        });
-        $("#left-down-corner").css({
-          top: visualHeight - 100,
-          left: widthGap + "px",
-        });
-        $("#right-up-corner").css({
-          right: widthGap + "px",
-        });
-        $("#right-down-corner").css({
-          top: visualHeight - 100,
-          right: widthGap + "px",
-        });
-        // $("#left-down-corner,#right-down-corner").css("bottom", "8vh");
-        // $("#flipbook").css("marginTop", "1vh");
-      }
-
-      if (isAndroidChrome()) {
-        console.log("android Chrome~~~");
-        // 初始化 chorme turn.js
-        $flipbook.turn({
-          width: screenHeight * 2,
-          height: screenHeight,
-          autoCenter: true,
-        });
-
-        $("#flipbook").css({
-          left: (visualWidth - screenHeight * 2) / 2 + "px",
-        });
-        $("#left-up-corner").css({
-          top: barHeight,
-          left: (visualWidth - screenHeight * 2) / 2 + "px",
-        });
-        $("#right-up-corner").css({
-          top: barHeight,
-          right: (visualWidth - screenHeight * 2) / 2 + "px",
-        });
-        $(".book").css("height", screenHeight + "px");
-        $("#left-down-corner").css({
-          top: screenHeight + barHeight - 100 + "px",
-          left: (visualWidth - screenHeight * 2) / 2 + "px",
-        });
-        $("#right-down-corner").css({
-          top: screenHeight + barHeight - 100 + "px",
-          right: (visualWidth - screenHeight * 2) / 2 + "px",
-        });
-        console.log("推算工具列高度≈ ", barHeight);
-        console.log("工具列高度≈ ", screenHeight);
-
-        $(".scroll-box").css("display", "block");
-        // $("#left-down-corner,#right-down-corner").css("bottom", "0vh");
-        $("#flipbook").css("marginTop", barHeight);
-
-        // call on load & on orientation change
-
-        // 顯示提示（只在第一次進站顯示）
-        function showFullscreenHint() {
-          if (localStorage.getItem("fullscreenHintShown")) return;
-
-          const hint = document.getElementById("swipe-fullscreen-hint");
-          hint.classList.add("show");
-
-          // 記錄下次不要再顯示
-          localStorage.setItem("fullscreenHintShown", "true");
-        }
-
-        // 隱藏提示
-        function hideFullscreenHint() {
-          const hint = document.getElementById("swipe-fullscreen-hint");
-          hint.classList.remove("show");
-        }
-
-        // 檢查使用者是否滑動（手動觸發全螢幕）
-        let touchStartY = 0;
-
-        window.addEventListener("touchstart", (e) => {
-          touchStartY = e.touches[0].clientY;
-        });
-
-        window.addEventListener("touchmove", (e) => {
-          const deltaY = e.touches[0].clientY - touchStartY;
-
-          if (deltaY > 20) {
-            hideFullscreenHint();
-
-            // 觸發微小滾動 → Android/Safari 會隱藏網址列
-            window.scrollTo(0, 1);
-          }
-        });
-
-        window.addEventListener("load", () => {
-          setTimeout(() => {
-            window.scrollTo(0, 0);
-          }, 0);
-          setTimeout(showFullscreenHint, 600);
-        });
-      }
-    }
-  }
-
-  function setBookMode(isSinglePage) {
-    const width = isSinglePage ? 600 : 1200;
-    const height = 600;
-
-    $("#flipbook").turn("size", width, height);
-
-    // ⭐ 等 turn.js layout 完成再置中
-    setTimeout(centerBook, 50);
-  }
-
-  function centerBook() {
-    const wrapperWidth = $(".book-scale-wrapper").width();
-    const bookWidth = $("#flipbook").width();
-
-    const offset = (wrapperWidth - bookWidth) / 2;
-
-    $("#flipbook").css({
-      marginLeft: offset + "px",
-    });
   }
 
   function resizeFunction() {
+    let scaleMobile;
+    let scaleMobileTranslateY;
+    if (innerHeight >= 300) {
+      scaleMobile = 0.8;
+      scaleMobileTranslateY = -76;
+    } else {
+      scaleMobile = 0.75;
+      scaleMobileTranslateY = -96;
+    }
+    console.log("scaleMobile:", scaleMobile);
     //resize書本大小
     const wrapper = $(".book-scale-wrapper");
 
@@ -435,12 +304,23 @@ $(function () {
       scale = 0.9; // 你要的固定值
       $(".book-section").css({
         transform: `scale(` + scale + `)`,
-        width: scale * 1080 + "px",
-        height: scale * 540 + "px",
+        width: scale * scale * 1200 + "px",
+        height: scale * scale * 600 + "px",
+      });
+      $("#flipbook").css({
+        transform: `scale(` + scale + `) translateY(-33px)`,
+      });
+    } else {
+      scale = scaleMobile; // 你要的固定值
+      $(".book-section").css({
+        transform: `scale(` + scale + `)`,
+        width: scale * scale * 1200 + "px",
+        height: scale * scale * 600 + "px",
       });
 
       $("#flipbook").css({
-        transform: `scale(` + scale + `) translateY(` + scale * -16 + `px)`,
+        transform:
+          `scale(` + scale + `) translateY(` + scaleMobileTranslateY + `px)`,
       });
     }
 
@@ -480,49 +360,6 @@ $(function () {
       }, 300); // 等旋轉動畫結束
     });
   }
-
-  // ---------- custom alert（覆寫 window.alert） ----------
-  const customAlertEl = document.getElementById("custom-alert");
-  const customAlertMsg = document.getElementById("custom-alert-message");
-  const customAlertOk = document.getElementById("custom-alert-ok");
-
-  function showCustomAlert(message, options = {}) {
-    if (!customAlertEl) {
-      // fallback
-      window.origAlert(message);
-      return;
-    }
-    customAlertMsg.textContent = message ?? "";
-    customAlertEl.classList.add("show");
-    customAlertEl.setAttribute("aria-hidden", "false");
-
-    // focus button for accessibility
-    customAlertOk.focus();
-
-    // return a Promise to allow awaiting if needed
-    return new Promise((resolve) => {
-      function closeHandler() {
-        customAlertEl.classList.remove("show");
-        customAlertEl.setAttribute("aria-hidden", "true");
-        customAlertOk.removeEventListener("click", closeHandler);
-        document.removeEventListener("keydown", keyHandler);
-        resolve();
-      }
-      function keyHandler(e) {
-        if (e.key === "Enter" || e.key === "Escape") closeHandler();
-      }
-      customAlertOk.addEventListener("click", closeHandler);
-      document.addEventListener("keydown", keyHandler);
-    });
-  }
-
-  // 保留原生 alert 作 fallback
-  window.origAlert = window.alert;
-  // 覆寫
-  window.alert = function (msg) {
-    // 如果你想保留同步行為可以用 xhr alert fallback，這裡用非同步替代
-    showCustomAlert(String(msg));
-  };
 
   let startMoveY = 0;
 
@@ -1064,379 +901,6 @@ $(function () {
         zIndex: "999",
         opacity: "0",
       });
-
-      if (isSafari() || isIOSChrome()) {
-        $(".all-milk-stains").css({
-          width: visualHeight + "px",
-        });
-
-        $(".daughter-hand-region").addClass("daughter-hand-finish");
-
-        setTimeout(() => {
-          $(".daughter-hand-finish").css({
-            top: (visualHeight * 404.073) / 609 + "px", //300
-            left: (visualHeight * 377.1348) / 609 + "px", //280
-            transform:
-              `translate(` +
-              (screenHeight * 0) / 609 +
-              `px,` +
-              (screenHeight * 0) / 609 +
-              `px) rotate(-72deg)`,
-          });
-        }, 5000);
-
-        $(".cheers").css({
-          bottom: (visualHeight * 385) / 609 + "px", //259.6px
-        });
-        $(".milk-box").css({
-          width: (visualHeight * 96.984) / 609 + "px", //72px
-          top: (visualHeight * 280.176) / 609 + "px", //208px
-          left: (visualHeight * 192.621) / 609 + "px", //143px
-        });
-
-        $(".father-hand-region-mb").css({
-          width: (visualHeight * 296.34) / 609 + "px", //220px
-          top: (visualHeight * 360.727) / 609 + "px", //267.8px
-          left: (visualHeight * 85.39) / 609 + "px", //53px
-        });
-
-        $(".father-hand").css({
-          width: (visualHeight * 269.4) / 609 + "px", //200px
-          left: (visualHeight * 2.97) / 609 + "px", //2.2px
-        });
-
-        $(".father-hand-cup").css({
-          width: (visualHeight * 66.003) / 609 + "px", //49px
-          bottom: (visualHeight * -67.478) / 609 + "px", //-50px
-          left: (visualHeight * 211.479) / 609 + "px", //157px
-        });
-
-        $(".father-hand-milk").css({
-          width: (visualHeight * 67.35) / 609 + "px", //50px
-          bottom: (visualHeight * -67.478) / 609 + "px", //-50px
-          left: (visualHeight * 216.867) / 609 + "px", //161px
-        });
-
-        $(".daughter-hand-region").css({
-          top: (visualHeight * 390.6) / 609 + "px", //290
-          left: (visualHeight * 371.74) / 609 + "px", //276
-          transform:
-            `translate(` +
-            (screenHeight * 0) / 609 +
-            `px,` +
-            (screenHeight * 0) / 609 +
-            `px) rotate(0deg)`,
-        });
-
-        page2627Timeouts.push(
-          setTimeout(() => {
-            $(".father-hand-finish-mb").css({
-              transform:
-                `translate(` +
-                (visualHeight * 2.694) / 609 +
-                `px,` +
-                (visualHeight * -18.858) / 609 +
-                `px) rotate(-39deg)`, //transform: translate(2px, -14px) rotate(-39deg);
-            });
-            $(".mom-hand-finish-mb").css({
-              transform:
-                `translate(` +
-                (visualHeight * 32.33) / 609 +
-                `px,` +
-                (visualHeight * -86.21) / 609 +
-                `px) rotate(33deg)`,
-            }); //transform: translate(24px, -64px) rotate(33deg);
-          }, 5000),
-        );
-
-        page2627Timeouts.push(
-          setTimeout(() => {
-            $(".father-hand-finish-mb").css({
-              width: (visualHeight * 296.34) / 609 + "px", //220px
-              top: (visualHeight * 360.727) / 609 + "px", //267.8px
-              left: (visualHeight * 85.39) / 609 + "px", //53px
-              transform: "translate(0,0) rotate(0deg)",
-            });
-
-            $(".daughter-hand-finish").css({
-              top: (visualHeight * 390.6) / 609 + "px", //290
-              left: (visualHeight * 371.74) / 609 + "px", //276
-              transform: "translate(0,0) rotate(0deg)",
-            });
-
-            $(".mom-hand-finish-mb").css({
-              bottom: (visualHeight * 204.744) / 609 + "px", //152px
-              right: (visualHeight * 682.88) / 609 + "px", //507px
-              transform: "translate(0,0) rotate(0deg)",
-            });
-          }, 7500),
-        );
-
-        $(".daughter-hand").css({
-          width: (visualHeight * 53.88) / 609 + "px", //40px
-        });
-
-        $(".daughter-hand-cup").css({
-          width: (visualHeight * 53.88) / 609 + "px", //40px
-        });
-
-        $(".daughter-hand-milk").css({
-          width: (visualHeight * 53.88) / 609 + "px", //40px
-          bottom: (visualHeight * -98.331) / 609 + "px", //-73
-          left: (visualHeight * 35) / 609 + "px", //26px
-        });
-
-        $(".cow-right").css({
-          width: (visualHeight * 345) / 609 + "px", //250px
-        });
-
-        $(".mow").css({
-          top: (visualHeight * 255.9) / 609 + "px", //190px
-          right: (visualHeight * 255.9) / 609 + "px", //190px
-        });
-
-        setTimeout(() => {
-          $(".mom-hand-region-mb").css({
-            bottom: (visualHeight * 204.744) / 609 + "px", //152px
-            right: (visualHeight * 682.88) / 609 + "px", //507px
-            opacity: "1",
-          });
-        }, 1800);
-      }
-
-      if (isAndroidChrome()) {
-        $(".all-milk-stains").css({
-          width: screenHeight + "px",
-        });
-
-        $(".daughter-hand-region").addClass("daughter-hand-finish");
-
-        setTimeout(() => {
-          $(".daughter-hand-finish").css({
-            top: (screenHeight * 403.536) / 609 + "px", //273
-            left: (screenHeight * 376.93) / 609 + "px", //254
-            transform:
-              `translate(` +
-              (screenHeight * 0) / 609 +
-              `px,` +
-              (screenHeight * 0) / 609 +
-              `px) rotate(-72deg)`,
-          });
-        }, 5000);
-
-        page2627Timeouts.push(
-          setTimeout(() => {
-            $(".father-hand-finish-mb").css({
-              transform:
-                `translate(` +
-                (screenHeight * -23.65) / 609 +
-                `px,` +
-                (screenHeight * -44.34) / 609 +
-                `px) rotate(-39deg)`, //transform: translate(-16px, -30px) rotate(-39deg);
-            });
-            $(".mom-hand-finish-mb").css({
-              transform:
-                `translate(` +
-                (screenHeight * 59.126) / 609 +
-                `px,` +
-                (screenHeight * -75.386) / 609 +
-                `px) rotate(33deg)`,
-            }); //transform: translate(40px, -51px) rotate(33deg);
-          }, 5000),
-        );
-
-        page2627Timeouts.push(
-          setTimeout(() => {
-            $(".father-hand-finish-mb").css({
-              width: (screenHeight * 325.197) / 609 + "px", //220px
-              top: (screenHeight * 395.85) / 609 + "px", //267.8px
-              left: (screenHeight * 78.34) / 609 + "px", //53px
-              transform: "translate(0,0) rotate(0deg)",
-            });
-
-            $(".daughter-hand-finish").css({
-              top: (screenHeight * 395.85) / 609 + "px", //267.8px
-              left: (screenHeight * 371.475) / 609 + "px", //251.31px
-              transform: "translate(0,0) rotate(0deg)",
-            });
-
-            $(".mom-hand-finish-mb").css({
-              bottom: (screenHeight * 224.68) / 609 + "px", //152px
-              right: (screenHeight * 711) / 609 + "px", //481px
-              transform: "translate(0,0) rotate(0deg)",
-            });
-          }, 7500),
-        );
-        $(".cheers").css({
-          bottom: (visualHeight * 385) / 609 + "px", //259.6px
-        });
-        $(".milk-box").css({
-          width: (visualHeight * 96.984) / 609 + "px", //72px
-          top: (visualHeight * 280.176) / 609 + "px", //208px
-          left: (visualHeight * 192.621) / 609 + "px", //143px
-        });
-
-        $(".father-hand-region-mb").css({
-          width: (visualHeight * 296.34) / 609 + "px", //220px
-          top: (visualHeight * 360.727) / 609 + "px", //267.8px
-          left: (visualHeight * 85.39) / 609 + "px", //53px
-        });
-
-        $(".father-hand").css({
-          width: (visualHeight * 269.4) / 609 + "px", //200px
-          left: (visualHeight * 2.97) / 609 + "px", //2.2px
-        });
-
-        $(".father-hand-cup").css({
-          width: (visualHeight * 66.003) / 609 + "px", //49px
-          bottom: (visualHeight * -67.478) / 609 + "px", //-50px
-          left: (visualHeight * 211.479) / 609 + "px", //157px
-        });
-
-        $(".father-hand-milk").css({
-          width: (visualHeight * 67.35) / 609 + "px", //50px
-          bottom: (visualHeight * -67.478) / 609 + "px", //-50px
-          left: (visualHeight * 216.867) / 609 + "px", //161px
-        });
-
-        $(".daughter-hand-region").css({
-          top: (visualHeight * 390.6) / 609 + "px", //290
-          left: (visualHeight * 371.74) / 609 + "px", //276
-          transform:
-            `translate(` +
-            (screenHeight * 0) / 609 +
-            `px,` +
-            (screenHeight * 0) / 609 +
-            `px) rotate(0deg)`,
-        });
-
-        $(".daughter-hand").css({
-          width: (visualHeight * 53.88) / 609 + "px", //40px
-        });
-
-        $(".daughter-hand-cup").css({
-          width: (visualHeight * 53.88) / 609 + "px", //40px
-        });
-
-        $(".daughter-hand-milk").css({
-          width: (visualHeight * 53.88) / 609 + "px", //40px
-          bottom: (visualHeight * -98.331) / 609 + "px", //-73
-          left: (visualHeight * 35) / 609 + "px", //26px
-        });
-
-        $(".cow-right").css({
-          width: (visualHeight * 345) / 609 + "px", //250px
-        });
-
-        $(".mow").css({
-          top: (visualHeight * 255.9) / 609 + "px", //190px
-          right: (visualHeight * 255.9) / 609 + "px", //190px
-        });
-
-        setTimeout(() => {
-          $(".mom-hand-region-mb").css({
-            bottom: (visualHeight * 204.744) / 609 + "px", //152px
-            right: (visualHeight * 682.88) / 609 + "px", //507px
-            opacity: "1",
-          });
-        }, 1800);
-      }
-
-      if (isAndroidChrome()) {
-        $(".cheers").css({
-          bottom: (screenHeight * 383.73) / 609 + "px", //259.6px
-        });
-        $(".milk-box").css({
-          width: (screenHeight * 106.427) / 609 + "px", //72px
-          top: (screenHeight * 307.456) / 609 + "px", //208px
-          left: (screenHeight * 211.3765) / 609 + "px", //143px
-        });
-
-        $(".father-hand-region-mb").css({
-          width: (screenHeight * 325.197) / 609 + "px", //220px
-          top: (screenHeight * 395.85) / 609 + "px", //267.8px
-          left: (screenHeight * 78.34) / 609 + "px", //53px
-        });
-
-        $(".father-hand").css({
-          width: (screenHeight * 295.63) / 609 + "px", //200px
-          left: (screenHeight * 3.25) / 609 + "px", //2.2px
-        });
-
-        $(".father-hand-cup").css({
-          width: (screenHeight * 72.43) / 609 + "px", //49px
-          bottom: (screenHeight * -73.91) / 609 + "px", //-50px
-          left: (screenHeight * 232.07) / 609 + "px", //157px
-        });
-
-        $(".father-hand-milk").css({
-          width: (screenHeight * 73.9) / 609 + "px", //50px
-          bottom: (screenHeight * -73.91) / 609 + "px", //-50px
-          left: (screenHeight * 237.8) / 609 + "px", //161px
-        });
-
-        $(".daughter-hand-region").css({
-          top: (screenHeight * 395.85) / 609 + "px", //267.8px
-          left: (screenHeight * 371.475) / 609 + "px", //251.31px
-          transform:
-            `translate(` +
-            (screenHeight * 0) / 609 +
-            `px,` +
-            (screenHeight * 0) / 609 +
-            `px) rotate(0deg)`,
-        });
-
-        $(".daughter-hand").css({
-          width: (screenHeight * 59.126) / 609 + "px", //40px
-        });
-
-        $(".daughter-hand-cup").css({
-          width: (screenHeight * 59.126) / 609 + "px", //40px
-        });
-
-        $(".daughter-hand-milk").css({
-          width: (screenHeight * 59.126) / 609 + "px", //40px
-          bottom: (screenHeight * -107.9) / 609 + "px", //-73
-          left: (screenHeight * 38.432) / 609 + "px", //26px
-        });
-
-        $(".cow-right").css({
-          width: (screenHeight * 340) / 609 + "px", //230px
-        });
-
-        $(".mow").css({
-          top: (screenHeight * 255.9) / 609 + "px", //190px
-          right: (screenHeight * 255.9) / 609 + "px", //190px
-        });
-
-        $(".all-milk-stains").css({
-          height: screenHeight + "px",
-        });
-
-        setTimeout(() => {
-          $(".mom-hand-region-mb").css({
-            bottom: (screenHeight * 224.68) / 609 + "px", //152px
-            right: (screenHeight * 711) / 609 + "px", //481px
-            opacity: "1",
-          });
-
-          $(".mom-hand").css({
-            width: (screenHeight * 229.114) / 609 + "px", //155px
-          });
-
-          $(".mom-hand-cup").css({
-            width: (screenHeight * 59.126) / 609 + "px", //40px
-            bottom: (screenHeight * -82.255) / 609 + "px", //-57px
-            left: (screenHeight * 8.869) / 609 + "px", //-6px
-          });
-
-          $(".mom-hand-milk").css({
-            width: (screenHeight * 59.126) / 609 + "px", //40px
-            bottom: (screenHeight * -82.255) / 609 + "px", //-57px
-            left: (screenHeight * 8.869) / 609 + "px", //-6px
-          });
-        }, 1800);
-      }
     }
 
     page2627Timeouts.push(
@@ -1724,33 +1188,6 @@ $(function () {
         `,
       );
 
-      if (window.matchMedia("(max-height: 460px)").matches) {
-        if (page === 2 || page === 3) {
-          if (isSafari() || isIOSChrome()) {
-            $(".book03-title, .milk03, .hands03, .girls-body03").css({
-              width: visualHeight + "px",
-            });
-
-            $(".girls-head03").css({
-              width: (visualHeight * 377.13) / 609 + "px", //280
-              right: (visualHeight * 94.3) / 609 + "px", //70
-              bottom: (visualHeight * 152.2) / 609 + "px", //113
-            });
-          }
-          if (isAndroidChrome()) {
-            $(".book03-title, .milk03, .hands03, .girls-body03").css({
-              width: screenHeight + "px",
-            });
-
-            $(".girls-head03").css({
-              width: (screenHeight * 399.1) / 609 + "px", //270
-              right: (screenHeight * 88.69) / 609 + "px", //60
-              bottom: (screenHeight * 147.82) / 609 + "px", //100
-            });
-          }
-        }
-      }
-
       page23Timeouts.push(
         setTimeout(() => {
           $(".book02").css("opacity", "1");
@@ -1808,21 +1245,6 @@ $(function () {
     if (page === 4 || page === 5) {
       if (replay) {
         reset45();
-      }
-
-      if (window.matchMedia("(max-height: 460px)").matches) {
-        if (page === 4 || page === 5) {
-          if (isSafari() || isIOSChrome()) {
-            $(".moms-hand-5").css({
-              bottom: (visualHeight * 153) / 609 + "px",
-            });
-          }
-          if (isAndroidChrome()) {
-            $(".moms-hand-5").css({
-              bottom: (screenHeight * 153) / 609 + "px",
-            });
-          }
-        }
       }
 
       setTimeout(() => {
@@ -1929,43 +1351,6 @@ $(function () {
         `,
         );
 
-        if (window.matchMedia("(max-height: 460px)").matches) {
-          // 第 6–7 頁：點擊門跑出森林
-          $("#flipbook").append(
-            '<img class="clouds" src="./images/book/book0607/雲.png"/>',
-          );
-
-          if (isSafari() || isIOSChrome()) {
-            $(".text06").css({
-              width: visualHeight + "px",
-            });
-            $(".knock").css({
-              right: (visualHeight * 336.725) / 609 + "px", //250
-              bottom: (visualHeight * 269.38) / 609 + "px", //200
-            });
-          }
-          if (isAndroidChrome()) {
-            $(".text06").css({
-              width: screenHeight + "px",
-            });
-            $(".knock").css({
-              right: (screenHeight * 331.1) / 609 + "px", //224
-              bottom: (screenHeight * 273.46) / 609 + "px", //185
-            });
-
-            if (screenHeight <= 360) {
-              $(".door-common").css({
-                bottom: "8%",
-              });
-              $(".wow").css({
-                width: "15%",
-                right: "65%",
-                bottom: "8%",
-              });
-            }
-          }
-        }
-
         page67Timeouts.push(
           setTimeout(() => {
             $(".door-bg").css("opacity", "1");
@@ -2064,28 +1449,6 @@ $(function () {
     if (page === 8 || page === 9) {
       if (replay) {
         reset89();
-      }
-
-      if (window.matchMedia("(max-height: 460px)").matches) {
-        if (screenHeight <= 360) {
-          $(".foot").css({
-            width: "15%",
-          });
-        }
-
-        if (isAndroidChrome()) {
-          $(".text09").css({
-            width: screenHeight + "px",
-            height: screenHeight + "px",
-          });
-        }
-
-        if (isSafari() || isIOSChrome()) {
-          $(".text09").css({
-            width: visualHeight + "px",
-            height: visualHeight + "px",
-          });
-        }
       }
 
       $("#flipbook").append(
@@ -2204,22 +1567,6 @@ $(function () {
         <img src="./images/book/book11/清單內容.png" class="list"/>
         `,
       );
-
-      if (window.matchMedia("(max-height: 460px)").matches) {
-        if (isAndroidChrome()) {
-          $(".text11").css({
-            width: screenHeight + "px",
-            height: screenHeight + "px",
-          });
-        }
-
-        if (isSafari() || isIOSChrome()) {
-          $(".text11").css({
-            width: visualHeight + "px",
-            height: visualHeight + "px",
-          });
-        }
-      }
 
       page1011Timeouts.push(
         setTimeout(() => {
@@ -2435,80 +1782,6 @@ $(function () {
           <div class="popup-board popup-board01">
           </div>
         `);
-        }
-      }
-
-      if (window.matchMedia("(max-height: 460px)").matches) {
-        if (isAndroidChrome()) {
-          $(".magic-wand").css({
-            right: (screenHeight * 103.47) / 609 + "px", //70
-            bottom: (screenHeight * 182.7) / 609 + "px", //123.6
-          });
-
-          $(".click-magic-wand-box").css({
-            height: (screenHeight * 162.6) / 609 + "px", //110
-          });
-
-          $(".text12").css({
-            width: screenHeight + "px",
-            height: screenHeight + "px",
-          });
-
-          $(".board13").css({
-            width: screenHeight + "px",
-            height: screenHeight + "px",
-          });
-
-          $(".finish-mission01").css({
-            left: (screenHeight * 114.486) / 609 + "px", //85
-            top: (screenHeight * 121.22) / 609 + "px", //90
-          });
-
-          $(".check01").css({
-            right: (screenHeight * 198.07) / 609 + "px", //134
-            top: (screenHeight * 177.38) / 609 + "px", //120
-          });
-
-          $(".coin-hint01").css({
-            width: screenHeight + "px",
-            height: screenHeight + "px",
-          });
-        }
-
-        if (isSafari() || isIOSChrome()) {
-          $(".magic-wand").css({
-            right: (visualHeight * 104.9) / 609 + "px", //78
-            bottom: (visualHeight * 186.95) / 609 + "px", //139
-          });
-
-          $(".click-magic-wand-box").css({
-            height: (visualHeight * 158.7) / 609 + "px", //118
-          });
-
-          $(".text12").css({
-            width: visualHeight + "px",
-            height: visualHeight + "px",
-          });
-
-          $(".board13").css({
-            width: visualHeight + "px",
-            height: visualHeight + "px",
-          });
-
-          $(".finish-mission01").css({
-            left: (visualHeight * 114.486) / 609 + "px", //85
-            top: (visualHeight * 121.22) / 609 + "px", //90
-          });
-
-          $(".check01").css({
-            right: (visualHeight * 199.34) / 609 + "px", //148
-            top: (visualHeight * 179.137) / 609 + "px", //133
-          });
-
-          $(".coin-hint01").css({
-            width: visualHeight + "px",
-            height: visualHeight + "px",
-          });
         }
       }
 
@@ -2745,64 +2018,6 @@ $(function () {
           }, 1000),
         );
 
-        if (window.matchMedia("(max-height: 460px)").matches) {
-          if (isAndroidChrome()) {
-            $(".girls-hand").css({
-              right: (screenHeight * 473.9) / 609 + "px", //320.6
-              bottom: (screenHeight * 75.68) / 609 + "px", //51.2
-            });
-
-            $(".click-milk-box").css({
-              width: (screenHeight * 132.4) / 609 + "px", //90
-              height: (screenHeight * 88.26) / 609 + "px", //60
-            });
-
-            $(".finish-mission02").css({
-              width: (screenHeight * 192.16) / 609 + "px", //130
-              left: (screenHeight * 517.354) / 609 + "px", //350
-              top: (screenHeight * 44.345) / 609 + "px", //30
-            });
-
-            $(".check02").css({
-              right: (screenHeight * 196.65) / 609 + "px", //146
-              top: (screenHeight * 215.5) / 609 + "px", //160
-            });
-
-            $(".coin-hint02").css({
-              width: screenHeight + "px",
-              height: screenHeight + "px",
-            });
-          }
-
-          if (isSafari() || isIOSChrome()) {
-            $(".girls-hand").css({
-              right: (visualHeight * 473.1857) / 609 + "px", //351.312
-              bottom: (visualHeight * 81.124) / 609 + "px", //60.2311
-            });
-
-            $(".click-milk-box").css({
-              width: (screenHeight * 121) / 609 + "px", //90
-              height: (screenHeight * 80.7) / 609 + "px", //60
-            });
-
-            $(".finish-mission02").css({
-              width: (visualHeight * 192.16) / 609 + "px", //130
-              left: (visualHeight * 517.354) / 609 + "px", //350
-              top: (visualHeight * 44.345) / 609 + "px", //30
-            });
-
-            $(".check02").css({
-              right: (visualHeight * 196.65) / 609 + "px", //146
-              top: (visualHeight * 215.5) / 609 + "px", //160
-            });
-
-            $(".coin-hint02").css({
-              width: visualHeight + "px",
-              height: visualHeight + "px",
-            });
-          }
-        }
-
         page1415Timeouts.push(
           setTimeout(() => {
             $(".board-list02").addClass("bubble-fade-in");
@@ -2993,51 +2208,6 @@ $(function () {
         `);
         }
 
-        if (window.matchMedia("(max-height: 460px)").matches) {
-          if (isAndroidChrome()) {
-            $(".click-hearing-heart-box").css({
-              width: (screenHeight * 103.47) / 609 + "px", //70
-              height: (screenHeight * 66.512) / 609 + "px", //45
-            });
-
-            $(".click-hearing-heart").css({
-              right: (screenHeight * 180) / 609 + "px",
-              bottom: (screenHeight * 70) / 609 + "px",
-            });
-
-            $(".coin-hint03").css({
-              width: screenHeight + "px",
-              height: screenHeight + "px",
-            });
-
-            $(".check03").css({
-              top: (screenHeight * 246.5) / 609 + "px", //167
-            });
-          }
-
-          if (isSafari() || isIOSChrome()) {
-            $(".click-hearing-heart-box").css({
-              width: (screenHeight * 94.15) / 609 + "px", //70
-              height: (screenHeight * 60.52) / 609 + "px", //45
-            });
-
-            $(".click-hearing-heart").css({
-              right: (visualHeight * 180) / 609 + "px",
-              bottom: (visualHeight * 70) / 609 + "px",
-            });
-
-            $(".coin-hint03").css({
-              width: visualHeight + "px",
-              height: visualHeight + "px",
-            });
-
-            $(".check03").css({
-              top: (visualHeight * 249.176) / 609 + "px", //185
-              right: (visualHeight * 184.525) / 609 + "px", //137
-            });
-          }
-        }
-
         page1617Timeouts.push(
           setTimeout(() => {
             $(".book16").css("opacity", "1");
@@ -3186,36 +2356,6 @@ $(function () {
       <img class="bubble18" src="./images/book/book1819/牛奶泡泡.png" />
     `);
 
-      if (window.matchMedia("(max-height: 460px)").matches) {
-        if (isAndroidChrome()) {
-          $(".book19-text").css({
-            width: screenHeight + "px",
-          });
-          $(".crown").css({
-            width: (screenHeight * 150) / 609 + "px",
-            height: (screenHeight * 150) / 609 + "px",
-          });
-          $(".coin-all").css({
-            width: (screenHeight * 130) / 609 + "px",
-            height: (screenHeight * 130) / 609 + "px",
-          });
-        }
-
-        if (isSafari() || isIOSChrome()) {
-          $(".book19-text").css({
-            width: visualHeight + "px",
-          });
-          $(".crown").css({
-            width: (visualHeight * 150) / 609 + "px",
-            height: (visualHeight * 150) / 609 + "px",
-          });
-          $(".coin-all").css({
-            width: (visualHeight * 130) / 609 + "px",
-            height: (visualHeight * 130) / 609 + "px",
-          });
-        }
-      }
-
       page1819Timeouts.push(
         setTimeout(() => {
           $(".book18").css("opacity", "1");
@@ -3333,20 +2473,6 @@ $(function () {
         `,
       );
 
-      if (window.matchMedia("(max-height: 460px)").matches) {
-        if (isAndroidChrome()) {
-          $(".book21-text").css({
-            width: screenHeight + "px",
-          });
-        }
-
-        if (isSafari() || isIOSChrome()) {
-          $(".book21-text").css({
-            width: visualHeight + "px",
-          });
-        }
-      }
-
       page2021Timeouts.push(
         setTimeout(() => {
           $(".book20").css("opacity", "1");
@@ -3409,20 +2535,6 @@ $(function () {
         reset2223();
       }
 
-      if (window.matchMedia("(max-height: 460px)").matches) {
-        if (isAndroidChrome()) {
-          $(".book23-text").css({
-            width: screenHeight + "px",
-          });
-        }
-
-        if (isSafari() || isIOSChrome()) {
-          $(".book23-text").css({
-            width: visualHeight + "px",
-          });
-        }
-      }
-
       page2223Timeouts.push(
         setTimeout(() => {
           $(".book22").css("opacity", "1");
@@ -3463,58 +2575,6 @@ $(function () {
 
       resetMilkPage(); // 每次重進頁面重置一次
 
-      if (window.matchMedia("(max-height: 460px)").matches) {
-        if (isSafari() || isIOSChrome()) {
-          $(".girl-l-hand-region").css({
-            top: (visualHeight * 373.1) / 609 + "px",
-            left: (visualHeight * 120.14) / 609 + "px",
-          });
-          $(".girl-l-hand").css({
-            right: (visualHeight * 59.264) / 609 + "px", //44
-          });
-          $(".girl-r-hand").css({
-            bottom: (visualHeight * 72.177) / 609 + "px",
-            right: (visualHeight * 210.576) / 609 + "px",
-          });
-        }
-        if (isAndroidChrome()) {
-          $(".girl-l-hand-region").css({
-            top: (screenHeight * 363.6) / 609 + "px",
-            left: (screenHeight * 117.075) / 609 + "px",
-          });
-
-          $(".girl-l-hand").css({
-            right: (screenHeight * 67.404) / 609 + "px", //45.6
-          });
-
-          if (screenHeight <= 360) {
-            $(".girl-l-hand-cup").css({
-              bottom: (screenHeight * 144.638) / 609 + "px",
-              right: (screenHeight * 42.62) / 609 + "px",
-            });
-            $(".girl-l-hand-milk").css({
-              bottom: (screenHeight * 147.18) / 609 + "px",
-              right: (screenHeight * 50.75) / 609 + "px",
-            });
-          } else {
-            $(".girl-l-hand-cup").css({
-              bottom: "54%",
-            });
-            $(".girl-l-hand-milk").css({
-              bottom: "55%",
-            });
-          }
-
-          $(".girl-l-hand").css({
-            width: (screenHeight * 109.96) / 609 + "px",
-          });
-          $(".girl-r-hand").css({
-            width: (screenHeight * 192.16) / 609 + "px",
-            bottom: (screenHeight * 58.8) / 609 + "px",
-            right: (screenHeight * 209.5) / 609 + "px",
-          });
-        }
-      }
       startMilkAnimation();
     } else {
       resetMilkPage();
@@ -3612,34 +2672,6 @@ $(function () {
     $(".click-girl")
       .off("click")
       .on("click", function () {
-        if (window.matchMedia("(max-height: 460px)").matches) {
-          page2425Timeouts.push(
-            setTimeout(() => {
-              if (isAndroidChrome()) {
-                $(".girl-l-hand-finish").css({
-                  top: (screenHeight * 314.276) / 609 + "px",
-                  left: (screenHeight * 117.075) / 609 + "px",
-                });
-                $(".girl-r-hand-finish").css({
-                  bottom: (screenHeight * 104.95) / 609 + "px",
-                  right: (screenHeight * 212.32) / 609 + "px",
-                });
-              }
-
-              if (isSafari() || isIOSChrome()) {
-                $(".girl-l-hand-finish").css({
-                  top: (visualHeight * 305) / 609 + "px",
-                  left: (visualHeight * 125.14) / 609 + "px",
-                });
-                $(".girl-r-hand-finish").css({
-                  bottom: (visualHeight * 114.1226) / 609 + "px",
-                  right: (visualHeight * 212.13) / 609 + "px",
-                });
-              }
-            }, 100),
-          );
-        }
-
         $(".book25-story").addClass("milk-stains-show");
         $(".flower").css("opacity", "1");
 
@@ -3694,30 +2726,7 @@ $(function () {
         }, 500),
       );
 
-      if (window.matchMedia("(max-height: 460px)").matches) {
-        page2627Timeouts.push(
-          setTimeout(() => {
-            $("#flipbook").append(
-              ' <div class="mom-hand-region-mb"><div class="mom-hand-milk-region"><img class="mom-hand-milk" src="./images/book/book2627/牛奶.png"/><img class="mom-hand-cup" src="./images/book/book2627/空杯.png"/></div><img class="mom-hand" src="./images/book/book2627/媽媽手.png"/></div>',
-            );
-            $(".mom-hand").css({
-              width: (visualHeight * 208.785) / 609 + "px", //155px
-            });
-
-            $(".mom-hand-cup").css({
-              width: (visualHeight * 53.88) / 609 + "px", //40px
-              bottom: (visualHeight * -76.78) / 609 + "px", //-57px
-              left: (visualHeight * 8.082) / 609 + "px", //-6px
-            });
-
-            $(".mom-hand-milk").css({
-              width: (visualHeight * 53.88) / 609 + "px", //40px
-              bottom: (visualHeight * -76.78) / 609 + "px", //-57px
-              left: (visualHeight * 8.082) / 609 + "px", //-6px
-            });
-          }, 1500),
-        );
-      } else {
+      if (!window.matchMedia("(max-height: 460px)").matches) {
         if (!$(".mom-hand").length) {
           page2627Timeouts.push(
             setTimeout(() => {
@@ -3802,25 +2811,6 @@ $(function () {
         startFamilyAnimation();
       } else {
         resetFamilyPage();
-
-        if (window.matchMedia("(max-height: 460px)").matches) {
-          if (isSafari() || isIOSChrome()) {
-            $(".father-hand-region-mb").css({
-              width: (visualHeight * 296.34) / 609 + "px", //220px
-              top: (visualHeight * 360.727) / 609 + "px", //267.8px
-              left: (visualHeight * 85.39) / 609 + "px", //53px
-              transform: "translate(0,0) rotate(0deg)",
-            });
-          }
-          if (isAndroidChrome()) {
-            $(".father-hand-region-mb").css({
-              width: (screenHeight * 325.197) / 609 + "px", //220px
-              top: (screenHeight * 395.85) / 609 + "px", //267.8px
-              left: (screenHeight * 78.34) / 609 + "px", //53px
-              transform: "translate(0,0) rotate(0deg)",
-            });
-          }
-        }
 
         $(".father-hand-region").removeClass("father-hand-finish");
         $(".daughter-hand-region").removeClass("daughter-hand-finish");
