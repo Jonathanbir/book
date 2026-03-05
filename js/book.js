@@ -17,6 +17,7 @@ $(function () {
 
   const innerWidth = window.innerWidth;
   const innerHeight = window.innerHeight; // 目前可視高度（含工具列收起）
+  const ratio = innerWidth / innerHeight;
   const barHeight = innerHeight - screenHeight;
   const visualWidth = visualViewport.width;
   const visualHeight = visualViewport.height;
@@ -281,7 +282,7 @@ $(function () {
   function resizeFunction() {
     let scaleMobile;
     let scaleMobileTranslateY;
-    if (innerHeight >= 300) {
+    if (innerHeight >= 320) {
       scaleMobile = 0.8;
       scaleMobileTranslateY = -76;
     } else {
@@ -301,14 +302,21 @@ $(function () {
 
     // ===== Tablet =====
     else if (isTablet) {
-      scale = 0.9; // 你要的固定值
+      if (ratio < 1.2 && ratio > 1) {
+        scale = 0.8; // 你要的固定值
+        $("#flipbook").css({
+          transform: `scale(` + scale + `) translateY(-73px)`,
+        });
+      } else {
+        scale = 0.9; // 你要的固定值
+        $("#flipbook").css({
+          transform: `scale(` + scale + `) translateY(-33px)`,
+        });
+      }
       $(".book-section").css({
         transform: `scale(` + scale + `)`,
         width: scale * scale * 1200 + "px",
         height: scale * scale * 600 + "px",
-      });
-      $("#flipbook").css({
-        transform: `scale(` + scale + `) translateY(-33px)`,
       });
     } else {
       scale = scaleMobile; // 你要的固定值
@@ -919,9 +927,7 @@ $(function () {
     page2627Timeouts.push(
       setTimeout(() => {
         $(".cheers").addClass("bubble-fade-in");
-        if (!window.matchMedia("(max-height: 460px)").matches) {
-          $(".daughter-hand-region").addClass("daughter-hand-finish");
-        }
+        $(".daughter-hand-region").addClass("daughter-hand-finish");
       }, 5000),
     );
 
@@ -2705,16 +2711,14 @@ $(function () {
         }, 500),
       );
 
-      if (!window.matchMedia("(max-height: 460px)").matches) {
-        if (!$(".mom-hand").length) {
-          page2627Timeouts.push(
-            setTimeout(() => {
-              $("#flipbook").append(
-                ' <div class="mom-hand-region"><div class="mom-hand-milk-region"><img class="mom-hand-milk" src="./images/book/book2627/牛奶.png"/><img class="mom-hand-cup" src="./images/book/book2627/空杯.png"/></div><img class="mom-hand" src="./images/book/book2627/媽媽手.png"/></div>',
-              );
-            }, 1500),
-          );
-        }
+      if (!$(".mom-hand").length) {
+        page2627Timeouts.push(
+          setTimeout(() => {
+            $("#flipbook").append(
+              ' <div class="mom-hand-region"><div class="mom-hand-milk-region"><img class="mom-hand-milk" src="./images/book/book2627/牛奶.png"/><img class="mom-hand-cup" src="./images/book/book2627/空杯.png"/></div><img class="mom-hand" src="./images/book/book2627/媽媽手.png"/></div>',
+            );
+          }, 1500),
+        );
       }
 
       page2627Timeouts.push(
