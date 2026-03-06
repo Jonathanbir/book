@@ -994,6 +994,7 @@ $(function () {
     $(".daughter-hand-cup").css("opacity", "0");
     $(".mom-hand-milk").css("opacity", "0");
     $(".cheers").removeClass("bubble-fade-in");
+    $(".text26").removeClass("opacity-show");
     const removeClasses = [
       // 手部完成、移除
       "father-hand-finish",
@@ -2741,6 +2742,7 @@ $(function () {
       if (!$(".mom-hand").length) {
         page2627Timeouts.push(
           setTimeout(() => {
+            $(".text26").addClass("opacity-show");
             $("#flipbook").append(
               ' <div class="mom-hand-region"><div class="mom-hand-milk-region"><img class="mom-hand-milk" src="./images/book/book2627/milk.png"/><img class="mom-hand-cup" src="./images/book/book2627/cup.png"/></div><img class="mom-hand" src="./images/book/book2627/mom-hand.png"/></div>',
             );
