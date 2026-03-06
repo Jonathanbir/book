@@ -67,6 +67,7 @@ $(function () {
   const VOICE_VOLUME = 1.2;
 
   let page23Timeouts = [];
+  let page45Timeouts = [];
   let page67Timeouts = [];
   let page89Timeouts = [];
   let page1011Timeouts = [];
@@ -780,15 +781,6 @@ $(function () {
       }, 50);
     });
 
-  function allAudioPause() {
-    $("audio").each(function () {
-      if (this.id.startsWith("audio-")) {
-        this.pause();
-        this.currentTime = 0;
-      }
-    });
-  }
-
   function addMilkTimeout(fn, delay) {
     const id = setTimeout(fn, delay);
     page2425Timeouts.push(id);
@@ -898,17 +890,22 @@ $(function () {
   // 第 26–27 頁 家人喝牛奶
   function startFamilyAnimation() {
     $("#flipbook").append(`
-      <img class="book2627" src="./images/book/book2627/book2627.png" />
       <img class="all-milk-stains" src="./images/book/book2627/牛奶鬍.png" />
     `);
 
     $(".next-page img").show();
+    page2627Timeouts.push(
+      setTimeout(() => {
+        $(".father-hand-region").show();
+      }, 1500),
+    );
+    console.log(".father-hand-regionshow()!!!!");
+    $(".father-hand-region").css("opacity", "1");
 
     page2627Timeouts.push(
       setTimeout(() => {
         $(".book26").css("opacity", "1");
         $(".book27").css("opacity", "1");
-        $(".book2627").css("opacity", "1");
       }, 1200),
     );
 
@@ -986,9 +983,10 @@ $(function () {
   function resetFamilyPage() {
     $(".book26").css("opacity", "0");
     $(".book27").css("opacity", "0");
-    $(".book2627").css("opacity", "0");
     $(".milk-box").css("opacity", "0");
     $(".father-hand").css("opacity", "0");
+    $(".father-hand-region").hide();
+    $(".father-hand-region").removeClass("father-hand-finish");
     $(".father-hand-milk").css("display", "none");
     $(".father-hand-cup").css("opacity", "0");
     $(".daughter-hand").css("opacity", "0");
@@ -1218,6 +1216,8 @@ $(function () {
     }
 
     function reset45() {
+      page45Timeouts.forEach((id) => clearTimeout(id));
+      page45Timeouts = [];
       $(".eyes-4").removeClass("eyes-big-animation");
       $(".question").removeClass("question-animation");
       $(".book04").css("opacity", "0");
@@ -1237,30 +1237,38 @@ $(function () {
         reset45();
       }
 
-      setTimeout(() => {
-        $(".book04").css("opacity", "1");
-        $(".text04").css("opacity", "1");
-        $(".eyes-4").css("opacity", "1");
-      }, 1000);
+      page45Timeouts.push(
+        setTimeout(() => {
+          $(".book04").css("opacity", "1");
+          $(".text04").css("opacity", "1");
+          $(".eyes-4").css("opacity", "1");
+        }, 1000),
+      );
 
-      setTimeout(() => {
-        $(".eyes-ball").addClass("eyes-ball-animation");
-        $(".eyes-4").addClass("eyes-big-animation");
-        $(".question").addClass("question-animation");
-      }, 8000);
+      page45Timeouts.push(
+        setTimeout(() => {
+          $(".eyes-ball").addClass("eyes-ball-animation");
+          $(".eyes-4").addClass("eyes-big-animation");
+          $(".question").addClass("question-animation");
+        }, 8000),
+      );
 
-      setTimeout(() => {
-        $(".book05").css("opacity", "1");
-        $(".text05").css("opacity", "1");
-        $(".daughter-5").css("opacity", "1");
-        $(".moms-head-5").css("opacity", "1");
-        $(".daughter-hand-5").css("opacity", "1");
-        $(".moms-hand-5").css("opacity", "1");
-      }, 22000);
+      page45Timeouts.push(
+        setTimeout(() => {
+          $(".book05").css("opacity", "1");
+          $(".text05").css("opacity", "1");
+          $(".daughter-5").css("opacity", "1");
+          $(".moms-head-5").css("opacity", "1");
+          $(".daughter-hand-5").css("opacity", "1");
+          $(".moms-hand-5").css("opacity", "1");
+        }, 22000),
+      );
 
-      setTimeout(() => {
-        $(".gogo").css("opacity", "1");
-      }, 29500);
+      page45Timeouts.push(
+        setTimeout(() => {
+          $(".gogo").css("opacity", "1");
+        }, 29500),
+      );
 
       startReplayTimer(31000);
     } else {
@@ -2568,9 +2576,10 @@ $(function () {
     if (page === 26 || page === 27) {
       if (replay) {
         resetFamilyPage();
+        $(".father-hand-region").hide();
+        console.log(".father-hand-region hide()!!!!");
         $(".mom-hand-region").hide();
         $(".mow").hide();
-        $(".father-hand-region").removeClass("father-hand-finish");
         $(".daughter-hand-region").removeClass("daughter-hand-finish");
         $(".father-hand-milk").css("opacity", "1");
         $(".daughter-hand-milk").css("opacity", "1");
@@ -3172,20 +3181,7 @@ $(function () {
     applyPageRule(page);
   });
 
-  let latestPage = 1;
-
-  // 停止所有音樂
-  function allAudioPause() {
-    $("audio").each(function () {
-      if (this.id.startsWith("audio-")) {
-        this.pause();
-        this.currentTime = 0;
-      }
-    });
-  }
-
   // 動態播放語音（不影響 background）
-
   async function playVoice(src) {
     try {
       // 如果之前有播放中的語音，先停止

@@ -98,11 +98,9 @@ audio {
 #flipbook .page {
   width: 460px;
   height: 600px;
-  /* line-height: 600px; */
   text-align: center;
   font-size: 24px;
   background: white;
-  border: 1px solid #ccc;
 }
 
 /* #flipbook .page p {
