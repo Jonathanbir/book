@@ -446,7 +446,7 @@ $(function () {
   //有任務下一頁 鎖定按鈕
   function btnDisabled() {
     isBtnDisabled = true;
-    $(".next-page img").attr("src", "./images/common/下一頁灰.png");
+    $(".next-page img").attr("src", "./images/common/next-grey-img.png");
     $(".next-page").prop("disabled", true);
 
     if (
@@ -462,7 +462,7 @@ $(function () {
   //有任務下一頁 不鎖定按鈕
   function btnUnDisabled() {
     isBtnDisabled = false;
-    $(".next-page img").attr("src", "./images/common/下一頁.png");
+    $(".next-page img").attr("src", "./images/common/next-img.png");
     $(".next-page img").css("cursor", "pointer");
     $(".next-page").prop("disabled", false);
   }
@@ -478,10 +478,10 @@ $(function () {
       count--;
 
       if (count > 0) {
-        $(".prev-page img").attr("src", `./images/common/${count}秒.png`);
+        $(".prev-page img").attr("src", `./images/common/${count}sec.png`);
       } else {
         clearInterval(timer);
-        $(".prev-page img").attr("src", "./images/common/上一頁.png");
+        $(".prev-page img").attr("src", "./images/common/prve-img.png");
         $(".prev-page img").css("cursor", "pointer");
       }
     }, 1000);
@@ -508,9 +508,9 @@ $(function () {
     }
 
     $(".prev-page").prop("disabled", true);
-    $(".prev-page img").attr("src", "./images/common/上一頁灰.png");
+    $(".prev-page img").attr("src", "./images/common/prev-grey-img.png");
     setTimeout(() => {
-      $(".prev-page img").attr("src", "./images/common/上一頁.png");
+      $(".prev-page img").attr("src", "./images/common/prve-img.png");
       $(".prev-page").prop("disabled", false);
     }, 3000);
   }
@@ -521,8 +521,8 @@ $(function () {
     let countMobile = 3;
 
     //一開始先顯示 3 秒
-    $(".prev-page img").attr("src", "./images/common/3秒.png");
-    $(".next-page img").attr("src", "./images/common/3秒.png");
+    $(".prev-page img").attr("src", "./images/common/3sec.png");
+    $(".next-page img").attr("src", "./images/common/3sec.png");
     $(".prev-page").prop("disabled", true);
     $(".next-page").prop("disabled", true);
 
@@ -533,14 +533,14 @@ $(function () {
       count--;
 
       if (count > 0) {
-        $(".prev-page img").attr("src", `./images/common/${count}秒.png`);
-        $(".next-page img").attr("src", `./images/common/${count}秒.png`);
+        $(".prev-page img").attr("src", `./images/common/${count}sec.png`);
+        $(".next-page img").attr("src", `./images/common/${count}sec.png`);
         $(".prev-page").prop("disabled", true);
         $(".next-page").prop("disabled", true);
       } else {
         clearInterval(timer);
-        $(".prev-page img").attr("src", "./images/common/上一頁.png");
-        $(".next-page img").attr("src", "./images/common/下一頁.png");
+        $(".prev-page img").attr("src", "./images/common/prve-img.png");
+        $(".next-page img").attr("src", "./images/common/next-img.png");
         $(".prev-page").css("cursor", "pointer");
         $(".next-page").css("cursor", "pointer");
         $(".prev-page").prop("disabled", false);
@@ -578,8 +578,8 @@ $(function () {
     // $(".prev-page, .next-page").prop("disabled", true);
     // $(".prev-page, .next-page img").attr("src","./images/common/下一頁深藍.png");
     setTimeout(() => {
-      $(".prev-page img").attr("src", "./images/common/上一頁.png");
-      $(".next-page img").attr("src", "./images/common/下一頁.png");
+      $(".prev-page img").attr("src", "./images/common/prve-img.png");
+      $(".next-page img").attr("src", "./images/common/next-img.png");
       $(".prev-page img, .next-page img").prop("disabled", false);
     }, 3000);
   }
@@ -617,7 +617,7 @@ $(function () {
     } else {
       // 先鎖按鈕
       $(".replay-btn").prop("disabled", true);
-      $(".replay-btn img").attr("src", "./images/common/再聽一次灰.png");
+      $(".replay-btn img").attr("src", "./images/common/replay-grey-btn.png");
     }
 
     // 建立新 timer
@@ -637,7 +637,7 @@ $(function () {
         $(".replay-mobile-btn-body").removeClass("replay-mobile-btn-disabled");
       } else {
         $(".replay-btn").prop("disabled", false);
-        $(".replay-btn img").attr("src", "./images/common/再聽一次.png");
+        $(".replay-btn img").attr("src", "./images/common/replay-btn.png");
       }
     }, delay);
   }
@@ -656,7 +656,7 @@ $(function () {
         playBackground();
         playVoice("./mp3/01.mp3");
         $("#cover").addClass("book01-start");
-        $(".next-page img").attr("src", "./images/common/下一頁.png");
+        $(".next-page img").attr("src", "./images/common/next-img.png");
 
         $(".prev-page").prop("disabled", true);
         $(".prev-page").show();
@@ -700,7 +700,7 @@ $(function () {
       }
 
       if (!window.matchMedia("(max-height: 460px)").matches) {
-        $(".mute-toggle img").attr("src", "./images/common/靜音按鈕開啟.png");
+        $(".mute-toggle img").attr("src", "./images/common/mute-btn-open.png");
       } else {
         $(".mute-mobile-toggle").css("background", "#fff");
         $(".mute-mobile-toggle").html('<i class="fas fa-volume-mute"></i>');
@@ -712,7 +712,7 @@ $(function () {
       }
 
       if (!window.matchMedia("(max-height: 460px)").matches) {
-        $(".mute-toggle img").attr("src", "./images/common/靜音按鈕關閉.png");
+        $(".mute-toggle img").attr("src", "./images/common/mute-btn-close.png");
       } else {
         $(".mute-mobile-toggle").css("background", "rgba(169, 169, 169, 0.2)");
         $(".mute-mobile-toggle").html('<i class="fas fa-volume-up"></i>');
@@ -890,7 +890,7 @@ $(function () {
   // 第 26–27 頁 家人喝牛奶
   function startFamilyAnimation() {
     $("#flipbook").append(`
-      <img class="all-milk-stains" src="./images/book/book2627/牛奶鬍.png" />
+      <img class="all-milk-stains" src="./images/book/book2627/milk-stains.png" />
     `);
 
     $(".next-page img").show();
@@ -1037,7 +1037,7 @@ $(function () {
         .addClass("replay-mobile-btn-disabled");
     } else {
       $(".replay-btn").prop("disabled", true);
-      $(".replay-btn img").attr("src", "./images/common/再聽一次灰.png");
+      $(".replay-btn img").attr("src", "./images/common/replay-grey-btn.png");
     }
   }
 
@@ -1114,25 +1114,25 @@ $(function () {
 
       $("#left-down-corner").hide();
       $(".prev-page img").hide();
-      $(".next-page img").attr("src", "./images/common/下一頁灰.png");
+      $(".next-page img").attr("src", "./images/common/next-grey-img.png");
       $(".next-page").prop("disabled", true);
 
       const timer = setInterval(() => {
         count--;
 
         if (count > 0) {
-          $(".next-page img").attr("src", `./images/common/${count}秒.png`);
+          $(".next-page img").attr("src", `./images/common/${count}sec.png`);
           $(".next-page").prop("disabled", true);
         } else {
           clearInterval(timer);
-          $(".next-page img").attr("src", "./images/common/下一頁.png");
+          $(".next-page img").attr("src", "./images/common/next-img.png");
           $(".next-page").css("cursor", "pointer");
           $(".next-page").prop("disabled", false);
         }
       }, 1000);
 
       setTimeout(() => {
-        $(".next-page img").attr("src", "./images/common/下一頁.png");
+        $(".next-page img").attr("src", "./images/common/next-img.png");
         $(".next-page").prop("disabled", false);
       }, 3000);
     }
@@ -1329,18 +1329,18 @@ $(function () {
         doorClickBound = true;
 
         $("#flipbook").append(
-          `<img class="knock" src="./images/book/book0607/點這裡.png"/>
-          <img class="grass0607" src="./images/book/book0607/草地.png"/>
-          <img class="tree1" src="./images/book/book0607/森林1.png"/>
-          <img class="tree2" src="./images/book/book0607/森林2.png"/>           
-          <img class="tree3" src="./images/book/book0607/森林3.png"/>         
+          `<img class="knock" src="./images/book/book0607/click-here.png"/>
+          <img class="grass0607" src="./images/book/book0607/grass.png"/>
+          <img class="tree1" src="./images/book/book0607/forest1.png"/>
+          <img class="tree2" src="./images/book/book0607/forest2.png"/>           
+          <img class="tree3" src="./images/book/book0607/forest3.png"/>         
           <img class="text06" src="./images/book/book0607/text-06.png"/>        
-          <img class="cloud2" src="./images/book/book0607/雲2.png"/>           
-          <img class="bubble67" src="./images/book/book0607/牛奶泡泡.png"/>           
-          <img class="star5" src="./images/book/book0607/亮晶晶.png"/>         
-          <img class="door-bg door-common" src="./images/book/book0607/門內.png"/>           
-          <img class="door door-common" src="./images/book/book0607/門.png"/>            
-          <img class="peoples" src="./images/book/book0607/媽媽鈴鈴.png"/>
+          <img class="cloud2" src="./images/book/book0607/cloud2.png"/>           
+          <img class="bubble67" src="./images/book/book0607/milk-bubble.png"/>           
+          <img class="star5" src="./images/book/book0607/shine.png"/>         
+          <img class="door-bg door-common" src="./images/book/book0607/indoor.png"/>           
+          <img class="door door-common" src="./images/book/book0607/door.png"/>            
+          <img class="peoples" src="./images/book/book0607/mom-lin.png"/>
         `,
         );
 
@@ -1445,9 +1445,9 @@ $(function () {
       }
 
       $("#flipbook").append(
-        `<img class="mom-daughter" src="./images/book/book08/鈴鈴媽媽.png"/>
-        <img class="bubble7" src="./images/book/book08/牛奶泡泡.png"/>
-        <img class="star7" src="./images/book/book09/亮晶晶.png"/>
+        `<img class="mom-daughter" src="./images/book/book08/lin-mom.png"/>
+        <img class="bubble7" src="./images/book/book08/milk-bubble.png"/>
+        <img class="star7" src="./images/book/book09/shine.png"/>
         `,
       );
 
@@ -1550,14 +1550,14 @@ $(function () {
 
       $("#flipbook").append(
         ` <img class="text11" src="./images/book/book11/text11.png">
-        <img class="girls-head" src="./images/book/book10/媽媽鈴鈴.png"/>        
-        <img class="rainbow"  src="./images/book/book11/彩虹.png"/>
-        <img class="star11" src="./images/book/book11/亮晶晶.png">
-        <img class="bubble11" src="./images/book/book11/牛奶泡泡.png">
-        <img class="cloud-group" src="./images/book/book11/雲01.png">
-        <img class="cow05" src="./images/book/book10/牛05.png"/>
-        <img src="./images/book/book11/手.png" class="list-board"/>
-        <img src="./images/book/book11/清單內容.png" class="list"/>
+        <img class="girls-head" src="./images/book/book10/mom-lin.png"/>        
+        <img class="rainbow"  src="./images/book/book11/rainbow.png"/>
+        <img class="star11" src="./images/book/book11/light.png">
+        <img class="bubble11" src="./images/book/book11/milk-bubble.png">
+        <img class="cloud-group" src="./images/book/book11/cloud01.png">
+        <img class="cow05" src="./images/book/book10/cow05.png"/>
+        <img src="./images/book/book11/board.png" class="list-board"/>
+        <img src="./images/book/book11/list-content.png" class="list"/>
         `,
       );
 
@@ -1746,18 +1746,18 @@ $(function () {
         btnDisabled();
 
         $("#flipbook")
-          .append(`<img class="electfan" src="./images/book/book12/風扇1.png"/>
+          .append(`<img class="electfan" src="./images/book/book12/electfan1.png"/>
                    <img class="text text12" src="./images/book/book12/text12.png"/>
-                   <img class="electfan-wind" src="./images/book/book12/電風扇氣旋.png"/>
-                   <img class="electfan-wind" src="./images/book/book12/風的線條.png"/>
-                   <img class="finish-mission01" src="./images/common/請完成任務1.png"/>
-                   <img class="click-magic-wand" src="./images/book/book0607/點這裡.png"/>
+                   <img class="electfan-wind" src="./images/book/book12/electfan-wind.png"/>
+                   <img class="electfan-wind-line" src="./images/book/book12/electfan-wind-line.png"/>
+                   <img class="finish-mission01" src="./images/common/finish-mission1.png"/>
+                   <img class="click-magic-wand" src="./images/book/book0607/click-here.png"/>
                    <div class="click-magic-wand-box"></div>
-                   <img class="bubble-bg" src="./images/book/book13/水珠.png"/>
-                   <img class="star13" src="./images/book/book13/星星.png"/>
-                   <img class="bubble12" src="./images/book/book13/牛奶泡泡.png"/>
+                   <img class="bubble-bg" src="./images/book/book13/bubble-bg.png"/>
+                   <img class="star13" src="./images/book/book13/star.png"/>
+                   <img class="bubble12" src="./images/book/book13/milk-bubble.png"/>
                    <img class="board board13" src="./images/book/book13/board13.png"/>
-                    <img class="check check01" src="./images/book/book13/綠勾.png" />
+                    <img class="check check01" src="./images/book/book13/check.png" />
                    <div class="check-box"></div>
                    `);
 
@@ -1779,9 +1779,9 @@ $(function () {
       }
 
       const fanImages = [
-        "./images/book/book12/風扇1.png",
-        "./images/book/book12/風扇2.png",
-        "./images/book/book12/風扇3.png",
+        "./images/book/book12/electfan1.png",
+        "./images/book/book12/electfan2.png",
+        "./images/book/book12/electfan3.png",
       ];
 
       let fanIndex = 0;
@@ -1919,6 +1919,7 @@ $(function () {
       $("#flipbook .board-list02").remove();
       $("#flipbook .small-cow").remove();
       $("#flipbook .bubble14").remove();
+      $("#flipbook .shine14").remove();
       $("#flipbook .check02").remove();
       $(".board14").remove();
       $(".popup-board02").remove();
@@ -1927,6 +1928,8 @@ $(function () {
       $(".success-hint02").removeClass("bubble-fade-in");
       $(".cows-tongue").removeClass("cows-tongue-animation");
       $(".milk").removeClass("milk-empty");
+      $(".bubble14").removeClass("bubble-fade-in");
+      $(".shine14").removeClass("shine14-animation");
       $(".coin02").removeClass("coin-animation");
       $(".coin-light02").removeClass("coin-light-show");
       $(".check02").removeClass("check-show");
@@ -1955,15 +1958,16 @@ $(function () {
         btnDisabled();
 
         $("#flipbook")
-          .append(`<img class="small-cow" src="./images/book/book1415/小牛.png"/>
-          <img class="finish-mission02" src="./images/common/請完成任務2.png"/>
-          <img class="board-list02" src="./images/book/book1415/任務清單.png">
-          <img class="board14" src="./images/book/book1415/板子.png"/>
-          <img class="check check02" src="./images/book/book13/綠勾.png"/>
+          .append(`<img class="small-cow" src="./images/book/book1415/cow.png"/>
+          <img class="finish-mission02" src="./images/common/finish-mission2.png"/>
+          <img class="board-list02" src="./images/book/book1415/board-list02.png">
+          <img class="board14" src="./images/book/book1415/board.png"/>
+          <img class="check check02" src="./images/book/book13/check.png"/>
           <div class="check-box"></div>
-          <img class="click-milk" src="./images/book/book0607/點這裡.png"/>
+          <img class="click-milk" src="./images/book/book0607/click-here.png"/>
           <div class="click-milk-box"></div>
-          <img class="bubble14" src="./images/book/book1415/牛奶泡泡.png"/>          
+          <img class="bubble14" src="./images/book/book1415/milk-bubble.png"/>     
+          <img class="shine14" src="./images/book/book1415/shine.png"/>       
           <img class="coin-hint02" src="./images/book/book1415/text15.png" />
            `);
 
@@ -1986,8 +1990,8 @@ $(function () {
         page1415Timeouts.push(
           setTimeout(() => {
             $("#flipbook").append(
-              `<img class="cloud14-2" src="./images/book/book1415/雲2.png"/>      
-             <img class="text14" src="./images/book/book1415/故事14.png"/>`,
+              `<img class="cloud14-2" src="./images/book/book1415/cloud2.png"/>      
+             <img class="text14" src="./images/book/book1415/text14.png"/>`,
             );
           }, 300),
         );
@@ -2047,6 +2051,7 @@ $(function () {
 
             page1415Timeouts.push(
               setTimeout(() => {
+                $(".shine14").addClass("shine14-animation");
                 $(".success-hint02").addClass("bubble-fade-in");
                 $(".cows-tongue").removeClass("cows-tongue-animation");
               }, 6000),
@@ -2107,7 +2112,8 @@ $(function () {
       $(".book16").css("opacity", "0");
       $(".book17").css("opacity", "0");
       $(".finish-mission03").css("opacity", "0");
-      $(".cloud-16-0").css("opacity", "0");
+      $(".cloud-16-1").css("opacity", "0");
+      $(".cloud-16-2").css("opacity", "0");
       $(".cloud-16-3").css("opacity", "0");
       $(".cloud14-3").css("opacity", "0");
       $(".moutain-left").css("opacity", "0");
@@ -2122,12 +2128,15 @@ $(function () {
       $(".popup-board03").css("display", "none");
       $(".stethoscope").addClass("disabled");
       $("#flipbook .stethoscope").removeClass("stethoscope-move");
+      $(".shine16").removeClass("shine16-animation");
       $(".cow-heart").removeClass("heart-beat-animation");
       $(".coin03").removeClass("coin-animation");
       $(".coin-light03").removeClass("coin-light-show");
       $(".check03").removeClass("check-show");
       $(".coin-hint03").removeClass("bubble-fade-in");
       $(".dondon").removeClass("bubble-fade-in");
+      $("#flipbook .shine16").remove();
+      $("#flipbook .cloud-16-2").remove();
       $("#flipbook .click-hearing-heart").remove();
       $("#flipbook .finish-mission03").remove();
       $("#flipbook .story-text16").remove();
@@ -2168,21 +2177,23 @@ $(function () {
         btnPreviousDisabled();
         btnDisabled();
         $("#flipbook").append(`
-            <img class="finish-mission03" src="./images/common/請完成任務3.png"/>
-            <img class="story-text16" src="./images/book/book1617/故事文.png"/>
-            <img class="mom-cow" src="./images/book/book1617/媽媽牛.png"/>
-            <img class="stethoscope disabled" src="./images/book/book1617/手.png"/>
-            <img class="cow-eyes" src="./images/book/book1617/牛眼睜開.png"/>
-            <img class="cow-heart" src="./images/book/book1617/牛愛心.png"/>
-            <img class="dondon" src="./images/book/book1617/咚咚.png">
-            <img class="nurse-girl" src="./images/book/book1617/鈴鈴護士.png"/>
-            <img class="click-hearing-heart" src="./images/book/book25/點這裡.png"/>
-            <div class="click-hearing-heart-box"></div>
+            <img class="finish-mission03" src="./images/common/finish-mission03.png"/>
+            <img class="story-text16" src="./images/book/book1617/text16.png"/>
+            <img class="mom-cow" src="./images/book/book1617/mom-cow.png"/>
+            <img class="stethoscope disabled" src="./images/book/book1617/hand.png"/>
+            <img class="cow-eyes" src="./images/book/book1617/cow-eyes-open.png"/>
+            <img class="cow-heart" src="./images/book/book1617/cow-heart.png"/>
+            <img class="dondon" src="./images/book/book1617/dondon.png">
+            <img class="nurse-girl" src="./images/book/book1617/lin-nurse.png"/>
+            <img class="click-hearing-heart" src="./images/book/book25/click-here.png"/>
+            <div class="click-hearing-heart-box"></div>      
+            <div class="cloud-16-2"></div>
             <div class="check-box"></div>
-            <img class="board-list03" src="./images/book/book1617/任務清單.png"/>
-            <img class="check check03" src="./images/book/book13/綠勾.png" />
-            <img class="board16" src="./images/book/book1415/板子.png">
-            <img class="bubble16" src="./images/book/book1617/牛奶泡泡.png"/>
+            <img class="board-list03" src="./images/book/book1617/board-list03.png"/>
+            <img class="check check03" src="./images/book/book13/check.png" />
+            <img class="board16" src="./images/book/book1415/board.png">
+            <img class="bubble16" src="./images/book/book1617/milk-bubble.png"/>
+            <img class="shine16" src="./images/book/book1617/shine.png"/>
             `);
 
         if (
@@ -2206,7 +2217,8 @@ $(function () {
             $(".book16").css("opacity", "1");
             $(".book17").css("opacity", "1");
             $(".finish-mission03").css("opacity", "1");
-            $(".cloud-16-0").css("opacity", "1");
+            $(".cloud-16-1").css("opacity", "1");
+            $(".cloud-16-2").css("opacity", "1");
             $(".cloud-16-3").css("opacity", "1");
             $(".cloud14-3").css("opacity", "1");
             $(".moutain-left").css("opacity", "1");
@@ -2240,8 +2252,8 @@ $(function () {
           "#flipbook .click-hearing-heart ,#flipbook .click-hearing-heart-box ",
         ).on("click", function () {
           const cowEyesImages = [
-            "./images/book/book1617/牛眼睜開.png",
-            "./images/book/book1617/牛眼關閉.png",
+            "./images/book/book1617/cow-eyes-open.png",
+            "./images/book/book1617/cow-eyes-close.png",
           ];
 
           let cowEyesIndex = 0;
@@ -2267,6 +2279,12 @@ $(function () {
           $(".finish-mission03").hide();
 
           playVoice("./mp3/hear-coin.mp3");
+
+          page1617Timeouts.push(
+            setTimeout(() => {
+              $(".shine16").addClass("shine16-animation");
+            }, 4000),
+          );
 
           page1617Timeouts.push(
             setTimeout(() => {
@@ -2339,14 +2357,14 @@ $(function () {
 
       $("#flipbook").append(`
       <img class="book19-text" src="./images/book/book1819/book19-text.png" />
-      <img class="coin-all  coin01-final" src="./images/book/book1819/金幣01.png" />
-      <img class="coin-all coin02-final" src="./images/book/book1819/金幣02.png" />
-      <img class="coin-all coin03-final" src="./images/book/book1819/金幣03.png" />
-      <img class="coin-all-shine" src="./images/book/book1819/亮晶晶.png" />
-      <img class="girl1819" src="./images/book/book1819/鈴鈴.png" />
-      <img class="crown" src="./images/book/book1819/好牛皇冠.png" />
-      <img class="crown-shine" src="./images/book/book1819/皇冠光芒.png" />
-      <img class="bubble18" src="./images/book/book1819/牛奶泡泡.png" />
+      <img class="coin-all  coin01-final" src="./images/book/book1819/coin01.png" />
+      <img class="coin-all coin02-final" src="./images/book/book1819/coin02.png" />
+      <img class="coin-all coin03-final" src="./images/book/book1819/coin03.png" />
+      <img class="coin-all-shine" src="./images/book/book1819/shine.png" />
+      <img class="girl1819" src="./images/book/book1819/linlin.png" />
+      <img class="crown" src="./images/book/book1819/crown.png" />
+      <img class="crown-shine" src="./images/book/book1819/crown-shine.png" />
+      <img class="bubble18" src="./images/book/book1819/milk-bubble.png" />
     `);
 
       page1819Timeouts.push(
@@ -2454,15 +2472,15 @@ $(function () {
       }
 
       $("#flipbook").append(
-        `<img class="dream04" src="./images/book/book2021/夢泡04.png"/>
-        <img class="dream-light" src="./images/book/book2021/夢泡光.png"/>
-        <img class="story20" src="./images/book/book2021/故事20.png"/>
+        `<img class="dream04" src="./images/book/book2021/dream04.png"/>
+        <img class="dream-light" src="./images/book/book2021/dream-light.png"/>
+        <img class="story20" src="./images/book/book2021/text20.png"/>
         <img class="book21-text" src="./images/book/book2021/book21-text.png"/>
-        <img class="dream-girl" src="./images/book/book2021/鈴鈴.png"/>
-        <img class="dialog20" src="./images/book/book2021/哇!.png"/>
-        <img class="dialog21" src="./images/book/book2021/嗯.png"/>
-        <img class="bubble20" src="./images/book/book2021/牛奶泡泡20.png"/>
-        <img class="star20" src="./images/book/book2021/亮晶晶.png"/>
+        <img class="dream-girl" src="./images/book/book2021/linlin.png"/>
+        <img class="dialog20" src="./images/book/book2021/wow.png"/>
+        <img class="dialog21" src="./images/book/book2021/um.png"/>
+        <img class="bubble20" src="./images/book/book2021/milk-bubble.png"/>
+        <img class="star20" src="./images/book/book2021/shine.png"/>
         `,
       );
 
@@ -2724,7 +2742,7 @@ $(function () {
         page2627Timeouts.push(
           setTimeout(() => {
             $("#flipbook").append(
-              ' <div class="mom-hand-region"><div class="mom-hand-milk-region"><img class="mom-hand-milk" src="./images/book/book2627/牛奶.png"/><img class="mom-hand-cup" src="./images/book/book2627/空杯.png"/></div><img class="mom-hand" src="./images/book/book2627/媽媽手.png"/></div>',
+              ' <div class="mom-hand-region"><div class="mom-hand-milk-region"><img class="mom-hand-milk" src="./images/book/book2627/milk.png"/><img class="mom-hand-cup" src="./images/book/book2627/cup.png"/></div><img class="mom-hand" src="./images/book/book2627/mom-hand.png"/></div>',
             );
           }, 1500),
         );
@@ -2889,22 +2907,22 @@ $(function () {
 
       let count = 3;
 
-      $(".next-page img").attr("src", "./images/common/下一頁灰.png");
+      $(".next-page img").attr("src", "./images/common/next-grey-img.png");
       $(".next-page").prop("disabled", true);
 
-      $(".prev-page img").attr("src", "./images/common/上一頁灰.png");
-      $(".prev-page img").attr("src", "./images/common/3秒.png");
+      $(".prev-page img").attr("src", "./images/common/prev-grey-img.png");
+      $(".prev-page img").attr("src", "./images/common/3sec.png");
       $(".prev-page").prop("disabled", true);
 
       const interval = setInterval(() => {
         count--;
 
         if (count > 0) {
-          $(".prev-page img").attr("src", `./images/common/${count}秒.png`);
+          $(".prev-page img").attr("src", `./images/common/${count}sec.png`);
           $(".prev-page").prop("disabled", true);
         } else {
           clearInterval(interval);
-          $(".prev-page img").attr("src", "./images/common/上一頁.png");
+          $(".prev-page img").attr("src", "./images/common/prve-img.png");
           $(".prev-page").prop("disabled", false);
         }
       }, 1000);
@@ -2913,7 +2931,7 @@ $(function () {
 
       pageTimers.push(
         setTimeout(() => {
-          $(".prev-page img").attr("src", "./images/common/上一頁.png");
+          $(".prev-page img").attr("src", "./images/common/prve-img.png");
           $(".prev-page").prop("disabled", false);
         }, 3000),
       );

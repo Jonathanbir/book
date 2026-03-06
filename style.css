@@ -1603,6 +1603,18 @@ button {
   transition: all 1s ease-in-out;
 }
 
+.electfan-wind-wave {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 5%;
+  z-index: 98;
+  margin: auto;
+  opacity: 0;
+  animation: windRotate 2s ease-in-out infinite;
+  transition: all 1s ease-in-out;
+}
+
 .electfan-wind-line {
   position: absolute;
   left: 0;
@@ -1730,7 +1742,7 @@ button {
   position: fixed;
   right: 5%;
   top: 15%;
-  z-index: 1000;
+  z-index: 9999;
   width: 170px;
   height: 232px;
   transform: rotate(-19deg);
@@ -1817,7 +1829,7 @@ button {
 }
 
 .popup-board01 {
-  background-image: url(./images/book/book13/任務板.png);
+  background-image: url(./images/book/book13/misson-board-pc.png);
 }
 
 .check02 {
@@ -2108,6 +2120,21 @@ button {
   opacity: 0;
 }
 
+.shine14 {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 99;
+  width: 100%;
+  height: 100%;
+  transition: all 3s ease-in-out;
+  opacity: 0;
+}
+
+.shine14-animation {
+  animation: starShow 1s ease-in-out infinite;
+}
+
 .cloud14-1 {
   position: absolute;
   left: 0;
@@ -2157,7 +2184,7 @@ button {
 }
 
 .popup-board02 {
-  background-image: url(./images/book/book1415/任務板.png);
+  background-image: url(./images/book/book1415/misson-board-pc.png);
 }
 /* book16 小女孩聽牛心跳*/
 .book16-box {
@@ -2184,21 +2211,38 @@ button {
   position: absolute;
   right: 18%;
   bottom: 33%;
-  z-index: 999;
+  z-index: 1001;
   cursor: pointer;
   pointer-events: auto;
   opacity: 0;
   transition: all 1s ease-in-out;
 }
 
-.cloud-16-0 {
+.cloud-16-1 {
   position: absolute;
   top: 0;
   right: 9%;
   z-index: 1;
   width: 545px;
   height: 255px;
-  background-image: url(./images/book/book1617/雲左.png);
+  background-image: url(./images/book/book1617/cloud01.png);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  animation: cloud01Move 10s ease-in-out infinite;
+  opacity: 0;
+  transition: all 1s ease-in-out;
+}
+
+.cloud-16-2 {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 99;
+  width: 1200px;
+  height: 690px;
+  background-image: url(./images/book/book1617/cloud02.png);
   background-size: 100%;
   background-repeat: no-repeat;
   animation: cloud01Move 10s ease-in-out infinite;
@@ -2213,7 +2257,7 @@ button {
   z-index: 1;
   width: 545px;
   height: 255px;
-  background-image: url(./images/book/book1617/雲右.png);
+  background-image: url(./images/book/book1617/cloud03.png);
   background-size: 100%;
   background-repeat: no-repeat;
   animation: cloud3 10s ease-in-out infinite;
@@ -2232,7 +2276,7 @@ button {
   height: 609px;
   margin: auto;
   background-size: 100%;
-  background-image: url(./images/book/book1617/山左.png);
+  background-image: url(./images/book/book1617/moutain01.png);
   background-position: center;
   background-repeat: no-repeat;
   opacity: 0;
@@ -2250,7 +2294,7 @@ button {
   height: 609px;
   margin: auto;
   background-size: 100%;
-  background-image: url(./images/book/book1617/山右.png);
+  background-image: url(./images/book/book1617/moutain02.png);
   background-position: center;
   background-repeat: no-repeat;
   opacity: 0;
@@ -2337,7 +2381,7 @@ button {
   position: absolute;
   left: 37%;
   bottom: 19%;
-  z-index: 999;
+  z-index: 1001;
   width: 65px;
   cursor: pointer;
   pointer-events: auto;
@@ -2352,7 +2396,7 @@ button {
   position: absolute;
   left: 43%;
   bottom: 18%;
-  z-index: 999;
+  z-index: 1001;
   cursor: pointer;
   pointer-events: auto;
 }
@@ -2383,7 +2427,7 @@ button {
   position: absolute;
   top: 13%;
   right: 3.5%;
-  z-index: 100;
+  z-index: 1001;
   width: 236px;
   opacity: 0;
   transition: all 1s ease-in-out;
@@ -2393,7 +2437,7 @@ button {
   position: absolute;
   top: 17%;
   right: 6.5%;
-  z-index: 102;
+  z-index: 1002;
   width: 168px;
   opacity: 0;
   transition: all 2s ease-in-out;
@@ -2402,16 +2446,33 @@ button {
 .bubble16 {
   position: absolute;
   left: 0;
+  right: 0;
+  top: 0;
   bottom: 0;
-  z-index: 99;
+  z-index: 1000;
   width: 100%;
   height: 100%;
   transition: all 3s ease-in-out;
   opacity: 0;
 }
 
+.shine16 {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 1000;
+  width: 100%;
+  height: 100%;
+  transition: all 3s ease-in-out;
+  opacity: 0;
+}
+
+.shine16-animation {
+  animation: starShow 1s ease-in-out infinite;
+}
+
 .popup-board03 {
-  background-image: url(./images/book/book1617/任務板.png);
+  background-image: url(./images/book/book1617/misson-board-pc.png);
 }
 
 /* book17 小女孩聽牛心跳*/
@@ -2990,7 +3051,7 @@ button {
   background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
-  background-image: url("./images/book/book24/手拿牛奶.png");
+  background-image: url("./images/book/book24/milk-hand.png");
   opacity: 0;
   transition: all 1.5s ease-in-out;
 }
@@ -3014,7 +3075,7 @@ button {
   background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
-  background-image: url("./images/book/book24/牛奶杯.png");
+  background-image: url("./images/book/book24/milk-cup.png");
   opacity: 0;
   transition: all 1s ease-in-out;
 }
@@ -3032,7 +3093,7 @@ button {
   background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
-  background-image: url("./images/book/book24/牛奶.png");
+  background-image: url("./images/book/book24/milk-inner.png");
   transition: all 5s ease-in-out;
 }
 
@@ -3049,7 +3110,7 @@ button {
   background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
-  background-image: url("./images/book/book24/媽媽右手掌.png");
+  background-image: url("./images/book/book24/mom-right-hand.png");
   opacity: 0;
   transition: all 1s ease-in-out;
 }
@@ -3067,7 +3128,7 @@ button {
   background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
-  background-image: url("./images/book/book24/牛奶柱.png");
+  background-image: url("./images/book/book24/milk-drop.png");
   opacity: 0;
   transition: all 2s ease-in-out;
 }
@@ -3085,7 +3146,7 @@ button {
   background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
-  background-image: url("./images/book/book24/花花.png");
+  background-image: url("./images/book/book24/milk-flower.png");
   opacity: 0;
   animation: flowereMove 5s ease-in-out infinite;
   transition: all 2s ease-in-out;
@@ -3104,7 +3165,7 @@ button {
   background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
-  background-image: url("./images/book/book24/香氣.png");
+  background-image: url("./images/book/book24/milk-smell.png");
   opacity: 0;
 }
 
@@ -3345,7 +3406,7 @@ button {
   top: 19%;
   width: 180px;
   height: 200px;
-  background-image: url(./images/book/book25/點這裡.png);
+  background-image: url(./images/book/book25/click-here.png);
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
@@ -3439,7 +3500,7 @@ button {
   width: 110px;
   height: 224px;
   background-size: 100%;
-  background-image: url(./images/book/book2627/林鳳營.png);
+  background-image: url(./images/book/book2627/milk-box.png);
   background-position: center;
   background-repeat: no-repeat;
   opacity: 0;
@@ -3504,7 +3565,7 @@ button {
   width: 115px;
   height: 60px;
   background-size: 100%;
-  background-image: url(./images/book/book2627/乾杯.png);
+  background-image: url(./images/book/book2627/cheers.png);
   background-position: center;
   background-repeat: no-repeat;
   opacity: 0;
@@ -3655,7 +3716,7 @@ button {
   z-index: 1;
   width: 1200px;
   height: 609px;
-  background-image: url(./images/book/book28/雲.png);
+  background-image: url(./images/book/book28/cloud.png);
   background-size: 100%;
   background-repeat: no-repeat;
   background-position-x: 450px;
@@ -3667,20 +3728,34 @@ button {
 .bubble-28 {
   position: absolute;
   top: 0;
-  right: -20%;
-  z-index: 4;
-  width: 1500px;
-  animation: bubbleMove 10s ease-in-out infinite;
+  bottom: 0;
+  left: 0;
+  z-index: 21;
+  width: 600px;
+  margin: auto;
+  animation: bubble28Move 10s ease-in-out infinite;
   opacity: 0;
   transition: all 1s ease-in-out;
 }
 
+@keyframes bubble28Move {
+  0% {
+    transform: translateY(5px);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+  100% {
+    transform: translateY(5px);
+  }
+}
+
 .star-28 {
   position: absolute;
-  bottom: 0%;
-  right: 3%;
-  z-index: 10;
-  width: 1200px;
+  bottom: 0;
+  right: 0;
+  z-index: 22;
+  width: 600px;
   opacity: 0;
   transition: all 1s ease-in-out;
 }
@@ -3693,7 +3768,7 @@ button {
   position: absolute;
   left: 0;
   bottom: 0;
-  z-index: 10;
+  z-index: 30;
   width: 100%;
   opacity: 0;
   transition: all 1s ease-in-out;
@@ -3721,6 +3796,7 @@ button {
 
 .story-28 {
   opacity: 0;
+  z-index: 30;
   transition: all 1s ease-in-out;
 }
 
@@ -3966,15 +4042,15 @@ button {
   }
 
   .popup-board01 {
-    background-image: url("./images/book/book13/任務板平板.png");
+    background-image: url("./images/book/book13/mission-board.png");
   }
 
   .popup-board02 {
-    background-image: url("./images/book/book1415/任務板平板.png");
+    background-image: url("./images/book/book1415/mission-board.png");
   }
 
   .popup-board03 {
-    background-image: url("./images/book/book1617/任務板平板.png");
+    background-image: url("./images/book/book1617/mission-board.png");
   }
 
   .popup-board-bg {
@@ -4196,15 +4272,15 @@ button {
   }
 
   .popup-board01 {
-    background-image: url("./images/book/book13/任務板平板.png");
+    background-image: url("./images/book/book13/mission-board.png");
   }
 
   .popup-board02 {
-    background-image: url("./images/book/book1415/任務板平板.png");
+    background-image: url("./images/book/book1415/mission-board.png");
   }
 
   .popup-board03 {
-    background-image: url("./images/book/book1617/任務板平板.png");
+    background-image: url("./images/book/book1617/mission-board.png");
   }
 
   .popup-board-bg {
