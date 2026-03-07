@@ -251,7 +251,7 @@ $(function () {
     let scale = 1;
 
     // ===== Desktop =====
-    if (!isCoarse && innerHeight > 500) {
+    if (!isCoarse) {
       $("#flipbook").css({
         transform: "none",
         width: "1200px",
@@ -265,7 +265,7 @@ $(function () {
       });
       console.log("進來桌機");
       return; // 直接結束
-    } else if (isTablet) {
+    } else if (isTablet || isIPad()) {
       console.log("進來平板");
       if (ratio < 1.2 && ratio > 1) {
         scale = 0.8; // 你要的固定值
@@ -577,7 +577,7 @@ $(function () {
 
     replayBtnTrunGray();
 
-    if (isTablet) {
+    if (isTablet || isIPad()) {
       $(".replay-mobile-btn-body").addClass("replay-mobile-btn-disabled");
     }
 
@@ -597,7 +597,7 @@ $(function () {
       // 如果不是最新 replay → 不准執行
       if (myGeneration !== replayGeneration) return;
 
-      if (isTablet) {
+      if (isTablet || isIPad()) {
         $(".replay-mobile-btn-body").prop("disabled", false);
         $(".replay-mobile-btn-body").removeClass("replay-mobile-btn-disabled");
       }
@@ -664,7 +664,7 @@ $(function () {
 
     // 切換 icon + 文字（保留你原本 UI）
     if (isMuted) {
-      if (isTablet) {
+      if (isTablet || isIPad()) {
         $(".mute-mobile-toggle").css("background", "#fff");
         $(".mute-mobile-toggle").html('<i class="fas fa-volume-mute"></i>');
       }
@@ -676,7 +676,7 @@ $(function () {
         $(".mute-mobile-toggle").html('<i class="fas fa-volume-mute"></i>');
       }
     } else {
-      if (isTablet) {
+      if (isTablet || isIPad()) {
         $(".mute-mobile-toggle").css("background", "rgba(169, 169, 169, 0.2)");
         $(".mute-mobile-toggle").html('<i class="fas fa-volume-up"></i>');
       }
@@ -995,7 +995,7 @@ $(function () {
   }
 
   function replayBtnTrunGray() {
-    if (isTablet) {
+    if (isTablet || isIPad()) {
       $(".replay-mobile-btn-body")
         .prop("disabled", true)
         .addClass("replay-mobile-btn-disabled");
@@ -2770,6 +2770,19 @@ $(function () {
                 left: w * 0.3528 + "px", //260
               });
             }
+          });
+        } else {
+          $(".book-section").css({
+            left: "0px",
+          });
+        }
+      } else {
+        if (page === 28) {
+          requestAnimationFrame(() => {
+            const w = getBookWidth();
+            $(".book-section").css({
+              left: w * 0.33 + "px", //260
+            });
           });
         } else {
           $(".book-section").css({
