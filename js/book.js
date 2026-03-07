@@ -256,27 +256,32 @@ $(function () {
   }
 
   function resizeFunction() {
+    const isCoarse = window.matchMedia("(pointer: coarse)").matches;
     let scaleMobile;
     let scaleMobileTranslateY;
-    if (innerHeight >= 320) {
-      scaleMobile = 0.8;
-      scaleMobileTranslateY = -76;
-    } else {
-      scaleMobile = 0.75;
-      scaleMobileTranslateY = -96;
-    }
+
     //resize書本大小
     const wrapper = $(".book-scale-wrapper");
 
     let scale = 1;
 
     // ===== Desktop =====
-    if (innerWidth > 1200) {
-      scale = 1;
-    }
+    if (!isCoarse && innerHeight > 500) {
+      $("#flipbook").css({
+        transform: "none",
+        width: "1200px",
+        height: "600px",
+      });
 
-    // ===== Tablet =====
-    else if (isTablet) {
+      $(".book-section").css({
+        transform: "none",
+        width: "1200px",
+        height: "600px",
+      });
+      console.log("進來桌機");
+      return; // 直接結束
+    } else if (isTablet) {
+      console.log("進來平板");
       if (ratio < 1.2 && ratio > 1) {
         scale = 0.8; // 你要的固定值
         $("#flipbook").css({
@@ -294,6 +299,14 @@ $(function () {
         height: scale * scale * 600 + "px",
       });
     } else {
+      console.log("進來手機");
+      if (innerHeight >= 320) {
+        scaleMobile = 0.8;
+        scaleMobileTranslateY = -76;
+      } else {
+        scaleMobile = 0.75;
+        scaleMobileTranslateY = -96;
+      }
       scale = scaleMobile; // 你要的固定值
       $(".book-section").css({
         transform: `scale(` + scale + `)`,
