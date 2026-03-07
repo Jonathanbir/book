@@ -1,9 +1,6 @@
 $(function () {
   const $flipbook = $("#flipbook");
 
-  const bookHeight = window.innerHeight;
-  const bookWidth = bookHeight * (1200 / 600); // 保持原始比例 1200:600
-
   $(window).on("resize", function () {
     const newWidth = window.innerWidth;
     const newHeight = window.innerHeight;
@@ -12,8 +9,6 @@ $(function () {
 
   const screenWidth = screen.width;
   const screenHeight = screen.height;
-  console.log("手機新的寬高:", bookWidth, bookHeight);
-  console.log("瀏覽器的寬高:", screenWidth, screenHeight);
 
   const innerWidth = window.innerWidth;
   const innerHeight = window.innerHeight; // 目前可視高度（含工具列收起）
@@ -26,29 +21,11 @@ $(function () {
   function getBookWidth() {
     return document.querySelector("#flipbook").getBoundingClientRect().width;
   }
-  // let notPhoneRatio = matchMedia("(max-aspect-ratio:3/2)").matches;
-  // function getDeviceLayout() {
-  //   const coarse = matchMedia("(pointer: coarse)").matches;
-  //   const width = innerWidth;
-  //   const height = innerHeight;
-  //   const ratio = width / height;
-
-  //   if (!coarse && width >= 1024 && height > 500) return "desktop";
-  //   if (coarse && ratio <= 1.6) return "tablet";
-  //   return "mobile";
-  // }
 
   const isTablet =
     window.matchMedia("(pointer: coarse)").matches &&
     innerHeight >= 460 &&
     innerHeight <= 1000;
-
-  // const isTablet = window.matchMedia(`
-  //   (pointer: coarse)
-  //   and (min-width: 768px)
-  //   and (max-width: 1366px)
-  //   and (max-aspect-ratio: 3/2)
-  // `).matches;
 
   const vh = window.visualViewport.height;
   function updateHeight() {
@@ -167,8 +144,6 @@ $(function () {
   //     "\nisIPad(): " +
   //     isIPad(),
   // );
-
-  // window.alert("getDeviceLayout(): " + getDeviceLayout());
 
   const audioContext = new (window.AudioContext || window.webkitAudioContext)();
 
@@ -290,7 +265,6 @@ $(function () {
       scaleMobile = 0.75;
       scaleMobileTranslateY = -96;
     }
-    console.log("scaleMobile:", scaleMobile);
     //resize書本大小
     const wrapper = $(".book-scale-wrapper");
 
@@ -575,8 +549,6 @@ $(function () {
       }
     }
 
-    // $(".prev-page, .next-page").prop("disabled", true);
-    // $(".prev-page, .next-page img").attr("src","./images/common/下一頁深藍.png");
     setTimeout(() => {
       $(".prev-page img").attr("src", "./images/common/prve-img.png");
       $(".next-page img").attr("src", "./images/common/next-img.png");
