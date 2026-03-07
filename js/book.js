@@ -810,16 +810,16 @@ $(function () {
     $(".milk-inner").css("opacity", "0");
     $(".click-girl").hide();
     $(".milk-hand").removeClass("milk-hand-animation");
-    $(".milk-drop").removeClass("milk-drop-show");
+    $(".milk-drop").removeClass("opacity-show");
     $(".girl-l-hand").removeClass("girl-l-hand-empty");
     $(".girl-l-hand-region").removeClass("girl-l-hand-finish");
     $(".girl-r-hand").removeClass("girl-r-hand-finish");
-    $(".milk-stains").removeClass("milk-stains-show");
-    $(".milk-drop").removeClass("milk-drop-show");
-    $(".book25-story").removeClass("milk-stains-show");
-    $(".book25-text").removeClass("milk-stains-show");
+    $(".milk-stains").removeClass("opacity-show");
+    $(".milk-drop").removeClass("opacity-show");
+    $(".book25-story").removeClass("opacity-show");
+    $(".book25-text").removeClass("opacity-show");
     $(".milk-flower").css("dispaly", "none");
-    $(".milk-flower").removeClass("milk-drop-show");
+    $(".milk-flower").removeClass("opacity-show");
     $(".milk-smell").removeClass("milk-smell-animation");
 
     for (let i = 1; i <= 6; i++) {
@@ -857,7 +857,7 @@ $(function () {
 
     page2425Timeouts.push(
       setTimeout(() => {
-        $(".milk-drop").addClass("milk-drop-show");
+        $(".milk-drop").addClass("opacity-show");
       }, 4000),
     );
 
@@ -869,8 +869,8 @@ $(function () {
 
     page2425Timeouts.push(
       setTimeout(() => {
-        $(".milk-flower").addClass("milk-drop-show");
-        $(".milk-drop").removeClass("milk-drop-show");
+        $(".milk-flower").addClass("opacity-show");
+        $(".milk-drop").removeClass("opacity-show");
       }, 8300),
     );
 
@@ -923,7 +923,7 @@ $(function () {
 
     page2627Timeouts.push(
       setTimeout(() => {
-        $(".cheers").addClass("bubble-fade-in");
+        $(".cheers").addClass("opacity-show");
         $(".daughter-hand-region").addClass("daughter-hand-finish");
       }, 5000),
     );
@@ -951,7 +951,7 @@ $(function () {
 
     page2627Timeouts.push(
       setTimeout(() => {
-        $(".sweet-taste").addClass("bubble-fade-in");
+        $(".sweet-taste").addClass("opacity-show");
       }, 7000),
     );
 
@@ -993,7 +993,7 @@ $(function () {
     $(".daughter-hand-milk").css("display", "none");
     $(".daughter-hand-cup").css("opacity", "0");
     $(".mom-hand-milk").css("opacity", "0");
-    $(".cheers").removeClass("bubble-fade-in");
+    $(".cheers").removeClass("opacity-show");
     $(".text26").removeClass("opacity-show");
     const removeClasses = [
       // 手部完成、移除
@@ -1294,14 +1294,14 @@ $(function () {
       $("#flipbook .star5").remove();
       $(".door").removeClass("door-opening");
       $(".peoples").removeClass("peoples-open");
-      $(".grass0607").removeClass("tree-fade-in");
-      $(".tree1").removeClass("tree-fade-in");
-      $(".tree2").removeClass("tree-fade-in");
-      $(".tree3").removeClass("tree-fade-in");
-      $(".cloud1").removeClass("cloud-fade-in");
-      $(".cloud2").removeClass("cloud-fade-in");
-      $(".cloud3").removeClass("cloud-fade-in");
-      $(".text06").removeClass("tree-fade-in");
+      $(".grass0607").removeClass("opacity-show");
+      $(".tree1").removeClass("opacity-show");
+      $(".tree2").removeClass("opacity-show");
+      $(".tree3").removeClass("opacity-show");
+      $(".cloud1").removeClass("opacity-show");
+      $(".cloud2").removeClass("opacity-show");
+      $(".cloud3").removeClass("opacity-show");
+      $(".text06").removeClass("opacity-show");
       $(".wow").removeClass("wow-animation");
     }
 
@@ -1358,20 +1358,20 @@ $(function () {
 
         $("#flipbook .knock , #flipbook .door").on("click", () => {
           $(".knock").css("display", "none");
-          $(".text06").addClass("cloud-fade-in");
-          $(".cloud1").addClass("cloud-fade-in");
+          $(".text06").addClass("opacity-show");
+          $(".cloud1").addClass("opacity-show");
 
           page67Timeouts.push(
             setTimeout(() => {
-              $(".grass0607").addClass("tree-fade-in");
-              $(".tree1").addClass("tree-fade-in");
+              $(".grass0607").addClass("opacity-show");
+              $(".tree1").addClass("opacity-show");
             }, 2500),
           );
 
           page67Timeouts.push(
             setTimeout(() => {
               $(".wow").addClass("wow-animation");
-              $(".tree2").addClass("tree-fade-in");
+              $(".tree2").addClass("opacity-show");
               $(".door").addClass("door-opening");
               $(".peoples").addClass("peoples-open");
             }, 2500),
@@ -1379,15 +1379,15 @@ $(function () {
 
           page67Timeouts.push(
             setTimeout(() => {
-              $(".tree3").addClass("tree-fade-in");
-              $(".cloud2").addClass("cloud-fade-in");
-              $(".cloud3").addClass("cloud-fade-in");
+              $(".tree3").addClass("opacity-show");
+              $(".cloud2").addClass("opacity-show");
+              $(".cloud3").addClass("opacity-show");
             }, 4000),
           );
 
           page67Timeouts.push(
             setTimeout(() => {
-              $(".bubble67").addClass("bubble-fade-in");
+              $(".bubble67").addClass("opacity-show");
             }, 6000),
           );
 
@@ -1425,11 +1425,11 @@ $(function () {
       $(".foot3").removeClass("foot3-animation");
       $(".foot4").removeClass("foot4-animation");
       $(".foot5").removeClass("foot5-animation");
-      $(".mowmow").removeClass("bubble-fade-in");
-      $(".text09").removeClass("bubble-fade-in");
+      $(".mowmow").removeClass("opacity-show");
+      $(".text09").removeClass("opacity-show");
       $(".eyes-ball-8").removeClass("eyes-ball-animation");
       $(".mom-daughter").removeClass("mom-daughter-animation");
-      $(".bubble7").removeClass("bubble-fade-in");
+      $(".bubble7").removeClass("opacity-show");
       $(".star7").removeClass("star-fade-in");
       $("#flipbook .mom-daughter").remove();
       $("#flipbook .bubble7").remove();
@@ -1486,14 +1486,14 @@ $(function () {
 
       page89Timeouts.push(
         setTimeout(() => {
-          $(".text09").addClass("bubble-fade-in");
+          $(".text09").addClass("opacity-show");
         }, 11000),
       );
 
       page89Timeouts.push(
         setTimeout(() => {
-          $(".mowmow").addClass("bubble-fade-in");
-          $(".bubble7").addClass("bubble-fade-in");
+          $(".mowmow").addClass("opacity-show");
+          $(".bubble7").addClass("opacity-show");
         }, 11500),
       );
 
@@ -1529,10 +1529,10 @@ $(function () {
       $(".list-board").css("opacity", "0");
       $(".rainbow").css("opacity", "0");
       $(".girls-head").css("opacity", "0");
-      $(".list").removeClass("bubble-fade-in");
+      $(".list").removeClass("opacity-show");
       $(".cloud-01").removeClass("cloud-animation");
       $(".cloud-02").removeClass("cloud-animation");
-      $(".book10-text").removeClass("bubble-fade-in");
+      $(".book10-text").removeClass("opacity-show");
       $("#flipbook .rainbow").remove();
       $("#flipbook .cloud-group").remove();
       $("#flipbook .girls-head").remove();
@@ -1584,20 +1584,20 @@ $(function () {
           $(".list-board").css("opacity", "1");
           $(".rainbow").css("opacity", "1");
           $(".girls-head").css("opacity", "1");
-          $(".bubble11").addClass("bubble-fade-in");
+          $(".bubble11").addClass("opacity-show");
         }, 1000),
       );
 
       page1011Timeouts.push(
         setTimeout(() => {
-          $(".list").addClass("bubble-fade-in");
+          $(".list").addClass("opacity-show");
           $(".star11").addClass("star-fade-in");
         }, 2000),
       );
 
       page1011Timeouts.push(
         setTimeout(() => {
-          $(".book10-text").addClass("bubble-fade-in");
+          $(".book10-text").addClass("opacity-show");
         }, 13000),
       );
 
@@ -1701,12 +1701,12 @@ $(function () {
       $(".finish-mission01").css("opacity", "0");
       $(".star13").removeClass("star3-animation");
       $(".electfan").removeClass("electfan-move");
-      $(".bubble-bg").removeClass("bubble-move");
+      $(".bubble-bg").removeClass("opacity-show");
       $(".magic-wand").removeClass("magic-wand-animation");
       $(".coin01").removeClass("coin-animation");
       $(".coin-light").removeClass("coin-light-show");
-      $(".coin-hint01").removeClass("bubble-fade-in");
-      $(".check01").removeClass("check-show");
+      $(".coin-hint01").removeClass("opacity-show");
+      $(".check01").removeClass("opacity-show");
       $(".check01").remove();
       $(".popup-board01").css("display", "none");
       $("#flipbook .click-magic-wand").remove();
@@ -1758,7 +1758,7 @@ $(function () {
                    <img class="star13" src="./images/book/book13/star.png"/>
                    <img class="bubble12" src="./images/book/book13/milk-bubble.png"/>
                    <img class="board board13" src="./images/book/book13/board13.png"/>
-                    <img class="check check01" src="./images/book/book13/check.png" />
+                    <img class="check check01" src="./images/common/check.png" />
                    <div class="check-box"></div>
                    `);
 
@@ -1834,19 +1834,19 @@ $(function () {
           );
 
           page1213Timeouts.push(
-            setTimeout(() => $(".bubble-bg").addClass("bubble-move"), 6000),
+            setTimeout(() => $(".bubble-bg").addClass("opacity-show"), 6000),
           );
 
           page1213Timeouts.push(
             setTimeout(() => {
               $(".star13").addClass("star3-animation");
-              $(".bubble12").addClass("bubble-fade-in");
+              $(".bubble12").addClass("opacity-show");
             }, 7000),
           );
 
           page1213Timeouts.push(
             setTimeout(() => {
-              $(".coin-hint01").addClass("bubble-fade-in");
+              $(".coin-hint01").addClass("opacity-show");
             }, 18000),
           );
 
@@ -1854,7 +1854,7 @@ $(function () {
             setTimeout(() => {
               $(".coin01").addClass("coin-animation");
               $(".coin-light").addClass("coin-light-show");
-              $(".check01").addClass("check-show");
+              $(".check01").addClass("opacity-show");
             }, 26000),
           );
 
@@ -1926,15 +1926,15 @@ $(function () {
       $(".popup-board02").remove();
       $(".popup-board-bg02").remove();
       $(".coin-hint02").remove();
-      $(".success-hint02").removeClass("bubble-fade-in");
+      $(".success-hint02").removeClass("opacity-show");
       $(".cows-tongue").removeClass("cows-tongue-animation");
       $(".milk").removeClass("milk-empty");
-      $(".bubble14").removeClass("bubble-fade-in");
+      $(".bubble14").removeClass("opacity-show");
       $(".shine14").removeClass("shine14-animation");
       $(".coin02").removeClass("coin-animation");
       $(".coin-light02").removeClass("coin-light-show");
-      $(".check02").removeClass("check-show");
-      $(".coin-hint02").removeClass("bubble-fade-in");
+      $(".check02").removeClass("opacity-show");
+      $(".coin-hint02").removeClass("opacity-show");
       $(".check-box").hide();
     }
 
@@ -1962,8 +1962,8 @@ $(function () {
           .append(`<img class="small-cow" src="./images/book/book1415/cow.png"/>
           <img class="finish-mission02" src="./images/common/finish-mission2.png"/>
           <img class="board-list02" src="./images/book/book1415/board-list02.png">
-          <img class="board14" src="./images/book/book1415/board.png"/>
-          <img class="check check02" src="./images/book/book13/check.png"/>
+          <img class="board14" src="./images/common/board.png"/>
+          <img class="check check02" src="./images/common/check.png"/>
           <div class="check-box"></div>
           <img class="click-milk" src="./images/book/book0607/click-here.png"/>
           <div class="click-milk-box"></div>
@@ -2018,13 +2018,13 @@ $(function () {
 
         page1415Timeouts.push(
           setTimeout(() => {
-            $(".board-list02").addClass("bubble-fade-in");
+            $(".board-list02").addClass("opacity-show");
           }, 1000),
         );
 
         page1415Timeouts.push(
           setTimeout(() => {
-            $(".bubble14").addClass("bubble-fade-in");
+            $(".bubble14").addClass("opacity-show");
           }, 1000),
         );
 
@@ -2053,7 +2053,7 @@ $(function () {
             page1415Timeouts.push(
               setTimeout(() => {
                 $(".shine14").addClass("shine14-animation");
-                $(".success-hint02").addClass("bubble-fade-in");
+                $(".success-hint02").addClass("opacity-show");
                 $(".cows-tongue").removeClass("cows-tongue-animation");
               }, 6000),
             );
@@ -2062,13 +2062,13 @@ $(function () {
 
             page1415Timeouts.push(
               setTimeout(() => {
-                $(".coin-hint02").addClass("bubble-fade-in");
+                $(".coin-hint02").addClass("opacity-show");
               }, 7000),
             );
 
             page1415Timeouts.push(
               setTimeout(() => {
-                $(".check02").addClass("check-show");
+                $(".check02").addClass("opacity-show");
                 $(".coin02").addClass("coin-animation");
                 $(".coin-light02").addClass("coin-light-show");
               }, 13000),
@@ -2133,9 +2133,9 @@ $(function () {
       $(".cow-heart").removeClass("heart-beat-animation");
       $(".coin03").removeClass("coin-animation");
       $(".coin-light03").removeClass("coin-light-show");
-      $(".check03").removeClass("check-show");
-      $(".coin-hint03").removeClass("bubble-fade-in");
-      $(".dondon").removeClass("bubble-fade-in");
+      $(".check03").removeClass("opacity-show");
+      $(".coin-hint03").removeClass("opacity-show");
+      $(".dondon").removeClass("opacity-show");
       $("#flipbook .shine16").remove();
       $("#flipbook .cloud-16-2").remove();
       $("#flipbook .click-hearing-heart").remove();
@@ -2191,8 +2191,8 @@ $(function () {
             <div class="cloud-16-2"></div>
             <div class="check-box"></div>
             <img class="board-list03" src="./images/book/book1617/board-list03.png"/>
-            <img class="check check03" src="./images/book/book13/check.png" />
-            <img class="board16" src="./images/book/book1415/board.png">
+            <img class="check check03" src="./images/common/check.png" />
+            <img class="board16" src="./images/common/board.png">
             <img class="bubble16" src="./images/book/book1617/milk-bubble.png"/>
             <img class="shine16" src="./images/book/book1617/shine.png"/>
             `);
@@ -2236,8 +2236,8 @@ $(function () {
 
         page1617Timeouts.push(
           setTimeout(() => {
-            $(".bubble16").addClass("bubble-fade-in");
-            $(".board-list03").addClass("bubble-fade-in");
+            $(".bubble16").addClass("opacity-show");
+            $(".board-list03").addClass("opacity-show");
           }, 1000),
         );
 
@@ -2267,7 +2267,7 @@ $(function () {
             }, 500),
           );
 
-          $(".dondon").addClass("bubble-fade-in");
+          $(".dondon").addClass("opacity-show");
           $(".stethoscope").addClass("stethoscope-move");
 
           page1617Timeouts.push(
@@ -2289,13 +2289,13 @@ $(function () {
 
           page1617Timeouts.push(
             setTimeout(() => {
-              $(".coin-hint03").addClass("bubble-fade-in");
+              $(".coin-hint03").addClass("opacity-show");
             }, 6000),
           );
 
           page1617Timeouts.push(
             setTimeout(() => {
-              $(".check03").addClass("check-show");
+              $(".check03").addClass("opacity-show");
               $(".coin03").addClass("coin-animation");
               $(".coin-light03").addClass("coin-light-show");
             }, 14000),
@@ -2342,11 +2342,11 @@ $(function () {
         $(".coin01-final, .coin02-final, .coin03-final").removeClass(
           "coin-all-animation",
         );
-        $(".book19-text").removeClass("bubble-fade-in");
+        $(".book19-text").removeClass("opacity-show");
         $(".crown").removeClass("crown-animation");
-        $(".crown-shine").removeClass("bubble-fade-in");
-        $(".coin-all-shine").removeClass("bubble-fade-in");
-        $(".bubble18").removeClass("bubble-fade-in");
+        $(".crown-shine").removeClass("opacity-show");
+        $(".coin-all-shine").removeClass("opacity-show");
+        $(".bubble18").removeClass("opacity-show");
         $("#flipbook .bubble18").remove();
         $("#flipbook .crown").remove();
         $("#flipbook .crown-shine").remove();
@@ -2386,13 +2386,13 @@ $(function () {
 
       page1819Timeouts.push(
         setTimeout(() => {
-          $(".coin-all-shine").addClass("bubble-fade-in");
+          $(".coin-all-shine").addClass("opacity-show");
         }, 4000),
       );
 
       page1819Timeouts.push(
         setTimeout(() => {
-          $(".bubble18").addClass("bubble-fade-in");
+          $(".bubble18").addClass("opacity-show");
         }, 3500),
       );
 
@@ -2404,13 +2404,13 @@ $(function () {
 
       page1819Timeouts.push(
         setTimeout(() => {
-          $(".crown-shine").addClass("bubble-fade-in");
+          $(".crown-shine").addClass("opacity-show");
         }, 12500),
       );
 
       page1819Timeouts.push(
         setTimeout(() => {
-          $(".book19-text").addClass("bubble-fade-in");
+          $(".book19-text").addClass("opacity-show");
         }, 18500),
       );
 
@@ -2426,11 +2426,11 @@ $(function () {
       $(".coin01-final, .coin02-final, .coin03-final").removeClass(
         "coin-all-animation",
       );
-      $(".book19-text").removeClass("bubble-fade-in");
+      $(".book19-text").removeClass("opacity-show");
       $(".crown").removeClass("crown-animation");
-      $(".crown-shine").removeClass("bubble-fade-in");
-      $(".coin-all-shine").removeClass("bubble-fade-in");
-      $(".bubble18").removeClass("bubble-fade-in");
+      $(".crown-shine").removeClass("opacity-show");
+      $(".coin-all-shine").removeClass("opacity-show");
+      $(".bubble18").removeClass("opacity-show");
       $("#flipbook .bubble18").remove();
       $("#flipbook .crown").remove();
       $("#flipbook .crown-shine").remove();
@@ -2454,15 +2454,15 @@ $(function () {
       $(".dialog20").remove();
       $(".dialog21").remove();
       $(".book21-text").remove();
-      $(".book21-text").removeClass("bubble-fade-in");
-      $(".dream01").removeClass("dream-animation");
-      $(".dream02").removeClass("dream-animation");
-      $(".dream03").removeClass("dream-animation");
-      $(".dream04").removeClass("dream-animation");
+      $(".book21-text").removeClass("opacity-show");
+      $(".dream01").removeClass("opacity-show");
+      $(".dream02").removeClass("opacity-show");
+      $(".dream03").removeClass("opacity-show");
+      $(".dream04").removeClass("opacity-show");
       $(".dialog20").removeClass("dialog20-animation");
       $(".dialog21").removeClass("dialog20-animation");
       $(".star20").removeClass("dialog20-animation");
-      $(".bubble20").removeClass("bubble-fade-in");
+      $(".bubble20").removeClass("opacity-show");
       $(".dream-girl").removeClass("dream-girl-animation");
     }
 
@@ -2489,24 +2489,24 @@ $(function () {
         setTimeout(() => {
           $(".book20").css("opacity", "1");
           $(".book21").css("opacity", "1");
-          $(".dream01").addClass("dream-animation");
-          $(".dream02").addClass("dream-animation");
-          $(".dream03").addClass("dream-animation");
-          $(".dream04").addClass("dream-animation");
-          $(".story20").addClass("dream-animation");
+          $(".dream01").addClass("opacity-show");
+          $(".dream02").addClass("opacity-show");
+          $(".dream03").addClass("opacity-show");
+          $(".dream04").addClass("opacity-show");
+          $(".story20").addClass("opacity-show");
           $(".dream-girl").addClass("dream-girl-animation");
         }, 1000),
       );
 
       page2021Timeouts.push(
         setTimeout(() => {
-          $(".dialog20").addClass("bubble-fade-in");
+          $(".dialog20").addClass("opacity-show");
         }, 5000),
       );
 
       page2021Timeouts.push(
         setTimeout(() => {
-          $(".bubble20").addClass("bubble-fade-in");
+          $(".bubble20").addClass("opacity-show");
           $(".dream-light").addClass("sweet-taste-animation");
           $(".star20").addClass("dialog20-animation");
         }, 7000),
@@ -2514,13 +2514,13 @@ $(function () {
 
       page2021Timeouts.push(
         setTimeout(() => {
-          $(".dialog21").addClass("bubble-fade-in");
+          $(".dialog21").addClass("opacity-show");
         }, 9000),
       );
 
       page2021Timeouts.push(
         setTimeout(() => {
-          $(".book21-text").addClass("bubble-fade-in");
+          $(".book21-text").addClass("opacity-show");
         }, 11000),
       );
 
@@ -2539,7 +2539,7 @@ $(function () {
       $(".cow-alarm ").css("opacity", "0");
       $(".sleep-girl-hand ").css("opacity", "0");
       $(".sleep-girl-arm").css("opacity", "0");
-      $(".book23-text").removeClass("bubble-fade-in");
+      $(".book23-text").removeClass("opacity-show");
     }
 
     if (page === 22 || page === 23) {
@@ -2559,7 +2559,7 @@ $(function () {
 
       page2223Timeouts.push(
         setTimeout(() => {
-          $(".book23-text").addClass("bubble-fade-in");
+          $(".book23-text").addClass("opacity-show");
         }, 6000),
       );
 
@@ -2604,7 +2604,7 @@ $(function () {
         $(".daughter-hand-milk").css("opacity", "1");
         $(".mom-hand-milk").css("opacity", "1");
         $(".daughter-hand-milk").removeClass("daughter-hand-milk-empty");
-        $(".sweet-taste").removeClass("bubble-fade-in");
+        $(".sweet-taste").removeClass("opacity-show");
         startFamilyAnimation();
         setTimeout(() => {
           $(".mom-hand-region").show();
@@ -2685,7 +2685,7 @@ $(function () {
     $(".click-girl")
       .off("click")
       .on("click", function () {
-        $(".book25-story").addClass("milk-stains-show");
+        $(".book25-story").addClass("opacity-show");
         $(".flower").css("opacity", "1");
 
         $(".click-girl").hide();
@@ -2702,13 +2702,13 @@ $(function () {
 
         page2425Timeouts.push(
           setTimeout(() => {
-            $(".milk-stains").addClass("milk-stains-show");
+            $(".milk-stains").addClass("opacity-show");
           }, 2200),
         );
 
         page2425Timeouts.push(
           setTimeout(() => {
-            $(".book25-text").addClass("milk-stains-show");
+            $(".book25-text").addClass("opacity-show");
           }, 6000),
         );
 
@@ -2830,7 +2830,7 @@ $(function () {
         $(".daughter-hand-milk").css("opacity", "1");
         $(".mom-hand-milk").css("opacity", "1");
         $(".daughter-hand-milk").removeClass("daughter-hand-milk-empty");
-        $(".sweet-taste").removeClass("bubble-fade-in");
+        $(".sweet-taste").removeClass("opacity-show");
       }
 
       if (isTablet || isIPad()) {
