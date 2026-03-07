@@ -1,22 +1,14 @@
 $(function () {
   const $flipbook = $("#flipbook");
 
-  $(window).on("resize", function () {
-    const newWidth = window.innerWidth;
-    const newHeight = window.innerHeight;
-    $("#flipbook").turn("size", newWidth, newHeight);
-  });
-
   const screenWidth = screen.width;
   const screenHeight = screen.height;
 
   const innerWidth = window.innerWidth;
   const innerHeight = window.innerHeight; // 目前可視高度（含工具列收起）
   const ratio = innerWidth / innerHeight;
-  const barHeight = innerHeight - screenHeight;
   const visualWidth = visualViewport.width;
   const visualHeight = visualViewport.height;
-  const widthGap = (visualWidth - visualHeight * 2) / 2;
 
   function getBookWidth() {
     return document.querySelector("#flipbook").getBoundingClientRect().width;
@@ -175,18 +167,15 @@ $(function () {
     bgSource.start(0);
   }
 
-  if (innerHeight > 500 && !matchMedia("(pointer: coarse)").matches) {
-    $flipbook.turn({
-      width: 1200,
-      height: 600,
-      autoCenter: true,
-    });
+  $flipbook.turn({
+    width: 1200,
+    height: 600,
+    autoCenter: true,
+  });
+  if (!matchMedia("(pointer: coarse)").matches) {
+    console.log("desktop mode");
   } else if (isTablet || isIPad()) {
-    $flipbook.turn({
-      width: 1200,
-      height: 600,
-      autoCenter: true,
-    });
+    console.log("tablet mode");
     // 等 turn.js 完成 layout
     requestAnimationFrame(() => {
       const w = getBookWidth();
@@ -209,11 +198,7 @@ $(function () {
       $(".book-container").css("height", window.innerHeight);
     });
   } else {
-    $flipbook.turn({
-      width: 1200,
-      height: 600,
-      autoCenter: true,
-    });
+    console.log("mobile mode");
     // 等 turn.js 完成 layout
     requestAnimationFrame(() => {
       const w = getBookWidth();

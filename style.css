@@ -4050,6 +4050,20 @@ button {
   }
 }
 
+/* 手機高度介於320px~460px */
+@media (pointer: coarse) and (max-height: 460px) and (min-height: 320px) {
+  .popup-board {
+    background-size: 90%;
+  }
+}
+
+/* 手機高度小於320px */
+@media screen and (max-height: 320px) {
+  .popup-board {
+    background-size: 80%;
+  }
+}
+
 /* 手機 */
 @media screen and (max-height: 460px) {
   .mobile {
