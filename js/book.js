@@ -1246,11 +1246,13 @@ $(function () {
       reset45();
     }
 
+    let doorClicked = false;
     let doorClickBound = false;
 
     function reset67() {
       page67Timeouts.forEach((id) => clearTimeout(id));
       page67Timeouts = [];
+      doorClicked = false;
       $("#flipbook .knock").remove();
       $("#flipbook .grass0607").remove();
       $("#flipbook .tree1").remove();
@@ -1327,6 +1329,8 @@ $(function () {
         btnDisabled();
 
         $("#flipbook .knock , #flipbook .door").on("click", () => {
+          if (doorClicked) return; // 已經點過就直接結束
+          doorClicked = true;
           $(".knock").css("display", "none");
           $(".text06").addClass("opacity-show");
           $(".cloud1").addClass("opacity-show");
@@ -1571,14 +1575,14 @@ $(function () {
         }, 13000),
       );
 
+      page1011Timeouts.push(
+        setTimeout(() => {
+          $(".text11").css("opacity", "1");
+        }, 17000),
+      );
+
       startReplayTimer(23000);
     }
-
-    page1011Timeouts.push(
-      setTimeout(() => {
-        $(".text11").css("opacity", "1");
-      }, 17000),
-    );
 
     if (page === 9 || page === 12) {
       reset1011();

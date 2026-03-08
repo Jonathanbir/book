@@ -4012,6 +4012,7 @@ button {
   }
 
   .popup-board {
+    background-size: 95%;
     z-index: 1000;
   }
 
