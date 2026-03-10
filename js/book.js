@@ -1,29 +1,21 @@
 $(function () {
   const $flipbook = $("#flipbook");
 
-  const screenWidth = screen.width;
-  const screenHeight = screen.height;
-
   const innerWidth = window.innerWidth;
   const innerHeight = window.innerHeight; // 目前可視高度（含工具列收起）
   const ratio = innerWidth / innerHeight;
-  const visualWidth = visualViewport.width;
-  const visualHeight = visualViewport.height;
 
   function getBookWidth() {
     return document.querySelector("#flipbook").getBoundingClientRect().width;
   }
 
+  //平板判斷
   const isTablet =
     window.matchMedia("(pointer: coarse)").matches &&
     innerHeight >= 460 &&
     innerHeight <= 1000;
 
-  const vh = window.visualViewport.height;
-  function updateHeight() {
-    document.documentElement.style.setProperty("--vh", `${vh}px`);
-  }
-
+  //控制載入機制flag
   let isBookStarted = false;
   let girlsHeadInterval = null;
   let electfanInterval = null;
@@ -31,14 +23,16 @@ $(function () {
   let replayTimer = null;
   let replayGeneration = 0;
   let isReplaying = false;
-  let pageTimers = [];
 
+  // 控制聲音的變數
   let currentVoiceSource = null;
   let voiceToken = 0;
   let lastAudioPage = null;
   const BG_VOLUME = 0.3;
   const VOICE_VOLUME = 1.2;
 
+  // 還原每頁的動畫及邏輯
+  let pageTimers = [];
   let page23Timeouts = [];
   let page45Timeouts = [];
   let page67Timeouts = [];
@@ -63,23 +57,7 @@ $(function () {
     pageTimers.push(id);
   }
 
-  //判斷是否為Android平板
-  function isAndroidTablet() {
-    const ua = navigator.userAgent.toLowerCase();
-
-    const isAndroid = ua.includes("android");
-    const isMobile = ua.includes("mobile");
-
-    // Android 平板 = Android + 沒有 mobile 字樣
-    return isAndroid && !isMobile;
-  }
-
-  // 頁面初次載入
-  updateHeight();
-
-  // 當手機旋轉或尺寸改變
-  window.addEventListener("resize", updateHeight);
-
+  //判斷瀏覽器模式
   function isSafari() {
     const ua = navigator.userAgent;
 
@@ -119,18 +97,10 @@ $(function () {
   }
 
   // window.alert(
-  //   "visualHeight: " +
-  //     visualHeight +
-  //     "\nvisualWidth: " +
-  //     visualWidth +
-  //     "\ninnerHeight " +
+  //     "innerHeight " +
   //     innerHeight +
   //     "\ninnerWidth " +
   //     innerWidth +
-  //     "\nscreenHeight " +
-  //     screenHeight +
-  //     "\nscreenWidth " +
-  //     screenWidth +
   //     "\nisIOSChrome(): " +
   //     isIOSChrome() +
   //     "\nisAndroidChrome(): " +
@@ -141,6 +111,7 @@ $(function () {
   //     isIPad(),
   // );
 
+  //控制音樂區塊
   const audioContext = new (window.AudioContext || window.webkitAudioContext)();
 
   // 背景音樂音量控制
@@ -156,6 +127,7 @@ $(function () {
 
   let bgSource = null;
 
+  //播放背景音樂
   async function playBackground() {
     const response = await fetch("./mp3/background.mp3");
     const arrayBuffer = await response.arrayBuffer();
@@ -171,6 +143,7 @@ $(function () {
     bgSource.start(0);
   }
 
+  //電子書主要設定寬高 與 book-section初始位置
   $flipbook.turn({
     width: 1200,
     height: 600,
@@ -232,6 +205,7 @@ $(function () {
     });
   }
 
+  //電子書各裝置縮放比例調整
   function resizeFunction() {
     const isCoarse = window.matchMedia("(pointer: coarse)").matches;
     let scaleMobile;
@@ -301,7 +275,7 @@ $(function () {
       transform: `scale(${scale})`,
     });
 
-    // ⭐ turn.js 重新計算翻頁區域
+    // turn.js 重新計算翻頁區域
     setTimeout(() => {
       $("#flipbook").turn("resize");
     }, 200);
@@ -334,6 +308,7 @@ $(function () {
     });
   }
 
+  //手機滑動邏輯
   let startMoveY = 0;
 
   window.addEventListener("touchstart", function (e) {
@@ -559,6 +534,26 @@ $(function () {
     $flipbook.turn("next");
   });
 
+  // 按鈕反灰
+  function replayBtnTrunGray() {
+    if (isTablet || isIPad()) {
+      $(".replay-mobile-btn-body")
+        .prop("disabled", true)
+        .addClass("replay-mobile-btn-disabled");
+    }
+
+    // 可選：恢復灰色按鈕
+    if (window.matchMedia("(max-height: 460px)").matches) {
+      $(".replay-mobile-btn-body")
+        .prop("disabled", true)
+        .addClass("replay-mobile-btn-disabled");
+    } else {
+      $(".replay-btn").prop("disabled", true);
+      $(".replay-btn img").attr("src", "./images/common/replay-grey-btn.png");
+    }
+  }
+
+  //按鈕的邏輯(3秒倒數,反灰,可否點擊等等)
   function startReplayTimer(delay) {
     const pageAtStart = currentPage;
     //記住這次世代
@@ -607,6 +602,7 @@ $(function () {
     }, delay);
   }
 
+  //載入的蓋板
   $(".book-cover-pc").on("click", async function () {
     if (audioContext.state === "suspended") {
       await audioContext.resume();
@@ -635,7 +631,7 @@ $(function () {
     }
   });
 
-  // 鍵盤方向鍵控制翻頁
+  // 鍵盤方向鍵控制翻頁 (正式上線要拿掉)
   $(document).on("keydown", function (e) {
     if (e.key === "ArrowLeft") {
       stopVoice();
@@ -694,6 +690,7 @@ $(function () {
     }
   }
 
+  //再聽一次按鈕邏輯
   async function replayCurrentPage() {
     await resumeAudio();
 
@@ -779,9 +776,9 @@ $(function () {
     canFlipNext = true;
   }, 12000);
 
-  // 重置該頁面的所有動畫與音效
+  // 第 24–25重置該頁面的所有動畫與音效
   function resetMilkPage() {
-    // ⭐ 清除所有 timeout
+    // 清除所有 timeout
     page2425Timeouts.forEach((id) => clearTimeout(id));
     page2425Timeouts = [];
     $(".book24").css("opacity", "0");
@@ -819,7 +816,7 @@ $(function () {
     });
   }
 
-  // 牛奶倒動畫流程
+  // 第 22–23 頁牛奶倒動畫流程
   function startMilkAnimation() {
     page2425Timeouts.push(
       setTimeout(() => {
@@ -977,8 +974,7 @@ $(function () {
     startReplayTimer(16000);
   }
 
-  // Reset function
-  // 重置家人手部與牛相關動畫狀態
+  // 第 26–27 頁重置家人手部與牛相關動畫狀態
   function resetFamilyPage() {
     $(".book26").css("opacity", "0");
     $(".book27").css("opacity", "0");
@@ -1023,24 +1019,7 @@ $(function () {
     $(".mow").hide();
   }
 
-  function replayBtnTrunGray() {
-    if (isTablet || isIPad()) {
-      $(".replay-mobile-btn-body")
-        .prop("disabled", true)
-        .addClass("replay-mobile-btn-disabled");
-    }
-
-    // 可選：恢復灰色按鈕
-    if (window.matchMedia("(max-height: 460px)").matches) {
-      $(".replay-mobile-btn-body")
-        .prop("disabled", true)
-        .addClass("replay-mobile-btn-disabled");
-    } else {
-      $(".replay-btn").prop("disabled", true);
-      $(".replay-btn img").attr("src", "./images/common/replay-grey-btn.png");
-    }
-  }
-
+  //所有頁面各業動畫邏輯
   function handlePage(page, replay) {
     if (currentVoiceSource) {
       currentVoiceSource.stop();
@@ -3282,6 +3261,7 @@ $(function () {
     }
   }
 
+  //各頁音效
   function playAudioByPage(page) {
     if (page === lastAudioPage) return;
     lastAudioPage = page;
