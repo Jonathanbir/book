@@ -840,19 +840,19 @@ $(function () {
     page2425Timeouts.push(
       setTimeout(() => {
         $(".milk-hand").addClass("milk-hand-animation");
-      }, 1800),
+      }, 2300),
     );
 
     page2425Timeouts.push(
       setTimeout(() => {
         $(".milk-drop").addClass("opacity-show");
-      }, 2500),
+      }, 3000),
     );
 
     page2425Timeouts.push(
       setTimeout(() => {
         $(".milk-inner").css("opacity", "1");
-      }, 4800),
+      }, 5300),
     );
 
     page2425Timeouts.push(
@@ -899,6 +899,12 @@ $(function () {
 
     page2627Timeouts.push(
       setTimeout(() => {
+        $(".text26").addClass("opacity-show");
+      }, 100),
+    );
+
+    page2627Timeouts.push(
+      setTimeout(() => {
         $(".milk-box").css("opacity", "1");
         $(".father-hand").css("opacity", "1");
         $(".father-hand-milk").css("display", "block");
@@ -911,7 +917,6 @@ $(function () {
 
     page2627Timeouts.push(
       setTimeout(() => {
-        $(".cheers").addClass("opacity-show");
         $(".daughter-hand-region").addClass("daughter-hand-finish");
       }, 3500),
     );
@@ -921,6 +926,12 @@ $(function () {
         $(".father-hand-region").addClass("father-hand-finish");
         $(".mom-hand-region").addClass("mom-hand-finish");
       }, 3500),
+    );
+
+    page2627Timeouts.push(
+      setTimeout(() => {
+        $(".cheers").addClass("opacity-show");
+      }, 4000),
     );
 
     page2627Timeouts.push(
@@ -960,7 +971,7 @@ $(function () {
     page2627Timeouts.push(
       setTimeout(() => {
         $(".mow").show();
-      }, 13500),
+      }, 13000),
     );
 
     startReplayTimer(16000);
@@ -1572,6 +1583,7 @@ $(function () {
 
       page1011Timeouts.push(
         setTimeout(() => {
+          $(".book10").css("opacity", "1");
           $(".book11").css("opacity", "1");
           $(".cow01").css("opacity", "1");
           $(".cow02").css("opacity", "1");
@@ -1585,7 +1597,7 @@ $(function () {
           $(".rainbow").css("opacity", "1");
           $(".girls-head").css("opacity", "1");
           $(".bubble11").addClass("opacity-show");
-        }, 1000),
+        }, 800),
       );
 
       page1011Timeouts.push(
@@ -1598,13 +1610,13 @@ $(function () {
       page1011Timeouts.push(
         setTimeout(() => {
           $(".book10-text").addClass("opacity-show");
-        }, 11500),
+        }, 12000),
       );
 
       page1011Timeouts.push(
         setTimeout(() => {
           $(".text11").css("opacity", "1");
-        }, 15500),
+        }, 16000),
       );
 
       startReplayTimer(23000);
@@ -2057,7 +2069,7 @@ $(function () {
               setTimeout(() => {
                 $(".cows-tongue").addClass("cows-tongue-animation");
                 $(".milk").addClass("milk-empty");
-              }, 2500),
+              }, 2000),
             );
 
             page1415Timeouts.push(
@@ -2073,7 +2085,7 @@ $(function () {
             page1415Timeouts.push(
               setTimeout(() => {
                 $(".coin-hint02").addClass("opacity-show");
-              }, 7000),
+              }, 6000),
             );
 
             page1415Timeouts.push(
@@ -2740,7 +2752,6 @@ $(function () {
       });
 
     if (page === 26 || page === 27) {
-      $(".text26").addClass("opacity-show");
       page2627Timeouts.push(
         setTimeout(() => {
           $("#right-down-corner").show();
