@@ -1030,19 +1030,6 @@ $(function () {
     }
   }
 
-  function loadPageImages(page) {
-    console.log("load page:", page);
-    const imgs = document.querySelectorAll(`.page${page} img[data-src]`);
-
-    console.log("imgs:", imgs);
-
-    imgs.forEach((img) => {
-      if (!img.src) {
-        img.src = img.dataset.src;
-      }
-    });
-  }
-
   function handlePage(page, replay) {
     if (currentVoiceSource) {
       currentVoiceSource.stop();
@@ -1166,9 +1153,6 @@ $(function () {
         reset23();
       }
 
-      loadPageImages(2);
-      loadPageImages(3);
-
       pageFirst = false;
 
       replayBtnTrunGray();
@@ -1251,9 +1235,6 @@ $(function () {
         reset45();
       }
 
-      loadPageImages(4);
-      loadPageImages(5);
-
       page45Timeouts.push(
         setTimeout(() => {
           $(".book04").css("opacity", "1");
@@ -1328,9 +1309,6 @@ $(function () {
       if (replay) {
         reset67();
       }
-
-      loadPageImages(6);
-      loadPageImages(7);
 
       replayBtnTrunGray();
 
@@ -1468,9 +1446,6 @@ $(function () {
         reset89();
       }
 
-      loadPageImages(8);
-      loadPageImages(9);
-
       $("#flipbook").append(
         `<img class="mom-daughter" src="./images/book/book08/lin-mom.png"/>
         <img class="bubble7" src="./images/book/book08/milk-bubble.png"/>
@@ -1574,9 +1549,6 @@ $(function () {
       if (replay) {
         reset1011();
       }
-
-      loadPageImages(10);
-      loadPageImages(11);
 
       $("#flipbook").append(
         ` <img class="text11" src="./images/book/book11/text11.png">
@@ -1762,9 +1734,6 @@ $(function () {
       if (replay) {
         reset1213();
       }
-
-      loadPageImages(12);
-      loadPageImages(13);
 
       replayBtnTrunGray();
 
@@ -1984,9 +1953,6 @@ $(function () {
         reset1415();
       }
 
-      loadPageImages(14);
-      loadPageImages(15);
-
       replayBtnTrunGray();
 
       isCanNotFlip();
@@ -2013,6 +1979,7 @@ $(function () {
           <img class="bubble14" src="./images/book/book1415/milk-bubble.png"/>     
           <img class="shine14" src="./images/book/book1415/shine.png"/>       
           <img class="coin-hint02" src="./images/book/book1415/text15.png" />
+          <img class="text14" src="./images/book/book1415/text14.png"/>
            `);
 
         if (
@@ -2035,16 +2002,10 @@ $(function () {
           setTimeout(() => {
             $("#flipbook").append(
               `<img class="cloud14-2" src="./images/book/book1415/cloud2.png"/>      
-             <img class="text14" src="./images/book/book1415/text14.png"/>`,
+             `,
             );
             $(".text14").css("opacity", "1");
           }, 300),
-        );
-
-        page1415Timeouts.push(
-          setTimeout(() => {
-            $(".text14").css("opacity", "1");
-          }, 800),
         );
 
         page1415Timeouts.push(
@@ -2213,9 +2174,6 @@ $(function () {
       if (replay) {
         reset1617();
       }
-
-      loadPageImages(16);
-      loadPageImages(17);
 
       replayBtnTrunGray();
 
@@ -2419,9 +2377,6 @@ $(function () {
         reset1819();
       }
 
-      loadPageImages(18);
-      loadPageImages(19);
-
       $("#flipbook").append(`
       <img class="book19-text" src="./images/book/book1819/book19-text.png" />
       <img class="coin-all  coin01-final" src="./images/book/book1819/coin01.png" />
@@ -2519,9 +2474,6 @@ $(function () {
         reset2021();
       }
 
-      loadPageImages(20);
-      loadPageImages(21);
-
       $("#flipbook").append(
         `<img class="dream04" src="./images/book/book2021/dream04.png"/>
         <img class="dream-light" src="./images/book/book2021/dream-light.png"/>
@@ -2597,9 +2549,6 @@ $(function () {
         reset2223();
       }
 
-      loadPageImages(22);
-      loadPageImages(23);
-
       page2223Timeouts.push(
         setTimeout(() => {
           $(".book22").css("opacity", "1");
@@ -2626,9 +2575,6 @@ $(function () {
       if (replay) {
         resetMilkPage();
       }
-
-      loadPageImages(24);
-      loadPageImages(25);
 
       replayBtnTrunGray();
 
@@ -2666,13 +2612,6 @@ $(function () {
           $(".mom-hand-region").show();
         }, 1500);
       }
-
-      loadPageImages(26);
-      loadPageImages(27);
-    }
-
-    if (page === 28) {
-      loadPageImages(28);
     }
   }
 
