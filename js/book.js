@@ -187,7 +187,7 @@ $(function () {
       $(".book-container").css("height", window.innerHeight);
     });
 
-    $(".pop-up-box").on("click", async function () {
+    $(".pop-up-box .book-cover-go").on("click", async function () {
       if (audioContext.state === "suspended") {
         await audioContext.resume();
       }
@@ -203,6 +203,34 @@ $(function () {
         }
       }, 200);
     });
+  }
+
+  let mbIconInterval = null;
+  let mbIconIndex = 0;
+
+  const mbIconImages = [
+    "./images/common/mb-icon1.png",
+    "./images/common/mb-icon2.png",
+  ];
+
+  function startMbIconAnimation() {
+    const img = document.querySelector(".mb-icon");
+    if (!img) return;
+
+    // 防止重複啟動
+    if (mbIconInterval) return;
+
+    mbIconInterval = setInterval(() => {
+      mbIconIndex = (mbIconIndex + 1) % mbIconImages.length;
+      img.src = mbIconImages[mbIconIndex];
+    }, 500);
+  }
+
+  function stopMbIconAnimation() {
+    if (mbIconInterval) {
+      clearInterval(mbIconInterval);
+      mbIconInterval = null;
+    }
   }
 
   //電子書各裝置縮放比例調整
@@ -285,6 +313,12 @@ $(function () {
     document.getElementById("rotate-notice").style.display = isPortrait
       ? "block"
       : "none";
+
+    if (isPortrait) {
+      startMbIconAnimation();
+    } else {
+      stopMbIconAnimation();
+    }
   }
 
   // 初始檢查
@@ -603,7 +637,7 @@ $(function () {
   }
 
   //載入的蓋板
-  $(".book-cover-pc").on("click", async function () {
+  $(".book-cover-pc .book-cover-go").on("click", async function () {
     if (audioContext.state === "suspended") {
       await audioContext.resume();
     }
@@ -954,7 +988,7 @@ $(function () {
     page2627Timeouts.push(
       setTimeout(() => {
         $(".cow-right").addClass("cow-right-move");
-      }, 6500),
+      }, 6000),
     );
 
     page2627Timeouts.push(
@@ -968,10 +1002,10 @@ $(function () {
     page2627Timeouts.push(
       setTimeout(() => {
         $(".mow").show();
-      }, 13000),
+      }, 9000),
     );
 
-    startReplayTimer(16000);
+    startReplayTimer(13000);
   }
 
   // 第 26–27 頁重置家人手部與牛相關動畫狀態
@@ -1455,7 +1489,14 @@ $(function () {
           $(".book09").css("opacity", "1");
           $(".eyes-8").css("opacity", "1");
           $(".eyes-ball-8").css("opacity", "1");
-        }, 1000),
+          $(".foot1").addClass("foot1-animation");
+          $(".foot2").addClass("foot2-animation");
+          $(".foot3").addClass("foot3-animation");
+          $(".foot4").addClass("foot4-animation");
+          $(".foot5").addClass("foot5-animation");
+          $(".eyes-ball-8").addClass("eyes-ball-animation");
+          $(".mom-daughter").addClass("mom-daughter-animation");
+        }, 800),
       );
 
       page89Timeouts.push(
@@ -1466,32 +1507,15 @@ $(function () {
 
       page89Timeouts.push(
         setTimeout(() => {
-          $(".foot1").addClass("foot1-animation");
-          $(".foot2").addClass("foot2-animation");
-          $(".foot3").addClass("foot3-animation");
-          $(".foot4").addClass("foot4-animation");
-          $(".foot5").addClass("foot5-animation");
-        }, 6000),
-      );
-
-      page89Timeouts.push(
-        setTimeout(() => {
-          $(".eyes-ball-8").addClass("eyes-ball-animation");
-          $(".mom-daughter").addClass("mom-daughter-animation");
-        }, 9000),
-      );
-
-      page89Timeouts.push(
-        setTimeout(() => {
           $(".text09").addClass("opacity-show");
-        }, 11000),
+        }, 9000),
       );
 
       page89Timeouts.push(
         setTimeout(() => {
           $(".mowmow").addClass("opacity-show");
           $(".bubble7").addClass("opacity-show");
-        }, 10000),
+        }, 8000),
       );
 
       page89Timeouts.push(
@@ -1500,7 +1524,7 @@ $(function () {
         }, 10000),
       );
 
-      startReplayTimer(20000);
+      startReplayTimer(17000);
     }
 
     if (page === 7 || page === 10) {
@@ -1993,8 +2017,6 @@ $(function () {
             page1415Timeouts.push(
               setTimeout(() => {
                 $(".cows-tongue").css("opacity", "1");
-                $(".cows-tongue").addClass("cows-tongue-animation");
-                $(".milk").addClass("milk-empty");
               }, 1000),
             );
 
