@@ -28,7 +28,7 @@ $(function () {
   let currentVoiceSource = null;
   let voiceToken = 0;
   let lastAudioPage = null;
-  const BG_VOLUME = 0.3;
+  const BG_VOLUME = 0.1;
   const VOICE_VOLUME = 1.2;
 
   // 還原每頁的動畫及邏輯
@@ -953,16 +953,16 @@ $(function () {
 
     page2627Timeouts.push(
       setTimeout(() => {
-        $(".father-hand-region").removeClass("father-hand-finish");
-        $(".daughter-hand-region").removeClass("daughter-hand-finish");
-        $(".mom-hand-region").removeClass("mom-hand-finish");
-      }, 8000),
+        $(".cow-right").addClass("cow-right-move");
+      }, 6500),
     );
 
     page2627Timeouts.push(
       setTimeout(() => {
-        $(".cow-right").addClass("cow-right-move");
-      }, 10500),
+        $(".father-hand-region").removeClass("father-hand-finish");
+        $(".daughter-hand-region").removeClass("daughter-hand-finish");
+        $(".mom-hand-region").removeClass("mom-hand-finish");
+      }, 8000),
     );
 
     page2627Timeouts.push(
@@ -1613,60 +1613,6 @@ $(function () {
 
     //跳出看板
     let popupBoard = (page) => {
-      $(".check-box")
-        .off("click touchstart")
-        .on("click touchstart", function (e) {
-          // 防止事件重複觸發（避免 click 跟 touchstart 同時跑兩次）
-          e.preventDefault();
-          e.stopImmediatePropagation();
-
-          $("body").addClass("popup-open"); // 開啟 popup
-          $("#flipbook").turn("disable", true);
-          $(".popup-board").css("display", "block");
-
-          if (page === 12 || page === 13) {
-            if (
-              window.matchMedia("(max-height: 460px)").matches ||
-              isTablet ||
-              isIPad()
-            ) {
-              $(".popup-board-bg01").css("display", "block");
-              $(".popup-board-bg02, .popup-board-bg03").css("display", "none");
-              $(".popup-board-bg02, .popup-board-bg03").remove();
-            }
-            stopVoice();
-            playVoice("./mp3/07b.mp3");
-          }
-
-          if (page === 14 || page === 15) {
-            if (
-              window.matchMedia("(max-height: 460px)").matches ||
-              isTablet ||
-              isIPad()
-            ) {
-              $(".popup-board-bg02").css("display", "block");
-              $(".popup-board-bg01, .popup-board-bg03").css("display", "none");
-              $(".popup-board-bg01, .popup-board-bg03").remove();
-            }
-            stopVoice();
-            playVoice("./mp3/08b.mp3");
-          }
-
-          if (page === 16 || page === 17) {
-            if (
-              window.matchMedia("(max-height: 460px)").matches ||
-              isTablet ||
-              isIPad()
-            ) {
-              $(".popup-board-bg03").css("display", "block");
-              $(".popup-board-bg01, .popup-board-bg02").css("display", "none");
-              $(".popup-board-bg01, .popup-board-bg02").remove();
-            }
-            stopVoice();
-            playVoice("./mp3/09b.mp3");
-          }
-        });
-
       $(".popup-board, .popup-board-bg")
         .off("click touchstart")
         .on("click touchstart", function (e) {
@@ -1678,6 +1624,7 @@ $(function () {
           $(".popup-board-bg").css("display", "none");
           $("body").removeClass("popup-open"); // 關閉 popup
           $("#flipbook").turn("disable", false);
+          $("#flipbook").turn("next");
           stopVoice();
         });
     };
@@ -1717,14 +1664,12 @@ $(function () {
       $("#flipbook .bubble-bg").remove();
       $("#flipbook .bubble12").remove();
       $(".star13").remove();
-      $("#flipbook .check-box").remove();
       $(".book-section .popup-board-bg").remove();
       $(".book-section .popup-board").remove();
       $(".board13").remove();
       $(".popup-board01").remove();
       $(".popup-board-bg01").remove();
       $(".text12").remove();
-      $(".check-box").hide();
     }
 
     if (page === 12 || page === 13) {
@@ -1759,7 +1704,6 @@ $(function () {
                    <img class="bubble12" src="./images/book/book13/milk-bubble.png"/>
                    <img class="board board13" src="./images/book/book13/board13.png"/>
                     <img class="check check01" src="./images/common/check.png" />
-                   <div class="check-box"></div>
                    `);
 
         if (
@@ -1870,7 +1814,6 @@ $(function () {
 
           page1213Timeouts.push(
             setTimeout(() => {
-              $(".check-box").show();
               if (
                 window.matchMedia("(max-height: 460px)").matches ||
                 isTablet ||
@@ -1881,7 +1824,7 @@ $(function () {
               $(".popup-board01").css("display", "block");
               stopVoice();
               playVoice("./mp3/07b.mp3");
-            }, 27000),
+            }, 28000),
           );
 
           startReplayTimer(28000);
@@ -1941,7 +1884,6 @@ $(function () {
       $(".coin-light02").removeClass("coin-light-show");
       $(".check02").removeClass("opacity-show");
       $(".coin-hint02").removeClass("opacity-show");
-      $(".check-box").hide();
     }
 
     // 第 14–15 頁：餵牛奶
@@ -1970,7 +1912,6 @@ $(function () {
           <img class="board-list02" src="./images/book/book1415/board-list02.png">
           <img class="board14" src="./images/common/board.png"/>
           <img class="check check02" src="./images/common/check.png"/>
-          <div class="check-box"></div>
           <img class="click-milk" src="./images/book/book0607/click-here.png"/>
           <div class="click-milk-box"></div>
           <img class="bubble14" src="./images/book/book1415/milk-bubble.png"/>     
@@ -2014,7 +1955,6 @@ $(function () {
             $(".bottle").css("opacity", "1");
             $(".milk").css("opacity", "1");
             $(".girls-hand ").css("opacity", "1");
-            $(".cows-tongue").css("opacity", "1");
             $(".board14").css("opacity", "1");
             $(".cloud14-1").css("opacity", "1");
             $(".cloud14-2").css("opacity", "1");
@@ -2052,6 +1992,14 @@ $(function () {
 
             page1415Timeouts.push(
               setTimeout(() => {
+                $(".cows-tongue").css("opacity", "1");
+                $(".cows-tongue").addClass("cows-tongue-animation");
+                $(".milk").addClass("milk-empty");
+              }, 1000),
+            );
+
+            page1415Timeouts.push(
+              setTimeout(() => {
                 $(".cows-tongue").addClass("cows-tongue-animation");
                 $(".milk").addClass("milk-empty");
               }, 2000),
@@ -2059,9 +2007,14 @@ $(function () {
 
             page1415Timeouts.push(
               setTimeout(() => {
+                $(".cows-tongue").css("opacity", "0");
+              }, 4000),
+            );
+
+            page1415Timeouts.push(
+              setTimeout(() => {
                 $(".shine14").addClass("shine14-animation");
                 $(".success-hint02").addClass("opacity-show");
-                $(".cows-tongue").removeClass("cows-tongue-animation");
               }, 6000),
             );
             stopVoice();
@@ -2083,7 +2036,6 @@ $(function () {
 
             page1415Timeouts.push(
               setTimeout(() => {
-                $(".check-box").show();
                 if (
                   window.matchMedia("(max-height: 460px)").matches ||
                   isTablet ||
@@ -2098,7 +2050,7 @@ $(function () {
                 canFlipNext = true;
                 $("#right-down-corner").css("color", "#000");
                 $("#right-down-corner").prop("disabled", false);
-              }, 14500),
+              }, 15500),
             );
 
             startReplayTimer(16000);
@@ -2163,7 +2115,6 @@ $(function () {
       $(".popup-board-bg03").remove();
       $("#flipbook .bubble16").remove();
       $("#flipbook .dondon").remove();
-      $(".check-box").hide();
     }
 
     // 第 16–17 頁：聽牛心跳
@@ -2197,7 +2148,6 @@ $(function () {
             <img class="click-hearing-heart" src="./images/book/book25/click-here.png"/>
             <div class="click-hearing-heart-box"></div>      
             <div class="cloud-16-2"></div>
-            <div class="check-box"></div>
             <img class="board-list03" src="./images/book/book1617/board-list03.png"/>
             <img class="check check03" src="./images/common/check.png" />
             <img class="board16" src="./images/common/board.png">
@@ -2316,7 +2266,6 @@ $(function () {
 
           page1617Timeouts.push(
             setTimeout(() => {
-              $(".check-box").show();
               if (
                 window.matchMedia("(max-height: 460px)").matches ||
                 isTablet ||
@@ -2331,7 +2280,7 @@ $(function () {
               canFlipNext = true;
               $("#right-down-corner").css("color", "#000");
               $("#right-down-corner").prop("disabled", false);
-            }, 16000),
+            }, 17000),
           );
 
           startReplayTimer(16000);
