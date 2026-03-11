@@ -1099,6 +1099,8 @@ $(function () {
       $(".prev-page img").hide();
       $(".next-page img").attr("src", "./images/common/next-grey-img.png");
       $(".next-page").prop("disabled", true);
+      $(".cloud-0").css("opacity", "1");
+      $(".bubble-0").css("opacity", "1");
 
       const timer = setInterval(() => {
         count--;
@@ -1142,6 +1144,9 @@ $(function () {
       if (replay) {
         reset23();
       }
+
+      $(".cloud-0").css("opacity", "0");
+      $(".bubble-0").css("opacity", "0");
 
       pageFirst = false;
 
@@ -1348,6 +1353,7 @@ $(function () {
         $("#flipbook .knock , #flipbook .door").on("click", () => {
           if (doorClicked) return; // 已經點過就直接結束
           doorClicked = true;
+          $(".door").css("cursor", "grab");
           $(".knock").css("display", "none");
           $(".text06").addClass("opacity-show");
           $(".cloud1").addClass("opacity-show");
