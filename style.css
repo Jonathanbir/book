@@ -18,7 +18,7 @@ body {
   left: 0;
   right: 0;
   margin: auto;
-  z-index: 99999;
+  z-index: 10000;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -26,7 +26,9 @@ body {
   height: 100vh;
   color: #fff;
   background-image: url("./images/common/book-cover.png");
-  background-size: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   cursor: pointer;
   /* background: rgba(0, 0, 0, 0.8); */
 }
@@ -67,14 +69,13 @@ body {
 
 .mb-icon {
   position: fixed;
-  left: 0;
+  top: 0;
   bottom: 0;
+  left: 0;
+  right: 0;
   z-index: 9999;
-  width: 100%;
-}
-
-#rotate-notice p {
-  text-align: center;
+  width: 250px;
+  margin: auto;
 }
 
 audio {
@@ -3803,6 +3804,8 @@ button {
   text-align: center;
   padding-top: 45vh;
   background-image: url(./images/common/mb-bg.png);
+  background-repeat: no-repeat;
+  background-size: cover;
   z-index: 99999;
 }
 
