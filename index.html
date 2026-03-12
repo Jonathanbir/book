@@ -21,7 +21,6 @@
         dataLayer.push(arguments);
       }
       gtag("js", new Date());
-
       gtag("config", "G-Z926JYCBYZ");
     </script>
     <title>林鳳營鮮乳</title>
@@ -32,7 +31,6 @@
     />
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
     <!-- jQuery UI -->
     <link
       rel="stylesheet"
@@ -40,16 +38,100 @@
     />
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
-    <!-- Turn.js（使用本地或 CDN） -->
-    <!-- 若你有放在本地資料夾 -->
     <script src="./js/turn.js"></script>
-    <!-- CSS -->
-    <style></style>
+
+    <style>
+      /* =============================================
+         Loading Screen
+      ============================================= */
+      #loading-screen {
+        position: fixed;
+        inset: 0;
+        z-index: 999999;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100vw;
+        height: 100vh;
+        background-image: url("./images/common/book-cover.png");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        cursor: grab;
+        transition:
+          opacity 0.8s ease,
+          visibility 0.8s ease;
+      }
+
+      #loading-screen.fade-out {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+
+      .loading-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+        padding: 32px 40px;
+        min-width: 260px;
+      }
+      /* 進度條外框 */
+      .loading-bar-track {
+        width: 220px;
+        height: 14px;
+        background: #e8e8e8;
+        border-radius: 99px;
+        overflow: hidden;
+        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .loading-text {
+        font-size: 14px;
+        font-weight: 600;
+        color: #555;
+        letter-spacing: 1px;
+        margin: 0;
+      }
+
+      .loading-percent {
+        font-size: 28px;
+        font-weight: 800;
+        color: #ffffff;
+        margin: 0;
+        line-height: 1;
+      }
+
+      /* 圖片預載完成後隱藏 loading，顯示正常內容 */
+      body.loading-active > *:not(#loading-screen) {
+        visibility: hidden;
+      }
+      body.loading-done > *:not(#loading-screen) {
+        visibility: visible;
+      }
+    </style>
   </head>
-  <body>
-    <!-- 向下滑提示（手機顯示） -->
+  <body class="loading-active">
+    <!-- ==================== Loading Screen ==================== -->
+    <div id="loading-screen">
+      <div class="loading-content">
+        <!-- 可換成你的 logo 圖，或直接用 cow icon -->
+        <img
+          class="loading-icon"
+          src="./images/common/loading01.png"
+          alt="載入中"
+          onerror="this.style.display = 'none'"
+        />
+        <p class="loading-percent" id="loading-percent">0%</p>
+        <p class="loading-text" id="loading-text"></p>
+      </div>
+    </div>
+    <!-- ======================================================== -->
+
+    <!-- 手機轉向提示（手機顯示） -->
     <div id="rotate-notice" style="display: none">
-      <!-- <p>請將裝置旋轉為橫向以觀看最佳效果</p> -->
       <img class="mb-icon" src="./images/common/mb-icon1.png" />
     </div>
     <button class="mute-mobile-toggle mobile tablet-show">
@@ -60,7 +142,6 @@
         <i class="fa fa-repeat" aria-hidden="true"></i>
       </button>
     </div>
-    <!-- 書本容器 -->
     <div class="pop-up-box mobile">
       <div class="book-cloud-region">
         <img src="./images/common/book-cover-cloud.png" />
@@ -643,6 +724,227 @@
         </div>
       </div>
     </div>
+
+    <!-- ==================== Preloader Script ==================== -->
+    <script>
+      (function () {
+        "use strict";
+
+        // ── 1. 動態 append 的圖片（book.js 裡用 append 加入的）─────────────
+        var DYNAMIC_IMAGES = [
+          // book03
+          "./images/book/book03/girls-head-01.png",
+          "./images/book/book03/girls-head-02.png",
+          "./images/book/book03/girls-body.png",
+          "./images/book/book03/hands.png",
+          "./images/book/book03/milk.png",
+          "./images/book/book03/book-title03.png",
+          // book0607
+          "./images/book/book0607/click-here.png",
+          "./images/book/book0607/grass.png",
+          "./images/book/book0607/forest1.png",
+          "./images/book/book0607/forest2.png",
+          "./images/book/book0607/forest3.png",
+          "./images/book/book0607/text-06.png",
+          "./images/book/book0607/cloud2.png",
+          "./images/book/book0607/milk-bubble.png",
+          "./images/book/book0607/shine.png",
+          "./images/book/book0607/indoor.png",
+          "./images/book/book0607/door.png",
+          "./images/book/book0607/mom-lin.png",
+          // book08 / book09
+          "./images/book/book08/lin-mom.png",
+          "./images/book/book08/milk-bubble.png",
+          "./images/book/book09/shine.png",
+          // book10 / book11
+          "./images/book/book10/mom-lin.png",
+          "./images/book/book10/cow05.png",
+          "./images/book/book11/text11.png",
+          "./images/book/book11/rainbow.png",
+          "./images/book/book11/light.png",
+          "./images/book/book11/milk-bubble.png",
+          "./images/book/book11/cloud01.png",
+          "./images/book/book11/board.png",
+          "./images/book/book11/list-content.png",
+          // book12 / book13
+          "./images/book/book12/electfan1.png",
+          "./images/book/book12/electfan2.png",
+          "./images/book/book12/electfan3.png",
+          "./images/book/book12/electfan-wind.png",
+          "./images/book/book12/electfan-wind-line.png",
+          "./images/book/book13/bubble-bg.png",
+          "./images/book/book13/star.png",
+          "./images/book/book13/milk-bubble.png",
+          "./images/book/book13/board13.png",
+          // book1415
+          "./images/book/book1415/cow.png",
+          "./images/book/book1415/board-list02.png",
+          "./images/book/book1415/milk-bubble.png",
+          "./images/book/book1415/shine.png",
+          "./images/book/book1415/text15.png",
+          "./images/book/book1415/text14.png",
+          "./images/book/book1415/cloud2.png",
+          // book1617
+          "./images/book/book1617/text16.png",
+          "./images/book/book1617/mom-cow.png",
+          "./images/book/book1617/hand.png",
+          "./images/book/book1617/cow-eyes-open.png",
+          "./images/book/book1617/cow-eyes-close.png",
+          "./images/book/book1617/cow-heart.png",
+          "./images/book/book1617/dondon.png",
+          "./images/book/book1617/lin-nurse.png",
+          "./images/book/book1617/board-list03.png",
+          "./images/book/book1617/milk-bubble.png",
+          "./images/book/book1617/shine.png",
+          // book1819
+          "./images/book/book1819/book19-text.png",
+          "./images/book/book1819/coin01.png",
+          "./images/book/book1819/coin02.png",
+          "./images/book/book1819/coin03.png",
+          "./images/book/book1819/shine.png",
+          "./images/book/book1819/linlin.png",
+          "./images/book/book1819/crown.png",
+          "./images/book/book1819/crown-shine.png",
+          "./images/book/book1819/milk-bubble.png",
+          // book2021
+          "./images/book/book2021/dream04.png",
+          "./images/book/book2021/dream-light.png",
+          "./images/book/book2021/text20.png",
+          "./images/book/book2021/book21-text.png",
+          "./images/book/book2021/linlin.png",
+          "./images/book/book2021/wow.png",
+          "./images/book/book2021/um.png",
+          "./images/book/book2021/milk-bubble.png",
+          "./images/book/book2021/shine.png",
+          // book2627
+          "./images/book/book2627/milk-stains.png",
+          "./images/book/book2627/mom-hand.png",
+          "./images/book/book2627/milk.png",
+          "./images/book/book2627/cup.png",
+          // book25 / click-here
+          "./images/book/book25/click-here.png",
+          // common
+          "./images/common/finish-mission1.png",
+          "./images/common/finish-mission2.png",
+          "./images/common/finish-mission03.png",
+          "./images/common/board.png",
+          "./images/common/check.png",
+          "./images/common/book-cover.png",
+          "./images/common/mb-icon1.png",
+          "./images/common/mb-icon2.png",
+          "./images/common/next-img.png",
+          "./images/common/prev-grey-img.png",
+          "./images/common/prve-img.png",
+          "./images/common/replay-btn.png",
+          "./images/common/replay-grey-btn.png",
+          "./images/common/mute-btn-close.png",
+          "./images/common/mute-btn-open.png",
+          "./images/common/1sec.png",
+          "./images/common/2sec.png",
+          "./images/common/3sec.png",
+        ];
+
+        // ── 2. 從 DOM 收集所有 <img> src ─────────────────────────────────
+        function collectDomImages() {
+          var imgs = document.querySelectorAll("img[src]");
+          var srcs = [];
+          imgs.forEach(function (img) {
+            if (img.src) srcs.push(img.src);
+          });
+          return srcs;
+        }
+
+        // ── 3. 合併去重 ───────────────────────────────────────────────────
+        function mergeUnique(a, b) {
+          var set = {};
+          var result = [];
+          a.concat(b).forEach(function (src) {
+            // 統一為絕對路徑後去重
+            var key = src;
+            if (!set[key]) {
+              set[key] = true;
+              result.push(src);
+            }
+          });
+          return result;
+        }
+
+        // ── 4. 更新進度 UI ────────────────────────────────────────────────
+        function updateProgress(loaded, total) {
+          const loadingSrc = [
+            "./images/common/loading02.png",
+            "./images/common/loading03.png",
+            "./images/common/loading04.png",
+          ];
+
+          const loadingIcon = document.querySelector(".loading-icon");
+          var pct = total === 0 ? 100 : Math.round((loaded / total) * 100);
+
+          if (pct >= 0 && pct < 25) {
+          } else if (pct >= 25 && pct < 50) {
+            loadingIcon.src = loadingSrc[0];
+          } else if (pct >= 50 && pct < 75) {
+            loadingIcon.src = loadingSrc[1];
+          } else if (pct >= 75) {
+            loadingIcon.src = loadingSrc[2];
+          }
+
+          // document.getElementById("loading-bar-fill").style.width = pct + "%";
+          document.getElementById("loading-percent").textContent = pct + "%";
+          // if (pct >= 100) {
+          //   document.getElementById("loading-text").textContent = "載入完成！";
+          // }
+        }
+
+        // ── 5. 隱藏 loading ───────────────────────────────────────────────
+        function hideLoading() {
+          var screen = document.getElementById("loading-screen");
+          document.body.classList.remove("loading-active");
+          document.body.classList.add("loading-done");
+          screen.classList.add("fade-out");
+          setTimeout(function () {
+            screen.style.display = "none";
+          }, 900);
+        }
+
+        // ── 6. 主流程 ─────────────────────────────────────────────────────
+        function startPreload() {
+          var domSrcs = collectDomImages();
+          var allSrcs = mergeUnique(domSrcs, DYNAMIC_IMAGES);
+          var total = allSrcs.length;
+          var loaded = 0;
+
+          // 沒有圖就直接結束
+          if (total === 0) {
+            hideLoading();
+            return;
+          }
+          updateProgress(0, total);
+
+          allSrcs.forEach(function (src) {
+            var img = new Image();
+            img.onload = img.onerror = function () {
+              loaded++;
+              updateProgress(loaded, total);
+              if (loaded >= total) {
+                // 短暫停留讓使用者看到 100%
+                setTimeout(hideLoading, 400);
+              }
+            };
+            img.src = src;
+          });
+        }
+
+        // DOM 已解析後立即開始
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", startPreload);
+        } else {
+          startPreload();
+        }
+      })();
+    </script>
+    <!-- ============================================================ -->
+
     <script>
       let canFlipOnce = false;
       function nextPage() {
