@@ -233,45 +233,95 @@ $(function () {
     }
   }
 
-  //手機平板轉向顯示蓋板邏輯
-  function hasDoneFirstLandscapeReload() {
-    return sessionStorage.getItem("firstLandscapeReloadDone") === "1";
+  // 手機平板轉向顯示蓋板邏輯
+  function getOrientationInitState() {
+    return sessionStorage.getItem("orientationInitState") || "";
   }
 
-  function markFirstLandscapeReloadDone() {
-    sessionStorage.setItem("firstLandscapeReloadDone", "1");
+  function setOrientationInitState(state) {
+    sessionStorage.setItem("orientationInitState", state);
+  }
+
+  function hideRotateNotice() {
+    const rotateNotice = document.getElementById("rotate-notice");
+    if (rotateNotice) {
+      rotateNotice.style.display = "none";
+    }
+    document.body.style.overflow = "";
+  }
+
+  function showRotateNotice() {
+    const rotateNotice = document.getElementById("rotate-notice");
+    if (rotateNotice) {
+      rotateNotice.style.display = "flex";
+    }
+    document.body.style.overflow = "hidden";
+  }
+
+  function isPortraitNow() {
+    return window.matchMedia("(orientation: portrait)").matches;
+  }
+
+  function initOrientationStateOnLoad() {
+    const isTouch = window.matchMedia("(pointer: coarse)").matches;
+    if (!isTouch) return;
+
+    const isPortrait = isPortraitNow();
+
+    // 每次載入頁面都重新判斷
+    if (isPortrait) {
+      setOrientationInitState("waiting-landscape-reload");
+    } else {
+      setOrientationInitState("done");
+    }
   }
 
   function handleOrientationBehavior() {
     const isTouch = window.matchMedia("(pointer: coarse)").matches;
-    const isPortrait = window.innerHeight > window.innerWidth;
-    const rotateNotice = document.getElementById("rotate-notice");
+    const isPortrait = isPortraitNow();
+    const initState = getOrientationInitState();
 
-    // 只處理手機/平板
     if (!isTouch) {
-      rotateNotice.style.display = "none";
-      document.body.style.overflow = "";
+      hideRotateNotice();
       return;
     }
 
-    // 第一次從直向轉成橫向時 reload 一次
-    if (!isPortrait && !hasDoneFirstLandscapeReload()) {
-      markFirstLandscapeReloadDone();
-      setTimeout(() => {
+    if (initState === "waiting-landscape-reload") {
+      if (isPortrait) {
+        showRotateNotice();
+      } else {
+        setOrientationInitState("done");
         location.reload();
-      }, 250);
+      }
       return;
     }
 
-    // 之後都只做遮罩，不 reload
+    // done：之後都只顯示/隱藏遮罩，不 reload
     if (isPortrait) {
-      rotateNotice.style.display = "flex";
-      document.body.style.overflow = "hidden";
+      showRotateNotice();
     } else {
-      rotateNotice.style.display = "none";
-      document.body.style.overflow = "";
+      hideRotateNotice();
     }
   }
+
+  // 每次載入都重新依照當下方向初始化
+  initOrientationStateOnLoad();
+
+  // 初始化先跑一次
+  handleOrientationBehavior();
+
+  // 旋轉與 resize 時，等畫面穩定後再判斷
+  let orientationTimer = null;
+
+  function onOrientationChange() {
+    clearTimeout(orientationTimer);
+    orientationTimer = setTimeout(() => {
+      handleOrientationBehavior();
+    }, 300);
+  }
+
+  window.addEventListener("resize", onOrientationChange);
+  window.addEventListener("orientationchange", onOrientationChange);
 
   //電子書各裝置縮放比例調整
   function resizeFunction() {
@@ -360,11 +410,6 @@ $(function () {
       stopMbIconAnimation();
     }
   }
-
-  handleOrientationBehavior();
-
-  window.addEventListener("resize", handleOrientationBehavior);
-  window.addEventListener("orientationchange", handleOrientationBehavior);
 
   // 初始檢查
   resizeFunction();
