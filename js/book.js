@@ -149,6 +149,31 @@ $(function () {
     height: 600,
     autoCenter: true,
   });
+
+  function disableNativeCornerHoverOnly() {
+    const data = $flipbook.data();
+    if (!data || !data.pages) return;
+
+    Object.keys(data.pages).forEach((page) => {
+      const p = data.pages[page];
+      if (p && typeof p.flip === "function") {
+        // 只關掉折角 hover，不要 disable 整頁
+        p.flip("hover", false);
+
+        // 把 corner size 縮到極小，降低原生角落觸發機率
+        p.flip("options", {
+          cornerSize: 1,
+        });
+      }
+    });
+  }
+
+  disableNativeCornerHoverOnly();
+
+  $flipbook.on("turned turning", function () {
+    disableNativeCornerHoverOnly();
+  });
+
   if (!matchMedia("(pointer: coarse)").matches) {
     console.log("desktop mode");
   } else if (isTablet || isIPad()) {
@@ -483,11 +508,6 @@ $(function () {
   // 釋放滑鼠（重置狀態）
   $flipbook.on("mouseup touchend", function () {
     isDragging = false;
-  });
-
-  $("#cover").on("click", function () {
-    stopVoice();
-    $("#flipbook").turn("next");
   });
 
   let isBtnDisabled;
