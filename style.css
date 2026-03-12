@@ -121,7 +121,7 @@ audio {
   width: 80px;
   height: 80px;
   bottom: 0;
-  cursor: pointer;
+  cursor: grab;
   z-index: 99;
 }
 
@@ -163,7 +163,7 @@ audio {
   height: 100px;
   z-index: 9999;
   pointer-events: auto;
-  cursor: pointer;
+  cursor: grab;
 }
 
 #left-up-corner {
@@ -209,25 +209,6 @@ audio {
   100% {
     transform: translateY(0px);
   }
-}
-
-.talk {
-  display: none;
-  position: absolute;
-  left: -80%;
-  bottom: 60%;
-  width: 100px;
-  height: 100px;
-  background-image: url("./images/talk.png");
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
-  cursor: pointer;
-  transition: all 1s ease-in-out;
-}
-
-.cow:hover .talk {
-  display: block;
 }
 
 .book {
@@ -1564,7 +1545,7 @@ button {
   left: 12%;
   top: 25%;
   z-index: 999;
-  cursor: pointer;
+  cursor: grab;
   pointer-events: auto;
   opacity: 0;
   transition: all 1s ease-in-out;
@@ -1912,9 +1893,9 @@ button {
   z-index: 999;
   width: 180px;
   pointer-events: auto;
+  cursor: grab;
   opacity: 0;
   transition: all 1s ease-in-out;
-  cursor: pointer;
 }
 
 .small-cow {
@@ -2210,8 +2191,8 @@ button {
   right: 18%;
   bottom: 33%;
   z-index: 1001;
-  cursor: pointer;
   pointer-events: auto;
+  cursor: grab;
   opacity: 0;
   transition: all 1s ease-in-out;
 }
@@ -3218,6 +3199,19 @@ button {
   transition: all 1s ease-in-out;
 }
 
+.click-little-girl-box {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  width: 500px;
+  height: 500px;
+  border-radius: 7%;
+  margin: auto;
+  cursor: pointer;
+}
+
 .milk-stains {
   position: absolute;
   top: 0;
@@ -4063,7 +4057,7 @@ button {
     color: #fff;
     background-image: url("./images/common/book-cover.png");
     background-size: 100%;
-    cursor: pointer;
+    cursor: grab;
     /* background: rgba(0, 0, 0, 0.8); */
   }
 

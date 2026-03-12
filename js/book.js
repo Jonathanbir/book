@@ -903,6 +903,7 @@ $(function () {
     $(".flower").css("opacity", "0");
     $(".milk-inner").css("opacity", "0");
     $(".click-girl").hide();
+    $(".click-little-girl-box").hide();
     $(".milk-hand").removeClass("milk-hand-animation");
     $(".milk-drop").removeClass("opacity-show");
     $(".girl-l-hand").removeClass("girl-l-hand-empty");
@@ -977,6 +978,7 @@ $(function () {
     page2425Timeouts.push(
       setTimeout(() => {
         $(".click-girl").show();
+        $(".click-little-girl-box").show();
       }, 13500),
     );
   }
@@ -2692,13 +2694,14 @@ $(function () {
     handlePage(currentPage);
 
     // 小女孩喝奶動畫流程（只綁一次，不堆疊）
-    $(".click-girl")
+    $(".click-little-girl-box")
       .off("click")
       .on("click", function () {
         $(".book25-story").addClass("opacity-show");
         $(".flower").css("opacity", "1");
 
         $(".click-girl").hide();
+        $(".click-little-girl-box").hide();
         $(".girl-l-hand-region").addClass("girl-l-hand-finish");
         $(".girl-r-hand").addClass("girl-r-hand-finish");
         stopVoice();
@@ -3205,8 +3208,8 @@ $(function () {
         canSwipePrev = true;
       }, 3000);
 
-      // 點 knock 才能準備往前
-      $(".click-girl").one("click", function () {
+      // 點小女孩 才能準備往前
+      $(".click-little-girl-box").one("click", function () {
         setTimeout(() => {
           canSwipeNext = true;
         }, 7000);
