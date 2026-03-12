@@ -233,6 +233,46 @@ $(function () {
     }
   }
 
+  //手機平板轉向顯示蓋板邏輯
+  function hasDoneFirstLandscapeReload() {
+    return sessionStorage.getItem("firstLandscapeReloadDone") === "1";
+  }
+
+  function markFirstLandscapeReloadDone() {
+    sessionStorage.setItem("firstLandscapeReloadDone", "1");
+  }
+
+  function handleOrientationBehavior() {
+    const isTouch = window.matchMedia("(pointer: coarse)").matches;
+    const isPortrait = window.innerHeight > window.innerWidth;
+    const rotateNotice = document.getElementById("rotate-notice");
+
+    // 只處理手機/平板
+    if (!isTouch) {
+      rotateNotice.style.display = "none";
+      document.body.style.overflow = "";
+      return;
+    }
+
+    // 第一次從直向轉成橫向時 reload 一次
+    if (!isPortrait && !hasDoneFirstLandscapeReload()) {
+      markFirstLandscapeReloadDone();
+      setTimeout(() => {
+        location.reload();
+      }, 250);
+      return;
+    }
+
+    // 之後都只做遮罩，不 reload
+    if (isPortrait) {
+      rotateNotice.style.display = "flex";
+      document.body.style.overflow = "hidden";
+    } else {
+      rotateNotice.style.display = "none";
+      document.body.style.overflow = "";
+    }
+  }
+
   //電子書各裝置縮放比例調整
   function resizeFunction() {
     const isCoarse = window.matchMedia("(pointer: coarse)").matches;
@@ -321,26 +361,16 @@ $(function () {
     }
   }
 
+  handleOrientationBehavior();
+
+  window.addEventListener("resize", handleOrientationBehavior);
+  window.addEventListener("orientationchange", handleOrientationBehavior);
+
   // 初始檢查
   resizeFunction();
 
   // 當裝置旋轉時重新檢查
   window.addEventListener("resize", resizeFunction);
-
-  // 當裝置旋轉時重新載入
-  const orientationMedia = window.matchMedia("(orientation: portrait)");
-
-  let reloadTimer = null;
-
-  if (matchMedia("(pointer: coarse)").matches) {
-    orientationMedia.addEventListener("change", () => {
-      clearTimeout(reloadTimer);
-
-      reloadTimer = setTimeout(() => {
-        location.reload();
-      }, 300); // 等旋轉動畫結束
-    });
-  }
 
   //手機滑動邏輯
   let startMoveY = 0;
