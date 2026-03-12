@@ -1637,7 +1637,7 @@ $(function () {
 
     //跳出看板
     let popupBoard = (page) => {
-      $(".popup-board, .popup-board-bg")
+      $(".popup-close-btn")
         .off("click touchstart")
         .on("click touchstart", function (e) {
           // 防止事件重複觸發（避免 click 跟 touchstart 同時跑兩次）
@@ -1645,7 +1645,6 @@ $(function () {
           e.stopImmediatePropagation();
 
           $(".popup-board").css("display", "none");
-          $(".popup-board-bg").css("display", "none");
           $("body").removeClass("popup-open"); // 關閉 popup
           $("#flipbook").turn("disable", false);
           $("#flipbook").turn("next");
@@ -1680,6 +1679,7 @@ $(function () {
       $(".check01").removeClass("opacity-show");
       $(".check01").remove();
       $(".popup-board01").css("display", "none");
+      $(".popup-board-box01").css("display", "none");
       $("#flipbook .click-magic-wand").remove();
       $("#flipbook .finish-mission01").remove();
       $("#flipbook .electfan").remove();
@@ -1688,11 +1688,10 @@ $(function () {
       $("#flipbook .bubble-bg").remove();
       $("#flipbook .bubble12").remove();
       $(".star13").remove();
-      $(".book-section .popup-board-bg").remove();
       $(".book-section .popup-board").remove();
       $(".board13").remove();
       $(".popup-board01").remove();
-      $(".popup-board-bg01").remove();
+      $(".popup-board-box01").remove();
       $(".text12").remove();
     }
 
@@ -1730,21 +1729,13 @@ $(function () {
                     <img class="check check01" src="./images/common/check.png" />
                    `);
 
-        if (
-          window.matchMedia("(max-height: 460px)").matches ||
-          isTablet ||
-          isIPad()
-        ) {
-          $("body").append(`
+        $(".book-section").append(`
           <div class="popup-board popup-board01"></div>
-          <div class="popup-board-bg popup-board-bg01">
-        `);
-        } else {
-          $(".book-section").append(`
-          <div class="popup-board popup-board01">
+          <div class="popup-board-box popup-board-box01">
+            <img src="./images/book/book13/mission-board.png"/>
+            <img class="popup-close-btn" src="./images/book/book13/board-close-icon.png"/>
           </div>
         `);
-        }
       }
 
       const fanImages = [
@@ -1838,14 +1829,8 @@ $(function () {
 
           page1213Timeouts.push(
             setTimeout(() => {
-              if (
-                window.matchMedia("(max-height: 460px)").matches ||
-                isTablet ||
-                isIPad()
-              ) {
-                $(".popup-board-bg01").css("display", "block");
-              }
               $(".popup-board01").css("display", "block");
+              $(".popup-board-box01").css("display", "block");
               stopVoice();
               playVoice("./mp3/07b.mp3");
             }, 28000),
@@ -1885,6 +1870,7 @@ $(function () {
       $(".text14").css("opacity", "0");
       $(".small-cow ").css("opacity", "0");
       $(".popup-board02").css("display", "none");
+      $(".popup-board-box02").css("display", "none");
       $("#flipbook .finish-mission02").remove();
       $("#flipbook .cloud14-2").remove();
       $("#flipbook .text14").remove();
@@ -1897,7 +1883,7 @@ $(function () {
       $("#flipbook .check02").remove();
       $(".board14").remove();
       $(".popup-board02").remove();
-      $(".popup-board-bg02").remove();
+      $(".popup-board-box02").remove();
       $(".coin-hint02").remove();
       $(".success-hint02").removeClass("opacity-show");
       $(".cows-tongue").removeClass("cows-tongue-animation");
@@ -1944,21 +1930,13 @@ $(function () {
           <img class="text14" src="./images/book/book1415/text14.png"/>
            `);
 
-        if (
-          window.matchMedia("(max-height: 460px)").matches ||
-          isTablet ||
-          isIPad()
-        ) {
-          $("body").append(`
+        $(".book-section").append(`
           <div class="popup-board popup-board02"></div>
-          <div class="popup-board-bg popup-board-bg02">
-        `);
-        } else {
-          $(".book-section").append(`
-          <div class="popup-board popup-board02">
+          <div class="popup-board-box popup-board-box02">
+            <img src="./images/book/book1415/mission-board.png"/>
+            <img class="popup-close-btn" src="./images/book/book1415/board-close-icon.png"/>
           </div>
         `);
-        }
 
         page1415Timeouts.push(
           setTimeout(() => {
@@ -2058,14 +2036,8 @@ $(function () {
 
             page1415Timeouts.push(
               setTimeout(() => {
-                if (
-                  window.matchMedia("(max-height: 460px)").matches ||
-                  isTablet ||
-                  isIPad()
-                ) {
-                  $(".popup-board-bg02").css("display", "block");
-                }
                 $(".popup-board02").css("display", "block");
+                $(".popup-board-box02").css("display", "block");
                 stopVoice();
                 playVoice("./mp3/08b.mp3");
                 btnUnDisabled();
@@ -2109,6 +2081,7 @@ $(function () {
       $(".story-text16").css("opacity", "0");
       $(".nurse-girl").css("opacity", "0");
       $(".popup-board03").css("display", "none");
+      $(".popup-board-box03").css("display", "none");
       $(".stethoscope").addClass("disabled");
       $("#flipbook .stethoscope").removeClass("stethoscope-move");
       $(".shine16").removeClass("shine16-animation");
@@ -2134,7 +2107,7 @@ $(function () {
       $("#flipbook .board-list03").remove();
       $("#flipbook .board16").remove();
       $(".popup-board03").remove();
-      $(".popup-board-bg03").remove();
+      $(".popup-board-box03").remove();
       $("#flipbook .bubble16").remove();
       $("#flipbook .dondon").remove();
     }
@@ -2177,21 +2150,13 @@ $(function () {
             <img class="shine16" src="./images/book/book1617/shine.png"/>
             `);
 
-        if (
-          window.matchMedia("(max-height: 460px)").matches ||
-          isTablet ||
-          isIPad()
-        ) {
-          $("body").append(`
+        $(".book-section").append(`
           <div class="popup-board popup-board03"></div>
-          <div class="popup-board-bg popup-board-bg03">
-        `);
-        } else {
-          $(".book-section").append(`
-          <div class="popup-board popup-board03">
+          <div class="popup-board-box popup-board-box03">
+            <img src="./images/book/book1617/mission-board.png"/>
+            <img class="popup-close-btn" src="./images/book/book1617/board-close-icon.png"/>
           </div>
         `);
-        }
 
         page1617Timeouts.push(
           setTimeout(() => {
@@ -2288,13 +2253,8 @@ $(function () {
 
           page1617Timeouts.push(
             setTimeout(() => {
-              if (
-                window.matchMedia("(max-height: 460px)").matches ||
-                isTablet ||
-                isIPad()
-              ) {
-                $(".popup-board-bg03").css("display", "block");
-              }
+              $(".popup-board03").css("display", "block");
+              $(".popup-board-box03").css("display", "block");
               $(".popup-board03").css("display", "block");
               stopVoice();
               playVoice("./mp3/09b.mp3");

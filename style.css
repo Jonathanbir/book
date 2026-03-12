@@ -1801,11 +1801,32 @@ button {
   background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
-  cursor: pointer;
+  cursor: grab;
 }
 
 .popup-board01 {
-  background-image: url(./images/book/book13/misson-board-pc.png);
+  background-image: url(./images/book/book13/mission-board-pc.png);
+}
+
+.popup-board-box {
+  display: none;
+  position: fixed;
+  top: 0;
+  bottom: 80px;
+  right: 0;
+  left: 0;
+  margin: auto;
+  z-index: 99999;
+  width: 413px;
+  height: 546px;
+  cursor: grab;
+}
+
+.popup-close-btn {
+  position: absolute;
+  top: 12px;
+  right: 21px;
+  cursor: pointer;
 }
 
 .check02 {
@@ -2162,6 +2183,7 @@ button {
 .popup-board02 {
   background-image: url(./images/book/book1415/misson-board-pc.png);
 }
+
 /* book16 小女孩聽牛心跳*/
 .book16-box {
   width: 100%;
@@ -3997,58 +4019,18 @@ button {
     margin: 0 auto;
   }
 
-  .popup-board {
-    background-size: 95%;
-    z-index: 1000;
-  }
-
-  .popup-board01 {
-    background-image: url("./images/book/book13/mission-board.png");
-  }
-
-  .popup-board02 {
-    background-image: url("./images/book/book1415/mission-board.png");
-  }
-
-  .popup-board03 {
-    background-image: url("./images/book/book1617/mission-board.png");
-  }
-
-  .popup-board-bg {
-    display: none;
-    position: fixed;
-    top: 0;
+  .popup-board-box {
+    transform: scale(0.8);
     bottom: 0;
-    right: 0;
-    left: 0;
-    margin: auto;
-    width: 200vw;
-    height: 200vh;
-    z-index: 999;
-  }
-
-  .popup-board-bg01 {
-    background-color: rgba(290, 190, 80, 0.5);
-  }
-
-  .popup-board-bg02,
-  .popup-board-bg03 {
-    background-color: rgba(3, 147, 3, 0.5);
   }
 }
 
 /* 手機高度介於320px~460px */
 @media (pointer: coarse) and (max-height: 460px) and (min-height: 320px) {
-  .popup-board {
-    background-size: 90%;
-  }
 }
 
 /* 手機高度小於320px */
 @media screen and (max-height: 320px) {
-  .popup-board {
-    background-size: 80%;
-  }
 }
 
 /* 手機 */
@@ -4200,38 +4182,9 @@ button {
     margin: 20px auto;
   }
 
-  .popup-board01 {
-    background-image: url("./images/book/book13/mission-board.png");
-  }
-
-  .popup-board02 {
-    background-image: url("./images/book/book1415/mission-board.png");
-  }
-
-  .popup-board03 {
-    background-image: url("./images/book/book1617/mission-board.png");
-  }
-
-  .popup-board-bg {
-    display: none;
-    position: fixed;
-    top: 0;
+  .popup-board-box {
+    transform: scale(0.6);
     bottom: 0;
-    right: 0;
-    left: 0;
-    margin: auto;
-    width: 200vw;
-    height: 200vh;
-    z-index: 999;
-  }
-
-  .popup-board-bg01 {
-    background-color: rgba(290, 190, 80, 0.5);
-  }
-
-  .popup-board-bg02,
-  .popup-board-bg03 {
-    background-color: rgba(3, 147, 3, 0.5);
   }
 }
 
