@@ -4,11 +4,7 @@
     <meta charset="UTF-8" />
     <meta
       name="viewport"
-      content="width=device-width,
-               initial-scale=1,
-               maximum-scale=1,
-               minimum-scale=1,
-               user-scalable=no"
+      content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"
     />
     <!-- Google tag (gtag.js) -->
     <script
@@ -134,14 +130,6 @@
     <div id="rotate-notice" style="display: none">
       <img class="mb-icon" src="./images/common/mb-icon1.png" />
     </div>
-    <button class="mute-mobile-toggle mobile tablet-show">
-      <i class="fas fa-volume-up"></i>
-    </button>
-    <div class="replay-mobile-btn mobile tablet-show">
-      <button class="replay-mobile-btn-body">
-        <i class="fa fa-repeat" aria-hidden="true"></i>
-      </button>
-    </div>
     <div class="pop-up-box mobile">
       <div class="book-cloud-region">
         <img src="./images/common/book-cover-cloud.png" />
@@ -159,6 +147,11 @@
     <div class="arrow"></div>
     <div class="book-cover desktop"></div>
     <div class="book-container">
+      <div class="controls-mb mobile tablet-show">
+        <button class="page-btn prev-page disabled-btn">
+          <img src="./images/common/prev-grey-img.png" style="display: none" />
+        </button>
+      </div>
       <div class="book-section">
         <div class="book-scale-wrapper">
           <div id="flipbook">
@@ -698,7 +691,7 @@
         <!-- 左右角落區域 -->
         <div id="left-up-corner"></div>
         <div id="left-down-corner" class="page-btn-mobile">
-          <p class="mobile tablet-show">上一頁</p>
+          <p class="mobile tablet-show"></p>
         </div>
         <div id="right-up-corner" onclick="nextPage()"></div>
         <div
@@ -706,15 +699,18 @@
           class="page-btn-mobile"
           onclick="nextPage()"
         >
-          <p class="mobile tablet-show">下一頁</p>
+          <p class="mobile tablet-show"></p>
         </div>
       </div>
       <!-- 翻頁按鈕 -->
-      <div class="controls desktop tablet-none">
-        <button class="page-btn prev-page disabled-btn" style="display: none">
+      <div class="controls">
+        <button
+          class="page-btn prev-page tablet-none disabled-btn"
+          style="display: none"
+        >
           <img src="./images/common/prev-grey-img.png" />
         </button>
-        <button class="page-btn next-page">
+        <button class="page-btn next-page tablet-none desktop">
           <img src="./images/common/next-img.png" />
         </button>
         <button class="page-btn replay-btn" disabled="true">
@@ -723,9 +719,11 @@
         <div class="page-btn mute-toggle">
           <img src="./images/common/mute-btn-close.png" />
         </div>
+        <button class="page-btn next-page tablet-show mobile">
+          <img src="./images/common/next-img.png" />
+        </button>
       </div>
     </div>
-
     <!-- ==================== Preloader Script ==================== -->
     <script>
       (function () {

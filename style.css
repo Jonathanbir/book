@@ -50,15 +50,15 @@ body {
 }
 
 /* 桌機 */
-@media (hover: hover) and (pointer: fine) {
-  .book-container {
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
+
+.book-container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: all 1s ease-in-out;
 }
 
 .book-section {
@@ -148,9 +148,9 @@ audio {
 }
 
 .page-btn {
+  position: relative;
+  z-index: 99999;
   cursor: pointer;
-  border-radius: 50px;
-  overflow: hidden;
 }
 
 #left-up-corner,
@@ -3926,15 +3926,25 @@ button {
     display: block;
   }
 
-  .book-section {
+  .book-container {
     position: fixed;
     top: 0;
     bottom: 0;
     right: 0;
     left: 0;
+    flex-direction: row;
     margin: auto;
+    transition: all 1s ease-in-out;
   }
 
+  .book-section {
+    left: 0;
+  }
+
+  .page-btn,
+  .page-btn img {
+    width: 80px;
+  }
   .mute-mobile-toggle {
     position: fixed;
     top: 0;
@@ -3990,28 +4000,46 @@ button {
   .replay-mobile-btn-disabled {
     background: rgb(255, 255, 255);
   }
-
+  /* 
   .page-btn-mobile {
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-
-  #left-down-corner {
-    background-color: rgba(169, 169, 169, 0.2);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    border-radius: 0 50% 0 0;
-  }
-
-  #right-down-corner {
-    background-color: rgba(169, 169, 169, 0.2);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    border-radius: 50% 0 0 0;
-  }
+  } */
 
   .controls {
-    margin: 0 auto;
+    left: -4%;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: initial;
   }
+
+  .controls-mb {
+    display: flex;
+    align-items: flex-end;
+    position: relative;
+    left: 4%;
+  }
+
+  .popup-open .mute-mobile-toggle {
+    pointer-events: none;
+  }
+
+  .mute-mobile-toggle {
+    /* position: fixed;
+    top: 0;
+    right: 0; */
+    z-index: 9999;
+    border: none;
+    width: 100px;
+    margin: 10px;
+  }
+
+  /* .prev-page,
+  .next-page,
+  .mute-toggle {
+    margin: 5% auto;
+  } */
 
   .popup-board-box {
     transform: scale(0.8);
@@ -4028,6 +4056,17 @@ button {
 }
 
 /* 手機 */
+@media screen and (max-width: 460px) {
+  .mobile {
+    display: block;
+  }
+
+  .desktop {
+    display: none;
+  }
+}
+
+/* 手機 */
 @media screen and (max-height: 460px) {
   .mobile {
     display: block;
@@ -4037,15 +4076,19 @@ button {
     display: none;
   }
 
-  .book-section {
+  .book-container {
     position: fixed;
     top: 0;
     bottom: 0;
     right: 0;
     left: 0;
     margin: auto;
+    flex-direction: row;
   }
 
+  .book-section {
+    left: initial;
+  }
   .pop-up-box {
     position: fixed;
     z-index: 9999;
@@ -4065,14 +4108,12 @@ button {
     transform: translateY(-20%);
   }
 
-  .page-btn-mobile {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  .page-btn {
+    width: 100px;
   }
 
-  .page-btn-mobile p {
-    font-weight: 500;
+  .page-btn img {
+    width: 100%;
   }
 
   body {
@@ -4085,47 +4126,29 @@ button {
   }
 
   .controls {
-    display: none;
+    left: -9%;
     flex-direction: column;
-    justify-content: center;
-    width: 100px;
-    height: 40px;
-    position: fixed;
-    top: 40%;
-    bottom: initial;
-    left: 0;
+    justify-content: space-between;
     margin: initial;
   }
 
-  #left-down-corner {
-    background-color: rgba(169, 169, 169, 0.2);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    border-radius: 0 50% 0 0;
-  }
-
-  #right-down-corner {
-    background-color: rgba(169, 169, 169, 0.2);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    border-radius: 50% 0 0 0;
+  .controls-mb {
+    display: flex;
+    align-items: flex-end;
+    position: relative;
+    left: 9%;
   }
 
   .popup-open .mute-mobile-toggle {
     pointer-events: none;
-    background: rgba(169, 169, 169, 0.2) !important;
   }
-
   .mute-mobile-toggle {
-    position: fixed;
+    /* position: fixed;
     top: 0;
-    right: 0;
+    right: 0; */
     z-index: 9999;
-    width: 40px;
-    height: 40px;
     border: none;
-    border-radius: 100%;
-    color: #000;
-    background-color: rgba(169, 169, 169, 0.2);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    width: 100px;
     margin: 10px;
   }
 
@@ -4168,12 +4191,6 @@ button {
 
   .replay-mobile-btn-disabled {
     background: rgb(255, 255, 255);
-  }
-
-  .prev-page,
-  .next-page,
-  .mute-toggle {
-    margin: 20px auto;
   }
 
   .popup-board-box {

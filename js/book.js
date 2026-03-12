@@ -9,6 +9,10 @@ $(function () {
     return document.querySelector("#flipbook").getBoundingClientRect().width;
   }
 
+  function getBookHeight() {
+    return document.querySelector("#flipbook").getBoundingClientRect().height;
+  }
+
   //平板判斷
   const isTablet =
     window.matchMedia("(pointer: coarse)").matches &&
@@ -181,37 +185,54 @@ $(function () {
     // 等 turn.js 完成 layout
     requestAnimationFrame(() => {
       const w = getBookWidth();
+      let h = getBookHeight();
+      const bookHeight = document
+        .querySelector("#flipbook")
+        .getBoundingClientRect().height;
       $("#left-down-corner").hide();
+      let scale;
+      if (ratio < 1.2 && ratio > 1) {
+        scale = 0.8; // 你要的固定值
+      } else {
+        scale = 0.9; // 你要的固定值
+      }
+
+      console.log("123", h * scale, scale);
       if (innerWidth > 1280) {
-        $(".book-section").css({
+        $(".book-container").css({
           left: (-w / 2) * 1.01 + "px",
         });
       } else if (innerWidth > 1000 && innerWidth <= 1280) {
-        $(".book-section").css({
+        $(".book-container").css({
           left: (-w / 2) * 0.85 + "px",
         });
       } else {
-        $(".book-section").css({
+        $(".book-container").css({
           left: (-w / 2) * 0.85 + "px",
         });
       }
 
-      $(".controls").hide();
       $(".book-container").css("height", window.innerHeight);
+      $(".controls-mb").css("height", h * scale);
+      $(".controls").css("height", h * scale);
     });
   } else {
     console.log("mobile mode");
     // 等 turn.js 完成 layout
     requestAnimationFrame(() => {
       const w = getBookWidth();
+      const bookHeight = document
+        .querySelector("#flipbook")
+        .getBoundingClientRect().height;
+      console.log("bookHeight:", bookHeight * 0.8);
       $("#left-down-corner").hide();
-      $(".book-section").css({
+      $(".book-container").css({
         left: -w * 0.425 + "px",
       });
-      $(".controls").hide();
       $(".book-container").css("height", window.innerHeight);
+      $(".controls-mb").css("height", bookHeight * 0.8);
+      $(".controls").css("height", bookHeight * 0.8);
     });
-
     $(".pop-up-box .book-cover-go").on("click", async function () {
       if (audioContext.state === "suspended") {
         await audioContext.resume();
@@ -555,27 +576,6 @@ $(function () {
       }
     }, 1000);
 
-    if (
-      window.matchMedia("(max-height: 460px)").matches ||
-      isTablet ||
-      isIPad()
-    ) {
-      // 每秒更新一次按鈕文字
-      prevMobileBtn.innerText = countMobile + "秒";
-      $("#left-down-corner").css("color", "##969696");
-
-      const timerMobile = setInterval(() => {
-        countMobile--;
-        if (countMobile > 0) {
-          prevMobileBtn.innerText = countMobile + "秒";
-        } else {
-          clearInterval(timerMobile);
-          prevMobileBtn.innerText = "上一頁";
-          $("#left-down-corner").css("color", "#000");
-        }
-      }, 1000);
-    }
-
     $(".prev-page").prop("disabled", true);
     $(".prev-page img").attr("src", "./images/common/prev-grey-img.png");
     setTimeout(() => {
@@ -617,33 +617,6 @@ $(function () {
       }
     }, 1000);
 
-    if (page !== 6) {
-      //手機版 控制按鈕
-      if (
-        window.matchMedia("(max-height: 460px)").matches ||
-        isTablet ||
-        isIPad()
-      ) {
-        // 每秒更新一次按鈕文字
-        prevMobileBtn.innerText = countMobile + "秒";
-        nextMobileBtn.innerText = countMobile + "秒";
-        $("#left-down-corner,#right-down-corner").css("color", "##969696");
-
-        const timerMobile = setInterval(() => {
-          countMobile--;
-          if (countMobile > 0) {
-            prevMobileBtn.innerText = countMobile + "秒";
-            nextMobileBtn.innerText = countMobile + "秒";
-          } else {
-            clearInterval(timerMobile);
-            prevMobileBtn.innerText = "上一頁";
-            nextMobileBtn.innerText = "下一頁";
-            $("#left-down-corner,#right-down-corner").css("color", "#000");
-          }
-        }, 1000);
-      }
-    }
-
     setTimeout(() => {
       $(".prev-page img").attr("src", "./images/common/prve-img.png");
       $(".next-page img").attr("src", "./images/common/next-img.png");
@@ -672,14 +645,8 @@ $(function () {
     }
 
     // 可選：恢復灰色按鈕
-    if (window.matchMedia("(max-height: 460px)").matches) {
-      $(".replay-mobile-btn-body")
-        .prop("disabled", true)
-        .addClass("replay-mobile-btn-disabled");
-    } else {
-      $(".replay-btn").prop("disabled", true);
-      $(".replay-btn img").attr("src", "./images/common/replay-grey-btn.png");
-    }
+    $(".replay-btn").prop("disabled", true);
+    $(".replay-btn img").attr("src", "./images/common/replay-grey-btn.png");
   }
 
   //按鈕的邏輯(3秒倒數,反灰,可否點擊等等)
@@ -700,14 +667,9 @@ $(function () {
       $(".replay-mobile-btn-body").addClass("replay-mobile-btn-disabled");
     }
 
-    if (window.matchMedia("(max-height: 460px)").matches) {
-      $(".replay-mobile-btn-body").prop("disabled", true);
-      $(".replay-mobile-btn-body").addClass("replay-mobile-btn-disabled");
-    } else {
-      // 先鎖按鈕
-      $(".replay-btn").prop("disabled", true);
-      $(".replay-btn img").attr("src", "./images/common/replay-grey-btn.png");
-    }
+    // 先鎖按鈕
+    $(".replay-btn").prop("disabled", true);
+    $(".replay-btn img").attr("src", "./images/common/replay-grey-btn.png");
 
     // 建立新 timer
     replayTimer = setTimeout(() => {
@@ -721,13 +683,8 @@ $(function () {
         $(".replay-mobile-btn-body").removeClass("replay-mobile-btn-disabled");
       }
 
-      if (window.matchMedia("(max-height: 460px)").matches) {
-        $(".replay-mobile-btn-body").prop("disabled", false);
-        $(".replay-mobile-btn-body").removeClass("replay-mobile-btn-disabled");
-      } else {
-        $(".replay-btn").prop("disabled", false);
-        $(".replay-btn img").attr("src", "./images/common/replay-btn.png");
-      }
+      $(".replay-btn").prop("disabled", false);
+      $(".replay-btn img").attr("src", "./images/common/replay-btn.png");
     }, delay);
   }
 
@@ -788,28 +745,14 @@ $(function () {
     // 切換 icon + 文字（保留你原本 UI）
     if (isMuted) {
       if (isTablet || isIPad()) {
-        $(".mute-mobile-toggle").css("background", "#fff");
-        $(".mute-mobile-toggle").html('<i class="fas fa-volume-mute"></i>');
+        $(".mute-mobile-toggle img").attr(
+          "src",
+          "./images/common/mute-btn-close.png",
+        );
       }
-
-      if (!window.matchMedia("(max-height: 460px)").matches) {
-        $(".mute-toggle img").attr("src", "./images/common/mute-btn-open.png");
-      } else {
-        $(".mute-mobile-toggle").css("background", "#fff");
-        $(".mute-mobile-toggle").html('<i class="fas fa-volume-mute"></i>');
-      }
+      $(".mute-toggle img").attr("src", "./images/common/mute-btn-open.png");
     } else {
-      if (isTablet || isIPad()) {
-        $(".mute-mobile-toggle").css("background", "rgba(169, 169, 169, 0.2)");
-        $(".mute-mobile-toggle").html('<i class="fas fa-volume-up"></i>');
-      }
-
-      if (!window.matchMedia("(max-height: 460px)").matches) {
-        $(".mute-toggle img").attr("src", "./images/common/mute-btn-close.png");
-      } else {
-        $(".mute-mobile-toggle").css("background", "rgba(169, 169, 169, 0.2)");
-        $(".mute-mobile-toggle").html('<i class="fas fa-volume-up"></i>');
-      }
+      $(".mute-toggle img").attr("src", "./images/common/mute-btn-close.png");
     }
   });
 
@@ -2820,25 +2763,25 @@ $(function () {
           requestAnimationFrame(() => {
             const w = getBookWidth();
             if (innerWidth > 1280) {
-              $(".book-section").css({
+              $(".book-container").css({
                 left: w * 0.32333 + "px", //388
               });
             } else if (innerWidth > 1000 && innerWidth <= 1280) {
-              $(".book-section").css({
+              $(".book-container").css({
                 left: w * 0.3528 + "px", //260
               });
             } else if (innerWidth > 1000) {
-              $(".book-section").css({
+              $(".book-container").css({
                 left: w * 0.28083 + "px", //337
               });
             } else {
-              $(".book-section").css({
+              $(".book-container").css({
                 left: w * 0.3528 + "px", //260
               });
             }
           });
         } else {
-          $(".book-section").css({
+          $(".book-container").css({
             left: "0px",
           });
         }
@@ -2846,12 +2789,12 @@ $(function () {
         if (page === 28) {
           requestAnimationFrame(() => {
             const w = getBookWidth();
-            $(".book-section").css({
+            $(".book-container").css({
               left: w * 0.33 + "px", //260
             });
           });
         } else {
-          $(".book-section").css({
+          $(".book-container").css({
             left: "0px",
           });
         }
@@ -2888,11 +2831,11 @@ $(function () {
             .querySelector(".book-title")
             .getBoundingClientRect().width;
 
-          $(".book-section").css({
+          $(".book-container").css({
             left: -1 * flipbookWidth + "px",
           });
         } else {
-          $(".book-section").css({
+          $(".book-container").css({
             left: "0px",
           });
         }
@@ -3117,7 +3060,7 @@ $(function () {
       if (window.matchMedia("(max-height: 460px)").matches) {
         requestAnimationFrame(() => {
           const w = getBookWidth();
-          $(".book-section").css({
+          $(".book-container").css({
             left: -w * 0.53125 + "px", //326.4
           });
         });
@@ -3125,13 +3068,13 @@ $(function () {
     } else {
       if (window.matchMedia("(max-height: 460px)").matches) {
         if (isSafari() || isIOSChrome()) {
-          $(".book-section").css({
+          $(".book-container").css({
             left: "0px",
           });
         }
 
         if (isAndroidChrome()) {
-          $(".book-section").css({
+          $(".book-container").css({
             left: "0px",
           });
         }
