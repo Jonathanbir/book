@@ -693,12 +693,8 @@
         <div id="left-down-corner" class="page-btn-mobile">
           <p class="mobile tablet-show"></p>
         </div>
-        <div id="right-up-corner" onclick="nextPage()"></div>
-        <div
-          id="right-down-corner"
-          class="page-btn-mobile"
-          onclick="nextPage()"
-        >
+        <div id="right-up-corner"></div>
+        <div id="right-down-corner" class="page-btn-mobile">
           <p class="mobile tablet-show"></p>
         </div>
       </div>
@@ -943,16 +939,6 @@
       })();
     </script>
     <!-- ============================================================ -->
-
-    <script>
-      let canFlipOnce = false;
-      function nextPage() {
-        if (!canFlipOnce) {
-          $("#flipbook").turn("next");
-          canFlipOnce = true;
-        }
-      }
-    </script>
     <script src="./js/book.js"></script>
   </body>
 </html>

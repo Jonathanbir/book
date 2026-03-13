@@ -1106,62 +1106,7 @@ $(function () {
     let canFlipPrev = false; // 初始禁止往前翻頁
     let canFlipNext = false; // 初始禁止往後翻頁
 
-    function isCanNotFlipPrev() {
-      if (!window.matchMedia("(max-height: 460px)").matches) {
-        console.log("pre disabled~~~~");
-        $("#left-up-corner")
-          .off("click") // 移除舊的
-          .on("click", function () {
-            if (!canFlipPrev) {
-              return;
-            }
-            stopVoice();
-            $("#flipbook").turn("previous");
-          });
-      }
-
-      $("#left-down-corner")
-        .off("click") // 移除舊的
-        .on("click", function () {
-          if (!canFlipPrev) {
-            return;
-          }
-          stopVoice();
-          $("#flipbook").turn("previous");
-        });
-    }
-
-    function isCanNotFlipNext() {
-      if (!window.matchMedia("(max-height: 460px)").matches) {
-        $("#right-up-corner")
-          .off("click")
-          .on("click", function () {
-            if (!canFlipNext) {
-              return;
-            }
-            stopVoice();
-            $("#flipbook").turn("next");
-          });
-      }
-
-      $("#right-down-corner")
-        .off("click")
-        .on("click", function () {
-          if (!canFlipNext) {
-            return;
-          }
-          stopVoice();
-          $("#flipbook").turn("next");
-        });
-    }
-
-    function isCanNotFlip() {
-      isCanNotFlipPrev();
-      isCanNotFlipNext();
-    }
-
     if (page === 1) {
-      isCanNotFlip();
       setTimeout(() => {
         canFlipNext = true;
       }, 3000);
@@ -1387,8 +1332,6 @@ $(function () {
           $(".door").css("opacity", "1");
         }, 1000),
       );
-
-      isCanNotFlip();
 
       addPageTimeout(() => {
         canFlipPrev = true;
@@ -1742,8 +1685,6 @@ $(function () {
 
       replayBtnTrunGray();
 
-      isCanNotFlip();
-
       addPageTimeout(() => {
         canFlipPrev = true;
       }, 3000);
@@ -1943,8 +1884,6 @@ $(function () {
       }
 
       replayBtnTrunGray();
-
-      isCanNotFlip();
 
       addPageTimeout(() => {
         canFlipPrev = true;
@@ -2159,8 +2098,6 @@ $(function () {
       }
 
       replayBtnTrunGray();
-
-      isCanNotFlip();
 
       addPageTimeout(() => {
         canFlipPrev = true;
@@ -2546,8 +2483,6 @@ $(function () {
 
       replayBtnTrunGray();
 
-      isCanNotFlip();
-
       addPageTimeout(() => {
         canFlipPrev = true;
       }, 3000);
@@ -2599,59 +2534,6 @@ $(function () {
     let canFlipPrev = false; // 初始禁止往前翻頁
     let canFlipNext = false; // 初始禁止往後翻頁
 
-    function isCanNotFlipPrev() {
-      if (!window.matchMedia("(max-height: 460px)").matches) {
-        $("#left-up-corner")
-          .off("click") // 移除舊的
-          .on("click", function () {
-            if (!canFlipPrev) {
-              return;
-            }
-            stopVoice();
-            $("#flipbook").turn("previous");
-          });
-      }
-
-      $("#left-down-corner")
-        .off("click") // 移除舊的
-        .on("click", function () {
-          if (!canFlipPrev) {
-            return;
-          }
-          stopVoice();
-          $("#flipbook").turn("previous");
-        });
-    }
-
-    function isCanNotFlipNext() {
-      if (!window.matchMedia("(max-height: 460px)").matches) {
-        $("#right-up-corner")
-          .off("click")
-          .on("click", function () {
-            if (!canFlipNext) {
-              return;
-            }
-            stopVoice();
-            $("#flipbook").turn("next");
-          });
-      }
-
-      $("#right-down-corner")
-        .off("click")
-        .on("click", function () {
-          if (!canFlipNext) {
-            return;
-          }
-          stopVoice();
-          $("#flipbook").turn("next");
-        });
-    }
-
-    function isCanNotFlip() {
-      isCanNotFlipPrev();
-      isCanNotFlipNext();
-    }
-
     currentPage = page;
 
     handlePage(currentPage);
@@ -2700,7 +2582,6 @@ $(function () {
           setTimeout(() => {
             btnUnDisabled();
             canFlipNext = true;
-            isCanNotFlipNext();
             $("#right-down-corner").css("color", "#000");
             $("#right-down-corner").prop("disabled", false);
           }, 12000),
@@ -2893,8 +2774,6 @@ $(function () {
       $("#right-down-corner").hide();
       $(".next-page img").hide();
 
-      isCanNotFlip();
-
       addPageTimeout(() => {
         canFlipPrev = true;
       }, 3000);
@@ -2945,7 +2824,6 @@ $(function () {
       page !== 24
     ) {
       allBtnDisabled(page);
-      isCanNotFlip();
 
       // 延遲三秒後才能翻頁
       addPageTimeout(() => {
