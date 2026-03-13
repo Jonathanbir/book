@@ -4032,6 +4032,16 @@ button {
 /*@media (pointer: coarse) and (min-width: 768px) and (max-width: 1366px) and (max-aspect-ratio: 3/2) {
 /* 平板 */
 @media (pointer: coarse) and (max-height: 1000px) and (min-height: 460px) {
+  /* 預設隱藏主要內容容器，防止 Reload 瞬間看到跑版 */
+  .book-container,
+  .pop-up-box,
+  .book-cover-pc,
+  .controls {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease; /* 顯現時會比較平順 */
+  }
+
   .tablet-none {
     display: none !important;
   }
@@ -4182,6 +4192,25 @@ button {
 
 /* 手機 */
 @media screen and (max-height: 460px) {
+  /* 預設隱藏主要內容容器，防止 Reload 瞬間看到跑版 */
+  .book-container,
+  .pop-up-box,
+  .book-cover-pc,
+  .controls {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease; /* 顯現時會比較平順 */
+  }
+
+  /* 確保旋轉提示始終在最上層且背景不透明，擋住後方的 reload */
+  #rotate-notice {
+    position: fixed;
+    inset: 0;
+    z-index: 1000000;
+    background-image: url("./images/common/mb-bg.png");
+    background-size: cover;
+  }
+
   .mobile {
     display: block;
   }
@@ -4202,6 +4231,7 @@ button {
     left: 0;
     margin: auto;
     flex-direction: row;
+    transition: all 1s ease-in-out;
   }
 
   .book-section {

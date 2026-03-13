@@ -196,8 +196,6 @@ $(function () {
       } else {
         scale = 0.9; // 你要的固定值
       }
-
-      console.log("123", h * scale, scale);
       if (innerWidth > 1280) {
         $(".book-container").css({
           left: (-w / 2) * 1.01 + "px",
@@ -219,36 +217,50 @@ $(function () {
   } else {
     console.log("mobile mode");
     // 等 turn.js 完成 layout
-    requestAnimationFrame(() => {
-      const w = getBookWidth();
-      const bookHeight = document
-        .querySelector("#flipbook")
-        .getBoundingClientRect().height;
+    const cloudImg = document.querySelector(".book-cover-title");
+    // 定義一個專門負責定位的函式
+    const updateMobileLayout = () => {
+      requestAnimationFrame(() => {
+        // 檢查高度是否正常，如果是 0 則不執行或延後
+        const cloudTiitleHeight = cloudImg.getBoundingClientRect().height;
+        if (cloudTiitleHeight === 0) {
+          setTimeout(updateMobileLayout, 100);
+          return;
+        }
 
-      const cloudTiitleWidth = document
-        .querySelector(".book-cover-title")
-        .getBoundingClientRect().width;
-      const cloudTiitleHeight = document
-        .querySelector(".book-cover-title")
-        .getBoundingClientRect().height;
-      console.log("cloudTiitleHeight:", cloudTiitleHeight);
-      console.log("cloudTiitleWidth:", cloudTiitleWidth);
-      $("#left-down-corner").hide();
-      $(".book-container").css({
-        left: -w * 0.425 + "px",
+        const w = getBookWidth();
+        const bookHeight = document
+          .querySelector("#flipbook")
+          .getBoundingClientRect().height;
+
+        $("#left-down-corner").hide();
+        $(".book-container").css({ left: -w * 0.425 + "px" });
+
+        // 使用正確抓到的高度進行計算
+        $(".book-cover-go").css({
+          top: cloudTiitleHeight * 0.905 + "px",
+          left: cloudTiitleHeight * 2.2074 + "px",
+        });
+
+        $(".book-cloud-region").css({
+          transform: `scale(0.6) translateY(${cloudTiitleHeight * -0.342}px)`,
+        });
+
+        $(".book-container").css("height", window.innerHeight);
+        $(".controls-mb").css("height", bookHeight * 0.8);
+        $(".controls").css("height", bookHeight * 0.8);
       });
-      $(".book-cover-go").css({
-        top: cloudTiitleHeight * 0.905 + "px", //172
-        left: cloudTiitleHeight * 2.2074 + "px", //419.4
-      });
-      $(".book-cloud-region").css({
-        transform:
-          `scale(0.6) translateY(` + cloudTiitleHeight * -0.342 + `px)`, //-65
-      });
-      $(".book-container").css("height", window.innerHeight);
-      $(".controls-mb").css("height", bookHeight * 0.8);
-      $(".controls").css("height", bookHeight * 0.8);
-    });
+    };
+
+    // 圖片載入完成後執行
+    if (cloudImg.complete) {
+      updateMobileLayout();
+    } else {
+      cloudImg.addEventListener("load", updateMobileLayout);
+    }
+
+    // 額外保險：視窗大小改變也重新跑一次
+    window.addEventListener("resize", updateMobileLayout);
     $(".pop-up-box .book-cover-go").on("click", async function () {
       if (audioContext.state === "suspended") {
         await audioContext.resume();
@@ -308,6 +320,24 @@ $(function () {
     const rotateNotice = document.getElementById("rotate-notice");
     if (rotateNotice) {
       rotateNotice.style.display = "none";
+      setTimeout(() => {
+        $(".book-container").css({
+          opacity: "1",
+          visibility: "visible",
+        });
+        $(".pop-up-box").css({
+          opacity: "1",
+          visibility: "visible",
+        });
+        $(".book-cover-pc").css({
+          opacity: "1",
+          visibility: "visible",
+        });
+        $(".controls").css({
+          opacity: "1",
+          visibility: "visible",
+        });
+      }, 1000);
     }
     document.body.style.overflow = "";
   }
@@ -974,7 +1004,6 @@ $(function () {
         $(".father-hand-region").show();
       }, 1500),
     );
-    console.log(".father-hand-regionshow()!!!!");
     $(".father-hand-region").css("opacity", "1");
 
     page2627Timeouts.push(
@@ -2517,7 +2546,6 @@ $(function () {
       if (replay) {
         resetFamilyPage();
         $(".father-hand-region").hide();
-        console.log(".father-hand-region hide()!!!!");
         $(".mom-hand-region").hide();
         $(".mow").hide();
         $(".daughter-hand-region").removeClass("daughter-hand-finish");
@@ -2858,7 +2886,6 @@ $(function () {
 
     $("#flipbook").on("mouseup", function (e) {
       const page = $("#flipbook").turn("page");
-      console.log("目前頁面是：" + page);
       const offset = $(this).offset();
       const x = e.pageX - offset.left;
       const y = e.pageY - offset.top;
