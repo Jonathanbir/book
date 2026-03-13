@@ -2684,24 +2684,46 @@ $(function () {
           });
         }
       } else if (isTablet || isIPad()) {
+        if (page === 27) {
+          $(".controls").css({
+            left: "-4%",
+          });
+        }
         if (page === 28) {
           requestAnimationFrame(() => {
             const w = getBookWidth();
             if (innerWidth > 1280) {
+              // 1.6882
+              console.log("1!");
               $(".book-container").css({
                 left: w * 0.32333 + "px", //388
               });
+              $(".controls").css({
+                left: -w * 0.54585 + "px", //260
+              });
             } else if (innerWidth > 1000 && innerWidth <= 1280) {
+              console.log("2!");
               $(".book-container").css({
                 left: w * 0.3528 + "px", //260
               });
+              $(".controls").css({
+                left: -w * 0.55 + "px", //260
+              });
             } else if (innerWidth > 1000) {
+              console.log("3!");
               $(".book-container").css({
                 left: w * 0.28083 + "px", //337
               });
+              $(".controls").css({
+                left: -w * 0.478 + "px", //260
+              });
             } else {
+              console.log("4!");
               $(".book-container").css({
                 left: w * 0.3528 + "px", //260
+              });
+              $(".controls").css({
+                left: -w * 0.55 + "px", //260
               });
             }
           });
@@ -2711,11 +2733,20 @@ $(function () {
           });
         }
       } else {
+        if (page === 27) {
+          $(".controls").css({
+            left: "-9%",
+          });
+        }
         if (page === 28) {
           requestAnimationFrame(() => {
             const w = getBookWidth();
+            console.log("w:", w);
             $(".book-container").css({
               left: w * 0.33 + "px", //260
+            });
+            $(".controls").css({
+              left: -w * 0.63 + "px", //260
             });
           });
         } else {
