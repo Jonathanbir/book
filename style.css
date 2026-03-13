@@ -4142,7 +4142,7 @@ button {
     display: flex;
     align-items: flex-end;
     position: relative;
-    left: 4%;
+    left: 3%;
   }
 
   .popup-open .mute-mobile-toggle {
