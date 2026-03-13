@@ -804,12 +804,26 @@
 
         // ── 2. 從 DOM 收集所有 <img> src ─────────────────────────────────
         function collectDomImages() {
-          var imgs = document.querySelectorAll("img[src]");
-          var srcs = [];
-          imgs.forEach(function (img) {
-            if (img.src) srcs.push(img.src);
+          var urls = [];
+
+          // <img src>
+          document.querySelectorAll("img[src]").forEach(function (img) {
+            var src = img.getAttribute("src");
+            if (src) urls.push(src);
           });
-          return srcs;
+
+          // CSS background-image
+          document.querySelectorAll("*").forEach(function (el) {
+            var bg = window.getComputedStyle(el).backgroundImage;
+            if (bg && bg !== "none") {
+              var match = bg.match(/url\(["']?(.*?)["']?\)/);
+              if (match && match[1]) {
+                urls.push(match[1]);
+              }
+            }
+          });
+
+          return urls;
         }
 
         // ── 3. 合併去重 ───────────────────────────────────────────────────
@@ -855,6 +869,29 @@
           }, 900);
         }
 
+        function preloadImage(src) {
+          return new Promise(function (resolve) {
+            var img = new Image();
+
+            img.onload = function () {
+              if (img.decode) {
+                img
+                  .decode()
+                  .catch(function () {})
+                  .finally(resolve);
+              } else {
+                resolve();
+              }
+            };
+
+            img.onerror = function () {
+              resolve(); // 就算錯誤也繼續
+            };
+
+            img.src = src;
+          });
+        }
+
         // ── 6. 主流程 ─────────────────────────────────────────────────────
         function startPreload() {
           var domSrcs = collectDomImages();
@@ -869,17 +906,21 @@
           }
           updateProgress(0, total);
 
+          // var forceFinishTimer = setTimeout(function () {
+          //   console.warn("⚠ 預載超時，強制進入頁面");
+          //   hideLoading();
+          // }, 120000000);
+
           allSrcs.forEach(function (src) {
-            var img = new Image();
-            img.onload = img.onerror = function () {
+            preloadImage(src).then(function () {
               loaded++;
               updateProgress(loaded, total);
+
               if (loaded >= total) {
-                // 短暫停留讓使用者看到 100%
+                // clearTimeout(forceFinishTimer);
                 setTimeout(hideLoading, 400);
               }
-            };
-            img.src = src;
+            });
           });
         }
 
