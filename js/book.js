@@ -224,10 +224,26 @@ $(function () {
       const bookHeight = document
         .querySelector("#flipbook")
         .getBoundingClientRect().height;
-      console.log("bookHeight:", bookHeight * 0.8);
+
+      const cloudTiitleWidth = document
+        .querySelector(".book-cover-title")
+        .getBoundingClientRect().width;
+      const cloudTiitleHeight = document
+        .querySelector(".book-cover-title")
+        .getBoundingClientRect().height;
+      console.log("cloudTiitleHeight:", cloudTiitleHeight);
+      console.log("cloudTiitleWidth:", cloudTiitleWidth);
       $("#left-down-corner").hide();
       $(".book-container").css({
         left: -w * 0.425 + "px",
+      });
+      $(".book-cover-go").css({
+        top: cloudTiitleHeight * 0.905 + "px", //172
+        left: cloudTiitleHeight * 2.2074 + "px", //419.4
+      });
+      $(".book-cloud-region").css({
+        transform:
+          `scale(0.6) translateY(` + cloudTiitleHeight * -0.342 + `px)`, //-65
       });
       $(".book-container").css("height", window.innerHeight);
       $(".controls-mb").css("height", bookHeight * 0.8);
@@ -1028,7 +1044,7 @@ $(function () {
     page2627Timeouts.push(
       setTimeout(() => {
         $(".cow-right").addClass("cow-right-move");
-      }, 6000),
+      }, 7000),
     );
 
     page2627Timeouts.push(
@@ -1042,10 +1058,10 @@ $(function () {
     page2627Timeouts.push(
       setTimeout(() => {
         $(".mow").show();
-      }, 9000),
+      }, 12000),
     );
 
-    startReplayTimer(13000);
+    startReplayTimer(16500);
   }
 
   // 第 26–27 頁重置家人手部與牛相關動畫狀態

@@ -4056,7 +4056,7 @@ button {
 }
 
 /* 手機 */
-@media screen and (max-width: 460px) {
+/* @media screen and (max-width: 460px) {
   .mobile {
     display: block;
   }
@@ -4064,7 +4064,7 @@ button {
   .desktop {
     display: none;
   }
-}
+} */
 
 /* 手機 */
 @media screen and (max-height: 460px) {
@@ -4105,7 +4105,30 @@ button {
   }
 
   .book-cloud-region {
-    transform: translateY(-20%);
+    /* transform: scale(0.6) translateY(-15%); */
+  }
+
+  .book-cloud-region {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .book-cover-go {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+    cursor: pointer;
   }
 
   .page-btn {
