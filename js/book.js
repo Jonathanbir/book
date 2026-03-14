@@ -215,12 +215,9 @@ $(function () {
           return;
         }
 
-        const w = getBookWidth();
-        const bookHeight = document
-          .querySelector("#flipbook")
-          .getBoundingClientRect().height;
-
-        $(".book-scale-wrapper").css({ left: -w * 0.25 + "px" });
+        $(".book-scale-wrapper").css({
+          left: "-350px",
+        });
 
         // 使用正確抓到的高度進行計算
         $(".book-cover-go").css({
@@ -2512,7 +2509,7 @@ $(function () {
         canSwipePrev = false;
 
         requestAnimationFrame(() => {
-          $(".book-scale-wrapper").css({ left: "-300px" });
+          $(".book-scale-wrapper").css({ left: "-350px" });
         });
       } else {
         $(".book-scale-wrapper").css({
@@ -2536,7 +2533,7 @@ $(function () {
         requestAnimationFrame(() => {
           const w = getBookWidth();
           console.log("w:", w);
-          $(".book-scale-wrapper").css({ left: "250px" });
+          $(".book-scale-wrapper").css({ left: "150px" });
           $(".controls").css({
             left: "-600px",
           });
