@@ -133,6 +133,10 @@ $(function () {
 
   //播放背景音樂
   async function playBackground() {
+    // 確保 Context 是跑起來的
+    if (audioContext.state === "suspended") {
+      await audioContext.resume();
+    }
     const response = await fetch("./mp3/background.mp3");
     const arrayBuffer = await response.arrayBuffer();
     const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
@@ -241,9 +245,22 @@ $(function () {
     // 額外保險：視窗大小改變也重新跑一次
     window.addEventListener("resize", updateMobileLayout);
     $(".pop-up-box .book-cover-go").on("click", async function () {
+      // 1. 傳統的 AudioContext 解鎖
       if (audioContext.state === "suspended") {
         await audioContext.resume();
       }
+
+      // 2. 關鍵：解鎖 iOS 靜音開關限制
+      const silentAudio = document.getElementById("ios-audio-unlock");
+      if (silentAudio) {
+        silentAudio
+          .play()
+          .then(() => {
+            silentAudio.pause(); // 播放一下即暫停，通道已開啟
+          })
+          .catch((err) => console.log("Silent audio unlock failed", err));
+      }
+
       playBackground();
       setTimeout(() => {
         $(".pop-up-box").css("display", "none");

@@ -1,4 +1,12 @@
-/* loading */
+@import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@700&display=swap");
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  overflow: hidden;
+}
+
+/* loading css*/
 #loading-screen {
   position: fixed;
   inset: 0;
@@ -106,6 +114,10 @@
   font-weight: 800;
   color: #ffffff;
   margin: 0;
+  font-family: "Fredoka", sans-serif;
+  /* font-family: "Comic Sans MS", "Comic Sans", cursive; */
+  /* font-family: "Arial Rounded MT Bold", "Helvetica Rounded", Arial, sans-serif; */
+  font-weight: bold;
   line-height: 1;
 }
 
@@ -118,10 +130,8 @@ body.loading-done > *:not(#loading-screen) {
 }
 /* loading end */
 
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
-  overflow: hidden;
+#ios-audio-unlock {
+  display: none;
 }
 
 .book-cover-pc {
