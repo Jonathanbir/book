@@ -874,18 +874,22 @@ $(function () {
     `);
 
     $(".next-page img").show();
+
     page2627Timeouts.push(
       setTimeout(() => {
         $(".father-hand-region").show();
-      }, 1500),
+        $(".daughter-hand-region").show();
+        $(".mom-hand-region").show();
+      }, 500),
     );
+
     $(".father-hand-region").css("opacity", "1");
 
     page2627Timeouts.push(
       setTimeout(() => {
         $(".book26").css("opacity", "1");
         $(".book27").css("opacity", "1");
-      }, 1200),
+      }, 500),
     );
 
     page2627Timeouts.push(
@@ -903,7 +907,10 @@ $(function () {
         $(".daughter-hand").css("opacity", "1");
         $(".daughter-hand-milk").css("display", "block");
         $(".daughter-hand-cup").css("opacity", "1");
-      }, 1500),
+        $(".mom-hand").css("opacity", "1");
+        $(".mom-hand-milk").css("opacity", "1");
+        $(".mom-hand-cup").css("opacity", "1");
+      }, 500),
     );
 
     page2627Timeouts.push(
@@ -2417,9 +2424,6 @@ $(function () {
         $(".daughter-hand-milk").removeClass("daughter-hand-milk-empty");
         $(".sweet-taste").removeClass("opacity-show");
         startFamilyAnimation();
-        setTimeout(() => {
-          $(".mom-hand-region").show();
-        }, 1500);
       }
     }
   }
@@ -2597,17 +2601,9 @@ $(function () {
             $("#flipbook").append(
               ' <div class="mom-hand-region"><div class="mom-hand-milk-region"><img class="mom-hand-milk" src="./images/book/book2627/milk.png"/><img class="mom-hand-cup" src="./images/book/book2627/cup.png"/></div><img class="mom-hand" src="./images/book/book2627/mom-hand.png"/></div>',
             );
-          }, 1500),
+          }, 200),
         );
       }
-
-      page2627Timeouts.push(
-        setTimeout(() => {
-          $(".mom-hand").css("opacity", "1");
-          $(".mom-hand-milk").css("opacity", "1");
-          $(".mom-hand-cup").css("opacity", "1");
-        }, 2000),
-      );
     }
 
     // 翻到該頁才開始動作
