@@ -178,6 +178,7 @@ $(function () {
     disableNativeCornerHoverOnly();
   });
 
+  //剛載入頁面邏輯
   if (!matchMedia("(pointer: coarse)").matches) {
     console.log("desktop mode");
   } else if (isTablet || isIPad()) {
@@ -189,30 +190,16 @@ $(function () {
       const bookHeight = document
         .querySelector("#flipbook")
         .getBoundingClientRect().height;
-      $("#left-down-corner").hide();
+
       let scale;
       if (ratio < 1.2 && ratio > 1) {
         scale = 0.8; // 你要的固定值
       } else {
         scale = 0.9; // 你要的固定值
       }
-      if (innerWidth > 1280) {
-        $(".book-container").css({
-          left: (-w / 2) * 1.01 + "px",
-        });
-      } else if (innerWidth > 1000 && innerWidth <= 1280) {
-        $(".book-container").css({
-          left: (-w / 2) * 0.85 + "px",
-        });
-      } else {
-        $(".book-container").css({
-          left: (-w / 2) * 0.85 + "px",
-        });
-      }
-
-      $(".book-container").css("height", window.innerHeight);
-      $(".controls-mb").css("height", h * scale);
-      $(".controls").css("height", h * scale);
+      $(".book-scale-wrapper").css({
+        left: "-400px",
+      });
     });
   } else {
     console.log("mobile mode");
@@ -220,11 +207,6 @@ $(function () {
     const cloudImg = document.querySelector(".book-cover-title");
     // 定義一個專門負責定位的函式
     const updateMobileLayout = () => {
-      if (isSafari()) {
-        $(".controls").css({
-          left: "-7%",
-        });
-      }
       requestAnimationFrame(() => {
         // 檢查高度是否正常，如果是 0 則不執行或延後
         const cloudTiitleHeight = cloudImg.getBoundingClientRect().height;
@@ -238,8 +220,7 @@ $(function () {
           .querySelector("#flipbook")
           .getBoundingClientRect().height;
 
-        $("#left-down-corner").hide();
-        $(".book-container").css({ left: -w * 0.425 + "px" });
+        $(".book-scale-wrapper").css({ left: -w * 0.25 + "px" });
 
         // 使用正確抓到的高度進行計算
         $(".book-cover-go").css({
@@ -250,10 +231,6 @@ $(function () {
         $(".book-cloud-region").css({
           transform: `scale(0.6) translateY(${cloudTiitleHeight * -0.342}px)`,
         });
-
-        $(".book-container").css("height", window.innerHeight);
-        $(".controls-mb").css("height", bookHeight * 0.8);
-        $(".controls").css("height", bookHeight * 0.8);
       });
     };
 
@@ -424,11 +401,6 @@ $(function () {
   function resizeFunction() {
     const isCoarse = window.matchMedia("(pointer: coarse)").matches;
     let scaleMobile;
-    let scaleMobileTranslateY;
-
-    //resize書本大小
-    const wrapper = $(".book-scale-wrapper");
-
     let scale = 1;
 
     // ===== Desktop =====
@@ -446,48 +418,31 @@ $(function () {
       });
       console.log("進來桌機");
       return; // 直接結束
-    } else if (isTablet || isIPad()) {
-      console.log("進來平板");
-      if (ratio < 1.2 && ratio > 1) {
-        scale = 0.8; // 你要的固定值
-        $("#flipbook").css({
-          transform: `scale(` + scale + `) translateY(-73px)`,
-        });
-      } else {
-        scale = 0.9; // 你要的固定值
-        $("#flipbook").css({
-          transform: `scale(` + scale + `) translateY(-33px)`,
-        });
-      }
-      $(".book-section").css({
-        transform: `scale(` + scale + `)`,
-        width: scale * scale * 1200 + "px",
-        height: scale * scale * 600 + "px",
-      });
-    } else {
-      console.log("進來手機");
-      if (innerHeight >= 320) {
-        scaleMobile = 0.8;
-        scaleMobileTranslateY = -76;
-      } else {
-        scaleMobile = 0.75;
-        scaleMobileTranslateY = -96;
-      }
-      scale = scaleMobile; // 你要的固定值
-      $(".book-section").css({
-        transform: `scale(` + scale + `)`,
-        width: scale * scale * 1200 + "px",
-        height: scale * scale * 600 + "px",
-      });
-
-      $("#flipbook").css({
-        transform:
-          `scale(` + scale + `) translateY(` + scaleMobileTranslateY + `px)`,
-      });
     }
 
-    wrapper.css({
+    // 1. 計算縮放比例
+    if (isTablet || isIPad()) {
+      scale = ratio < 1.2 && ratio > 1 ? 0.7 : 0.75;
+    } else {
+      // 手機邏輯
+      scale = innerHeight >= 320 ? 0.55 : 0.5;
+    }
+
+    // 2. 【關鍵】統一
+    // 移除 translateY，交給 CSS Flexbox 置中
+    $(".book-scale-wrapper").css({
       transform: `scale(${scale})`,
+      "transform-origin": "center center", // 確保從中心縮放
+      display: "flex",
+      "align-items": "center",
+      "justify-content": "center",
+    });
+
+    // 3. 【關鍵】重設內部容器，不要讓它們重複 scale
+    $(".book-section, #flipbook").css({
+      transform: "none",
+      top: "0",
+      margin: "0",
     });
 
     // turn.js 重新計算翻頁區域
@@ -514,74 +469,6 @@ $(function () {
   // 當裝置旋轉時重新檢查
   window.addEventListener("resize", resizeFunction);
 
-  //手機滑動邏輯
-  let startMoveY = 0;
-
-  window.addEventListener("touchstart", function (e) {
-    startMoveY = e.touches[0].clientY;
-  });
-
-  window.addEventListener("touchmove", function (e) {
-    const currentY = e.touches[0].clientY;
-
-    // 手指往上滑 = currentY < startMoveY
-    if (startMoveY - currentY > 50) {
-      onSwipeUp();
-    }
-  });
-
-  function onSwipeUp() {
-    $(".swipe-pointer").hide();
-    $(".arrow").hide();
-  }
-
-  window.addEventListener("touchmove", () => {
-    const scrollTop = window.scrollY;
-    const viewportHeight = window.innerHeight;
-    const pageHeight = document.documentElement.scrollHeight;
-
-    if (scrollTop + viewportHeight + 5 >= pageHeight) {
-      onReachBottom();
-    }
-  });
-
-  function onReachBottom() {
-    // 你要執行的動作
-    $(".swipe-cotainer").hide();
-  }
-
-  // 禁止滑鼠拖曳翻頁（但保留角落點擊）
-  let isDragging = false;
-  let startX = 0;
-  let startY = 0;
-
-  // 監聽滑鼠或觸控開始事件
-  $flipbook.on("mousedown touchstart", function (e) {
-    const evt = e.originalEvent.touches ? e.originalEvent.touches[0] : e;
-    isDragging = true;
-    startX = evt.clientX;
-    startY = evt.clientY;
-  });
-
-  // 監聽移動事件（阻止拖曳）
-  $flipbook.on("mousemove touchmove", function (e) {
-    if (!isDragging) return;
-    const evt = e.originalEvent.touches ? e.originalEvent.touches[0] : e;
-    const dx = Math.abs(evt.clientX - startX);
-    const dy = Math.abs(evt.clientY - startY);
-
-    // 如果移動超過 10px，表示使用者在拖曳 → 阻止翻頁
-    if (dx > 10 || dy > 10) {
-      e.stopImmediatePropagation();
-      e.preventDefault();
-    }
-  });
-
-  // 釋放滑鼠（重置狀態）
-  $flipbook.on("mouseup touchend", function () {
-    isDragging = false;
-  });
-
   let isBtnDisabled;
 
   //有任務下一頁 鎖定按鈕
@@ -603,8 +490,6 @@ $(function () {
   function btnPreviousDisabled() {
     console.log("btnPreviousDisabled!");
     let count = 3;
-    let countMobile = 3;
-    const prevMobileBtn = $("#left-down-corner")[0];
 
     const timer = setInterval(() => {
       count--;
@@ -636,9 +521,6 @@ $(function () {
     $(".next-page img").attr("src", "./images/common/3sec.png");
     $(".prev-page").prop("disabled", true);
     $(".next-page").prop("disabled", true);
-
-    const prevMobileBtn = $("#left-down-corner")[0];
-    const nextMobileBtn = $("#right-down-corner")[0];
 
     const timer = setInterval(() => {
       count--;
@@ -760,15 +642,15 @@ $(function () {
   });
 
   // 鍵盤方向鍵控制翻頁 (正式上線要拿掉)
-  // $(document).on("keydown", function (e) {
-  //   if (e.key === "ArrowLeft") {
-  //     stopVoice();
-  //     $flipbook.turn("previous");
-  //   } else if (e.key === "ArrowRight") {
-  //     stopVoice();
-  //     $flipbook.turn("next");
-  //   }
-  // });
+  $(document).on("keydown", function (e) {
+    if (e.key === "ArrowLeft") {
+      stopVoice();
+      $flipbook.turn("previous");
+    } else if (e.key === "ArrowRight") {
+      stopVoice();
+      $flipbook.turn("next");
+    }
+  });
 
   //靜音按鈕
   let isMuted = false;
@@ -1203,14 +1085,6 @@ $(function () {
     if (page === 2 || page === 3) {
       if (replay) {
         reset23();
-      }
-
-      if (matchMedia("(pointer: coarse)").matches && !isTablet && !isIPad()) {
-        if (isSafari()) {
-          $(".controls-mb").css({
-            left: "7%",
-          });
-        }
       }
 
       $(".cloud-0").css("opacity", "0");
@@ -2573,6 +2447,103 @@ $(function () {
 
     handlePage(currentPage);
 
+    // 書本定位
+    if (!isTablet && !window.matchMedia("(max-height: 460px)").matches) {
+      if (page === 1) {
+        $(".book-scale-wrapper").css({
+          left: "-300px",
+        });
+        $(".controls").css({
+          left: "300px",
+        });
+      } else if (page === 28) {
+        $(".book-scale-wrapper").css({
+          left: "300px",
+        });
+        $(".controls").css({
+          left: "-300px",
+        });
+      } else {
+        $(".book-scale-wrapper").css({
+          left: "0px",
+        });
+        $(".controls").css({
+          left: "0px",
+        });
+      }
+    } else if (isTablet || isIPad()) {
+      if (page === 1) {
+        $("#left-down-corner").hide();
+        requestAnimationFrame(() => {
+          $(".book-scale-wrapper").css({ left: "-400px" });
+        });
+      } else {
+        $(".book-scale-wrapper").css({
+          left: "0px",
+        });
+      }
+
+      if (page === 27) {
+        $(".book-scale-wrapper").css({
+          left: "0px",
+        });
+        $(".controls").css({
+          left: "0px",
+        });
+        $(".next-page img").attr("src", "./images/common/next-img.png");
+        $(".next-page").css("cursor", "pointer");
+        $(".next-page").prop("disabled", false);
+      }
+
+      if (page === 28) {
+        requestAnimationFrame(() => {
+          const w = getBookWidth();
+          console.log("w:", w);
+          $(".book-scale-wrapper").css({ left: "250px" });
+        });
+        $(".controls").css({
+          left: "-600px", //260
+        });
+      }
+    } else {
+      // 第一頁：不能往回
+      if (page === 1) {
+        $("#left-down-corner").hide();
+        canSwipePrev = false;
+
+        requestAnimationFrame(() => {
+          $(".book-scale-wrapper").css({ left: "-300px" });
+        });
+      } else {
+        $(".book-scale-wrapper").css({
+          left: "0px",
+        });
+      }
+
+      if (page === 27) {
+        $(".book-scale-wrapper").css({
+          left: "0px",
+        });
+        $(".controls").css({
+          left: "0px",
+        });
+        $(".next-page img").attr("src", "./images/common/next-img.png");
+        $(".next-page").css("cursor", "pointer");
+        $(".next-page").prop("disabled", false);
+      }
+
+      if (page === 28) {
+        requestAnimationFrame(() => {
+          const w = getBookWidth();
+          console.log("w:", w);
+          $(".book-scale-wrapper").css({ left: "250px" });
+          $(".controls").css({
+            left: "-600px",
+          });
+        });
+      }
+    }
+
     // 小女孩喝奶動畫流程（只綁一次，不堆疊）
     $(".click-little-girl-box")
       .off("click")
@@ -2623,12 +2594,6 @@ $(function () {
       });
 
     if (page === 26 || page === 27) {
-      page2627Timeouts.push(
-        setTimeout(() => {
-          $("#right-down-corner").show();
-        }, 500),
-      );
-
       if (!$(".mom-hand").length) {
         page2627Timeouts.push(
           setTimeout(() => {
@@ -2657,111 +2622,6 @@ $(function () {
       playAudioByPage(page);
       applyPageRule(page);
 
-      // 書本定位
-      if (!isTablet && !window.matchMedia("(max-height: 460px)").matches) {
-        if (page === 1) {
-          $(".book-section").css({
-            left: "-300px",
-          });
-        } else if (page === 28) {
-          $(".book-section").css({
-            left: "300px",
-          });
-        } else {
-          $(".book-section").css({
-            left: "0px",
-          });
-        }
-      } else if (isTablet || isIPad()) {
-        if (page === 27) {
-          $(".controls").css({
-            left: "-4%",
-          });
-        }
-        if (page === 28) {
-          requestAnimationFrame(() => {
-            const w = getBookWidth();
-            if (innerWidth > 1280) {
-              // 1.6882
-              console.log("1!");
-              $(".book-container").css({
-                left: w * 0.32333 + "px", //388
-              });
-              $(".controls").css({
-                left: -w * 0.54585 + "px", //260
-              });
-            } else if (innerWidth > 1000 && innerWidth <= 1280) {
-              console.log("2!");
-              $(".book-container").css({
-                left: w * 0.3528 + "px", //260
-              });
-              $(".controls").css({
-                left: -w * 0.55 + "px", //260
-              });
-            } else if (innerWidth > 1000) {
-              console.log("3!");
-              $(".book-container").css({
-                left: w * 0.28083 + "px", //337
-              });
-              $(".controls").css({
-                left: -w * 0.478 + "px", //260
-              });
-            } else {
-              console.log("4!");
-              $(".book-container").css({
-                left: w * 0.3528 + "px", //260
-              });
-              $(".controls").css({
-                left: -w * 0.55 + "px", //260
-              });
-            }
-          });
-        } else {
-          $(".book-container").css({
-            left: "0px",
-          });
-        }
-      } else {
-        if (page === 27) {
-          if (isSafari()) {
-            $(".controls").css({
-              left: "-7%",
-            });
-          }
-          if (isIOSChrome()) {
-            $(".controls").css({
-              left: "-9%",
-            });
-          }
-        }
-        if (page === 28) {
-          requestAnimationFrame(() => {
-            const w = getBookWidth();
-            console.log("w:", w);
-            $(".book-container").css({
-              left: w * 0.33 + "px", //260
-            });
-            $(".controls").css({
-              left: -w * 0.63 + "px", //260
-            });
-          });
-        } else {
-          $(".book-container").css({
-            left: "0px",
-          });
-        }
-      }
-
-      if (
-        page > 1 &&
-        page !== 28 &&
-        !window.matchMedia("(max-height: 460px)").matches
-      ) {
-        $("#right-up-corner, #right-down-corner")
-          .prop("disabled", false)
-          .show();
-      }
-
       // 第 26–27 頁：家人一起喝牛奶
       if (page === 26 || page === 27) {
         startFamilyAnimation();
@@ -2775,22 +2635,6 @@ $(function () {
         $(".mom-hand-milk").css("opacity", "1");
         $(".daughter-hand-milk").removeClass("daughter-hand-milk-empty");
         $(".sweet-taste").removeClass("opacity-show");
-      }
-
-      if (isTablet || isIPad()) {
-        if (page === 1) {
-          const flipbookWidth = document
-            .querySelector(".book-title")
-            .getBoundingClientRect().width;
-
-          $(".book-container").css({
-            left: -1 * flipbookWidth + "px",
-          });
-        } else {
-          $(".book-container").css({
-            left: "0px",
-          });
-        }
       }
     });
 
@@ -2842,8 +2686,12 @@ $(function () {
         }, 800),
       );
 
-      $("#right-down-corner").hide();
-      $(".next-page img").hide();
+      if (!window.matchMedia("(pointer: coarse)").matches) {
+        $(".next-page img").hide();
+      } else {
+        $(".next-page img").attr("src", "./images/common/next-grey-img.png");
+        $(".next-page").prop("disabled", true);
+      }
 
       addPageTimeout(() => {
         canFlipPrev = true;
@@ -2892,7 +2740,8 @@ $(function () {
       page !== 15 &&
       page !== 16 &&
       page !== 17 &&
-      page !== 24
+      page !== 24 &&
+      page !== 28
     ) {
       allBtnDisabled(page);
 
@@ -2981,17 +2830,6 @@ $(function () {
     });
   });
 
-  let canFlip = true;
-  let canSwipePrev = false;
-  let canSwipeNext = false;
-
-  let touchStartX = 0;
-  let touchEndX = 0;
-
-  let currentMobilePage = 1;
-
-  const flipbook = document.getElementById("flipbook");
-
   /* ======================
    頁面規則控制
 ====================== */
@@ -2999,35 +2837,6 @@ $(function () {
     // 預設：全部開放
     canSwipePrev = true;
     canSwipeNext = true;
-
-    // 第一頁：不能往回
-    if (page === 1) {
-      $("#left-down-corner").hide();
-      canSwipePrev = false;
-
-      if (window.matchMedia("(max-height: 460px)").matches) {
-        requestAnimationFrame(() => {
-          const w = getBookWidth();
-          $(".book-container").css({
-            left: -w * 0.53125 + "px", //326.4
-          });
-        });
-      }
-    } else {
-      if (window.matchMedia("(max-height: 460px)").matches) {
-        if (isSafari() || isIOSChrome()) {
-          $(".book-container").css({
-            left: "0px",
-          });
-        }
-
-        if (isAndroidChrome()) {
-          $(".book-container").css({
-            left: "0px",
-          });
-        }
-      }
-    }
 
     // 第 6–7 頁：點擊門跑出森林
     if (page === 6 || page === 7) {
@@ -3231,59 +3040,5 @@ $(function () {
       // 如果這頁不需要播放音樂，確保停止之前的語音 (可選)
       stopVoice();
     }
-  }
-
-  /* ======================
-   🔥 初始化補救（一開始page是undefined關鍵）
-====================== */
-  $(document).ready(function () {
-    // 取得目前頁數（預設應該是 1）
-    let currentPage = $("#flipbook").turn("page") || 1;
-  });
-  /* ======================
-   touch events
-====================== */
-  flipbook.addEventListener("touchstart", function (e) {
-    touchStartX = e.changedTouches[0].screenX;
-  });
-
-  flipbook.addEventListener("touchend", function (e) {
-    touchEndX = e.changedTouches[0].screenX;
-    handleSwipe();
-  });
-
-  /* ======================
-   swipe事件
-====================== */
-  function handleSwipe() {
-    const swipeDistance = touchEndX - touchStartX;
-    if (Math.abs(swipeDistance) < 30) return;
-    if (!canFlip) return;
-
-    // 👉 向右滑：previous
-    if (swipeDistance > 0) {
-      if (!canSwipePrev) return;
-      lockFlip();
-      stopVoice();
-      $("#flipbook").turn("previous");
-    }
-
-    // 👉 向左滑：next
-    if (swipeDistance < 0) {
-      if (!canSwipeNext) return;
-      lockFlip();
-      stopVoice();
-      $("#flipbook").turn("next");
-    }
-  }
-
-  /* ======================
-   冷卻鎖
-====================== */
-  function lockFlip() {
-    canFlip = false;
-    setTimeout(() => {
-      canFlip = true;
-    }, 3000);
   }
 });

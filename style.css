@@ -124,13 +124,6 @@ body {
   overflow: hidden;
 }
 
-.book-scale-wrapper {
-  width: 1200px;
-  height: 600px;
-  margin: auto;
-  transform-origin: top center;
-}
-
 .book-cover-pc {
   position: fixed;
   top: 0;
@@ -170,10 +163,22 @@ body {
 }
 
 /* 桌機 */
+.book-scale-wrapper {
+  position: relative;
+  left: -300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh;
+  margin: auto;
+  transform-origin: center center;
+  transition: all 1s ease-in-out;
+}
 
 .book-container {
-  width: 100%;
-  height: 100vh;
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -188,7 +193,6 @@ body {
   width: 1200px;
   height: 600px;
   margin: 0 auto;
-  left: -300px;
   cursor: grab;
   transition: all 1s ease-in-out;
 }
@@ -256,14 +260,14 @@ audio {
   display: flex;
   justify-content: center;
   position: relative;
-  z-index: 999;
+  z-index: 9999;
   text-align: center;
   margin: 20px auto;
 }
 
 .page-btn {
   position: relative;
-  z-index: 99999;
+  z-index: 9999;
   cursor: pointer;
 }
 
@@ -1643,12 +1647,11 @@ button {
 
 .click-magic-wand-box {
   display: none;
-  width: 50px;
-  height: 160px;
-  transform: rotate(20deg);
+  width: 250px;
+  height: 300px;
   position: absolute;
-  left: 36%;
-  bottom: 22%;
+  left: 21%;
+  bottom: 0;
   z-index: 9999;
   cursor: pointer;
   pointer-events: auto;
@@ -4029,7 +4032,21 @@ button {
   }
 }
 
-/*@media (pointer: coarse) and (min-width: 768px) and (max-width: 1366px) and (max-aspect-ratio: 3/2) {
+/* 桌機 */
+@media (pointer: fine) {
+  .controls {
+    position: relative;
+    left: 300px;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    z-index: 9999;
+    text-align: center;
+    margin: 20px auto;
+    transition: all ease-in-out;
+  }
+}
+
 /* 平板 */
 @media (pointer: coarse) and (max-height: 1000px) and (min-height: 460px) {
   /* 預設隱藏主要內容容器，防止 Reload 瞬間看到跑版 */
@@ -4050,25 +4067,6 @@ button {
     display: block;
   }
 
-  .book-container {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    flex-direction: row;
-    margin: auto;
-    transition: all 1s ease-in-out;
-  }
-
-  .book-section {
-    left: 0;
-  }
-
-  .page-btn,
-  .page-btn img {
-    width: 80px;
-  }
   .mute-mobile-toggle {
     position: fixed;
     top: 0;
@@ -4124,15 +4122,9 @@ button {
   .replay-mobile-btn-disabled {
     background: rgb(255, 255, 255);
   }
-  /* 
-  .page-btn-mobile {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  } */
 
   .controls {
-    left: -4%;
+    width: 100px;
     flex-direction: column;
     justify-content: space-between;
     margin: initial;
@@ -4140,9 +4132,11 @@ button {
 
   .controls-mb {
     display: flex;
-    align-items: flex-end;
-    position: relative;
-    left: 3%;
+    width: 100px;
+  }
+
+  .page-btn {
+    width: 100px;
   }
 
   .popup-open .mute-mobile-toggle {
@@ -4150,23 +4144,13 @@ button {
   }
 
   .mute-mobile-toggle {
-    /* position: fixed;
-    top: 0;
-    right: 0; */
     z-index: 9999;
     border: none;
     width: 100px;
     margin: 10px;
   }
 
-  /* .prev-page,
-  .next-page,
-  .mute-toggle {
-    margin: 5% auto;
-  } */
-
   .popup-board-box {
-    transform: scale(0.8);
     bottom: 0;
   }
 }
@@ -4178,17 +4162,6 @@ button {
 /* 手機高度小於320px */
 @media screen and (max-height: 320px) {
 }
-
-/* 手機 */
-/* @media screen and (max-width: 460px) {
-  .mobile {
-    display: block;
-  }
-
-  .desktop {
-    display: none;
-  }
-} */
 
 /* 手機 */
 @media screen and (max-height: 460px) {
@@ -4223,23 +4196,9 @@ button {
     transform: scale(0.65) translateY(-10%);
   }
 
-  .book-container {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    margin: auto;
-    flex-direction: row;
-    transition: all 1s ease-in-out;
-  }
-
-  .book-section {
-    left: initial;
-  }
   .pop-up-box {
     position: fixed;
-    z-index: 9999;
+    z-index: 10000;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -4297,7 +4256,6 @@ button {
   }
 
   .controls {
-    left: -9%;
     flex-direction: column;
     justify-content: space-between;
     margin: initial;
@@ -4305,18 +4263,19 @@ button {
 
   .controls-mb {
     display: flex;
+    width: 150px;
     align-items: flex-end;
-    position: relative;
-    left: 9%;
+  }
+
+  .page-btn {
+    width: 150px;
   }
 
   .popup-open .mute-mobile-toggle {
     pointer-events: none;
   }
+
   .mute-mobile-toggle {
-    /* position: fixed;
-    top: 0;
-    right: 0; */
     z-index: 9999;
     border: none;
     width: 100px;
@@ -4365,8 +4324,58 @@ button {
   }
 
   .popup-board-box {
-    transform: scale(0.6);
     bottom: 0;
+  }
+}
+
+/* 平板與手機的共用 RWD 修正 */
+@media (pointer: coarse) {
+  .book-scale-wrapper {
+    flex-direction: row;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    height: 600px;
+    margin: auto;
+    transition: all 1s ease-in-out;
+  }
+
+  .book-container {
+    pointer-events: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1200px;
+    height: 600px;
+  }
+
+  .book-section {
+    width: 1200px;
+    height: 600px;
+    left: 0 !important; /* 行動版通常不需要桌機的 -300px 偏移 */
+    margin: 0 auto !important;
+  }
+
+  #flipbook {
+    width: 1200px;
+    height: 600px;
+  }
+
+  .controls {
+    height: 600px;
+  }
+
+  .controls-mb {
+    height: 600px;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  .page-btn img {
+    width: 100%;
   }
 }
 
