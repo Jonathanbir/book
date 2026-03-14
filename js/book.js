@@ -193,7 +193,7 @@ $(function () {
 
       let scale;
       if (ratio < 1.2 && ratio > 1) {
-        scale = 0.8; // 你要的固定值
+        scale = 0.7; // 你要的固定值
       } else {
         scale = 0.9; // 你要的固定值
       }
@@ -422,7 +422,7 @@ $(function () {
       scale = ratio < 1.2 && ratio > 1 ? 0.7 : 0.75;
     } else {
       // 手機邏輯
-      scale = innerHeight >= 320 ? 0.55 : 0.5;
+      scale = innerHeight >= 320 ? 0.5 : 0.42;
     }
 
     // 2. 【關鍵】統一
