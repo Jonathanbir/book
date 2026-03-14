@@ -3096,4 +3096,31 @@ $(function () {
       stopVoice();
     }
   }
+
+  document.addEventListener("visibilitychange", function () {
+    if (isAndroidChrome()) {
+      if (document.hidden) {
+        // 除了 suspend，強制將總音量歸零
+        bgGainNode.gain.setTargetAtTime(0, audioContext.currentTime, 0.1);
+        voiceGainNode.gain.setTargetAtTime(0, audioContext.currentTime, 0.1);
+        audioContext.suspend();
+      } else {
+        audioContext.resume().then(() => {
+          // 恢復原本音量
+          if (!isMuted) {
+            bgGainNode.gain.setTargetAtTime(
+              BG_VOLUME,
+              audioContext.currentTime,
+              0.1,
+            );
+            voiceGainNode.gain.setTargetAtTime(
+              VOICE_VOLUME,
+              audioContext.currentTime,
+              0.1,
+            );
+          }
+        });
+      }
+    }
+  });
 });
