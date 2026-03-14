@@ -1,5 +1,17 @@
 @import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@700&display=swap");
 
+/* 確保 body 和 html 絕對不會因為內容過大而出現滾動條 */
+html,
+body {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  /* 關鍵：強制禁止全網頁出現捲軸，這能防止 Chrome 因為內容物變大而自動偏移視窗 */
+  overflow: hidden !important; /* 強制禁止所有方向的滾動 */
+  position: fixed; /* 避免手機/桌機縮放觸發邊緣彈跳 */
+}
+
 body {
   font-family: Arial, sans-serif;
   background-color: #f4f4f4;
@@ -175,13 +187,13 @@ body.loading-done > *:not(#loading-screen) {
 /* 桌機 */
 .book-scale-wrapper {
   position: relative;
-  left: -300px;
+  left: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%;
-  min-height: 100vh;
+  height: 100vh;
   margin: auto;
   transform-origin: center center;
   transition: all 1s ease-in-out;
@@ -272,7 +284,7 @@ audio {
   position: relative;
   z-index: 9999;
   text-align: center;
-  margin: 20px auto;
+  margin: 15px auto;
 }
 
 .page-btn {
@@ -4044,15 +4056,31 @@ button {
 
 /* 桌機 */
 @media (pointer: fine) {
+  /* 桌機版 wrapper 修改 */
+  .book-scale-wrapper {
+    position: absolute; /* 改用 absolute 配合 inset 0 */
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    margin: auto;
+    transform-origin: center center;
+    /* 移除原本可能干擾的 left 偏移 */
+    left: 0 !important;
+  }
+
   .controls {
     position: relative;
-    left: 300px;
+    left: 0;
     display: flex;
     justify-content: center;
     position: relative;
     z-index: 9999;
     text-align: center;
-    margin: 20px auto;
+    margin: 15px auto;
     transition: all ease-in-out;
   }
 }

@@ -101,7 +101,7 @@ $(function () {
   }
 
   // window.alert(
-  //     "innerHeight " +
+  //   "innerHeight " +
   //     innerHeight +
   //     "\ninnerWidth " +
   //     innerWidth +
@@ -112,7 +112,9 @@ $(function () {
   //     "\nisSafari(): " +
   //     isSafari() +
   //     "\nisIPad(): " +
-  //     isIPad(),
+  //     isIPad() +
+  //     "\nisTablet: " +
+  //     isTablet,
   // );
 
   //控制音樂區塊
@@ -411,11 +413,28 @@ $(function () {
   window.addEventListener("resize", onOrientationChange);
   window.addEventListener("orientationchange", onOrientationChange);
 
+  let scaleDesktop = 1;
+
+  const winW = window.innerWidth;
+  const winH = window.innerHeight;
+
+  // --- 桌機 RWD 自動縮放邏輯 ---
+  // 假設書本內容區域加上按鈕大約需要 1400x700 的空間
+  const targetW = 1200;
+  const targetH = 720;
+
+  if (winW < targetW || winH < targetH) {
+    // 計算寬度與高度哪個縮得比較多，取最小值作為 scale
+    const scaleW = winW / targetW;
+    const scaleH = winH / targetH;
+    scaleDesktop = Math.min(scaleW, scaleH, 1); // 最高就是 1，不放大
+  } else {
+    scaleDesktop = 1;
+  }
+
   //電子書各裝置縮放比例調整
   function resizeFunction() {
     const isCoarse = window.matchMedia("(pointer: coarse)").matches;
-    let scaleMobile;
-    let scale = 1;
 
     // ===== Desktop =====
     if (!isCoarse) {
@@ -430,8 +449,36 @@ $(function () {
         width: "1200px",
         height: "600px",
       });
-      console.log("進來桌機");
-      return; // 直接結束
+
+      // 套用縮放
+      $(".book-scale-wrapper").css({
+        transform: `scale(${scaleDesktop})`,
+        "transform-origin": "center center",
+        left: "0px", // 強制回歸 0，不使用負偏移
+        position: "relative",
+        margin: "auto",
+        display: "flex",
+        width: "100vw",
+        height: "100vh",
+      });
+
+      // 針對第一頁與最後一頁在桌機上的「單頁置中」修正
+      // 因為現在 wrapper 是 scale 置中，我們只需微調內部位移即可
+      const page = $flipbook.turn("page");
+      if (page === 1) {
+        // 如果要在封面時讓書本視覺上往右偏一點點（補償單頁感），改用 margin 或 small translate
+        $(".book-scale-wrapper").css({
+          transform: `scale(${scaleDesktop}) translateX(-300px)`,
+        });
+        $(".controls").css({ transform: "translateX(300px)" });
+      }
+
+      // 修正：當 scale 小於 1 時，強制移除可能導致偏移的 margin
+      if (scaleDesktop < 1) {
+        $(".book-container").css("margin", "0");
+      }
+
+      return;
     }
 
     // 1. 計算縮放比例
@@ -2467,27 +2514,25 @@ $(function () {
 
     // 書本定位
     if (!isTablet && !window.matchMedia("(max-height: 460px)").matches) {
+      console.log("scaleDesktop turning:", scaleDesktop);
       if (page === 1) {
         $(".book-scale-wrapper").css({
-          left: "-300px",
+          transform: `scale(${scaleDesktop}) translateX(${-300 * scaleDesktop}px)`,
         });
         $(".controls").css({
-          left: "300px",
+          transform: `scale(${scaleDesktop}) translateX(${300 * scaleDesktop}px)`,
         });
       } else if (page === 28) {
         $(".book-scale-wrapper").css({
-          left: "300px",
+          transform: `scale(${scaleDesktop}) translateX(${300 * scaleDesktop}px)`,
         });
-        $(".controls").css({
-          left: "-300px",
-        });
+        $(".controls").css({ transform: "translateX(-300px)" });
       } else {
         $(".book-scale-wrapper").css({
-          left: "0px",
+          transform: `scale(${scaleDesktop}) translateX(0px)`,
         });
-        $(".controls").css({
-          left: "0px",
-        });
+
+        $(".controls").css({ transform: "translateX(0px)" });
       }
     } else if (isTablet || isIPad()) {
       if (page === 1) {
@@ -2506,7 +2551,7 @@ $(function () {
           left: "0px",
         });
         $(".controls").css({
-          left: "0px",
+          transform: "translateX(0px)",
         });
         $(".next-page img").attr("src", "./images/common/next-img.png");
         $(".next-page").css("cursor", "pointer");
