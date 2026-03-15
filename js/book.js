@@ -27,6 +27,8 @@ $(function () {
   let replayTimer = null;
   let replayGeneration = 0;
   let isReplaying = false;
+  let scaleLargeMobile = 0.5;
+  let scaleSmallMobile = 0.4;
 
   // 控制聲音的變數
   let currentVoiceSource = null;
@@ -201,7 +203,7 @@ $(function () {
       if (ratio < 1.2 && ratio > 1) {
         scale = 0.7; // 你要的固定值
       } else {
-        scale = 0.9; // 你要的固定值
+        scale = 0.8; // 你要的固定值
       }
       $(".book-scale-wrapper").css({
         left: "-400px",
@@ -210,42 +212,12 @@ $(function () {
   } else {
     console.log("mobile mode");
     // 等 turn.js 完成 layout
-    const cloudImg = document.querySelector(".book-cover-title");
-    // 定義一個專門負責定位的函式
-    const updateMobileLayout = () => {
-      requestAnimationFrame(() => {
-        // 檢查高度是否正常，如果是 0 則不執行或延後
-        const cloudTiitleHeight = cloudImg.getBoundingClientRect().height;
-        if (cloudTiitleHeight === 0) {
-          setTimeout(updateMobileLayout, 100);
-          return;
-        }
-
-        $(".book-scale-wrapper").css({
-          left: "-350px",
-        });
-
-        // 使用正確抓到的高度進行計算
-        $(".book-cover-go").css({
-          top: cloudTiitleHeight * 0.905 + "px",
-          left: cloudTiitleHeight * 2.2074 + "px",
-        });
-
-        $(".book-cloud-region").css({
-          transform: `scale(0.6) translateY(${cloudTiitleHeight * -0.342}px)`,
-        });
+    requestAnimationFrame(() => {
+      $(".book-scale-wrapper").css({
+        left: -700 * scaleSmallMobile + "px",
       });
-    };
+    });
 
-    // 圖片載入完成後執行
-    if (cloudImg.complete) {
-      updateMobileLayout();
-    } else {
-      cloudImg.addEventListener("load", updateMobileLayout);
-    }
-
-    // 額外保險：視窗大小改變也重新跑一次
-    window.addEventListener("resize", updateMobileLayout);
     $(".pop-up-box .book-cover-go").on("click", async function () {
       // 1. 傳統的 AudioContext 解鎖
       if (audioContext.state === "suspended") {
@@ -486,7 +458,7 @@ $(function () {
       scale = ratio < 1.2 && ratio > 1 ? 0.7 : 0.75;
     } else {
       // 手機邏輯
-      scale = innerHeight >= 320 ? 0.5 : 0.42;
+      scale = innerHeight >= 350 ? scaleLargeMobile : scaleSmallMobile;
     }
 
     // 2. 【關鍵】統一
@@ -2575,7 +2547,9 @@ $(function () {
         canSwipePrev = false;
 
         requestAnimationFrame(() => {
-          $(".book-scale-wrapper").css({ left: "-350px" });
+          $(".book-scale-wrapper").css({
+            left: -700 * scaleSmallMobile + "px",
+          });
         });
       } else {
         $(".book-scale-wrapper").css({
@@ -2599,7 +2573,9 @@ $(function () {
         requestAnimationFrame(() => {
           const w = getBookWidth();
           console.log("w:", w);
-          $(".book-scale-wrapper").css({ left: "150px" });
+          $(".book-scale-wrapper").css({
+            left: 300 * scaleSmallMobile + "px",
+          });
           $(".controls").css({
             left: "-600px",
           });

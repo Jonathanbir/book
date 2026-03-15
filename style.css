@@ -4246,34 +4246,10 @@ button {
     background-image: url("./images/common/book-cover.png");
     background-size: 100%;
     cursor: grab;
-    /* background: rgba(0, 0, 0, 0.8); */
   }
 
-  .book-cloud-region {
-    /* transform: scale(0.6) translateY(-15%); */
-  }
-
-  .book-cloud-region {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .book-cover-go {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    margin: auto;
-    cursor: pointer;
+  .book-logo-region {
+    transform: scale(0.5) translateY(-30%);
   }
 
   .page-btn {
