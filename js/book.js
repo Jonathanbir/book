@@ -206,7 +206,7 @@ $(function () {
         scale = 0.8; // 你要的固定值
       }
       $(".book-scale-wrapper").css({
-        left: "-400px",
+        left: -667 * scale + "px",
       });
     });
   } else {
@@ -214,7 +214,7 @@ $(function () {
     // 等 turn.js 完成 layout
     requestAnimationFrame(() => {
       $(".book-scale-wrapper").css({
-        left: -700 * scaleSmallMobile + "px",
+        left: -500 * scaleSmallMobile + "px",
       });
     });
 
@@ -2510,7 +2510,9 @@ $(function () {
       if (page === 1) {
         $("#left-down-corner").hide();
         requestAnimationFrame(() => {
-          $(".book-scale-wrapper").css({ left: "-400px" });
+          $(".book-scale-wrapper").css({
+            left: -667 * scale + "px",
+          });
         });
       } else {
         $(".book-scale-wrapper").css({
@@ -2523,7 +2525,7 @@ $(function () {
           left: "0px",
         });
         $(".controls").css({
-          transform: "translateX(0px)",
+          left: "0px",
         });
         $(".next-page img").attr("src", "./images/common/next-img.png");
         $(".next-page").css("cursor", "pointer");
@@ -2532,13 +2534,21 @@ $(function () {
 
       if (page === 28) {
         requestAnimationFrame(() => {
-          const w = getBookWidth();
-          console.log("w:", w);
-          $(".book-scale-wrapper").css({ left: "250px" });
+          $(".book-scale-wrapper").css({
+            left: 293 * scale + "px",
+          });
         });
+
         $(".controls").css({
-          left: "-600px", //260
+          left: "-600px",
+          display: "none",
         });
+
+        setTimeout(() => {
+          $(".controls").css({
+            display: "flex",
+          });
+        }, 1000);
       }
     } else {
       // 第一頁：不能往回
@@ -2576,9 +2586,17 @@ $(function () {
           $(".book-scale-wrapper").css({
             left: 300 * scaleSmallMobile + "px",
           });
+
           $(".controls").css({
             left: "-600px",
+            display: "none",
           });
+
+          setTimeout(() => {
+            $(".controls").css({
+              display: "flex",
+            });
+          }, 1000);
         });
       }
     }
