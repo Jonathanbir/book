@@ -1,5 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@700&display=swap");
-
 /* 確保 body 和 html 絕對不會因為內容過大而出現滾動條 */
 html,
 body {
@@ -126,9 +124,7 @@ body {
   font-weight: 800;
   color: #ffffff;
   margin: 0;
-  font-family: "Fredoka", sans-serif;
-  /* font-family: "Comic Sans MS", "Comic Sans", cursive; */
-  /* font-family: "Arial Rounded MT Bold", "Helvetica Rounded", Arial, sans-serif; */
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
   font-weight: bold;
   line-height: 1;
 }
