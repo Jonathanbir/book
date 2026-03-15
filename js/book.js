@@ -1622,6 +1622,11 @@ $(function () {
       $(".electfan-wind").css("opacity", "0");
       $(".electfan-wind-line").css("opacity", "0");
       $(".magic-wand").css("opacity", "0");
+      $(".book1213").css("opacity", "0");
+      $(".check01").css("opacity", "0");
+      $(".coin01").css("opacity", "0");
+      $(".coin-light").css("opacity", "0");
+      $(".coin-hint01").css("opacity", "0");
       $(".click-magic-wand").css("opacity", "0");
       $(".finish-mission01").css("opacity", "0");
       $(".star13").removeClass("star3-animation");
@@ -1648,6 +1653,12 @@ $(function () {
       $(".popup-board01").remove();
       $(".popup-board-box01").remove();
       $(".text12").remove();
+      $(".book1213").remove();
+      $(".magic-wand").remove();
+      $(".check01").remove();
+      $(".coin01").remove();
+      $(".coin-light").remove();
+      $(".coin-hint01").remove();
     }
 
     if (page === 12 || page === 13) {
@@ -1668,8 +1679,10 @@ $(function () {
         btnDisabled();
 
         $("#flipbook")
-          .append(`<img class="electfan" src="./images/book/book12/electfan1.png"/>
+          .append(`<img class="book1213" src="./images/book/book12/book1213.png"/>
+                   <img class="electfan" src="./images/book/book12/electfan1.png"/>
                    <img class="text text12" src="./images/book/book12/text12.png"/>
+                   <img class="magic-wand" src="./images/book/book12/magic-wand.png"/>
                    <img class="electfan-wind" src="./images/book/book12/electfan-wind.png"/>
                    <img class="electfan-wind-line" src="./images/book/book12/electfan-wind-line.png"/>
                    <img class="finish-mission01" src="./images/common/finish-mission1.png"/>
@@ -1679,7 +1692,10 @@ $(function () {
                    <img class="star13" src="./images/book/book13/star.png"/>
                    <img class="bubble12" src="./images/book/book13/milk-bubble.png"/>
                    <img class="board board13" src="./images/book/book13/board13.png"/>
-                    <img class="check check01" src="./images/common/check.png" />
+                   <img class="check check01" src="./images/common/check.png" />
+                   <img class="coin01 coin" src="./images/book/book13/coin01.png" />
+                   <img class="coin-light coin-light01" src="./images/book/book13/light.png" />
+                   <img class="coin-hint01" src="./images/book/book13/text13.png" />
                    `);
 
         $(".book-section").append(`
@@ -1709,6 +1725,12 @@ $(function () {
           $(".magic-wand").css("opacity", "1");
           $(".finish-mission01").css("opacity", "1");
         }, 1000),
+      );
+
+      page1213Timeouts.push(
+        setTimeout(() => {
+          $(".book1213").css("opacity", "1");
+        }, 1100),
       );
 
       page1213Timeouts.push(
