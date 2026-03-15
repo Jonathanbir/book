@@ -399,14 +399,16 @@ $(function () {
 
   // --- 桌機 RWD 自動縮放邏輯 ---
   // 假設書本內容區域加上按鈕大約需要 1400x700 的空間
-  const targetW = 1200;
-  const targetH = 720;
+  const targetW = 1450;
+  const targetH = 850;
 
   if (winW < targetW || winH < targetH) {
     // 計算寬度與高度哪個縮得比較多，取最小值作為 scale
     const scaleW = winW / targetW;
     const scaleH = winH / targetH;
-    scaleDesktop = Math.min(scaleW, scaleH, 1); // 最高就是 1，不放大
+    scaleDesktop = Math.min(scaleW, scaleH); // 最高就是 1，不放大
+    // 設定縮放下限，避免縮到太小看不見
+    if (scaleDesktop < 0.5) scaleDesktop = 0.5;
   } else {
     scaleDesktop = 1;
   }
