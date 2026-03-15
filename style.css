@@ -3583,7 +3583,7 @@ button {
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 999;
+  z-index: 2000;
   /* width: 100%;
   height: 100%; */
   margin: auto;
@@ -3765,6 +3765,15 @@ button {
 .mom-hand-empty-move {
   right: 40%;
   bottom: 120px;
+}
+
+.mom-body {
+  position: absolute;
+  right: 37%;
+  bottom: 14%;
+  z-index: 1000;
+  opacity: 0;
+  transition: all 0.5s ease-in-out;
 }
 
 /* book27 一家人喝牛奶 */

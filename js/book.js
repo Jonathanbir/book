@@ -5,6 +5,17 @@ $(function () {
   const innerHeight = window.innerHeight; // 目前可視高度（含工具列收起）
   const ratio = innerWidth / innerHeight;
 
+  // 鍵盤方向鍵控制翻頁 (正式上線要拿掉)
+  // $(document).on("keydown", function (e) {
+  //   if (e.key === "ArrowLeft") {
+  //     stopVoice();
+  //     $flipbook.turn("previous");
+  //   } else if (e.key === "ArrowRight") {
+  //     stopVoice();
+  //     $flipbook.turn("next");
+  //   }
+  // });
+
   function getBookWidth() {
     return document.querySelector("#flipbook").getBoundingClientRect().width;
   }
@@ -681,17 +692,6 @@ $(function () {
     }
   });
 
-  // 鍵盤方向鍵控制翻頁 (正式上線要拿掉)
-  // $(document).on("keydown", function (e) {
-  //   if (e.key === "ArrowLeft") {
-  //     stopVoice();
-  //     $flipbook.turn("previous");
-  //   } else if (e.key === "ArrowRight") {
-  //     stopVoice();
-  //     $flipbook.turn("next");
-  //   }
-  // });
-
   //靜音按鈕
   let isMuted = false;
 
@@ -923,6 +923,7 @@ $(function () {
         $(".father-hand-region").show();
         $(".daughter-hand-region").show();
         $(".mom-hand-region").show();
+        $(".mom-body").show();
       }, 500),
     );
 
@@ -953,6 +954,7 @@ $(function () {
         $(".mom-hand").css("opacity", "1");
         $(".mom-hand-milk").css("opacity", "1");
         $(".mom-hand-cup").css("opacity", "1");
+        $(".mom-body").css("opacity", "1");
       }, 500),
     );
 
@@ -2449,6 +2451,7 @@ $(function () {
         resetFamilyPage();
         $(".father-hand-region").hide();
         $(".mom-hand-region").hide();
+        $(".mom-body").hide();
         $(".mow").hide();
         $(".daughter-hand-region").removeClass("daughter-hand-finish");
         $(".father-hand-milk").css("opacity", "1");
@@ -2674,6 +2677,9 @@ $(function () {
             $("#flipbook").append(
               ' <div class="mom-hand-region"><div class="mom-hand-milk-region"><img class="mom-hand-milk" src="./images/book/book2627/milk.png"/><img class="mom-hand-cup" src="./images/book/book2627/cup.png"/></div><img class="mom-hand" src="./images/book/book2627/mom-hand.png"/></div>',
             );
+            $("#flipbook").append(
+              ' <div class="mom-body"><img class="mom-body" src="./images/book/book2627/mom-body.png"/></div>',
+            );
           }, 200),
         );
       }
@@ -2723,6 +2729,7 @@ $(function () {
       $(".book2627").remove();
       $(".all-milk-stains").remove();
       $(".mom-hand-region").remove();
+      $(".mom-body").remove();
       $(".mom-hand").removeClass("mom-hand-finish");
     }
 
