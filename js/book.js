@@ -210,13 +210,22 @@ $(function () {
       });
     });
   } else {
+    let scale = innerHeight >= 350 ? scaleLargeMobile : scaleSmallMobile;
     console.log("mobile mode");
     // 等 turn.js 完成 layout
-    requestAnimationFrame(() => {
-      $(".book-scale-wrapper").css({
-        left: -500 * scaleSmallMobile + "px",
+    if (scale === scaleLargeMobile) {
+      requestAnimationFrame(() => {
+        $(".book-scale-wrapper").css({
+          left: -600 * scaleLargeMobile + "px",
+        });
       });
-    });
+    } else {
+      requestAnimationFrame(() => {
+        $(".book-scale-wrapper").css({
+          left: -750 * scaleSmallMobile + "px",
+        });
+      });
+    }
 
     $(".pop-up-box .book-cover-go").on("click", async function () {
       // 1. 傳統的 AudioContext 解鎖
@@ -671,15 +680,15 @@ $(function () {
   });
 
   // 鍵盤方向鍵控制翻頁 (正式上線要拿掉)
-  $(document).on("keydown", function (e) {
-    if (e.key === "ArrowLeft") {
-      stopVoice();
-      $flipbook.turn("previous");
-    } else if (e.key === "ArrowRight") {
-      stopVoice();
-      $flipbook.turn("next");
-    }
-  });
+  // $(document).on("keydown", function (e) {
+  //   if (e.key === "ArrowLeft") {
+  //     stopVoice();
+  //     $flipbook.turn("previous");
+  //   } else if (e.key === "ArrowRight") {
+  //     stopVoice();
+  //     $flipbook.turn("next");
+  //   }
+  // });
 
   //靜音按鈕
   let isMuted = false;
@@ -2534,16 +2543,25 @@ $(function () {
         }, 1000);
       }
     } else {
+      let scale = innerHeight >= 350 ? scaleLargeMobile : scaleSmallMobile;
       // 第一頁：不能往回
       if (page === 1) {
         $("#left-down-corner").hide();
         canSwipePrev = false;
 
-        requestAnimationFrame(() => {
-          $(".book-scale-wrapper").css({
-            left: -700 * scaleSmallMobile + "px",
+        if (scale === scaleLargeMobile) {
+          requestAnimationFrame(() => {
+            $(".book-scale-wrapper").css({
+              left: -600 * scaleLargeMobile + "px",
+            });
           });
-        });
+        } else {
+          requestAnimationFrame(() => {
+            $(".book-scale-wrapper").css({
+              left: -750 * scaleSmallMobile + "px",
+            });
+          });
+        }
       } else {
         $(".book-scale-wrapper").css({
           left: "0px",
@@ -2569,6 +2587,20 @@ $(function () {
           $(".book-scale-wrapper").css({
             left: 300 * scaleSmallMobile + "px",
           });
+
+          if (scale === scaleLargeMobile) {
+            requestAnimationFrame(() => {
+              $(".book-scale-wrapper").css({
+                left: 300 * scaleLargeMobile + "px",
+              });
+            });
+          } else {
+            requestAnimationFrame(() => {
+              $(".book-scale-wrapper").css({
+                left: 300 * scaleSmallMobile + "px",
+              });
+            });
+          }
 
           $(".controls").css({
             left: "-600px",
