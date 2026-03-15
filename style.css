@@ -902,6 +902,17 @@ button {
   pointer-events: none;
 }
 
+.sky {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 100;
+  width: 100%;
+  height: 100%;
+  transition: all 0.5s ease-in-out;
+  opacity: 0;
+}
+
 .text06 {
   position: absolute;
   width: 600px;
@@ -1028,6 +1039,7 @@ button {
   position: absolute;
   top: 0;
   left: 0;
+  z-index: 101;
   width: 380px;
   opacity: 0;
   animation: cloud1 5s ease-in-out infinite;
@@ -1073,6 +1085,7 @@ button {
   position: absolute;
   top: 0;
   right: 0;
+  z-index: 1001;
   width: 300px;
   opacity: 0;
   animation: cloud3 5s ease-in-out infinite;
@@ -1094,9 +1107,9 @@ button {
 .wow {
   position: absolute;
   top: 10%;
-  right: 66%;
+  right: 33%;
   z-index: 999;
-  width: 77px;
+  width: 70px;
   opacity: 0;
 }
 

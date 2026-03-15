@@ -1263,6 +1263,7 @@ $(function () {
       $("#flipbook .tree3").remove();
       $("#flipbook .cloud2").remove();
       $("#flipbook .text06").remove();
+      $("#flipbook .sky").remove();
       $("#flipbook .door-common").remove();
       $("#flipbook .peoples").remove();
       $("#flipbook .bubble67").remove();
@@ -1277,6 +1278,7 @@ $(function () {
       $(".cloud2").removeClass("opacity-show");
       $(".cloud3").removeClass("opacity-show");
       $(".text06").removeClass("opacity-show");
+      $("#flipbook .sky").removeClass("opacity-show");
       $(".wow").removeClass("wow-animation");
     }
 
@@ -1305,17 +1307,27 @@ $(function () {
         $("#flipbook").append(
           `<img class="knock" src="./images/book/book0607/click-here.png"/>
           <img class="grass0607" src="./images/book/book0607/grass.png"/>
+          <img class="sky" src="./images/book/book0607/sky.png"/>
           <img class="tree1" src="./images/book/book0607/forest1.png"/>
           <img class="tree2" src="./images/book/book0607/forest2.png"/>           
           <img class="tree3" src="./images/book/book0607/forest3.png"/>         
-          <img class="text06" src="./images/book/book0607/text-06.png"/>        
-          <img class="cloud2" src="./images/book/book0607/cloud2.png"/>           
+          <img class="text06" src="./images/book/book0607/text-06.png"/>    
+          <img class="cloud1" src="./images/book/book0607/cloud1.png" />    
+          <img class="cloud2" src="./images/book/book0607/cloud2.png"/>       
+          <img class="cloud3" src="./images/book/book0607/cloud3.png" />
+          <img class="wow" src="./images/book/book0607/wow.png" />           
           <img class="bubble67" src="./images/book/book0607/milk-bubble.png"/>           
           <img class="star5" src="./images/book/book0607/shine.png"/>         
           <img class="door-bg door-common" src="./images/book/book0607/indoor.png"/>           
           <img class="door door-common" src="./images/book/book0607/door.png"/>            
           <img class="peoples" src="./images/book/book0607/mom-lin.png"/>
         `,
+        );
+
+        page67Timeouts.push(
+          setTimeout(() => {
+            $(".sky").addClass("opacity-show");
+          }, 100),
         );
 
         page67Timeouts.push(
