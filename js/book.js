@@ -38,8 +38,8 @@ $(function () {
   let replayTimer = null;
   let replayGeneration = 0;
   let isReplaying = false;
-  let scaleLargeMobile = 0.5;
-  let scaleSmallMobile = 0.4;
+  let scaleLargeMobile = 0.52;
+  let scaleSmallMobile = 0.42;
 
   // 控制聲音的變數
   let currentVoiceSource = null;
@@ -212,7 +212,7 @@ $(function () {
 
       let scale;
       if (ratio < 1.2 && ratio > 1) {
-        scale = 0.7; // 你要的固定值
+        scale = 0.5; // 你要的固定值
       } else {
         scale = 0.8; // 你要的固定值
       }
@@ -475,7 +475,7 @@ $(function () {
 
     // 1. 計算縮放比例
     if (isTablet || isIPad()) {
-      scale = ratio < 1.2 && ratio > 1 ? 0.7 : 0.75;
+      scale = ratio < 1.2 && ratio > 1 ? 0.5 : 0.8;
     } else {
       // 手機邏輯
       scale = innerHeight >= 350 ? scaleLargeMobile : scaleSmallMobile;
