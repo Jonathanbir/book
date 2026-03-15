@@ -2044,6 +2044,7 @@ $(function () {
       $(".board16").css("opacity", "0");
       $(".story-text16").css("opacity", "0");
       $(".nurse-girl").css("opacity", "0");
+      $(".trees16").css("opacity", "0");
       $(".popup-board03").css("display", "none");
       $(".popup-board-box03").css("display", "none");
       $(".stethoscope").addClass("disabled");
@@ -2074,6 +2075,8 @@ $(function () {
       $(".popup-board-box03").remove();
       $("#flipbook .bubble16").remove();
       $("#flipbook .dondon").remove();
+      $("#flipbook .nurse-girl").remove();
+      $("#flipbook .trees16").remove();
     }
 
     // 第 16–17 頁：聽牛心跳
@@ -2105,6 +2108,7 @@ $(function () {
             <img class="click-hearing-heart" src="./images/book/book25/click-here.png"/>
             <div class="click-hearing-heart-box"></div>      
             <div class="cloud-16-2"></div>
+            <img class="trees16" src="./images/book/book1617/trees.png">
             <img class="board-list03" src="./images/book/book1617/board-list03.png"/>
             <img class="check check03" src="./images/common/check.png" />
             <img class="board16" src="./images/common/board.png">
@@ -2123,6 +2127,7 @@ $(function () {
         page1617Timeouts.push(
           setTimeout(() => {
             $(".story-text16").css("opacity", "1");
+            $(".trees16").css("opacity", "1");
           }, 500),
         );
 
@@ -2848,6 +2853,7 @@ $(function () {
       page !== 16 &&
       page !== 17 &&
       page !== 24 &&
+      page !== 25 &&
       page !== 28
     ) {
       allBtnDisabled(page);
