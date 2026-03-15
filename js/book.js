@@ -236,16 +236,14 @@ $(function () {
       }
 
       playBackground();
-      setTimeout(() => {
-        $(".pop-up-box").css("display", "none");
-        if (!isBookStarted) {
-          isBookStarted = true;
-          stopVoice();
-          playVoice("./mp3/01.mp3");
-          $("#cover").addClass("book01-start");
-          startReplayTimer(5500);
-        }
-      }, 200);
+      $(".pop-up-box").css("display", "none");
+      if (!isBookStarted) {
+        isBookStarted = true;
+        stopVoice();
+        playVoice("./mp3/01.mp3");
+        $("#cover").addClass("book01-start");
+        startReplayTimer(5500);
+      }
     });
   }
 
@@ -655,22 +653,20 @@ $(function () {
       isBookStarted = true;
       pageFirst = true;
       playBackground();
-      setTimeout(() => {
-        $(".prev-page img").hide();
-        $(".book-cover-pc").hide();
-        stopVoice();
-        playVoice("./mp3/01.mp3");
-        $("#cover").addClass("book01-start");
-        $(".next-page img").attr("src", "./images/common/next-img.png");
+      $(".prev-page img").hide();
+      $(".book-cover-pc").hide();
+      stopVoice();
+      playVoice("./mp3/01.mp3");
+      $("#cover").addClass("book01-start");
+      $(".next-page img").attr("src", "./images/common/next-img.png");
 
-        $(".prev-page").prop("disabled", true);
-        $(".prev-page").show();
-        $(".book-cover").remove();
+      $(".prev-page").prop("disabled", true);
+      $(".prev-page").show();
+      $(".book-cover").remove();
 
-        startReplayTimer(5500);
+      startReplayTimer(5500);
 
-        return;
-      }, 200);
+      return;
     }
   });
 
@@ -985,13 +981,8 @@ $(function () {
     page2627Timeouts.push(
       setTimeout(() => {
         $(".sweet-taste").addClass("opacity-show");
-      }, 5500),
-    );
-
-    page2627Timeouts.push(
-      setTimeout(() => {
         $(".cow-right").addClass("cow-right-move");
-      }, 7000),
+      }, 5500),
     );
 
     page2627Timeouts.push(
@@ -999,16 +990,11 @@ $(function () {
         $(".father-hand-region").removeClass("father-hand-finish");
         $(".daughter-hand-region").removeClass("daughter-hand-finish");
         $(".mom-hand-region").removeClass("mom-hand-finish");
+        $(".mow").show();
       }, 8000),
     );
 
-    page2627Timeouts.push(
-      setTimeout(() => {
-        $(".mow").show();
-      }, 12000),
-    );
-
-    startReplayTimer(16500);
+    startReplayTimer(13000);
   }
 
   // 第 26–27 頁重置家人手部與牛相關動畫狀態
@@ -2486,24 +2472,21 @@ $(function () {
 
     // 書本定位
     if (!isTablet && !window.matchMedia("(max-height: 460px)").matches) {
-      console.log("scaleDesktop turning:", scaleDesktop);
+      // console.log("scaleDesktop turning:", scaleDesktop);
       if (page === 1) {
         $(".book-scale-wrapper").css({
-          transform: `scale(${scaleDesktop}) translateX(${-300 * scaleDesktop}px)`,
+          transform: `scale(${scaleDesktop}) translateX(-300px)`,
         });
-        $(".controls").css({
-          transform: `scale(${scaleDesktop}) translateX(${300 * scaleDesktop}px)`,
-        });
+        $(".controls").css({ transform: "translateX(300px)" });
       } else if (page === 28) {
         $(".book-scale-wrapper").css({
-          transform: `scale(${scaleDesktop}) translateX(${300 * scaleDesktop}px)`,
+          transform: `scale(${scaleDesktop}) translateX(300px)`,
         });
         $(".controls").css({ transform: "translateX(-300px)" });
       } else {
         $(".book-scale-wrapper").css({
           transform: `scale(${scaleDesktop}) translateX(0px)`,
         });
-
         $(".controls").css({ transform: "translateX(0px)" });
       }
     } else if (isTablet || isIPad()) {
