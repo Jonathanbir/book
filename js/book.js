@@ -40,6 +40,8 @@ $(function () {
   let isReplaying = false;
   let scaleLargeMobile = 0.52;
   let scaleSmallMobile = 0.42;
+  let scaleFoldTablet = 0.5;
+  let scaleTablet = 0.7;
 
   // 控制聲音的變數
   let currentVoiceSource = null;
@@ -212,9 +214,9 @@ $(function () {
 
       let scale;
       if (ratio < 1.2 && ratio > 1) {
-        scale = 0.5; // 你要的固定值
+        scale = scaleFoldTablet; // 你要的固定值
       } else {
-        scale = 0.8; // 你要的固定值
+        scale = scaleTablet; // 你要的固定值
       }
       $(".book-scale-wrapper").css({
         left: -667 * scale + "px",
@@ -475,7 +477,7 @@ $(function () {
 
     // 1. 計算縮放比例
     if (isTablet || isIPad()) {
-      scale = ratio < 1.2 && ratio > 1 ? 0.5 : 0.8;
+      scale = ratio < 1.2 && ratio > 1 ? scaleFoldTablet : scaleTablet;
     } else {
       // 手機邏輯
       scale = innerHeight >= 350 ? scaleLargeMobile : scaleSmallMobile;
@@ -2704,9 +2706,9 @@ $(function () {
           setTimeout(() => {
             btnUnDisabled();
             canFlipNext = true;
-          }, 12000),
+          }, 10000),
         );
-        startReplayTimer(12000);
+        startReplayTimer(10000);
       });
 
     if (page === 26 || page === 27) {
