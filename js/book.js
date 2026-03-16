@@ -842,7 +842,7 @@ $(function () {
     $(".milk-drop").removeClass("opacity-show");
     $(".book25-story").removeClass("opacity-show");
     $(".book25-text").removeClass("opacity-show");
-    $(".milk-flower").css("dispaly", "none");
+    $(".milk-flower").css("display", "none");
     $(".milk-flower").removeClass("opacity-show");
     $(".milk-smell").removeClass("milk-smell-animation");
 
@@ -869,7 +869,7 @@ $(function () {
         $(".girl-l-hand-milk").css("opacity", "1");
         $(".girl-l-hand-cup").css("opacity", "1");
         $(".girl-r-hand").css("opacity", "1");
-        $(".milk-flower").css("dispaly", "block");
+        $(".milk-flower").css("display", "block");
       }, 800),
     );
 
@@ -2437,6 +2437,8 @@ $(function () {
       $(".sleep-girl-hand ").css("opacity", "0");
       $(".sleep-girl-arm").css("opacity", "0");
       $(".book23-text").removeClass("opacity-show");
+      $(".bed").css("opacity", "0");
+      $(".bed").remove();
     }
 
     if (page === 22 || page === 23) {
@@ -2444,10 +2446,15 @@ $(function () {
         reset2223();
       }
 
+      $("#flipbook").append(`
+      <img class="bed" src="./images/book/book2223/bed.png"/>
+      `);
+
       page2223Timeouts.push(
         setTimeout(() => {
           $(".book22").css("opacity", "1");
           $(".book23").css("opacity", "1");
+          $(".bed").css("opacity", "1");
           $(".cow-alarm ").css("opacity", "1");
           $(".sleep-girl-hand").css("opacity", "1");
           $(".sleep-girl-arm").css("opacity", "1");
