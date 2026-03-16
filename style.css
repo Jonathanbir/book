@@ -621,7 +621,7 @@ button {
   position: absolute;
   top: 0;
   right: 0;
-  z-index: 33;
+  z-index: 133;
   opacity: 0;
 }
 
@@ -629,10 +629,19 @@ button {
   position: absolute;
   right: 90px;
   bottom: 150px;
-  z-index: 30;
+  z-index: 130;
   width: 375px;
   opacity: 0;
   animation: headRotate 2s ease-in-out infinite;
+  transition: all 1s ease-in-out;
+}
+
+.desk03 {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+  opacity: 0;
   transition: all 1s ease-in-out;
 }
 
@@ -652,7 +661,7 @@ button {
   position: absolute;
   right: 0;
   top: 0;
-  z-index: 30;
+  z-index: 130;
   width: 600px;
   margin: auto;
   transition: all 1s ease-in-out;
@@ -663,7 +672,7 @@ button {
   position: absolute;
   right: 0;
   top: 0;
-  z-index: 31;
+  z-index: 131;
   opacity: 0;
   transition: all 1s ease-in-out;
 }
@@ -672,7 +681,7 @@ button {
   position: absolute;
   right: 0;
   top: 0;
-  z-index: 32;
+  z-index: 132;
   opacity: 0;
   transition: all 1s ease-in-out;
 }
@@ -3820,7 +3829,7 @@ button {
 
 .mom-body {
   position: absolute;
-  right: 37%;
+  right: 36.8%;
   bottom: 14%;
   z-index: 1000;
   opacity: 0;

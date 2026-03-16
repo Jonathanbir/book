@@ -1114,6 +1114,7 @@ $(function () {
       $(".book03-title").css("opacity", "0");
       $(".girls-head03").css("opacity", "0");
       $(".girls-body03").hide();
+      $(".desk03").css("opacity", "0");
       $(".milk03").css("opacity", "0");
       $(".hands03").css("opacity", "0");
       $("#flipbook .girls-head03").remove();
@@ -1121,6 +1122,7 @@ $(function () {
       $("#flipbook .hands03").remove();
       $("#flipbook .book03-title").remove();
       $("#flipbook .girls-head03").remove();
+      $("#flipbook .desk03").remove();
     }
 
     if (page === 2 || page === 3) {
@@ -1142,6 +1144,7 @@ $(function () {
         ` <img class="girls-head03" src="./images/book/book03/girls-head-01.png"/>       
           <img class="girls-body03" src="./images/book/book03/girls-body.png"/>     
           <img class="hands03" src="./images/book/book03/hands.png"/>        
+          <img class="desk03" src="./images/book/book03/desk03.png"/>       
           <img class="milk03" src="./images/book/book03/milk.png"/>       
           <img class="book03-title" src="./images/book/book03/book-title03.png"/>               
         `,
@@ -1156,6 +1159,7 @@ $(function () {
           $(".girls-head03").css("opacity", "1");
           $(".girls-body03").css("opacity", "1");
           $(".milk03").css("opacity", "1");
+          $(".desk03").css("opacity", "1");
           $(".hands03").css("opacity", "1");
         }, 1000),
       );
@@ -2534,7 +2538,6 @@ $(function () {
 
     // 書本定位
     if (!isTablet && !window.matchMedia("(max-height: 460px)").matches) {
-      // console.log("scaleDesktop turning:", scaleDesktop);
       if (page === 1) {
         $(".book-scale-wrapper").css({
           transform: `scale(${scaleDesktop}) translateX(-300px)`,
