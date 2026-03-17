@@ -3167,30 +3167,38 @@ $(function () {
     }
   }
 
+  /* ======================
+   修復 iOS 跳出後回來無聲的問題
+====================== */
   document.addEventListener("visibilitychange", function () {
-    if (isAndroidChrome()) {
-      if (document.hidden) {
-        // 除了 suspend，強制將總音量歸零
-        bgGainNode.gain.setTargetAtTime(0, audioContext.currentTime, 0.1);
-        voiceGainNode.gain.setTargetAtTime(0, audioContext.currentTime, 0.1);
+    if (document.hidden) {
+      if (audioContext.state !== "closed") {
         audioContext.suspend();
-      } else {
-        audioContext.resume().then(() => {
-          // 恢復原本音量
-          if (!isMuted) {
-            bgGainNode.gain.setTargetAtTime(
-              BG_VOLUME,
-              audioContext.currentTime,
-              0.1,
-            );
-            voiceGainNode.gain.setTargetAtTime(
-              VOICE_VOLUME,
-              audioContext.currentTime,
-              0.1,
-            );
-          }
-        });
       }
+    } else {
+      // 回來時延遲 300ms 再嘗試 resume，增加成功率
+      setTimeout(() => {
+        audioContext
+          .resume()
+          .then(() => {})
+          .catch((err) => {
+            // 如果自動恢復失敗，才顯示你的蓋板
+            if (window.matchMedia("(pointer: coarse)").matches) {
+              window.alert("離開電字書過久,請點選確認繼後續播放");
+            }
+          });
+      }, 300);
     }
   });
+
+  // 額外保險：如果使用者點擊螢幕任何地方，也檢查是否需要恢復（解決 iOS 嚴格的解鎖機制）
+  document.addEventListener(
+    "touchstart",
+    function () {
+      if (audioContext.state === "suspended") {
+        audioContext.resume();
+      }
+    },
+    { passive: true },
+  );
 });
