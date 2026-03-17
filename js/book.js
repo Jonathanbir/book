@@ -16,14 +16,6 @@ $(function () {
   //   }
   // });
 
-  function getBookWidth() {
-    return document.querySelector("#flipbook").getBoundingClientRect().width;
-  }
-
-  function getBookHeight() {
-    return document.querySelector("#flipbook").getBoundingClientRect().height;
-  }
-
   //平板判斷
   const isTablet =
     window.matchMedia("(pointer: coarse)").matches &&
@@ -76,61 +68,11 @@ $(function () {
     pageTimers.push(id);
   }
 
-  //判斷瀏覽器模式
-  function isSafari() {
-    const ua = navigator.userAgent;
-
-    return /^((?!chrome|crios|android).)*safari/i.test(ua);
-  }
-
-  if (isSafari()) {
-    console.log("這是 Safari");
-  }
-
-  function isIOSChrome() {
-    const ua = navigator.userAgent;
-
-    // Android Chrome 或 iOS Chrome (CriOS)
-    return ua.includes("CriOS");
-  }
-
-  function isAndroidChrome() {
-    const ua = navigator.userAgent;
-
-    // Android Chrome 或 iOS Chrome (CriOS)
-    return ua.includes("Chrome");
-  }
-
-  if (isIOSChrome()) {
-    console.log("這是 ios Chrome");
-  }
-
-  if (isAndroidChrome()) {
-    console.log("這是 android Chrome");
-  }
-
   function isIPad() {
     return (
       navigator.maxTouchPoints > 1 && /iPad|Macintosh/.test(navigator.userAgent)
     );
   }
-
-  // window.alert(
-  //   "innerHeight " +
-  //     innerHeight +
-  //     "\ninnerWidth " +
-  //     innerWidth +
-  //     "\nisIOSChrome(): " +
-  //     isIOSChrome() +
-  //     "\nisAndroidChrome(): " +
-  //     isAndroidChrome() +
-  //     "\nisSafari(): " +
-  //     isSafari() +
-  //     "\nisIPad(): " +
-  //     isIPad() +
-  //     "\nisTablet: " +
-  //     isTablet,
-  // );
 
   //控制音樂區塊
   const audioContext = new (window.AudioContext || window.webkitAudioContext)();
@@ -201,17 +143,9 @@ $(function () {
 
   //剛載入頁面邏輯
   if (!matchMedia("(pointer: coarse)").matches) {
-    console.log("desktop mode");
   } else if (isTablet || isIPad()) {
-    console.log("tablet mode");
     // 等 turn.js 完成 layout
     requestAnimationFrame(() => {
-      const w = getBookWidth();
-      let h = getBookHeight();
-      const bookHeight = document
-        .querySelector("#flipbook")
-        .getBoundingClientRect().height;
-
       let scale;
       if (ratio < 1.2 && ratio > 1) {
         scale = scaleFoldTablet; // 你要的固定值
@@ -224,7 +158,6 @@ $(function () {
     });
   } else {
     let scale = innerHeight >= 350 ? scaleLargeMobile : scaleSmallMobile;
-    console.log("mobile mode");
     // 等 turn.js 完成 layout
     if (scale === scaleLargeMobile) {
       requestAnimationFrame(() => {
@@ -543,7 +476,6 @@ $(function () {
 
   //上一頁按鈕 倒數三秒
   function btnPreviousDisabled() {
-    console.log("btnPreviousDisabled!");
     let count = 3;
 
     const timer = setInterval(() => {
@@ -2528,7 +2460,6 @@ $(function () {
 
   // 當頁面翻轉完成後觸發
   $("#flipbook").bind("turning", function (event, page, view) {
-    console.log("page:", page);
     let canFlipPrev = false; // 初始禁止往前翻頁
     let canFlipNext = false; // 初始禁止往後翻頁
 
@@ -2638,8 +2569,6 @@ $(function () {
 
       if (page === 28) {
         requestAnimationFrame(() => {
-          const w = getBookWidth();
-          console.log("w:", w);
           $(".book-scale-wrapper").css({
             left: 300 * scaleSmallMobile + "px",
           });
@@ -3103,8 +3032,6 @@ $(function () {
       voiceSource.start(0);
 
       currentVoiceSource = voiceSource;
-
-      console.log("語音播放成功");
     } catch (err) {
       console.log("語音播放失敗:", err);
     }
