@@ -281,6 +281,10 @@ audio {
   left: 0;
 }
 
+.share-page {
+  display: none;
+}
+
 /* 可以取消這個 debug 色塊顯示透明按鈕位置 */
 .click-corner:hover {
   background-color: rgba(0, 0, 0, 0.05);
@@ -343,8 +347,15 @@ audio {
   opacity: 0;
   cursor: pointer;
   pointer-events: auto;
-  animation: dialogKnockShow 2s ease-in-out infinite;
   transition: all 1s ease-in-out;
+}
+
+.pointer {
+  position: absolute;
+  z-index: 10000;
+  opacity: 0;
+  cursor: pointer;
+  animation: dialogKnockShow 2s ease-in-out infinite;
 }
 
 @keyframes dialogKnockShow {
@@ -352,11 +363,16 @@ audio {
     transform: translateY(0px);
   }
   50% {
-    transform: translateY(-10px);
+    transform: translateY(30px);
   }
   100% {
     transform: translateY(0px);
   }
+}
+
+.pointer1 {
+  right: 26%;
+  bottom: 39%;
 }
 
 .book {
@@ -739,6 +755,14 @@ button {
   }
 }
 
+.goodmorning04 {
+  position: absolute;
+  top: 14%;
+  left: 67%;
+  opacity: 0;
+  transition: all 1s ease-in-out;
+}
+
 .question {
   position: absolute;
   top: 0;
@@ -1119,9 +1143,8 @@ button {
 }
 
 .wow-animation {
-  animation: dialogShow 2s ease-in-out infinite;
+  animation: dialogShow 1s ease-in-out 2 forwards;
   animation-delay: 1.5s;
-  transition: all 1s ease-in-out;
 }
 
 .bubble67 {
@@ -1704,7 +1727,6 @@ button {
   width: 65px;
   cursor: pointer;
   pointer-events: auto;
-  animation: dialogKnockShow 2s ease-in-out infinite;
   transition: all 1s ease-in-out;
 }
 
@@ -1718,6 +1740,11 @@ button {
   z-index: 9999;
   cursor: pointer;
   pointer-events: auto;
+}
+
+.pointer2 {
+  left: 33%;
+  bottom: 20%;
 }
 
 .finish-mission01 {
@@ -2233,7 +2260,6 @@ button {
   z-index: 999;
   width: 65px;
   cursor: pointer;
-  animation: dialogKnockShow 2s ease-in-out infinite;
   transition: all 1s ease-in-out;
 }
 
@@ -2246,6 +2272,11 @@ button {
   right: 33%;
   z-index: 999;
   cursor: pointer;
+}
+
+.pointer3 {
+  right: 33%;
+  bottom: 15%;
 }
 
 .coin-light02 {
@@ -2566,7 +2597,6 @@ button {
   width: 65px;
   cursor: pointer;
   pointer-events: auto;
-  animation: dialogKnockShow 2s ease-in-out infinite;
   transition: all 1s ease-in-out;
 }
 
@@ -2580,6 +2610,11 @@ button {
   z-index: 1001;
   cursor: pointer;
   pointer-events: auto;
+}
+
+.pointer4 {
+  left: 38%;
+  bottom: 10%;
 }
 
 .heart-beat-animation {
@@ -3225,6 +3260,15 @@ button {
   transition: all 1s ease-in-out;
 }
 
+.goodmorning24 {
+  position: absolute;
+  top: 17.5%;
+  right: 5%;
+  z-index: 9;
+  opacity: 0;
+  transition: all 1s ease-in-out;
+}
+
 .milk-hand {
   position: absolute;
   bottom: 6%;
@@ -3415,7 +3459,7 @@ button {
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 999;
+  z-index: 1001;
   width: 500px;
   height: 500px;
   border-radius: 7%;
@@ -3602,8 +3646,13 @@ button {
   background-position: center;
   background-repeat: no-repeat;
   cursor: pointer;
-  animation: dialogKnockShow 2s ease-in-out infinite;
   transition: all 1s ease-in-out;
+}
+
+.pointer5 {
+  right: 76%;
+  top: 48%;
+  z-index: 999;
 }
 
 /* book26 一家人喝牛奶 */

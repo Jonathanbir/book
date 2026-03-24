@@ -459,6 +459,33 @@ $(function () {
 
   let isBtnDisabled;
 
+  //分享按鈕複製連結功能
+  $(".share-page").on("click", function () {
+    // 取得當前網址
+    const shareUrl = window.location.href;
+
+    // 1. 優先使用現代瀏覽器支援的 API
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard
+        .writeText(shareUrl)
+        .then(function () {
+          // 成功後執行的動作
+          alert("連結已複製到剪貼簿！現在可以轉給朋友了！");
+        })
+        .catch(function (err) {
+          console.error("無法複製網址", err);
+        });
+    } else {
+      // 2. 備用方案：針對舊版瀏覽器或非 HTTPS 環境
+      const $temp = $("<textarea>");
+      $("body").append($temp);
+      $temp.val(shareUrl).select();
+      document.execCommand("copy");
+      $temp.remove();
+      alert("網址已複製！");
+    }
+  });
+
   //有任務下一頁 鎖定按鈕
   function btnDisabled() {
     isBtnDisabled = true;
@@ -765,6 +792,7 @@ $(function () {
     $(".milk-inner").css("opacity", "0");
     $(".click-girl").hide();
     $(".click-little-girl-box").hide();
+    $(".goodmorning24").removeClass("opacity-show");
     $(".milk-hand").removeClass("milk-hand-animation");
     $(".milk-drop").removeClass("opacity-show");
     $(".girl-l-hand").removeClass("girl-l-hand-empty");
@@ -807,6 +835,7 @@ $(function () {
 
     page2425Timeouts.push(
       setTimeout(() => {
+        $(".goodmorning24").addClass("opacity-show");
         $(".milk-hand").addClass("milk-hand-animation");
       }, 2300),
     );
@@ -840,6 +869,7 @@ $(function () {
       setTimeout(() => {
         $(".click-girl").show();
         $(".click-little-girl-box").show();
+        $(".pointer5").css("opacity", "1");
       }, 13500),
     );
   }
@@ -1159,6 +1189,18 @@ $(function () {
 
       page45Timeouts.push(
         setTimeout(() => {
+          $(".goodmorning04").addClass("opacity-show");
+        }, 6000),
+      );
+
+      // page45Timeouts.push(
+      //   setTimeout(() => {
+      //     $(".goodmorning04").removeClass("opacity-show");
+      //   }, 7500),
+      // );
+
+      page45Timeouts.push(
+        setTimeout(() => {
           $(".eyes-ball").addClass("eyes-ball-animation");
           $(".eyes-4").addClass("eyes-big-animation");
           $(".question").addClass("question-animation");
@@ -1195,6 +1237,7 @@ $(function () {
       page67Timeouts = [];
       doorClicked = false;
       $("#flipbook .knock").remove();
+      $("#flipbook .pointer1").remove();
       $("#flipbook .grass0607").remove();
       $("#flipbook .tree1").remove();
       $("#flipbook .tree2").remove();
@@ -1243,7 +1286,9 @@ $(function () {
         doorClickBound = true;
 
         $("#flipbook").append(
-          `<img class="knock" src="./images/book/book0607/click-here.png"/>
+          `
+          <img class="knock" src="./images/book/book0607/click-here.png"/>
+          <img class="pointer pointer1" src="./images/common/hand.png"/>
           <img class="grass0607" src="./images/book/book0607/grass.png"/>
           <img class="sky" src="./images/book/book0607/sky.png"/>
           <img class="tree1" src="./images/book/book0607/forest1.png"/>
@@ -1271,6 +1316,7 @@ $(function () {
         page67Timeouts.push(
           setTimeout(() => {
             $(".door-bg").css("opacity", "1");
+            $(".pointer1").css("opacity", "1");
           }, 2000),
         );
 
@@ -1279,61 +1325,65 @@ $(function () {
         btnPreviousDisabled();
         btnDisabled();
 
-        $("#flipbook .knock , #flipbook .door").on("click", () => {
-          if (doorClicked) return; // 已經點過就直接結束
-          doorClicked = true;
-          $(".door").css("cursor", "grab");
-          $(".knock").css("display", "none");
-          $(".text06").addClass("opacity-show");
-          $(".cloud1").addClass("opacity-show");
+        $("#flipbook .knock , #flipbook .door, #flipbook .pointer1").on(
+          "click",
+          () => {
+            if (doorClicked) return; // 已經點過就直接結束
+            doorClicked = true;
+            $(".door").css("cursor", "grab");
+            $(".pointer1").css("display", "none");
+            $(".knock").css("display", "none");
+            $(".text06").addClass("opacity-show");
+            $(".cloud1").addClass("opacity-show");
 
-          page67Timeouts.push(
-            setTimeout(() => {
-              $(".grass0607").addClass("opacity-show");
-              $(".tree1").addClass("opacity-show");
-            }, 2500),
-          );
+            page67Timeouts.push(
+              setTimeout(() => {
+                $(".grass0607").addClass("opacity-show");
+                $(".tree1").addClass("opacity-show");
+              }, 2500),
+            );
 
-          page67Timeouts.push(
-            setTimeout(() => {
-              $(".wow").addClass("wow-animation");
-              $(".tree2").addClass("opacity-show");
-              $(".door").addClass("door-opening");
-              $(".peoples").addClass("peoples-open");
-            }, 2500),
-          );
+            page67Timeouts.push(
+              setTimeout(() => {
+                $(".wow").addClass("wow-animation");
+                $(".tree2").addClass("opacity-show");
+                $(".door").addClass("door-opening");
+                $(".peoples").addClass("peoples-open");
+              }, 2500),
+            );
 
-          page67Timeouts.push(
-            setTimeout(() => {
-              $(".tree3").addClass("opacity-show");
-              $(".cloud2").addClass("opacity-show");
-              $(".cloud3").addClass("opacity-show");
-            }, 4000),
-          );
+            page67Timeouts.push(
+              setTimeout(() => {
+                $(".tree3").addClass("opacity-show");
+                $(".cloud2").addClass("opacity-show");
+                $(".cloud3").addClass("opacity-show");
+              }, 4000),
+            );
 
-          page67Timeouts.push(
-            setTimeout(() => {
-              $(".bubble67").addClass("opacity-show");
-            }, 6000),
-          );
+            page67Timeouts.push(
+              setTimeout(() => {
+                $(".bubble67").addClass("opacity-show");
+              }, 6000),
+            );
 
-          page67Timeouts.push(
-            setTimeout(() => {
-              $(".star5").addClass("star-fade-in");
-            }, 7000),
-          );
+            page67Timeouts.push(
+              setTimeout(() => {
+                $(".star5").addClass("star-fade-in");
+              }, 7000),
+            );
 
-          page67Timeouts.push(
-            setTimeout(() => {
-              btnUnDisabled();
-              canFlipNext = true;
-            }, 11000),
-          );
+            page67Timeouts.push(
+              setTimeout(() => {
+                btnUnDisabled();
+                canFlipNext = true;
+              }, 11000),
+            );
 
-          startReplayTimer(11000);
-          stopVoice();
-          playVoice("./mp3/04.mp3");
-        });
+            startReplayTimer(11000);
+            stopVoice();
+            playVoice("./mp3/04.mp3");
+          },
+        );
       }
     }
 
@@ -1579,6 +1629,7 @@ $(function () {
       $(".popup-board01").css("display", "none");
       $(".popup-board-box01").css("display", "none");
       $("#flipbook .click-magic-wand").remove();
+      $("#flipbook .pointer").remove();
       $("#flipbook .finish-mission01").remove();
       $("#flipbook .electfan").remove();
       $("#flipbook .electfan-wind").remove();
@@ -1626,6 +1677,7 @@ $(function () {
                    <img class="finish-mission01" src="./images/common/finish-mission1.png"/>
                    <img class="click-magic-wand" src="./images/book/book0607/click-here.png"/>
                    <div class="click-magic-wand-box"></div>
+                   <img class="pointer pointer2" src="./images/common/hand.png"/>
                    <img class="bubble-bg" src="./images/book/book13/bubble-bg.png"/>
                    <img class="star13" src="./images/book/book13/star.png"/>
                    <img class="bubble12" src="./images/book/book13/milk-bubble.png"/>
@@ -1675,78 +1727,79 @@ $(function () {
         setTimeout(() => {
           $(".click-magic-wand").show();
           $(".click-magic-wand-box").show();
+          $(".pointer2").css("opacity", "1");
           $(".finish-mission01").hide();
         }, 4000),
       );
 
-      $("#flipbook .click-magic-wand, #flipbook .click-magic-wand-box").on(
-        "click",
-        () => {
-          $(".click-magic-wand").hide();
-          $(".click-magic-wand-box").hide();
-          $(".finish-mission01").hide();
-          $(".text12").css("opacity", "1");
+      $(
+        "#flipbook .click-magic-wand, #flipbook .click-magic-wand-box, #flipbook .pointer2",
+      ).on("click", () => {
+        $(".click-magic-wand").hide();
+        $(".click-magic-wand-box").hide();
+        $(".finish-mission01").hide();
+        $(".pointer2").hide();
+        $(".text12").css("opacity", "1");
 
-          page1213Timeouts.push(
-            setTimeout(
-              () => $(".magic-wand").addClass("magic-wand-animation"),
-              5000,
-            ),
-          );
+        page1213Timeouts.push(
+          setTimeout(
+            () => $(".magic-wand").addClass("magic-wand-animation"),
+            5000,
+          ),
+        );
 
-          page1213Timeouts.push(
-            setTimeout(() => {
-              $(".electfan-wind").css("opacity", "1");
-              $(".electfan-wind-line").css("opacity", "1");
-              if (electfanInterval) return; // 避免重複開 interval
-              electfanInterval = setInterval(() => {
-                fanIndex = (fanIndex + 1) % fanImages.length;
-                fanImg.src = fanImages[fanIndex];
-              }, 100);
-            }, 7000),
-          );
+        page1213Timeouts.push(
+          setTimeout(() => {
+            $(".electfan-wind").css("opacity", "1");
+            $(".electfan-wind-line").css("opacity", "1");
+            if (electfanInterval) return; // 避免重複開 interval
+            electfanInterval = setInterval(() => {
+              fanIndex = (fanIndex + 1) % fanImages.length;
+              fanImg.src = fanImages[fanIndex];
+            }, 100);
+          }, 7000),
+        );
 
-          page1213Timeouts.push(
-            setTimeout(() => $(".bubble-bg").addClass("opacity-show"), 6000),
-          );
+        page1213Timeouts.push(
+          setTimeout(() => $(".bubble-bg").addClass("opacity-show"), 6000),
+        );
 
-          page1213Timeouts.push(
-            setTimeout(() => {
-              $(".star13").addClass("star3-animation");
-              $(".bubble12").addClass("opacity-show");
-            }, 7000),
-          );
+        page1213Timeouts.push(
+          setTimeout(() => {
+            $(".star13").addClass("star3-animation");
+            $(".bubble12").addClass("opacity-show");
+          }, 7000),
+        );
 
-          page1213Timeouts.push(
-            setTimeout(() => {
-              $(".coin-hint01").addClass("opacity-show");
-            }, 16500),
-          );
+        page1213Timeouts.push(
+          setTimeout(() => {
+            $(".coin-hint01").addClass("opacity-show");
+          }, 16500),
+        );
 
-          page1213Timeouts.push(
-            setTimeout(() => {
-              $(".coin01").addClass("coin-animation");
-              $(".coin-light").addClass("coin-light-show");
-              $(".check01").addClass("opacity-show");
-            }, 24500),
-          );
+        page1213Timeouts.push(
+          setTimeout(() => {
+            $(".coin01").addClass("coin-animation");
+            $(".coin-light").addClass("coin-light-show");
+            $(".check01").addClass("opacity-show");
+          }, 24500),
+        );
 
-          page1213Timeouts.push(
-            setTimeout(() => {
-              btnUnDisabled();
-              canFlipNext = true;
-              $(".popup-board01").css("display", "block");
-              $(".popup-board-box01").css("display", "block");
-              stopVoice();
-              playVoice("./mp3/07b.mp3");
-            }, 28000),
-          );
+        page1213Timeouts.push(
+          setTimeout(() => {
+            btnUnDisabled();
+            canFlipNext = true;
+            $(".popup-board01").css("display", "block");
+            $(".popup-board-box01").css("display", "block");
+            stopVoice();
+            playVoice("./mp3/07b.mp3");
+          }, 28000),
+        );
 
-          startReplayTimer(28000);
-          stopVoice();
-          playVoice("./mp3/07.mp3");
-        },
-      );
+        startReplayTimer(28000);
+        stopVoice();
+        playVoice("./mp3/07.mp3");
+      });
       popupBoard(page);
     }
 
@@ -1781,6 +1834,7 @@ $(function () {
       $("#flipbook .cloud14-2").remove();
       $("#flipbook .text14").remove();
       $("#flipbook .click-milk").remove();
+      $("#flipbook .pointer3").remove();
       $("#flipbook .board14").remove();
       $("#flipbook .board-list02").remove();
       $("#flipbook .small-cow").remove();
@@ -1828,6 +1882,7 @@ $(function () {
           <img class="check check02" src="./images/common/check.png"/>
           <img class="click-milk" src="./images/book/book0607/click-here.png"/>
           <div class="click-milk-box"></div>
+          <img class="pointer pointer3" src="./images/common/hand.png"/>
           <img class="bubble14" src="./images/book/book1415/milk-bubble.png"/>     
           <img class="shine14" src="./images/book/book1415/shine.png"/>       
           <img class="coin-hint02" src="./images/book/book1415/text15.png" />
@@ -1886,72 +1941,73 @@ $(function () {
             $(".finish-mission02").css("opacity", "0");
             $(".click-milk").show();
             $(".click-milk-box").show();
+            $(".pointer3").css("opacity", "1");
           }, 15500),
         );
 
-        $("#flipbook .click-milk , #flipbook .click-milk-box ").on(
-          "click",
-          function () {
-            $(".click-milk").hide();
-            $(".click-milk-box").hide();
-            $(".finish-mission02").hide();
+        $(
+          "#flipbook .click-milk , #flipbook .click-milk-box, #flipbook .pointer3",
+        ).on("click", function () {
+          $(".click-milk").hide();
+          $(".click-milk-box").hide();
+          $(".finish-mission02").hide();
+          $(".pointer3").hide();
 
-            page1415Timeouts.push(
-              setTimeout(() => {
-                $(".cows-tongue").css("opacity", "1");
-              }, 1000),
-            );
+          page1415Timeouts.push(
+            setTimeout(() => {
+              $(".cows-tongue").css("opacity", "1");
+            }, 1000),
+          );
 
-            page1415Timeouts.push(
-              setTimeout(() => {
-                $(".cows-tongue").addClass("cows-tongue-animation");
-                $(".milk").addClass("milk-empty");
-              }, 2000),
-            );
+          page1415Timeouts.push(
+            setTimeout(() => {
+              $(".cows-tongue").addClass("cows-tongue-animation");
+              $(".milk").addClass("milk-empty");
+            }, 2000),
+          );
 
-            page1415Timeouts.push(
-              setTimeout(() => {
-                $(".cows-tongue").css("opacity", "0");
-              }, 4000),
-            );
+          page1415Timeouts.push(
+            setTimeout(() => {
+              $(".cows-tongue").css("opacity", "0");
+            }, 4000),
+          );
 
-            page1415Timeouts.push(
-              setTimeout(() => {
-                $(".shine14").addClass("shine14-animation");
-                $(".success-hint02").addClass("opacity-show");
-              }, 6000),
-            );
-            stopVoice();
-            playVoice("./mp3/sucking-coin.mp3");
+          page1415Timeouts.push(
+            setTimeout(() => {
+              $(".shine14").addClass("shine14-animation");
+              $(".success-hint02").addClass("opacity-show");
+            }, 6000),
+          );
+          stopVoice();
+          playVoice("./mp3/sucking-coin.mp3");
 
-            page1415Timeouts.push(
-              setTimeout(() => {
-                $(".coin-hint02").addClass("opacity-show");
-              }, 6000),
-            );
+          page1415Timeouts.push(
+            setTimeout(() => {
+              $(".coin-hint02").addClass("opacity-show");
+            }, 6000),
+          );
 
-            page1415Timeouts.push(
-              setTimeout(() => {
-                $(".check02").addClass("opacity-show");
-                $(".coin02").addClass("coin-animation");
-                $(".coin-light02").addClass("coin-light-show");
-              }, 13000),
-            );
+          page1415Timeouts.push(
+            setTimeout(() => {
+              $(".check02").addClass("opacity-show");
+              $(".coin02").addClass("coin-animation");
+              $(".coin-light02").addClass("coin-light-show");
+            }, 13000),
+          );
 
-            page1415Timeouts.push(
-              setTimeout(() => {
-                $(".popup-board02").css("display", "block");
-                $(".popup-board-box02").css("display", "block");
-                stopVoice();
-                playVoice("./mp3/08b.mp3");
-                btnUnDisabled();
-                canFlipNext = true;
-              }, 15500),
-            );
+          page1415Timeouts.push(
+            setTimeout(() => {
+              $(".popup-board02").css("display", "block");
+              $(".popup-board-box02").css("display", "block");
+              stopVoice();
+              playVoice("./mp3/08b.mp3");
+              btnUnDisabled();
+              canFlipNext = true;
+            }, 15500),
+          );
 
-            startReplayTimer(16000);
-          },
-        );
+          startReplayTimer(16000);
+        });
       }
       popupBoard(page);
     }
@@ -2006,6 +2062,7 @@ $(function () {
       $("#flipbook .dondon").remove();
       $("#flipbook .nurse-girl").remove();
       $("#flipbook .click-hearing-heart").remove();
+      $("#flipbook .pointer4").remove();
       $("#flipbook .check03").remove();
       $("#flipbook .board-list03").remove();
       $("#flipbook .board16").remove();
@@ -2045,6 +2102,7 @@ $(function () {
             <img class="nurse-girl" src="./images/book/book1617/lin-nurse.png"/>
             <img class="click-hearing-heart" src="./images/book/book25/click-here.png"/>
             <div class="click-hearing-heart-box"></div>      
+            <img class="pointer pointer4" src="./images/common/hand.png"/>
             <div class="cloud-16-2"></div>
             <img class="trees16" src="./images/book/book1617/trees.png">
             <img class="board-list03" src="./images/book/book1617/board-list03.png"/>
@@ -2101,11 +2159,12 @@ $(function () {
             $(".finish-mission03").css("opacity", "0");
             $(".click-hearing-heart").show();
             $(".click-hearing-heart-box").show();
+            $(".pointer4").css("opacity", "1");
           }, 13500),
         );
 
         $(
-          "#flipbook .click-hearing-heart ,#flipbook .click-hearing-heart-box ",
+          "#flipbook .click-hearing-heart ,#flipbook .click-hearing-heart-box, #flipbook .pointer4",
         ).on("click", function () {
           const cowEyesImages = [
             "./images/book/book1617/cow-eyes-open.png",
@@ -2133,6 +2192,7 @@ $(function () {
           $(".click-hearing-heart").hide();
           $(".click-hearing-heart-box").hide();
           $(".finish-mission03").hide();
+          $(".pointer4").hide();
           stopVoice();
           playVoice("./mp3/hear-coin.mp3");
 
@@ -2610,6 +2670,7 @@ $(function () {
 
         $(".click-girl").hide();
         $(".click-little-girl-box").hide();
+        $(".pointer5").css("opacity", "0");
         $(".girl-l-hand-region").addClass("girl-l-hand-finish");
         $(".girl-r-hand").addClass("girl-r-hand-finish");
         stopVoice();
@@ -2700,6 +2761,10 @@ $(function () {
       $(".fence-28").css("opacity", "0");
       $(".cow-28-1").css("opacity", "0");
       $(".cow-28-2").css("opacity", "0");
+      if (!matchMedia("(pointer: coarse)").matches) {
+        $("#next-page-pc").css("display", "block");
+      }
+      $(".share-page").hide();
     }
 
     if (page === 25 || page === 28) {
@@ -2740,10 +2805,12 @@ $(function () {
       );
 
       if (!window.matchMedia("(pointer: coarse)").matches) {
-        $(".next-page img").hide();
+        $(".share-page").show();
+        $("#next-page-pc").hide();
       } else {
         $(".next-page img").attr("src", "./images/common/next-grey-img.png");
         $(".next-page").prop("disabled", true);
+        $(".share-page").show();
       }
 
       addPageTimeout(() => {
