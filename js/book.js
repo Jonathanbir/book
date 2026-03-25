@@ -1162,6 +1162,7 @@ $(function () {
       page45Timeouts = [];
       $(".eyes-4").removeClass("eyes-big-animation");
       $(".question").removeClass("question-animation");
+      $(".goodmorning04").removeClass("opacity-show");
       $(".book04").css("opacity", "0");
       $(".text04").css("opacity", "0");
       $(".text05").css("opacity", "0");
@@ -1192,12 +1193,6 @@ $(function () {
           $(".goodmorning04").addClass("opacity-show");
         }, 6000),
       );
-
-      // page45Timeouts.push(
-      //   setTimeout(() => {
-      //     $(".goodmorning04").removeClass("opacity-show");
-      //   }, 7500),
-      // );
 
       page45Timeouts.push(
         setTimeout(() => {
