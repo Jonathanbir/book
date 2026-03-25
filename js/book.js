@@ -1956,27 +1956,22 @@ $(function () {
           page1415Timeouts.push(
             setTimeout(() => {
               $(".cows-tongue").css("opacity", "1");
-            }, 1000),
-          );
-
-          page1415Timeouts.push(
-            setTimeout(() => {
               $(".cows-tongue").addClass("cows-tongue-animation");
               $(".milk").addClass("milk-empty");
-            }, 2000),
+            }, 0),
           );
 
           page1415Timeouts.push(
             setTimeout(() => {
               $(".cows-tongue").css("opacity", "0");
-            }, 4000),
+            }, 2000),
           );
 
           page1415Timeouts.push(
             setTimeout(() => {
               $(".shine14").addClass("shine14-animation");
               $(".success-hint02").addClass("opacity-show");
-            }, 6000),
+            }, 4000),
           );
           stopVoice();
           playVoice("./mp3/sucking-coin.mp3");
@@ -1984,7 +1979,7 @@ $(function () {
           page1415Timeouts.push(
             setTimeout(() => {
               $(".coin-hint02").addClass("opacity-show");
-            }, 6000),
+            }, 4500),
           );
 
           page1415Timeouts.push(
@@ -1992,7 +1987,7 @@ $(function () {
               $(".check02").addClass("opacity-show");
               $(".coin02").addClass("coin-animation");
               $(".coin-light02").addClass("coin-light-show");
-            }, 13000),
+            }, 11000),
           );
 
           page1415Timeouts.push(
