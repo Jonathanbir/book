@@ -1,6 +1,15 @@
 $(function () {
   const $flipbook = $("#flipbook");
 
+  /* ======================
+   GA4 事件追蹤輔助函式
+  ====================== */
+  function gaEvent(eventName, params) {
+    if (typeof gtag === "function") {
+      gtag("event", eventName, params || {});
+    }
+  }
+
   const innerWidth = window.innerWidth;
   const innerHeight = window.innerHeight; // 目前可視高度（含工具列收起）
   const ratio = innerWidth / innerHeight;
@@ -599,6 +608,9 @@ $(function () {
       replayTimer = null;
     }
 
+    // 在計時開始時，先確保移除舊的動畫，避免重複或殘留
+    $(".next-page img").removeClass("nextBtnAnimation");
+
     replayBtnTrunGray();
 
     if (isTablet || isIPad()) {
@@ -620,7 +632,7 @@ $(function () {
         $(".replay-mobile-btn-body").prop("disabled", false);
         $(".replay-mobile-btn-body").removeClass("replay-mobile-btn-disabled");
       }
-
+      $(".next-page img").addClass("nextBtnAnimation");
       $(".replay-btn").prop("disabled", false);
       $(".replay-btn img").attr("src", "./images/common/replay-btn.png");
     }, delay);
@@ -2506,6 +2518,9 @@ $(function () {
     currentPage = page;
     replayGeneration++; // ⭐ 直接殺死所有舊timer
     clearPageTimers(); // ⭐ 清動畫timer
+
+    // --- 新增：翻頁開始時，立刻移除下一頁的動畫提示 ---
+    $(".next-page img").removeClass("nextBtnAnimation");
   });
 
   // 當頁面翻轉完成後觸發

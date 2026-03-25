@@ -16,6 +16,22 @@ body {
   overflow: hidden;
 }
 
+.nextBtnAnimation {
+  animation: btnLargeSmall 2s ease-in-out 2 forwards;
+}
+
+@keyframes btnLargeSmall {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
 /* loading css*/
 #loading-screen {
   position: fixed;
